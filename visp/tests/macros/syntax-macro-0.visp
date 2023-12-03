@@ -7,11 +7,11 @@
 ;; vim: set syntax=clojure:
 
 (syntax-macro matchfnexample
-  [(_ sym m ms ...)
+  [(_ sym m ...)
     (fn sym (arg)
       (match arg
         m
-        ms ...
+        ...
       ))
   ])
 
@@ -26,5 +26,5 @@
     [_ 0]))
 
 (printfn "%A & %A"
-  (name (tuple! 1 2))
-  (name2 (tuple! 1 2)))
+  (name (!tuple 1 2))
+  (name2 (!tuple 1 2)))

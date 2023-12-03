@@ -143,6 +143,10 @@ let rec transform (func: SynExpr -> SynExpr) expr =
 
     func result
 
+let runTransforms1 (expr: SynExpr) (tfs: (SynExpr -> SynExpr) seq)  =
+    let flip f a b = f b a
+    tfs |> Seq.fold (flip transform) expr
+
 let runTransforms (tfs: (SynExpr -> SynExpr) seq) (expr: SynExpr) =
     let flip f a b = f b a
     tfs |> Seq.fold (flip transform) expr

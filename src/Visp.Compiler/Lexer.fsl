@@ -166,13 +166,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ':'        { COLON }
   | ident      {
       let text = lexeme lexbuf
-      match tryGetKeyword text with
-      | Some (tok) -> tok
-      | None ->
-        if text.EndsWith('!') then
-          MACRO_NAME (text.TrimEnd('!'))
-        else
-          SYMBOL text
+      symbolOrKeyword text
     }
   | ','        { COMMA }
   | _ { unexpected_char "token" lexbuf }
