@@ -5,17 +5,17 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 3 @"example-2.visp"
+// line 10 @"example-2.visp"
 let hello argname =
-  // line 5 @"example-2.visp"
+  // line 12 @"example-2.visp"
   let name = argname
-  // line 6 @"example-2.visp"
+  // line 13 @"example-2.visp"
   printfn ("hello %s") (name)
 
-// line 8 @"example-2.visp"
+// line 15 @"example-2.visp"
 let visp_result_todo =
-  // line 8 @"example-2.visp"
+  // line 15 @"example-2.visp"
   hello ("world")
-// line 8 @"example-2.visp"
+// line 15 @"example-2.visp"
 printfn ("%A") (visp_result_todo)
 

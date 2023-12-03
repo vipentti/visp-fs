@@ -5,34 +5,34 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"example-16.visp"
+// line 8 @"example-16.visp"
 let visp_result_todo =
   (
-    // line 2 @"example-16.visp"
+    // line 9 @"example-16.visp"
     let captured_variable = 1
-    // line 3 @"example-16.visp"
+    // line 10 @"example-16.visp"
     let first_fun =
-      // line 4 @"example-16.visp"
+      // line 11 @"example-16.visp"
       (fun () ->
         (
-          // line 5 @"example-16.visp"
+          // line 12 @"example-16.visp"
           let second_fun =
-            // line 6 @"example-16.visp"
+            // line 13 @"example-16.visp"
             (fun () ->
               (
-                // line 7 @"example-16.visp"
+                // line 14 @"example-16.visp"
                 let third_fun =
-                  // line 8 @"example-16.visp"
+                  // line 15 @"example-16.visp"
                   (fun () ->
-                    // line 8 @"example-16.visp"
+                    // line 15 @"example-16.visp"
                     (captured_variable) +
                     (1))
-                // line 9 @"example-16.visp"
+                // line 16 @"example-16.visp"
                 third_fun ()))
-          // line 11 @"example-16.visp"
+          // line 18 @"example-16.visp"
           second_fun ()))
-    // line 14 @"example-16.visp"
+    // line 21 @"example-16.visp"
     CoreMethods.``str``(state, Value.from(first_fun ())))
-// line 1 @"example-16.visp"
+// line 8 @"example-16.visp"
 printfn ("%A") (visp_result_todo)
 

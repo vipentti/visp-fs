@@ -5,22 +5,22 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 3 @"variables-0.visp"
+// line 10 @"variables-0.visp"
 let value = 1
-// line 4 @"variables-0.visp"
+// line 11 @"variables-0.visp"
 printfn ("value is %i") (value)
-// line 7 @"variables-0.visp"
+// line 14 @"variables-0.visp"
 let mutable valuemut =
   1
-// line 8 @"variables-0.visp"
+// line 15 @"variables-0.visp"
 printfn ("valuemut is %i") (valuemut)
-// line 12 @"variables-0.visp"
+// line 19 @"variables-0.visp"
 valuemut <- (valuemut) +
 (1)
-// line 14 @"variables-0.visp"
+// line 21 @"variables-0.visp"
 let visp_result_todo =
-  // line 14 @"variables-0.visp"
+  // line 21 @"variables-0.visp"
   printfn ("valuemut is %i") (valuemut)
-// line 14 @"variables-0.visp"
+// line 21 @"variables-0.visp"
 printfn ("%A") (visp_result_todo)
 

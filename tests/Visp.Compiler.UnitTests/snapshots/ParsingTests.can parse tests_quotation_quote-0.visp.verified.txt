@@ -5,32 +5,32 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 2 @"quote-0.visp"
+// line 9 @"quote-0.visp"
 let items =
-  // line 2 @"quote-0.visp"
+  // line 9 @"quote-0.visp"
   Value.from([Value.from(1);Value.from(2);Value.from(3);Value.from(4);Value.from(5)])
-// line 3 @"quote-0.visp"
+// line 10 @"quote-0.visp"
 let sym =
-  // line 3 @"quote-0.visp"
+  // line 10 @"quote-0.visp"
   Value.symbol("symbol")
-// line 4 @"quote-0.visp"
+// line 11 @"quote-0.visp"
 let something =
-  // line 4 @"quote-0.visp"
+  // line 11 @"quote-0.visp"
   Value.from([Value.symbol("fn");
     ( let temp = Vector(1)
       temp.Add(Value.from(Value.symbol("a")))
       Value.vector(temp));Value.from([Value.symbol("+");Value.symbol("a");Value.symbol("b");Value.from(1);Value.from([Value.symbol("call");Value.symbol("+");Value.from(1);Value.from(2)])])])
-// line 6 @"quote-0.visp"
+// line 13 @"quote-0.visp"
 printfn ("items: %O") (items)
-// line 7 @"quote-0.visp"
+// line 14 @"quote-0.visp"
 printfn ("sym: %O") (sym)
-// line 8 @"quote-0.visp"
+// line 15 @"quote-0.visp"
 printfn ("something: %O") (something)
-// line 9 @"quote-0.visp"
+// line 16 @"quote-0.visp"
 printfn ("nested: %O") (Value.from([Value.symbol("nested1");Value.from([Value.symbol("nested2");Value.from([Value.symbol("nested3");Value.from([Value.symbol("nested4");Value.symbol("and");Value.symbol("on");Value.symbol("and");Value.symbol("on");Value.keyword(":keyword")])])])]))
-// line 10 @"quote-0.visp"
+// line 17 @"quote-0.visp"
 let visp_result_todo =
-  // line 10 @"quote-0.visp"
+  // line 17 @"quote-0.visp"
   printfn ("nested vec: %O") (
     ( let temp = Vector(2)
       temp.Add(Value.from(Value.symbol("nested1")))
@@ -40,6 +40,6 @@ let visp_result_todo =
           temp.Add(Value.from(Value.from([Value.symbol("nested4");Value.symbol("and");Value.symbol("on");Value.symbol("and");Value.symbol("on");Value.keyword(":keyword")])))
           Value.vector(temp))])))
       Value.vector(temp)))
-// line 10 @"quote-0.visp"
+// line 17 @"quote-0.visp"
 printfn ("%A") (visp_result_todo)
 
