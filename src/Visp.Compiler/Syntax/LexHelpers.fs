@@ -69,6 +69,15 @@ type LexArgs =
 
     member this.Nest() = this.depth <- this.depth + 1
 
+    member this.NestIfNotDefault() =
+        if not this.mode.IsDefaultMode then
+            this.Nest()
+
+    member this.UnnestIfNotDefault() =
+        if not this.mode.IsDefaultMode then
+            if this.Unnest() <= 0 then
+                this.Reset()
+
     member this.Unnest() =
         this.depth <- this.depth - 1
         this.depth
@@ -142,6 +151,7 @@ let keywordTokenList =
       ("quote", QUOTE_KW)
       ("set!", SET)
       ("splice-unquote", SPLICE_UNQUOTE_KW)
+      ("syntax-macro", SYNTAX_MACRO)
       ("type", TYPE)
       ("unquote", UNQUOTE_KW)
       ("when", WHEN)

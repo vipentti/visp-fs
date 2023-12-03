@@ -103,6 +103,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                     body,
                 range
             )
+        | SynExpr.SyntaxMacroCall _ -> expr
+        | SynExpr.SyntaxMacro _ -> expr
         | SynExpr.Quote _ -> expr
         | SynExpr.Quasiquote _ -> expr
         | SynExpr.Const _ -> expr
