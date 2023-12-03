@@ -15,7 +15,7 @@
       ))
   ])
 
-(matchfnexample! name
+(matchfnexample!! name
   [(!tuple a b)
     (+ a b)]
   [_ 0])
