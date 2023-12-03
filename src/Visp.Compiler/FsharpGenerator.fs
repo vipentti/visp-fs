@@ -125,6 +125,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
     member this.WriteVispFiles(files: VispFile list) =
         let dir = this.fs.Directory.CreateDirectory this.dir
         let existingFiles = dir.GetFiles("*.fs", SearchOption.TopDirectoryOnly)
+
         for file in existingFiles do
             file.Delete()
 
