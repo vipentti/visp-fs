@@ -5,24 +5,24 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"example-11.visp"
+// line 8 @"example-11.visp"
 printfn ("this is in the default top-level module")
-// line 3 @"example-11.visp"
+// line 10 @"example-11.visp"
 module MyCustomModule =
-  // line 4 @"example-11.visp"
+  // line 11 @"example-11.visp"
   printfn ("this is inside MyCustomModule")
-  // line 5 @"example-11.visp"
+  // line 12 @"example-11.visp"
   let hello () =
-    // line 6 @"example-11.visp"
+    // line 13 @"example-11.visp"
     printfn ("hello world")
 
-  // line 8 @"example-11.visp"
+  // line 15 @"example-11.visp"
   hello ()
 
-// line 11 @"example-11.visp"
+// line 18 @"example-11.visp"
 let visp_result_todo =
-  // line 11 @"example-11.visp"
+  // line 18 @"example-11.visp"
   printfn ("this is back in the top-level-module")
-// line 11 @"example-11.visp"
+// line 18 @"example-11.visp"
 printfn ("%A") (visp_result_todo)
 

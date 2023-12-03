@@ -5,27 +5,27 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"type-0.visp"
+// line 8 @"type-0.visp"
 type MyType (value: int32) =
-  // line 2 @"type-0.visp"
+  // line 9 @"type-0.visp"
   let field = value
-  // line 3 @"type-0.visp"
+  // line 10 @"type-0.visp"
   member this.Foo =
         value
-  // line 4 @"type-0.visp"
+  // line 11 @"type-0.visp"
   member this.Thing () =
     "hello"
 
-// line 7 @"type-0.visp"
+// line 14 @"type-0.visp"
 let myObject =
-  // line 7 @"type-0.visp"
+  // line 14 @"type-0.visp"
   (new MyType(99))
-// line 9 @"type-0.visp"
+// line 16 @"type-0.visp"
 printfn ("%O") (myObject)
-// line 10 @"type-0.visp"
+// line 17 @"type-0.visp"
 let visp_result_todo =
-  // line 10 @"type-0.visp"
+  // line 17 @"type-0.visp"
   printfn ("%O") ((myObject.Foo))
-// line 10 @"type-0.visp"
+// line 17 @"type-0.visp"
 printfn ("%A") (visp_result_todo)
 

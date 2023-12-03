@@ -5,14 +5,14 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 2 @"int-0.visp"
+// line 9 @"int-0.visp"
 printfn ("int32 is %A") (99)
-// line 3 @"int-0.visp"
+// line 10 @"int-0.visp"
 printfn ("int32 is %A") (99)
-// line 4 @"int-0.visp"
+// line 11 @"int-0.visp"
 let visp_result_todo =
-  // line 4 @"int-0.visp"
+  // line 11 @"int-0.visp"
   printfn ("int64 is %A") (99L)
-// line 4 @"int-0.visp"
+// line 11 @"int-0.visp"
 printfn ("%A") (visp_result_todo)
 

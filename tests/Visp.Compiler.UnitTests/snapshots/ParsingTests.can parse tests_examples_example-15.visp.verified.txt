@@ -5,23 +5,23 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"example-15.visp"
+// line 8 @"example-15.visp"
 let visp_result_todo =
-  // line 1 @"example-15.visp"
-    // line 1 @"example-15.visp"
+  // line 8 @"example-15.visp"
+    // line 8 @"example-15.visp"
   (fun captured_arg ->
     (
-      // line 2 @"example-15.visp"
+      // line 9 @"example-15.visp"
       let second_capture =
-        // line 2 @"example-15.visp"
+        // line 9 @"example-15.visp"
         (captured_arg) +
         (1)
-      // line 3 @"example-15.visp"
-            // line 3 @"example-15.visp"
+      // line 10 @"example-15.visp"
+            // line 10 @"example-15.visp"
       (fun () ->
-        // line 3 @"example-15.visp"
+        // line 10 @"example-15.visp"
         (captured_arg) +
         (second_capture)) ())) (99)
-// line 1 @"example-15.visp"
+// line 8 @"example-15.visp"
 printfn ("%A") (visp_result_todo)
 

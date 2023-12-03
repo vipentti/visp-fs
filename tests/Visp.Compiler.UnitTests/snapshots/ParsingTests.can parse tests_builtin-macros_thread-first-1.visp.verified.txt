@@ -5,21 +5,21 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 3 @"thread-first-1.visp"
+// line 9 @"thread-first-1.visp"
 let identity arg =
   arg
 
-// line 5 @"thread-first-1.visp"
+// line 11 @"thread-first-1.visp"
 let visp_result_todo =
-  // line 5 @"thread-first-1.visp"
+  // line 11 @"thread-first-1.visp"
   "return me"
     |> identity
     |> (fun arg ->
       arg)
     |> (fun arg ->
-      // line 9 @"thread-first-1.visp"
+      // line 15 @"thread-first-1.visp"
       printfn ("arg is %O") (arg)
       arg)
-// line 5 @"thread-first-1.visp"
-printfn ("%O") (visp_result_todo)
+// line 11 @"thread-first-1.visp"
+printfn ("%A") (visp_result_todo)
 

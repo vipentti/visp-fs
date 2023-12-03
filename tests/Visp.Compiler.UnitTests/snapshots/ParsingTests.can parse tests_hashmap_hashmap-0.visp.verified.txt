@@ -5,18 +5,18 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"hashmap-0.visp"
+// line 8 @"hashmap-0.visp"
 let map =
-  // line 1 @"hashmap-0.visp"
+  // line 8 @"hashmap-0.visp"
   [(Value.keyword(":this-is-a-key"), Value.string("value"));(Value.string("string as key"), Value.string("string value"));(Value.from(0), Value.string("int as key"))] |> HashMap.ofList
-// line 5 @"hashmap-0.visp"
+// line 12 @"hashmap-0.visp"
 printfn ("%O") (map)
-// line 7 @"hashmap-0.visp"
+// line 14 @"hashmap-0.visp"
 printfn ("%O") (HashMap.find (Value.string ("string as key")) (map))
-// line 9 @"hashmap-0.visp"
+// line 16 @"hashmap-0.visp"
 let visp_result_todo =
-  // line 9 @"hashmap-0.visp"
+  // line 16 @"hashmap-0.visp"
   printfn ("%O") (HashMap.find (Value.keyword(":this-is-a-key")) (map))
-// line 9 @"hashmap-0.visp"
+// line 16 @"hashmap-0.visp"
 printfn ("%A") (visp_result_todo)
 

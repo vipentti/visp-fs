@@ -5,26 +5,26 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 2 @"example-9.visp"
+// line 9 @"example-9.visp"
 let decimals =
-  // line 2 @"example-9.visp"
+  // line 9 @"example-9.visp"
   (new ResizeArray<_>())
-// line 4 @"example-9.visp"
+// line 11 @"example-9.visp"
 (decimals.Add(decimal (1)))
-// line 6 @"example-9.visp"
+// line 13 @"example-9.visp"
 printfn ("number of decimals: %i") ((decimals.Count))
-// line 8 @"example-9.visp"
+// line 15 @"example-9.visp"
 (decimals.Add(decimal (2)))
-// line 10 @"example-9.visp"
+// line 17 @"example-9.visp"
 printfn ("number of decimals: %i") ((decimals.Count))
-// line 12 @"example-9.visp"
+// line 19 @"example-9.visp"
 printfn ("decimals 0 is %f") ((decimals.[0]))
-// line 14 @"example-9.visp"
+// line 21 @"example-9.visp"
 let index = 1
-// line 16 @"example-9.visp"
+// line 23 @"example-9.visp"
 let visp_result_todo =
-  // line 16 @"example-9.visp"
+  // line 23 @"example-9.visp"
   printfn ("decimals 1 is %f") ((decimals.[index]))
-// line 16 @"example-9.visp"
+// line 23 @"example-9.visp"
 printfn ("%A") (visp_result_todo)
 

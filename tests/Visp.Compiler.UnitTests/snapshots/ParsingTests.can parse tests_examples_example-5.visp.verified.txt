@@ -5,34 +5,34 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"example-5.visp"
+// line 8 @"example-5.visp"
 let a = 5
-// line 2 @"example-5.visp"
+// line 9 @"example-5.visp"
 let b = 4
-// line 4 @"example-5.visp"
+// line 11 @"example-5.visp"
 printfn ("+ is %i") ((a) +
 (b) +
 (52))
-// line 5 @"example-5.visp"
-printfn ("+ is %i") (0)
-// line 6 @"example-5.visp"
-printfn ("+ is %i") (2)
-// line 8 @"example-5.visp"
-printfn ("* is %i") (a * b * 52)
-// line 9 @"example-5.visp"
-printfn ("* is %i") (2)
-// line 10 @"example-5.visp"
-printfn ("* is %i") (1)
 // line 12 @"example-5.visp"
-printfn ("- is %i") (a - b - 52)
+printfn ("+ is %i") (0)
 // line 13 @"example-5.visp"
-printfn ("- is %i") (-2)
+printfn ("+ is %i") (2)
 // line 15 @"example-5.visp"
+printfn ("* is %i") (a * b * 52)
+// line 16 @"example-5.visp"
+printfn ("* is %i") (2)
+// line 17 @"example-5.visp"
+printfn ("* is %i") (1)
+// line 19 @"example-5.visp"
+printfn ("- is %i") (a - b - 52)
+// line 20 @"example-5.visp"
+printfn ("- is %i") (-2)
+// line 22 @"example-5.visp"
 printfn ("/ is %f") ((decimal a) / (decimal b) / (decimal 52))
-// line 16 @"example-5.visp"
+// line 23 @"example-5.visp"
 let visp_result_todo =
-  // line 16 @"example-5.visp"
+  // line 23 @"example-5.visp"
   printfn ("/ is %f") (1.0m / (decimal 2))
-// line 16 @"example-5.visp"
+// line 23 @"example-5.visp"
 printfn ("%A") (visp_result_todo)
 
