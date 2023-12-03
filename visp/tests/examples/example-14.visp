@@ -1,0 +1,24 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let value "hello")
+
+(let result (quasiquote (unquote value)))
+
+(printfn "value is %O" result)
+
+
+(let items (quote (1 2 3 4 5)))
+
+;; (let result2 (quasiquote (quasiquote (1 2 (unquote (+ 3 4)))) ))
+(let result2 (quasiquote (1 2 (unquote (+ 3 4)))))
+
+(printfn "result2 is %O" result2)
+
+(let result3 (quasiquote (0 (splice-unquote items) 6)))
+
+(printfn "result3 is %O" result3)

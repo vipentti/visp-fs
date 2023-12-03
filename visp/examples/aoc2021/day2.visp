@@ -1,0 +1,74 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(let contents (System.IO.File.ReadLines "./inputs/day2.txt"))
+
+(fn string->number [(it: string)]
+    (let [result: Option<Number>] (Number.ParseOption it))
+    (if (. result +IsNone)
+        (failwithf "not valid number '%s'" it)
+        (. result +Value)))
+
+(fn ParseInstructions [lines]
+  (fn ParseInner [[line: string]]
+    (let parts (. line Split " "))
+    (let dir (. parts .[0]))
+    (let amount (string->number (. parts .[1])))
+    (pair
+      (Value.string dir)
+      (Value.number amount)))
+  (Value.list (Seq.map ParseInner lines)))
+
+(let instructions (ParseInstructions contents))
+
+(mut PosX (Number.int 0))
+(mut PosY (Number.int 0))
+(mut Aim (Number.int 0))
+
+(fn Part1 [(ins: Value)]
+  (fn Inner [(ins: Value)]
+    (let pair (unwrapPair ins))
+    (let dir (car pair))
+    (let amount (unwrapNumber (cdr pair)))
+    (if (= dir "forward")
+      (set! PosX (+ PosX amount)))
+    (if (= dir "up")
+      (set! PosY (- PosY amount)))
+    (if (= dir "down")
+      (set! PosY (+ PosY amount)))
+    #())
+  (Seq.iter Inner (unwrapSeq ins)))
+
+(Part1 instructions)
+
+(printfn "Part1 %O %O = %O" PosX PosY (* PosX PosY))
+
+(set! PosX (Number.int 0))
+(set! PosY (Number.int 0))
+(set! Aim (Number.int 0))
+
+(fn Part2 ([ins: Value])
+  (fn Inner [v]
+    (let pair (unwrapPair v))
+    (let dir (car pair))
+    (let amount (unwrapNumber (cdr pair)))
+
+    (if (= dir "forward")
+      (do
+        (set! PosY (+ PosY (* Aim amount)))
+        (set! PosX (+ PosX amount))))
+    (if (= dir "up")
+      (set! Aim (- Aim amount)))
+    (if (= dir "down")
+      (set! Aim (+ Aim amount)))
+
+    #())
+  (Seq.iter Inner (unwrapSeq ins)))
+
+(Part2 instructions)
+(printfn "Part2 %O %O = %O" PosX PosY (* PosX PosY))
+

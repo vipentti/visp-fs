@@ -1,0 +1,18 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "this is in the default top-level module")
+
+(module MyCustomModule
+    (printfn "this is inside MyCustomModule")
+    (fn hello ()
+        (printfn "hello world"))
+
+    (hello)
+)
+
+(printfn "this is back in the top-level-module")

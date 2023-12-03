@@ -1,0 +1,53 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System.IO)
+
+(fn string->number [(it: string)]
+    (let [result: Option<Number>] (Number.ParseOption it))
+    (if (. result +IsNone)
+        (failwithf "not valid number '%s'" it)
+        (. result +Value)))
+
+(fn string->int [(it: string)]
+    (System.Int64.Parse it))
+
+(fn i64-inc [(it: int64)]
+    (i64-+ it 1))
+
+(fn i64-add [(lhs: int64) (rhs: int64)]
+    (i64-+ lhs rhs))
+
+(let contents (File.ReadLines "./inputs/day1.txt"))
+
+(let numbers (Seq.map string->int contents))
+
+(fn CountIncreases ([numbs : seq<int64>])
+    (mut [increases: int64] 0)
+
+    (Seq.fold
+        (fn [acc curr]
+            (if (i64-= acc -1)
+                curr
+                (do
+                    (if (i64-> curr acc)
+                        (set! increases (i64-inc increases)))
+                curr)))
+        (int64 -1)
+        numbs)
+
+    increases)
+
+(fn CountWindows ([numbs : seq<int64>])
+    (let wins (Seq.windowed 3 numbs))
+    (let winsums
+        (Seq.map
+            (fn [win] (Array.reduce i64-add win))
+            wins))
+    (CountIncreases winsums))
+
+(printfn "Part 1 %O" (CountIncreases numbers))
+(printfn "Part 2 %O" (CountWindows numbers))

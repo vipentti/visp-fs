@@ -1,0 +1,18 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 1 @"tuple-0.visp"
+printfn ("%A") ((1, 2))
+// line 2 @"tuple-0.visp"
+printfn ("%A") ((1, 2, 3))
+// line 3 @"tuple-0.visp"
+let visp_result_todo =
+  // line 3 @"tuple-0.visp"
+  printfn ("%A") ((1, 2, 3, 4))
+// line 3 @"tuple-0.visp"
+printfn ("%A") (visp_result_todo)
+

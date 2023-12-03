@@ -1,0 +1,19 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System.Text.RegularExpressions)
+(let rx (new Regex "Game (\d+):" (.+Compiled RegexOptions)))
+
+(let ms (.Match rx "Game 1:"))
+
+(printfn "Groups %A" (+Groups ms))
+
+(let gamePrefix (.[0] (.+Groups ms)))
+
+(printfn "Game Prefix %A" gamePrefix)
+
+(printfn "Game Prefix %A" (->> ms +Groups .[0]))

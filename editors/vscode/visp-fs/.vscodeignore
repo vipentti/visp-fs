@@ -1,0 +1,10 @@
+**
+!language-configuration.json
+!LICENSE.md
+!icon.png
+!out/extension.js
+!out/extension.js.map
+!package-lock.json
+!package.json
+!README.md
+!syntaxes/visp-fs.tmLanguage.json

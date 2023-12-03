@@ -1,0 +1,155 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+;; Editable properties
+(let example false)
+(let day "day2")
+
+;; Common functionality
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(let g_PLAYER (!set "X" "Y" "Z"))
+(let g_DRAW "draw")
+
+(let g_PLAYER_ROCK "X")
+(let g_PLAYER_PAPER "Y")
+(let g_PLAYER_SCISSOR "Z")
+
+(let g_ROCKS    (!set "A" "X"))
+(let g_PAPERS   (!set "B" "Y"))
+(let g_SCISSORS (!set "C" "Z"))
+
+(fn player? (v) (Set.contains v g_PLAYER))
+(fn rock? (v) (Set.contains v g_ROCKS))
+(fn paper? (v) (Set.contains v g_PAPERS))
+(fn scissors? (v) (Set.contains v g_SCISSORS))
+(fn draw? (v) (= v g_DRAW))
+
+
+(fn parse-game ([lines : seq<string>])
+  (let games (!vec))
+  (for/in [line lines]
+    (if (not (string-empty? line))
+    (do
+      (let parts (.Split line " "))
+      (.Add games ((.[0] parts) . (.[1] parts)))
+    ))
+    )
+  games)
+
+(let games (parse-game contents))
+
+; (printfn "%A" games)
+
+(fn eval-game ([game : string*string])
+  (let a (fst game))
+  (let b (snd game))
+  (mut result "")
+
+  (if (and (paper? a) (paper? b))
+    (set! result g_DRAW))
+  (if (and (paper? a) (scissors? b))
+    (set! result b))
+  (if (and (paper? a) (rock? b))
+    (set! result a))
+
+  (if (and (rock? a) (scissors? b))
+    (set! result a))
+  (if (and (rock? a) (rock? b))
+    (set! result g_DRAW))
+  (if (and (rock? a) (paper? b))
+    (set! result b))
+
+  (if (and (scissors? a) (scissors? b))
+    (set! result g_DRAW))
+  (if (and (scissors? a) (rock? b))
+    (set! result b))
+  (if (and (scissors? a) (paper? b))
+    (set! result a))
+
+  result)
+
+(fn score-choice (v)
+  (mut res 0)
+  (if (rock? v)
+    (set! res 1))
+  (if (paper? v)
+    (set! res 2))
+  (if (scissors? v)
+    (set! res 3))
+  res)
+
+(fn score-game (game)
+  (let winner (eval-game game))
+  (let player (score-choice (snd game)))
+  (if (draw? winner)
+    (+ 3 player)
+    (if (player? winner)
+      (+ 6 player)
+      player)))
+
+(fn part2 (games)
+  (fn winner (v)
+    (cond
+      (rock? v)
+        g_PLAYER_PAPER
+      (paper? v)
+        g_PLAYER_SCISSOR
+      (scissors? v)
+        g_PLAYER_ROCK
+      :else
+        (failwith "unsupported")))
+  (fn loser (v)
+    (cond
+      (rock? v)
+        g_PLAYER_SCISSOR
+      (paper? v)
+        g_PLAYER_ROCK
+      (scissors? v)
+        g_PLAYER_PAPER
+      :else
+        (failwith "unsupported")
+    ))
+  (fn drawer (v)
+    (cond
+      (rock? v)
+        g_PLAYER_ROCK
+      (paper? v)
+        g_PLAYER_PAPER
+      (scissors? v)
+        g_PLAYER_SCISSOR
+      :else
+        (failwith "unsupported")
+    ))
+  (fn update-game (game)
+    (let oppo (fst game))
+    (let player (snd game))
+    (let next_player
+      (cond
+        (= player "X") (loser oppo)
+        (= player "Y") (drawer oppo)
+        (= player "Z") (winner oppo)))
+
+    (oppo . next_player))
+
+  (let new_games (Seq.map update-game games))
+  (->> (Seq.map score-game new_games)
+       (Seq.fold add 0))
+  )
+
+(let part1
+  (->> (Seq.map score-game games)
+       (Seq.fold add 0)))
+(printfn "Part1: %A %A" part1 (= part1 (if example 15 11386)))
+
+(let part2res (part2 games))
+
+(printfn "Part2: %A %A" part2res (= part2res (if example 12 13600)))
+;;(printfn "Game0 %A" (->> (.[0] games) eval-game))
+
+#()

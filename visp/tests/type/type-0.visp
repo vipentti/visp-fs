@@ -1,0 +1,17 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type MyType ([value: int32])
+  (let field value)
+  (member this.Foo value)
+  (memberfn this.Thing () "hello")
+)
+
+(let myObject (new MyType 99))
+
+(printfn "%O" myObject)
+(printfn "%O" (.+Foo myObject))

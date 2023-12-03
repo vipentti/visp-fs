@@ -1,0 +1,18 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let [ints : ResizeArray<int32>]
+    (new ResizeArray<_>))
+
+(. ints Add 1)
+
+(printfn "number of ints: %i" (. ints +Count))
+
+(. ints Add 2)
+
+(printfn "number of ints: %i" (. ints +Count))

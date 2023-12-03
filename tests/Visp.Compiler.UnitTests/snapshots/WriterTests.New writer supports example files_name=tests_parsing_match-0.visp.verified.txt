@@ -1,0 +1,39 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 2 @"match-0.visp"
+match "hello" with
+  | "hello" ->
+    // line 4 @"match-0.visp"
+    printfn ("was hello")
+  | _ ->
+    // line 7 @"match-0.visp"
+    printfn ("default")
+// line 10 @"match-0.visp"
+match (1, 2) with
+  | (a, 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
+    // line 13 @"match-0.visp"
+    printfn ("a is %A") (a)
+  | _ ->
+    // line 16 @"match-0.visp"
+    printfn ("default")
+// line 19 @"match-0.visp"
+match Some (1) with
+  | (Some a) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
+    // line 22 @"match-0.visp"
+    printfn ("a is %A") (a)
+  | (Some _) ->
+    // line 25 @"match-0.visp"
+    printfn ("some other")
+  | _ ->
+    // line 28 @"match-0.visp"
+    printfn ("default")
+// line 32 @"match-0.visp"
+let visp_result_todo = ()
+// line 32 @"match-0.visp"
+printfn ("%O") (visp_result_todo)
+

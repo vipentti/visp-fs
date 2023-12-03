@@ -1,0 +1,39 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 2 @"thread-last-0.visp"
+open System.Text.RegularExpressions
+
+// line 3 @"thread-last-0.visp"
+let rx =
+  // line 3 @"thread-last-0.visp"
+  (new Regex("Game (\d+):", (RegexOptions.Compiled)))
+// line 5 @"thread-last-0.visp"
+let ms =
+  // line 5 @"thread-last-0.visp"
+  (rx.Match("Game 1:"))
+// line 7 @"thread-last-0.visp"
+printfn ("Groups %A") ((ms.Groups))
+// line 9 @"thread-last-0.visp"
+let gamePrefix =
+  // line 9 @"thread-last-0.visp"
+  ((ms.Groups).[0])
+// line 11 @"thread-last-0.visp"
+printfn ("Game Prefix %A") (gamePrefix)
+// line 13 @"thread-last-0.visp"
+let visp_result_todo =
+  // line 13 @"thread-last-0.visp"
+  printfn ("Game Prefix %A") (ms
+    |> (fun a1 ->
+      // line 13 @"thread-last-0.visp"
+      (a1.Groups))
+    |> (fun a1 ->
+      // line 13 @"thread-last-0.visp"
+      (a1.[0])))
+// line 13 @"thread-last-0.visp"
+printfn ("%O") (visp_result_todo)
+

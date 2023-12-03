@@ -1,0 +1,28 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 2 @"while-0.visp"
+let inc (v: Value) =
+  // line 3 @"while-0.visp"
+  Value.from ((1) +
+  (unwrapInt (v)))
+
+// line 5 @"while-0.visp"
+let count =
+  // line 5 @"while-0.visp"
+  Value.atom(Value.from(0))
+// line 6 @"while-0.visp"
+let visp_result_todo =
+  // line 6 @"while-0.visp"
+  while CoreMethods.isTruthy(CoreMethods.``lt``(deref (count), 5)) do
+        // line 7 @"while-0.visp"
+    printfn ("in loop %O") (deref (count))
+        // line 8 @"while-0.visp"
+    CoreMethods.``swap!``(Value.from(count), inc)
+// line 6 @"while-0.visp"
+printfn ("%O") (visp_result_todo)
+

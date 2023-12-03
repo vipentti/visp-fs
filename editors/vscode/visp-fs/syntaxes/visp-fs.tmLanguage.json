@@ -1,0 +1,419 @@
+{
+    "information_for_contributors": [
+        "If you want to provide a fix or improvement, please create a pull request against the original repository.",
+        "Once accepted there, we are happy to receive an update request."
+    ],
+    "version": "",
+    "name": "visp-fs",
+    "scopeName": "source.visp",
+    "patterns": [
+        { "include": "#comment" },
+        { "include": "#shebang-comment" },
+        { "include": "#quoted-sexp" },
+        { "include": "#sexp" },
+        { "include": "#keyfn" },
+        { "include": "#tripleQuotedString" },
+        { "include": "#string" },
+        { "include": "#raw-string" },
+        { "include": "#char-lit" },
+        { "include": "#char-lit-str" },
+        { "include": "#vector" },
+        { "include": "#set" },
+        { "include": "#map" },
+        { "include": "#regexp" },
+        { "include": "#var" },
+        { "include": "#constants" },
+        { "include": "#dynamic-variables" },
+        { "include": "#metadata" },
+        { "include": "#read-metadata" },
+        { "include": "#namespace-symbol" },
+        { "include": "#symbol" }
+    ],
+    "repository": {
+        "comment": {
+            "begin": "(?<!\\\\);",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.comment.visp" }
+            },
+            "end": "$",
+            "name": "comment.line.semicolon.visp"
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "match": "(nil)(?=(\\s|\\)|\\]|\\}))",
+                    "name": "constant.language.nil.visp"
+                },
+                {
+                    "match": "(true|false)",
+                    "name": "constant.language.boolean.visp"
+                },
+                {
+                    "match": "(##(?:Inf|-Inf|NaN))",
+                    "name": "constant.numeric.symbol.visp"
+                },
+                {
+                    "match": "([-+]?\\d+/\\d+)",
+                    "name": "constant.numeric.ratio.visp"
+                },
+                {
+                    "match": "([-+]?(?:(?:3[0-6])|(?:[12]\\d)|[2-9])[rR][0-9A-Za-z]+N?)",
+                    "name": "constant.numeric.arbitrary-radix.visp"
+                },
+                {
+                    "match": "([-+]?0[xX][0-9a-fA-F]+N?)",
+                    "name": "constant.numeric.hexadecimal.visp"
+                },
+                {
+                    "match": "([-+]?0[0-7]+N?)",
+                    "name": "constant.numeric.octal.visp"
+                },
+                {
+                    "match": "([-+]?[0-9]+(?:(\\.|(?=[eEM]))[0-9]*([eE][-+]?[0-9]+)?)M?)",
+                    "name": "constant.numeric.double.visp"
+                },
+                {
+                    "match": "([-+]?\\d+N?)",
+                    "name": "constant.numeric.long.visp"
+                },
+                { "include": "#char-lit" },
+                { "include": "#keyword" }
+            ]
+        },
+        "char-lit": {
+            "ignore-me": "(?<=(\\s|\\(|\\[|\\{))\\#\\\\[\"\\'\\|\\(\\)\\[\\]\\@\\w\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}|\\,))",
+            "match": "\\#\\\\.\\w*",
+            "name": "constant.character.visp"
+        },
+        "char-lit-str": {
+            "ignore-me": "(?<=(\\s|\\(|\\[|\\{))\\#\\\\[\"\\'\\|\\(\\)\\[\\]\\@\\w\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}|\\,))",
+            "match": "\\#c\".\\w*\"",
+            "name": "string.quoted.other.visp"
+        },
+        "keyword": {
+            "match": "(?<=(\\s|\\(|\\[|\\{)):[\\w\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}|\\,))",
+            "name": "constant.keyword.visp"
+        },
+        "keyfn": {
+            "patterns": [
+                {
+                    "match": "(?<=(\\s|\\(|\\[|\\{))(if(-[-\\p{Ll}\\?]*)?|when(-[-\\p{Ll}]*)?|for(-[-\\p{Ll}]*)?|cond|do|let(-[-\\p{Ll}\\?]*)?|binding|loop|recur|fn|set|throw[\\p{Ll}\\-]*|try|catch|finally|set!|([\\p{Ll}]*case))(?=(\\s|\\)|\\]|\\}))",
+                    "name": "storage.control.visp"
+                },
+                {
+                    "match": "(?<=(\\s|\\(|\\[|\\{))(declare-?|(in-)?ns|import|use|require|load|compile|(def[\\p{Ll}\\-]*))(?=(\\s|\\)|\\]|\\}))",
+                    "name": "keyword.other.visp"
+                },
+                {
+                    "match": "(?<=(\\s|\\(|\\[|\\{))(match|and(-[-\\p{Ll}\\?]*)?|or(-[-\\p{Ll}\\?]*)?)(?=(\\s|\\)|\\]|\\}))",
+                    "name": "keyword.control.visp"
+                },
+                {
+                    "match": "(?<=(\\s|\\(|\\[|\\{))(module|type(-[-\\p{Ll}\\?]*)?|union(-[-\\p{Ll}\\?]*)?|struct(-[-\\p{Ll}\\?]*)?)(?=(\\s|\\)|\\]|\\}))",
+                    "name": "storage.type.visp"
+                },
+                {
+                    "match": "(?<=(\\s|\\(|\\[|\\{))(inline|override|open|mut(-[-\\p{Ll}\\?]*)?|member(-[-\\p{Ll}\\?]*)?|memberfn(-[-\\p{Ll}\\?]*)?)(?=(\\s|\\)|\\]|\\}))",
+                    "name": "keyword.other.visp"
+                }
+            ]
+        },
+        "fnvariablenames": {
+            "match": "(?<=\\(\\s*fn\\s+)(.+?)(?=\\s|\\()",
+            "captures": {
+                "1": { "name": "entity.name.function.visp" }
+            },
+            "patterns": [{ "include": "$self" }]
+        },
+        "variablenames": {
+            "match": "(?<=\\(\\s*[let|mut|set\\!]+\\s+)(.+?)(?=\\s)",
+            "captures": {
+                "1": { "name": "variable.other.visp" }
+            },
+            "patterns": [{ "include": "$self" }]
+        },
+        "dynamic-variables": {
+            "match": "\\*[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\d\\$]+\\*",
+            "name": "meta.symbol.dynamic.visp"
+        },
+        "map": {
+            "begin": "(\\{)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.section.map.begin.visp" }
+            },
+            "end": "(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})",
+            "endCaptures": {
+                "1": { "name": "punctuation.section.map.end.trailing.visp" },
+                "2": { "name": "punctuation.section.map.end.visp" }
+            },
+            "name": "meta.map.visp",
+            "patterns": [{ "include": "$self" }]
+        },
+        "read-metadata": {
+            "patterns": [
+                {
+                    "begin": "(\\#\\^\\{)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.section.read-metadata.map.begin.visp"
+                        }
+                    },
+                    "end": "(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.read-metadata.map.end.trailing.visp"
+                        },
+                        "2": {
+                            "name": "punctuation.section.read-metadata.map.end.visp"
+                        }
+                    },
+                    "name": "meta.read-metadata.map.visp",
+                    "patterns": [{ "include": "$self" }]
+                },
+                {
+                    "begin": "(\\#\\^)",
+                    "end": "(\\s)",
+                    "name": "entity.name.type.visp",
+                    "patterns": [
+                        { "include": "#keyword" },
+                        { "include": "$self" }
+                    ]
+                }
+            ]
+        },
+        "metadata": {
+            "patterns": [
+                {
+                    "begin": "(\\^\\{)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.section.metadata.map.begin.visp"
+                        }
+                    },
+                    "end": "(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.metadata.map.end.trailing.visp"
+                        },
+                        "2": {
+                            "name": "punctuation.section.metadata.map.end.visp"
+                        }
+                    },
+                    "name": "meta.metadata.map.visp",
+                    "patterns": [{ "include": "$self" }]
+                },
+                {
+                    "begin": "(\\^)",
+                    "end": "(\\s)",
+                    "name": "meta.metadata.simple.visp",
+                    "patterns": [
+                        { "include": "#keyword" },
+                        { "include": "$self" }
+                    ]
+                }
+            ]
+        },
+        "quoted-sexp": {
+            "begin": "(['``]\\()",
+            "beginCaptures": {
+                "1": { "name": "punctuation.section.expression.begin.visp" }
+            },
+            "end": "(\\))$|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.expression.end.trailing.visp"
+                },
+                "2": {
+                    "name": "punctuation.section.expression.end.trailing.visp"
+                },
+                "3": { "name": "punctuation.section.expression.end.visp" }
+            },
+            "name": "meta.quoted-expression.visp",
+            "patterns": [{ "include": "$self" }]
+        },
+        "regexp": {
+            "begin": "#re\"",
+            "beginCaptures": {
+                "0": { "name": "punctuation.definition.regexp.begin.visp" }
+            },
+            "end": "\"",
+            "endCaptures": {
+                "0": { "name": "punctuation.definition.regexp.end.visp" }
+            },
+            "name": "string.regexp.visp",
+            "patterns": [{ "include": "#regexp_escaped_char" }]
+        },
+        "regexp_escaped_char": {
+            "match": "\\\\.",
+            "name": "constant.character.escape.visp"
+        },
+        "hashset": {
+            "begin": "(\\#\\{)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.section.hashset.begin.visp" }
+            },
+            "end": "(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})",
+            "endCaptures": {
+                "1": { "name": "punctuation.section.hashset.end.trailing.visp" },
+                "2": { "name": "punctuation.section.hashset.end.visp" }
+            },
+            "name": "meta.hashset.visp",
+            "patterns": [{ "include": "$self" }]
+        },
+        "sexp": {
+            "begin": "(\\()",
+            "beginCaptures": {
+                "1": { "name": "punctuation.section.expression.begin.visp" }
+            },
+            "end": "(\\))$|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.expression.end.trailing.visp"
+                },
+                "2": {
+                    "name": "punctuation.section.expression.end.trailing.visp"
+                },
+                "3": { "name": "punctuation.section.expression.end.visp" }
+            },
+            "name": "meta.expression.visp",
+            "patterns": [
+                {
+                    "begin": "(?<=\\()(ns|declare|def[\\w\\d._:+=><!?*-]*|[\\w._:+=><!?*-][\\w\\d._:+=><!?*-]*/def[\\w\\d._:+=><!?*-]*)\\s+",
+                    "beginCaptures": {
+                        "1": { "name": "keyword.control.visp" }
+                    },
+                    "end": "(?=\\))",
+                    "name": "meta.definition.global.visp",
+                    "patterns": [
+                        { "include": "#metadata" },
+                        { "include": "#read-metadata" },
+                        { "include": "#dynamic-variables" },
+                        {
+                            "match": "([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)",
+                            "name": "entity.global.visp"
+                        },
+                        { "include": "$self" }
+                    ]
+                },
+                { "include": "#keyfn" },
+                { "include": "#fnvariablenames" },
+                { "include": "#variablenames" },
+                { "include": "#char-lit" },
+                { "include": "#char-lit-str" },
+                { "include": "#constants" },
+                { "include": "#vector" },
+                { "include": "#map" },
+                { "include": "#hashset" },
+                { "include": "#sexp" },
+                { "include": "#read-metadata" },
+                { "include": "#string" },
+                {
+                    "match": "(?<=\\()(.+?)(?=\\s|\\))",
+                    "captures": {
+                        "1": { "name": "entity.name.function.visp" }
+                    },
+                    "patterns": [{ "include": "$self" }]
+                },
+                { "include": "$self" }
+            ]
+        },
+        "shebang-comment": {
+            "begin": "^(#!)",
+            "beginCaptures": {
+                "1": {
+                    "name": "punctuation.definition.comment.shebang.visp"
+                }
+            },
+            "end": "$",
+            "name": "comment.line.shebang.visp"
+        },
+        "tripleQuotedString": {
+            "begin": "(?<!\\\\)(\"\"\")",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.tripleQuotedString.begin.visp" }
+            },
+            "end": "(\"\"\")",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.tripleQuotedString.end.visp" }
+            },
+            "name": "string.quoted.triple.visp",
+            "patterns": [
+                {
+                    "match": "\\\\.",
+                    "name": "constant.character.escape.visp"
+                }
+            ]
+        },
+        "raw-string": {
+            "begin": "#r\"\"\"",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.raw-string.begin.visp" }
+            },
+            "end": "(\"\"\")",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.raw-string.end.visp" }
+            },
+            "name": "string.quoted.triple.visp",
+            "patterns": [
+                {
+                    "match": "\\\\.",
+                    "name": "constant.character.escape.visp"
+                }
+            ]
+        },
+        "string": {
+            "begin": "(?<!\\\\)(\")",
+            "beginCaptures": {
+                "1": { "name": "punctuation.definition.string.begin.visp" }
+            },
+            "end": "(\")",
+            "endCaptures": {
+                "1": { "name": "punctuation.definition.string.end.visp" }
+            },
+            "name": "string.quoted.double.visp",
+            "patterns": [
+                {
+                    "match": "\\\\.",
+                    "name": "constant.character.escape.visp"
+                }
+            ]
+        },
+        "namespace-symbol": {
+            "patterns": [
+                {
+                    "match": "([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)/",
+                    "captures": {
+                        "1": { "name": "meta.symbol.namespace.visp" }
+                    }
+                }
+            ]
+        },
+        "symbol": {
+            "patterns": [
+                {
+                    "match": "([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*\\$][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d\\$]*)",
+                    "name": "meta.symbol.visp"
+                }
+            ]
+        },
+        "var": {
+            "match": "(?<=(\\s|\\(|\\[|\\{)\\#)'[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))",
+            "name": "meta.var.visp"
+        },
+        "vector": {
+            "begin": "(\\[)",
+            "beginCaptures": {
+                "1": { "name": "punctuation.section.vector.begin.visp" }
+            },
+            "end": "(\\](?=[\\}\\]\\)\\s]*(?:;|$)))|(\\])",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.vector.end.trailing.visp"
+                },
+                "2": { "name": "punctuation.section.vector.end.visp" }
+            },
+            "name": "meta.vector.visp",
+            "patterns": [{ "include": "$self" }]
+        }
+    }
+}

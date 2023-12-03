@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        ".visp": "visp-fs"
+    },
+    "[visp-fs]": {
+        "editor.wordSeparators": "`~@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+        "editor.tabSize": 2,
+    },
+    "[visp]": {
+        "editor.wordSeparators": "`~@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+        "editor.tabSize": 2,
+    },
+    "files.trimTrailingWhitespace": true,
+}

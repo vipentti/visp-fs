@@ -1,0 +1,134 @@
+{
+  "name": "visp-fs",
+  "displayName": "visp-fs",
+  "description": "Language support for visp-fs",
+  "icon": "icon.png",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "publisher": "vipentti",
+  "author": {
+    "name": "vipentti"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "pricing": "Free",
+  "repository": {
+    "url": "https://github.com/vipentti/visp-fs"
+  },
+  "keywords": [
+    "F#",
+    "fsharp",
+    "visp",
+    "visp-fs",
+    "lisp",
+    "scheme"
+  ],
+  "license": "MIT",
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "visp-fs.resetClient",
+        "title": "Reset the language client",
+        "category": "visp-fs"
+      },
+      {
+        "command": "visp-fs.restartServer",
+        "title": "Restart server",
+        "category": "visp-fs"
+      },
+      {
+        "command": "visp-fs.startServer",
+        "title": "Start server",
+        "category": "visp-fs"
+      },
+      {
+        "command": "visp-fs.stopServer",
+        "title": "Stop server",
+        "category": "visp-fs"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "visp-fs.server.path": {
+          "scope": "machine-overridable",
+          "type": [
+            "null",
+            "string"
+          ],
+          "default": null,
+          "description": "Path to the language server executable"
+        },
+        "visp-fs.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "visp-fs",
+        "aliases": [
+          "visp-fs",
+          "Visp-fs"
+        ],
+        "extensions": [
+          ".visp",
+          ".vispfs",
+          ".visp-fs"
+        ],
+        "icon": {
+          "dark": "icon.png",
+          "light": "icon.png"
+        },
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "visp-fs",
+        "scopeName": "source.visp",
+        "path": "./syntaxes/visp-fs.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build-base -- --minify",
+    "package": "vsce package -o visp-fs.vsix",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "build-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "build": "npm run build-base -- --sourcemap",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.84.2",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.54.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  }
+}

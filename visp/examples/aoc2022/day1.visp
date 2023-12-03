@@ -1,0 +1,115 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; Editable properties
+(let example false)
+(let day "day1")
+
+;; Common functionality
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(fn parse-elves-from-file [lines]
+  (let elves [])
+  (let cur [])
+  (Seq.iter
+    (fn [line]
+      (if (string-empty? line)
+        (do
+          (let vs (->> cur copyVec VecToValue))
+          (.Add elves vs)
+          (.Clear cur))
+        (do
+          (.Add cur (->> line string->number Value.number))
+        )))
+    lines)
+
+  (if (>= (.+Count cur) 0)
+    (.Add elves (->> cur copyVec VecToValue)))
+
+  elves)
+
+(let elves (parse-elves-from-file contents))
+
+;; (printfn "elves: %O" elves)
+
+(fn sum-calories (elf)
+  (->> elf
+       unwrapVec
+       (Seq.reduce
+          (fn [a b] (Value.number (+ (unwrapNumber a) (unwrapNumber b)))))
+       Unwrap.int))
+
+(fn FindMaxCalories (elves [ignored: Set<int>])
+  (mut maxCalories (int64 -1))
+  (mut maxIndex (int64 -1))
+  (mut index 0)
+
+  (Seq.iter
+    (fn [elf]
+      (let calories (sum-calories elf))
+      ;; (printfn "elf: %O index %o calories %O" elf index calories)
+      (if (not (Set.contains index ignored))
+        (if (>= calories maxCalories)
+          (do
+            (set! maxCalories calories)
+            (set! maxIndex index)
+          )))
+
+      (set! index (+ index 1))
+      #())
+    elves)
+
+  {
+    :maxCalories maxCalories
+    :maxIndex maxIndex
+  })
+
+(fn part1 [elves]
+  (mut maxCalories (int64 -1))
+  (mut maxIndex (int64 -1))
+  (mut index 0)
+
+  (Seq.iter
+    (fn [elf]
+      (let calories (sum-calories elf))
+      ;; (printfn "elf: %O index %o calories %O" elf index calories)
+      (set! index (+ index 1))
+      (if (>= calories maxCalories)
+        (do
+          (set! maxCalories calories)
+          (set! maxIndex index)
+        ))
+      #())
+    elves)
+
+  {
+    :part1 'part1
+    :maxCalories maxCalories
+    :maxIndex maxIndex
+  })
+
+(printfn "part1: %O" (part1 elves))
+
+(fn part2 [elves]
+  (let set (.+empty Set))
+  (let first (FindMaxCalories elves set))
+  ;; (let third (FindMaxCalories (->> (Set.add first set) (Set.add second))))
+  (printfn "type: %O" (.GetType first))
+  (let set (Set.add (->> (:maxIndex first) Unwrap.i32) set))
+  (let second (FindMaxCalories elves set))
+  (let third (FindMaxCalories elves (Set.add (->> (:maxIndex second) Unwrap.i32) set)))
+  {
+    :maxCalories
+      (+ (Unwrap.i64 (:maxCalories first))
+         (Unwrap.i64 (:maxCalories second))
+         (Unwrap.i64 (:maxCalories third))
+         )
+  })
+
+(printfn "part2: %O" (part2 elves))

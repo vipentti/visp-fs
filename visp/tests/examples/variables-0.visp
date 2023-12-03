@@ -1,0 +1,21 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; define a variable which cannot be re-assigned
+(let value 1)
+(printfn "value is %i" value)
+
+;; define a mutable variable which can be re-assigned
+(mut valuemut 1)
+(printfn "valuemut is %i" valuemut)
+
+;; set! re-assigns the value pointed to by the first expression with the result of the second exprssion
+;; in F# terms (set! varOrExpr value) becomes varOrExpr <- value
+(set! valuemut (+ valuemut 1))
+
+(printfn "valuemut is %i" valuemut)

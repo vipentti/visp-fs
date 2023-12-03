@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let a 5)
+(let b 4)
+
+(printfn "+ is %i" (+ a b 52))
+(printfn "+ is %i" (+))
+(printfn "+ is %i" (+ 2))
+
+(printfn "* is %i" (* a b 52))
+(printfn "* is %i" (* 2))
+(printfn "* is %i" (*))
+
+(printfn "- is %i" (- a b 52))
+(printfn "- is %i" (- 2))
+
+(printfn "/ is %f" (/ a b 52))
+(printfn "/ is %f" (/ 2))

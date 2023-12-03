@@ -1,0 +1,16 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn inc ([v: Value])
+    (Value.from (+ 1 (unwrapInt v))))
+(let count (atom 0))
+
+(printfn "count is %O" @count)
+
+(swap! count inc)
+
+(printfn "count is %O" @count)

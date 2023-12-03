@@ -1,0 +1,13 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let values
+    [1 2 "foo" "bar"])
+
+(printfn "values are %O" values)
+(vector-push! values 4 5 6 7)
+(printfn "values after update are %O" values)

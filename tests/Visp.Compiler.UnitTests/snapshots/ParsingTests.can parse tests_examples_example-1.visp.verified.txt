@@ -1,0 +1,46 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 4 @"example-1.visp"
+let hello (name: string) =
+  // line 6 @"example-1.visp"
+  printfn ("hello %s") (name)
+
+// line 10 @"example-1.visp"
+let ``hello-no-types`` name =
+  // line 11 @"example-1.visp"
+  printfn ("hello %s") (name)
+
+// line 14 @"example-1.visp"
+let ``hello-with-vector`` (name: string) =
+  // line 15 @"example-1.visp"
+  printfn ("hello %s") (name)
+
+// line 18 @"example-1.visp"
+let anon =
+  // line 18 @"example-1.visp"
+  (fun name ->
+    // line 18 @"example-1.visp"
+    printfn ("hello %s") (name))
+// line 20 @"example-1.visp"
+hello ("test")
+// line 21 @"example-1.visp"
+``hello-no-types`` ("no types")
+// line 22 @"example-1.visp"
+``hello-with-vector`` ("vector")
+// line 23 @"example-1.visp"
+anon ("anon")
+// line 25 @"example-1.visp"
+let visp_result_todo =
+  // line 25 @"example-1.visp"
+    // line 25 @"example-1.visp"
+  (fun name ->
+    // line 26 @"example-1.visp"
+    printfn ("hello %s") (name)) ("lambda")
+// line 25 @"example-1.visp"
+printfn ("%A") (visp_result_todo)
+

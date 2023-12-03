@@ -1,0 +1,16 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let quasiquoted (quasiquote (hello world in quotes)))
+
+(printfn "quasiquoted is: %O" quasiquoted)
+
+(let next_quasiquoted (quasiquote
+    ("constants" :keywords-work true 1 1.5 false also "work" nil)))
+
+(printfn "next_quasiquoted is: %O" next_quasiquoted)

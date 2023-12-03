@@ -1,0 +1,16 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 6 @"let-values.visp"
+printfn ("%i") (CoreMethods.``add``(1, 2))
+// line 7 @"let-values.visp"
+printfn ("%i") (List.reduce (CoreMethods.add) ([1;2;3;4;5]))
+// line 9 @"let-values.visp"
+let visp_result_todo = "let-value support?"
+// line 9 @"let-values.visp"
+printfn ("%A") (visp_result_todo)
+

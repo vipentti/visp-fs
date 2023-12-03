@@ -1,0 +1,32 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; create a function named hello
+;; which takes one argument with the name 'name' and type 'string'
+(fn hello ((name : string))
+    ;; call function with the name printfn with the provided arguments
+    (printfn "hello %s" name))
+
+;; create another function which does the exactly the same thing as hello above
+;; but only it uses type inference for the argument type
+(fn hello-no-types (name)
+    (printfn "hello %s" name))
+
+;; function arguments & types may also be specified using brackets []
+(fn hello-with-vector [[name : string]]
+    (printfn "hello %s" name))
+
+;; Create an anonymous lamda and store it in variable named 'anon'
+(let anon (fn (name) (printfn "hello %s" name)))
+
+(hello "test")
+(hello-no-types "no types")
+(hello-with-vector "vector")
+(anon "anon")
+;; call an anonymous lambda function
+((fn (name)
+    (printfn "hello %s" name)) "lambda")
