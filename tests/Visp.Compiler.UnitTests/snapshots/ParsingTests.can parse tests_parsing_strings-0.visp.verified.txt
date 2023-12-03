@@ -5,23 +5,23 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 2 @"strings-0.visp"
+// line 9 @"strings-0.visp"
 printfn ("string is: '%s'") ("
   this is
   a multiline
   string
 ")
-// line 8 @"strings-0.visp"
+// line 15 @"strings-0.visp"
 printfn ("string is: '%s'") ("""
   this is
   a multiline
   string
 """)
-// line 14 @"strings-0.visp"
+// line 21 @"strings-0.visp"
 let ``generate-test`` path =
-  // line 15 @"strings-0.visp"
+  // line 22 @"strings-0.visp"
   let template =
-    // line 15 @"strings-0.visp"
+    // line 22 @"strings-0.visp"
     sprintf ("""
 let ``can parse %s`` =
   TestUtils.runTest %s
@@ -29,10 +29,10 @@ let ``can parse %s`` =
   """) (path) (path)
   template
 
-// line 23 @"strings-0.visp"
+// line 30 @"strings-0.visp"
 let visp_result_todo =
-  // line 23 @"strings-0.visp"
+  // line 30 @"strings-0.visp"
   printfn ("test is: '%s'") (``generate-test`` ("hello"))
-// line 23 @"strings-0.visp"
+// line 30 @"strings-0.visp"
 printfn ("%A") (visp_result_todo)
 

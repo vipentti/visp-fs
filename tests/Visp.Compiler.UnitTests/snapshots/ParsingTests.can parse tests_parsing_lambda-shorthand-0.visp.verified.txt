@@ -5,17 +5,17 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"lambda-shorthand-0.visp"
+// line 8 @"lambda-shorthand-0.visp"
 let temp =
-  // line 1 @"lambda-shorthand-0.visp"
+  // line 8 @"lambda-shorthand-0.visp"
   (fun arg10 arg21 ->
-    // line 1 @"lambda-shorthand-0.visp"
+    // line 8 @"lambda-shorthand-0.visp"
     (arg10) +
     (arg21))
-// line 2 @"lambda-shorthand-0.visp"
+// line 9 @"lambda-shorthand-0.visp"
 let visp_result_todo =
-  // line 2 @"lambda-shorthand-0.visp"
+  // line 9 @"lambda-shorthand-0.visp"
   temp (1) (2)
-// line 2 @"lambda-shorthand-0.visp"
+// line 9 @"lambda-shorthand-0.visp"
 printfn ("%A") (visp_result_todo)
 

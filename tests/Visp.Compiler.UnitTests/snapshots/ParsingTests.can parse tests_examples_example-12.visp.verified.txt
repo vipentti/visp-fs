@@ -5,20 +5,20 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 2 @"example-12.visp"
+// line 9 @"example-12.visp"
 let quoted =
-  // line 2 @"example-12.visp"
-  Value.from([Value.symbol("hello");Value.symbol("world");Value.symbol("in");Value.symbol("quotes")])
-// line 4 @"example-12.visp"
-printfn ("quoted is: %O") (quoted)
-// line 6 @"example-12.visp"
-let next_quoted =
-  // line 6 @"example-12.visp"
-  Value.from([Value.string("constants");Value.keyword(":keywords-work");Value.from(true);Value.from(1);Value.from(1.5);Value.from(false);Value.symbol("also");Value.string("work");Value.from(Value.Nil)])
-// line 9 @"example-12.visp"
-let visp_result_todo =
   // line 9 @"example-12.visp"
+  Value.from([Value.symbol("hello");Value.symbol("world");Value.symbol("in");Value.symbol("quotes")])
+// line 11 @"example-12.visp"
+printfn ("quoted is: %O") (quoted)
+// line 13 @"example-12.visp"
+let next_quoted =
+  // line 13 @"example-12.visp"
+  Value.from([Value.string("constants");Value.keyword(":keywords-work");Value.from(true);Value.from(1);Value.from(1.5);Value.from(false);Value.symbol("also");Value.string("work");Value.from(Value.Nil)])
+// line 16 @"example-12.visp"
+let visp_result_todo =
+  // line 16 @"example-12.visp"
   printfn ("next_quoted is: %O") (next_quoted)
-// line 9 @"example-12.visp"
+// line 16 @"example-12.visp"
 printfn ("%A") (visp_result_todo)
 

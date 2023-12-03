@@ -5,12 +5,12 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 1 @"for-in-0.visp"
+// line 8 @"for-in-0.visp"
 let visp_result_todo =
-  // line 1 @"for-in-0.visp"
+  // line 8 @"for-in-0.visp"
   for var in 0 .. 1 .. 10 do
-    // line 2 @"for-in-0.visp"
+    // line 9 @"for-in-0.visp"
     printfn ("var is: %O") (var)
-// line 1 @"for-in-0.visp"
+// line 8 @"for-in-0.visp"
 printfn ("%A") (visp_result_todo)
 
