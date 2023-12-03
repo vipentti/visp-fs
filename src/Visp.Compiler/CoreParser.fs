@@ -79,18 +79,17 @@ let state = { Todo = () }
             | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
                 args.Nested <| LexMode.TokenStream TokenStreamMode.Quote
             | QUASIQUOTE_KW -> args.Nested <| LexMode.TokenStream TokenStreamMode.Quasiquote
+            | SYNTAX_MACRO -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
+            | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
             | LPAREN
             | LBRACE
             | LBRACKET
             | HASH_BRACE ->
-                if not args.mode.IsDefaultMode then
-                    args.Nest()
+                args.NestIfNotDefault ()
             | RPAREN
             | RBRACE
             | RBRACKET ->
-                if not args.mode.IsDefaultMode then
-                    if args.Unnest() <= 0 then
-                        args.Reset()
+                args.UnnestIfNotDefault ()
             | _ -> ()
 
             next

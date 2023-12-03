@@ -98,6 +98,8 @@ type SynExpr =
     | Op of SynOp
     | MacroDef of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
     | MacroCall of name: SynSymbol * args: SynValue list * range: range
+    | SyntaxMacroCall of name: SynSymbol * args: SynMacroBody list * range : range
+    | SyntaxMacro of macro: SynMacro
     | FunctionDef of
         name: SynSymbol *
         isInline: bool *
@@ -164,6 +166,8 @@ type SynExpr =
         | MacroCall(range = r)
         | FunctionDef(range = r)
         | FunctionCall(range = r)
+        | SyntaxMacroCall(range = r)
+        | SyntaxMacro(SynMacro(range = r))
         | LambdaDef(SynLambda(range = r))
         | Const(range = r)
         | Quote(range = r)
@@ -206,7 +210,7 @@ and SynMacroCase = SynMacroCase of pat: SynMacroPat * body: SynMacroBody * range
 
 and [<RequireQualifiedAccess>] SynMacroPat =
     | Const of value: SynConst * range: range
-    | List of pats: SynMatchPattern list * range: range
+    | List of pats: SynMacroPat list * range: range
     | Symbol of name: SynSymbol * range: range
     | Ellipsis of range: range
     | Discard of range: range
@@ -220,6 +224,7 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
     | Ellipsis of range: range
+    | Discard of range: range
 
 and [<RequireQualifiedAccess>] SynMatch =
     | SynMatch of
