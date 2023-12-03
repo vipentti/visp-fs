@@ -1,0 +1,33 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 1 @"if-0.visp"
+let condition () =
+  false
+
+// line 2 @"if-0.visp"
+let _then () =
+  "then"
+
+// line 3 @"if-0.visp"
+let alt () =
+  "alt"
+
+// line 5 @"if-0.visp"
+let visp_result_todo =
+  // line 5 @"if-0.visp"
+  if CoreMethods.isTruthy(
+    condition ())
+    then
+      // line 6 @"if-0.visp"
+      _then ()
+    else
+      // line 7 @"if-0.visp"
+      alt ()
+// line 5 @"if-0.visp"
+printfn ("%O") (visp_result_todo)
+

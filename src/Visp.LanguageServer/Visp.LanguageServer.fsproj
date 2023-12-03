@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="LanguageServer.fs" />
+    <Compile Include="LanguageServerMain.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol" Version="17.2.8" />
+    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol.Extensions" Version="17.2.8" />
+    <PackageReference Include="SpanUtils" Version="0.4.0" />
+    <PackageReference Include="StreamJsonRpc" Version="2.17.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Visp.Compiler\Visp.Compiler.fsproj" />
+    <ProjectReference Include="..\Visp.Common\Visp.Common.csproj" />
+  </ItemGroup>
+
+</Project>

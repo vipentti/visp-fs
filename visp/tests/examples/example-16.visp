@@ -1,0 +1,21 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let* [
+    captured_variable 1
+    first_fun
+      (fn* []
+          (let* [second_fun
+                  (fn* []
+                    (let* [third_fun
+                        (fn* [] (+ captured_variable 1))]
+                      (third_fun))
+                      )]
+            (second_fun))
+      )
+    ]
+    (str (first_fun)))

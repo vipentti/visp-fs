@@ -1,0 +1,48 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(match "hello"
+  ["hello"
+    (printfn "was hello")
+  ]
+  [_
+    (printfn "default")
+  ])
+
+(match (!tuple 1 2)
+  [ (!tuple a 2)
+    (when (>= a 0))
+    (printfn "a is %A" a)
+  ]
+  [_
+    (printfn "default")
+  ])
+
+(match (!tuple 1 2)
+  [ (a, 2)
+    (when (>= a 0))
+    (printfn "a is %A" a)
+  ]
+  [_
+    (printfn "default")
+  ])
+
+(match (Some 1)
+  [ (Some a)
+    (when (>= a 0))
+    (printfn "a is %A" a)
+  ]
+  [ (Some _)
+    (printfn "some other")
+  ]
+  [_
+    (printfn "default")
+  ]
+)
+
+#()

@@ -1,0 +1,15 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 4 @"test"
+let hello (name: string) =
+  // line 6 @"test"
+  printfn ("hello %s") (name)
+
+// line 8 @"test"
+hello ("world")
+

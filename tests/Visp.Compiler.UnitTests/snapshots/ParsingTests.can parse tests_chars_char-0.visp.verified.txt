@@ -1,0 +1,24 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 1 @"char-0.visp"
+printfn ("Char is %O") ('h')
+// line 2 @"char-0.visp"
+printfn ("Char is %O") ('a')
+// line 3 @"char-0.visp"
+printfn ("Char is %O") ('a')
+// line 5 @"char-0.visp"
+printfn ("Char is %O") (':')
+// line 6 @"char-0.visp"
+printfn ("Char is %O") ('(')
+// line 7 @"char-0.visp"
+let visp_result_todo =
+  // line 7 @"char-0.visp"
+  printfn ("Char is %O") (')')
+// line 7 @"char-0.visp"
+printfn ("%A") (visp_result_todo)
+

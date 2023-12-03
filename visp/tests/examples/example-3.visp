@@ -1,0 +1,11 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(mut value "initial")
+(printfn "value is %s" value)
+(set! value "updated")
+(printfn "value is %s" value)

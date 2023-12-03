@@ -1,0 +1,6 @@
+Lexer.fs
+Parser.fs
+Lexer.fsi
+Parser.fsi
+*.generated.fs
+editors/

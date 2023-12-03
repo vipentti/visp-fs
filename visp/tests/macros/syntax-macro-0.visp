@@ -1,0 +1,30 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro matchfnexample
+  [(_ sym m ms ...)
+    (fn sym (arg)
+      (match arg
+        m
+        ms ...
+      ))
+  ])
+
+(matchfnexample name
+  [(!tuple a b)
+    (+ a b)]
+  [_ 0])
+
+(fn name2 (tup)
+  (match tup
+    [(!tuple a b) (+ a b)]
+    [_ 0]))
+
+(printfn "%A & %A"
+  (name (tuple! 1 2))
+  (name2 (tuple! 1 2)))

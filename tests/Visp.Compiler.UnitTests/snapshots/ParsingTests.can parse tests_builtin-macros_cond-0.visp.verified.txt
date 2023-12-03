@@ -1,0 +1,32 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 2 @"cond-0.visp"
+let visp_result_todo =
+  // line 2 @"cond-0.visp"
+  if CoreMethods.isTruthy(
+    CoreMethods.``gt``(0, 0))
+    then
+      1
+    else
+      // line 2 @"cond-0.visp"
+      if CoreMethods.isTruthy(
+        CoreMethods.``lt``(0, 0))
+        then
+          2
+        else
+          // line 2 @"cond-0.visp"
+          if CoreMethods.isTruthy(
+            Value.keyword(":else"))
+            then
+              3
+            else
+              // line 2 @"cond-0.visp"
+              failwith ("Unbalanced cond")
+// line 2 @"cond-0.visp"
+printfn ("%O") (visp_result_todo)
+

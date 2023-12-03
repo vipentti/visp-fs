@@ -1,0 +1,16 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 2 @"for-in-4.visp"
+let visp_result_todo =
+  // line 2 @"for-in-4.visp"
+  for var in [(1, 2);(3, 4);(5, 6)] |> Map.ofList do
+    // line 3 @"for-in-4.visp"
+    printfn ("var is: %O") (var)
+// line 2 @"for-in-4.visp"
+printfn ("%A") (visp_result_todo)
+

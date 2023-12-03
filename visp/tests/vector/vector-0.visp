@@ -1,0 +1,17 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(mut vec [1 2 3 4 5 6])
+(let empty [])
+
+(set! (.[1] vec) (Value.int -1))
+
+(.Add empty (Value.int 99))
+
+(printfn "%O" empty)
+
+vec

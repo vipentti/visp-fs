@@ -1,0 +1,14 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; create a function named hello
+;; which takes one argument with the name 'name' and type 'string'
+(fn hello ((name : string))
+    ;; call function with the name printfn with the provided arguments
+    (printfn "hello %s" name))
+
+(hello "world")

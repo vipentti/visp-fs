@@ -1,0 +1,14 @@
+###############################################################################
+# Set default behavior to automatically normalize line endings.
+###############################################################################
+* text=auto
+
+*.sh text eol=lf
+*.cmd text eol=lf
+
+.visp text working-tree-encoding=UTF-8 linguist-language=Clojure linguist-detectable
+
+## Snapshots
+*.verified.txt text eol=lf working-tree-encoding=UTF-8
+*.verified.xml text eol=lf working-tree-encoding=UTF-8
+*.verified.json text eol=lf working-tree-encoding=UTF-8

@@ -1,0 +1,33 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 1 @"dot-shorthands.visp"
+let mutable vec =
+  // line 1 @"dot-shorthands.visp"
+  let temp = Vector(6)
+  temp.Add(Value.from(1))
+  temp.Add(Value.from(2))
+  temp.Add(Value.from(3))
+  temp.Add(Value.from(4))
+  temp.Add(Value.from(5))
+  temp.Add(Value.from(6))
+  temp
+// line 3 @"dot-shorthands.visp"
+vec.[1] <- Value.int (-1)
+// line 5 @"dot-shorthands.visp"
+printfn ("%O") ((vec.[1]))
+// line 6 @"dot-shorthands.visp"
+printfn ("%O") ((System.Int64.MaxValue))
+// line 8 @"dot-shorthands.visp"
+(vec.Add(Value.int (64)))
+// line 10 @"dot-shorthands.visp"
+let visp_result_todo =
+  // line 10 @"dot-shorthands.visp"
+  printfn ("%O") ((vec.[(vec.Count) - 1]))
+// line 10 @"dot-shorthands.visp"
+printfn ("%A") (visp_result_todo)
+

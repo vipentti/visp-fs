@@ -1,0 +1,28 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+;; Editable properties
+(let example true)
+(let day "day3")
+
+;; Common functionality
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(let bits (->> contents
+    (Seq.map (fn [[s: string]]
+      (->> s
+        Seq.toList
+        (Seq.map char->value)
+        List.ofSeq
+        )))
+    List.ofSeq
+  ))
+
+(printfn "%O" bits)
+
+#()

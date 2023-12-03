@@ -1,0 +1,16 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 1 @"thread-first-0.visp"
+let visp_result_todo =
+  // line 1 @"thread-first-0.visp"
+  "return me"
+    |> (fun arg ->
+      arg)
+// line 1 @"thread-first-0.visp"
+printfn ("%O") (visp_result_todo)
+

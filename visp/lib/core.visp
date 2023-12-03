@@ -1,0 +1,46 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+;; TODO: Module + auto-open attribute?
+
+(fn string->number [(it: string)]
+    (let [result: Option<Number>] (Number.ParseOption it))
+    (if (. result +IsNone)
+        (failwithf "not valid number '%s'" it)
+        (. result +Value)))
+
+(fn string->int [(it: string)]
+    (System.Int64.Parse it))
+
+(fn string-empty? [(it: string)]
+    (= 0 (.+Length it)))
+
+(fn inline char-digit? [(ch: char)]
+    (System.Char.IsDigit ch))
+
+(fn inline char->int [(it: char)]
+    (int64 it))
+
+(let char_zero (int #\0))
+(fn inline char->value [(it: char)] (- (int it) char_zero))
+
+(fn i64-inc [(it: int64)]
+    (i64-+ it 1))
+
+(fn i64-add [(lhs: int64) (rhs: int64)]
+    (i64-+ lhs rhs))
+
+(fn vec->value ([v: Vector]) (Value.vector v))
+(fn VecToValue ([v: Vector]) (Value.vector v))
+
+(fn inline add [(lhs: 'a) (rhs: 'a)] (+ lhs rhs))
+(fn inline sub [(lhs: 'a) (rhs: 'a)] (- lhs rhs))
+(fn inline mul [(lhs: 'a) (rhs: 'a)] (* lhs rhs))
+(fn inline div [(lhs: 'a) (rhs: 'a)] (* lhs rhs))
+(fn inline sub1 [a] (- a 1))
+(fn inline dec [a] (- a 1))
+(fn inline add1 [a] (+ a 1))
+(fn inline inc [a] (+ a 1))

@@ -1,0 +1,109 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+;; Day properties
+(let example
+    (not (Array.exists (fn [it] (= it "full")) ARGV)))
+
+(let day "day1")
+
+;; Common functionality
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+(let filepath2 (+ "./inputs/" day (if example "_example2" "") ".txt"))
+
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(let part1 (->> contents
+  (Seq.map (fn [(s: string)]
+    (->> s
+        Seq.toList
+        (List.filter (fn [it] (System.Char.IsDigit it))))
+  ))
+  List.ofSeq
+  (List.map
+    (fn [items]
+      (let first (List.head items))
+      (let last (List.last items))
+      (->> (+ (.ToString first) (.ToString last))
+            int64))
+  )
+  (List.reduce #(+ %1 %2))
+))
+
+(let part1expected (if example 142L 55834L))
+
+(printfn "part1: %i %O" part1 (= part1 part1expected))
+
+(let spelledDigits (!array "one" "two" "three" "four" "five" "six" "seven" "eight" "nine"))
+
+(let mappedDigits (!map
+  ("one" . 1)
+  ("two" . 2)
+  ("three" . 3)
+  ("four" . 4)
+  ("five" . 5)
+  ("six" . 6)
+  ("seven" . 7)
+  ("eight" . 8)
+  ("nine" . 9)
+))
+
+(fn findSpelled ([s: string])
+  (->> spelledDigits
+      (Array.choose (fn [current]
+        (let indices (new ResizeArray<_>))
+        (mut idx (.IndexOf s current))
+        (while (>= idx 0)
+          (.Add indices (idx . (Map.find current mappedDigits)))
+          (set! idx (.IndexOf s current (+ idx 1))))
+
+        (if (> (.+Count indices) 0)
+          (Some (.ToArray indices))
+          None)))
+      (Array.concat)
+      (Array.sortBy fst)
+  ))
+
+(fn findDigitIndices ([s: string])
+  (->> s
+       Seq.toList
+       (Seq.mapi (fn [index ch]
+        (if (System.Char.IsDigit ch)
+          (Some (index . (char->value ch)))
+          None)))
+       ;(Seq.filter #(.+IsSome %1))
+       (Seq.choose id)
+       (Array.ofSeq)
+       ))
+
+(let contents2 (System.IO.File.ReadLines filepath2))
+
+(let part2
+  (->> contents2
+    (Seq.map (fn [(s: string)]
+      (let found (findSpelled s))
+      (let digits (findDigitIndices s))
+      (let combined
+        (->>
+          (Array.concat (!array found digits))
+          (Array.sortBy fst)
+          (Array.map snd)))
+      (let a (Array.head combined))
+      (let b (Array.last combined))
+
+      (->> (sprintf "%i%i" a b)
+          int64)
+    ))
+    List.ofSeq
+    (List.reduce #(+ %1 %2))
+  ))
+
+(let part2expected (if example 281L 53221L))
+
+(printfn "part2: %i %O" part2 (= part2 part2expected))
+
+#()

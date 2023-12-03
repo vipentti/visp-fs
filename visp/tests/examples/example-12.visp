@@ -1,0 +1,16 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+
+(let quoted (quote (hello world in quotes)))
+
+(printfn "quoted is: %O" quoted)
+
+(let next_quoted (quote
+    ("constants" :keywords-work true 1 1.5 false also "work" nil)))
+
+(printfn "next_quoted is: %O" next_quoted)

@@ -1,0 +1,23 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let decimals (new ResizeArray<_>))
+
+(. decimals Add (decimal 1))
+
+(printfn "number of decimals: %i" (. decimals +Count))
+
+(. decimals Add (decimal 2))
+
+(printfn "number of decimals: %i" (. decimals +Count))
+
+(printfn "decimals 0 is %f" (. decimals .[0]))
+
+(let index 1)
+
+(printfn "decimals 1 is %f" (. decimals .[index]))

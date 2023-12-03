@@ -1,0 +1,16 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; (let [(a b c) : (int int int)] (!t 1 2 3))
+;;(+ 1 2)
+
+;; (List )
+; (Arr)
+(printfn "%i" (add 1 2))
+(printfn "%i" (List.reduce CoreMethods.add (!list 1 2 3 4 5)))
+
+"let-value support?"

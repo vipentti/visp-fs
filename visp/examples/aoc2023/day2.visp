@@ -1,0 +1,146 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System.Text.RegularExpressions)
+;; Day properties
+(let example
+    (not (Array.exists (fn [it] (= it "full")) ARGV)))
+(let day "day2")
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(fn parseGame [(line: string)]
+  (let rx (new Regex "Game (\d+):" (.+Compiled RegexOptions)))
+  (let color (new Regex "(\d+)\s+(\w+)" (.+Compiled RegexOptions)))
+
+  (let colon (.IndexOf line #\:))
+
+  (let ms (.Match rx line))
+
+  ;; (printfn "Groups %A" (.+Groups ms))
+  ;; (printfn "Captures %A" (.+Captures ms))
+
+  (let gameId (->> ms +Groups .[1] +Value int))
+
+  (let gamePrefix (.[0] (.+Groups ms)))
+
+  (let gameContents
+    (->>
+      (.Substring line (.+Length gamePrefix))
+      #(.Trim %1)))
+  ;; (printfn "contents %A" gameContents)
+
+  (let parts (.Split gameContents #\; (.+TrimEntries System.StringSplitOptions)))
+  ;; (printfn "parts %A" parts)
+
+  (let cubeset (!vector))
+
+  (for/in [part parts]
+    (let items (!vector))
+    (let ms (.Matches color part))
+    (for/in [i (!range 0 .. (->> ms +Count dec))]
+      (let item (.Item ms i))
+      ;; (printfn "item %d = %A" i item)
+      ;; (printfn "item %d = Groups %A" i (+Groups item))
+      ;; (printfn "item %d = Captures %A" i (+Captures item))
+
+      (let count (->> item +Groups .[1] +Value int))
+      (let color (->> item +Groups .[2] +Value))
+
+      (.Add items (!tuple color count)))
+
+    (.Add cubeset (->> items .ToArray)))
+
+  (!tuple gameId
+    (->> cubeset .ToArray)))
+
+(let part1Setup (!map
+  (!tuple "red" 12)
+  (!tuple "green" 13)
+  (!tuple "blue" 14)
+))
+
+(let games
+  (->> contents
+    (Seq.filter #(> (+Length %1) 0))
+    (Seq.map parseGame)
+    (List.ofSeq)))
+
+;; (printfn "%A" games)
+
+(fn IsPossible (game)
+  (match game
+    [(!tuple id items)
+      (let possible
+        (->> items
+          (Array.forall
+            (fn [cubeset]
+              (->> cubeset
+                (Array.forall
+                  (fn [pair]
+                    (let key (fst pair))
+                    (let value (snd pair))
+                    (match (Map.tryFind key part1Setup)
+                      [(Some maxCount) (<= value maxCount)]
+                      [None false]
+                    ))))
+              ))))
+
+      (if possible
+        (do (Some id))
+        None
+      )]))
+
+(let part1
+  (->> games
+    (List.choose IsPossible)
+    (List.fold add 0)))
+
+(fn Result (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(Result "part1" part1 (if example 8 2169))
+
+(fn FindMinimuSet [cubeset]
+  (mut maxGreen 0)
+  (mut maxRed 0)
+  (mut maxBlue 0)
+
+  (for/in [items cubeset]
+    (for/in [pair items]
+      (match pair
+        [("red", value) (when (> value maxRed))
+          (set! maxRed value) ]
+        [("blue", value) (when (> value maxBlue))
+          (set! maxBlue value) ]
+        [("green", value) (when (> value maxGreen))
+          (set! maxGreen value) ]
+        [_ ()]
+      )
+    ))
+
+  (!tuple maxRed maxGreen maxBlue))
+
+(fn FindMinimuSets [game]
+  (match game
+    [(!tuple id items)
+      (match (FindMinimuSet items)
+        [(r . g . b)
+          (* r g b)
+        ]
+      )]))
+
+(let part2
+  (->> games
+    (List.map FindMinimuSets)
+    (List.fold add 0)
+  ))
+
+(Result "part2" part2 (if example 2286 60948))
+
+unit

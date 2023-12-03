@@ -1,0 +1,51 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+#line 2 @"example-9.visp"
+let decimals = 
+  #line 2 @"example-9.visp"
+  new ResizeArray<_>()
+#line 4 @"example-9.visp"
+decimals.Add(
+  #line 4 @"example-9.visp"
+  decimal
+    1)
+#line 6 @"example-9.visp"
+printfn
+  "number of decimals: %i"
+  #line 6 @"example-9.visp"
+  decimals.Count
+#line 8 @"example-9.visp"
+decimals.Add(
+  #line 8 @"example-9.visp"
+  decimal
+    2)
+#line 10 @"example-9.visp"
+printfn
+  "number of decimals: %i"
+  #line 10 @"example-9.visp"
+  decimals.Count
+#line 12 @"example-9.visp"
+printfn
+  "decimals 0 is %f"
+  #line 12 @"example-9.visp"
+  decimals.[0]
+#line 14 @"example-9.visp"
+let index = 
+  1
+#line 16 @"example-9.visp"
+let visp_result_todo = 
+  #line 16 @"example-9.visp"
+  printfn
+    "decimals 1 is %f"
+    #line 16 @"example-9.visp"
+    decimals.[index]
+#line 16 @"example-9.visp"
+printfn
+  "%O"
+  visp_result_todo
+

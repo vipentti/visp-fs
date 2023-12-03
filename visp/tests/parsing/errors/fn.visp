@@ -1,0 +1,4 @@
+(fn)
+(fn arg)
+(fn arg [])
+(fn [])

@@ -1,0 +1,199 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; opens here
+
+;; Day properties
+;;
+(let example (not (Array.contains "full" ARGV)))
+(let day "day3")
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+(printfn "filepath: %s" filepath)
+(let contents (System.IO.File.ReadLines filepath))
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(fn IsSymbol ([ch : char ])
+  (not (or (char-digit? ch) (= ch #\.))))
+
+(type Pos ([x: int] [y: int] [ch: char])
+  (member _.x x)
+  (member _.y y)
+  (member _.ch ch)
+
+  (member fn d.IsSymbol ()
+    (IsSymbol (+ch d)))
+
+  (member fn d.IsNumber ()
+    (char-digit? (+ch d)))
+
+  (member fn d.NumberValue ()
+    (if (.IsNumber d)
+      (Some (char->value (+ch d)))
+      None))
+
+  (override fn d.ToString ()
+    (sprintf "Pos(%i, %i, '%c')" (+y d) (+x d) (+ch d))
+    ))
+
+(fn FindSymbolsAndNumbers ([line : string])
+  (->> line
+    (Seq.mapi
+      (fn [index ch]
+        (match ch
+          [it (when (IsSymbol it))
+            (Some (index . ch))
+          ]
+          [it (when (char-digit? it))
+            (Some (index . ch))
+          ]
+          [_ None]
+        )))
+    (Seq.choose id)
+    (Array.ofSeq)))
+
+(fn ConsecutiveNumbers (pair map)
+  (if (Map.containsKey pair map)
+    (match pair
+      [(y . x)
+        (mut x_ x)
+        (mut start x)
+
+        (while (Map.containsKey (y . (dec start)) map)
+          (set! start (dec start)))
+
+        (mut done false)
+        (mut end x)
+
+        (while (Map.containsKey (y . (inc end)) map)
+          (set! end (inc end)))
+
+        ;; (printfn "start %i end %i" start end)
+
+        (mut str "")
+        (mut res (!set))
+
+        (for/in [x_ (!range start .. end)]
+          (let loc (y . x_))
+          (set! str (+ str (->> map .[loc] .ToString)))
+          (set! res (Set.add loc res))
+        )
+
+        (Some (res . (->> str int)))
+      ])
+    None))
+
+(fn Adjacent (pair)
+  (match pair
+    [(y . x)
+      ;; TODO: support seq computed expressions?
+      (let res (!vector))
+      (let __ (.EnsureCapacity res 8))
+      (for/in [ypos (!range -1 .. 1)]
+        (for/in [xpos (!range -1 .. 1)]
+          (let nexty (+ y ypos))
+          (let nextx (+ x xpos))
+          (if (not (and (= nextx x) (= nexty y)))
+            (.Add res (nexty . nextx))
+          )))
+      (.ToArray res)
+    ]))
+
+(fn ParseSchema ([lines: seq<_>])
+  (mut enu (.GetEnumerator lines))
+  (mut index 0)
+  (let symbols (!vector))
+  (let numbers (!vector))
+  (while (.MoveNext enu)
+    (let cur (+Current enu))
+    ;;(printfn "current is '%s'" cur)
+
+    (let symbolsAndNumbers (FindSymbolsAndNumbers cur))
+    ;; (printfn "index: %A" symbolsAndNumbers)
+
+    (for/in [pair symbolsAndNumbers]
+      (match pair
+        [(xpos . ch)
+          (cond
+            (IsSymbol ch)
+              (.Add symbols ((index . xpos) . ch))
+            (char-digit? ch)
+              (.Add numbers ((index . xpos) . (char->value ch)))
+            :else
+              ())
+          ;; (.Add symbols (new Pos xpos index ch))
+        ]
+      ))
+    ;;(.Add symbols (Pos (!tuple )))
+    (set! index (inc index))
+  )
+  (
+    (->> symbols (Map.ofSeq))
+    .
+    (->> numbers (Map.ofSeq))
+  ))
+
+(match (ParseSchema contents)
+  [(symbols . numbers)
+    (let results (!vector))
+    (mut visited (!set))
+    (let gearResults (!vector))
+    (for/in [sym symbols]
+      (let loc (+Key sym))
+      (let sym (+Value sym))
+
+      (let adjacent (Adjacent loc))
+
+      (for/in [adj adjacent]
+        (if (not (Set.contains adj visited))
+          (match (ConsecutiveNumbers adj numbers)
+            [(Some (lst . val))
+              (set! visited (Set.union visited lst))
+              (.Add results val) ]
+            [None ()])
+        ))
+
+      (match sym
+        [#\*
+          (mut visited (!set))
+          (mut results (!list))
+          (for/in [adj adjacent]
+            (match (Set.contains adj visited)
+              [true ()]
+              [false
+                ;; TODO
+                (match (ConsecutiveNumbers adj numbers)
+                  [(Some (lst . val))
+                    (set! visited (Set.union visited lst))
+                    (set! results (cons val results))
+                  ]
+                  [None ()])
+                ()
+              ]
+            ))
+          (if (= (+Length results) 2)
+            (do
+              (.Add gearResults (->> results (List.reduce mul)))))
+
+          ()
+        ]
+        [_ ()]
+      )
+
+    )
+    (let part1
+      (->> results (Seq.reduce add)))
+    (let part2
+      (->> gearResults (Seq.reduce add)))
+
+    (WriteResult "part1" part1 (if example 4361 507214))
+    (WriteResult "part2" part2 (if example 467835 72553319))
+  ])
+
+()

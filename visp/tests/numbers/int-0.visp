@@ -1,0 +1,11 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "int32 is %A" 99)
+(printfn "int32 is %A" 99l)
+(printfn "int64 is %A" 99L)

@@ -1,0 +1,17 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let items '(1 2 3 4 5))
+(let sym 'symbol)
+(let something '(fn [a] (+ a b 1 (call + 1 2))))
+
+(printfn "items: %O" items)
+(printfn "sym: %O" sym)
+(printfn "something: %O" something)
+(printfn "nested: %O" '(nested1 (nested2 (nested3 (nested4 and on and on :keyword)))))
+(printfn "nested vec: %O" '[nested1 (nested2 [nested3 (nested4 and on and on :keyword)])])

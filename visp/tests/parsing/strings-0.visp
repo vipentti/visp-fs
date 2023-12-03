@@ -1,0 +1,30 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "string is: '%s'" "
+  this is
+  a multiline
+  string
+")
+
+(printfn "string is: '%s'" """
+  this is
+  a multiline
+  string
+""")
+
+(fn generate-test (path)
+  (let template (sprintf """
+let ``can parse %s`` =
+  TestUtils.runTest %s
+  |> Async.AwaitTask
+  """ path path))
+
+  template)
+
+(printfn "test is: '%s'" (generate-test "hello"))
