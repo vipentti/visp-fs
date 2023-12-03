@@ -1157,12 +1157,13 @@ module Write =
             string w "] |> HashMap.ofList"
 
 
-    let expandExpr expr =
-        let tfs =
-            [| Visp.Compiler.Transforms.QuasiquoteExpander.expand
-               Visp.Compiler.Transforms.BuiltinMacros.expand
-               Visp.Compiler.Transforms.Common.transformLambdaShortHands |]
+    let private tfs =
+        [| Visp.Compiler.Transforms.SyntaxMacros.expand
+           Visp.Compiler.Transforms.QuasiquoteExpander.expand
+           Visp.Compiler.Transforms.BuiltinMacros.expand
+           Visp.Compiler.Transforms.Common.transformLambdaShortHands |]
 
+    let expandExpr expr =
         Visp.Compiler.Transforms.Helpers.runTransforms tfs expr
 
     let writeParsedFile w (ParsedFile(fragments)) =

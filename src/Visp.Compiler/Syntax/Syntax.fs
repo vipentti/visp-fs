@@ -27,6 +27,13 @@ type SynSymbol =
         let newId = id.trimStart ch
         SynSymbol newId
 
+    member this.TextEquals(SynSymbol(other)) =
+        System.String.Equals(this.Text, other.idText, System.StringComparison.Ordinal)
+
+    member this.Text =
+        let (SynSymbol(id)) = this
+        id.idText
+
     member this.Range =
         let (SynSymbol(id)) = this
         id.idRange
@@ -98,7 +105,7 @@ type SynExpr =
     | Op of SynOp
     | MacroDef of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
     | MacroCall of name: SynSymbol * args: SynValue list * range: range
-    | SyntaxMacroCall of name: SynSymbol * args: SynMacroBody list * range : range
+    | SyntaxMacroCall of call: SynMacroCall
     | SyntaxMacro of macro: SynMacro
     | FunctionDef of
         name: SynSymbol *
@@ -166,7 +173,7 @@ type SynExpr =
         | MacroCall(range = r)
         | FunctionDef(range = r)
         | FunctionCall(range = r)
-        | SyntaxMacroCall(range = r)
+        | SyntaxMacroCall(SynMacroCall(range = r))
         | SyntaxMacro(SynMacro(range = r))
         | LambdaDef(SynLambda(range = r))
         | Const(range = r)
@@ -206,7 +213,9 @@ and SynBinding = SynBinding of name: SynName * expr: SynExpr * range: range
 
 and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: range
 
-and SynMacroCase = SynMacroCase of pat: SynMacroPat * body: SynMacroBody * range: range
+and SynMacroCall = SynMacroCall of name: SynSymbol * args: SynMacroBody list * range: range
+
+and SynMacroCase = SynMacroCase of pats: SynMacroPat list * body: SynMacroBody * range: range
 
 and [<RequireQualifiedAccess>] SynMacroPat =
     | Const of value: SynConst * range: range
@@ -401,6 +410,7 @@ module Syntax =
             | _ -> true)
             l
 
+    let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynModuleDecl =

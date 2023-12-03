@@ -36,7 +36,6 @@ let ``can parse %s`` () = TestUtils.runTest "%s"
 (fn IsIgnoredFile ([file: string])
   (let dir (.GetDirectoryName Path file))
   (or (.Contains dir "errors")
-      (.Contains dir "macros")
     ))
 
 (fn genTests ([parent: string] [files: seq<string>])

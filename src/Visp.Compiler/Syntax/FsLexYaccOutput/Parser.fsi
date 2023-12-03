@@ -157,8 +157,10 @@ type tokenId =
     | TOKEN_end_of_input
     | TOKEN_error
 type nonTerminalId = 
+    | NONTERM__startraw_expr
     | NONTERM__startstart
     | NONTERM_start
+    | NONTERM_raw_expr
     | NONTERM_prog
     | NONTERM_file_fragments
     | NONTERM_rev_file_fragments
@@ -179,11 +181,13 @@ type nonTerminalId =
     | NONTERM_parens_expr_start
     | NONTERM_parens_expr
     | NONTERM_macro_call_expr
+    | NONTERM_macro_call
     | NONTERM_syntax_macro_expr
     | NONTERM_syntax_macro
     | NONTERM_macro_cases
     | NONTERM_rev_macro_cases
     | NONTERM_macro_case_start
+    | NONTERM_macro_case_pat
     | NONTERM_macro_pat_list
     | NONTERM_rev_macro_pat_list
     | NONTERM_macro_pat
@@ -279,4 +283,5 @@ val prodIdxToNonTerminal: int -> nonTerminalId
 
 /// This function gets the name of a token as a string
 val token_to_string: token -> string
+val raw_expr : (FSharp.Text.Lexing.LexBuffer<'cty> -> token) -> FSharp.Text.Lexing.LexBuffer<'cty> -> (SynExpr) 
 val start : (FSharp.Text.Lexing.LexBuffer<'cty> -> token) -> FSharp.Text.Lexing.LexBuffer<'cty> -> (ParsedFile) 
