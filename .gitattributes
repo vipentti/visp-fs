@@ -6,7 +6,7 @@
 *.sh text eol=lf
 *.cmd text eol=lf
 
-.visp text working-tree-encoding=UTF-8 linguist-language=Clojure linguist-detectable
+*.visp text working-tree-encoding=UTF-8 linguist-language=Clojure linguist-detectable
 
 ## Snapshots
 *.verified.txt text eol=lf working-tree-encoding=UTF-8
