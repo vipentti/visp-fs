@@ -7,6 +7,7 @@ type token =
   | DOT_METHOD of (string)
   | STRING of (string * SynStringKind * ParseHelpers.LexerContinuation)
   | CHAR of (string)
+  | MACRO_NAME of (string)
   | PROP_PLUS of (string)
   | DECIMAL of (decimal)
   | INT64 of (int64)
@@ -14,6 +15,7 @@ type token =
   | INLINE
   | THREAD_FIRST
   | THREAD_LAST
+  | SYNTAX_MACRO
   | ATOM_KW
   | DEREF_KW
   | WHILE
@@ -82,6 +84,7 @@ type tokenId =
     | TOKEN_DOT_METHOD
     | TOKEN_STRING
     | TOKEN_CHAR
+    | TOKEN_MACRO_NAME
     | TOKEN_PROP_PLUS
     | TOKEN_DECIMAL
     | TOKEN_INT64
@@ -89,6 +92,7 @@ type tokenId =
     | TOKEN_INLINE
     | TOKEN_THREAD_FIRST
     | TOKEN_THREAD_LAST
+    | TOKEN_SYNTAX_MACRO
     | TOKEN_ATOM_KW
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
@@ -174,6 +178,18 @@ type nonTerminalId =
     | NONTERM_inside_parens
     | NONTERM_parens_expr_start
     | NONTERM_parens_expr
+    | NONTERM_macro_call_expr
+    | NONTERM_syntax_macro_expr
+    | NONTERM_syntax_macro
+    | NONTERM_macro_cases
+    | NONTERM_rev_macro_cases
+    | NONTERM_macro_case_start
+    | NONTERM_macro_pat_list
+    | NONTERM_rev_macro_pat_list
+    | NONTERM_macro_pat
+    | NONTERM_macro_body_list
+    | NONTERM_rev_macro_body_list
+    | NONTERM_macro_body
     | NONTERM_cons_expr
     | NONTERM_concat_expr
     | NONTERM_new_expr
@@ -225,6 +241,7 @@ type nonTerminalId =
     | NONTERM_name_list
     | NONTERM_rev_name_list
     | NONTERM_symbol
+    | NONTERM_macro_name
     | NONTERM_dot_method
     | NONTERM_keyword
     | NONTERM_syntype_ident

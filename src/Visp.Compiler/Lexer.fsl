@@ -49,7 +49,7 @@ let startString (lexbuf: LexBuffer<_>) =
 
 let int = ['-' '+']? ['0'-'9']+ ['l' 'L']?
 let digit = ['0'-'9']
-let frac = '.' digit*
+let frac = '.' digit+
 let exp = ['e' 'E'] ['-' '+']? digit+
 let decimal = '-'? digit* frac? exp?
 let letter = ['A'-'Z'] | ['a'-'z']
@@ -103,6 +103,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ']'           { RBRACKET }
   | ':'           { COLON }
   | ','           { COMMA }
+
+  | "..." { SYMBOL (lexeme lexbuf) }
 
   | '+' anyspace+   { OP_PLUS }
   | '-' anyspace+   { OP_MINUS }
@@ -166,7 +168,11 @@ rule token (args: LexArgs) (skip: bool) = parse
       let text = lexeme lexbuf
       match tryGetKeyword text with
       | Some (tok) -> tok
-      | None -> SYMBOL text
+      | None ->
+        if text.EndsWith('!') then
+          MACRO_NAME (text.TrimEnd('!'))
+        else
+          SYMBOL text
     }
   | ','        { COMMA }
   | _ { unexpected_char "token" lexbuf }
@@ -187,6 +193,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '.' anyspace+ { DOT }
+
+  | "..." { SYMBOL (lexeme lexbuf) }
 
   // Constants
   | "#()"      { UNIT }
@@ -222,7 +230,6 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
       // TODO: validate
       tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
-
 
   // Exprs
   | ':' ident_char+ { KEYWORD (lexeme lexbuf) }

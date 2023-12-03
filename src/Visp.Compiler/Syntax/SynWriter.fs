@@ -367,6 +367,8 @@ module Write =
         match expr with
         | SynExpr.MacroDef _ -> failwithf "unsupported %O" expr
         | SynExpr.MacroCall _ -> failwithf "unsupported %O" expr
+        | SynExpr.SyntaxMacroCall _ -> failwithf "unsupported %A" expr
+        | SynExpr.SyntaxMacro _ -> failwithf "unsupported %A" expr
         | SynExpr.LambdaShort _ -> failwithf "unsupported %O" expr
         | SynExpr.Match(exprs, pats, range) ->
             use _ = startNewlineExpr w st range

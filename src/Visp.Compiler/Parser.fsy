@@ -31,12 +31,13 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token OPEN MODULE
 %token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE MEMBER MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT
-%token THREAD_FIRST THREAD_LAST
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO
 %token INLINE
 %token <int> INT32
 %token <int64> INT64
 %token <decimal> DECIMAL
 %token <string> PROP_PLUS
+%token <string> MACRO_NAME
 %token <string> CHAR
 %token <string * SynStringKind * ParseHelpers.LexerContinuation> STRING
 %token <string> SYMBOL KEYWORD RAWSTRING DOT_METHOD
@@ -218,6 +219,8 @@ parens_expr:
     | cons_expr { $1 }
     | concat_expr { $1 }
     | operators_not_in_parens { SynExpr.Op($1) }
+    | syntax_macro_expr { $1 }
+    | macro_call_expr { $1 }
     | QUOTE_KW quoted_expr
         { SynExpr.Quote(false, $2, lhs parseState) }
     | QUASIQUOTE_KW quasiquoted_expr
@@ -252,6 +255,69 @@ parens_expr:
 
     | BANG_VEC { SynExpr.FsVec([], lhs parseState)}
     | BANG_VEC expr_list { SynExpr.FsVec($2, lhs parseState)}
+
+macro_call_expr:
+    | macro_name macro_body_list
+        { SynExpr.SyntaxMacroCall($1, $2, lhs parseState) }
+
+syntax_macro_expr:
+    | syntax_macro { SynExpr.SyntaxMacro($1)}
+
+syntax_macro:
+    | SYNTAX_MACRO symbol macro_cases
+        { SynMacro($2, $3, lhs parseState )}
+
+macro_cases: rev_macro_cases { List.rev $1 }
+rev_macro_cases:
+    | macro_case_start { [$1] }
+    | rev_macro_cases macro_case_start { $2 :: $1 }
+
+macro_case_start:
+    | LPAREN macro_pat macro_body RPAREN
+        { SynMacroCase($2, $3, lhs parseState) }
+    | LBRACKET macro_pat macro_body RBRACKET
+        { SynMacroCase($2, $3, lhs parseState) }
+
+macro_pat_list: rev_macro_pat_list { List.rev $1 }
+rev_macro_pat_list:
+    | macro_pat { [$1] }
+    | rev_macro_pat_list macro_pat { $2 :: $1 }
+
+macro_pat:
+    | constant { SynMacroPat.Const(fst $1, snd $1) }
+    | LPAREN macro_pat_list RPAREN { SynMacroPat.List($2, lhs parseState) }
+    | LBRACKET macro_pat_list RBRACKET { SynMacroPat.List($2, lhs parseState) }
+    | symbol {
+        let text = $1
+        let symText = (Syntax.textOfSymbol text)
+        if (symText = "_") then
+            SynMacroPat.Discard (lhs parseState)
+        else if (symText = "...") then
+            SynMacroPat.Ellipsis (lhs parseState)
+        else
+            SynMacroPat.Symbol (text, lhs parseState) }
+
+macro_body_list: rev_macro_body_list { List.rev $1 }
+rev_macro_body_list:
+    | macro_body { [$1] }
+    | rev_macro_body_list macro_body { $2 :: $1 }
+
+macro_body:
+    | constant { SynMacroBody.Const(fst $1, snd $1) }
+    | LPAREN macro_body_list RPAREN { SynMacroBody.List($2, lhs parseState) }
+    | LBRACKET macro_body_list RBRACKET { SynMacroBody.Vector($2, lhs parseState) }
+    | LBRACE macro_body_list RBRACE { SynMacroBody.HashMap($2, lhs parseState) }
+    | HASH_BRACE macro_body_list RBRACE { SynMacroBody.HashSet($2, lhs parseState) }
+    | keyword { SynMacroBody.Keyword($1) }
+    | symbol {
+        let text = $1
+        let symText = (Syntax.textOfSymbol text)
+        if (symText = "_") then
+            SynMacroBody.Discard (lhs parseState)
+        else if (symText = "...") then
+            SynMacroBody.Ellipsis (lhs parseState)
+        else
+            SynMacroBody.Symbol (text) }
 
 cons_expr:
     | CONS expr expr
@@ -552,6 +618,12 @@ rev_name_list:
 
 symbol:
     | SYMBOL
+        { let text = $1
+          SynSymbol(Ident(text, lhs parseState))
+        }
+
+macro_name:
+    | MACRO_NAME
         { let text = $1
           SynSymbol(Ident(text, lhs parseState))
         }
