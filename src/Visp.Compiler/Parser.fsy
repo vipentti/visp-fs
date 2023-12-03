@@ -18,6 +18,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %}
 
 %start start
+%start raw_expr
 
 %token EOF
 %token LPAREN RPAREN
@@ -102,11 +103,14 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc EOF
 
 %type <ParsedFile> start
+%type <SynExpr> raw_expr
 
 %%
 
 //  start of actual code
 start: prog { $1 }
+
+raw_expr: expr { $1 }
 
 prog:
     | file_fragments
@@ -257,8 +261,12 @@ parens_expr:
     | BANG_VEC expr_list { SynExpr.FsVec($2, lhs parseState)}
 
 macro_call_expr:
+    | macro_call { SynExpr.SyntaxMacroCall($1) }
+
+macro_call:
     | macro_name macro_body_list
-        { SynExpr.SyntaxMacroCall($1, $2, lhs parseState) }
+        { let mNameBody = SynMacroBody.Symbol($1)
+          SynMacroCall($1, mNameBody :: $2, lhs parseState) }
 
 syntax_macro_expr:
     | syntax_macro { SynExpr.SyntaxMacro($1)}
@@ -273,10 +281,14 @@ rev_macro_cases:
     | rev_macro_cases macro_case_start { $2 :: $1 }
 
 macro_case_start:
-    | LPAREN macro_pat macro_body RPAREN
+    | LPAREN macro_case_pat macro_body RPAREN
         { SynMacroCase($2, $3, lhs parseState) }
-    | LBRACKET macro_pat macro_body RBRACKET
+    | LBRACKET macro_case_pat macro_body RBRACKET
         { SynMacroCase($2, $3, lhs parseState) }
+
+macro_case_pat:
+    | LPAREN macro_pat_list RPAREN { $2 }
+    | LBRACKET macro_pat_list RBRACKET { $2 }
 
 macro_pat_list: rev_macro_pat_list { List.rev $1 }
 rev_macro_pat_list:

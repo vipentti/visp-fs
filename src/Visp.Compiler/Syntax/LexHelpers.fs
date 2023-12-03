@@ -160,3 +160,12 @@ let keywordTokenList =
 let keywordToTokenMap = keywordTokenList |> Map.ofList
 
 let tryGetKeyword w = keywordToTokenMap.TryFind w
+
+let symbolOrKeyword (s: string) =
+    match tryGetKeyword s with
+    | Some(tok) -> tok
+    | None ->
+        if s.EndsWith('!') then
+            MACRO_NAME(s.TrimEnd('!'))
+        else
+            SYMBOL(s)

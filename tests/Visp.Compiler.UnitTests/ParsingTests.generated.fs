@@ -15,6 +15,18 @@ open Xunit
 let ``can parse tests_atom_atom-0.visp`` () = TestUtils.runTest "tests/atom/atom-0.visp"
 
 [<Fact>]
+let ``can parse tests_builtin-macros_cond-0.visp`` () = TestUtils.runTest "tests/builtin-macros/cond-0.visp"
+
+[<Fact>]
+let ``can parse tests_builtin-macros_thread-first-0.visp`` () = TestUtils.runTest "tests/builtin-macros/thread-first-0.visp"
+
+[<Fact>]
+let ``can parse tests_builtin-macros_thread-first-1.visp`` () = TestUtils.runTest "tests/builtin-macros/thread-first-1.visp"
+
+[<Fact>]
+let ``can parse tests_builtin-macros_thread-last-0.visp`` () = TestUtils.runTest "tests/builtin-macros/thread-last-0.visp"
+
+[<Fact>]
 let ``can parse tests_chars_char-0.visp`` () = TestUtils.runTest "tests/chars/char-0.visp"
 
 [<Fact>]
@@ -100,6 +112,9 @@ let ``can parse tests_hashset_hashset-0.visp`` () = TestUtils.runTest "tests/has
 
 [<Fact>]
 let ``can parse tests_if_if-0.visp`` () = TestUtils.runTest "tests/if/if-0.visp"
+
+[<Fact>]
+let ``can parse tests_macros_syntax-macro-0.visp`` () = TestUtils.runTest "tests/macros/syntax-macro-0.visp"
 
 [<Fact>]
 let ``can parse tests_numbers_int-0.visp`` () = TestUtils.runTest "tests/numbers/int-0.visp"
