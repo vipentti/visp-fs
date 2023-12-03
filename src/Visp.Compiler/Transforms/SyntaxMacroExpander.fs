@@ -43,7 +43,7 @@ let private evaluatePatterns (body: SynMacroBody) (pats: BoundPattern list) =
     let findPattern (f: SynMacroBody) (pats: BoundPattern list) =
         match f with
         | SynMacroBody.Symbol sym ->
-            printfn "looking for %A in\n%A" sym pats
+            // printfn "looking for %A in\n%A" sym pats
 
             let found =
                 pats
@@ -175,15 +175,12 @@ let private evaluatePatterns (body: SynMacroBody) (pats: BoundPattern list) =
 
     let result = raw_expr getTokens lexbuf
 
-    printfn "RESULT %A" result
+    // printfn "RESULT %A" result
 
     result
 
-let private expandSynMacro
-    (SynMacro(_, cases, _) as macro)
-    (SynMacroCall(_, args, _) as call)
-    =
-    printfn "todo %A -> %A" macro call
+let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, args, _) as call) =
+    // printfn "todo %A -> %A" macro call
 
     let pat = cases |> List.tryFind (matchesCase args)
 

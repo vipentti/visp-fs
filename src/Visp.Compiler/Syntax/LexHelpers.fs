@@ -165,7 +165,7 @@ let symbolOrKeyword (s: string) =
     match tryGetKeyword s with
     | Some(tok) -> tok
     | None ->
-        if s.EndsWith('!') then
+        if s.EndsWith("!!") then
             MACRO_NAME(s.TrimEnd('!'))
         else
             SYMBOL(s)

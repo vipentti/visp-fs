@@ -84,12 +84,10 @@ let state = { Todo = () }
             | LPAREN
             | LBRACE
             | LBRACKET
-            | HASH_BRACE ->
-                args.NestIfNotDefault ()
+            | HASH_BRACE -> args.NestIfNotDefault()
             | RPAREN
             | RBRACE
-            | RBRACKET ->
-                args.UnnestIfNotDefault ()
+            | RBRACKET -> args.UnnestIfNotDefault()
             | _ -> ()
 
             next
