@@ -1,4 +1,4 @@
-﻿#{:this-is-a-key "int as key" "string as key" "string value" "value" 0}
+﻿#{:this-is-a-key 0 "int as key" "string as key" "string value" "value"}
 ()
 
 ExitCode: 0

@@ -1,4 +1,4 @@
-﻿{:this-is-a-key "value" "string as key" "string value" 0 "int as key"}
+﻿{:this-is-a-key "value" 0 "int as key" "string as key" "string value"}
 "string value"
 "value"
 ()
