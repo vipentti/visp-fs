@@ -128,15 +128,20 @@ type SymbolDetails =
     | FsharpMethod of text: string * details: string * range: Range
     | Interop of text: string * range: Range
     | Function of text: string * range: Range
-    | Variable of text: string * range: Range
+    | Variable of text: string * mut: bool * range: Range
+    | Type of text: string * range: Range
+    | Member of text: string * fn: bool * range: Range
     | Parameter of text: string * range: Range
     | Symbol of text: string * range: Range
 
     member this.Text =
         match this with
         | FsharpMethod(text = it)
-        | Interop(text = it)
         | Function(text = it)
+        | Interop(text = it)
+        | Variable(text = it)
+        | Type(text = it)
+        | Member(text = it)
         | Variable(text = it)
         | Symbol(text = it)
         | Parameter(text = it) -> it
@@ -146,6 +151,8 @@ type SymbolDetails =
         | FsharpMethod(range = it)
         | Function(range = it)
         | Interop(range = it)
+        | Member(range = it)
+        | Type(range = it)
         | Symbol(range = it)
         | Variable(range = it)
         | Parameter(range = it) -> it
@@ -158,54 +165,152 @@ type SymbolDetails =
         | Symbol _ -> SymbolKind.Method
         | Variable _ -> SymbolKind.Variable
         | Parameter _ -> SymbolKind.Field
+        | Type _ -> SymbolKind.Class
+        | Member(fn = fn) -> if fn then SymbolKind.Method else SymbolKind.Field
+
+    member this.CompletionItemKind =
+        match this with
+        | FsharpMethod _ -> CompletionItemKind.Method
+        | Function _ -> CompletionItemKind.Function
+        | Interop _ -> CompletionItemKind.Operator
+        | Symbol _ -> CompletionItemKind.Method
+        | Variable _ -> CompletionItemKind.Variable
+        | Parameter _ -> CompletionItemKind.Field
+        | Type _ -> CompletionItemKind.Class
+        | Member(fn = fn) ->
+            if fn then
+                CompletionItemKind.Method
+            else
+                CompletionItemKind.Field
+
+    member this.SortPrefix =
+        match this with
+        | FsharpMethod _ -> "44444"
+        | Interop _ -> "44444"
+        | Function _ -> "44444"
+        | Variable _ -> "44444"
+        | Type _ -> "44444"
+        | Member _ -> "44444"
+        | Parameter _ -> "44444"
+        | Symbol _ -> "44444"
+
+    member this.SortText = this.SortPrefix + this.Text
+
+    member this.Label =
+        match this with
+        | Interop(it, _) -> it.TrimStart('!')
+        | _ -> this.Text
+
+    member this.InsertText =
+        match this with
+        | Interop(it, _) -> it
+        | _ -> null
+
+    member this.Detail =
+        match this with
+        | FsharpMethod(_, sg, _) -> sg
+        | Interop _ -> "F# interop"
+        | Symbol _ -> "symbol"
+        | Function _ -> "function"
+        | Variable(mut = mut) -> if mut then "mutable" else "variable"
+        | Parameter _ -> "parameter"
+        | Type _ -> "type"
+        | Member(fn = fn) -> if fn then "member function" else "member"
+
 
     member this.ToCompletionItem(index: int) =
         let item = new CompletionItem()
-
-        match this with
-        | FsharpMethod(it, sg, _) ->
-            item.Kind <- CompletionItemKind.Method
-            item.Label <- it
-            item.SortText <- "44444" + it
-            item.Detail <- sg
-            item.Data <- index
-
-        | Interop(it, _) ->
-            item.Kind <- CompletionItemKind.Macro
-            item.Label <- it.TrimStart('!')
-            item.InsertText <- it.TrimStart('!')
-            item.SortText <- "55555" + it
-            item.Detail <- "F# helper"
-            item.Data <- index
-
-        | Symbol(it, _) ->
-            item.Kind <- CompletionItemKind.Reference
-            item.Label <- it
-            item.SortText <- "33333" + it
-            item.Detail <- "method"
-            item.Data <- index
-
-        | Function(it, _) ->
-            item.Kind <- CompletionItemKind.Function
-            item.Label <- it
-            item.SortText <- "22222" + it
-            item.Detail <- "function"
-            item.Data <- index
-
-        | Variable(it, _) ->
-            item.Kind <- CompletionItemKind.Variable
-            item.Label <- it
-            item.SortText <- "11111" + it
-            item.Detail <- "variable"
-            item.Data <- index
-        | Parameter(it, _) ->
-            item.Kind <- CompletionItemKind.TypeParameter
-            item.Label <- it
-            item.SortText <- "00000" + it
-            item.Detail <- "parameter"
-            item.Data <- index
-
+        item.SortText <- this.SortText
+        item.Label <- this.Label
+        item.InsertText <- this.InsertText
+        item.Kind <- this.CompletionItemKind
+        item.Data <- index
+        item.Detail <- this.Detail
         item
+
+let findAllSymbolDetails (syms: ResizeArray<_>) expr =
+    match expr with
+    | SynExpr.FunctionCall(SynExpr.Symbol sym, _, _) ->
+        let r = Syntax.rangeOfSymbol sym
+        syms.Add(SymbolDetails.Symbol(Syntax.textOfSymbol sym, textRangeToSyntaxRange r))
+    | SynExpr.FunctionDef(name, _, args, _, _) ->
+
+        let r = Syntax.rangeOfSymbol name
+
+        syms.Add(SymbolDetails.Function(Syntax.textOfSymbol name, textRangeToSyntaxRange r))
+
+        syms.AddRange(
+            List.map
+                (fun x -> (Syntax.textOfArg x, Syntax.rangeOfArg x |> textRangeToSyntaxRange))
+                args
+            |> List.map SymbolDetails.Parameter
+        )
+
+    | SynExpr.Type(name, _, members, _) ->
+        syms.Add(
+            SymbolDetails.Type(
+                Syntax.textOfSymbol name,
+                Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+            )
+        )
+
+        syms.AddRange(
+            members
+            |> List.choose (function
+                | SynTypeMember.OverrideMember(name = name) ->
+                    Some(
+                        (SymbolDetails.Member(
+                            Syntax.textOfSymbol name,
+                            false,
+                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+                        ))
+                    )
+                | SynTypeMember.Member(name = name) ->
+                    Some(
+                        (SymbolDetails.Member(
+                            Syntax.textOfSymbol name,
+                            false,
+                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+                        ))
+                    )
+                | SynTypeMember.OverrideFn(name = name) ->
+                    Some(
+                        (SymbolDetails.Member(
+                            Syntax.textOfSymbol name,
+                            true,
+                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+                        ))
+                    )
+                | SynTypeMember.MemberFn(name = name) ->
+                    Some(
+                        (SymbolDetails.Member(
+                            Syntax.textOfSymbol name,
+                            true,
+                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+                        ))
+                    )
+                | _ -> None)
+        )
+
+    | SynExpr.SimpleMut(name, _, _) ->
+        syms.Add(
+            SymbolDetails.Variable(
+                Syntax.textOfName name,
+                true,
+                Syntax.rangeOfName name |> textRangeToSyntaxRange
+            )
+        )
+    | SynExpr.SimpleLet(name, _, _) ->
+        syms.Add(
+            SymbolDetails.Variable(
+                Syntax.textOfName name,
+                false,
+                Syntax.rangeOfName name |> textRangeToSyntaxRange
+            )
+        )
+    | _ -> ()
+
+    expr
 
 
 let commonFsharpCollectionMethods =
@@ -278,58 +383,14 @@ type VispDocumentItem =
 
             let syms = ResizeArray<SymbolDetails>()
 
-            Transforms.Helpers.transformParsedFile
-                (fun expr ->
-                    match expr with
-                    | SynExpr.FunctionCall(SynExpr.Symbol sym, _, _) ->
-                        let r = Syntax.rangeOfSymbol sym
-
-                        syms.Add(
-                            SymbolDetails.Symbol(Syntax.textOfSymbol sym, textRangeToSyntaxRange r)
-                        )
-
-                        ()
-                    | SynExpr.FunctionDef(name, _, args, _, _) ->
-
-                        let r = Syntax.rangeOfSymbol name
-
-                        syms.Add(
-                            SymbolDetails.Function(
-                                Syntax.textOfSymbol name,
-                                textRangeToSyntaxRange r
-                            )
-                        )
-
-                        syms.AddRange(
-                            List.map
-                                (fun x ->
-                                    (Syntax.textOfArg x,
-                                     Syntax.rangeOfArg x |> textRangeToSyntaxRange))
-                                args
-                            |> List.map SymbolDetails.Parameter
-                        )
-
-                        ()
-
-
-                    | SynExpr.SimpleLet(name, _, _) ->
-                        syms.Add(
-                            SymbolDetails.Variable(
-                                Syntax.textOfName name,
-                                Syntax.rangeOfName name |> textRangeToSyntaxRange
-                            )
-                        )
-
-                    | _ -> ()
-
-                    expr)
-                file
+            Transforms.Helpers.transformParsedFile (findAllSymbolDetails syms) file
             |> ignore
 
             this.symbols <- Some(syms.ToArray())
         // TODO: Resilient parsing
         with ex ->
             eprintfn "Failed to parse: %O" ex
+            this.symbols <- Some([||])
             ()
 
         ()
