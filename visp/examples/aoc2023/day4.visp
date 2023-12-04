@@ -1,0 +1,198 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+;; opens here
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+;;
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(fn ParseCard ([line: string])
+  (let cardrx (new Regex "Card\s+(\d+):" (.+Compiled RegexOptions)))
+
+  (let cardMatch (.Match cardrx line))
+
+  (let cardId (->> cardMatch +Groups .[1] +Value int))
+
+  (let lineSpan (.AsSpan line))
+  (let colonIndex (.IndexOf line #\:))
+
+  (let gameContents (.Slice lineSpan (inc colonIndex)))
+
+  (let splitOptions (bor (+TrimEntries System.StringSplitOptions) (+RemoveEmptyEntries System.StringSplitOptions)))
+
+  (mut enu (.EnumerateSplitSubstrings gameContents #\| splitOptions))
+
+  (let sets (!vector))
+
+  (while (.MoveNext enu)
+    (let row (+Current enu))
+
+    (mut enu (.EnumerateSplitSubstrings row #\space splitOptions))
+
+    (let numbers (!vector))
+
+    (while (.MoveNext enu)
+      (let item (+Current enu))
+      ;; (printfn "item is: %s" (.ToString item))
+      (.Add numbers (span->int32 item)))
+
+    (.Add sets (.ToArray numbers))
+    )
+
+  ;; (printfn "result is %A" result)
+
+  (cardId . (.[0] sets) . (.[1] sets))
+)
+
+(fn ScoreGame (game)
+  (match game
+    [(id . winning . ours)
+      (mut score 0)
+
+      (for/in [num ours]
+        (if (Array.contains num winning)
+          (match score
+            [0 (set! score 1)]
+            [x (set! score (* x 2))])
+          ))
+      score
+    ]
+  ))
+
+(fn CountMatches (game)
+  (match game
+    [(id . winning . ours)
+      (mut score 0)
+
+      (for/in [num ours]
+        (if (Array.contains num winning)
+          (set! score (inc score))
+          ))
+      score
+    ]
+  ))
+
+(fn GameId [game]
+  (match game
+    [(id . _ . _)
+      id
+    ]))
+
+(fn GameRest [game]
+  (match game
+    [(_ . a . b)
+      (a . b)
+    ]))
+
+(fn FindGame (id games) (Map.tryFind id games))
+
+(fn GetSubGames (games game (cache: Dictionary<_, _>))
+  (match game
+    [(id . winning . ours)
+      (match (.TryGetValue cache id)
+        [(true . subs) subs]
+        [(false . _)
+          (let score (CountMatches game))
+          (mut enu (->> (seq ((inc id) .. (+ id score)))
+                        .GetEnumerator))
+          (mut done false)
+          (mut res (!list))
+          (while (and (not done) (.MoveNext enu))
+            (let next (+Current enu))
+            (match (FindGame next games)
+              [(Some game)
+                (set! res (cons game res))
+                ()
+              ]
+              [None (set! done true)]))
+
+          (set! (.[id] cache) res)
+
+          res
+        ])]))
+
+(fn HandleScoreCardsOpt (game games cache)
+  (mut sub (GetSubGames games game cache))
+  (mut done false)
+  (mut cardCount 1)
+
+  (while (> (+Length sub) 0)
+    (set! cardCount (+ cardCount (+Length sub)))
+    (set! sub (->> sub (List.map #(GetSubGames games %1 cache)) (List.concat)))
+  )
+
+  cardCount)
+
+(fn rec HandleScoreCards (game games)
+  (match game
+    [(id . winning . ours)
+      (let score (CountMatches game))
+      (mut cardCount 1)
+
+      (mut enu (->> (seq ((inc id) .. (+ id score)))
+                    .GetEnumerator))
+      (mut done false)
+
+      (while (and (not done) (.MoveNext enu))
+        (let next (+Current enu))
+        (match (FindGame next games)
+          [(Some game)
+            (let subCount (HandleScoreCards game games))
+            (set! cardCount (+ cardCount subCount))
+            ()
+          ]
+          [None (set! done true)]))
+      cardCount
+    ]))
+
+(fn run ()
+  (let example (not (Array.contains "full" ARGV)))
+  (let day "day4")
+  (let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+  (printfn "filepath: %s" filepath)
+
+  (let contents (System.IO.File.ReadLines filepath))
+
+  (let games
+    (->> contents
+      (Seq.map ParseCard)
+      (List.ofSeq)
+    ))
+
+  ;; (printfn "games %A" games)
+
+  (let scores (List.map ScoreGame games))
+
+  ;; (printfn "scores %A" scores)
+
+  (let part1 (List.reduce add scores))
+
+  (WriteResult "part1" part1 (if example 13 25174))
+
+  (let gameMap (->> games
+    (List.map #((GameId %1) . %1))
+    (Map.ofList)))
+
+  (let cache (new Dictionary<_, _>))
+  (let sheets (List.map #(HandleScoreCardsOpt %1 gameMap cache) games))
+  (let part2 (List.reduce add sheets))
+
+  ;; (printfn "part2: %A" part2)
+  (WriteResult "part2" part2 (if example 30 6420979))
+
+  ;; (WriteResult "part2" part1 (if example 13 25174))
+  ())
+
+(run)
