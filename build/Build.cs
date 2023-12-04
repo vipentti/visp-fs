@@ -14,7 +14,6 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 using Nuke.Components;
 using Vipentti.Nuke.Components;
-using static Nuke.Common.Tools.NuGet.NuGetTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Vipentti.Nuke.Components.StandardNames;
 
@@ -24,8 +23,9 @@ using static Vipentti.Nuke.Components.StandardNames;
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest,
     OnPullRequestBranches = [ MainBranch, DevelopBranch ],
-    PublishArtifacts = false,
-    FetchDepth = 0 // fetch full history
+    OnPushBranches = [ MainBranch, DevelopBranch ],
+    PublishArtifacts = false
+    // FetchDepth = 0 // fetch full history
     , SetupDotnetVersions = [ "8.x", ]
     , InvokedTargets = [
         nameof(ITest.Test),
