@@ -9,13 +9,17 @@ type token =
   | CHAR of (string)
   | MACRO_NAME of (string)
   | PROP_PLUS of (string)
+  | HASH_IDENT of (string)
   | DECIMAL of (decimal)
   | INT64 of (int64)
   | INT32 of (int)
   | INLINE
+  | REC
   | THREAD_FIRST
   | THREAD_LAST
   | SYNTAX_MACRO
+  | SEQ
+  | YIELD
   | ATOM_KW
   | DEREF_KW
   | WHILE
@@ -28,6 +32,7 @@ type token =
   | WHEN
   | CONS
   | CONCAT
+  | REQUIRE
   | FN
   | FNSTAR
   | LET
@@ -86,13 +91,17 @@ type tokenId =
     | TOKEN_CHAR
     | TOKEN_MACRO_NAME
     | TOKEN_PROP_PLUS
+    | TOKEN_HASH_IDENT
     | TOKEN_DECIMAL
     | TOKEN_INT64
     | TOKEN_INT32
     | TOKEN_INLINE
+    | TOKEN_REC
     | TOKEN_THREAD_FIRST
     | TOKEN_THREAD_LAST
     | TOKEN_SYNTAX_MACRO
+    | TOKEN_SEQ
+    | TOKEN_YIELD
     | TOKEN_ATOM_KW
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
@@ -105,6 +114,7 @@ type tokenId =
     | TOKEN_WHEN
     | TOKEN_CONS
     | TOKEN_CONCAT
+    | TOKEN_REQUIRE
     | TOKEN_FN
     | TOKEN_FNSTAR
     | TOKEN_LET
@@ -168,6 +178,9 @@ type nonTerminalId =
     | NONTERM_module_decls
     | NONTERM_rev_module_decls
     | NONTERM_module_decl
+    | NONTERM_hash_ident_args
+    | NONTERM_rev_hash_ident_args
+    | NONTERM_hash_ident_arg
     | NONTERM_module_parens
     | NONTERM_module_help
     | NONTERM_expr_list
@@ -179,6 +192,8 @@ type nonTerminalId =
     | NONTERM_vector_start
     | NONTERM_inside_parens
     | NONTERM_parens_expr_start
+    | NONTERM_dotted_exprs
+    | NONTERM_rev_dotted_exprs
     | NONTERM_parens_expr
     | NONTERM_macro_call_expr
     | NONTERM_macro_call

@@ -61,8 +61,6 @@ let rec transform (func: SynExpr -> SynExpr) expr =
             SynExpr.Cons(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Concat(lhs, rhs, range) ->
             SynExpr.Concat(bound_transform lhs, bound_transform rhs, range)
-        // | SynExpr.Value(lhs, range) -> SynExpr.Value(bound_transform lhs, range)
-        // | SynExpr.UnwrapList(lhs, range) -> SynExpr.UnwrapList(bound_transform lhs, range)
         | SynExpr.Atom(expr, range) -> SynExpr.Atom(bound_transform expr, range)
         | SynExpr.Deref(short, expr, range) -> SynExpr.Deref(short, bound_transform expr, range)
         | SynExpr.Begin(exprs, range) -> SynExpr.Begin(List.map bound_transform exprs, range)
@@ -76,6 +74,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Pair(lhs, rhs, range) ->
             SynExpr.Pair(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Tuple(exprs, range) -> SynExpr.Tuple(List.map bound_transform exprs, range)
+        | SynExpr.FsYield(exprs, range) -> SynExpr.FsYield(bound_transform exprs, range)
+        | SynExpr.FsSeq(exprs, range) -> SynExpr.FsSeq(List.map bound_transform exprs, range)
         | SynExpr.FsSet(exprs, range) -> SynExpr.FsSet(List.map bound_transform exprs, range)
         | SynExpr.FsArray(exprs, range) -> SynExpr.FsArray(List.map bound_transform exprs, range)
         | SynExpr.FsMap(exprs, range) -> SynExpr.FsMap(List.map bound_transform exprs, range)
@@ -124,7 +124,6 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                     )),
                 range
             )
-        //SynExpr.Match(bound_transform expr, pats, cond |> Option.map bound_transform, range)
         | SynExpr.Type(name, args, members, range) ->
             let tfmember =
                 function
@@ -151,13 +150,42 @@ let runTransforms (tfs: (SynExpr -> SynExpr) seq) (expr: SynExpr) =
     let flip f a b = f b a
     tfs |> Seq.fold (flip transform) expr
 
+type Require = Require of name: string * version: string
+
+let getAllRequires (file: ParsedFile) =
+    let results = ResizeArray<_>()
+
+    let rec transformModuleDecl (res: ResizeArray<_>) (decl: SynModuleDecl) =
+
+        match decl with
+        | SynModuleDecl.HashDirective _ -> ()
+        | SynModuleDecl.Expr _ -> ()
+        | SynModuleDecl.Open _ -> ()
+        | SynModuleDecl.Require(name, ver, _) -> res.Add(Require(Syntax.textOfSymbol name, ver))
+        | SynModuleDecl.ModuleAbbrev _ -> ()
+        | SynModuleDecl.NestedModule(_, decls, _) -> List.iter (transformModuleDecl res) decls
+
+        ()
+
+    let transformFragment res (frag: ParsedFileFragment) =
+        let (ParsedFileFragment.AnonModule(decls, _)) = frag
+        List.iter (transformModuleDecl res) decls
+        ()
+
+    let (ParsedFile(fragments)) = file
+    List.iter (transformFragment results) fragments
+
+    results |> Set.ofSeq
+
 let transformParsedFile (func: SynExpr -> SynExpr) (file: ParsedFile) =
     let bound_transform = transform func
 
     let rec transformModuleDecl (decl: SynModuleDecl) =
         match decl with
         | SynModuleDecl.Expr(ex, r) -> SynModuleDecl.Expr(bound_transform ex, r)
+        | SynModuleDecl.HashDirective _ as it -> it
         | SynModuleDecl.Open _ as it -> it
+        | SynModuleDecl.Require _ as it -> it
         | SynModuleDecl.ModuleAbbrev _ as it -> it
         | SynModuleDecl.NestedModule(name, decls, range) ->
             SynModuleDecl.NestedModule(name, List.map transformModuleDecl decls, range)

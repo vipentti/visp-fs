@@ -99,6 +99,12 @@ type SynOpenDeclTarget =
         | ModuleOrNamespace(range = m) -> m
         | Type(range = m) -> m
 
+[<System.Flags; RequireQualifiedAccess>]
+type FunctionFlags =
+    | None = 0
+    | Inline = 1
+    | Recursive = 2
+
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynExpr =
     // special operator application
@@ -109,7 +115,7 @@ type SynExpr =
     | SyntaxMacro of macro: SynMacro
     | FunctionDef of
         name: SynSymbol *
-        isInline: bool *
+        flags: FunctionFlags *
         args: SynArg list *
         body: SynExpr list *
         range: range
@@ -137,6 +143,8 @@ type SynExpr =
     | FsMap of exprs: SynExpr list * range: range
     | FsSet of exprs: SynExpr list * range: range
     | FsVec of exprs: SynExpr list * range: range
+    | FsSeq of exprs: SynExpr list * range: range
+    | FsYield of expr: SynExpr * range: range
     | List of exprs: SynExpr list * range: range
     | Vector of exprs: SynExpr list * range: range
     | HashMap of exprs: SynExpr list * range: range
@@ -191,6 +199,8 @@ type SynExpr =
         | FsArray(range = r)
         | FsSet(range = r)
         | FsVec(range = r)
+        | FsSeq(range = r)
+        | FsYield(range = r)
         | List(range = r)
         | Vector(range = r)
         | HashMap(range = r)
@@ -413,6 +423,17 @@ module Syntax =
     let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
+type ParsedHashDirectiveArgument =
+    | String of value: string * stringKind: SynStringKind * range: range
+
+    member this.Range =
+        match this with
+        | String(range = m) -> m
+
+[<NoEquality; NoComparison>]
+type ParsedHashDirective = ParsedHashDirective of ident: string * args: ParsedHashDirectiveArgument list * range: range
+
+[<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynModuleDecl =
     | ModuleAbbrev of ident: Ident * longId: LongIdent * range: range
     | NestedModule of ident: SynSymbol * decls: SynModuleDecl list * range: range
@@ -431,18 +452,21 @@ type SynModuleDecl =
 
 
     | Open of target: SynSymbol * range: range
+    | Require of target: SynSymbol * version: string * range: range
 
     // | Attributes of attributes: SynAttributes * range: range
 
-    // | HashDirective of hashDirective: ParsedHashDirective * range: range
+    | HashDirective of hashDirective: ParsedHashDirective * range: range
 
     // | NamespaceFragment of fragment: SynModuleOrNamespace
 
     member d.Range =
         match d with
+        | SynModuleDecl.HashDirective(range = m)
         | SynModuleDecl.ModuleAbbrev(range = m)
         | SynModuleDecl.NestedModule(range = m)
         | SynModuleDecl.Expr(range = m)
+        | SynModuleDecl.Require(range = m)
         | SynModuleDecl.Open(range = m) -> m
 
 // | SynModuleDecl.Let (range = m)
