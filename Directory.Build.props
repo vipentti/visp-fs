@@ -37,7 +37,7 @@
 
     <PropertyGroup>
         <UseReproducibleBuild Condition="'$(UseReproducibleBuild)'==''">false</UseReproducibleBuild>
-        <PackableProjects>Visp.Runtime.Library</PackableProjects>
+        <PackableProjects>Visp.Runtime.Library;Visp.Common</PackableProjects>
     </PropertyGroup>
 
     <Choose>
