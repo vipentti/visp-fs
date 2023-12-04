@@ -104,6 +104,7 @@ let private generateNuGetConfig () =
     </fallbackPackageFolders>
 </configuration>
 """
+
         t.Trim() + Environment.NewLine
 
     | None ->
@@ -117,6 +118,7 @@ let private generateNuGetConfig () =
     </packageSources>
 </configuration>
 """
+
         t.Trim() + Environment.NewLine
 
 let private runtimeProjectOrPackageReference (typ: RuntimeLibraryReference) =
@@ -244,7 +246,11 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
     member this.NameOfWithoutExtension(name: string) =
         this.fs.Path.GetFileNameWithoutExtension name
 
-    member this.WriteVispFiles (typ: RuntimeLibraryReference) (files: VispFile list) (flags: string option) =
+    member this.WriteVispFiles
+        (typ: RuntimeLibraryReference)
+        (files: VispFile list)
+        (flags: string option)
+        =
         let dir = this.fs.Directory.CreateDirectory this.dir
         let existingFiles = dir.GetFiles("*.fs", SearchOption.TopDirectoryOnly)
 
@@ -269,7 +275,8 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
         let fileNames = results |> List.map fst
         let requires = results |> List.map snd |> Set.unionMany
 
-        let projTemplate = generateFsProjectFile fileNames requires typ (Option.defaultValue "" flags)
+        let projTemplate =
+            generateFsProjectFile fileNames requires typ (Option.defaultValue "" flags)
 
         let projPath = this.PathOf "project.fsproj"
 

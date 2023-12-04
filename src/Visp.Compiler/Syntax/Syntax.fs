@@ -431,7 +431,8 @@ type ParsedHashDirectiveArgument =
         | String(range = m) -> m
 
 [<NoEquality; NoComparison>]
-type ParsedHashDirective = ParsedHashDirective of ident: string * args: ParsedHashDirectiveArgument list * range: range
+type ParsedHashDirective =
+    | ParsedHashDirective of ident: string * args: ParsedHashDirectiveArgument list * range: range
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynModuleDecl =
