@@ -38,7 +38,7 @@ let main args =
 
     let generator = new FsharpGenerator(fs, projectPath)
 
-    generator.WriteVispFiles pkg files
+    generator.WriteVispFiles pkg files None
 
     let dotnet =
         Cli
