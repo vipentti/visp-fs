@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <InvariantGlobalization>true</InvariantGlobalization>
     <FsYaccOutputFolder>Syntax\\FsLexYaccOutput\\</FsYaccOutputFolder>
     <FsLexOutputFolder>Syntax\\FsLexYaccOutput\\</FsLexOutputFolder>
   </PropertyGroup>
