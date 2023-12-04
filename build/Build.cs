@@ -97,6 +97,7 @@ class Build :
         .SetProcessEnvironmentVariable("VISP_FS_COMMON_PACKAGE_PATH", PackagePath)
         .SetProcessEnvironmentVariable("VISP_FS_PACKAGE_PATH", PackagePath)
         .SetProcessEnvironmentVariable("VISP_FS_PACKAGE_FEED_PATH", PackagePath / "feed")
+        .SetProcessEnvironmentVariable("VISP_FS_LIB_PATH", RootDirectory / "visp" / "lib")
         ;
 
     Target ITest.Test => _ => _
