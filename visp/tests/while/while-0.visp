@@ -6,10 +6,12 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(fn inc ([v: Value])
-    (Value.from (+ 1 (unwrapInt v))))
+#nowarn "20"
 
-(let count (atom 0))
-(while (< @count 5)
+(fn inc ([v: Value])
+    (Value.from (+ 1L (unwrapInt v))))
+
+(let count (atom 0L))
+(while (< (unwrapInt @count) 5L)
     (printfn "in loop %O" @count)
     (swap! count inc))

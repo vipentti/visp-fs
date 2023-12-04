@@ -1,0 +1,6 @@
+﻿value is "hello"
+result2 is (1 2 7)
+result3 is (0 1 2 3 4 5 6)
+()
+
+ExitCode: 0

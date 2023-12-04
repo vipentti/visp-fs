@@ -1,0 +1,5 @@
+﻿count is 0
+count is 1
+()
+
+ExitCode: 0

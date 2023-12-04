@@ -11,6 +11,6 @@
 ;; (List )
 ; (Arr)
 (printfn "%i" (add 1 2))
-(printfn "%i" (List.reduce CoreMethods.add (!list 1 2 3 4 5)))
+(printfn "%i" (List.reduce add (!list 1 2 3 4 5)))
 
 "let-value support?"

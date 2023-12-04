@@ -1,0 +1,29 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"example-7.visp"
+#nowarn "20"
+// line 11 @"example-7.visp"
+let values =
+  // line 12 @"example-7.visp"
+  let temp = Vector(4)
+  temp.Add(Value.from(1))
+  temp.Add(Value.from(2))
+  temp.Add(Value.from("foo"))
+  temp.Add(Value.from("bar"))
+  temp
+// line 14 @"example-7.visp"
+printfn ("values are %O") (values)
+// line 15 @"example-7.visp"
+CoreMethods.``vector-push!``(state, Value.from(values), Value.from(4), Value.from(5), Value.from(6), Value.from(7))
+// line 16 @"example-7.visp"
+let visp_result_todo =
+  // line 16 @"example-7.visp"
+  printfn ("values after update are %O") (values)
+// line 16 @"example-7.visp"
+printfn ("%A") (visp_result_todo)
+

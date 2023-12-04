@@ -1,0 +1,4 @@
+﻿hello world
+()
+
+ExitCode: 0

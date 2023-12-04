@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace></RootNamespace>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <NoWarn>CS0649;CS0169;CA1050;CA1822;CA2211;IDE1006</NoWarn>
     <NukeRootDirectory>..</NukeRootDirectory>
     <NukeScriptDirectory>..</NukeScriptDirectory>
@@ -16,6 +16,10 @@
     <PackageReference Include="Nuke.Common" Version="7.0.6" />
     <PackageReference Include="Nuke.Components" Version="7.0.6" />
     <PackageReference Include="Vipentti.Nuke.Components" Version="0.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageDownload Include="NuGet.CommandLine" Version="[6.8.0]" />
   </ItemGroup>
 
 </Project>

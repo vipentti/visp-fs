@@ -1,0 +1,6 @@
+﻿value is initial
+value is hello
+value is world
+()
+
+ExitCode: 0

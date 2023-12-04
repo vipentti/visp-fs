@@ -6,6 +6,9 @@
     "build": {
       "type": "object",
       "properties": {
+        "CleanPackagesDirectory": {
+          "type": "boolean"
+        },
         "Configuration": {
           "type": "string",
           "enum": [
@@ -78,17 +81,16 @@
               "CheckCsharpier",
               "CheckFantomas",
               "Compile",
-              "Format",
               "FormatCsharpier",
               "FormatFantomas",
               "InstallCsharpier",
               "InstallFantomas",
               "InstallLinters",
               "Lint",
+              "Pack",
               "Restore",
               "RestoreTools",
-              "Test",
-              "ValidateFormat"
+              "Test"
             ]
           }
         },
@@ -105,17 +107,16 @@
               "CheckCsharpier",
               "CheckFantomas",
               "Compile",
-              "Format",
               "FormatCsharpier",
               "FormatFantomas",
               "InstallCsharpier",
               "InstallFantomas",
               "InstallLinters",
               "Lint",
+              "Pack",
               "Restore",
               "RestoreTools",
-              "Test",
-              "ValidateFormat"
+              "Test"
             ]
           }
         },

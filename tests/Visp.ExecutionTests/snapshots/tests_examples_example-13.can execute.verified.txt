@@ -1,0 +1,5 @@
+﻿quasiquoted is: (hello world in quotes)
+next_quasiquoted is: ("constants" :keywords-work true 1 1.5 false also "work" nil)
+()
+
+ExitCode: 0

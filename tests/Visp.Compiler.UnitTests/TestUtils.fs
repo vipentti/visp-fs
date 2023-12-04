@@ -35,6 +35,6 @@ let runTest (name: string) =
         .Verify(output)
         .UseDirectory("snapshots")
         .DisableDiff()
-        .UseParameters(name.Replace('/', '_'))
+        .UseParameters(name.Replace('/', '_').Replace('\\', '_'))
         .ToTask()
     |> Async.AwaitTask
