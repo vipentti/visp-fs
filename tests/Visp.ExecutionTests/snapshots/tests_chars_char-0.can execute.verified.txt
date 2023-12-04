@@ -1,0 +1,9 @@
+﻿Char is h
+Char is a
+Char is a
+Char is :
+Char is (
+Char is )
+()
+
+ExitCode: 0

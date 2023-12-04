@@ -1,0 +1,4 @@
+﻿values are [1 2 "foo" "bar"]
+()
+
+ExitCode: 0

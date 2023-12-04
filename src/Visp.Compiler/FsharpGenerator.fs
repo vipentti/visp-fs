@@ -7,6 +7,13 @@ module Visp.Compiler.ProjectGenerator
 open Visp.Compiler.Core
 open System.IO.Abstractions
 open System.IO
+open System
+open Visp.Compiler.Transforms.Helpers
+
+[<RequireQualifiedAccess>]
+type RuntimeLibraryReference =
+    | Project
+    | Package
 
 let tempDirPath name =
     let src_dir = __SOURCE_DIRECTORY__
@@ -24,13 +31,120 @@ let runtimeLibPath =
     Path.Combine(src_dir, "..", "Visp.Runtime.Library", "Visp.Runtime.Library.fsproj")
     |> Path.GetFullPath
 
-let generateFsProjectFile (files: string seq) =
+[<Literal>]
+let runtimePackageName = "Visp.Runtime.Library"
+
+[<Literal>]
+let commonPackageName = "Visp.Common"
+
+let artifactsPackagePath =
+    let src_dir = __SOURCE_DIRECTORY__
+    Path.Combine(src_dir, "..", "..", "artifacts", "packages") |> Path.GetFullPath
+
+let runtimePackagePath =
+    let src_dir = __SOURCE_DIRECTORY__
+
+    match Environment.GetEnvironmentVariable("VISP_FS_RUNTIME_PACKAGE_PATH") with
+    | null ->
+        if Directory.Exists(artifactsPackagePath) then
+            artifactsPackagePath
+        else
+            Path.Combine(src_dir, "..", "Visp.Runtime.Library", "bin", "Release")
+            |> Path.GetFullPath
+    | it -> it
+
+let commonPackagePath =
+    let src_dir = __SOURCE_DIRECTORY__
+
+    match Environment.GetEnvironmentVariable("VISP_FS_COMMON_PACKAGE_PATH") with
+    | null ->
+        if Directory.Exists(artifactsPackagePath) then
+            artifactsPackagePath
+        else
+            Path.Combine(src_dir, "..", "Visp.Common", "bin", "Release") |> Path.GetFullPath
+    | it -> it
+
+let runtimePackageExists () =
+    let path = runtimePackagePath
+
+    if Directory.Exists(path) then
+        Directory.GetFiles(path, $"{runtimePackageName}*.nupkg", SearchOption.TopDirectoryOnly)
+        |> Seq.isEmpty
+        |> not
+    else
+        false
+
+let commonPackageExists () =
+    let path = commonPackagePath
+
+    if Directory.Exists(path) then
+        Directory.GetFiles(path, $"{commonPackageName}*.nupkg", SearchOption.TopDirectoryOnly)
+        |> Seq.isEmpty
+        |> not
+    else
+        false
+
+
+let private generateNuGetConfig () =
+    let feedPath =
+        match Environment.GetEnvironmentVariable("VISP_FS_PACKAGE_FEED_PATH") with
+        | null -> None
+        | path -> Some(path)
+
+    match feedPath with
+    | Some(feed) ->
+        let t =
+            $"""
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <fallbackPackageFolders>
+        <add key="PackageFeed" value="{feed}" />
+    </fallbackPackageFolders>
+</configuration>
+"""
+        t.Trim() + Environment.NewLine
+
+    | None ->
+        let t =
+            $"""
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <packageSources>
+        <add key="CommonSource" value="{commonPackagePath}" />
+        <add key="RuntimeSource" value="{runtimePackagePath}" />
+    </packageSources>
+</configuration>
+"""
+        t.Trim() + Environment.NewLine
+
+let private runtimeProjectOrPackageReference (typ: RuntimeLibraryReference) =
+    match typ with
+    | RuntimeLibraryReference.Project -> $"    <ProjectReference Include=\"{runtimeLibPath}\" />"
+    | RuntimeLibraryReference.Package ->
+        $"""
+    <PackageReference Include="{runtimePackageName}" Version="1.0.0" />
+    <PackageReference Include="{commonPackageName}" Version="1.0.0" />
+"""
+    |> (fun (it: string) -> it.Trim([| '\r'; '\n' |]))
+
+let private generateFsProjectFile
+    (files: string seq)
+    (deps: Set<Require>)
+    (typ: RuntimeLibraryReference)
+    =
     let compileIncludes files =
         let compileInclude file =
             sprintf "  <Compile Include=\"%s\" />" file
 
         Seq.map compileInclude files
         |> String.concat (System.Environment.NewLine + "  ")
+
+    let pkgReferences deps =
+        let pkgRef (Require(name, version)) =
+            sprintf "  <PackageReference Include=\"%s\" Version=\"%s\" />" name version
+
+        Seq.map pkgRef deps |> String.concat (System.Environment.NewLine + "  ")
+
 
     let template =
         $"""
@@ -48,7 +162,11 @@ let generateFsProjectFile (files: string seq) =
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="{runtimeLibPath}" />
+{runtimeProjectOrPackageReference typ}
+  </ItemGroup>
+
+  <ItemGroup>
+  {pkgReferences deps}
   </ItemGroup>
 
 </Project>
@@ -122,7 +240,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
     member this.NameOfWithoutExtension(name: string) =
         this.fs.Path.GetFileNameWithoutExtension name
 
-    member this.WriteVispFiles(files: VispFile list) =
+    member this.WriteVispFiles (typ: RuntimeLibraryReference) (files: VispFile list) =
         let dir = this.fs.Directory.CreateDirectory this.dir
         let existingFiles = dir.GetFiles("*.fs", SearchOption.TopDirectoryOnly)
 
@@ -136,18 +254,27 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
             let outputPath = this.PathOf fsfileName
             let parsed = CoreParser.parseFile filePath file.ReturnLast
 
+            let requires = Transforms.Helpers.getAllRequires parsed
+
             (use stream = this.OpenFileForWriting outputPath
              CoreParser.writeParsedFile parsed stream file.Template)
 
-            fsfileName
+            (fsfileName, requires)
 
-        let fileNames = List.map writeFile files
+        let results = List.map writeFile files
+        let fileNames = results |> List.map fst
+        let requires = results |> List.map snd |> Set.unionMany
 
-        let projTemplate = generateFsProjectFile fileNames
+        let projTemplate = generateFsProjectFile fileNames requires typ
 
         let projPath = this.PathOf "project.fsproj"
 
         fs.File.WriteAllText(projPath, projTemplate)
+
+        match typ with
+        | RuntimeLibraryReference.Package ->
+            fs.File.WriteAllText(this.PathOf "nuget.config", generateNuGetConfig ())
+        | _ -> ()
 
         ()
 

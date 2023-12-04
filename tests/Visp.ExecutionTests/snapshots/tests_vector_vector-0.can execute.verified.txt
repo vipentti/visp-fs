@@ -1,0 +1,6 @@
+﻿[99]
+seq
+  [Number (Int64 1L); Number (Int64 -1L); Number (Int64 3L); Number (Int64 4L);
+   ...]
+
+ExitCode: 0

@@ -1,0 +1,7 @@
+﻿this is in the default top-level module
+this is inside MyCustomModule
+hello world
+this is back in the top-level-module
+()
+
+ExitCode: 0

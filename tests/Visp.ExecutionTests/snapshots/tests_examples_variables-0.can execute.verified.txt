@@ -1,0 +1,6 @@
+﻿value is 1
+valuemut is 1
+valuemut is 2
+()
+
+ExitCode: 0

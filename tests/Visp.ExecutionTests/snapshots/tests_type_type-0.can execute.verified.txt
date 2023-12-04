@@ -1,0 +1,5 @@
+﻿type-0+MyType
+99
+()
+
+ExitCode: 0

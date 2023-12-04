@@ -1,0 +1,6 @@
+﻿var is: [1, 2]
+var is: [3, 4]
+var is: [5, 6]
+()
+
+ExitCode: 0

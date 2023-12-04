@@ -1,0 +1,4 @@
+﻿#{:this-is-a-key "int as key" "string as key" "string value" "value" 0}
+()
+
+ExitCode: 0
