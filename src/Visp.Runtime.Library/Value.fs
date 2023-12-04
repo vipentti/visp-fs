@@ -32,15 +32,33 @@ type Value =
     | HashSet of HashSet
     | Pair of Pair
 
+    member this.TypeName =
+        match this with
+        | Nil -> "Value.Nil"
+        | Unit -> "Value.Unit"
+        | String _ -> "Value.String"
+        | Symbol _ -> "Value.Symbol"
+        | Keyword _ -> "Value.Keyword"
+        | Number _ -> "Value.Number"
+        | Char _ -> "Value.Char"
+        | Bool _ -> "Value.Bool"
+        | Any _ -> "Value.Any"
+        | Atom _ -> "Value.Atom"
+        | List _ -> "Value.List"
+        | Vector _ -> "Value.Vector"
+        | HashMap _ -> "Value.HashMap"
+        | HashSet _ -> "Value.HashSet"
+        | Pair _ -> "Value.Pair"
+
     override this.GetHashCode() =
         System.HashCode.Combine(
             this.GetType(),
             match this with
             | Vector v -> v.GetHashCode()
             | List v -> v.GetHashCode()
-            | String v -> HashCode.Combine("string", v.GetHashCode())
-            | Symbol v -> HashCode.Combine("symbol", v.GetHashCode())
-            | Keyword v -> HashCode.Combine("keyword", v.GetHashCode())
+            | String v -> HashCode.Combine("string", v)
+            | Symbol v -> HashCode.Combine("symbol", v)
+            | Keyword v -> HashCode.Combine("keyword", v)
             | Number v -> v.GetHashCode()
             | Char v -> v.GetHashCode()
             | Bool v -> v.GetHashCode()
@@ -105,9 +123,7 @@ type Value =
             | (HashMap lhs, HashMap rhs) -> lhs.CompareTo(rhs)
             | (HashSet lhs, HashSet rhs) -> lhs.CompareTo(rhs)
             | (Pair lhs, Pair rhs) -> lhs.CompareTo(rhs)
-            | (lhs, rhs) ->
-                (lhs.GetType().GetHashCode() :> IComparable<_>)
-                    .CompareTo(rhs.GetType().GetHashCode())
+            | (lhs, rhs) -> lhs.TypeName.CompareTo(rhs.TypeName)
 
     static member list(it: Value seq) = List(ValueList(List.ofSeq it))
 
