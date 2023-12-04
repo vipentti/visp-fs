@@ -42,7 +42,10 @@ let CreateAndRunProject filePath =
     let sb = new StringBuilder()
 
     // https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/compiler-options#compiler-options-listed-alphabetically
-    generator.WriteVispFiles RuntimeLibraryReference.Package files (Some "--debug- --nooptimizationdata --optimize-")
+    generator.WriteVispFiles
+        RuntimeLibraryReference.Package
+        files
+        (Some "--debug- --nooptimizationdata --optimize-")
 
     let dotnet =
         Cli
@@ -55,6 +58,7 @@ let CreateAndRunProject filePath =
 
     async {
         let mutable succeed = false
+
         try
             let! result = dotnet.ExecuteAsync().Task |> Async.AwaitTask
 

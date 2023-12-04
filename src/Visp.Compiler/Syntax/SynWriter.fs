@@ -1187,18 +1187,21 @@ module Write =
             match decls with
             | decl :: rest ->
                 match decl with
-                | SynModuleDecl.HashDirective (ParsedHashDirective (ident, args, r), _) ->
+                | SynModuleDecl.HashDirective(ParsedHashDirective(ident, args, r), _) ->
                     indent w
                     lineof w r
                     indent w
                     fmtprintf w "#%s" ident
+
                     for arg in args do
                         space w
+
                         match arg with
-                        | ParsedHashDirectiveArgument.String (it, _, _) ->
+                        | ParsedHashDirectiveArgument.String(it, _, _) ->
                             char w '"'
                             string w it
                             char w '"'
+
                     ()
                 | SynModuleDecl.ModuleAbbrev _ -> ()
                 | SynModuleDecl.Require _ -> ()
