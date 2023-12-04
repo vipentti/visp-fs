@@ -1,0 +1,6 @@
+﻿int32 is 99
+int32 is 99
+int64 is 99L
+()
+
+ExitCode: 0

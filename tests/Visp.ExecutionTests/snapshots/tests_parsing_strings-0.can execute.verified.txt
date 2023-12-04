@@ -1,0 +1,18 @@
+﻿string is: '
+  this is
+  a multiline
+  string
+'
+string is: '
+  this is
+  a multiline
+  string
+'
+test is: '
+let ``can parse hello`` =
+  TestUtils.runTest hello
+  |> Async.AwaitTask
+  '
+()
+
+ExitCode: 0

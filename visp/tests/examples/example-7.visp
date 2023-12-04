@@ -5,6 +5,9 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
+;; implicitly ignore warning
+#nowarn "20"
+
 (let values
     [1 2 "foo" "bar"])
 

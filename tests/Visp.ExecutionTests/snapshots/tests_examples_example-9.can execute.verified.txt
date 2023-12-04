@@ -1,0 +1,7 @@
+﻿number of decimals: 1
+number of decimals: 2
+decimals 0 is 1.000000
+decimals 1 is 2.000000
+()
+
+ExitCode: 0

@@ -6,6 +6,9 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
+;; this rule will never be matched
+#nowarn "0026"
+
 (syntax-macro matchfnexample
   [(_ sym m ...)
     (fn sym (arg)

@@ -1,0 +1,30 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"atom-0.visp"
+#nowarn "20"
+// line 11 @"atom-0.visp"
+let inc (v: Value) =
+  // line 12 @"atom-0.visp"
+  Value.from ((1L) +
+  (unwrapInt (v)))
+
+// line 13 @"atom-0.visp"
+let count =
+  // line 13 @"atom-0.visp"
+  Value.atom(Value.from(0L))
+// line 15 @"atom-0.visp"
+printfn ("count is %O") (deref (count))
+// line 17 @"atom-0.visp"
+CoreMethods.``swap!``(Value.from(count), inc)
+// line 19 @"atom-0.visp"
+let visp_result_todo =
+  // line 19 @"atom-0.visp"
+  printfn ("count is %O") (deref (count))
+// line 19 @"atom-0.visp"
+printfn ("%A") (visp_result_todo)
+

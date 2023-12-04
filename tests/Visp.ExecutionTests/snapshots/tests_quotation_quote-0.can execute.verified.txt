@@ -1,0 +1,8 @@
+﻿items: (1 2 3 4 5)
+sym: symbol
+something: (fn [a] (+ a b 1 (call + 1 2)))
+nested: (nested1 (nested2 (nested3 (nested4 and on and on :keyword))))
+nested vec: [nested1 (nested2 [nested3 (nested4 and on and on :keyword)])]
+()
+
+ExitCode: 0

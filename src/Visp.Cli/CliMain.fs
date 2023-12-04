@@ -16,18 +16,36 @@ let main args =
 
     let mutable files = [ VispFile.Main filePath ]
 
-    if not (Array.exists (fun it -> it = "--no-lib") args) then
+    let knownArguments = [ "--no-lib"; "--release"; "--package" ] |> Set.ofList
+
+    if not (Array.contains "--no-lib" args) then
         files <- VispFile.CoreLib "core.visp" :: files
+
+    let release =
+        if Array.contains "--release" args then
+            [| "--configuration"; "Release" |]
+        else
+            [||]
+
+    let pkg =
+        if Array.contains "--package" args then
+            RuntimeLibraryReference.Package
+        else
+            RuntimeLibraryReference.Project
+
+    let cmdArguments =
+        args[1..] |> Array.filter (fun it -> not (Set.contains it knownArguments))
 
     let generator = new FsharpGenerator(fs, projectPath)
 
-    generator.WriteVispFiles files
+    generator.WriteVispFiles pkg files
 
     let dotnet =
         Cli
             .Wrap("dotnet")
             .WithArguments(
-                Array.concat [| [| "run"; "--project"; projectPath; "--" |]; args[1..] |]
+                Array.concat
+                    [| [| "run"; "--project"; projectPath |]; release; [| "--" |]; cmdArguments |]
             )
             .WithWorkingDirectory(cwd)
             .WithStandardOutputPipe(PipeTarget.ToDelegate(fun x -> printfn "%s" x))

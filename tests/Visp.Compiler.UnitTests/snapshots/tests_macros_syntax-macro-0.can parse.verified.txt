@@ -1,0 +1,39 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 10 @"syntax-macro-0.visp"
+#nowarn "0026"
+// line 12 @"syntax-macro-0.visp"
+let macro_matchfnexample = "__MACRO_INIT__"
+// line 0 @""
+let name arg =
+  // line 0 @""
+  match arg with
+    | (a, b) ->
+      // line 0 @""
+      CoreMethods.``add``(a, b)
+    | _ ->
+      0
+
+// line 26 @"syntax-macro-0.visp"
+let name2 tup =
+  // line 27 @"syntax-macro-0.visp"
+  match tup with
+    | (a, b) ->
+      // line 28 @"syntax-macro-0.visp"
+      (a) +
+      (b)
+    | _ ->
+      0
+
+// line 31 @"syntax-macro-0.visp"
+let visp_result_todo =
+  // line 31 @"syntax-macro-0.visp"
+  printfn ("%A & %A") (name ((1, 2))) (name2 ((1, 2)))
+// line 31 @"syntax-macro-0.visp"
+printfn ("%A") (visp_result_todo)
+

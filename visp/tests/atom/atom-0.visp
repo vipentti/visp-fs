@@ -5,9 +5,12 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
+;; discard
+#nowarn "20"
+
 (fn inc ([v: Value])
-    (Value.from (+ 1 (unwrapInt v))))
-(let count (atom 0))
+    (Value.from (+ 1L (unwrapInt v))))
+(let count (atom 0L))
 
 (printfn "count is %O" @count)
 

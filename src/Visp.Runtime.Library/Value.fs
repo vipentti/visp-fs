@@ -809,7 +809,7 @@ module Unwrap =
 module Value =
     let unwrapList d =
         match d with
-        | Value.List lst -> lst
+        | Value.List lst -> lst.List
         | _ -> failwithf "not supported %O" d
 
     let unwrapVec d =

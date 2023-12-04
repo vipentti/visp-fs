@@ -28,6 +28,12 @@ module private CompareHelpers =
 
         result
 
+[<AutoOpen>]
+module Bitwise =
+    let inline bor (lhs: 'a) (rhs: 'a) = lhs ||| rhs
+    let inline band (lhs: 'a) (rhs: 'a) = lhs &&& rhs
+
+
 type CoreMethods =
     static member ``vector-push!``(_: RuntimeState, [<ParamArray>] args: Value[]) =
         match Array.tryHead args with

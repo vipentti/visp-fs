@@ -1,0 +1,8 @@
+﻿hello test
+hello no types
+hello vector
+hello anon
+hello lambda
+()
+
+ExitCode: 0
