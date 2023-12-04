@@ -52,7 +52,7 @@ let state = { Todo = () }
     let outputSyntaxError (syn: ParseHelpers.SyntaxError) =
         match syn.Data0 with
         | :? FSharp.Text.Parsing.ParseErrorContext<SyntaxParser.token> as ctx ->
-            let (startPos, endPos) = ctx.ParseState.ResultRange
+            let (startPos, _) = ctx.ParseState.ResultRange
             eprintfn "ReduceTokens: %A" ctx.ReduceTokens
             eprintfn "ReducibleProductions: %A" ctx.ReducibleProductions
             eprintfn "ShiftTokens: %A" ctx.ShiftTokens
