@@ -131,6 +131,7 @@ let private generateFsProjectFile
     (files: string seq)
     (deps: Set<Require>)
     (typ: RuntimeLibraryReference)
+    (flags: string)
     =
     let compileIncludes files =
         let compileInclude file =
@@ -155,6 +156,7 @@ let private generateFsProjectFile
     <TargetFramework>net8.0</TargetFramework>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <OtherFlags>$(OtherFlags) {flags}</OtherFlags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -240,7 +242,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
     member this.NameOfWithoutExtension(name: string) =
         this.fs.Path.GetFileNameWithoutExtension name
 
-    member this.WriteVispFiles (typ: RuntimeLibraryReference) (files: VispFile list) =
+    member this.WriteVispFiles (typ: RuntimeLibraryReference) (files: VispFile list) (flags: string option) =
         let dir = this.fs.Directory.CreateDirectory this.dir
         let existingFiles = dir.GetFiles("*.fs", SearchOption.TopDirectoryOnly)
 
@@ -265,7 +267,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
         let fileNames = results |> List.map fst
         let requires = results |> List.map snd |> Set.unionMany
 
-        let projTemplate = generateFsProjectFile fileNames requires typ
+        let projTemplate = generateFsProjectFile fileNames requires typ (Option.defaultValue "" flags)
 
         let projPath = this.PathOf "project.fsproj"
 
