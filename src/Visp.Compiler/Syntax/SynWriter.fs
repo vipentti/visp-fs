@@ -170,7 +170,7 @@ module Write =
         if should then w.writer.Indent() else w.writer.DoNotIndent()
 
 
-    let reservedWords = [ "then"; "done"; "val"; "end"; "begin" ] |> Set.ofList
+    let reservedWords = [ "then"; "done"; "val"; "end"; "begin"; "mod" ] |> Set.ofList
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
 
@@ -429,28 +429,42 @@ module Write =
             writeBody w writeExpr body
             ()
 
+        | SynExpr.FsYield(expr, range) ->
+            startExpr w st range
+            string w "yield "
+            writeExprInParens w WriteState.Inline expr
+
+        | SynExpr.FsSeq(exprs, range) ->
+            startExpr w st range
+            string w "seq {"
+            writeBody w writeExpr exprs
+            string w "}"
+
         | SynExpr.RangeExpr(start, mid, last, range) ->
             startExpr w st range
 
-            writeExpr w WriteState.Inline start
+            writeExprInParens w WriteState.Inline start
             string w " .. "
 
             match mid with
             | Some(mid) ->
-                writeExpr w WriteState.Inline mid
+                writeExprInParens w WriteState.Inline mid
                 string w " .. "
             | None -> ()
 
-            writeExpr w WriteState.Inline last
+            writeExprInParens w WriteState.Inline last
 
             ()
 
-        | SynExpr.FunctionDef(name_, isInline, args, body, range) ->
+        | SynExpr.FunctionDef(name_, flags, args, body, range) ->
             startExpr w st range
 
             string w "let "
 
-            if isInline then
+            if flags.HasFlag(FunctionFlags.Recursive) then
+                string w "rec "
+
+            if flags.HasFlag(FunctionFlags.Inline) then
                 string w "inline "
 
             symbol w name_ true
@@ -484,7 +498,9 @@ module Write =
 
         | SynExpr.Begin(expr, range) ->
             startExpr w st range
+            char w '('
             writeBody w writeExpr expr
+            char w ')'
 
         | SynExpr.If(cond, thn, alt, range) ->
             use _ = startNewlineExpr w st range
@@ -1171,6 +1187,21 @@ module Write =
             match decls with
             | decl :: rest ->
                 match decl with
+                | SynModuleDecl.HashDirective (ParsedHashDirective (ident, args, r), _) ->
+                    indent w
+                    lineof w r
+                    indent w
+                    fmtprintf w "#%s" ident
+                    for arg in args do
+                        space w
+                        match arg with
+                        | ParsedHashDirectiveArgument.String (it, _, _) ->
+                            char w '"'
+                            string w it
+                            char w '"'
+                    ()
+                | SynModuleDecl.ModuleAbbrev _ -> ()
+                | SynModuleDecl.Require _ -> ()
                 | SynModuleDecl.Expr(ex, _) -> writeExpr w WriteState.Body (expandExpr ex)
                 | SynModuleDecl.Open(target, range) ->
                     indent w
@@ -1188,7 +1219,6 @@ module Write =
 
                     writeModuleDecls w decls
 
-                | _ -> failwith "unsupported"
 
                 newline w
 

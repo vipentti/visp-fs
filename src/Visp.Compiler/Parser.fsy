@@ -31,12 +31,13 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token AT
 %token OPEN MODULE
 %token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
-%token ATOM_KW DEREF_KW WHILE TYPE MEMBER MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT
-%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO
-%token INLINE
+%token ATOM_KW DEREF_KW WHILE TYPE MEMBER MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ YIELD
+%token INLINE REC
 %token <int> INT32
 %token <int64> INT64
 %token <decimal> DECIMAL
+%token <string> HASH_IDENT
 %token <string> PROP_PLUS
 %token <string> MACRO_NAME
 %token <string> CHAR
@@ -49,6 +50,8 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_module_decl
 
 %nonassoc prec_module_decls
+%nonassoc prec_hash_ident_args
+%nonassoc prec_hash_ident
 
 // https://github.com/dotnet/fsharp/blob/363e8768ecd3e537aff643e0ea6da89115f249c2/src/Compiler/pars.fsy#L189
 
@@ -70,6 +73,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_expr
 
 %nonassoc TRUE FALSE NIL INT32 INT64 DECIMAL SYMBOL KEYWORD RAWSTRING DOT_METHOD STRING UNIT CHAR
+%nonassoc HASH_IDENT
 
 %nonassoc prec_dot_no_paren
 %nonassoc prec_paren
@@ -135,8 +139,22 @@ rev_module_decls:
     | rev_module_decls module_decl %prec prec_module_decls { $2 :: $1 }
 
 module_decl:
+    | HASH_IDENT hash_ident_args %prec prec_hash_ident
+        { SynModuleDecl.HashDirective(ParsedHashDirective($1, $2, lhs parseState), lhs parseState)}
     | module_parens { $1 }
     | expr { SynModuleDecl.Expr($1, lhs parseState) }
+
+hash_ident_args: rev_hash_ident_args %prec prec_hash_ident_args { List.rev $1 }
+rev_hash_ident_args:
+    | %prec prec_hash_ident_args { [] }
+    | hash_ident_arg %prec prec_hash_ident { [$1] }
+    | rev_hash_ident_args hash_ident_arg %prec prec_hash_ident_args { $2 :: $1 }
+
+hash_ident_arg:
+    | STRING %prec prec_hash_ident {
+        let (raw, k, _) = $1
+        ParsedHashDirectiveArgument.String(raw, k, rhs parseState 1)
+    }
 
 module_parens:
     | LPAREN module_help RPAREN { $2 }
@@ -146,6 +164,9 @@ module_help:
         { SynModuleDecl.Open($2, lhs parseState) }
     | MODULE symbol module_decls
         { SynModuleDecl.NestedModule($2, $3, lhs parseState) }
+    | REQUIRE symbol STRING
+        { let (raw, _, _) = $3
+          SynModuleDecl.Require($2, raw, lhs parseState) }
 
 expr_list: rev_expr_list { List.rev $1 }
 rev_expr_list:
@@ -178,10 +199,7 @@ expr:
     | inside_parens %prec prec_paren { $1 }
 
 lambda_short_expr_list:
-    | operators_not_in_parens { SynExpr.Op($1) }
-    | function_call { $1 }
-    | dot_expr { $1 }
-    | new_expr { $1 }
+    | parens_expr { $1 }
 
 vector_start:
     | LBRACKET RBRACKET { SynExpr.Vector([], lhs parseState) }
@@ -203,9 +221,20 @@ inside_parens:
 parens_expr_start:
     | parens_expr %prec prec_paren_expr { $1 }
 
+dotted_exprs: rev_dotted_exprs { List.rev $1 }
+rev_dotted_exprs:
+    | { [] }
+    | expr { [$1] }
+    | rev_dotted_exprs DOT expr { $3 :: $1 }
+    | rev_dotted_exprs COMMA expr { $3 :: $1 }
+
 parens_expr:
-    | expr DOT expr
-        { SynExpr.Pair($1, $3, lhs parseState)}
+    // | expr DOT expr
+    //     { SynExpr.Pair($1, $3, lhs parseState)}
+    | expr DOT dotted_exprs
+        { SynExpr.Tuple($1 :: $3, lhs parseState)}
+    | expr COMMA dotted_exprs
+        { SynExpr.Tuple($1 :: $3, lhs parseState)}
     | function_def %prec prec_fn { $1 }
     | macro_def { $1 }
     | function_call %prec prec_call { $1 }
@@ -259,6 +288,9 @@ parens_expr:
 
     | BANG_VEC { SynExpr.FsVec([], lhs parseState)}
     | BANG_VEC expr_list { SynExpr.FsVec($2, lhs parseState)}
+
+    | SEQ expr_list { SynExpr.FsSeq($2, lhs parseState) }
+    | YIELD expr { SynExpr.FsYield($2, lhs parseState) }
 
 macro_call_expr:
     | macro_call { SynExpr.SyntaxMacroCall($1) }
@@ -426,6 +458,10 @@ range_expr:
         { SynExpr.RangeExpr ($2, None, $4, lhs parseState) }
     | BANG_RANGE expr expr
         { SynExpr.RangeExpr ($2, None, $3, lhs parseState) }
+    | expr DOTDOT expr DOTDOT expr
+        { SynExpr.RangeExpr ($1, Some($3), $5, lhs parseState) }
+    | expr DOTDOT expr
+        { SynExpr.RangeExpr ($1, None, $3, lhs parseState) }
 
 if_expr:
     | IF_KW expr expr
@@ -657,6 +693,11 @@ syntype_ident:
         { let text = $1
           SynType.Ident(Ident(text, lhs parseState))
         }
+    | SYMBOL COMMA SYMBOL
+        { let text1 = $1
+          let text2 = $3
+          SynType.Ident(Ident(text1 + "," + text2, lhs parseState))
+        }
     | QUOTE_SYM SYMBOL
         { let text = $2
           SynType.Ident(Ident("'" + text, lhs parseState))
@@ -682,9 +723,13 @@ rawConstant:
 
 function_def:
     | FN symbol arg_list_start expr_list %prec prec_fn
-        { SynExpr.FunctionDef($2, false, $3, $4, (lhs parseState)) }
+        { SynExpr.FunctionDef($2, FunctionFlags.None, $3, $4, (lhs parseState)) }
     | FN INLINE symbol arg_list_start expr_list %prec prec_fn
-        { SynExpr.FunctionDef($3, true, $4, $5, (lhs parseState)) }
+        { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, $5, (lhs parseState)) }
+    | FN REC INLINE symbol arg_list_start expr_list %prec prec_fn
+        { SynExpr.FunctionDef($4, FunctionFlags.Recursive ||| FunctionFlags.Inline, $5, $6, (lhs parseState)) }
+    | FN REC symbol arg_list_start expr_list %prec prec_fn
+        { SynExpr.FunctionDef($3, FunctionFlags.Recursive, $4, $5, (lhs parseState)) }
     | FN arg_list_start expr_list %prec prec_lambda_def
         { SynExpr.LambdaDef(SynLambda($2, $3, (lhs parseState))) }
     | FNSTAR arg_list_start expr_list
@@ -697,15 +742,15 @@ invalid_function_def:
         { SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) }
     // TODO: Report
     | FN symbol %prec prec_invalid_fn
-        { SynExpr.FunctionDef($2, false, [], [], lhs parseState) }
+        { SynExpr.FunctionDef($2, FunctionFlags.None, [], [], lhs parseState) }
     // TODO: Report
     | FN arg_list_start %prec prec_invalid_fn
         { SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) }
     // TODO: Report
     | FN symbol arg_list_start %prec prec_invalid_fn
-        { SynExpr.FunctionDef($2, false, $3, [], (lhs parseState)) }
+        { SynExpr.FunctionDef($2, FunctionFlags.None, $3, [], (lhs parseState)) }
     | FN INLINE symbol arg_list_start %prec prec_invalid_fn
-        { SynExpr.FunctionDef($3, true, $4, [], (lhs parseState)) }
+        { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, [], (lhs parseState)) }
 
 macro_def:
     | MACRO symbol arg_list_start expr_list

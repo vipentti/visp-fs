@@ -149,13 +149,17 @@ let keywordTokenList =
       ("override", OVERRIDE)
       ("quasiquote", QUASIQUOTE_KW)
       ("quote", QUOTE_KW)
+      ("rec", REC)
+      ("require", REQUIRE)
       ("set!", SET)
+      ("seq", SEQ)
       ("splice-unquote", SPLICE_UNQUOTE_KW)
       ("syntax-macro", SYNTAX_MACRO)
       ("type", TYPE)
       ("unquote", UNQUOTE_KW)
       ("when", WHEN)
-      ("while", WHILE) ]
+      ("while", WHILE)
+      ("yield", YIELD) ]
 
 let keywordToTokenMap = keywordTokenList |> Map.ofList
 

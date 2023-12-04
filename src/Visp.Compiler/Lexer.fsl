@@ -106,6 +106,8 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   | "..." { SYMBOL (lexeme lexbuf) }
 
+  | "#nowarn" { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
+
   | '+' anyspace+   { OP_PLUS }
   | '-' anyspace+   { OP_MINUS }
   | '.' anyspace+ { DOT }
@@ -176,6 +178,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | newline    { newline lexbuf; tokenStream args skip lexbuf }
   | ";" [^'\n''\r']* { tokenStream args skip lexbuf  }
   | eof        { EOF }
+
+  | "#line" { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
 
   // punct
   | '('           { LPAREN }
