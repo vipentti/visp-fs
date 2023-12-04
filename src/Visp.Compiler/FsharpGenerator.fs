@@ -21,9 +21,11 @@ let tempDirPath name =
     Path.Combine(src_dir, "..", "..", ".tmp", name) |> Path.GetFullPath
 
 let coreLibPath name =
-    let src_dir = __SOURCE_DIRECTORY__
-
-    Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
+    match Environment.GetEnvironmentVariable("VISP_FS_LIB_PATH") with
+    | null ->
+        let src_dir = __SOURCE_DIRECTORY__
+        Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
+    | path -> Path.Combine(path, name) |> Path.GetFullPath
 
 let runtimeLibPath =
     let src_dir = __SOURCE_DIRECTORY__
