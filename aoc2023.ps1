@@ -1,6 +1,7 @@
 
 [CmdletBinding()]
 param (
+    [switch] $Release,
     [switch] $Full,
     [switch] $NoBuild,
     [ValidateSet("day1", "day2", "day3", "day4", "day5", "day6", "day7", "day8", "day9")]
@@ -19,6 +20,9 @@ $cliArgs = @(
 )
 if ($Full) {
     $cliArgs += "full"
+}
+if ($Release) {
+    $cliArgs += "--release"
 }
 
 ExecSafe {
