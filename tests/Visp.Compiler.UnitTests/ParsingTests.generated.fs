@@ -186,6 +186,11 @@ module ``tests_if_if-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/if/if-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_struct-macro-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/macros/struct-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_syntax-macro-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/macros/syntax-macro-0.visp"

@@ -211,9 +211,7 @@ vector_start:
         { SynExpr.Vector($2, lhs parseState) }
 
 inside_parens:
-    | LPAREN RPAREN {
-        SynExpr.Const (SynConst.Unit, lhs parseState)
-    }
+    | LPAREN RPAREN { SynExpr.Const (SynConst.Unit, lhs parseState) }
     | LPAREN parens_expr_start RPAREN { $2 }
     | LPAREN parens_expr_start EOF %prec prec_recover { $2 }
     // TODO: handle this better?
@@ -355,12 +353,14 @@ rev_macro_body_list:
 
 macro_body:
     | constant { SynMacroBody.Const(fst $1, snd $1) }
-    | LPAREN macro_body_list RPAREN { SynMacroBody.List($2, lhs parseState) }
-    | LBRACKET macro_body_list RBRACKET { SynMacroBody.Vector($2, lhs parseState) }
-    | LBRACE macro_body_list RBRACE { SynMacroBody.HashMap($2, lhs parseState) }
-    | HASH_BRACE macro_body_list RBRACE { SynMacroBody.HashSet($2, lhs parseState) }
-    | DOT { SynMacroBody.Dot(lhs parseState) }
-    | COMMA { SynMacroBody.Comma(lhs parseState) }
+    | LPAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.List, $2, lhs parseState) }
+    | LBRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.Vector, $2, lhs parseState) }
+    | LBRACE macro_body_list RBRACE { SynMacroBody.List(SynListKind.HashMap, $2, lhs parseState) }
+    | HASH_BRACE macro_body_list RBRACE { SynMacroBody.List(SynListKind.HashSet, $2, lhs parseState) }
+    | HASH_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.AttributeList, $2, lhs parseState) }
+    | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
+    | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
+    | COLON { SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
     | keyword { SynMacroBody.Keyword($1) }
     | symbol {
         let text = $1
@@ -790,11 +790,8 @@ macro_def:
     | MACRO symbol arg_list_start expr_list
         { SynExpr.MacroDef($2, $3, $4, (lhs parseState)) }
 
-empty_arg_list:
-    | LPAREN RPAREN { [] }
-    | LBRACKET RBRACKET { [] }
-
 arg_list_start:
+    | UNIT { [] }
     | LPAREN RPAREN { [] }
     | LBRACKET RBRACKET { [] }
     | lparen_or_lbracket arg_list rparen_or_rbracket { $2 }

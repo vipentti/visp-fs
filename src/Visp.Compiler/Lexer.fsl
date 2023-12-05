@@ -115,12 +115,12 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '+' propShort { PROP_PLUS (lexeme lexbuf) }
   | "#(" { HASH_PAREN }
   | "#[" { HASH_BRACKET }
+  | "#{" { HASH_BRACE }
   | ".." { DOTDOT }
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }
   | ".+" { DOT_PLUS }
   | '.' letter+ { DOT_METHOD (lexeme lexbuf) }
-  | "#{" { HASH_BRACE }
   | '@' { AT }
   | "#\\" charWords { CHAR (lexeme lexbuf) }
   | "#\\u" unicodeChars { CHAR (lexeme lexbuf) }
@@ -193,6 +193,9 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '.' anyspace+ { DOT }
+  | "#("          { HASH_PAREN }
+  | "#["          { HASH_BRACKET }
+  | "#{"          { HASH_BRACE }
 
   | "..." { SYMBOL (lexeme lexbuf) }
 
