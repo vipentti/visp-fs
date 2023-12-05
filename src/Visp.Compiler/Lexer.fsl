@@ -201,6 +201,12 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
 
   | "..." { SYMBOL (lexeme lexbuf) }
 
+  // operators
+  | '-' anyspace+   { SYMBOL "-" }
+  | '*' anyspace+   { SYMBOL "*" }
+  | '+' anyspace+   { SYMBOL "+" }
+  | '/' anyspace+   { SYMBOL "/" }
+
   // Constants
   | "#()"      { UNIT }
   | "()"       { UNIT }
