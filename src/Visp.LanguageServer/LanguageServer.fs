@@ -257,7 +257,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             |> List.map SymbolDetails.Parameter
         )
 
-    | SynExpr.Type(name, _, members, _) ->
+    | SynExpr.Type(name, _, members, _, _) ->
         syms.Add(
             SymbolDetails.Type(
                 Syntax.textOfSymbol name,
