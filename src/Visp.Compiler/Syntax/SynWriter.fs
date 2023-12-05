@@ -883,9 +883,12 @@ module Write =
                         ()
                     | _ -> writeExpr w WriteState.Inline item
 
-        | SynExpr.Type(name, args, members, range) ->
-            startExpr w st range
+        | SynExpr.Type(name, args, members, attributes, range) ->
+            if not attributes.IsEmpty then
+                writeAttributes w st attributes
+                newline w
 
+            startExpr w st range
             fmtprintf w "type %s" (Syntax.textOfSymbol name)
 
             if args.IsEmpty then
@@ -897,6 +900,22 @@ module Write =
 
             string w " ="
             writeBody w writeMember members
+
+    and private writeAttributes w _ (attributes: SynAttributes) =
+        string w "[<"
+
+        let mutable f = true
+
+        for attr in attributes do
+            for attr in attr.Attributes do
+                if f then f <- false else string w "; "
+
+                writeType w <| attr.TypeName
+                writeExpr w WriteState.InlineNoParens attr.ArgExpr
+                ()
+
+        string w ">]"
+        ()
 
     and private writeName w st (name: SynName) =
         match name with

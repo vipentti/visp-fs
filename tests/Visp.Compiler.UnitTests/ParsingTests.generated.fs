@@ -16,6 +16,11 @@ module ``tests_atom_atom-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/atom/atom-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_attributes_attributes-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/attributes/attributes-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_builtin-macros_cond-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/builtin-macros/cond-0.visp"

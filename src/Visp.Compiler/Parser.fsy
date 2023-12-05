@@ -23,7 +23,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token EOF
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
-%token LBRACE RBRACE HASH_BRACE HASH_PAREN
+%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET
 %token TRUE FALSE NIL COLON COMMA UNIT
 %token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
 %token BANG_RANGE FOR_IN BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
@@ -60,6 +60,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc LPAREN HASH_PAREN
 %nonassoc LBRACKET
 %nonassoc LBRACE HASH_BRACE
+%nonassoc HASH_BRACKET
 %nonassoc RPAREN
 %nonassoc RBRACKET
 %nonassoc RBRACE
@@ -68,6 +69,9 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %nonassoc OPEN MODULE
 %nonassoc prec_constant
+
+%nonassoc prec_attribute
+%nonassoc COMMA
 
 %nonassoc prec_at_expr
 %nonassoc prec_expr
@@ -593,7 +597,30 @@ letstar:
 
 type_expr:
     | TYPE symbol name_list_start member_list_start
-        { SynExpr.Type($2, $3, $4, lhs parseState) }
+        { SynExpr.Type($2, $3, $4, [], lhs parseState) }
+    | attribute_list TYPE symbol name_list_start member_list_start
+        { SynExpr.Type($3, $4, $5, $1, lhs parseState) }
+
+attribute_list: rev_attribute_list { List.rev $1 }
+rev_attribute_list:
+    | attr_list { [$1] }
+    | rev_attribute_list attr_list { $2 :: $1 }
+
+attr_list:
+    | HASH_BRACKET attributes RBRACKET
+        { { Attributes = $2; Range = (lhs parseState) } }
+
+attributes: rev_attributes { List.rev $1 }
+rev_attributes:
+    | attribute { [$1] }
+    | rev_attributes COMMA attribute %prec prec_attribute { $3 :: $1 }
+    | rev_attributes DOT attribute { $3 :: $1 }
+
+attribute:
+    | syntype_ident expr
+        { { TypeName = $1; ArgExpr = $2; Range = lhs parseState } }
+    | syntype_ident
+        { { TypeName = $1; ArgExpr = Syntax.UnitExpr <| lhs parseState; Range = lhs parseState } }
 
 member_list_start:
     | { [] }

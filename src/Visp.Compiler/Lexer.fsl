@@ -114,6 +114,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '.' anyspace+ { DOT }
   | '+' propShort { PROP_PLUS (lexeme lexbuf) }
   | "#(" { HASH_PAREN }
+  | "#[" { HASH_BRACKET }
   | ".." { DOTDOT }
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }

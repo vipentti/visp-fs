@@ -1,0 +1,24 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+[<Struct(); NoEquality(); NoComparison()>]
+// line 8 @"attributes-0.visp"
+type TestStruct (value: int) =
+  // line 10 @"attributes-0.visp"
+  member _.Value =
+        value
+// line 13 @"attributes-0.visp"
+let xx =
+  // line 13 @"attributes-0.visp"
+  (new TestStruct(99))
+// line 15 @"attributes-0.visp"
+printfn ("Value is %i") ((xx.Value))
+// line 17 @"attributes-0.visp"
+let visp_result_todo = ()
+// line 17 @"attributes-0.visp"
+printfn ("%A") (visp_result_todo)
+
