@@ -145,6 +145,8 @@ type Value =
 
     static member atom(it: Value) = Atom(new Atom(it))
 
+    static member bool(it: bool) = Bool it
+
     static member keyword(it: string) = Keyword it
 
     static member symbol(it: string) = Symbol it

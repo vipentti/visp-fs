@@ -9,12 +9,12 @@ let state = { Todo = () }
 #nowarn "0026"
 // line 12 @"syntax-macro-0.visp"
 let macro_matchfnexample = "__MACRO_INIT__"
-// line 0 @""
+// line 21 @"syntax-macro-0.visp"
 let name arg =
-  // line 0 @""
+  // line 21 @"syntax-macro-0.visp"
   match arg with
     | (a, b) ->
-      // line 0 @""
+      // line 21 @"syntax-macro-0.visp"
       CoreMethods.``add``(a, b)
     | _ ->
       0

@@ -9,6 +9,7 @@ open FSharp.Text.Lexing
 open Visp.Compiler
 open Visp.Compiler.SyntaxParser
 open Visp.Compiler.LexHelpers
+open Visp.Compiler.Syntax.Macros
 
 
 module CoreParser =
@@ -63,10 +64,7 @@ let state = { Todo = () }
         | _ -> ()
 
     let private mkTokenizer () =
-        // Lexer.token (LexHelpers.mkDefaultLextArgs ()) false buf
-        let args = mkDefaultLextArgs ()
-
-        let tokens buf =
+        let tokens args buf =
             let next =
                 match args.mode with
                 | LexMode.Default -> Lexer.token args false buf
@@ -79,7 +77,11 @@ let state = { Todo = () }
             | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
                 args.Nested <| LexMode.TokenStream TokenStreamMode.Quote
             | QUASIQUOTE_KW -> args.Nested <| LexMode.TokenStream TokenStreamMode.Quasiquote
-            | SYNTAX_MACRO -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
+            | SYNTAX_MACRO -> args.Nested <| LexMode.TokenStream TokenStreamMode.SyntaxMacroStart
+            | SYMBOL s when args.mode.IsSyntaxMacroStart ->
+                args.mode <- LexMode.TokenStream TokenStreamMode.Macro
+                macroTable.AddMacroName s
+                ()
             | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
             | LPAREN
             | LBRACE
@@ -92,7 +94,7 @@ let state = { Todo = () }
 
             next
 
-        tokens
+        tokens <| mkDefaultLextArgs ()
 
     let parseFile filePath returnLast =
         let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)

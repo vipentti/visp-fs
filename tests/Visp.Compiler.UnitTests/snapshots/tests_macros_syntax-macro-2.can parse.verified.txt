@@ -1,0 +1,37 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"syntax-macro-2.visp"
+#nowarn "0026"
+// line 11 @"syntax-macro-2.visp"
+let ``macro_custom-match-fn`` = "__MACRO_INIT__"
+// line 28 @"syntax-macro-2.visp"
+let lambda =
+  // line 28 @"syntax-macro-2.visp"
+  (fun arg ->
+    // line 28 @"syntax-macro-2.visp"
+    match arg with
+      | (a, b) ->
+        // line 28 @"syntax-macro-2.visp"
+        CoreMethods.``add``(a, b))
+// line 29 @"syntax-macro-2.visp"
+let named arg =
+  // line 29 @"syntax-macro-2.visp"
+  match arg with
+    | (a, b) ->
+      // line 29 @"syntax-macro-2.visp"
+      CoreMethods.``add``(a, b)
+
+// line 32 @"syntax-macro-2.visp"
+printfn ("lambda: %i") (lambda ((1, 2)))
+// line 33 @"syntax-macro-2.visp"
+let visp_result_todo =
+  // line 33 @"syntax-macro-2.visp"
+  printfn ("named: %i") (named ((1, 2)))
+// line 33 @"syntax-macro-2.visp"
+printfn ("%A") (visp_result_todo)
+
