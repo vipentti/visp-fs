@@ -133,9 +133,11 @@ type SymbolDetails =
     | Member of text: string * fn: bool * range: Range
     | Parameter of text: string * range: Range
     | Symbol of text: string * range: Range
+    | SyntaxMacro of text: string * range: Range
 
     member this.Text =
         match this with
+        | SyntaxMacro(text = it)
         | FsharpMethod(text = it)
         | Function(text = it)
         | Interop(text = it)
@@ -148,6 +150,7 @@ type SymbolDetails =
 
     member this.Range =
         match this with
+        | SyntaxMacro(range = it)
         | FsharpMethod(range = it)
         | Function(range = it)
         | Interop(range = it)
@@ -161,6 +164,7 @@ type SymbolDetails =
         match this with
         | FsharpMethod _ -> SymbolKind.Null
         | Function _ -> SymbolKind.Function
+        | SyntaxMacro _ -> SymbolKind.Function
         | Interop _ -> SymbolKind.Operator
         | Symbol _ -> SymbolKind.Method
         | Variable _ -> SymbolKind.Variable
@@ -176,6 +180,7 @@ type SymbolDetails =
         | Symbol _ -> CompletionItemKind.Method
         | Variable _ -> CompletionItemKind.Variable
         | Parameter _ -> CompletionItemKind.Field
+        | SyntaxMacro _ -> CompletionItemKind.Macro
         | Type _ -> CompletionItemKind.Class
         | Member(fn = fn) ->
             if fn then
@@ -193,6 +198,7 @@ type SymbolDetails =
         | Member _ -> "44444"
         | Parameter _ -> "44444"
         | Symbol _ -> "44444"
+        | SyntaxMacro _ -> "44444"
 
     member this.SortText = this.SortPrefix + this.Text
 
@@ -209,6 +215,7 @@ type SymbolDetails =
     member this.Detail =
         match this with
         | FsharpMethod(_, sg, _) -> sg
+        | SyntaxMacro _ -> "syntax-macro"
         | Interop _ -> "F# interop"
         | Symbol _ -> "symbol"
         | Function _ -> "function"
@@ -233,6 +240,10 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
     | SynExpr.FunctionCall(SynExpr.Symbol sym, _, _) ->
         let r = Syntax.rangeOfSymbol sym
         syms.Add(SymbolDetails.Symbol(Syntax.textOfSymbol sym, textRangeToSyntaxRange r))
+    | SynExpr.SyntaxMacro(SynMacro(Patterns.Text text, _, range)) ->
+        syms.Add(SymbolDetails.SyntaxMacro(text, textRangeToSyntaxRange range))
+        ()
+
     | SynExpr.FunctionDef(name, _, args, _, _) ->
 
         let r = Syntax.rangeOfSymbol name
