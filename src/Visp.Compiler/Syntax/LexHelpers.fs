@@ -173,10 +173,29 @@ let keywordToTokenMap = keywordTokenList |> Map.ofList
 
 let tryGetKeyword w = keywordToTokenMap.TryFind w
 
+let alwaysSymbol (s: string) = SYMBOL(s)
+
+let isLetter (ch: char) = System.Char.IsLetter(ch)
+
+let specialSymbol (s: string) =
+    match s with
+    | "." -> Some(DOT)
+    | ".." -> Some(DOTDOT)
+    | ".+" -> Some(DOT_PLUS)
+    // TODO: Better conditions?
+    | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(PROP_PLUS s)
+    | it when it.Length > 1 && it[0] = '.' && isLetter it[1] -> Some(DOT_METHOD s)
+    | _ -> None
+
 let symbolOrKeyword (s: string) =
     match tryGetKeyword s with
     | Some(tok) -> tok
     | None ->
-        if macroTable.IsMacro(s) then MACRO_NAME(s)
-        else if s.EndsWith("!!") then MACRO_NAME(s.TrimEnd('!'))
-        else SYMBOL(s)
+        if macroTable.IsMacro(s) then
+            MACRO_NAME(s)
+        else if s.EndsWith("!!") then
+            MACRO_NAME(s.TrimEnd('!'))
+        else
+            match specialSymbol s with
+            | Some(it) -> it
+            | None -> SYMBOL s

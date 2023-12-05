@@ -1,0 +1,26 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type Counter ()
+  (mut count 0)
+  (member fn _.DoStuff ()
+    (if (> count 6)
+      None
+      (do
+        (set! count (inc count))
+        (Some count)
+      )
+    )))
+
+(let counter (new Counter))
+
+(while-match (.DoStuff counter)
+  [None false]
+  [(Some c)
+    (printfn "Count is: %i" c)
+    (let _ (.DoStuff counter))
+    true])

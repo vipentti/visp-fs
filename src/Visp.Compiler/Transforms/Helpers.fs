@@ -129,6 +129,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 function
                 | SynTypeMember.Let(name, expr, range) ->
                     SynTypeMember.Let(name, bound_transform expr, range)
+                | SynTypeMember.Mut(name, expr, range) ->
+                    SynTypeMember.Mut(name, bound_transform expr, range)
                 | SynTypeMember.Member(name, expr, range) ->
                     SynTypeMember.Member(name, bound_transform expr, range)
                 | SynTypeMember.MemberFn(name, args, expr, range) ->

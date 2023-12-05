@@ -610,6 +610,8 @@ member:
 member_in_parens:
     | LET name expr
         { SynTypeMember.Let($2, $3, lhs parseState) }
+    | MUT name expr
+        { SynTypeMember.Mut($2, $3, lhs parseState) }
     | MEMBER symbol expr
         { SynTypeMember.Member($2, $3, lhs parseState) }
     | MEMBERFN symbol arg_list_start expr_list

@@ -277,6 +277,7 @@ and [<RequireQualifiedAccess>] SynMatchPattern =
 
 and [<RequireQualifiedAccess>] SynTypeMember =
     | Let of name: SynName * value: SynExpr * range: range
+    | Mut of name: SynName * value: SynExpr * range: range
     | Member of name: SynSymbol * value: SynExpr * range: range
     | MemberFn of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
     | OverrideMember of name: SynSymbol * value: SynExpr * range: range
@@ -517,6 +518,13 @@ module Patterns =
         match it with
         | SynExpr.Symbol(SynSymbol(id)) -> id.idText
         | _ -> ""
+
+    let (|SymbolText|) (it: SynExpr) =
+        match it with
+        | SynExpr.Symbol(sym) -> Some(sym.Text)
+        | _ -> None
+
+    let (|Text|) (it: SynSymbol) = it.Text
 
 
 module Keywords =
