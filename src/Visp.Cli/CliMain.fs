@@ -14,12 +14,17 @@ let main args =
     let filePath = fs.Path.GetFullPath args.[0]
     let cwd = fs.Path.GetDirectoryName filePath
 
-    let mutable files = [ VispFile.Main filePath ]
+    let coreLibs = [ VispFile.CoreLib "core-macros.visp"; VispFile.CoreLib "core.visp" ]
+
+    let mainFile = [ VispFile.Main filePath ]
 
     let knownArguments = [ "--no-lib"; "--release"; "--package" ] |> Set.ofList
 
-    if not (Array.contains "--no-lib" args) then
-        files <- VispFile.CoreLib "core.visp" :: files
+    let files =
+        if (Array.contains "--no-lib" args) then
+            mainFile
+        else
+            coreLibs @ mainFile
 
     let release =
         if Array.contains "--release" args then
