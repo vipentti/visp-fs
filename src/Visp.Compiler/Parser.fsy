@@ -71,7 +71,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_constant
 
 %nonassoc prec_attribute
-%nonassoc COMMA
+%nonassoc prec_syn_type
 
 %nonassoc prec_at_expr
 %nonassoc prec_expr
@@ -109,6 +109,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %nonassoc prec_error
 %nonassoc EOF
+%nonassoc COMMA
 
 %type <ParsedFile> start
 %type <SynExpr> raw_expr
@@ -727,7 +728,7 @@ syntype_ident:
         { let text = $1
           SynType.Ident(Ident(text, lhs parseState))
         }
-    | SYMBOL COMMA SYMBOL
+    | SYMBOL COMMA SYMBOL %prec prec_syn_type
         { let text1 = $1
           let text2 = $3
           SynType.Ident(Ident(text1 + "," + text2, lhs parseState))
