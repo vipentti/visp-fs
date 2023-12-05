@@ -36,9 +36,7 @@ let CreateAndRunProject filePath =
         )
 
     let files =
-        [ VispFile.CoreLib "core-macros.visp"
-          VispFile.CoreLib "core.visp"
-          VispFile.Main filePath ]
+        CoreLibs @ [ VispFile.Main filePath ]
 
     let generator = new FsharpGenerator(new FileSystem(), projectPath)
 
