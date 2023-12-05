@@ -8,21 +8,18 @@ namespace Visp.Common;
 
 public static class PooledDictionary
 {
-    public static void ReturnToPool<K, V>(this Dictionary<K, V> it) where K : notnull
-        => PooledDictionary<K, V>.Return(it);
+    public static void ReturnToPool<K, V>(this Dictionary<K, V> it)
+        where K : notnull => PooledDictionary<K, V>.Return(it);
 
-    public static Dictionary<K, V> Get<K, V>() where K : notnull
-        => PooledDictionary<K, V>.Get();
+    public static Dictionary<K, V> Get<K, V>()
+        where K : notnull => PooledDictionary<K, V>.Get();
 
-    public static PooledDisposer<Dictionary<K, V>> GetPooled<K, V>() where K : notnull
-        => new(
-            PooledDictionary<K, V>.Get(),
-            ReturnToPool
-        );
+    public static PooledDisposer<Dictionary<K, V>> GetPooled<K, V>()
+        where K : notnull => new(PooledDictionary<K, V>.Get(), ReturnToPool);
 }
 
 public static class PooledDictionary<K, V>
-    where K: notnull
+    where K : notnull
 {
     internal class PooledDictionaryPolicy : PooledObjectPolicy<Dictionary<K, V>>
     {
@@ -44,7 +41,9 @@ public static class PooledDictionary<K, V>
         }
     }
 
-    private static readonly ObjectPool<Dictionary<K, V>> s_pool = new DefaultObjectPool<Dictionary<K, V>>(new PooledDictionaryPolicy());
+    private static readonly ObjectPool<Dictionary<K, V>> s_pool = new DefaultObjectPool<
+        Dictionary<K, V>
+    >(new PooledDictionaryPolicy());
 
     public static Dictionary<K, V> Get() => s_pool.Get();
 
