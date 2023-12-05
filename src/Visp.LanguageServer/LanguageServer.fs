@@ -216,6 +216,9 @@ type SymbolDetails =
     member this.Label =
         match this with
         | Interop(it, _) -> it.TrimStart('!')
+        | Member(text = text) ->
+            let i = text.IndexOf('.')
+            if i >= 0 then text.Substring(i + 1) else text
         | _ -> this.Text
 
     member this.InsertText =
@@ -311,7 +314,24 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
                             Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
                         ))
                     )
-                | _ -> None)
+                | SynTypeMember.Let(name = name) ->
+                    Some(
+                        SymbolDetails.Variable(
+                            Syntax.textOfName name,
+                            false,
+                            Syntax.rangeOfName name |> textRangeToSyntaxRange
+                        )
+                    )
+                | SynTypeMember.Mut(name = name) ->
+                    Some(
+                        SymbolDetails.Variable(
+                            Syntax.textOfName name,
+                            true,
+                            Syntax.rangeOfName name |> textRangeToSyntaxRange
+                        )
+                    )
+
+            )
         )
 
     | SynExpr.SimpleMut(name, _, _) ->
@@ -591,7 +611,7 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                 i <- i + 1
                 i
 
-            let libSymbols = this.GetLibSymbolDetails ()
+            let libSymbols = this.GetLibSymbolDetails()
 
             let mutable symbols =
                 Array.concat [| textDoc.Symbols; libSymbols |]
@@ -616,6 +636,17 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                     symbols <- Array.concat [| found; symbols |]
                     ()
 
+                let searchMembers =
+                    wordAtCursor.Length > 1
+                    && (wordAtCursor[0] = '.' || wordAtCursor[0] = '+' || wordAtCursor[0] = '-')
+                    && System.Char.IsLetter(wordAtCursor[1])
+
+                let memberSearch =
+                    if searchMembers then
+                        wordAtCursor.Substring(1)
+                    else
+                        wordAtCursor
+
                 symbols
                 |> Array.distinctBy completionItemFilterText
                 |> Array.choose (fun it ->
@@ -624,7 +655,12 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                     if it.InsertText <> null then
                         temp <- it.InsertText.Contains(withoutExlamation, StringComparison.Ordinal)
 
-                    if temp || it.Label.Contains(wordAtCursor, StringComparison.Ordinal) then
+                    if
+                        temp
+                        || it.Label.Contains(wordAtCursor, StringComparison.Ordinal)
+                        || (searchMembers
+                            && it.Label.EndsWith(memberSearch, StringComparison.Ordinal))
+                    then
                         let text =
                             match it.InsertText with
                             | null -> it.Label
