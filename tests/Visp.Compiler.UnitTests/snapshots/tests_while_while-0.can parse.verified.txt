@@ -21,9 +21,9 @@ let count =
 let visp_result_todo =
   // line 15 @"while-0.visp"
   while CoreMethods.isTruthy(CoreMethods.``lt``(unwrapInt (deref (count)), 5L)) do
-        // line 16 @"while-0.visp"
+    // line 16 @"while-0.visp"
     printfn ("in loop %O") (deref (count))
-        // line 17 @"while-0.visp"
+    // line 17 @"while-0.visp"
     CoreMethods.``swap!``(Value.from(count), inc)
 // line 15 @"while-0.visp"
 printfn ("%A") (visp_result_todo)

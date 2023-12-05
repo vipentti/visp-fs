@@ -23,3 +23,16 @@
       ))
   ]
 )
+
+(syntax-macro while-match
+  [(_ cnt body ...)
+    (do
+       (mut notdone true)
+       (while notdone
+        (set! notdone
+          (match cnt
+            body ...
+          )))
+       ())
+  ]
+)
