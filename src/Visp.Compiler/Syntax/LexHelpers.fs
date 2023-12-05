@@ -96,6 +96,8 @@ type LexArgs =
 
 let mkDefaultLextArgs () = { mode = LexMode.Default; depth = 0 }
 
+let mkTokenStreamArgs () = { mode = LexMode.TokenStream (TokenStreamMode.Macro); depth = 0 }
+
 type StringBuffer = Text.StringBuilder
 
 [<Flags>]
@@ -185,6 +187,7 @@ let specialSymbol (s: string) =
     // TODO: Better conditions?
     | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(PROP_PLUS s)
     | it when it.Length > 1 && it[0] = '.' && isLetter it[1] -> Some(DOT_METHOD s)
+    | it when it.Length > 1 && it[0] = '-' && isLetter it[1] -> Some(APPLY_METHOD s)
     | _ -> None
 
 let symbolOrKeyword (s: string) =

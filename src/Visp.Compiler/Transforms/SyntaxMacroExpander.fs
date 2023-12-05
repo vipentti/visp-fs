@@ -91,10 +91,12 @@ let openToken =
     | SynListKind.HashMap -> LBRACE
     | SynListKind.HashSet -> HASH_BRACE
     | SynListKind.AttributeList -> HASH_BRACKET
+    | SynListKind.HashParen -> HASH_PAREN
 
 let closeToken =
     function
     | SynListKind.List -> RPAREN
+    | SynListKind.HashParen -> RPAREN
     | SynListKind.Vector -> RBRACKET
     | SynListKind.HashMap -> RBRACE
     | SynListKind.HashSet -> RBRACE
@@ -189,6 +191,8 @@ let private evaluatePatterns
             EOF
 
     // printfn "tokens %A" res
+    // for tok in res do
+    //     printf "%A " tok
 
     try
         let result = raw_expr getTokens lexbuf

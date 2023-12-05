@@ -63,7 +63,7 @@ let state = { Todo = () }
             eprintfn "Message: %A" ctx.Message
         | _ -> ()
 
-    let private mkTokenizer () =
+    let private mkTokenizerWithArgs args =
         let tokens args buf =
             let next =
                 match args.mode with
@@ -83,6 +83,8 @@ let state = { Todo = () }
                 macroTable.AddMacroName s
                 ()
             | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
+            | HASH_PAREN
+            | HASH_BRACKET
             | LPAREN
             | LBRACE
             | LBRACKET
@@ -94,7 +96,10 @@ let state = { Todo = () }
 
             next
 
-        tokens <| mkDefaultLextArgs ()
+        tokens args
+
+    let private mkTokenizer () =
+        mkTokenizerWithArgs <| mkDefaultLextArgs ()
 
     let parseFile filePath returnLast =
         let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
@@ -123,19 +128,11 @@ let state = { Todo = () }
 
             reraise ()
 
-    let getTokenizer str fileName =
-        let lexbuf = LexBuffer<_>.FromString str
-        lexbuf.EndPos <- Position.FirstLine fileName
-
-        let tokenizer = mkTokenizer ()
-
-        (fun () -> tokenizer lexbuf)
-
     let getTokens str fileName =
         let lexbuf = LexBuffer<_>.FromString str
         lexbuf.EndPos <- Position.FirstLine fileName
 
-        let tokenizer = mkTokenizer ()
+        let tokenizer = mkTokenizerWithArgs <| mkTokenStreamArgs ()
 
         seq {
             while not lexbuf.IsPastEndOfStream do

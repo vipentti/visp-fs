@@ -268,6 +268,7 @@ and [<RequireQualifiedAccess>] SynListKind =
     | Vector
     | HashMap
     | HashSet
+    | HashParen
     | AttributeList
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =

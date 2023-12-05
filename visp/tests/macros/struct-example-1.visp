@@ -1,0 +1,51 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(struct Range ([start: int64] [len: int64])
+  (member _.Start start)
+  (member _.Len len)
+  (member _.End (+ start len))
+
+  (member fn d.Offset (v)
+    (- v (+Start d)))
+
+  (member fn d.Contains (v)
+    (and
+      (>= v (+Start d))
+      (< v (+End d)))
+  )
+
+  (override fn t.ToString ()
+    (sprintf "Range(%i, %i)" (+Start t) (+Len t)))
+)
+
+(printfn "Range is: %A" (new Range 0 5))
+(printfn "Range end is: %A" (->> (new Range 0 5) +End))
+
+(struct SourceDestMap ([dest: int64] [src: int64] [len: int64])
+  (member _.Dest (new Range dest len))
+  (member _.Src (new Range src len))
+  (member _.Len len)
+
+  (member fn d.Contains (v)
+    (->> d +Src
+      #(-Contains %1 v)
+    ))
+
+  (member fn d.Get (src)
+    (cond
+      (-Contains (+Src d) src)
+        (+ (->> d +Dest +Start) (-Offset (+Src d) src))
+      :else
+        src
+    ))
+
+  (override fn t.ToString ()
+    (sprintf "(%A, %A, %i)" (+Dest t) (+Src t) (+Len t)))
+)
+
+()
