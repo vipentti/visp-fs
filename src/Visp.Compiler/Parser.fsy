@@ -24,7 +24,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
 %token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET
-%token TRUE FALSE NIL COLON COMMA UNIT
+%token TRUE FALSE NIL COLON COMMA UNIT BAR
 %token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
 %token BANG_RANGE FOR_IN BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
@@ -42,7 +42,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token <string> MACRO_NAME
 %token <string> CHAR
 %token <string * SynStringKind * ParseHelpers.LexerContinuation> STRING
-%token <string> SYMBOL KEYWORD RAWSTRING DOT_METHOD
+%token <string> SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD
 
 // %left TRUE FALSE
 // %left LPAREN LBRACKET
@@ -70,14 +70,18 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc OPEN MODULE
 %nonassoc prec_constant
 
-%nonassoc prec_attribute
-%nonassoc prec_syn_type
-
 %nonassoc prec_at_expr
 %nonassoc prec_expr
 
-%nonassoc TRUE FALSE NIL INT32 INT64 DECIMAL SYMBOL KEYWORD RAWSTRING DOT_METHOD STRING UNIT CHAR
+%nonassoc TRUE FALSE NIL INT32 INT64 DECIMAL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
 %nonassoc HASH_IDENT
+
+// %left COMMA
+// %right COMMA
+%nonassoc prec_syn_type
+%nonassoc prec_attribute
+
+%nonassoc prec_attribute_comma
 
 %nonassoc prec_dot_no_paren
 %nonassoc prec_paren
@@ -109,7 +113,6 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %nonassoc prec_error
 %nonassoc EOF
-%nonassoc COMMA
 
 %type <ParsedFile> start
 %type <SynExpr> raw_expr
@@ -362,6 +365,7 @@ macro_body:
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
     | COLON { SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
+    | BAR { SynMacroBody.Trivia(SynMacroTriviaKind.Bar, lhs parseState) }
     | keyword { SynMacroBody.Keyword($1) }
     | symbol {
         let text = $1
@@ -404,7 +408,9 @@ threadable:
     | prop_plus
         { SynThreadable.Property($1, lhs parseState) }
     | dot_method
-        { SynThreadable.Method($1, lhs parseState) }
+        { SynThreadable.Method($1, DotMethodKind.Tuple, lhs parseState) }
+    | apply_method
+        { SynThreadable.Method($1, DotMethodKind.Apply, lhs parseState) }
     | DOT_BRACKET expr RBRACKET
         { SynThreadable.Index($2, lhs parseState) }
     | expr
@@ -425,23 +431,27 @@ dot_expr:
     | prop_plus expr
         { SynExpr.DotProperty($2, $1, lhs parseState)}
     | dot_method expr expr_list
-        { SynExpr.DotMethod($2, $1, $3, lhs parseState) }
+        { SynExpr.DotMethod($2, $1, $3, DotMethodKind.Tuple, lhs parseState) }
     | dot_method expr
-        { SynExpr.DotMethod($2, $1, [], lhs parseState) }
+        { SynExpr.DotMethod($2, $1, [], DotMethodKind.Tuple, lhs parseState) }
+    | apply_method expr expr_list
+        { SynExpr.DotMethod($2, $1, $3, DotMethodKind.Apply, lhs parseState) }
+    | apply_method expr
+        { SynExpr.DotMethod($2, $1, [], DotMethodKind.Apply, lhs parseState) }
     | DOT expr symbol
         {
           let text = Syntax.textOfSymbol $3
           if text.StartsWith('+') then
             SynExpr.DotProperty($2, ($3).trimStart '+', lhs parseState)
           else
-            SynExpr.DotMethod($2, $3, [], lhs parseState) }
+            SynExpr.DotMethod($2, $3, [], DotMethodKind.Tuple, lhs parseState) }
     | DOT expr prop_plus
         { SynExpr.DotProperty($2, $3, lhs parseState) }
 
     | DOT expr DOT_BRACKET expr RBRACKET
         { SynExpr.DotIndex($2, $4, lhs parseState) }
     | DOT expr symbol expr_list
-        { SynExpr.DotMethod($2, $3, $4, lhs parseState) }
+        { SynExpr.DotMethod($2, $3, $4, DotMethodKind.Tuple, lhs parseState) }
 
 lparen_or_lbracket:
     | LPAREN { () }
@@ -613,8 +623,8 @@ attr_list:
 
 attributes: rev_attributes { List.rev $1 }
 rev_attributes:
-    | attribute { [$1] }
-    | rev_attributes COMMA attribute %prec prec_attribute { $3 :: $1 }
+    | attribute %prec prec_attribute { [$1] }
+    | rev_attributes BAR attribute %prec prec_attribute_comma { $3 :: $1 }
     | rev_attributes DOT attribute { $3 :: $1 }
 
 attribute:
@@ -717,26 +727,57 @@ dot_method:
           SynSymbol(Ident(text.TrimStart '.', lhs parseState))
         }
 
+apply_method:
+    | APPLY_METHOD
+        { let text = $1
+          SynSymbol(Ident(text.TrimStart '-', lhs parseState))
+        }
+
 keyword:
     | KEYWORD
         { let text = $1
           SynKeyword(Ident(text, lhs parseState))
         }
 
-syntype_ident:
-    | SYMBOL
+syn_comma:
+    | COMMA %prec prec_syn_comma { () }
+
+raw_syntype_ident_text:
+    | SYMBOL %prec prec_syn_type { $1 }
+
+raw_syntype_ident:
+    | SYMBOL %prec prec_syn_type
         { let text = $1
           SynType.Ident(Ident(text, lhs parseState))
         }
-    | SYMBOL COMMA SYMBOL %prec prec_syn_type
-        { let text1 = $1
-          let text2 = $3
-          SynType.Ident(Ident(text1 + "," + text2, lhs parseState))
-        }
-    | QUOTE_SYM SYMBOL
+
+syntype_ident:
+    | raw_syntype_ident_text { SynType.Ident(Ident($1, lhs parseState))}
+    | QUOTE_SYM raw_syntype_ident_text
         { let text = $2
           SynType.Ident(Ident("'" + text, lhs parseState))
         }
+    | raw_syntype_ident_text COMMA syntype_comma_list
+        {
+            let text = $1
+            let rest = $3
+            SynType.Ident(Ident(text + "," + (String.concat "," rest), lhs parseState))
+        }
+    // | SYMBOL syn_comma SYMBOL
+    //     { let text1 = $1
+    //       let text2 = $3
+    //       // SynType.Ident(Ident("'xxx" + text1, lhs parseState))
+    //       SynType.Ident(Ident(text1 + "," + text2, lhs parseState))
+    //     }
+    // | QUOTE_SYM SYMBOL
+    //     { let text = $2
+    //       SynType.Ident(Ident("'" + text, lhs parseState))
+    //     }
+
+syntype_comma_list: rev_syntype_comma_list { List.rev $1 }
+rev_syntype_comma_list:
+    | raw_syntype_ident_text %prec prec_syn_type { [$1] }
+    | rev_syntype_comma_list COMMA SYMBOL %prec prec_syn_comma { $3 :: $1 }
 
 constant:
     | rawConstant { ($1, (rhs parseState 1))}

@@ -768,15 +768,22 @@ module Write =
             string w ") do"
             writeBody w writeExpr body
 
-        | SynExpr.DotMethod(inst, method, args, range) ->
+        | SynExpr.DotMethod(inst, method, args, kind, range) ->
             startExpr w st range
             string w "("
             writeExpr w WriteState.Inline inst
             string w "."
             symbol w method true
-            string w "("
-            writeArgComma w writeExpr args
-            string w "))"
+            match kind with
+            | DotMethodKind.Tuple ->
+                string w "("
+                writeArgComma w writeExpr args
+                string w ")"
+            | DotMethodKind.Apply ->
+                string w " "
+                writeArgSpace w writeExprInParens args
+                ()
+            string w ")"
 
         | SynExpr.DotProperty(inst, prop, range) ->
             startExpr w st range

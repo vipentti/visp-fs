@@ -46,12 +46,12 @@ and private handleThreadables (args: SynThreadable list) =
                     ),
                     range
                 ))
-            | SynThreadable.Method(sym, range) ->
+            | SynThreadable.Method(sym, kind, range) ->
                 (SynThreadable.Expr(
                     SynExpr.LambdaDef(
                         SynLambda(
                             [ Syntax.mkInferredArg "a1" range ],
-                            [ SynExpr.DotMethod(Syntax.mkSynSymbolExpr "a1" range, sym, [], range) ],
+                            [ SynExpr.DotMethod(Syntax.mkSynSymbolExpr "a1" range, sym, [], kind, range) ],
                             range
                         )
                     ),
