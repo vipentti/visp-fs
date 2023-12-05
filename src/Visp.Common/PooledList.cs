@@ -9,19 +9,16 @@ namespace Visp.Common;
 
 public static class PooledList
 {
-    public static void ReturnToPool<T>(this List<T> obj) =>
-        PooledList<T>.Return(obj);
+    public static void ReturnToPool<T>(this List<T> obj) => PooledList<T>.Return(obj);
 
-    public static T[] ToArrayAndReturn<T>(this List<T> s) =>
-        PooledList<T>.ToArrayAndReturn(s);
+    public static T[] ToArrayAndReturn<T>(this List<T> s) => PooledList<T>.ToArrayAndReturn(s);
 
     public static ImmutableArray<T> ToImmutableAndReturn<T>(this List<T> s) =>
         PooledList<T>.ToImmutableAndReturn(s);
 
     public static List<T> Get<T>() => PooledList<T>.Get();
 
-    public static PooledDisposer<List<T>> GetPooled<T>() =>
-        new(Get<T>(), ReturnToPool);
+    public static PooledDisposer<List<T>> GetPooled<T>() => new(Get<T>(), ReturnToPool);
 }
 
 public static class PooledList<T>
@@ -46,7 +43,9 @@ public static class PooledList<T>
         }
     }
 
-    private static readonly ObjectPool<List<T>> s_pool = new DefaultObjectPool<List<T>>(new PooledListPolicy());
+    private static readonly ObjectPool<List<T>> s_pool = new DefaultObjectPool<List<T>>(
+        new PooledListPolicy()
+    );
 
     public static List<T> Get() => s_pool.Get();
 

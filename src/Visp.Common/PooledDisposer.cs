@@ -12,10 +12,7 @@ namespace Visp.Common;
 /// <typeparam name="T">Type of object contained</typeparam>
 /// <param name="value">Value</param>
 /// <param name="ret">Function to call when disposed</param>
-public readonly struct PooledDisposer<T>(
-    T value,
-    Action<T> ret
-) : IDisposable
+public readonly struct PooledDisposer<T>(T value, Action<T> ret) : IDisposable
 {
     /// <summary>
     /// The value

@@ -139,10 +139,10 @@ let private evaluatePatterns
                 | SynConst.Unit -> res.Add(UNIT)
                 | SynConst.Nil -> res.Add(NIL)
                 | SynConst.String(s, k, _) -> res.Add(STRING(s, k, ParseHelpers.LexCont.Token()))
+
                 ()
 
-            | SynMacroBody.Symbol sym ->
-                res.Add(LexHelpers.symbolOrKeyword sym.Text)
+            | SynMacroBody.Symbol sym -> res.Add(LexHelpers.symbolOrKeyword sym.Text)
 
     use pooled = PooledList.GetPooled<token>()
     let res = pooled.Value
