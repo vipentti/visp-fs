@@ -36,3 +36,11 @@
        ())
   ]
 )
+
+(syntax-macro struct
+  [(_ typ (arg ctor ...) body ...)
+    (#[Struct]
+      type typ (arg ctor ...)
+      body ...
+    )
+  ])

@@ -277,7 +277,6 @@ type nonTerminalId =
     | NONTERM_function_def
     | NONTERM_invalid_function_def
     | NONTERM_macro_def
-    | NONTERM_empty_arg_list
     | NONTERM_arg_list_start
     | NONTERM_arg_list
     | NONTERM_rev_arg_list

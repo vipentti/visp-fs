@@ -199,3 +199,16 @@ let symbolOrKeyword (s: string) =
             match specialSymbol s with
             | Some(it) -> it
             | None -> SYMBOL s
+
+let outputSyntaxError (syn: SyntaxError) =
+    match syn.Data0 with
+    | :? FSharp.Text.Parsing.ParseErrorContext<SyntaxParser.token> as ctx ->
+        let (startPos, _) = ctx.ParseState.ResultRange
+        eprintfn "ReduceTokens: %A" ctx.ReduceTokens
+        eprintfn "ReducibleProductions: %A" ctx.ReducibleProductions
+        eprintfn "ShiftTokens: %A" ctx.ShiftTokens
+        eprintfn "StateStack: %A" ctx.StateStack
+        eprintfn "%s(%i,%i)" (startPos.FileName) (startPos.Line) (startPos.Column)
+        eprintfn "Token: %A" ctx.CurrentToken
+        eprintfn "Message: %A" ctx.Message
+    | _ -> ()
