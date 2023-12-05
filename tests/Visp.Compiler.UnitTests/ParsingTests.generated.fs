@@ -251,6 +251,11 @@ module ``tests_quotation_quote-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/quotation/quote-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_member-fn-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_type-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/type/type-0.visp"
