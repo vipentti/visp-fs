@@ -1,0 +1,5 @@
+﻿lambda: 3
+named: 3
+()
+
+ExitCode: 0

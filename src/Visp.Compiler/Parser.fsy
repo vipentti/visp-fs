@@ -296,6 +296,9 @@ macro_call_expr:
     | macro_call { SynExpr.SyntaxMacroCall($1) }
 
 macro_call:
+    | macro_name
+        { let mNameBody = SynMacroBody.Symbol($1)
+          SynMacroCall($1, [mNameBody], lhs parseState) }
     | macro_name macro_body_list
         { let mNameBody = SynMacroBody.Symbol($1)
           SynMacroCall($1, mNameBody :: $2, lhs parseState) }
@@ -352,6 +355,8 @@ macro_body:
     | LBRACKET macro_body_list RBRACKET { SynMacroBody.Vector($2, lhs parseState) }
     | LBRACE macro_body_list RBRACE { SynMacroBody.HashMap($2, lhs parseState) }
     | HASH_BRACE macro_body_list RBRACE { SynMacroBody.HashSet($2, lhs parseState) }
+    | DOT { SynMacroBody.Dot(lhs parseState) }
+    | COMMA { SynMacroBody.Comma(lhs parseState) }
     | keyword { SynMacroBody.Keyword($1) }
     | symbol {
         let text = $1

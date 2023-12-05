@@ -1,0 +1,60 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"syntax-macro-1.visp"
+#nowarn "0026"
+// line 11 @"syntax-macro-1.visp"
+let ``macro_my-or`` = "__MACRO_INIT__"
+// line 23 @"syntax-macro-1.visp"
+printfn ("%A") (true)
+// line 24 @"syntax-macro-1.visp"
+printfn ("%A") (Value.bool (false))
+// line 25 @"syntax-macro-1.visp"
+printfn ("%A") ((
+  // line 25 @"syntax-macro-1.visp"
+  let ortemp =
+    // line 25 @"syntax-macro-1.visp"
+    Value.bool (false)
+  // line 25 @"syntax-macro-1.visp"
+  if CoreMethods.isTruthy(
+    ortemp)
+    then
+      ortemp
+    else
+      // line 25 @"syntax-macro-1.visp"
+      Value.string ("this works, yay")))
+// line 26 @"syntax-macro-1.visp"
+let visp_result_todo =
+  // line 26 @"syntax-macro-1.visp"
+  printfn ("%A") ((
+    // line 26 @"syntax-macro-1.visp"
+    let ortemp =
+      // line 26 @"syntax-macro-1.visp"
+      Value.bool (false)
+    // line 26 @"syntax-macro-1.visp"
+    if CoreMethods.isTruthy(
+      ortemp)
+      then
+        ortemp
+      else
+        // line 26 @"syntax-macro-1.visp"
+        (
+          // line 26 @"syntax-macro-1.visp"
+          let ortemp =
+            // line 26 @"syntax-macro-1.visp"
+            Value.bool (false)
+          // line 26 @"syntax-macro-1.visp"
+          if CoreMethods.isTruthy(
+            ortemp)
+            then
+              ortemp
+            else
+              // line 26 @"syntax-macro-1.visp"
+              Value.string ("this works, yay"))))
+// line 26 @"syntax-macro-1.visp"
+printfn ("%A") (visp_result_todo)
+

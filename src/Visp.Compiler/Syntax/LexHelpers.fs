@@ -8,6 +8,7 @@ open Visp.Compiler.Text
 open ParseHelpers
 open SyntaxParser
 open System
+open Visp.Compiler.Syntax.Macros
 
 [<RequireQualifiedAccess>]
 type TokenStreamMode =
@@ -15,6 +16,7 @@ type TokenStreamMode =
     | QuoteSym
     | Quasiquote
     | QuasiquoteSym
+    | SyntaxMacroStart
     | Macro
 
     member this.IsQuoteMode =
@@ -26,6 +28,7 @@ type TokenStreamMode =
     member this.IsMacroMode =
         match this with
         | Macro -> true
+        | SyntaxMacroStart -> true
         | _ -> false
 
     member this.IsQuasiquoteMode =
@@ -52,6 +55,11 @@ type LexMode =
     member this.IsMacroMode =
         match this with
         | TokenStream t -> t.IsMacroMode
+        | _ -> false
+
+    member this.IsSyntaxMacroStart =
+        match this with
+        | TokenStream t -> t = TokenStreamMode.SyntaxMacroStart
         | _ -> false
 
     member this.IsQuoteMode =
@@ -169,7 +177,6 @@ let symbolOrKeyword (s: string) =
     match tryGetKeyword s with
     | Some(tok) -> tok
     | None ->
-        if s.EndsWith("!!") then
-            MACRO_NAME(s.TrimEnd('!'))
-        else
-            SYMBOL(s)
+        if macroTable.IsMacro(s) then MACRO_NAME(s)
+        else if s.EndsWith("!!") then MACRO_NAME(s.TrimEnd('!'))
+        else SYMBOL(s)

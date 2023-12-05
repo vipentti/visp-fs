@@ -1,4 +1,3 @@
-
 ;; Copyright 2023 Ville Penttinen
 ;; Distributed under the MIT License.
 ;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
@@ -9,25 +8,26 @@
 ;; this rule will never be matched
 #nowarn "0026"
 
-(syntax-macro matchfnexample
+(syntax-macro custom-match-fn
+  [(_ (c ...) rest ...)
+    (fn (arg)
+      (match arg
+        [c ...]
+        rest ...
+      ))
+  ]
   [(_ sym m rest ...)
     (fn sym (arg)
       (match arg
         m
         rest ...
       ))
-  ])
+  ]
+)
 
-(matchfnexample name
-  [(!tuple a b)
-    (+ a b)]
-  [_ 0])
+(let lambda (custom-match-fn [(a . b) (+ a b)]))
+(custom-match-fn named
+  [(a . b) (+ a b)])
 
-(fn name2 (tup)
-  (match tup
-    [(!tuple a b) (+ a b)]
-    [_ 0]))
-
-(printfn "%A & %A"
-  (name (!tuple 1 2))
-  (name2 (!tuple 1 2)))
+(printfn "lambda: %i" (lambda (1 . 2)))
+(printfn "named: %i" (named (1 . 2)))

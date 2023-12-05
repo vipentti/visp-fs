@@ -242,8 +242,16 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | Const of constant: SynConst * range: range
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
+    | Dot of range: range
+    | Comma of range: range
     | Ellipsis of range: range
     | Discard of range: range
+
+    member this.Sequence =
+        match this with
+        | List(exprs = e)
+        | Vector(exprs = e) -> Some(e)
+        | _ -> None
 
 and [<RequireQualifiedAccess>] SynMatch =
     | SynMatch of
