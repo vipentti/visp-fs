@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(open System.Collections.Generic)
+
+(type Mapping ()
+  (let src_to_dest (new Dictionary<int,int>))
+
+  (member fn _.AddRange (dest src len)
+    (for/in [src_range (!range src .. (+ src (dec len)))]
+      (printfn "src %i" src_range)
+      )
+    ()
+    ))
+
+(let mapping (new Mapping))
+(-AddRange mapping 0 1 5)
+
+()

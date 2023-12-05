@@ -5,7 +5,7 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(#[Struct, NoEquality, NoComparison]
+(#[Struct | NoEquality | NoComparison]
   type TestStruct ([value: int])
     (member _.Value value)
   )

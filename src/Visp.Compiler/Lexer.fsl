@@ -104,6 +104,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ']'           { RBRACKET }
   | ':'           { COLON }
   | ','           { COMMA }
+  | '|'           { BAR }
 
   | "..." { SYMBOL (lexeme lexbuf) }
 
@@ -120,7 +121,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }
   | ".+" { DOT_PLUS }
-  | '.' letter+ { DOT_METHOD (lexeme lexbuf) }
+  | '.' propShort { DOT_METHOD (lexeme lexbuf) }
+  | '-' propShort { APPLY_METHOD (lexeme lexbuf) }
   | '@' { AT }
   | "#\\" charWords { CHAR (lexeme lexbuf) }
   | "#\\u" unicodeChars { CHAR (lexeme lexbuf) }
@@ -172,7 +174,6 @@ rule token (args: LexArgs) (skip: bool) = parse
       let text = lexeme lexbuf
       symbolOrKeyword text
     }
-  | ','        { COMMA }
   | _ { unexpected_char "token" lexbuf }
 
 and tokenStream (args: LexArgs) (skip: bool) = parse
@@ -192,6 +193,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | ']'           { RBRACKET }
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
+  | '|'           { BAR }
   | '.' anyspace+ { DOT }
   | "#("          { HASH_PAREN }
   | "#["          { HASH_BRACKET }
@@ -240,6 +242,9 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
       let text = lexeme lexbuf;
       SYMBOL text }
   | '+' ident_char+ {
+      let text = lexeme lexbuf;
+      SYMBOL text }
+  | '-' ident_char+ {
       let text = lexeme lexbuf;
       SYMBOL text }
   | ident      {

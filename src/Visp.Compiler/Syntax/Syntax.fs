@@ -105,6 +105,11 @@ type FunctionFlags =
     | Inline = 1
     | Recursive = 2
 
+[<RequireQualifiedAccess>]
+type DotMethodKind =
+    | Tuple
+    | Apply
+
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynExpr =
     // special operator application
@@ -151,7 +156,7 @@ type SynExpr =
     | HashSet of exprs: SynExpr list * range: range
     | DotIndex of target: SynExpr * index: SynExpr * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
-    | DotMethod of target: SynExpr * method: SynSymbol * args: SynExpr list * range: range
+    | DotMethod of target: SynExpr * method: SynSymbol * args: SynExpr list * kind : DotMethodKind * range: range
     | Atom of expr: SynExpr * range: range
     | Deref of short: bool * expr: SynExpr * range: range
     | Type of
@@ -256,6 +261,7 @@ and [<RequireQualifiedAccess>] SynMacroTriviaKind =
     | Dot
     | Comma
     | Colon
+    | Bar
 
 and [<RequireQualifiedAccess>] SynListKind =
     | List
@@ -284,7 +290,7 @@ and [<RequireQualifiedAccess>] SynThreadable =
     | Expr of value: SynExpr * range: range
     | Index of expr: SynExpr * range: range
     | Property of symbol: SynSymbol * range: range
-    | Method of symbol: SynSymbol * range: range
+    | Method of symbol: SynSymbol * kind: DotMethodKind * range: range
 
 and [<RequireQualifiedAccess>] SynMatchPattern =
     | Const of value: SynConst * range: range

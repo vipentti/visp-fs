@@ -137,6 +137,7 @@ let private evaluatePatterns
                 | SynMacroTriviaKind.Colon -> res.Add(COLON)
                 | SynMacroTriviaKind.Dot -> res.Add(DOT)
                 | SynMacroTriviaKind.Comma -> res.Add(COMMA)
+                | SynMacroTriviaKind.Bar -> res.Add(BAR)
 
             | SynMacroBody.Keyword kw -> res.Add(KEYWORD(Syntax.textOfKeyword kw))
             | SynMacroBody.Ellipsis _ -> ()

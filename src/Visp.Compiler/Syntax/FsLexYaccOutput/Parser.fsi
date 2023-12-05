@@ -5,6 +5,7 @@ type token =
   | KEYWORD of (string)
   | RAWSTRING of (string)
   | DOT_METHOD of (string)
+  | APPLY_METHOD of (string)
   | STRING of (string * SynStringKind * ParseHelpers.LexerContinuation)
   | CHAR of (string)
   | MACRO_NAME of (string)
@@ -73,6 +74,7 @@ type token =
   | COLON
   | COMMA
   | UNIT
+  | BAR
   | LBRACE
   | RBRACE
   | HASH_BRACE
@@ -88,6 +90,7 @@ type tokenId =
     | TOKEN_KEYWORD
     | TOKEN_RAWSTRING
     | TOKEN_DOT_METHOD
+    | TOKEN_APPLY_METHOD
     | TOKEN_STRING
     | TOKEN_CHAR
     | TOKEN_MACRO_NAME
@@ -156,6 +159,7 @@ type tokenId =
     | TOKEN_COLON
     | TOKEN_COMMA
     | TOKEN_UNIT
+    | TOKEN_BAR
     | TOKEN_LBRACE
     | TOKEN_RBRACE
     | TOKEN_HASH_BRACE
@@ -270,8 +274,14 @@ type nonTerminalId =
     | NONTERM_symbol
     | NONTERM_macro_name
     | NONTERM_dot_method
+    | NONTERM_apply_method
     | NONTERM_keyword
+    | NONTERM_syn_comma
+    | NONTERM_raw_syntype_ident_text
+    | NONTERM_raw_syntype_ident
     | NONTERM_syntype_ident
+    | NONTERM_syntype_comma_list
+    | NONTERM_rev_syntype_comma_list
     | NONTERM_constant
     | NONTERM_rawConstant
     | NONTERM_function_def

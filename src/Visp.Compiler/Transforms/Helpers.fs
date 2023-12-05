@@ -88,8 +88,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
             SynExpr.DotIndex(bound_transform target, bound_transform index, range)
         | SynExpr.DotProperty(target, property, range) ->
             SynExpr.DotProperty(bound_transform target, property, range)
-        | SynExpr.DotMethod(target, method, args, range) ->
-            SynExpr.DotMethod(bound_transform target, method, List.map bound_transform args, range)
+        | SynExpr.DotMethod(target, method, args, kind, range) ->
+            SynExpr.DotMethod(bound_transform target, method, List.map bound_transform args, kind, range)
         | SynExpr.While(cond, body, range) ->
             SynExpr.While(bound_transform cond, List.map bound_transform body, range)
         | SynExpr.ThreadFirst(body, range) ->
