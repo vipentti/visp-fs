@@ -252,24 +252,26 @@ and [<RequireQualifiedAccess>] SynMacroPat =
     | Ellipsis of range: range
     | Discard of range: range
 
+and [<RequireQualifiedAccess>] SynMacroTriviaKind =
+    | Dot
+    | Comma
+    | Colon
+
+and [<RequireQualifiedAccess>] SynListKind =
+    | List
+    | Vector
+    | HashMap
+    | HashSet
+    | AttributeList
+
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
-    | List of exprs: SynMacroBody list * range: range
-    | Vector of exprs: SynMacroBody list * range: range
-    | HashMap of exprs: SynMacroBody list * range: range
-    | HashSet of exprs: SynMacroBody list * range: range
+    | List of kind: SynListKind * exprs: SynMacroBody list * range: range
     | Const of constant: SynConst * range: range
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
-    | Dot of range: range
-    | Comma of range: range
     | Ellipsis of range: range
     | Discard of range: range
-
-    member this.Sequence =
-        match this with
-        | List(exprs = e)
-        | Vector(exprs = e) -> Some(e)
-        | _ -> None
+    | Trivia of kind: SynMacroTriviaKind * range: range
 
 and [<RequireQualifiedAccess>] SynMatch =
     | SynMatch of

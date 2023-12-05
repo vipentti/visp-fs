@@ -30,7 +30,9 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
                 | (SynMacroPat.Symbol _, _) -> true
                 | (SynMacroPat.Discard _, _) -> true
                 // TODO: Nested matching
-                | (SynMacroPat.List _, it) -> it.Sequence.IsSome
+                | (SynMacroPat.List(lhs, _), SynMacroBody.List(exprs = rhs)) -> matchesPat rhs lhs
+                // () gets parsed as UNIT but in some places we want to allow () to be treated as empty list
+                | (SynMacroPat.List(lhs, _), SynMacroBody.Const(SynConst.Unit, _)) -> matchesPat [] lhs
                 | _ -> false
 
             temp && matchesPat argRest rest
@@ -66,12 +68,14 @@ let rec private bindPatterns
             | (SynMacroPat.Ellipsis _, it) -> failwithf "unsupported ellipsis for %A" it
             | (SynMacroPat.Symbol(sym, _), it) ->
                 dict.Add(Syntax.textOfSymbol sym, BoundPatternBody.Item(it))
-            | (SynMacroPat.List(ps, _), it) ->
-                match it.Sequence with
-                | Some lst ->
-                    bindPatterns dict lst ps
-                    ()
-                | None -> failwithf "todo list %A" arg
+            | (SynMacroPat.List(ps, _), SynMacroBody.List(exprs = exprs)) ->
+                bindPatterns dict exprs ps
+                ()
+            | (SynMacroPat.List(ps, _), SynMacroBody.Const (SynConst.Unit, _)) ->
+                bindPatterns dict [] ps
+                ()
+            // TODO: valide if this is enough
+            | (_, _) -> ()
 
             bindPatterns dict argRest patRest
         | [] -> failwithf "unmatched pattern %A" pt
@@ -79,6 +83,22 @@ let rec private bindPatterns
         match args with
         | [] -> ()
         | _ -> failwithf "unmatched arguments %A" args
+
+let openToken =
+    function
+    | SynListKind.List -> LPAREN
+    | SynListKind.Vector -> LBRACKET
+    | SynListKind.HashMap -> LBRACE
+    | SynListKind.HashSet -> HASH_BRACE
+    | SynListKind.AttributeList -> HASH_BRACKET
+
+let closeToken =
+    function
+    | SynListKind.List -> RPAREN
+    | SynListKind.Vector -> RBRACKET
+    | SynListKind.HashMap -> RBRACE
+    | SynListKind.HashSet -> RBRACE
+    | SynListKind.AttributeList -> RBRACKET
 
 let private evaluatePatterns
     (body: SynMacroBody)
@@ -107,25 +127,17 @@ let private evaluatePatterns
 
         | None ->
             match f with
-            | SynMacroBody.List(lst, _) ->
-                res.Add(LPAREN)
+            | SynMacroBody.List(kind, lst, _) ->
+                res.Add(openToken kind)
                 lst |> List.iter (fun ex -> tokenize ex pats res)
-                res.Add(RPAREN)
-            | SynMacroBody.Vector(lst, _) ->
-                res.Add(LBRACKET)
-                lst |> List.iter (fun ex -> tokenize ex pats res)
-                res.Add(RBRACKET)
-            | SynMacroBody.HashMap(lst, _) ->
-                res.Add(LBRACE)
-                lst |> List.iter (fun ex -> tokenize ex pats res)
-                res.Add(RBRACE)
-            | SynMacroBody.HashSet(lst, _) ->
-                res.Add(HASH_BRACE)
-                lst |> List.iter (fun ex -> tokenize ex pats res)
-                res.Add(RBRACE)
+                res.Add(closeToken kind)
 
-            | SynMacroBody.Comma _ -> res.Add(COMMA)
-            | SynMacroBody.Dot _ -> res.Add(DOT)
+            | SynMacroBody.Trivia(kind, _) ->
+                match kind with
+                | SynMacroTriviaKind.Colon -> res.Add(COLON)
+                | SynMacroTriviaKind.Dot -> res.Add(DOT)
+                | SynMacroTriviaKind.Comma -> res.Add(COMMA)
+
             | SynMacroBody.Keyword kw -> res.Add(KEYWORD(Syntax.textOfKeyword kw))
             | SynMacroBody.Ellipsis _ -> ()
             | SynMacroBody.Discard _ -> res.Add(SYMBOL "_")
@@ -177,11 +189,13 @@ let private evaluatePatterns
 
     // printfn "tokens %A" res
 
-    let result = raw_expr getTokens lexbuf
+    try
+        let result = raw_expr getTokens lexbuf
 
-    // printfn "RESULT %A" result
-
-    result
+        result
+    with :? ParseHelpers.SyntaxError as syn ->
+        LexHelpers.outputSyntaxError syn
+        reraise ()
 
 let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, args, range) as call) =
     // printfn "todo %A -> %A" macro call
