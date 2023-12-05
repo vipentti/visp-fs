@@ -1,0 +1,48 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"while-match-0.visp"
+type Counter () =
+  // line 9 @"while-match-0.visp"
+  let mutable count =
+    0
+  // line 10 @"while-match-0.visp"
+  member _.DoStuff () =
+    // line 11 @"while-match-0.visp"
+    if CoreMethods.isTruthy(
+      CoreMethods.``gt``(count, 6))
+      then
+        None
+      else
+        // line 13 @"while-match-0.visp"
+        (
+          // line 14 @"while-match-0.visp"
+          count <- inc (count)
+          // line 15 @"while-match-0.visp"
+          Some (count))
+
+// line 19 @"while-match-0.visp"
+let counter =
+  // line 19 @"while-match-0.visp"
+  (new Counter())
+// line 21 @"while-match-0.visp"
+let visp_result_todo =
+  // line 21 @"while-match-0.visp"
+  ``while-match`` ((counter.DoStuff())) (let temp = Vector(2)
+  temp.Add(Value.from(None))
+  temp.Add(Value.from(false))
+  temp) (let temp = Vector(4)
+  temp.Add(Value.from(Some (c)))
+  temp.Add(Value.from(printfn ("Count is: %i") (c)))
+  temp.Add(Value.from(let _ =
+    // line 25 @"while-match-0.visp"
+    (counter.DoStuff())))
+  temp.Add(Value.from(true))
+  temp)
+// line 21 @"while-match-0.visp"
+printfn ("%A") (visp_result_todo)
+

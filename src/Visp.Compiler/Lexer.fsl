@@ -22,8 +22,9 @@ let newline (lexbuf: LexBuffer<_>) =
 let outputToken lexbuf =
   (sprintf "token: '%s' Line: %d Column: %d" (lexeme lexbuf) (lexbuf.StartPos.Line+1) lexbuf.StartPos.Column)
 
-let unexpected_char mode lexbuf =
-  failwith (sprintf "%s SyntaxError: Unexpected char: '%s' Line: %d Column: %d" mode (lexeme lexbuf) (lexbuf.StartPos.Line+1) lexbuf.StartPos.Column)
+let unexpected_char mode (lexbuf: LexBuffer<_>) =
+  let file = lexbuf.EndPos.FileName
+  failwith (sprintf "%s SyntaxError: Unexpected char: '%s' %s:line %d Column: %d" mode (lexeme lexbuf) file (lexbuf.StartPos.Line+1) lexbuf.StartPos.Column)
 
 let startString (lexbuf: LexBuffer<_>) =
     let buf = StringBuffer()
@@ -54,7 +55,7 @@ let exp = ['e' 'E'] ['-' '+']? digit+
 let decimal = '-'? digit* frac? exp?
 let letter = ['A'-'Z'] | ['a'-'z']
 
-let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' ]
+let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' '&' ]
 let SymbolicExtra = [ '.' '\'' '/' ]
 
 let ident_start_char = letter | SymbolicStartCharacters
@@ -231,6 +232,12 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
 
   // Exprs
   | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
+  | '.' ident_char+ {
+      let text = lexeme lexbuf;
+      SYMBOL text }
+  | '+' ident_char+ {
+      let text = lexeme lexbuf;
+      SYMBOL text }
   | ident      {
     let text = lexeme lexbuf
     if args.mode.IsQuasiquoteMode then

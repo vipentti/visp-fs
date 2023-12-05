@@ -170,7 +170,8 @@ module Write =
         if should then w.writer.Indent() else w.writer.DoNotIndent()
 
 
-    let reservedWords = [ "then"; "done"; "val"; "end"; "begin"; "mod" ] |> Set.ofList
+    let reservedWords =
+        [ "then"; "done"; "val"; "end"; "begin"; "mod"; "to"; "with" ] |> Set.ofList
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
 
@@ -765,8 +766,7 @@ module Write =
             string w "while CoreMethods.isTruthy("
             writeExpr w WriteState.Arg cond
             string w ") do"
-            use _ = withIndent w false
-            writeSeqLeading w st newlineIndent writeExpr body
+            writeBody w writeExpr body
 
         | SynExpr.DotMethod(inst, method, args, range) ->
             startExpr w st range
@@ -917,6 +917,15 @@ module Write =
         | SynTypeMember.Let(name, expr, range) ->
             startExpr w st range
             writeLet w st name expr
+            ()
+        | SynTypeMember.Mut(name, body, range) ->
+            startExpr w st range
+            string w "let mutable "
+            synName w name
+            string w " ="
+            use _ = withIndent w false
+            newline w
+            writeExpr w WriteState.Body body
             ()
         | SynTypeMember.Member(name, expr, range) ->
             startExpr w st range
