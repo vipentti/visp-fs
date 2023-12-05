@@ -14,8 +14,6 @@ let main args =
     let filePath = fs.Path.GetFullPath args.[0]
     let cwd = fs.Path.GetDirectoryName filePath
 
-    let coreLibs = [ VispFile.CoreLib "core-macros.visp"; VispFile.CoreLib "core.visp" ]
-
     let mainFile = [ VispFile.Main filePath ]
 
     let knownArguments = [ "--no-lib"; "--release"; "--package" ] |> Set.ofList
@@ -24,7 +22,7 @@ let main args =
         if (Array.contains "--no-lib" args) then
             mainFile
         else
-            coreLibs @ mainFile
+            CoreLibs @ mainFile
 
     let release =
         if Array.contains "--release" args then
