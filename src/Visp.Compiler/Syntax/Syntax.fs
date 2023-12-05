@@ -154,7 +154,12 @@ type SynExpr =
     | DotMethod of target: SynExpr * method: SynSymbol * args: SynExpr list * range: range
     | Atom of expr: SynExpr * range: range
     | Deref of short: bool * expr: SynExpr * range: range
-    | Type of name: SynSymbol * args: SynName list * members: SynTypeMember list * range: range
+    | Type of
+        name: SynSymbol *
+        args: SynName list *
+        members: SynTypeMember list *
+        attributes: SynAttributes *
+        range: range
     | ThreadFirst of exprs: SynExpr list * range: range
     | ThreadLast of exprs: SynThreadable list * range: range
     | RangeExpr of first: SynExpr * step: SynExpr option * last: SynExpr * range: range
@@ -218,6 +223,19 @@ type SynExpr =
     member this.withRangeOf(r: range) =
         match this with
         | _ -> this
+
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynAttribute =
+    { TypeName: SynType
+      ArgExpr: SynExpr
+    //   Target: Ident option
+    //   AppliesToGetterAndSetter: bool
+      Range: range }
+
+and [<RequireQualifiedAccess>] SynAttributeList =
+    { Attributes: SynAttribute list
+      Range: range }
+
+and SynAttributes = SynAttributeList list
 
 and SynBinding = SynBinding of name: SynName * expr: SynExpr * range: range
 
@@ -344,6 +362,8 @@ and SynArg =
 and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
 
 module Syntax =
+    let UnitExpr r = SynExpr.Const (SynConst.Unit, r)
+
     [<Literal>]
     let parserRecovery = "__PARSER_RECOVERY__"
 

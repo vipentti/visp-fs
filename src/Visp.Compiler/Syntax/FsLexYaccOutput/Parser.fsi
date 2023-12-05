@@ -77,6 +77,7 @@ type token =
   | RBRACE
   | HASH_BRACE
   | HASH_PAREN
+  | HASH_BRACKET
   | LBRACKET
   | RBRACKET
   | LPAREN
@@ -159,6 +160,7 @@ type tokenId =
     | TOKEN_RBRACE
     | TOKEN_HASH_BRACE
     | TOKEN_HASH_PAREN
+    | TOKEN_HASH_BRACKET
     | TOKEN_LBRACKET
     | TOKEN_RBRACKET
     | TOKEN_LPAREN
@@ -241,6 +243,12 @@ type nonTerminalId =
     | NONTERM_mut
     | NONTERM_letstar
     | NONTERM_type_expr
+    | NONTERM_attribute_list
+    | NONTERM_rev_attribute_list
+    | NONTERM_attr_list
+    | NONTERM_attributes
+    | NONTERM_rev_attributes
+    | NONTERM_attribute
     | NONTERM_member_list_start
     | NONTERM_member_list
     | NONTERM_rev_member_list

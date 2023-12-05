@@ -124,7 +124,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                     )),
                 range
             )
-        | SynExpr.Type(name, args, members, range) ->
+        | SynExpr.Type(name, args, members, attributes, range) ->
             let tfmember =
                 function
                 | SynTypeMember.Let(name, expr, range) ->
@@ -140,7 +140,23 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 | SynTypeMember.OverrideFn(name, args, expr, range) ->
                     SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
 
-            SynExpr.Type(name, args, List.map tfmember members, range)
+            SynExpr.Type(
+                name,
+                args,
+                List.map tfmember members,
+                attributes
+                |> List.map (fun it ->
+                    let items = it.Attributes
+
+                    let newAttributes =
+                        items
+                        |> List.map (fun attr ->
+                            let expr = bound_transform attr.ArgExpr
+                            { attr with ArgExpr = expr })
+
+                    { it with Attributes = newAttributes }),
+                range
+            )
 
     func result
 
