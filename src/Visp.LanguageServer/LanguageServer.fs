@@ -7,7 +7,6 @@ open System.IO
 open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 open System.Text.Json
-open System.Text.Json.Nodes
 open System.Text.Json.Serialization
 open System.Threading
 
@@ -18,6 +17,18 @@ open StreamJsonRpc
 open Visp.Common
 open Visp.Compiler
 open Visp.Compiler.Syntax
+
+let NormalizePath (str: string) =
+    let root = Path.GetPathRoot(str)
+
+    let lowerRoot = root.ToLowerInvariant().Replace(":", "%3A")
+
+    let file = str.Replace(root, lowerRoot).Replace('\\', '/')
+
+    if file.StartsWith('/') then file else "/" + file
+
+let ToFileUri (str: string) =
+    str |> NormalizePath |> (+) "file://" |> Uri
 
 type ICommonEvents =
     abstract member Nothing: bool
@@ -464,7 +475,11 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
 
     let textDocuments = new Dictionary<TextDocumentIdentifier, VispDocumentItem>()
 
+    let libFiles = new ResizeArray<TextDocumentIdentifier>()
+
     let mutable traceLevel = TraceValue.Off
+
+    do self.ReadCoreLibFiles()
 
     member _.TraceSource = jsonRpcTraceSource
 
@@ -479,6 +494,28 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
 
     member _.Target = target
     member _.JsonRpc = jsonRpc
+
+    member _.ReadCoreLibFiles() =
+        let root = ProjectGenerator.CoreLibRoot()
+
+        for file in Directory.GetFiles(root, "*.visp", SearchOption.AllDirectories) do
+            let id = new TextDocumentIdentifier(Uri = ToFileUri(file))
+
+            let contents = File.ReadAllText(file)
+
+            let doc =
+                new VispDocumentItem(
+                    Uri = id.Uri,
+                    Text = contents,
+                    Version = 1,
+                    LanguageId = "visp-fs"
+                )
+
+            textDocuments[id] <- doc
+            doc.Parse()
+            libFiles.Add(id)
+
+        ()
 
     member this.OnRpcDisconnected(ev: JsonRpcDisconnectedEventArgs) =
         this.LogInfo "Disconnecting"
@@ -512,8 +549,13 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
             textDoc.Text <- text
             textDoc.Parse()
 
-    member _.GetDocumentSymbols(args: DocumentSymbolParams) =
-        match textDocuments.TryGetValue(args.TextDocument) with
+    member _.DocumentSymbolDetails(id: TextDocumentIdentifier) =
+        match textDocuments.TryGetValue(id) with
+        | false, _ -> [||]
+        | true, textDoc -> textDoc.Symbols
+
+    member _.DocumentSymbols(id: TextDocumentIdentifier) =
+        match textDocuments.TryGetValue(id) with
         | false, _ -> [||]
         | true, textDoc ->
             let symbols = textDoc.Symbols
@@ -523,9 +565,17 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                     new SymbolInformation(
                         Name = it.Text,
                         Kind = it.SymbolKind,
-                        Location = new Location(Uri = args.TextDocument.Uri, Range = it.Range)
+                        Location = new Location(Uri = id.Uri, Range = it.Range)
                     ))
                 symbols
+
+    member d.GetLibSymbols() =
+        libFiles |> Seq.map d.DocumentSymbols |> Array.concat
+
+    member d.GetLibSymbolDetails() =
+        libFiles |> Seq.map d.DocumentSymbolDetails |> Array.concat
+
+    member d.GetDocumentSymbols(args: DocumentSymbolParams) = d.DocumentSymbols(args.TextDocument)
 
     member this.GetCompletionsAt(args: TextDocumentPositionParams) =
         match textDocuments.TryGetValue(args.TextDocument) with
@@ -541,8 +591,10 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                 i <- i + 1
                 i
 
+            let libSymbols = this.GetLibSymbolDetails ()
+
             let mutable symbols =
-                textDoc.Symbols
+                Array.concat [| textDoc.Symbols; libSymbols |]
                 |> Array.distinctBy _.Text
                 |> Array.map (fun it -> it.ToCompletionItem(index ()))
 

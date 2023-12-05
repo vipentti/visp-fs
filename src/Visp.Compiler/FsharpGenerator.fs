@@ -20,12 +20,15 @@ let tempDirPath name =
 
     Path.Combine(src_dir, "..", "..", ".tmp", name) |> Path.GetFullPath
 
-let coreLibPath name =
+let CoreLibRoot () =
     match Environment.GetEnvironmentVariable("VISP_FS_LIB_PATH") with
     | null ->
         let src_dir = __SOURCE_DIRECTORY__
-        Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
-    | path -> Path.Combine(path, name) |> Path.GetFullPath
+        Path.Combine(src_dir, "..", "..", "visp", "lib") |> Path.GetFullPath
+    | path -> path |> Path.GetFullPath
+
+let coreLibPath name =
+    Path.Combine(CoreLibRoot (), name) |> Path.GetFullPath
 
 let runtimeLibPath =
     let src_dir = __SOURCE_DIRECTORY__
@@ -235,6 +238,8 @@ let ARGV = System.Environment.GetCommandLineArgs()
 
 let state = {{ Todo = () }}
 """
+
+let CoreLibs = [ VispFile.CoreLib "core-macros.visp"; VispFile.CoreLib "core.visp" ]
 
 type FsharpGenerator(fs: IFileSystem, dir: string) =
     member _.fs = fs
