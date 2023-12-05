@@ -737,6 +737,10 @@ module Write =
                     writeCallArgs w args
                     ()
 
+            | SynExpr.ThreadLast _ as ex ->
+                writeExpr w st ex
+                writeCallArgs w args
+
             | _ -> failwithf "not callable %O" expr
 
 
