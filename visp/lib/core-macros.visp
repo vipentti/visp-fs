@@ -1,0 +1,25 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; core-macros
+
+(syntax-macro match-fn
+  [(_ (c ...) rest ...)
+    (fn (arg)
+      (match arg
+        [c ...]
+        rest ...
+      ))
+  ]
+  [(_ sym m rest ...)
+    (fn sym (arg)
+      (match arg
+        m
+        rest ...
+      ))
+  ]
+)
