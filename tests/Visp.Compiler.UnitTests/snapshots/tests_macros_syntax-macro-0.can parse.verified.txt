@@ -33,7 +33,7 @@ let name2 tup =
 // line 31 @"syntax-macro-0.visp"
 let visp_result_todo =
   // line 31 @"syntax-macro-0.visp"
-  printfn ("%A & %A") (name ((1, 2))) (name2 ((1, 2)))
+  printfn ("%A & %A") (name (1, 2)) (name2 (1, 2))
 // line 31 @"syntax-macro-0.visp"
 printfn ("%A") (visp_result_todo)
 

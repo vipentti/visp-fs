@@ -63,7 +63,8 @@ let private parseCharSpan (span: ReadOnlySpan<char>) =
     | it when it.Length = 1 -> it[0]
     | it when it.Length > 0 && (it[0] = 'u' || it[0] = 'U') ->
         System.Int32.Parse(it.Slice(1), Globalization.NumberStyles.HexNumber) |> char
-    | it when matchSpan it "newline" || matchSpan it "linefeed" -> '\n'
+    | it when matchSpan it "newline" || matchSpan it "linefeed" || matchSpan it "lf" -> '\n'
+    | it when matchSpan it "cr" || matchSpan it "return" -> '\r'
     | it when matchSpan it "nul" || matchSpan it "null" -> '\u0000'
     | it when matchSpan it "tab" -> '\t'
     | it when matchSpan it "space" -> ' '

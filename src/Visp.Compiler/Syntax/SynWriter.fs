@@ -239,10 +239,13 @@ module Write =
         | SynConst.Char(value) ->
             w.Write('\'')
 
-            if (value = '\\') then
-                w.Write(value)
+            match value with
+            | '\n' -> w.Write("\\n")
+            | '\r' -> w.Write("\\r")
+            | '\t' -> w.Write("\\t")
+            | '\\' -> w.Write("\\\\")
+            | it -> w.Write(it)
 
-            w.Write(value)
             w.Write('\'')
         | SynConst.Nil -> string w "Value.Nil"
         | SynConst.Unit -> if toValue then string w "Value.Unit" else string w "()"
@@ -791,7 +794,7 @@ module Write =
                 string w ")"
             | DotMethodKind.Apply ->
                 string w " "
-                writeArgSpace w writeExprInParens args
+                writeArgSpace w writeExpr args
                 ()
 
             string w ")"
@@ -1163,15 +1166,11 @@ module Write =
         if args.IsEmpty then
             string w " ()"
         else
-            writeSeqLeading
-                w
-                WriteState.Inline
-                space
-                (fun w st a ->
-                    char w '('
-                    writeExpr w st a
-                    char w ')')
-                args
+            match args with
+            | SynExpr.Tuple _ as arg :: [] ->
+                space w
+                writeExpr w WriteState.InlineNoParens arg
+            | _ -> writeSeqLeading w WriteState.Inline space writeExprInParens args
 
     and writeArgsOrEmpty w (args: SynArg list) =
         let writeArgs w args =

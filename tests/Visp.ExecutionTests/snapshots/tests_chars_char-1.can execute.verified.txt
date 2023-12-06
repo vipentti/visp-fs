@@ -1,0 +1,6 @@
+﻿Char is '012'
+Char is '015'
+Char is '011'
+()
+
+ExitCode: 0
