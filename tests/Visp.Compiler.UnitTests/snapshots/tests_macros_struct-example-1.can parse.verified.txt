@@ -67,9 +67,9 @@ type SourceDestMap (dest: int64, src: int64, len: int64) =
       |> (fun a1 ->
         // line 29 @"struct-example-1.visp"
         (a1.Src))
-      |> (fun arg10 ->
+      |> (fun arg1 ->
         // line 29 @"struct-example-1.visp"
-        (arg10.Contains (v)))
+        (arg1.Contains (v)))
 
   // line 29 @"struct-example-1.visp"
   member d.Get src =

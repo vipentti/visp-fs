@@ -38,7 +38,7 @@ module CoreParser =
         Visp.Syntax.SynWriter.Write.writeParsedFile writer file
         fileWriter.WriteLine()
 
-    let writeToStreamNew file outputStream filePath =
+    let writeToStreamNew file outputStream _ =
         let fileWriter = Writer.CustomFileWriter(outputStream, 2, "//")
 
         let mainProgram =
