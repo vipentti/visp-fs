@@ -16,34 +16,32 @@ let transformLambdaShortHands (expr: SynExpr) =
             let dict = new Dictionary<string, string>()
             let parameters = new ResizeArray<_>()
 
-            Helpers.transform
-                (fun it ->
-                    match it with
-                    | SynExpr.Symbol(SynSymbol(id)) ->
-                        if id.idText.StartsWith('%') && not (dict.ContainsKey(id.idText)) then
-                            // let name = "arg" + id.idText.TrimStart('%') + (index.ToString())
-                            let textSpan = id.idText.AsSpan()
-                            let textSpan = textSpan.TrimStart('%')
+            expr
+            |> Traversal.depthFirstExprs
+            |> Seq.iter (fun it ->
+                match it with
+                | SynExpr.Symbol(SynSymbol(id)) ->
+                    if id.idText.StartsWith('%') && not (dict.ContainsKey(id.idText)) then
+                        let textSpan = id.idText.AsSpan()
+                        let textSpan = textSpan.TrimStart('%')
 
-                            let name =
-                                if textSpan.IsEmpty then
-                                    $"arg{index}"
-                                else
-                                    $"arg{textSpan.ToString()}"
+                        let name =
+                            if textSpan.IsEmpty then
+                                $"arg{index}"
+                            else
+                                $"arg{textSpan.ToString()}"
 
-                            dict.[id.idText] <- name
-                            index <- index + 1
+                        dict.[id.idText] <- name
+                        index <- index + 1
 
-                            parameters.Add(
-                                SynArg.InferredArg(Syntax.mkSynSymbol name id.idRange, id.idRange)
-                            )
+                        parameters.Add(
+                            SynArg.InferredArg(Syntax.mkSynSymbol name id.idRange, id.idRange)
+                        )
 
-                        ()
-                    | _ -> ()
+                    ()
+                | _ -> ()
 
-                    it)
-                expr
-            |> ignore
+                ())
 
             let body =
                 Helpers.transform

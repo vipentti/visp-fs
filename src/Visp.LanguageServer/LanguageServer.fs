@@ -352,7 +352,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
         )
     | _ -> ()
 
-    expr
+    ()
 
 
 let commonFsharpCollectionMethods =
@@ -425,8 +425,9 @@ type VispDocumentItem =
 
             let syms = ResizeArray<SymbolDetails>()
 
-            Transforms.Helpers.transformParsedFile (findAllSymbolDetails syms) file
-            |> ignore
+            file
+            |> Transforms.Traversal.depthFirstExprsInFile
+            |> Seq.iter (findAllSymbolDetails syms)
 
             this.symbols <- Some(syms.ToArray())
         // TODO: Resilient parsing
