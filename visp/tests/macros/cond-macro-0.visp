@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro my-cond
+  [(_) (failwith "unreachable cond")]
+  [(_ one) one]
+  [(_ var body exprs ...)
+    (if var
+      body
+      (my-cond exprs ...))
+  ])
+
+(my-cond
+  (> 0 0)
+    1
+  (< 0 0)
+    2
+  :else
+    3)

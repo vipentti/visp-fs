@@ -7,6 +7,44 @@
 
 ;; core-macros
 
+(syntax-macro and
+  [(_) true]
+  [(_ one) one]
+  [(_ cond exprs ...)
+    (if cond
+      (and exprs ...)
+      false)
+  ])
+
+(syntax-macro or
+  [(_) false]
+  [(_ one) one]
+  [(_ cond exprs ...)
+    (do
+      (let orTemp cond)
+      (if orTemp
+        orTemp
+        (or exprs ...)
+      ))
+  ])
+
+(syntax-macro cond
+  [(_) (failwith "unreachable cond")]
+  [(_ one) one]
+  [(_ var body exprs ...)
+    (if var
+      body
+      (cond exprs ...))
+  ])
+
+(syntax-macro cond_
+  [(_) (failwith "unbalanced cond")]
+  [(_ (test body ...) rest ...)
+    (if test
+      (begin body ...)
+      (cond_ rest ...))
+  ])
+
 (syntax-macro match-fn
   [(_ (c ...) rest ...)
     (fn (arg)
@@ -44,3 +82,4 @@
       body ...
     )
   ])
+

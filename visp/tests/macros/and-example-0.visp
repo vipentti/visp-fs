@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro my-and
+  [(_) true]
+  [(_ one) one]
+  [(_ cond exprs ...)
+    (if cond
+      (my-and exprs ...)
+      false)
+  ])
+
+(printfn "my-and %A" (my-and))
+(printfn "my-and %A" (my-and false))
+(printfn "my-and %A" (my-and true))
+(printfn "my-and %A" (my-and true false))
+(printfn "my-and %A" (my-and true true))
+(printfn "my-and %A" (my-and true true false))
+(printfn "my-and %A" (my-and true true true))

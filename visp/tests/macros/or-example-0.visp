@@ -1,0 +1,30 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro my-or
+  [(_) false]
+  [(_ one) one]
+  [(_ test exprs ...)
+    (do
+      (let orTemp test)
+      (if orTemp
+        orTemp
+        (my-or exprs ...)
+      ))
+  ])
+
+(printfn "my-or %A" (my-or))
+(printfn "my-or %A" (my-or false))
+(printfn "my-or %A" (my-or true))
+(printfn "my-or %A" (my-or true false))
+(printfn "my-or %A" (my-or true true))
+(printfn "my-or %A" (my-or true true false))
+(printfn "my-or %A" (my-or true true true))
+
+(printfn "my-or %A" (my-or (Value.bool false)))
+(printfn "my-or %A" (my-or (Value.bool false) (Value.string "this works, yay")))
+(printfn "my-or %A" (my-or (Value.bool false) (Value.bool false) (Value.string "this works, yay")))

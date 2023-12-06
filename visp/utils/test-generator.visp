@@ -115,7 +115,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (let tests (->> files
     (Seq.filter #(not (IsIgnoredFile %1)))
     (Seq.map (fn [file]
-      (GetTestCategory parent file)
+      ;; (GetTestCategory parent file)
       (let simplified
         (->> (.Replace file parent "")
           #(.TrimStart %1 #\/)

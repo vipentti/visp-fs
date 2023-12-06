@@ -35,6 +35,7 @@ module CoreParser =
         fileWriter.Write(template.Trim())
         fileWriter.WriteLine()
         let writer = Visp.Syntax.SynWriter.mkSynWriter fileWriter
+        let file = transformFile file
         Visp.Syntax.SynWriter.Write.writeParsedFile writer file
         fileWriter.WriteLine()
 
@@ -58,6 +59,7 @@ let state = { Todo = () }
 
         let writer = Visp.Syntax.SynWriter.mkSynWriter fileWriter
 
+        let file = transformFile file
         Visp.Syntax.SynWriter.Write.writeParsedFile writer file
 
         fileWriter.WriteLine()

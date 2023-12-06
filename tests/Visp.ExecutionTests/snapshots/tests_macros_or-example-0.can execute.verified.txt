@@ -1,0 +1,13 @@
+﻿my-or false
+my-or false
+my-or true
+my-or true
+my-or true
+my-or true
+my-or true
+my-or Bool false
+my-or String "this works, yay"
+my-or String "this works, yay"
+()
+
+ExitCode: 0
