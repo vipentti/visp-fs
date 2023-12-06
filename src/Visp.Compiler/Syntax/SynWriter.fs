@@ -901,6 +901,11 @@ module Write =
                         ()
                     | _ -> writeExpr w WriteState.Inline item
 
+        | SynExpr.TypeAlias(name, typ, range) ->
+            startExpr w st range
+            fmtprintf w "type %s = " (Syntax.textOfSymbol name)
+            writeType w typ
+
         | SynExpr.Type(name, args, members, attributes, range) ->
             if not attributes.IsEmpty then
                 writeAttributes w st attributes
