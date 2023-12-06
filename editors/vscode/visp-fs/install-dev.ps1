@@ -1,4 +1,4 @@
-
+#!/usr/bin/env pwsh
 
 function ExecSafe([scriptblock] $cmd) {
     & $cmd

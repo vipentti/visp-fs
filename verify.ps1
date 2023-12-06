@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 [CmdletBinding()]
 param (
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
