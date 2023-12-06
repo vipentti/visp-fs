@@ -1,0 +1,10 @@
+﻿my-and true
+my-and false
+my-and true
+my-and false
+my-and true
+my-and false
+my-and true
+()
+
+ExitCode: 0

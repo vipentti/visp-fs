@@ -5,28 +5,30 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
-// line 8 @"cond-0.visp"
+// line 8 @"cond-macro-0.visp"
+let ``macro_my-cond`` = "__MACRO_INIT__"
+// line 17 @"cond-macro-0.visp"
 let visp_result_todo =
-  // line 8 @"cond-0.visp"
+  // line 17 @"cond-macro-0.visp"
   if CoreMethods.isTruthy(
     CoreMethods.``gt``(0, 0))
     then
       1
     else
-      // line 8 @"cond-0.visp"
+      // line 17 @"cond-macro-0.visp"
       if CoreMethods.isTruthy(
         CoreMethods.``lt``(0, 0))
         then
           2
         else
-          // line 8 @"cond-0.visp"
+          // line 17 @"cond-macro-0.visp"
           if CoreMethods.isTruthy(
             Value.keyword(":else"))
             then
               3
             else
-              // line 8 @"cond-0.visp"
+              // line 17 @"cond-macro-0.visp"
               failwith ("unreachable cond")
-// line 8 @"cond-0.visp"
+// line 17 @"cond-macro-0.visp"
 printfn ("%A") (visp_result_todo)
 

@@ -10,9 +10,6 @@ open Visp.Compiler.Transforms
 let rec expand (expr: SynExpr) =
     let inner expr =
         match expr with
-        | SynExpr.FunctionCall(Patterns.SymbolWith "and", args, range) -> handleAnd args range
-        | SynExpr.FunctionCall(Patterns.SymbolWith "or", args, range) -> handleOr args range
-        | SynExpr.FunctionCall(Patterns.SymbolWith "cond", args, range) -> handleCond args range
         | SynExpr.ThreadLast(items, range) -> SynExpr.ThreadLast(handleThreadables items, range)
         | _ -> expr
 

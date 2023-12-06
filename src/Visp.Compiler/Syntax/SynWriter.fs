@@ -1270,16 +1270,6 @@ module Write =
 
             string w "] |> HashMap.ofList"
 
-
-    let private tfs =
-        [| Visp.Compiler.Transforms.SyntaxMacros.expand
-           Visp.Compiler.Transforms.QuasiquoteExpander.expand
-           Visp.Compiler.Transforms.BuiltinMacros.expand
-           Visp.Compiler.Transforms.Common.transformLambdaShortHands |]
-
-    let expandExpr expr =
-        Visp.Compiler.Transforms.Helpers.runTransforms tfs expr
-
     let writeParsedFile w (ParsedFile(fragments)) =
         let rec writeModuleDecls w (decls: SynModuleDecl list) =
             match decls with
@@ -1303,7 +1293,7 @@ module Write =
                     ()
                 | SynModuleDecl.ModuleAbbrev _ -> ()
                 | SynModuleDecl.Require _ -> ()
-                | SynModuleDecl.Expr(ex, _) -> writeExpr w WriteState.Body (expandExpr ex)
+                | SynModuleDecl.Expr(ex, _) -> writeExpr w WriteState.Body ex
                 | SynModuleDecl.Open(target, range) ->
                     indent w
                     lineof w range
