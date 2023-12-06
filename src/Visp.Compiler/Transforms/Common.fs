@@ -4,6 +4,7 @@
 
 module Visp.Compiler.Transforms.Common
 
+open System
 open Visp.Compiler.Syntax
 open System.Collections.Generic
 
@@ -20,7 +21,16 @@ let transformLambdaShortHands (expr: SynExpr) =
                     match it with
                     | SynExpr.Symbol(SynSymbol(id)) ->
                         if id.idText.StartsWith('%') && not (dict.ContainsKey(id.idText)) then
-                            let name = "arg" + id.idText.TrimStart('%') + (index.ToString())
+                            // let name = "arg" + id.idText.TrimStart('%') + (index.ToString())
+                            let textSpan = id.idText.AsSpan()
+                            let textSpan = textSpan.TrimStart('%')
+
+                            let name =
+                                if textSpan.IsEmpty then
+                                    $"arg{index}"
+                                else
+                                    $"arg{textSpan.ToString()}"
+
                             dict.[id.idText] <- name
                             index <- index + 1
 
@@ -46,7 +56,9 @@ let transformLambdaShortHands (expr: SynExpr) =
                         | _ -> helpers)
                     expr
 
-            SynExpr.LambdaDef(SynLambda(List.ofSeq (parameters), [ body ], range))
+            SynExpr.LambdaDef(
+                SynLambda(parameters |> Seq.sortBy _.NameText |> List.ofSeq, [ body ], range)
+            )
 
         | _ -> expr
 

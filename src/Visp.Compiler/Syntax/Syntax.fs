@@ -405,11 +405,16 @@ and SynLambda =
         let (SynLambda(_, _, rng)) = this
         rng
 
-and SynArg =
+and [<RequireQualifiedAccess>] SynArg =
     // Argument with explicit type
     | TypedArg of name: SynSymbol * argtype: SynType * range: range
     // Argument with inferred type
     | InferredArg of name: SynSymbol * range: range
+
+    member d.NameText =
+        match d with
+        | TypedArg (name = name)
+        | InferredArg (name = name) -> name.Text
 
 and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
 

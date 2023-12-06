@@ -936,7 +936,7 @@ rev_arg_list:
     | rev_arg_list arg { $2 :: $1 }
 
 arg:
-    | symbol { InferredArg($1, lhs parseState) }
+    | symbol { SynArg.InferredArg($1, lhs parseState) }
     | arg_in_parens_or_brackets_start { $1 }
 
 arg_in_parens_or_brackets_start:
@@ -945,9 +945,9 @@ arg_in_parens_or_brackets_start:
 
 arg_in_parens_or_brackets:
     | symbol COLON syntype_ident
-        { TypedArg($1, $3, lhs parseState) }
+        { SynArg.TypedArg($1, $3, lhs parseState) }
     | symbol
-        { InferredArg($1, lhs parseState) }
+        { SynArg.InferredArg($1, lhs parseState) }
 
 function_call:
     | expr expr_list { SynExpr.FunctionCall($1, $2, (lhs parseState))}
