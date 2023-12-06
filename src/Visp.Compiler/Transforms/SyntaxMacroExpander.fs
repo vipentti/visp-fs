@@ -271,18 +271,11 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
     | None -> failwith "no matching pattern"
 
 let private hasMacroCall (expr: SynExpr) =
-    let mutable res = false
-
-    // TODO: Provide some iterators for doing this so we can stop earlY?
     expr
-    |> Helpers.transform (function
-        | SynExpr.SyntaxMacroCall _ as ex ->
-            res <- true
-            ex
-        | it -> it)
-    |> ignore
-
-    res
+    |> Traversal.depthFirstExprs
+    |> Seq.exists (function
+        | SynExpr.SyntaxMacroCall _ -> true
+        | _ -> false)
 
 let expand (expr: SynExpr) =
 
