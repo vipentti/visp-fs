@@ -32,7 +32,8 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
                 // TODO: Nested matching
                 | (SynMacroPat.List(lhs, _), SynMacroBody.List(exprs = rhs)) -> matchesPat rhs lhs
                 // () gets parsed as UNIT but in some places we want to allow () to be treated as empty list
-                | (SynMacroPat.List(lhs, _), SynMacroBody.Const(SynConst.Unit, _)) -> matchesPat [] lhs
+                | (SynMacroPat.List(lhs, _), SynMacroBody.Const(SynConst.Unit, _)) ->
+                    matchesPat [] lhs
                 | _ -> false
 
             temp && matchesPat argRest rest
@@ -71,7 +72,7 @@ let rec private bindPatterns
             | (SynMacroPat.List(ps, _), SynMacroBody.List(exprs = exprs)) ->
                 bindPatterns dict exprs ps
                 ()
-            | (SynMacroPat.List(ps, _), SynMacroBody.Const (SynConst.Unit, _)) ->
+            | (SynMacroPat.List(ps, _), SynMacroBody.Const(SynConst.Unit, _)) ->
                 bindPatterns dict [] ps
                 ()
             // TODO: valide if this is enough

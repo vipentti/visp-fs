@@ -96,7 +96,9 @@ type LexArgs =
 
 let mkDefaultLextArgs () = { mode = LexMode.Default; depth = 0 }
 
-let mkTokenStreamArgs () = { mode = LexMode.TokenStream (TokenStreamMode.Macro); depth = 0 }
+let mkTokenStreamArgs () =
+    { mode = LexMode.TokenStream(TokenStreamMode.Macro)
+      depth = 0 }
 
 type StringBuffer = Text.StringBuilder
 
@@ -151,6 +153,7 @@ let keywordTokenList =
       ("macro", MACRO)
       ("match", MATCH)
       ("member", MEMBER)
+      ("members", MEMBERS)
       ("memberfn", MEMBERFN)
       ("module", MODULE)
       ("mut", MUT)
@@ -160,6 +163,8 @@ let keywordTokenList =
       ("quasiquote", QUASIQUOTE_KW)
       ("quote", QUOTE_KW)
       ("rec", REC)
+      ("record", RECORD)
+      ("rinit", RINIT)
       ("require", REQUIRE)
       ("set!", SET)
       ("seq", SEQ)

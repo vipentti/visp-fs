@@ -497,11 +497,16 @@ module Write =
 
         | SynExpr.Keyword kw -> writeQuoted w st (SynQuoted.Keyword kw)
 
-        | SynExpr.Begin(expr, range) ->
+        | SynExpr.Begin(expr, kind, range) ->
             startExpr w st range
-            char w '('
+
+            if kind = BeginKind.Do then
+                char w '('
+
             writeBody w writeExpr expr
-            char w ')'
+
+            if kind = BeginKind.Do then
+                char w ')'
 
         | SynExpr.If(cond, thn, alt, range) ->
             use _ = startNewlineExpr w st range
@@ -778,6 +783,7 @@ module Write =
             writeExpr w WriteState.Inline inst
             string w "."
             symbol w method true
+
             match kind with
             | DotMethodKind.Tuple ->
                 string w "("
@@ -787,6 +793,7 @@ module Write =
                 string w " "
                 writeArgSpace w writeExprInParens args
                 ()
+
             string w ")"
 
         | SynExpr.DotProperty(inst, prop, range) ->
@@ -911,6 +918,54 @@ module Write =
 
             string w " ="
             writeBody w writeMember members
+
+        | SynExpr.Record(name, labels, members, attributes, range) ->
+            if not attributes.IsEmpty then
+                writeAttributes w st attributes
+                newline w
+
+            startExpr w st range
+            fmtprintf w "type %s =" (Syntax.textOfSymbol name)
+
+            use _ = withIndent w false
+            newlineIndent w
+            string w "{ "
+
+            writeSeq
+                w
+                WriteState.InlineNoParens
+                (flip string "; ")
+                (fun w _ (RecordLabel(kind, name, typ, _)) ->
+                    if kind = RecordLabelKind.Mutable then
+                        string w "mutable "
+
+                    fmtprintf w "%s: %s" name.Text typ.Text
+
+                    ())
+                labels
+
+            string w " }"
+
+            if not members.IsEmpty then
+                writeBody w writeMember members
+
+
+        | SynExpr.RecordInit(inits, range) ->
+            startExpr w st range
+            string w "{ "
+
+            writeSeq
+                w
+                WriteState.Inline
+                (flip string "; ")
+                (fun w st (SynInit(name, expr, _)) ->
+                    symbol w name true
+                    string w " = "
+                    writeExpr w st expr
+                    ())
+                inits
+
+            string w " }"
 
     and private writeAttributes w _ (attributes: SynAttributes) =
         string w "[<"

@@ -51,7 +51,13 @@ and private handleThreadables (args: SynThreadable list) =
                     SynExpr.LambdaDef(
                         SynLambda(
                             [ Syntax.mkInferredArg "a1" range ],
-                            [ SynExpr.DotMethod(Syntax.mkSynSymbolExpr "a1" range, sym, [], kind, range) ],
+                            [ SynExpr.DotMethod(
+                                  Syntax.mkSynSymbolExpr "a1" range,
+                                  sym,
+                                  [],
+                                  kind,
+                                  range
+                              ) ],
                             range
                         )
                     ),

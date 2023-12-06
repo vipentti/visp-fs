@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(record Mapping
+  (src : int64)
+  (dest : int64)
+  (range : int64)
+
+  (member fn this.Stuff()
+    (printfn "doing stuff %A" (+src this)))
+)
+
+(let temp (rinit [src 1] [Mapping.dest 2] [range 3]))
+
+(printfn "Record is %A" temp)
+
+(.Stuff temp)
+
+()
