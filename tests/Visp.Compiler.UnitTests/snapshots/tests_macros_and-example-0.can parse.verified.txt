@@ -1,0 +1,64 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"and-example-0.visp"
+let ``macro_my-and`` = "__MACRO_INIT__"
+// line 17 @"and-example-0.visp"
+printfn ("my-and %A") (true)
+// line 18 @"and-example-0.visp"
+printfn ("my-and %A") (false)
+// line 19 @"and-example-0.visp"
+printfn ("my-and %A") (true)
+// line 20 @"and-example-0.visp"
+printfn ("my-and %A") (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      false
+    else
+      false)
+// line 21 @"and-example-0.visp"
+printfn ("my-and %A") (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      true
+    else
+      false)
+// line 22 @"and-example-0.visp"
+printfn ("my-and %A") (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      // line 22 @"and-example-0.visp"
+      if CoreMethods.isTruthy(
+        true)
+        then
+          false
+        else
+          false
+    else
+      false)
+// line 23 @"and-example-0.visp"
+let visp_result_todo =
+  // line 23 @"and-example-0.visp"
+  printfn ("my-and %A") (
+    if CoreMethods.isTruthy(
+      true)
+      then
+        // line 23 @"and-example-0.visp"
+        if CoreMethods.isTruthy(
+          true)
+          then
+            true
+          else
+            false
+      else
+        false)
+// line 23 @"and-example-0.visp"
+printfn ("%A") (visp_result_todo)
+

@@ -103,11 +103,38 @@ let closeToken =
     | SynListKind.HashSet -> RBRACE
     | SynListKind.AttributeList -> RBRACKET
 
+[<RequireQualifiedAccess>]
+type private TokenizeMode =
+    | Default
+    | Macro
+
+type private TokenizeArgs =
+    { mutable depth: int32
+      mutable mode: TokenizeMode }
+
+    member t.TryNest() =
+        if t.mode = TokenizeMode.Macro then
+            t.depth <- t.depth + 1
+
+    member t.StartMacro() =
+        t.mode <- TokenizeMode.Macro
+        t.TryNest()
+
+    member t.TryUnnest() =
+        if t.mode = TokenizeMode.Macro then
+            t.depth <- t.depth - 1
+
+            if t.depth <= 0 then
+                t.mode <- TokenizeMode.Default
+                t.depth <- 0
+
 let private evaluatePatterns
     (body: SynMacroBody)
     (pats: Dictionary<string, BoundPatternBody>)
     (range: range)
     : SynExpr =
+
+
     let findPattern bod (pats: Dictionary<string, BoundPatternBody>) =
         match bod with
         | SynMacroBody.Symbol sym ->
@@ -117,22 +144,30 @@ let private evaluatePatterns
         | _ -> None
 
     let rec tokenize
-        (f: SynMacroBody)
         (pats: Dictionary<string, BoundPatternBody>)
         (res: ResizeArray<token>)
+        (args: TokenizeArgs)
+        (f: SynMacroBody)
         =
+
+        let bound_tokenize = tokenize pats res args
 
         match findPattern f pats with
         | Some(pat) ->
             match pat with
-            | BoundPatternBody.Item(it) -> tokenize it pats res
-            | BoundPatternBody.List(lst) -> lst |> List.iter (fun ex -> tokenize ex pats res)
+            | BoundPatternBody.Item(it) -> bound_tokenize it
+            | BoundPatternBody.List(lst) -> lst |> List.iter bound_tokenize
 
         | None ->
             match f with
             | SynMacroBody.List(kind, lst, _) ->
                 res.Add(openToken kind)
-                lst |> List.iter (fun ex -> tokenize ex pats res)
+
+                args.TryNest()
+
+                lst |> List.iter bound_tokenize
+
+                args.TryUnnest()
                 res.Add(closeToken kind)
 
             | SynMacroBody.Trivia(kind, _) ->
@@ -158,12 +193,27 @@ let private evaluatePatterns
 
                 ()
 
-            | SynMacroBody.Symbol sym -> res.Add(LexHelpers.symbolOrKeyword sym.Text)
+            | SynMacroBody.Symbol sym ->
+                match args.mode with
+                | TokenizeMode.Macro -> res.Add(SYMBOL sym.Text)
+                | TokenizeMode.Default ->
+                    let tok = LexHelpers.symbolOrKeyword sym.Text
+
+                    match tok with
+                    | MACRO_NAME _
+                    | SYNTAX_MACRO -> args.StartMacro()
+                    | _ -> ()
+
+                    res.Add(tok)
 
     use pooled = PooledList.GetPooled<token>()
     let res = pooled.Value
 
-    tokenize body pats res
+    let args =
+        { depth = 0
+          mode = TokenizeMode.Default }
+
+    tokenize pats res args body
 
     // Dummy lexbuffer
     let lexbuf = LexBuffer<_>.FromString ""
@@ -198,6 +248,8 @@ let private evaluatePatterns
     try
         let result = raw_expr getTokens lexbuf
 
+        // printfn "result\n%A" result
+
         result
     with :? ParseHelpers.SyntaxError as syn ->
         LexHelpers.outputSyntaxError syn
@@ -218,6 +270,20 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
         result
     | None -> failwith "no matching pattern"
 
+let private hasMacroCall (expr: SynExpr) =
+    let mutable res = false
+
+    // TODO: Provide some iterators for doing this so we can stop earlY?
+    expr
+    |> Helpers.transform (function
+        | SynExpr.SyntaxMacroCall _ as ex ->
+            res <- true
+            ex
+        | it -> it)
+    |> ignore
+
+    res
+
 let expand (expr: SynExpr) =
 
     let collect =
@@ -233,13 +299,23 @@ let expand (expr: SynExpr) =
             )
         | it -> it
 
+    let mutable didExpand = true
+
     let expandMacros =
         function
         | SynExpr.SyntaxMacroCall(SynMacroCall(name = name) as call) ->
             match macroTable.TryGetMacro(Syntax.textOfSymbol name) with
-            | Some(syn) -> expandSynMacro syn call
+            | Some(syn) ->
+                didExpand <- true
+                expandSynMacro syn call
             | None -> failwithf "macro: %A not found" name
         | it -> it
 
     // TODO: this should continue expanding until no more macro invocations are available
-    [ collect; expandMacros ] |> Helpers.runTransforms1 expr
+
+    let mutable expr = expr |> Helpers.transform collect
+
+    while hasMacroCall expr do
+        expr <- Helpers.transform expandMacros expr
+
+    expr

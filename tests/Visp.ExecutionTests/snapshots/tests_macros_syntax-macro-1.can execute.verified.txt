@@ -1,7 +1,0 @@
-﻿true
-Bool false
-String "this works, yay"
-String "this works, yay"
-()
-
-ExitCode: 0

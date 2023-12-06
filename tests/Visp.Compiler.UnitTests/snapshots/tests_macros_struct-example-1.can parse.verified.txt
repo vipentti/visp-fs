@@ -93,7 +93,7 @@ type SourceDestMap (dest: int64, src: int64, len: int64) =
             src
           else
             // line 29 @"struct-example-1.visp"
-            failwith ("Unbalanced cond")
+            failwith ("unreachable cond")
 
   // line 29 @"struct-example-1.visp"
   override t.ToString () =

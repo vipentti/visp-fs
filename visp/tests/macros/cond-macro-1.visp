@@ -5,21 +5,26 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(syntax-macro cond_
+(syntax-macro my-cond_
   [(_) (failwith "unbalanced cond")]
-  [(_ (test body ...))
-  ]
   [(_ (test body ...) rest ...)
-
+    (if test
+      (begin body ...)
+      (my-cond_ rest ...))
   ]
 )
 
-(cond_
+(my-cond_
   [(> 0 1)
-    (printfn "body here")
+    (printfn "body here1")
+    (printfn "body here2")
     ()]
   [(< 1 0)
-    (printfn "here")
+    (printfn "here1")
+    (printfn "here2")
   ]
-  [_ (printfn "default")]
+  [:else
+    (printfn "default1")
+    (printfn "default2")
+    ]
 )

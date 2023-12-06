@@ -11,44 +11,9 @@ namespace ExecutionTests
 open Xunit
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_atom_atom-0`` =
+module ``tests_while_while-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/atom/atom-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_attributes_attributes-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/attributes/attributes-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_builtin-macros_cond-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/cond-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_builtin-macros_thread-first-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-first-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_builtin-macros_thread-first-1`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-first-1.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_builtin-macros_thread-last-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-last-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_chars_char-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/chars/char-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_chars_char-1`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/chars/char-1.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/while/while-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_dot_dot-shorthands`` =
@@ -56,99 +21,94 @@ module ``tests_dot_dot-shorthands`` =
     let ``can execute`` () = TestUtils.runTest "tests/dot/dot-shorthands.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-0`` =
+module ``tests_type_type-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/type/type-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-1`` =
+module ``tests_type_member-fn-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-1.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-10`` =
+module ``tests_type_type-alias-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-10.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/type/type-alias-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-11`` =
+module ``tests_type_record-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-11.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/type/record-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-12`` =
+module ``tests_hashset_hashset-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-12.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/hashset/hashset-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-13`` =
+module ``tests_parsing_match-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-13.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/match-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-14`` =
+module ``tests_parsing_tuple-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-14.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/tuple-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-15`` =
+module ``tests_parsing_strings-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-15.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/strings-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-16`` =
+module ``tests_parsing_lambda-shorthand-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-16.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/lambda-shorthand-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-17`` =
+module ``tests_parsing_props`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-17.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/props.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-2`` =
+module ``tests_parsing_call-tuple-args-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-2.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/call-tuple-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-3`` =
+module ``tests_parsing_let-values`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-3.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/let-values.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-4`` =
+module ``tests_atom_atom-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-4.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/atom/atom-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-5`` =
+module ``tests_vector_vector-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-5.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/vector/vector-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-6`` =
+module ``tests_numbers_int-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-6.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/numbers/int-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-7`` =
+module ``tests_chars_char-1`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-7.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/chars/char-1.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-8`` =
+module ``tests_chars_char-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-8.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/chars/char-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_examples_example-9`` =
+module ``tests_hashmap_hashmap-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/example-9.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_examples_variables-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/examples/variables-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/hashmap/hashmap-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_for-in_for-in-0`` =
@@ -166,24 +126,19 @@ module ``tests_for-in_for-in-2`` =
     let ``can execute`` () = TestUtils.runTest "tests/for-in/for-in-2.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_for-in_for-in-3`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/for-in/for-in-3.visp"
-
-[<VerifyXunit.UsesVerify>]
 module ``tests_for-in_for-in-4`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/for-in/for-in-4.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_hashmap_hashmap-0`` =
+module ``tests_for-in_for-in-3`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/hashmap/hashmap-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/for-in/for-in-3.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_hashset_hashset-0`` =
+module ``tests_attributes_attributes-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/hashset/hashset-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/attributes/attributes-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_if_if-0`` =
@@ -191,24 +146,34 @@ module ``tests_if_if-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/if/if-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_quotation_quote-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/quotation/quote-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_builtin-macros_thread-first-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-first-1.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_builtin-macros_thread-first-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-first-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_builtin-macros_thread-last-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/thread-last-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_builtin-macros_cond-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/builtin-macros/cond-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_struct-example-1`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/struct-example-1.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_macros_struct-macro-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/macros/struct-macro-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_macros_syntax-macro-0`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/macros/syntax-macro-0.visp"
-
-[<VerifyXunit.UsesVerify>]
-module ``tests_macros_syntax-macro-1`` =
-    [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/macros/syntax-macro-1.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_macros_syntax-macro-2`` =
@@ -216,82 +181,132 @@ module ``tests_macros_syntax-macro-2`` =
     let ``can execute`` () = TestUtils.runTest "tests/macros/syntax-macro-2.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_syntax-macro-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/syntax-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_cond-macro-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/cond-macro-1.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_cond-macro-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/cond-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_struct-macro-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/struct-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_and-example-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/and-example-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_while-match-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/while-match-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_numbers_int-0`` =
+module ``tests_macros_or-example-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/numbers/int-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/macros/or-example-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_call-tuple-args-0`` =
+module ``tests_examples_example-4`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/call-tuple-args-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-4.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_lambda-shorthand-0`` =
+module ``tests_examples_example-11`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/lambda-shorthand-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-11.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_let-values`` =
+module ``tests_examples_example-3`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/let-values.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-3.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_match-0`` =
+module ``tests_examples_example-9`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/match-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-9.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_props`` =
+module ``tests_examples_example-10`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/props.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-10.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_strings-0`` =
+module ``tests_examples_example-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/strings-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_parsing_tuple-0`` =
+module ``tests_examples_example-15`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/parsing/tuple-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-15.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_quotation_quote-0`` =
+module ``tests_examples_example-16`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/quotation/quote-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-16.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_type_member-fn-0`` =
+module ``tests_examples_example-1`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-1.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_type_record-0`` =
+module ``tests_examples_variables-0`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/type/record-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/variables-0.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_type_type-0`` =
+module ``tests_examples_example-7`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/type/type-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-7.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_type_type-alias-0`` =
+module ``tests_examples_example-2`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/type/type-alias-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-2.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_vector_vector-0`` =
+module ``tests_examples_example-13`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/vector/vector-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-13.visp"
 
 [<VerifyXunit.UsesVerify>]
-module ``tests_while_while-0`` =
+module ``tests_examples_example-14`` =
     [<Fact>]
-    let ``can execute`` () = TestUtils.runTest "tests/while/while-0.visp"
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-14.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_examples_example-6`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-6.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_examples_example-8`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-8.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_examples_example-12`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-12.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_examples_example-17`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-17.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_examples_example-5`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/examples/example-5.visp"
 
