@@ -51,6 +51,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
 (fn IsIgnoredFile ([file: string])
   (let dir (.GetDirectoryName Path file))
   (or (.Contains dir "errors")
+      (.Contains file "skip")
     ))
 
 (type TestScenario ([m : string] [prefix: string])

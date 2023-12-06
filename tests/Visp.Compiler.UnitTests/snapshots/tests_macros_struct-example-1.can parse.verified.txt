@@ -1,0 +1,107 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+[<Struct()>]
+// line 8 @"struct-example-1.visp"
+type Range (start: int64, len: int64) =
+  // line 8 @"struct-example-1.visp"
+  member _.Start =
+        start
+  // line 8 @"struct-example-1.visp"
+  member _.Len =
+        len
+  // line 8 @"struct-example-1.visp"
+  member _.End =
+        // line 8 @"struct-example-1.visp"
+    CoreMethods.``add``(start, len)
+  // line 8 @"struct-example-1.visp"
+  member d.Offset v =
+    // line 8 @"struct-example-1.visp"
+    CoreMethods.``sub``(v, (d.Start))
+
+  // line 8 @"struct-example-1.visp"
+  member d.Contains v =
+    // line 8 @"struct-example-1.visp"
+    if CoreMethods.isTruthy(
+      CoreMethods.``gte``(v, (d.Start)))
+      then
+        // line 8 @"struct-example-1.visp"
+        CoreMethods.``lt``(v, (d.End))
+      else
+        false
+
+  // line 8 @"struct-example-1.visp"
+  override t.ToString () =
+    // line 8 @"struct-example-1.visp"
+    sprintf ("Range(%i, %i)") ((t.Start)) ((t.Len))
+
+// line 26 @"struct-example-1.visp"
+printfn ("Range is: %A") ((new Range(0, 5)))
+// line 27 @"struct-example-1.visp"
+printfn ("Range end is: %A") ((new Range(0, 5))
+  |> (fun a1 ->
+    // line 27 @"struct-example-1.visp"
+    (a1.End)))
+[<Struct()>]
+// line 29 @"struct-example-1.visp"
+type SourceDestMap (dest: int64, src: int64, len: int64) =
+  // line 29 @"struct-example-1.visp"
+  member _.Dest =
+        // line 29 @"struct-example-1.visp"
+    (new Range(dest, len))
+  // line 29 @"struct-example-1.visp"
+  member _.Src =
+        // line 29 @"struct-example-1.visp"
+    (new Range(src, len))
+  // line 29 @"struct-example-1.visp"
+  member _.Len =
+        len
+  // line 29 @"struct-example-1.visp"
+  member d.Contains v =
+    // line 29 @"struct-example-1.visp"
+    d
+      |> (fun a1 ->
+        // line 29 @"struct-example-1.visp"
+        (a1.Src))
+      |> (fun arg10 ->
+        // line 29 @"struct-example-1.visp"
+        (arg10.Contains (v)))
+
+  // line 29 @"struct-example-1.visp"
+  member d.Get src =
+    // line 29 @"struct-example-1.visp"
+    if CoreMethods.isTruthy(
+      ((d.Src).Contains (src)))
+      then
+        // line 29 @"struct-example-1.visp"
+        CoreMethods.``add``(d
+          |> (fun a1 ->
+            // line 29 @"struct-example-1.visp"
+            (a1.Dest))
+          |> (fun a1 ->
+            // line 29 @"struct-example-1.visp"
+            (a1.Start)), ((d.Src).Offset (src)))
+      else
+        // line 29 @"struct-example-1.visp"
+        if CoreMethods.isTruthy(
+          Value.keyword(":else"))
+          then
+            src
+          else
+            // line 29 @"struct-example-1.visp"
+            failwith ("Unbalanced cond")
+
+  // line 29 @"struct-example-1.visp"
+  override t.ToString () =
+    // line 29 @"struct-example-1.visp"
+    sprintf ("(%A, %A, %i)") ((t.Dest)) ((t.Src)) ((t.Len))
+
+// line 51 @"struct-example-1.visp"
+let visp_result_todo = ()
+// line 51 @"struct-example-1.visp"
+printfn ("%A") (visp_result_todo)
+

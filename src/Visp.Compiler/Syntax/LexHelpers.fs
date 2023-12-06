@@ -9,6 +9,8 @@ open ParseHelpers
 open SyntaxParser
 open System
 open Visp.Compiler.Syntax.Macros
+open Visp.Common
+open System.IO
 
 [<RequireQualifiedAccess>]
 type TokenStreamMode =
@@ -220,3 +222,58 @@ let outputSyntaxError (syn: SyntaxError) =
         eprintfn "Token: %A" ctx.CurrentToken
         eprintfn "Message: %A" ctx.Message
     | _ -> ()
+
+type ParseErrorState =
+    { ReduceTokens: int list
+      ReducibleProductions: list<list<int>>
+      ShiftTokens: list<int>
+      StateStack: list<int>
+      FileName: string
+      Line: int
+      Column: int
+      CurrentToken: token option
+      Message: string }
+
+    override ctx.ToString() =
+        let sb = PooledStringBuilder.Get()
+        use w = new StringWriter(sb)
+
+        fprintfn w "ReduceTokens: %A" ctx.ReduceTokens
+        fprintfn w "ReducibleProductions: %A" ctx.ReducibleProductions
+        fprintfn w "ShiftTokens: %A" ctx.ShiftTokens
+        fprintfn w "StateStack: %A" ctx.StateStack
+        fprintfn w "%s(%i,%i)" (ctx.FileName) (ctx.Line) (ctx.Column)
+        fprintfn w "Token: %A" ctx.CurrentToken
+        fprintfn w "Message: %A" ctx.Message
+
+        PooledStringBuilder.ToStringAndReturn(sb)
+
+// exception ParseError of state: ParseErrorState * range: Text.range
+type ParseError(state: ParseErrorState, syn: SyntaxError, range: Text.range) =
+    inherit Exception(sprintf "%A" state, syn)
+
+    member _.State = state
+    member _.Syn = syn
+    member _.Range = range
+
+let syntaxErrorToParseError (syn: SyntaxError) =
+    match syn.Data0 with
+    | :? FSharp.Text.Parsing.ParseErrorContext<SyntaxParser.token> as ctx ->
+        let (startPos, _) = ctx.ParseState.ResultRange
+        let r = new ParseError (
+            {
+                ReduceTokens = ctx.ReduceTokens
+                ReducibleProductions = ctx.ReducibleProductions
+                ShiftTokens = ctx.ShiftTokens
+                StateStack = ctx.StateStack
+                CurrentToken = ctx.CurrentToken
+                Message = ctx.Message
+                FileName = startPos.FileName
+                Line = startPos.Line
+                Column = startPos.Column
+            },
+            syn,
+            syn.range
+        )
+        r
+    | _ -> failwith "not a valid syntax error"

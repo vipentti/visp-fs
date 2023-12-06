@@ -22,7 +22,6 @@ open FSharp.Text.Parsing
 [<NoEquality; NoComparison>]
 exception SyntaxError of obj (* ParseErrorContext<_> *) * range: Text.range
 
-
 //------------------------------------------------------------------------
 // Parsing: getting positions from the lexer
 //------------------------------------------------------------------------
