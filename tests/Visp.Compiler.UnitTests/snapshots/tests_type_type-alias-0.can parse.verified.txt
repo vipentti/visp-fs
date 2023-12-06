@@ -16,7 +16,7 @@ let things (r: range) =
 // line 13 @"type-alias-0.visp"
 let visp_result_todo =
   // line 13 @"type-alias-0.visp"
-  printfn ("Result is %A") (things ((1, 2)))
+  printfn ("Result is %A") (things (1, 2))
 // line 13 @"type-alias-0.visp"
 printfn ("%A") (visp_result_todo)
 

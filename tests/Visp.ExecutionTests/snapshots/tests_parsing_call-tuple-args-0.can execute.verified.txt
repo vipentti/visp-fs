@@ -1,0 +1,5 @@
+﻿result is is "firstsecondthird"
+result is is "firstsecondthird"
+()
+
+ExitCode: 0
