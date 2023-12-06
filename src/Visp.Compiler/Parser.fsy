@@ -620,6 +620,8 @@ letstar:
         { SynExpr.LetStar($2, $3, lhs parseState) }
 
 type_expr:
+    | TYPE symbol syntype_ident
+        { SynExpr.TypeAlias($2, $3, lhs parseState) }
     | TYPE symbol name_list_start member_list_start
         { SynExpr.Type($2, $3, $4, [], lhs parseState) }
     | attribute_list TYPE symbol name_list_start member_list_start

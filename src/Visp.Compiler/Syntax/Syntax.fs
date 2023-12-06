@@ -198,6 +198,7 @@ type SynExpr =
         members: SynTypeMember list *
         attributes: SynAttributes *
         range: range
+    | TypeAlias of name: SynSymbol * typ: SynType * range: range
     | ThreadFirst of exprs: SynExpr list * range: range
     | ThreadLast of exprs: SynThreadable list * range: range
     | RangeExpr of first: SynExpr * step: SynExpr option * last: SynExpr * range: range
@@ -255,6 +256,7 @@ type SynExpr =
         | DotMethod(range = r)
         | Atom(range = r)
         | Type(range = r)
+        | TypeAlias(range = r)
         | ThreadFirst(range = r)
         | ThreadLast(range = r)
         | Deref(range = r) -> r

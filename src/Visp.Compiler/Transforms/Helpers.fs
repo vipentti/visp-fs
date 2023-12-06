@@ -116,6 +116,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Const _ -> expr
         | SynExpr.Keyword _ -> expr
         | SynExpr.Symbol _ -> expr
+        | SynExpr.TypeAlias _ -> expr
         | SynExpr.LambdaShort(call, range) -> SynExpr.LambdaShort(bound_transform call, range)
         | SynExpr.Match(expr, pats, range) ->
             SynExpr.Match(
