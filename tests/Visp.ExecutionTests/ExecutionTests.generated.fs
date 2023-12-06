@@ -186,6 +186,11 @@ module ``tests_if_if-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/if/if-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_struct-example-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/struct-example-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_struct-macro-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/struct-macro-0.visp"
@@ -256,9 +261,19 @@ module ``tests_type_member-fn-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/record-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_type-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/type-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_type_type-alias-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/type-alias-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_vector_vector-0`` =
