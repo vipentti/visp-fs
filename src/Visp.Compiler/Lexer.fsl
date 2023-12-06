@@ -71,6 +71,9 @@ let nonWhitespace = [^ ' ' '\t' '\r' '\n']
 let charWords = (
   "newline"
     | "linefeed"
+    | "cr"
+    | "lf"
+    | "return"
     | "tab"
     | "nul"
     | "null"

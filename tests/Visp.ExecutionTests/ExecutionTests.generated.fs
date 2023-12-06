@@ -46,6 +46,11 @@ module ``tests_chars_char-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/chars/char-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_chars_char-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/chars/char-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_dot_dot-shorthands`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/dot/dot-shorthands.visp"
@@ -219,6 +224,11 @@ module ``tests_macros_while-match-0`` =
 module ``tests_numbers_int-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/numbers/int-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_parsing_call-tuple-args-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/call-tuple-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_parsing_lambda-shorthand-0`` =
