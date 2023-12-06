@@ -28,7 +28,7 @@ let CoreLibRoot () =
     | path -> path |> Path.GetFullPath
 
 let coreLibPath name =
-    Path.Combine(CoreLibRoot (), name) |> Path.GetFullPath
+    Path.Combine(CoreLibRoot(), name) |> Path.GetFullPath
 
 let runtimeLibPath =
     let src_dir = __SOURCE_DIRECTORY__

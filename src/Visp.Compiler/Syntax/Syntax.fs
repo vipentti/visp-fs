@@ -51,7 +51,12 @@ type LongIdent = Ident list
 type SynLongIdent = SynLongIdent of id: LongIdent * dotRanges: range list * trivia: unit option list
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
-type SynType = Ident of Ident
+type SynType =
+    | Ident of Ident
+
+    member this.Text =
+        let (Ident id) = this
+        id.idText
 
 [<Struct; RequireQualifiedAccess>]
 type SynStringKind =
@@ -80,6 +85,16 @@ type SynConst =
     | Char of char
     | Decimal of System.Decimal
     | String of text: string * synStringKind: SynStringKind * range: range
+
+type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range
+
+[<NoComparison; RequireQualifiedAccess>]
+type RecordLabelKind =
+    | Default
+    | Mutable
+
+type RecordLabel =
+    | RecordLabel of kind: RecordLabelKind * name: SynSymbol * argtype: SynType * range: range
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynName =
@@ -110,6 +125,12 @@ type DotMethodKind =
     | Tuple
     | Apply
 
+
+[<RequireQualifiedAccess>]
+type BeginKind =
+    | Begin
+    | Do
+
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynExpr =
     // special operator application
@@ -134,7 +155,7 @@ type SynExpr =
     | Const of constant: SynConst * range: range
     | Quote of shorthand: bool * expr: SynQuoted * range: range
     | Quasiquote of shorthand: bool * expr: SynQuasiquote * range: range
-    | Begin of exprs: SynExpr list * range: range
+    | Begin of exprs: SynExpr list * kind: BeginKind * range: range
     | New of typ: SynType * args: SynExpr list * range: range
     | SimpleLet of name: SynName * value: SynExpr * range: range
     | SimpleMut of name: SynName * value: SynExpr * range: range
@@ -156,9 +177,21 @@ type SynExpr =
     | HashSet of exprs: SynExpr list * range: range
     | DotIndex of target: SynExpr * index: SynExpr * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
-    | DotMethod of target: SynExpr * method: SynSymbol * args: SynExpr list * kind : DotMethodKind * range: range
+    | DotMethod of
+        target: SynExpr *
+        method: SynSymbol *
+        args: SynExpr list *
+        kind: DotMethodKind *
+        range: range
     | Atom of expr: SynExpr * range: range
     | Deref of short: bool * expr: SynExpr * range: range
+    | Record of
+        name: SynSymbol *
+        labels: RecordLabel list *
+        members: SynTypeMember list *
+        attributes: SynAttributes *
+        range: range
+    | RecordInit of inits: SynInit list * range: range
     | Type of
         name: SynSymbol *
         args: SynName list *
@@ -190,6 +223,8 @@ type SynExpr =
         | MacroDef(range = r)
         | MacroCall(range = r)
         | FunctionDef(range = r)
+        | Record(range = r)
+        | RecordInit(range = r)
         | FunctionCall(range = r)
         | SyntaxMacroCall(SynMacroCall(range = r))
         | SyntaxMacro(SynMacro(range = r))
@@ -232,8 +267,8 @@ type SynExpr =
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynAttribute =
     { TypeName: SynType
       ArgExpr: SynExpr
-    //   Target: Ident option
-    //   AppliesToGetterAndSetter: bool
+      //   Target: Ident option
+      //   AppliesToGetterAndSetter: bool
       Range: range }
 
 and [<RequireQualifiedAccess>] SynAttributeList =
@@ -242,6 +277,8 @@ and [<RequireQualifiedAccess>] SynAttributeList =
 
 and SynAttributes = SynAttributeList list
 
+and SynInit = SynInit of name: SynSymbol * expr: SynExpr * range: range
+
 and SynBinding = SynBinding of name: SynName * expr: SynExpr * range: range
 
 and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: range
@@ -249,6 +286,10 @@ and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: r
 and SynMacroCall = SynMacroCall of name: SynSymbol * args: SynMacroBody list * range: range
 
 and SynMacroCase = SynMacroCase of pats: SynMacroPat list * body: SynMacroBody * range: range
+
+and [<RequireQualifiedAccess>] RecordContent =
+    | Label of RecordLabel
+    | Member of SynTypeMember
 
 and [<RequireQualifiedAccess>] SynMacroPat =
     | Const of value: SynConst * range: range
@@ -371,7 +412,7 @@ and SynArg =
 and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
 
 module Syntax =
-    let UnitExpr r = SynExpr.Const (SynConst.Unit, r)
+    let UnitExpr r = SynExpr.Const(SynConst.Unit, r)
 
     [<Literal>]
     let parserRecovery = "__PARSER_RECOVERY__"
@@ -459,6 +500,22 @@ module Syntax =
             l
 
     let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
+
+    let partitionMembers (r: RecordContent list) =
+        let labels, members =
+            r
+            |> List.partition (function
+                | RecordContent.Label _ -> true
+                | _ -> false)
+
+        (labels
+         |> List.choose (function
+             | RecordContent.Label it -> Some it
+             | _ -> None),
+         members
+         |> List.choose (function
+             | RecordContent.Member it -> Some it
+             | _ -> None))
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type ParsedHashDirectiveArgument =
