@@ -1,0 +1,536 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day5")
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+(printfn "filepath: %s" filepath)
+
+(let contents (System.IO.File.ReadLines filepath))
+
+;; (let splitOptions (bor (+TrimEntries System.StringSplitOptions) (+RemoveEmptyEntries System.StringSplitOptions)))
+(let splitOptions (bor System.StringSplitOptions.TrimEntries (+RemoveEmptyEntries System.StringSplitOptions)))
+
+(record Mapping (src: int64) (dst: int64) (range: int64)
+  (member d.last (+ d.src d.range))
+)
+(record Amap
+  (sourceType: string)
+  (destType: string)
+  (mappings: seq<Mapping>))
+
+(type range int64*int64)
+
+(fn inRange (num (mapping: Mapping))
+  (and (>= num (+src mapping))
+      (<= num (+last mapping))
+      ))
+
+(struct Range ([start: int64] [len: int64])
+  (member _.Start start)
+  (member _.Len len)
+  (member _.Last (+ start (dec64 len)))
+  (member _.End (+ start len))
+
+  (member fn d.Offset (v)
+    (- (+Start d) v))
+
+  (member fn d.Contains (v)
+    (and
+      (>= v (+Start d))
+      (< v (+End d))))
+
+  (member fn d.Seq ()
+    (let s (+Start d))
+    (let end (dec64 (+End d)))
+    (seq (!range s .. end)))
+
+  (override fn t.ToString ()
+    (sprintf "Range(%i, %i)" (+Start t) (+Len t)))
+)
+
+(fn intersection ((lhs : range) (rhs : range))
+  (match (lhs . rhs)
+    [((l1 . r1) . (l2 . r2))
+      (if (or
+        (and (<= l1 r2) (>= r1 l2))
+        (and (>= r1 l2) (<= l1 r2)))
+        (do
+          (Some
+            (
+              (.Max Math l1 l2)
+              .
+              (.Min Math r1 r2)
+            )
+          ))
+        None
+      )
+    ]
+  ))
+(fn exclusion ([lhs: range] [rhs: range])
+  (let l1 (fst lhs))
+  (let r1 (snd lhs))
+  (let l2 (fst rhs))
+  (let r2 (snd rhs))
+  (seq
+    (cond
+      (and (= l1 l2) (= r1 r2))
+        ()
+      (and (< l1 l2) (> r1 r2))
+        (begin
+          (yield (l1 . (dec64 l2)))
+          (yield ((inc64 r2) . r1))
+        )
+      (and (< l1 l2))
+        (yield (l1 . (.Min Math r1 (dec64 l2))))
+      (and (> r1 r2))
+        (yield ((.Max Math l1 (inc64 r2)) . r1))
+      :else
+        ()
+    ))
+)
+
+;; https://github.com/SaahilClaypool/aoc/blob/main/2023/fsharp/Day05.fs
+(fn mapperToRange (m) ((+src m) . (dec64 (+last m))))
+(fn mapRange ([mapper: Amap] [r : range])
+  (let matchingRanges
+    (->> (+mappings mapper)
+      (Seq.choose #(
+        match (intersection r (mapperToRange %1))
+        [None None]
+        [(Some (lhs . rhs ))
+          (let m %1)
+          (Some
+            ( (+ (- lhs (+src m)) (+dst m))
+              .
+              (+ (- rhs (+src m)) (+dst m))
+            )
+          )
+        ]
+      ))
+      (List.ofSeq)
+    ))
+
+  (let unmatchedRanges
+    (->> (+mappings mapper)
+      (Seq.fold #(begin
+        (let state %1)
+        (let next %2)
+        (->> state
+          (Seq.map #(exclusion %3 (mapperToRange next)))
+          (Seq.concat)))
+          (!list r))
+      (List.ofSeq)
+    ))
+
+  ;; (printfn "%A converting range %A to %A" (+destType mapper) r matchingRanges)
+  ;; (printfn "excluded: %A" unmatchedRanges)
+
+  (Seq.concat (!list matchingRanges unmatchedRanges))
+)
+
+(fn mapRanges [(mapper: Amap) (r: seq<range>)]
+  (let r (List.ofSeq r))
+  (->> r
+    (Seq.map (mapRange mapper))
+    (Seq.concat))
+)
+
+(fn RangeIntersection ([lhs: Range] [rhs: Range])
+  (let l1 (+Start lhs))
+  (let r1 (+Last lhs))
+  (let l2 (+Start rhs))
+  (let r2 (+Last rhs))
+  (match (intersection (l1 . r1) (l2 . r2))
+    [None None]
+    [(Some (new1 . new2))
+      (let len (inc64 (- new2 new1)))
+      (Some (new Range new1 len))
+    ]
+  )
+)
+
+(fn RangeExclusion ([lhs: Range] [rhs: Range])
+  (let l1 (+Start lhs))
+  (let r1 (+Last lhs))
+  (let l2 (+Start rhs))
+  (let r2 (+Last rhs))
+  (seq
+    (cond
+      (and (= l1 l2) (= r1 r2))
+        ()
+      (and (< l1 l2) (> r1 r2))
+        (begin
+          (yield (l1 . (dec64 l2)))
+          (yield ((inc64 r2) . r1))
+        )
+      (and (< l1 l2))
+        (yield (l1 . (.Min Math r1 (dec64 l2))))
+      (and (> r1 r2))
+        (yield ((.Max Math l1 (inc64 r2)) . r1))
+      :else
+        ()
+    ))
+)
+
+(struct SourceDestMap ([dest: int64] [src: int64] [len: int64])
+  (member _.Dest (new Range dest len))
+  (member _.Src (new Range src len))
+  (member _.Len len)
+  ;; (member _.Dest dest)
+  ;; (member _.Src dest)
+  ;; (let dest dest)
+  ;; (let src src)
+  ;; (let len len)
+  ;; (let end (+ src len))
+
+  (member fn d.Contains (v)
+    (->> d +Src #(-Contains %1 v))
+    ;; (and (>= v src)
+    ;;      (< v end))
+    )
+
+  (member fn d.Get (num)
+    (cond
+      (-Contains d num)
+        (do
+          (let src (->> d +Src +Start))
+          (let dest (->> d +Dest +Start))
+          (+ (- num src) dest)
+        )
+      :else
+        num
+    )
+  )
+
+  (override fn t.ToString ()
+    (sprintf "(%A, %A, %i)" (+Dest t) (+Src t) (+Len t)))
+)
+
+(type RangeMapping ()
+  ;; (let src_to_dest (new Dictionary<int64,int64>))
+  (let ranges (new ResizeArray<SourceDestMap>))
+
+  (member fn _.Get (nval)
+    (let res
+      (->> ranges
+        (Seq.tryFind #(-Contains %1 nval))
+        #(match %1
+          [(Some map) (-Get map nval)]
+          [None nval]
+        )))
+    ;; (mut done false)
+    ;; (mut enu (.GetEnumerator ranges))
+    ;; (mut res src)
+    ;; (while (and (not done) (.MoveNext enu))
+    ;;   (let range (+Current enu))
+
+    ;;   (if (-Contains range src)
+    ;;     (do
+    ;;       (set! res (-Get range src))
+    ;;       (set! done true)
+    ;;     ))
+    ;; )
+
+    res
+  )
+
+  (member fn _.AddRange ((dest: int64) (src: int64) (len: int64))
+    ;; todo
+
+    (.Add ranges (new SourceDestMap dest src len))
+
+    ;; (let src_range (seq (!range src .. (+ src (dec64 len)))))
+    ;; (let dest_range (seq (!range dest .. (+ dest (dec64 len)))))
+
+    ;; (for/in [pair (Seq.zip src_range dest_range)]
+    ;;   (match pair
+    ;;     [( src . dest)
+    ;;       (.Add src_to_dest src dest)
+    ;;     ]))
+    ()
+    ))
+
+
+(type Almanac ((seeds: array<int64>) [fromMap: Dictionary<string,string>] [ranges: Dictionary<string, RangeMapping>])
+  (let seeds seeds)
+  (let fromMap fromMap)
+  (let ranges ranges)
+
+  (member _.Seeds seeds)
+
+  (member fn _.TryGetTarget (from)
+    (match (.TryGetValue fromMap from)
+      [(false, _) None]
+      [(true, it) (Some it)]))
+
+  (member fn t.TryGetValue (from src)
+    (match (.TryGetValue ranges from)
+      [(false, _) None]
+      [(true, rng) (Some (.Get rng src))])
+  ))
+
+(type Part2Almanac ((seeds: array<Range>) [fromMap: Dictionary<string,string>] [ranges: Dictionary<string, RangeMapping>])
+  (let seeds seeds)
+  (let fromMap fromMap)
+  (let ranges ranges)
+
+  (member _.Seeds seeds)
+
+  (member fn _.TryGetTarget (from)
+    (match (.TryGetValue fromMap from)
+      [(false, _) None]
+      [(true, it) (Some it)]))
+
+  (member fn t.TryGetValue (from src)
+    (match (.TryGetValue ranges from)
+      [(false, _) None]
+      [(true, rng) (Some (.Get rng src))])
+  ))
+
+(fn readNextNum ([nums: byref<SpanUtils.Enumerators.StringSplitByCharEnumerator>])
+  (let _ (.MoveNext nums))
+  (let c (+Current nums))
+  (span->int64 c))
+
+(fn TryReadNextNumByChar ([nums: byref<SpanUtils.Enumerators.StringSplitByCharEnumerator>])
+  (match (.MoveNext nums)
+    [false None]
+    [true
+      (Some (span->int64 (+Current nums)))]))
+
+(fn ParseFile ([lines: seq<string>])
+  (mut lines (.GetEnumerator lines))
+
+  (let seeds (!vector))
+  (let part2seeds (!vector))
+  (let fromMap (new Dictionary<_,_>))
+  (let ranges (new Dictionary<_,_>))
+
+  (let amaps (!vector))
+
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (let line (.AsSpan line))
+    (let line (.Trim line))
+
+    (cond
+      (.StartsWith line "seeds:")
+        (do
+          (let index (.IndexOf line #\:))
+          (let rest (.Slice line (inc index)))
+          (mut enu (.EnumerateSplitSubstrings rest #\space splitOptions))
+
+          (while-match (TryReadNextNumByChar &enu)
+            [None false]
+            [(Some num)
+              (.Add seeds num)
+              true])
+
+          (mut enu (.EnumerateSplitSubstrings rest #\space splitOptions))
+
+          (while-match (TryReadNextNumByChar &enu)
+            [None false]
+            [(Some num)
+              (match (TryReadNextNumByChar &enu)
+                [None false]
+                [(Some len)
+                  (.Add part2seeds (new Range num len))
+                  true])
+              ;;(.Add seeds num)
+              ])
+          ()
+        )
+      (.EndsWith line "map:")
+        (do
+          ;; TODO: Support (->> for byref types?)
+          (let line (.TrimEnd line "map:"))
+          (let line (.Trim line))
+          (do
+            ;; read names
+            (mut enu (.EnumerateSplitSubstrings line "-to-" splitOptions))
+            ;; Todo: improved discard support?
+            (let _ (.MoveNext enu))
+            (let from (.ToString (+Current enu)))
+            (let _ (.MoveNext enu))
+            (let to (.ToString (+Current enu)))
+
+            ;; (printfn " from %s to %s" (.ToString from) (.ToString to))
+
+            (mut done false)
+
+            (let mapping (new RangeMapping))
+
+            (.Add fromMap from to)
+            (.Add ranges from mapping)
+
+            (let seqs (!vector))
+
+            (while (and (not done) (.MoveNext lines))
+                (let cur (+Current lines))
+
+                (if (= 0 (+Length cur))
+                  (set! done true)
+                  (do
+                    (mut nums (.EnumerateSplitSubstrings cur #\space splitOptions))
+
+                    (let destRange (readNextNum &nums))
+                    (let srcRange (readNextNum &nums))
+                    (let rangeLength (readNextNum &nums))
+                    ;;(printfn "destRange %i srcRange %i rangeLength %i" destRange srcRange rangeLength)
+                    ;; (let res (new SourceDestMap destRange srcRange rangeLength))
+
+                    (-AddRange mapping destRange srcRange rangeLength)
+                    (.Add seqs (rinit [src srcRange] [dst destRange] [range rangeLength]))
+                    ()
+                  ))
+                ())
+
+              (.Add amaps (rinit [sourceType from] [destType to] [mappings seqs]))
+
+            ()
+          )
+          ;; (let )
+          ()
+        )
+      :else ()
+    )
+    ;(let span (->> lines +Current .AsSpan))
+
+    ()
+  )
+
+  ;; (printfn "%A" seeds)
+  ;; (printfn "%A" fromMap)
+  ;; (printfn "%A" ranges)
+
+  (let part1 (new Almanac (->> seeds (Array.ofSeq)) fromMap ranges))
+  ;; (let part2 (new Part2Almanac (->> part2seeds (Array.ofSeq)) fromMap ranges))
+
+  (part1 . amaps)
+  )
+
+;; (fn ParseFile [(line: string)]
+;;   ())
+
+
+(fn GetLocation ([alm: Almanac] (from: string) (src: int64))
+  (mut from from)
+  (mut src src)
+  (while-match (-TryGetValue alm from src)
+    [None false]
+    [(Some target)
+      ;; (printfn "from %s %A -> %A" from src target)
+      (match (-TryGetTarget alm from)
+        [None false]
+        [(Some next)
+          (set! from next)
+          (set! src target)
+          true
+        ])
+    ])
+  src
+)
+(fn GetLocationP2 ([alm: Part2Almanac] (from: string) (src: int64))
+  (mut from from)
+  (mut src src)
+  (while-match (-TryGetValue alm from src)
+    [None false]
+    [(Some target)
+      ;; (printfn "from %s %A -> %A" from src target)
+      (match (-TryGetTarget alm from)
+        [None false]
+        [(Some next)
+          (set! from next)
+          (set! src target)
+          true
+        ])
+    ])
+  src
+)
+
+(fn GetPart2Locations ([alm: Part2Almanac] [seedRange: Range])
+  (mut minValue -1L)
+
+  (for/in [src (.Seq seedRange)]
+    ;; (printfn "src: %i" src)Vgc
+    (let t (GetLocationP2 alm "seed" src))
+    (if (= minValue -1)
+      (set! minValue t)
+      (if (< t minValue)
+        (set! minValue t))))
+
+  minValue
+)
+
+(fn SolvePart2 [(amaps: seq<Amap>) (seeds: seq<int64>)]
+  (let seedRanges (->> seeds
+    (Seq.chunkBySize 2)
+    (Seq.map #((.[0] %1) . (dec64 (+ (.[0] %1) (.[1] %1)))))
+  ))
+
+  (fn mapSeedRange ([r: range])
+    (->> amaps
+      (Seq.fold #(mapRanges %2 %1) (!list r))))
+
+  (let finalValues
+    (->> seedRanges
+      (Seq.map mapSeedRange)
+      (Seq.concat)
+      (Seq.toList))
+  )
+
+  (->> finalValues
+    (Seq.map fst)
+    (Seq.min))
+)
+
+;;(let results (->> contents (Seq.map ParseFile)))
+(let result (ParseFile contents))
+(let almanac (fst result))
+(let part2Almanac (snd result))
+(let seeds (+Seeds almanac))
+
+(if example
+  (do
+    (printfn "seed 79 %A" (-TryGetValue almanac "seed" 79))
+    (printfn "seed 14 %A" (-TryGetValue almanac "seed" 14))
+    (printfn "seed 55 %A" (-TryGetValue almanac "seed" 55))
+    (printfn "seed 13 %A" (-TryGetValue almanac "seed" 13))
+
+
+    ;; (printfn "locations %A" locations)
+
+    ;;(let xx (GetLocation almanac "seed" 79))
+    ()
+  ))
+
+(let part1locations (->> (+Seeds almanac) (Array.map #(GetLocation almanac "seed" %1))))
+(let part1 (->> part1locations (Array.min)))
+
+(WriteResult "part1" part1 (if example 35L 165788812L))
+
+(let part2 (SolvePart2 part2Almanac seeds))
+
+;; (let part2Locations (->> (+Seeds part2Almanac) (Array.Parallel.map #(GetPart2Locations part2Almanac %1))))
+;; (let part2 (->> part2Locations (Array.min)))
+
+(WriteResult "part2" part2 (if example 46 -1))
+
+()
+
+()

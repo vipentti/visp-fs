@@ -44,9 +44,14 @@
 (fn inline dec [a] (- a 1))
 (fn inline add1 [a] (+ a 1))
 (fn inline inc [a] (+ a 1))
+(fn inline dec64 [a] (- a 1L))
+(fn inline inc64 [a] (+ a 1L))
 
 (fn inline span->int32 [(sp: System.ReadOnlySpan<char>)]
   (System.Int32.Parse sp))
+
+(fn inline span->int64 [(sp: System.ReadOnlySpan<char>)]
+  (System.Int64.Parse sp))
 
 (fn inline try-string->int32 [(s: string)]
   (match (System.Int32.TryParse s)
