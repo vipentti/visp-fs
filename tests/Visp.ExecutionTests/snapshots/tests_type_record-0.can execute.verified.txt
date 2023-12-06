@@ -1,0 +1,7 @@
+﻿Record is { src = 1L
+  dest = 2L
+  range = 3L }
+doing stuff 1L
+()
+
+ExitCode: 0

@@ -1,0 +1,25 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro cond_
+  [(_) (failwith "unbalanced cond")]
+  [(_ (test body ...))
+  ]
+  [(_ (test body ...) rest ...)
+
+  ]
+)
+
+(cond_
+  [(> 0 1)
+    (printfn "body here")
+    ()]
+  [(< 1 0)
+    (printfn "here")
+  ]
+  [_ (printfn "default")]
+)

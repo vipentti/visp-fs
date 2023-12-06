@@ -18,6 +18,18 @@ module CoreParser =
 
         Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
 
+    let private tfs =
+        [| Transforms.SyntaxMacros.expand
+           Transforms.QuasiquoteExpander.expand
+           Transforms.BuiltinMacros.expand
+           Transforms.Common.transformLambdaShortHands |]
+
+    let expandExpr expr =
+        Transforms.Helpers.runTransforms tfs expr
+
+    let transformFile file =
+        Transforms.Helpers.transformParsedFile expandExpr file
+
     let writeParsedFile file outputStream (template: string) =
         let fileWriter = Writer.CustomFileWriter(outputStream, 2, "//")
         fileWriter.Write(template.Trim())
