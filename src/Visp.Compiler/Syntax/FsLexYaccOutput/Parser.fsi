@@ -16,6 +16,7 @@ type token =
   | INT32 of (int)
   | INLINE
   | REC
+  | RINIT
   | THREAD_FIRST
   | THREAD_LAST
   | SYNTAX_MACRO
@@ -25,7 +26,9 @@ type token =
   | DEREF_KW
   | WHILE
   | TYPE
+  | RECORD
   | MEMBER
+  | MEMBERS
   | MEMBERFN
   | OVERRIDE
   | MACRO
@@ -101,6 +104,7 @@ type tokenId =
     | TOKEN_INT32
     | TOKEN_INLINE
     | TOKEN_REC
+    | TOKEN_RINIT
     | TOKEN_THREAD_FIRST
     | TOKEN_THREAD_LAST
     | TOKEN_SYNTAX_MACRO
@@ -110,7 +114,9 @@ type tokenId =
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
     | TOKEN_TYPE
+    | TOKEN_RECORD
     | TOKEN_MEMBER
+    | TOKEN_MEMBERS
     | TOKEN_MEMBERFN
     | TOKEN_OVERRIDE
     | TOKEN_MACRO
@@ -247,6 +253,20 @@ type nonTerminalId =
     | NONTERM_mut
     | NONTERM_letstar
     | NONTERM_type_expr
+    | NONTERM_record_expr
+    | NONTERM_record_labels_or_members
+    | NONTERM_rev_record_labels_or_members
+    | NONTERM_record_label_or_member_parens
+    | NONTERM_record_label_or_member
+    | NONTERM_typed_list
+    | NONTERM_rev_typed_list
+    | NONTERM_syntyped
+    | NONTERM_record_members
+    | NONTERM_record_init_expr
+    | NONTERM_record_init_list
+    | NONTERM_rev_record_init_list
+    | NONTERM_record_init_parens
+    | NONTERM_record_init
     | NONTERM_attribute_list
     | NONTERM_rev_attribute_list
     | NONTERM_attr_list

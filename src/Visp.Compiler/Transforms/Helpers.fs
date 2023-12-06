@@ -63,7 +63,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
             SynExpr.Concat(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Atom(expr, range) -> SynExpr.Atom(bound_transform expr, range)
         | SynExpr.Deref(short, expr, range) -> SynExpr.Deref(short, bound_transform expr, range)
-        | SynExpr.Begin(exprs, range) -> SynExpr.Begin(List.map bound_transform exprs, range)
+        | SynExpr.Begin(exprs, k, range) -> SynExpr.Begin(List.map bound_transform exprs, k, range)
         | SynExpr.New(typ, args, range) -> SynExpr.New(typ, List.map bound_transform args, range)
         | SynExpr.SimpleLet(name, value, range) ->
             SynExpr.SimpleLet(name, bound_transform value, range)
@@ -89,7 +89,13 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.DotProperty(target, property, range) ->
             SynExpr.DotProperty(bound_transform target, property, range)
         | SynExpr.DotMethod(target, method, args, kind, range) ->
-            SynExpr.DotMethod(bound_transform target, method, List.map bound_transform args, kind, range)
+            SynExpr.DotMethod(
+                bound_transform target,
+                method,
+                List.map bound_transform args,
+                kind,
+                range
+            )
         | SynExpr.While(cond, body, range) ->
             SynExpr.While(bound_transform cond, List.map bound_transform body, range)
         | SynExpr.ThreadFirst(body, range) ->
@@ -124,41 +130,64 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                     )),
                 range
             )
-        | SynExpr.Type(name, args, members, attributes, range) ->
-            let tfmember =
-                function
-                | SynTypeMember.Let(name, expr, range) ->
-                    SynTypeMember.Let(name, bound_transform expr, range)
-                | SynTypeMember.Mut(name, expr, range) ->
-                    SynTypeMember.Mut(name, bound_transform expr, range)
-                | SynTypeMember.Member(name, expr, range) ->
-                    SynTypeMember.Member(name, bound_transform expr, range)
-                | SynTypeMember.MemberFn(name, args, expr, range) ->
-                    SynTypeMember.MemberFn(name, args, List.map bound_transform expr, range)
-                | SynTypeMember.OverrideMember(name, expr, range) ->
-                    SynTypeMember.OverrideMember(name, bound_transform expr, range)
-                | SynTypeMember.OverrideFn(name, args, expr, range) ->
-                    SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
 
+        | SynExpr.RecordInit(inits, range) ->
+            SynExpr.RecordInit(
+                inits |> List.map (fun (SynInit(n, ex, r)) -> SynInit(n, bound_transform ex, r)),
+                range
+            )
+
+        | SynExpr.Record(name, args, members, attributes, range) ->
+            SynExpr.Record(
+                name,
+                args,
+                fixMembers bound_transform members,
+                fixAttributes bound_transform attributes,
+                range
+            )
+        | SynExpr.Type(name, args, members, attributes, range) ->
             SynExpr.Type(
                 name,
                 args,
-                List.map tfmember members,
-                attributes
-                |> List.map (fun it ->
-                    let items = it.Attributes
-
-                    let newAttributes =
-                        items
-                        |> List.map (fun attr ->
-                            let expr = bound_transform attr.ArgExpr
-                            { attr with ArgExpr = expr })
-
-                    { it with Attributes = newAttributes }),
+                fixMembers bound_transform members,
+                fixAttributes bound_transform attributes,
                 range
             )
 
     func result
+
+and private fixAttributes bound_transform attributes =
+    attributes
+    |> List.map (fun it ->
+        let items = it.Attributes
+
+        let newAttributes =
+            items
+            |> List.map (fun attr ->
+                let expr = bound_transform attr.ArgExpr
+                { attr with ArgExpr = expr })
+
+        { it with Attributes = newAttributes })
+
+
+and private fixMembers bound_transform members =
+    let tfmember =
+        function
+        | SynTypeMember.Let(name, expr, range) ->
+            SynTypeMember.Let(name, bound_transform expr, range)
+        | SynTypeMember.Mut(name, expr, range) ->
+            SynTypeMember.Mut(name, bound_transform expr, range)
+        | SynTypeMember.Member(name, expr, range) ->
+            SynTypeMember.Member(name, bound_transform expr, range)
+        | SynTypeMember.MemberFn(name, args, expr, range) ->
+            SynTypeMember.MemberFn(name, args, List.map bound_transform expr, range)
+        | SynTypeMember.OverrideMember(name, expr, range) ->
+            SynTypeMember.OverrideMember(name, bound_transform expr, range)
+        | SynTypeMember.OverrideFn(name, args, expr, range) ->
+            SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
+
+    members |> List.map tfmember
+
 
 let runTransforms1 (expr: SynExpr) (tfs: (SynExpr -> SynExpr) seq) =
     let flip f a b = f b a
