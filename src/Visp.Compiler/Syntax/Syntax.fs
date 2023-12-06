@@ -413,8 +413,8 @@ and [<RequireQualifiedAccess>] SynArg =
 
     member d.NameText =
         match d with
-        | TypedArg (name = name)
-        | InferredArg (name = name) -> name.Text
+        | TypedArg(name = name)
+        | InferredArg(name = name) -> name.Text
 
 and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
 

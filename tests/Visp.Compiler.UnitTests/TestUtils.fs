@@ -19,10 +19,12 @@ let parseCoreLibs () =
 
         for lib in libs do
             let path = lib.Path
+
             CoreParser.parseFile path lib.ReturnLast
             // TODO: We only really want macros here?
             |> CoreParser.transformFile
             |> ignore
+
         ()
 
     with :? ParseHelpers.SyntaxError as syn ->
