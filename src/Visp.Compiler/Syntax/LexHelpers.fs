@@ -260,20 +260,21 @@ let syntaxErrorToParseError (syn: SyntaxError) =
     match syn.Data0 with
     | :? FSharp.Text.Parsing.ParseErrorContext<SyntaxParser.token> as ctx ->
         let (startPos, _) = ctx.ParseState.ResultRange
-        let r = new ParseError (
-            {
-                ReduceTokens = ctx.ReduceTokens
-                ReducibleProductions = ctx.ReducibleProductions
-                ShiftTokens = ctx.ShiftTokens
-                StateStack = ctx.StateStack
-                CurrentToken = ctx.CurrentToken
-                Message = ctx.Message
-                FileName = startPos.FileName
-                Line = startPos.Line
-                Column = startPos.Column
-            },
-            syn,
-            syn.range
-        )
+
+        let r =
+            new ParseError(
+                { ReduceTokens = ctx.ReduceTokens
+                  ReducibleProductions = ctx.ReducibleProductions
+                  ShiftTokens = ctx.ShiftTokens
+                  StateStack = ctx.StateStack
+                  CurrentToken = ctx.CurrentToken
+                  Message = ctx.Message
+                  FileName = startPos.FileName
+                  Line = startPos.Line
+                  Column = startPos.Column },
+                syn,
+                syn.range
+            )
+
         r
     | _ -> failwith "not a valid syntax error"
