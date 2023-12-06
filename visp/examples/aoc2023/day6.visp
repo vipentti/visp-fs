@@ -1,0 +1,105 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day6")
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(printfn "filepath: %s" filepath)
+
+(let contents (System.IO.File.ReadAllText filepath))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(fn ParseRaces ([lines: string])
+  (mut enu (SplitLines lines))
+  (let _ (enu.MoveNext))
+  (let times enu.Current)
+  (let _ (enu.MoveNext))
+  (let distances enu.Current)
+
+  (let timesColon (times.IndexOf #\:))
+  (let distancesColon (distances.IndexOf #\:))
+
+  (let times (times.Slice (inc timesColon)))
+  (let distances (distances.Slice (inc distancesColon)))
+
+  (mut timesEnu (times.EnumerateSplitSubstrings (#\space, splitOptions)))
+  (mut distancesEnu (distances.EnumerateSplitSubstrings (#\space, splitOptions)))
+
+  (let timesResult (!vector))
+  (let distancesResult (!vector))
+
+  (while (timesEnu.MoveNext)
+    (timesResult.Add (span->int32 timesEnu.Current)))
+
+  (while (distancesEnu.MoveNext)
+    (distancesResult.Add (span->int32 distancesEnu.Current)))
+
+  (->> (Seq.zip timesResult distancesResult)
+    (List.ofSeq))
+)
+
+(type race int32*int32)
+
+(let races (ParseRaces contents))
+
+(fn inline distance ([time: 'a] [speed: 'a]) (* time speed))
+
+(fn inline estimate ([time: 'a] [held: 'a])
+  (let speed held)
+  (let remaining (- time held))
+  (distance remaining speed))
+
+(fn ConcatNumbers (nums)
+  (->> nums
+    (Seq.map #(.ToString %1))
+    (String.concat "")))
+
+(fn inline CountWinsGen [rc]
+  (match rc
+    [(time . maxdist)
+      (mut result LanguagePrimitives.GenericZero)
+      (let start LanguagePrimitives.GenericOne)
+      (let end (dec time))
+
+      (for/in [held (!range start .. end)]
+        (let est (estimate time held))
+        (if (> est maxdist)
+          (set! result (inc result))
+        ))
+
+      result
+    ]
+  )
+)
+
+(let part1 (->> races (List.map CountWinsGen) (List.reduce mul)))
+
+(WriteResult "part1" part1 (if example 288 2612736))
+
+(let newTimes (->> races (Seq.map fst) ConcatNumbers int64))
+(let newDistances (->> races (Seq.map snd) ConcatNumbers int64))
+
+(let part2 (CountWinsGen (newTimes . newDistances)))
+
+(WriteResult "part2" part2 (if example 71503 29891250))
+
+()
