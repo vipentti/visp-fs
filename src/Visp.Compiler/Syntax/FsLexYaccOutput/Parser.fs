@@ -5165,7 +5165,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 939 "Parser.fsy"
-                                    InferredArg(_1, lhs parseState) 
+                                    SynArg.InferredArg(_1, lhs parseState) 
                    )
 # 939 "Parser.fsy"
                  : 'gentype_arg));
@@ -5210,7 +5210,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 948 "Parser.fsy"
-                               TypedArg(_1, _3, lhs parseState) 
+                               SynArg.TypedArg(_1, _3, lhs parseState) 
                    )
 # 948 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets));
@@ -5221,7 +5221,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 950 "Parser.fsy"
-                               InferredArg(_1, lhs parseState) 
+                               SynArg.InferredArg(_1, lhs parseState) 
                    )
 # 950 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets));
