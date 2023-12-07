@@ -14,6 +14,21 @@ open FSharp.Text.Lexing
 open Visp.Compiler.Syntax.Macros
 open System.Collections.Generic
 
+
+let (|MatchingText|) str (pat: SynMacroPat) =
+    match pat with
+    | SynMacroPat.Symbol(it, _) ->
+        if it.Text = str then
+            true
+        else
+            false
+    | _ -> false
+
+let (|DiscardPredicate|Not|) (pat: SynMacroPat) =
+    match pat with
+    | SynMacroPat.List([ MatchingText "?discard" true ], _) -> DiscardPredicate
+    | _ -> Not
+
 let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
     // printfn "looking for\n%A\nin\n%A" args pats
     // TODO: Determine pattern matching
@@ -25,6 +40,9 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
             // printfn "matching %A with %A" arg pt
             let temp =
                 match (pt, arg) with
+                | (DiscardPredicate,  SynMacroBody.Discard _) ->
+                    // printfn "DISCAAARD pt: %A lhs: %A\nRESTPAT:\n%A\nARGREST:\n%A" pt arg rest argRest
+                    true
                 // TODO: Constant matching
                 | (SynMacroPat.Const _, SynMacroBody.Const _) -> true
                 | (SynMacroPat.Symbol _, _) -> true
