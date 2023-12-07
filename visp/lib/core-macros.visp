@@ -39,6 +39,11 @@
 
 (syntax-macro cond_
   [(_) (failwith "unbalanced cond")]
+  [(_ ((?discard) body ...))
+    (if true
+      (begin body ...)
+      (failwith "unreachable"))
+  ]
   [(_ (test body ...) rest ...)
     (if test
       (begin body ...)

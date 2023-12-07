@@ -7,44 +7,44 @@ open Visp.Runtime.Library
 let state = { Todo = () }
 // line 8 @"cond-macro-1.visp"
 let ``macro_my-cond_`` = "__MACRO_INIT__"
-// line 17 @"cond-macro-1.visp"
+// line 22 @"cond-macro-1.visp"
 let visp_result_todo =
-  // line 17 @"cond-macro-1.visp"
+  // line 22 @"cond-macro-1.visp"
   if CoreMethods.isTruthy(
     CoreMethods.``gt``(0, 1))
     then
-      // line 17 @"cond-macro-1.visp"
+      // line 22 @"cond-macro-1.visp"
       
-        // line 17 @"cond-macro-1.visp"
+        // line 22 @"cond-macro-1.visp"
         printfn ("body here1")
-        // line 17 @"cond-macro-1.visp"
+        // line 22 @"cond-macro-1.visp"
         printfn ("body here2")
         ()
     else
-      // line 17 @"cond-macro-1.visp"
+      // line 22 @"cond-macro-1.visp"
       if CoreMethods.isTruthy(
         CoreMethods.``lt``(1, 0))
         then
-          // line 17 @"cond-macro-1.visp"
+          // line 22 @"cond-macro-1.visp"
           
-            // line 17 @"cond-macro-1.visp"
+            // line 22 @"cond-macro-1.visp"
             printfn ("here1")
-            // line 17 @"cond-macro-1.visp"
+            // line 22 @"cond-macro-1.visp"
             printfn ("here2")
         else
-          // line 17 @"cond-macro-1.visp"
+          // line 22 @"cond-macro-1.visp"
           if CoreMethods.isTruthy(
-            Value.keyword(":else"))
+            true)
             then
-              // line 17 @"cond-macro-1.visp"
+              // line 22 @"cond-macro-1.visp"
               
-                // line 17 @"cond-macro-1.visp"
+                // line 22 @"cond-macro-1.visp"
                 printfn ("default1")
-                // line 17 @"cond-macro-1.visp"
+                // line 22 @"cond-macro-1.visp"
                 printfn ("default2")
             else
-              // line 17 @"cond-macro-1.visp"
-              failwith ("unbalanced cond")
-// line 17 @"cond-macro-1.visp"
+              // line 22 @"cond-macro-1.visp"
+              failwith ("unreachable")
+// line 22 @"cond-macro-1.visp"
 printfn ("%A") (visp_result_todo)
 
