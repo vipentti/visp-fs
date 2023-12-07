@@ -7,6 +7,11 @@
 
 (syntax-macro my-cond_
   [(_) (failwith "unbalanced cond")]
+  [(_ ((?discard) body ...))
+    (if true
+      (begin body ...)
+      (failwith "unreachable"))
+  ]
   [(_ (test body ...) rest ...)
     (if test
       (begin body ...)
@@ -23,7 +28,7 @@
     (printfn "here1")
     (printfn "here2")
   ]
-  [:else
+  [_
     (printfn "default1")
     (printfn "default2")
     ]
