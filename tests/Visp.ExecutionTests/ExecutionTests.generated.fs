@@ -31,6 +31,11 @@ module ``tests_type_member-fn-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_union-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/union-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_type-alias-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/type-alias-0.visp"

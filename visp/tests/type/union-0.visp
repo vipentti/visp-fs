@@ -1,0 +1,42 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(union MyList<^a>
+  Empty
+  (Cons ^a [tail: MyList<^a>])
+
+  (member t.TIsEmpty
+    (match t
+      [Empty true]
+      [_ false]))
+
+  (member fn t.Length ()
+    (match t
+      [Empty 0]
+      [(Cons (_, rest))
+        (+ 1 (rest.Length))
+      ]
+    ))
+)
+
+(let linkedList (Cons (1, (Cons (2, (Cons (3, Empty)))))))
+
+(printfn "List is %A" linkedList)
+(printfn "List length %A" (linkedList.Length))
+(printfn "List isEmpty %A" linkedList.TIsEmpty)
+
+
+(#[RequireQualifiedAccess]
+  union MyOption<^T>
+  None
+  (Some ^T))
+
+(let myOptNone MyOption.None)
+(let myOptSome (MyOption.Some 1))
+
+(printfn "myOptNone %A" myOptNone)
+(printfn "myOptSome %A" myOptSome)

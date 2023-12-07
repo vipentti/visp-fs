@@ -175,7 +175,7 @@ module Write =
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
 
-    let name (w: SynWriter) (name: string) (escape: bool) =
+    let normalizeString name =
         let mutable sb = PooledStringBuilder.Get()
         let mutable needs_escape = false
 
@@ -187,12 +187,25 @@ module Write =
             if Set.contains ch escapableChars then
                 needs_escape <- true
 
-            sb <- sb.Append(ch)
+            // TODO: Allow ^ also
+            if ch = '^' then
+                sb <- sb.Append('\'')
+            else
+                sb <- sb.Append(ch)
+
+        (PooledStringBuilder.ToStringAndReturn(sb), needs_escape)
+
+    let symbolText (SynSymbol _ as it) =
+        normalizeString it.Text
+        |> fst
+
+    let name (w: SynWriter) (name: string) (escape: bool) =
+        let (name, needs_escape) = normalizeString name
 
         if escape && needs_escape then
             w.writer.Write("``")
 
-        w.writer.Write(PooledStringBuilder.ToStringAndReturn(sb))
+        w.Write(name)
 
         if escape && needs_escape then
             w.writer.Write("``")
@@ -906,8 +919,52 @@ module Write =
 
         | SynExpr.TypeAlias(name, typ, range) ->
             startExpr w st range
-            fmtprintf w "type %s = " (Syntax.textOfSymbol name)
+            fmtprintf w "type %s = " (symbolText name)
             writeType w typ
+
+        | SynExpr.Union (name, cases, members, attributes, range) ->
+            if not attributes.IsEmpty then
+                writeAttributes w st attributes
+                newline w
+
+            startExpr w st range
+            fmtprintf w "type %s =" (symbolText name)
+
+            use _ = withIndent w false
+
+            writeSeqLeading
+                w
+                WriteState.Body
+                newline
+                (fun w st (UnionCase(name, fields, range)) ->
+                    startExpr w st range
+                    string w "| "
+                    symbol w name false
+                    if not fields.IsEmpty then
+                        string w " of"
+                        let mutable fs = true
+                        for field in fields do
+                            if fs then
+                                fs <- false
+                                space w
+                            else
+                                string w " * "
+                            match field with
+                            | UnionField.Type (typ, _) ->
+                                writeType w typ
+                            | UnionField.Named (name, typ, _) ->
+                                symbol w name false
+                                string w ": "
+                                writeType w typ
+                            ()
+                    ())
+                cases
+
+            newline w
+            if not members.IsEmpty then
+                newline w
+                writeSeq w WriteState.Body newline writeMember members
+            ()
 
         | SynExpr.Type(name, args, members, attributes, range) ->
             if not attributes.IsEmpty then
@@ -915,7 +972,7 @@ module Write =
                 newline w
 
             startExpr w st range
-            fmtprintf w "type %s" (Syntax.textOfSymbol name)
+            fmtprintf w "type %s" (symbolText name)
 
             if args.IsEmpty then
                 string w " ()"
