@@ -173,6 +173,7 @@ let private evaluatePatterns
             | SynMacroBody.Trivia(kind, _) ->
                 match kind with
                 | SynMacroTriviaKind.Colon -> res.Add(COLON)
+                | SynMacroTriviaKind.ColonColon -> res.Add(COLON_COLON)
                 | SynMacroTriviaKind.Dot -> res.Add(DOT)
                 | SynMacroTriviaKind.Comma -> res.Add(COMMA)
                 | SynMacroTriviaKind.Bar -> res.Add(BAR)
