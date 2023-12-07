@@ -17,11 +17,7 @@ open System.Collections.Generic
 
 let (|MatchingText|) str (pat: SynMacroPat) =
     match pat with
-    | SynMacroPat.Symbol(it, _) ->
-        if it.Text = str then
-            true
-        else
-            false
+    | SynMacroPat.Symbol(it, _) -> if it.Text = str then true else false
     | _ -> false
 
 let (|DiscardPredicate|Not|) (pat: SynMacroPat) =
@@ -40,7 +36,7 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
             // printfn "matching %A with %A" arg pt
             let temp =
                 match (pt, arg) with
-                | (DiscardPredicate,  SynMacroBody.Discard _) ->
+                | (DiscardPredicate, SynMacroBody.Discard _) ->
                     // printfn "DISCAAARD pt: %A lhs: %A\nRESTPAT:\n%A\nARGREST:\n%A" pt arg rest argRest
                     true
                 // TODO: Constant matching
