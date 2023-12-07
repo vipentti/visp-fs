@@ -145,6 +145,8 @@ type SymbolDetails =
     | Parameter of text: string * range: Range
     | Symbol of text: string * range: Range
     | SyntaxMacro of text: string * range: Range
+    | Union of text: string * range: Range
+    | UnionMember of text: string * fn: bool * range: Range
 
     member this.Text =
         match this with
@@ -153,6 +155,8 @@ type SymbolDetails =
         | Function(text = it)
         | Interop(text = it)
         | Variable(text = it)
+        | Union(text = it)
+        | UnionMember(text = it)
         | Type(text = it)
         | Member(text = it)
         | Variable(text = it)
@@ -166,6 +170,8 @@ type SymbolDetails =
         | Function(range = it)
         | Interop(range = it)
         | Member(range = it)
+        | Union(range = it)
+        | UnionMember(range = it)
         | Type(range = it)
         | Symbol(range = it)
         | Variable(range = it)
@@ -180,6 +186,8 @@ type SymbolDetails =
         | Symbol _ -> SymbolKind.Method
         | Variable _ -> SymbolKind.Variable
         | Parameter _ -> SymbolKind.Field
+        | Union _ -> SymbolKind.Enum
+        | UnionMember _ -> SymbolKind.EnumMember
         | Type _ -> SymbolKind.Class
         | Member(fn = fn) -> if fn then SymbolKind.Method else SymbolKind.Field
 
@@ -192,6 +200,8 @@ type SymbolDetails =
         | Variable _ -> CompletionItemKind.Variable
         | Parameter _ -> CompletionItemKind.Field
         | SyntaxMacro _ -> CompletionItemKind.Macro
+        | Union _ -> CompletionItemKind.Union
+        | UnionMember _ -> CompletionItemKind.EnumMember
         | Type _ -> CompletionItemKind.Class
         | Member(fn = fn) ->
             if fn then
@@ -210,6 +220,8 @@ type SymbolDetails =
         | Parameter _ -> "44444"
         | Symbol _ -> "44444"
         | SyntaxMacro _ -> "44444"
+        | Union _ -> "44444"
+        | UnionMember _ -> "44444"
 
     member this.SortText = this.SortPrefix + this.Text
 
@@ -233,11 +245,12 @@ type SymbolDetails =
         | Interop _ -> "F# interop"
         | Symbol _ -> "symbol"
         | Function _ -> "function"
+        | Union _ -> "union"
+        | UnionMember _ -> "union-member"
         | Variable(mut = mut) -> if mut then "mutable" else "variable"
         | Parameter _ -> "parameter"
         | Type _ -> "type"
         | Member(fn = fn) -> if fn then "member function" else "member"
-
 
     member this.ToCompletionItem(index: int) =
         let item = new CompletionItem()
@@ -249,7 +262,29 @@ type SymbolDetails =
         item.Detail <- this.Detail
         item
 
+let memberToSymbolDetails memval var (mem: SynTypeMember) =
+    match mem with
+    | SynTypeMember.Mut(name = name) ->
+        var (Syntax.textOfName name, true, Syntax.rangeOfName name |> textRangeToSyntaxRange)
+    | SynTypeMember.Let(name = name) ->
+        var (Syntax.textOfName name, false, Syntax.rangeOfName name |> textRangeToSyntaxRange)
+    | SynTypeMember.Member(name = name)
+    | SynTypeMember.OverrideMember(name = name) ->
+        (memval (
+            Syntax.textOfSymbol name,
+            true,
+            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+        ))
+    | SynTypeMember.MemberFn(name = name)
+    | SynTypeMember.OverrideFn(name = name) ->
+        (memval (
+            Syntax.textOfSymbol name,
+            false,
+            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+        ))
+
 let findAllSymbolDetails (syms: ResizeArray<_>) expr =
+
     match expr with
     | SynExpr.FunctionCall(SynExpr.Symbol sym, _, _) ->
         let r = Syntax.rangeOfSymbol sym
@@ -271,6 +306,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             |> List.map SymbolDetails.Parameter
         )
 
+    | SynExpr.Record(name, _, members, _, _)
     | SynExpr.Type(name, _, members, _, _) ->
         syms.Add(
             SymbolDetails.Type(
@@ -281,57 +317,26 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.AddRange(
             members
-            |> List.choose (function
-                | SynTypeMember.OverrideMember(name = name) ->
-                    Some(
-                        (SymbolDetails.Member(
-                            Syntax.textOfSymbol name,
-                            false,
-                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
-                        ))
-                    )
-                | SynTypeMember.Member(name = name) ->
-                    Some(
-                        (SymbolDetails.Member(
-                            Syntax.textOfSymbol name,
-                            false,
-                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
-                        ))
-                    )
-                | SynTypeMember.OverrideFn(name = name) ->
-                    Some(
-                        (SymbolDetails.Member(
-                            Syntax.textOfSymbol name,
-                            true,
-                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
-                        ))
-                    )
-                | SynTypeMember.MemberFn(name = name) ->
-                    Some(
-                        (SymbolDetails.Member(
-                            Syntax.textOfSymbol name,
-                            true,
-                            Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
-                        ))
-                    )
-                | SynTypeMember.Let(name = name) ->
-                    Some(
-                        SymbolDetails.Variable(
-                            Syntax.textOfName name,
-                            false,
-                            Syntax.rangeOfName name |> textRangeToSyntaxRange
-                        )
-                    )
-                | SynTypeMember.Mut(name = name) ->
-                    Some(
-                        SymbolDetails.Variable(
-                            Syntax.textOfName name,
-                            true,
-                            Syntax.rangeOfName name |> textRangeToSyntaxRange
-                        )
-                    )
+            |> Seq.map (memberToSymbolDetails SymbolDetails.Member SymbolDetails.Variable)
+        )
 
+    | SynExpr.Union(name, cases, members, _, _) ->
+        syms.Add(
+            SymbolDetails.Union(
+                Syntax.textOfSymbol name,
+                Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
             )
+        )
+
+        syms.AddRange(
+            cases
+            |> Seq.map (fun (UnionCase(name, _, _)) ->
+                (SymbolDetails.UnionMember(name.Text, false, name.Range |> textRangeToSyntaxRange)))
+        )
+
+        syms.AddRange(
+            members
+            |> Seq.map (memberToSymbolDetails SymbolDetails.UnionMember SymbolDetails.Variable)
         )
 
     | SynExpr.SimpleMut(name, _, _) ->
@@ -342,6 +347,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
                 Syntax.rangeOfName name |> textRangeToSyntaxRange
             )
         )
+
     | SynExpr.SimpleLet(name, _, _) ->
         syms.Add(
             SymbolDetails.Variable(
