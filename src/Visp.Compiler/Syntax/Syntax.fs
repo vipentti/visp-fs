@@ -317,6 +317,7 @@ and [<RequireQualifiedAccess>] SynMacroTriviaKind =
     | Dot
     | Comma
     | Colon
+    | ColonColon
     | Bar
 
 and [<RequireQualifiedAccess>] SynListKind =
@@ -349,14 +350,19 @@ and [<RequireQualifiedAccess>] SynThreadable =
     | Property of symbol: SynSymbol * range: range
     | Method of symbol: SynSymbol * kind: DotMethodKind * range: range
 
+and [<RequireQualifiedAccess>] SynPatternTriviaKind =
+    | Dot
+    | Comma
+    | ColonColon
+    | Brackets
+
 and [<RequireQualifiedAccess>] SynMatchPattern =
     | Const of value: SynConst * range: range
     | Tuple of pats: SynMatchPattern list * range: range
     | List of pats: SynMatchPattern list * range: range
     | Symbol of name: SynSymbol * range: range
     | Discard of range: range
-    // Artificial only exists during parsing
-    | CommaOrDot of range: range
+    | Trivia of kind: SynPatternTriviaKind * range: range
 
 and [<RequireQualifiedAccess>] SynTypeMember =
     | Let of name: SynName * value: SynExpr * range: range
@@ -512,12 +518,12 @@ module Syntax =
     let mkInferredArg s range =
         SynArg.InferredArg(mkSynSymbol s range, range)
 
-    let withoutCommaOrDots (l: SynMatchPattern list) =
-        List.filter
-            (function
-            | SynMatchPattern.CommaOrDot _ -> false
-            | _ -> true)
-            l
+    // let withoutCommaOrDots (l: SynMatchPattern list) =
+    //     List.filter
+    //         (function
+    //         | SynMatchPattern.CommaOrDot _ -> false
+    //         | _ -> true)
+    //         l
 
     let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
 

@@ -105,7 +105,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '}'           { RBRACE }
   | '['           { LBRACKET }
   | ']'           { RBRACKET }
-  | ':'           { COLON }
+  | "::"           { COLON_COLON }
+  | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '|'           { BAR }
 
@@ -165,14 +166,7 @@ rule token (args: LexArgs) (skip: bool) = parse
     }
   | '*'        { OP_MULT }
   | '/'        { OP_DIV }
-  | '('        { LPAREN }
-  | ')'        { RPAREN }
-  | '{'        { LBRACE }
-  | '}'        { RBRACE }
-  | '['        { LBRACKET }
-  | ']'        { RBRACKET }
   | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
-  | ':'        { COLON }
   | ident      {
       let text = lexeme lexbuf
       symbolOrKeyword text
@@ -194,6 +188,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | '}'           { RBRACE }
   | '['           { LBRACKET }
   | ']'           { RBRACKET }
+  | "::" anyspace+ { COLON_COLON }
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '|'           { BAR }

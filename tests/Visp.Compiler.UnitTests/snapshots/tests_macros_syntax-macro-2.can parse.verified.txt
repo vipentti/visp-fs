@@ -15,14 +15,14 @@ let lambda =
   (fun arg ->
     // line 28 @"syntax-macro-2.visp"
     match arg with
-      | (a, b) ->
+      | (a , b) ->
         // line 28 @"syntax-macro-2.visp"
         CoreMethods.``add``(a, b))
 // line 29 @"syntax-macro-2.visp"
 let named arg =
   // line 29 @"syntax-macro-2.visp"
   match arg with
-    | (a, b) ->
+    | (a , b) ->
       // line 29 @"syntax-macro-2.visp"
       CoreMethods.``add``(a, b)
 
