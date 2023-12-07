@@ -1,0 +1,292 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day7")
+(let filepath (+ "./inputs/" day (if example "_example" "") ".txt"))
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(type Cards list<char>)
+
+(union Hand
+  (FiveOfKind Cards)
+  (FourOfKind Cards)
+  (FullHouse Cards)
+  (ThreeOfKind Cards)
+  (TwoPair Cards)
+  (OnePair Cards)
+  (HighCard Cards)
+
+  (member t.Cards
+    (match t
+      [(FiveOfKind c) c]
+      [(FourOfKind c) c]
+      [(FullHouse c) c]
+      [(ThreeOfKind c) c]
+      [(TwoPair c) c]
+      [(OnePair c) c]
+      [(HighCard c) c]
+    ))
+)
+
+(fn HandRank ([hand: Hand])
+  (match hand
+    [(FiveOfKind _) 7]
+    [(FourOfKind _) 6]
+    [(FullHouse _) 5]
+    [(ThreeOfKind _) 4]
+    [(TwoPair _) 3]
+    [(OnePair _) 2]
+    [(HighCard _) 1]
+  ))
+
+(fn CardsToHand ([s: Cards])
+  (let cardCounts (->> (List.countBy id s) (List.sortByDescending snd)))
+  (let counts (->> cardCounts (List.map snd)))
+  (match counts
+    [(5 :: [])
+      (FiveOfKind s)]
+    [(4 :: 1 :: [])
+      (FourOfKind s)]
+    [(3 :: 2 :: [])
+      (FullHouse s)]
+    [(3 :: _ :: rest)
+      (ThreeOfKind s)]
+    [(2 :: 2 :: rest)
+      (TwoPair s)]
+    [(2 :: _ :: rest)
+      (OnePair s)]
+    [_ (HighCard s)]
+  ))
+
+(fn CardsToHandPart2 ([s: Cards])
+  (let cardCounts (->>
+    s
+    (List.filter #(not (= %1 #\J)))
+    (List.countBy id)
+    (List.sortByDescending snd)))
+  (let counts (->> cardCounts (List.map snd)))
+  (let jokerCount (->> s (List.filter #(= %1 #\J)) +Length))
+
+  (let res (match (counts . jokerCount)
+    [(5 :: _ . 0) (FiveOfKind s)]
+    [(_ . 5)      (FiveOfKind s)]
+
+    [(4 :: _ . 1) (FiveOfKind s)]
+    [(4 :: _ . 0) (FourOfKind s)]
+
+    [(3 :: _ . 2) (FiveOfKind s)]
+    [(3 :: _ . 1) (FourOfKind s)]
+    [(3 :: 2 :: _ . 0) (FullHouse s)]
+    [(3 :: _ . 0) (ThreeOfKind s)]
+
+    [(2 :: _ . 3) (FiveOfKind s)]
+    [(2 :: _ . 2) (FourOfKind s)]
+    [(2 :: 2 :: _ . 1) (FullHouse s)]
+    [(2 :: _ . 1) (ThreeOfKind s)]
+    [(2 :: 2 :: _ . 0) (TwoPair s)]
+    [(2 :: _ . 0) (OnePair s)]
+
+    [(1 :: _ . 4) (FiveOfKind s)]
+    [(1 :: _ . 3) (FourOfKind s)]
+    [(1 :: _ . 2) (ThreeOfKind s)]
+    [(1 :: _ . 1) (OnePair s)]
+    [(_ . _) (HighCard s)]
+  ))
+
+
+  ;; (if (> jokerCount 0)
+  ;;   (begin
+  ;;     (let temp (sprintf "%A" counts))
+  ;;     (printfn "JOKER %A vs %-15s = %A" jokerCount temp res)
+  ;;   )
+  ;; )
+
+  res
+)
+
+(fn SpanToCards ([s: System.ReadOnlySpan<char>])
+  (mut rev (!list))
+
+  (for/in [c s]
+    (set! rev (cons c rev)))
+
+  (List.rev rev))
+
+(fn SpanToHand ([s: System.ReadOnlySpan<char>])
+  (->> (SpanToCards s) CardsToHand))
+
+(fn StringToCards ([s: string])
+  (SpanToCards (s.AsSpan)))
+
+(fn StringToHand ([s: string])
+  (->> s StringToCards CardsToHand))
+
+;;  A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, or 2.
+(fn CardRank ([ch: char])
+  (match ch
+    [#\A 14]
+    [#\K 13]
+    [#\Q 12]
+    [#\J 11]
+    [#\T 10]
+    [#\9 9]
+    [#\8 8]
+    [#\7 7]
+    [#\6 6]
+    [#\5 5]
+    [#\4 4]
+    [#\3 3]
+    [#\2 2]
+    [_ (failwithf "unsupported card '%c'" ch)]
+    ))
+
+(fn CardRankPart2 ([ch: char])
+  (match ch
+    [#\A 14]
+    [#\K 13]
+    [#\Q 12]
+    [#\T 10]
+    [#\9 9]
+    [#\8 8]
+    [#\7 7]
+    [#\6 6]
+    [#\5 5]
+    [#\4 4]
+    [#\3 3]
+    [#\2 2]
+    [#\J 1]
+    [_ (failwithf "unsupported card '%c'" ch)]
+    ))
+
+(fn rec CompareCards ([lhs: Cards] [rhs: Cards])
+  (match (lhs . rhs)
+    [((lhs :: lhsrest) . (rhs :: rhsrest))
+      (let res (compare (CardRank lhs) (CardRank rhs)))
+      (cond_
+        [(= res 0)
+          (CompareCards lhsrest rhsrest)
+        ]
+        [_ res])
+    ]
+    [(([]) . ([]))
+      0
+    ]
+    [_ (failwithf "todo %A %A" lhs rhs)]
+  ))
+
+(fn rec CompareCardsPart2 ([lhs: Cards] [rhs: Cards])
+  (match (lhs . rhs)
+    [((lhs :: lhsrest) . (rhs :: rhsrest))
+      (let res (compare (CardRankPart2 lhs) (CardRankPart2 rhs)))
+      (cond_
+        [(= res 0)
+          (CompareCardsPart2 lhsrest rhsrest)
+        ]
+        [_ res])
+    ]
+    [(([]) . ([]))
+      0
+    ]
+    [_ (failwithf "todo %A %A" lhs rhs)]
+  ))
+
+(fn CompareHands ([lhs: Hand] [rhs: Hand])
+  (let lhsRank (HandRank lhs))
+  (let rhsRank (HandRank rhs))
+
+  (cond_
+    [(= lhsRank rhsRank) (CompareCards lhs.Cards rhs.Cards)]
+    [_ (compare lhsRank rhsRank)]
+  ))
+
+(fn CompareHandsPart2 ([lhs: Hand] [rhs: Hand])
+  (let lhsRank (HandRank lhs))
+  (let rhsRank (HandRank rhs))
+
+  (cond_
+    [(= lhsRank rhsRank) (CompareCardsPart2 lhs.Cards rhs.Cards)]
+    [_ (compare lhsRank rhsRank)]
+  ))
+
+(fn ParseHands (ctor text)
+  (mut lines (SplitLines text))
+  (let res (new ResizeArray<_>))
+
+  (while (lines.MoveNext)
+    (let line lines.Current)
+
+    (mut lineEnu (line.EnumerateSplitSubstrings (#\space, splitOptions)))
+    (let _ (lineEnu.MoveNext))
+    (let hand (SpanToCards lineEnu.Current))
+    (let _ (lineEnu.MoveNext))
+    (let bid (span->int32 lineEnu.Current))
+    (res.Add ((ctor hand) . bid))
+
+    ())
+
+  (List.ofSeq res))
+
+(let fileText (System.IO.File.ReadAllText filepath))
+(let part1hands (ParseHands CardsToHand fileText))
+(let part1ordered (->> part1hands
+  (List.sortWith #(CompareHands (fst %1) (fst %2)))
+))
+(let part1 (->> part1ordered
+  (Seq.map snd)
+  (Seq.mapi #(* (inc %1) %2))
+  (Seq.reduce add)
+))
+
+(WriteResult "part1" part1 (if example 6440 253910319))
+
+(let part2hands (ParseHands CardsToHandPart2 fileText))
+(let part2ordered (->> part2hands
+  (List.sortWith #(CompareHandsPart2 (fst %1) (fst %2)))
+))
+(let part2 (->> part2ordered
+  (Seq.map snd)
+  (Seq.mapi #(* (inc %1) %2))
+  (Seq.reduce add)
+))
+
+(WriteResult "part2" part2 (if example 5905 254083736))
+
+;; (printfn "%A" (CardsToHandPart2 (StringToCards "QQQJA")))
+;; (printfn "%A" (CardsToHandPart2 (StringToCards "T55J5")))
+;; (printfn "%A" (CardsToHandPart2 (StringToCards "KTJJT")))
+
+
+;; (printfn "Compare %A"
+;;   (CompareHands
+;;     (StringToHand "33332")
+;;     (StringToHand "2AAAA")
+;;   )
+;; )
+
+;; (printfn "Compare %A"
+;;   (CompareHands
+;;     (StringToHand "77788")
+;;     (StringToHand "77888")
+;;   )
+;; )
+
+()
