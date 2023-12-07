@@ -76,6 +76,7 @@ type token =
   | FALSE
   | NIL
   | COLON
+  | COLON_COLON
   | COMMA
   | UNIT
   | BAR
@@ -165,6 +166,7 @@ type tokenId =
     | TOKEN_FALSE
     | TOKEN_NIL
     | TOKEN_COLON
+    | TOKEN_COLON_COLON
     | TOKEN_COMMA
     | TOKEN_UNIT
     | TOKEN_BAR
@@ -208,6 +210,8 @@ type nonTerminalId =
     | NONTERM_parens_expr_start
     | NONTERM_dotted_exprs
     | NONTERM_rev_dotted_exprs
+    | NONTERM_colon_colon_exprs
+    | NONTERM_rev_colon_colon_exprs
     | NONTERM_parens_expr
     | NONTERM_macro_call_expr
     | NONTERM_macro_call

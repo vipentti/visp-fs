@@ -26,7 +26,7 @@ type MyList<'a> =
     match t with
       | Empty ->
         0
-      | (Cons (_, rest)) ->
+      | (Cons (_ , rest)) ->
         // line 21 @"union-0.visp"
         (1) +
         (rest.Length ())
