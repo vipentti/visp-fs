@@ -1,0 +1,66 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"union-0.visp"
+type MyList<'a> =
+  // line 9 @"union-0.visp"
+  | Empty
+  // line 10 @"union-0.visp"
+  | Cons of 'a * tail: MyList<'a>
+
+  // line 12 @"union-0.visp"
+  member t.TIsEmpty =
+        // line 13 @"union-0.visp"
+    match t with
+      | Empty ->
+        true
+      | _ ->
+        false
+  // line 17 @"union-0.visp"
+  member t.Length () =
+    // line 18 @"union-0.visp"
+    match t with
+      | Empty ->
+        0
+      | (Cons (_, rest)) ->
+        // line 21 @"union-0.visp"
+        (1) +
+        (rest.Length ())
+
+// line 26 @"union-0.visp"
+let linkedList =
+  // line 26 @"union-0.visp"
+  Cons (1, Cons (2, Cons (3, Empty)))
+// line 28 @"union-0.visp"
+printfn ("List is %A") (linkedList)
+// line 29 @"union-0.visp"
+printfn ("List length %A") (linkedList.Length ())
+// line 30 @"union-0.visp"
+printfn ("List isEmpty %A") (linkedList.TIsEmpty)
+[<RequireQualifiedAccess()>]
+// line 33 @"union-0.visp"
+type MyOption<'T> =
+  // line 35 @"union-0.visp"
+  | None
+  // line 36 @"union-0.visp"
+  | Some of 'T
+
+// line 38 @"union-0.visp"
+let myOptNone = MyOption.None
+// line 39 @"union-0.visp"
+let myOptSome =
+  // line 39 @"union-0.visp"
+  MyOption.Some (1)
+// line 41 @"union-0.visp"
+printfn ("myOptNone %A") (myOptNone)
+// line 42 @"union-0.visp"
+let visp_result_todo =
+  // line 42 @"union-0.visp"
+  printfn ("myOptSome %A") (myOptSome)
+// line 42 @"union-0.visp"
+printfn ("%A") (visp_result_todo)
+

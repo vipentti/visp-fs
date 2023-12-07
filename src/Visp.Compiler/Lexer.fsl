@@ -55,7 +55,7 @@ let exp = ['e' 'E'] ['-' '+']? digit+
 let decimal = '-'? digit* frac? exp?
 let letter = ['A'-'Z'] | ['a'-'z']
 
-let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' '&' ]
+let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' '&' '^' ]
 let SymbolicExtra = [ '.' '\'' '/' ]
 
 let ident_start_char = letter | SymbolicStartCharacters

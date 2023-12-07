@@ -22,6 +22,7 @@ type token =
   | SYNTAX_MACRO
   | SEQ
   | YIELD
+  | UNION
   | ATOM_KW
   | DEREF_KW
   | WHILE
@@ -110,6 +111,7 @@ type tokenId =
     | TOKEN_SYNTAX_MACRO
     | TOKEN_SEQ
     | TOKEN_YIELD
+    | TOKEN_UNION
     | TOKEN_ATOM_KW
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
@@ -253,6 +255,14 @@ type nonTerminalId =
     | NONTERM_mut
     | NONTERM_letstar
     | NONTERM_type_expr
+    | NONTERM_union_expr
+    | NONTERM_union_labels_or_members
+    | NONTERM_rev_union_labels_or_members
+    | NONTERM_union_label_or_member_parens
+    | NONTERM_union_label_or_member
+    | NONTERM_union_fields
+    | NONTERM_rev_union_fields
+    | NONTERM_union_field
     | NONTERM_record_expr
     | NONTERM_record_labels_or_members
     | NONTERM_rev_record_labels_or_members

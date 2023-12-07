@@ -1,0 +1,8 @@
+﻿List is Cons (1, Cons (2, Cons (3, Empty)))
+List length 3
+List isEmpty false
+myOptNone None
+myOptSome Some 1
+()
+
+ExitCode: 0
