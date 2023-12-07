@@ -32,7 +32,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token OPEN MODULE
 %token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
-%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ YIELD
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ YIELD UNION
 %token INLINE REC RINIT
 %token <int> INT32
 %token <int64> INT64
@@ -254,6 +254,7 @@ parens_expr:
     | if_expr { $1 }
     | type_expr { $1 }
     | record_expr { $1 }
+    | union_expr { $1 }
     | for_in_expr { $1 }
     | record_init_expr { $1 }
     | range_expr { $1 }
@@ -627,15 +628,51 @@ type_expr:
     | attribute_list TYPE symbol name_list_start member_list_start
         { SynExpr.Type($3, $4, $5, $1, lhs parseState) }
 
+union_expr:
+    | UNION symbol union_labels_or_members
+        {
+            let labels, members = Syntax.partitionChoices $3
+            SynExpr.Union($2, labels, members, [] , lhs parseState)
+        }
+    | attribute_list UNION symbol union_labels_or_members
+        {
+            let labels, members = Syntax.partitionChoices $4
+            SynExpr.Union($3, labels, members, $1 , lhs parseState)
+        }
+
+union_labels_or_members: rev_union_labels_or_members { List.rev $1 }
+rev_union_labels_or_members:
+    | union_label_or_member_parens { [$1] }
+    | rev_union_labels_or_members union_label_or_member_parens { $2 :: $1 }
+
+union_label_or_member_parens:
+    | symbol { Choice1Of2(UnionCase($1, [], lhs parseState)) }
+    | LPAREN union_label_or_member RPAREN { $2 }
+    | LBRACKET union_label_or_member RBRACKET { $2 }
+
+union_label_or_member:
+    | MEMBER symbol expr
+        { Choice2Of2(SynTypeMember.Member($2, $3, lhs parseState)) }
+    | MEMBER FN symbol arg_list_start expr_list
+        { Choice2Of2(SynTypeMember.MemberFn($3, $4, $5, (lhs parseState))) }
+    | symbol
+        { Choice1Of2(UnionCase($1, [], lhs parseState)) }
+    | symbol union_fields
+        { Choice1Of2(UnionCase($1, $2, lhs parseState)) }
+
+union_fields: rev_union_fields { List.rev $1 }
+rev_union_fields:
+    | union_field { [$1] }
+    | rev_union_fields union_field { $2 :: $1 }
+
+union_field:
+    | syntype_ident { UnionField.Type($1, lhs parseState) }
+    | LPAREN symbol COLON syntype_ident RPAREN
+        { UnionField.Named($2, $4, lhs parseState) }
+    | LBRACKET symbol COLON syntype_ident RBRACKET
+        { UnionField.Named($2, $4, lhs parseState) }
+
 record_expr:
-    // | RECORD symbol typed_list record_members %prec prec_record_with_members
-    //     { SynExpr.Record($2, $3, $4, [], lhs parseState) }
-    // | attribute_list RECORD symbol typed_list record_members %prec prec_record_with_members
-    //     { SynExpr.Record($3, $4, $5, $1, lhs parseState) }
-    // | RECORD symbol typed_list
-    //     { SynExpr.Record($2, $3, [], [], lhs parseState) }
-    // | attribute_list RECORD symbol typed_list
-    //     { SynExpr.Record($3, $4, [], $1, lhs parseState) }
     | RECORD symbol record_labels_or_members
         {
             let labels, members = Syntax.partitionMembers $3

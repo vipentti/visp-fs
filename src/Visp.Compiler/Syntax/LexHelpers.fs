@@ -173,6 +173,7 @@ let keywordTokenList =
       ("splice-unquote", SPLICE_UNQUOTE_KW)
       ("syntax-macro", SYNTAX_MACRO)
       ("type", TYPE)
+      ("union", UNION)
       ("unquote", UNQUOTE_KW)
       ("when", WHEN)
       ("while", WHILE)

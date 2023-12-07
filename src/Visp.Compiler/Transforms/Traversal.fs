@@ -192,6 +192,7 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for SynInit(expr = e) in inits do
                         yield! loop e
 
+                | SynExpr.Union(_, _, members, attributes, _)
                 | SynExpr.Record(_, _, members, attributes, _)
                 | SynExpr.Type(_, _, members, attributes, _) ->
                     for attrlist in attributes do

@@ -146,6 +146,14 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 fixAttributes bound_transform attributes,
                 range
             )
+        | SynExpr.Union(name, args, members, attributes, range) ->
+            SynExpr.Union(
+                name,
+                args,
+                fixMembers bound_transform members,
+                fixAttributes bound_transform attributes,
+                range
+            )
         | SynExpr.Type(name, args, members, attributes, range) ->
             SynExpr.Type(
                 name,

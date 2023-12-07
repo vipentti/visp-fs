@@ -198,6 +198,12 @@ type SynExpr =
         members: SynTypeMember list *
         attributes: SynAttributes *
         range: range
+    | Union of
+        name: SynSymbol *
+        cases: UnionCase list *
+        members: SynTypeMember list *
+        attributes: SynAttributes *
+        range: range
     | TypeAlias of name: SynSymbol * typ: SynType * range: range
     | ThreadFirst of exprs: SynExpr list * range: range
     | ThreadLast of exprs: SynThreadable list * range: range
@@ -223,6 +229,7 @@ type SynExpr =
         | ForIn(range = r)
         | MacroDef(range = r)
         | MacroCall(range = r)
+        | Union(range = r)
         | FunctionDef(range = r)
         | Record(range = r)
         | RecordInit(range = r)
@@ -288,6 +295,12 @@ and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: r
 and SynMacroCall = SynMacroCall of name: SynSymbol * args: SynMacroBody list * range: range
 
 and SynMacroCase = SynMacroCase of pats: SynMacroPat list * body: SynMacroBody * range: range
+
+and [<RequireQualifiedAccess>] UnionField =
+    | Type of typ: SynType * range: range
+    | Named of name: SynSymbol * typ: SynType * range: range
+
+and UnionCase = UnionCase of name: SynSymbol * fields: UnionField list * range: range
 
 and [<RequireQualifiedAccess>] RecordContent =
     | Label of RecordLabel
@@ -522,6 +535,16 @@ module Syntax =
          members
          |> List.choose (function
              | RecordContent.Member it -> Some it
+             | _ -> None))
+
+    let partitionChoices<'a, 'b> (r: Choice<'a, 'b> list) =
+        (r
+         |> List.choose (function
+             | Choice1Of2 it -> Some(it)
+             | _ -> None),
+         r
+         |> List.choose (function
+             | Choice2Of2 it -> Some(it)
              | _ -> None))
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
