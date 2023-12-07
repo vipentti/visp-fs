@@ -6,42 +6,61 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 9 @"match-0.visp"
+#nowarn "26"
+// line 11 @"match-0.visp"
 match "hello" with
   | "hello" ->
-    // line 11 @"match-0.visp"
+    // line 13 @"match-0.visp"
     printfn ("was hello")
   | _ ->
-    // line 14 @"match-0.visp"
+    // line 16 @"match-0.visp"
     printfn ("default")
-// line 17 @"match-0.visp"
+// line 19 @"match-0.visp"
 match (1, 2) with
   | (a, 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
-    // line 20 @"match-0.visp"
+    // line 22 @"match-0.visp"
     printfn ("a is %A") (a)
   | _ ->
-    // line 23 @"match-0.visp"
+    // line 25 @"match-0.visp"
     printfn ("default")
-// line 26 @"match-0.visp"
+// line 28 @"match-0.visp"
 match (1, 2) with
-  | (a, 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
-    // line 29 @"match-0.visp"
+  | (a , 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
+    // line 31 @"match-0.visp"
     printfn ("a is %A") (a)
   | _ ->
-    // line 32 @"match-0.visp"
+    // line 34 @"match-0.visp"
     printfn ("default")
-// line 35 @"match-0.visp"
+// line 37 @"match-0.visp"
 match Some (1) with
   | (Some a) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
-    // line 38 @"match-0.visp"
+    // line 40 @"match-0.visp"
     printfn ("a is %A") (a)
   | (Some _) ->
-    // line 41 @"match-0.visp"
+    // line 43 @"match-0.visp"
     printfn ("some other")
   | _ ->
-    // line 44 @"match-0.visp"
+    // line 46 @"match-0.visp"
     printfn ("default")
-// line 48 @"match-0.visp"
+// line 50 @"match-0.visp"
+match [1;2;3;4] with
+  | (x :: y :: rest) ->
+    // line 52 @"match-0.visp"
+    printfn ("x is %A y is %A rest is %A") (x) (y) (rest)
+  | (x :: rest) ->
+    // line 55 @"match-0.visp"
+    printfn ("x is %A rest is %A") (x) (rest)
+  | (x :: []) ->
+    // line 58 @"match-0.visp"
+    printfn ("x is %A rest is empty") (x)
+  | ([]) ->
+    // line 60 @"match-0.visp"
+    printfn ("empty")
+  | [] ->
+    // line 61 @"match-0.visp"
+    printfn ("empty")
+// line 64 @"match-0.visp"
 let visp_result_todo = ()
-// line 48 @"match-0.visp"
+// line 64 @"match-0.visp"
 printfn ("%A") (visp_result_todo)
 

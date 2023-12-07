@@ -6,6 +6,8 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
+#nowarn "26"
+
 (match "hello"
   ["hello"
     (printfn "was hello")
@@ -45,4 +47,18 @@
   ]
 )
 
-#()
+(match (1 :: 2 :: 3 :: 4 :: ())
+  [(x :: y :: rest)
+    (printfn "x is %A y is %A rest is %A" x y rest)
+  ]
+  [(x :: rest)
+    (printfn "x is %A rest is %A" x rest)
+  ]
+  [(x :: [])
+    (printfn "x is %A rest is empty" x)
+  ]
+  [([]) (printfn "empty")]
+  [[] (printfn "empty")]
+)
+
+()

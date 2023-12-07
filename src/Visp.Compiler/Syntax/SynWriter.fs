@@ -195,9 +195,7 @@ module Write =
 
         (PooledStringBuilder.ToStringAndReturn(sb), needs_escape)
 
-    let symbolText (SynSymbol _ as it) =
-        normalizeString it.Text
-        |> fst
+    let symbolText (SynSymbol _ as it) = normalizeString it.Text |> fst
 
     let name (w: SynWriter) (name: string) (escape: bool) =
         let (name, needs_escape) = normalizeString name
@@ -403,7 +401,15 @@ module Write =
                 (fun w st (SynMatch.SynMatch(pat, cond, body, _)) ->
                     let rec writeMatchPattern w _ pat =
                         match pat with
-                        | SynMatchPattern.CommaOrDot _ -> failwith "not supported"
+                        // | SynMatchPattern.CommaOrDot _ -> failwith "not supported"
+                        | SynMatchPattern.Trivia(kind, _) ->
+                            match kind with
+                            | SynPatternTriviaKind.Brackets -> string w "[]"
+                            | SynPatternTriviaKind.ColonColon -> string w "::"
+                            | SynPatternTriviaKind.Comma
+                            | SynPatternTriviaKind.Dot -> string w ","
+
+                            ()
                         | SynMatchPattern.Const(cnst, _) ->
                             writeConst w false cnst
                             ()
@@ -625,7 +631,13 @@ module Write =
         | SynExpr.List(items, range) ->
             startExpr w st range
             string w "["
-            writeInlineSeparated w ";" writeExpr items
+            // TODO: Don't filter units and handle them correctly
+            items
+            |> Seq.filter (function
+                | SynExpr.Const(SynConst.Unit, _) -> false
+                | _ -> true)
+            |> writeInlineSeparated w ";" writeExpr
+
             string w "]"
 
         | SynExpr.Pair(lhs, rhs, range) ->
@@ -922,7 +934,7 @@ module Write =
             fmtprintf w "type %s = " (symbolText name)
             writeType w typ
 
-        | SynExpr.Union (name, cases, members, attributes, range) ->
+        | SynExpr.Union(name, cases, members, attributes, range) ->
             if not attributes.IsEmpty then
                 writeAttributes w st attributes
                 newline w
@@ -940,30 +952,36 @@ module Write =
                     startExpr w st range
                     string w "| "
                     symbol w name false
+
                     if not fields.IsEmpty then
                         string w " of"
                         let mutable fs = true
+
                         for field in fields do
                             if fs then
                                 fs <- false
                                 space w
                             else
                                 string w " * "
+
                             match field with
-                            | UnionField.Type (typ, _) ->
-                                writeType w typ
-                            | UnionField.Named (name, typ, _) ->
+                            | UnionField.Type(typ, _) -> writeType w typ
+                            | UnionField.Named(name, typ, _) ->
                                 symbol w name false
                                 string w ": "
                                 writeType w typ
+
                             ()
+
                     ())
                 cases
 
             newline w
+
             if not members.IsEmpty then
                 newline w
                 writeSeq w WriteState.Body newline writeMember members
+
             ()
 
         | SynExpr.Type(name, args, members, attributes, range) ->
