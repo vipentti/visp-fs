@@ -6,6 +6,8 @@
 
 #nowarn "1182"  // generated code has lots of unused "parseState"
 
+open Visp.Compiler.DiagnosticsLogger
+open Visp.Compiler.StringResources
 open Visp.Compiler.Syntax
 open Visp.Compiler.ParseHelpers
 open FSharp.Text.Parsing
@@ -35,9 +37,23 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
-%token <int> INT32
-%token <int64> INT64
-%token <decimal> DECIMAL
+
+/* bool indicates if INT8 was 'bad' max_int+1, e.g. '128' */
+%token <sbyte * bool> INT8
+%token <int16 * bool> INT16
+%token <int32 * bool> INT32 INT32_DOT_DOT
+%token <int64 * bool> INT64
+%token <int64 * bool> NATIVEINT
+
+%token <byte> UINT8
+%token <uint16> UINT16
+%token <uint32> UINT32
+%token <uint64> UINT64
+%token <uint64> UNATIVEINT
+%token <single> IEEE32
+%token <double> IEEE64
+%token <System.Decimal> DECIMAL
+
 %token <string> HASH_IDENT
 %token <string> PROP_PLUS
 %token <string> MACRO_NAME
@@ -74,7 +90,8 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_at_expr
 %nonassoc prec_expr
 
-%nonassoc TRUE FALSE NIL INT32 INT64 DECIMAL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
+%nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL
+%nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
 %nonassoc HASH_IDENT
 
 // %left COMMA
@@ -913,9 +930,49 @@ rawConstant:
     | STRING
         { let (raw, kind, _) = $1
           SynConst.String(raw, kind, (lhs parseState))}
+    | INT8
+      { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideEightBitSigned(), lhs parseState))
+        SynConst.SByte(fst $1) }
+
+    | UINT8
+      { SynConst.Byte $1 }
+
+    | INT16
+      { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideSixteenBitSigned(), lhs parseState))
+        SynConst.Int16 (fst $1) }
+
+    | UINT16
+      { SynConst.UInt16 $1 }
+
+    | INT32
+      { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideThirtyTwoBitSigned(), lhs parseState))
+        SynConst.Int32 (fst $1) }
+
+    | UINT32
+      { SynConst.UInt32 $1 }
+
+    | INT64
+      { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideSixtyFourBitSigned(), lhs parseState))
+        SynConst.Int64 (fst $1) }
+
+    | UINT64
+      { SynConst.UInt64 $1 }
+
+    | NATIVEINT
+      { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideNativeSigned(), lhs parseState))
+        SynConst.IntPtr(fst $1) }
+
+    | UNATIVEINT
+      { SynConst.UIntPtr $1 }
+
+    | IEEE32
+      { SynConst.Single $1 }
+
+    | IEEE64
+      { SynConst.Double $1 }
+
     | DECIMAL { SynConst.Decimal($1)}
-    | INT32 { SynConst.Int32($1)}
-    | INT64 { SynConst.Int64($1)}
+
     | TRUE { SynConst.Bool(true)}
     | FALSE { SynConst.Bool(false)}
     | NIL { SynConst.Nil }

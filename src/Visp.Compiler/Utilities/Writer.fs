@@ -18,6 +18,8 @@ module Writer =
             for _ in 0 .. count - 1 do
                 streamWriter.Write(' ')
 
+        member _.Inner = streamWriter
+
         member this.WriteIndent() =
             this.WriteSpaces(indentation * indentationFactor)
 

@@ -48,7 +48,6 @@ let mkTokenizerWithArgs args =
 let mkTokenizer () =
     mkTokenizerWithArgs <| mkDefaultLextArgs ()
 
-
 let parseStringToExpr fileName str =
     let lexbuf = LexBuffer<_>.FromString str
     lexbuf.EndPos <- Position.FirstLine fileName
