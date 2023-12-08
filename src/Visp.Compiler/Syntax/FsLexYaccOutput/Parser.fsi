@@ -11,9 +11,20 @@ type token =
   | MACRO_NAME of (string)
   | PROP_PLUS of (string)
   | HASH_IDENT of (string)
-  | DECIMAL of (decimal)
-  | INT64 of (int64)
-  | INT32 of (int)
+  | DECIMAL of (System.Decimal)
+  | IEEE64 of (double)
+  | IEEE32 of (single)
+  | UNATIVEINT of (uint64)
+  | UINT64 of (uint64)
+  | UINT32 of (uint32)
+  | UINT16 of (uint16)
+  | UINT8 of (byte)
+  | NATIVEINT of (int64 * bool)
+  | INT64 of (int64 * bool)
+  | INT32 of (int32 * bool)
+  | INT32_DOT_DOT of (int32 * bool)
+  | INT16 of (int16 * bool)
+  | INT8 of (sbyte * bool)
   | YIELD of (bool)
   | INLINE
   | REC
@@ -102,8 +113,19 @@ type tokenId =
     | TOKEN_PROP_PLUS
     | TOKEN_HASH_IDENT
     | TOKEN_DECIMAL
+    | TOKEN_IEEE64
+    | TOKEN_IEEE32
+    | TOKEN_UNATIVEINT
+    | TOKEN_UINT64
+    | TOKEN_UINT32
+    | TOKEN_UINT16
+    | TOKEN_UINT8
+    | TOKEN_NATIVEINT
     | TOKEN_INT64
     | TOKEN_INT32
+    | TOKEN_INT32_DOT_DOT
+    | TOKEN_INT16
+    | TOKEN_INT8
     | TOKEN_YIELD
     | TOKEN_INLINE
     | TOKEN_REC

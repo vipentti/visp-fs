@@ -15,12 +15,14 @@
 (printfn "* is %i" (* a b 52))
 (printfn "* is %i" (* 2))
 (printfn "* is %i" (*))
+(printfn "* is %A" (* 2y 1y))
 
 (printfn "- is %i" (- a b 52))
 (printfn "- is %i" (- 2))
 
 (printfn "/ is %A" (/ a b 52))
-(printfn "/ is %A" (/ 2))
+(printfn "/ is %A" (/ 2L))
 
 (printfn "/ is %A" (/ (decimal a) (decimal b) (decimal 52.0)))
 (printfn "/ is %A" (/ 2))
+(printfn "/ is %A" (/ (decimal a) (decimal b) 52.0m))

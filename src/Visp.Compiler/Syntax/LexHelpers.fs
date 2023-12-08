@@ -71,7 +71,8 @@ type LexMode =
         | _ -> false
 
 type LexArgs =
-    { mutable mode: LexMode
+    { diagnosticsLogger: DiagnosticsLogger.DiagnosticsLogger
+      mutable mode: LexMode
       mutable stringNest: LexerInterpolatedStringNesting
       mutable interpolationDelimiterLength: int
       mutable depth: int }
@@ -100,7 +101,8 @@ type LexArgs =
         this.depth <- 0
 
 let mkDefaultLextArgs () =
-    { mode = LexMode.Default
+    { diagnosticsLogger = DiagnosticsLogger.DiagnosticsThreadStatics.DiagnosticsLogger
+      mode = LexMode.Default
       depth = 0
       interpolationDelimiterLength = 0
       stringNest = [] }
