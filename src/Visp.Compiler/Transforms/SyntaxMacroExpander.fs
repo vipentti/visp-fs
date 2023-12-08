@@ -198,7 +198,7 @@ let private evaluatePatterns
             | SynMacroBody.Const(c, _) ->
                 match c with
                 | SynConst.Bool v -> res.Add(if v then TRUE else FALSE)
-                | SynConst.Char ch -> res.Add(CHAR(ch.ToString()))
+                | SynConst.Char ch -> res.Add(CHAR(ParseHelpers.charToParseable ch))
                 | SynConst.Decimal dec -> res.Add(DECIMAL dec)
                 | SynConst.Int32 dec -> res.Add(INT32 dec)
                 | SynConst.Int64 dec -> res.Add(INT64 dec)
