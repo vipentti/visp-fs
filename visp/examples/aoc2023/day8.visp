@@ -1,0 +1,168 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day8")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(fn rec cycle [xs]
+  (seq
+    (yield! xs)
+    (yield! (cycle xs))
+  ))
+
+(type Network ([name: string] [left: Network] [right: Network])
+  (let name name)
+  (let left left)
+  (let right right))
+
+(let g_START "AAA")
+(let g_END "ZZZ")
+
+(let left fst)
+(let right snd)
+
+(fn ParseFile ([text: string])
+  (mut enu (SplitLines text))
+  (let _ (enu.MoveNext))
+  (let instructions (->> (.ToString enu.Current) Seq.toList))
+  (let mapping (new Dictionary<_,_>))
+
+  (while (enu.MoveNext)
+    (let line enu.Current)
+    (cond_
+      [(not line.IsEmpty)
+        (mut parts (line.EnumerateSplitSubstrings (#\= , splitOptions)))
+        (let _ (parts.MoveNext))
+        (let from parts.Current)
+        (let _ (parts.MoveNext))
+        (let network parts.Current)
+        (mut networkParts (network.Trim (!array #\( #\)) ))
+        (mut networkParts (networkParts.EnumerateSplitSubstrings (#\, . splitOptions)))
+        (let _ (networkParts.MoveNext))
+        (let leftPart networkParts.Current)
+        (let _ (networkParts.MoveNext))
+        (let rightPart networkParts.Current)
+
+
+        (let from (.ToString from))
+        (let leftPart (.ToString leftPart))
+        (let rightPart (.ToString rightPart))
+
+        (.Add mapping from (leftPart . rightPart))
+      ]))
+
+  (instructions . mapping))
+
+(let map (ParseFile fileText))
+
+(type Dict Dictionary<string,string*string>)
+(type MapType list<char>*Dict)
+
+(fn GetNext ([d: Dict] [ins: char] [cur: string])
+  (match (.TryGetValue d cur)
+    [(false . _) (failwithf "not found %A" cur)]
+    [(true . pair)
+      (match ins
+        [#\L (left pair)]
+        [#\R (right pair)]
+        [_ (failwith "unreachable")])
+    ]))
+
+(fn FindPathPart1 ((map : MapType))
+  (match map
+    [(instructions . network)
+      (mut steps 0)
+      (mut current g_START)
+      (mut loop true)
+      (mut insEnu (->> (cycle instructions) .GetEnumerator))
+
+      (while (and loop (not (= current g_END)))
+        (let _ (insEnu.MoveNext))
+        (let curIns insEnu.Current)
+        (set! current (GetNext network curIns current))
+        (set! steps (+ steps 1))
+      )
+      steps
+    ]))
+
+(let part1 (FindPathPart1 map))
+(WriteResult "part1" part1 (if example 6 14257))
+
+(let part2ExampleMap """
+LR
+
+11A = (11B, XXX)
+11B = (XXX, 11Z)
+11Z = (11B, XXX)
+22A = (22B, XXX)
+22B = (22C, 22C)
+22C = (22Z, 22Z)
+22Z = (22B, 22B)
+XXX = (XXX, XXX)
+""")
+
+(let part2Map (if example (ParseFile part2ExampleMap) map))
+(let starts (->> (snd part2Map) +Keys (Seq.filter #(.EndsWith %1 #\A)) (List.ofSeq)))
+(let ends (->> (snd part2Map) +Keys (Seq.filter #(.EndsWith %1 #\Z)) (Set.ofSeq)))
+
+;; (printfn "STARTS %A" starts)
+;; (printfn "ENDS %A" ends)
+
+(fn ContainsAll ([ends : Set<string>] [nodes: array<string>])
+  (->> nodes
+    (Array.forall #(Set.contains %1 ends))))
+
+(fn FindUntilEnd ([map: MapType] [start: string] [ends : Set<string>])
+  (match map
+    [(instructions . network)
+      (mut steps 0L)
+      (mut current start)
+      (mut insEnu (->> (cycle instructions) .GetEnumerator))
+      (while (and (not (Set.contains current ends)))
+        (let _ (insEnu.MoveNext))
+        (let curIns insEnu.Current)
+        (set! current (GetNext network curIns current))
+        (set! steps (+ steps 1L)))
+      steps
+    ]))
+
+(fn Part2FindPath ([map: MapType] [starts: list<string>] [ends : Set<string>])
+  (match map
+    [(instructions . network)
+      (mut current (Array.ofList starts))
+      (let ends (->> current (Array.Parallel.map #(FindUntilEnd map %1 ends))))
+      ;; (printfn "%A" ends)
+      (->>
+        ends
+        (Array.reduce lcm64))
+    ]))
+
+(let part2 (Part2FindPath part2Map starts ends))
+
+(WriteResult "part2" part2 (if example 6L 16187743689077L))
+
+()
+
