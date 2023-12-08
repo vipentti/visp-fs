@@ -32,8 +32,9 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token OPEN MODULE
 %token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
-%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ YIELD UNION
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
+%token <bool> YIELD
 %token <int> INT32
 %token <int64> INT64
 %token <decimal> DECIMAL
@@ -311,7 +312,7 @@ parens_expr:
     | BANG_VEC expr_list { SynExpr.FsVec($2, lhs parseState)}
 
     | SEQ expr_list { SynExpr.FsSeq($2, lhs parseState) }
-    | YIELD expr { SynExpr.FsYield($2, lhs parseState) }
+    | YIELD expr { SynExpr.FsYield($2, $1, lhs parseState) }
 
 macro_call_expr:
     | macro_call { SynExpr.SyntaxMacroCall($1) }

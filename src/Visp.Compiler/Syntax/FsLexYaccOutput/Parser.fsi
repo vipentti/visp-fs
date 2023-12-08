@@ -14,6 +14,7 @@ type token =
   | DECIMAL of (decimal)
   | INT64 of (int64)
   | INT32 of (int)
+  | YIELD of (bool)
   | INLINE
   | REC
   | RINIT
@@ -21,7 +22,6 @@ type token =
   | THREAD_LAST
   | SYNTAX_MACRO
   | SEQ
-  | YIELD
   | UNION
   | ATOM_KW
   | DEREF_KW
@@ -104,6 +104,7 @@ type tokenId =
     | TOKEN_DECIMAL
     | TOKEN_INT64
     | TOKEN_INT32
+    | TOKEN_YIELD
     | TOKEN_INLINE
     | TOKEN_REC
     | TOKEN_RINIT
@@ -111,7 +112,6 @@ type tokenId =
     | TOKEN_THREAD_LAST
     | TOKEN_SYNTAX_MACRO
     | TOKEN_SEQ
-    | TOKEN_YIELD
     | TOKEN_UNION
     | TOKEN_ATOM_KW
     | TOKEN_DEREF_KW

@@ -192,7 +192,8 @@ let keywordTokenList =
       ("unquote", UNQUOTE_KW)
       ("when", WHEN)
       ("while", WHILE)
-      ("yield", YIELD) ]
+      ("yield", YIELD false)
+      ("yield!", YIELD true) ]
 
 let keywordToTokenMap = keywordTokenList |> Map.ofList
 
