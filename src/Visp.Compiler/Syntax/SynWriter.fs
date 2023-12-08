@@ -779,9 +779,16 @@ module Write =
             | SynExpr.Symbol name ->
                 match w.knownMethods.TryFind(Syntax.textOfSymbol name) with
                 | Some method ->
-                    fmtprintf w "%s.``%s``(" method.DeclaringType.Name method.Name
+
+                    let mutable parens = false
+
+                    fmtprintf w "%s.``%s``" method.DeclaringType.Name method.Name
 
                     if isVariableArgMethod method then
+                        parens <- true
+                        string w "("
+
+
                         string w "state"
 
                         if not args.IsEmpty then
@@ -795,6 +802,9 @@ module Write =
                                 string wt ")")
                             args
                     else if hasSingleValueArrayTypeArg method then
+                        parens <- true
+                        string w "("
+
                         writeArgComma
                             w
                             (fun wt stt ex ->
@@ -803,8 +813,15 @@ module Write =
                                 string wt ")")
                             args
                     else if hasParamArrayAttribute method then
+                        parens <- true
+                        string w "("
+
                         writeSeq w WriteState.Arg (flip string ", ") writeExpr args
                     else
+
+                        // TODO: Support
+                        parens <- true
+                        string w "("
                         let parameters = method.GetParameters()
                         let zipped = Seq.zip args parameters
 
@@ -824,7 +841,8 @@ module Write =
 
                         ()
 
-                    char w ')'
+                    if parens then
+                        char w ')'
                 | None ->
                     symbol w name true
                     writeCallArgs w args
@@ -1270,7 +1288,7 @@ module Write =
             startExpr w st r
 
             match args with
-            | [] -> string w "1"
+            | [] -> string w "LanguagePrimitives.GenericOne"
             | [ one ] -> writeExpr w st one
             | rest -> writeSeq w WriteState.Inline (flip string " * ") writeExpr rest
         | SynOp.Div(args, r) ->
@@ -1278,19 +1296,9 @@ module Write =
 
             match args with
             | [ one ] ->
-                string w "1.0m / (decimal "
-                writeExpr w WriteState.Inline one
-                string w ")"
-            | rest ->
-                writeSeq
-                    w
-                    WriteState.Inline
-                    (flip string " / ")
-                    (fun w st a ->
-                        string w "(decimal "
-                        writeExpr w st a
-                        string w ")")
-                    rest
+                string w "LanguagePrimitives.GenericOne / "
+                writeExprInParens w WriteState.Inline one
+            | rest -> writeSeq w WriteState.Inline (flip string " / ") writeExprInParens rest
         | SynOp.Minus(args, r) ->
             startExpr w st r
 
@@ -1309,15 +1317,7 @@ module Write =
         string w "(fun "
         writeArgsOrEmpty w args
         string w " ->"
-
-        // if body.Length = 1 then
-        //     space w
-        //     for ex in body do
-        //         writeExpr w wsNone ex
-        // else
-        // use _ = withIndent w false
         writeBody w writeExpr body
-
         string w ")"
         ()
 

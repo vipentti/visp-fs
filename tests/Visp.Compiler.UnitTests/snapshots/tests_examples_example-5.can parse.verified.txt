@@ -22,17 +22,21 @@ printfn ("* is %i") (a * b * 52)
 // line 16 @"example-5.visp"
 printfn ("* is %i") (2)
 // line 17 @"example-5.visp"
-printfn ("* is %i") (1)
+printfn ("* is %i") (LanguagePrimitives.GenericOne)
 // line 19 @"example-5.visp"
 printfn ("- is %i") (a - b - 52)
 // line 20 @"example-5.visp"
 printfn ("- is %i") (-2)
 // line 22 @"example-5.visp"
-printfn ("/ is %f") ((decimal a) / (decimal b) / (decimal 52))
+printfn ("/ is %A") ((a) / (b) / (52))
 // line 23 @"example-5.visp"
+printfn ("/ is %A") (LanguagePrimitives.GenericOne / (2))
+// line 25 @"example-5.visp"
+printfn ("/ is %A") ((decimal (a)) / (decimal (b)) / (decimal (52.0)))
+// line 26 @"example-5.visp"
 let visp_result_todo =
-  // line 23 @"example-5.visp"
-  printfn ("/ is %f") (1.0m / (decimal 2))
-// line 23 @"example-5.visp"
+  // line 26 @"example-5.visp"
+  printfn ("/ is %A") (LanguagePrimitives.GenericOne / (2))
+// line 26 @"example-5.visp"
 printfn ("%A") (visp_result_todo)
 
