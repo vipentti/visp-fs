@@ -36,10 +36,11 @@
 (fn vec->value ([v: Vector]) (Value.vector v))
 (fn VecToValue ([v: Vector]) (Value.vector v))
 
-(fn inline add [(lhs: 'a) (rhs: 'a)] (+ lhs rhs))
-(fn inline sub [(lhs: 'a) (rhs: 'a)] (- lhs rhs))
-(fn inline mul [(lhs: 'a) (rhs: 'a)] (* lhs rhs))
-(fn inline div [(lhs: 'a) (rhs: 'a)] (* lhs rhs))
+(fn inline add [(lhs: ^a) (rhs: ^a)] (+ lhs rhs))
+(fn inline sub [(lhs: ^a) (rhs: ^a)] (- lhs rhs))
+(fn inline mul [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
+(fn inline div [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
+(fn inline rem [(lhs: ^a) (rhs: ^a)] (CoreMethods.rem_impl lhs rhs))
 (fn inline sub1 [a] (- a LanguagePrimitives.GenericOne))
 (fn inline dec [a] (- a LanguagePrimitives.GenericOne))
 (fn inline add1 [a] (+ a LanguagePrimitives.GenericOne))
@@ -58,3 +59,14 @@
     [(false . _) None]
     [(true . v ) (Some v)]
   ))
+
+
+(fn rec gcd64 [a b]
+  (match (a . b)
+    [(x, 0L) x]
+    [(0L, y) y]
+    [(x, y) (gcd64 y (rem x y))]
+  ))
+
+(fn inline lcm64 (a b)
+  (/ (* a b) (gcd64 a b)))
