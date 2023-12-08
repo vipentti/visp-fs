@@ -173,7 +173,7 @@ type SynExpr =
     | FsSet of exprs: SynExpr list * range: range
     | FsVec of exprs: SynExpr list * range: range
     | FsSeq of exprs: SynExpr list * range: range
-    | FsYield of expr: SynExpr * range: range
+    | FsYield of expr: SynExpr * bang: bool * range: range
     | List of exprs: SynExpr list * range: range
     | Vector of exprs: SynExpr list * range: range
     | HashMap of exprs: SynExpr list * range: range
