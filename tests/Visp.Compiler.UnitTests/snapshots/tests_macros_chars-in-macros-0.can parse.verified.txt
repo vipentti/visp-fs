@@ -1,0 +1,24 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"chars-in-macros-0.visp"
+let macro_PrintChars = "__MACRO_INIT__"
+// line 13 @"chars-in-macros-0.visp"
+printfn ("Values: %A") ([('a', '=', 'B', '\n', ' ', '\t')])
+// line 15 @"chars-in-macros-0.visp"
+printfn ("%A") ('a')
+// line 16 @"chars-in-macros-0.visp"
+printfn ("%A") ('\n')
+// line 17 @"chars-in-macros-0.visp"
+printfn ("%A") (' ')
+// line 18 @"chars-in-macros-0.visp"
+let visp_result_todo =
+  // line 18 @"chars-in-macros-0.visp"
+  printfn ("%A") ('\t')
+// line 18 @"chars-in-macros-0.visp"
+printfn ("%A") (visp_result_todo)
+

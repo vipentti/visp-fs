@@ -121,6 +121,11 @@ module ``tests_chars_char-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/chars/char-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_chars_char-2`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/chars/char-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_hashmap_hashmap-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/hashmap/hashmap-0.visp"
@@ -204,6 +209,11 @@ module ``tests_macros_syntax-macro-0`` =
 module ``tests_macros_cond-macro-1`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/cond-macro-1.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_chars-in-macros-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/chars-in-macros-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_macros_cond-macro-0`` =

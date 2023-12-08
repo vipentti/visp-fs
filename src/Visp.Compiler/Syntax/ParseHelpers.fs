@@ -77,6 +77,16 @@ let parseChar (text: string) =
     let span = text.AsSpan().Slice(2)
     parseCharSpan span
 
+let charToParseable (ch: char) =
+    match ch with
+    | '\n' -> "#\\lf"
+    | '\r' -> "#\\cr"
+    | '\t' -> "#\\tab"
+    | ' ' -> "#\\space"
+    | '\\' -> "#\\\\"
+    | it when it = (char 8) -> "#\\backspace"
+    | it when it = '\u0000' -> "#\\nul"
+    | it -> $"#\\{it}"
 
 //------------------------------------------------------------------------
 // Parsing: continuations for whitespace tokens
