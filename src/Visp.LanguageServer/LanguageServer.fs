@@ -356,6 +356,8 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
                 Syntax.rangeOfName name |> textRangeToSyntaxRange
             )
         )
+    | SynExpr.Symbol sym ->
+        syms.Add(SymbolDetails.Variable(sym.Text, false, sym.Range |> textRangeToSyntaxRange))
     | _ -> ()
 
     ()
