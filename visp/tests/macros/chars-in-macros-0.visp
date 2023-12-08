@@ -1,0 +1,18 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro PrintChars
+  [(_ body ...)
+    (printfn "Values: %A" (!list body ...))
+  ])
+
+(PrintChars (#\a . #\= . #\B . #\newline . #\space . #\tab))
+
+(printfn "%A" #\a)
+(printfn "%A" #\newline)
+(printfn "%A" #\space)
+(printfn "%A" #\tab)
