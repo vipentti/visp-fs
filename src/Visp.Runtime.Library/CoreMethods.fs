@@ -61,6 +61,8 @@ type CoreMethods =
 
     static member inline div([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (/)
 
+    static member inline rem_impl (lhs: 'a) (rhs: 'a) : 'a = lhs % rhs
+
     static member inline ``null?``<'a when 'a: null and 'a: equality>(v: 'a) = v = null
 
     static member ``eq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs = rhs
