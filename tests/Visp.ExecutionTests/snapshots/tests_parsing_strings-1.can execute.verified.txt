@@ -1,0 +1,40 @@
+﻿string is 'r:
+t:	n:
+a:"'
+string is 'r:\rt:\tn:\na:\a'
+string is 'r:\rt:\tn:\na:\a'
+string is '
+  multiple lines are okay?
+'
+string is '
+  multiple lines are okay?
+'
+"
+// AUTO GENERATED
+// DO NOT MODIFY BY HAND
+
+namespace Temp
+
+open Xunit
+
+module Temp
+
+
+  [<Fact>]
+  let ``example example`` () = TestUtils.runTest "example"
+
+
+  [<Fact>]
+  let ``interpolated example example`` () = TestUtils.runTest "example"
+
+
+  [<Fact>]
+  let ``interpolated example example`` () = TestUtils.runTest "example {path}"
+
+
+  [<Fact>]
+  let ``interpolated example example`` () = TestUtils.runTest "6 6 {(+ 1 2 3)}"
+
+"
+
+ExitCode: 0

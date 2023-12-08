@@ -306,7 +306,6 @@
                 { "include": "#hashset" },
                 { "include": "#sexp" },
                 { "include": "#read-metadata" },
-                { "include": "#string" },
                 {
                     "match": "(?<=\\()(.+?)(?=\\s|\\))",
                     "captures": {
@@ -328,7 +327,7 @@
             "name": "comment.line.shebang.visp"
         },
         "tripleQuotedString": {
-            "begin": "(?<!\\\\)(\"\"\")",
+            "begin": "(\"\"\")",
             "beginCaptures": {
                 "1": { "name": "punctuation.definition.tripleQuotedString.begin.visp" }
             },

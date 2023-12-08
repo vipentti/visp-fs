@@ -28,7 +28,9 @@ module CoreParser =
         Transforms.Helpers.runTransforms tfs expr
 
     let transformFile file =
-        Transforms.Helpers.transformParsedFile expandExpr file
+        file
+        |> Transforms.StringLifter.liftLiteralStrings
+        |> Transforms.Helpers.transformParsedFile expandExpr
 
     let writeParsedFile file outputStream (template: string) =
         let fileWriter = Writer.CustomFileWriter(outputStream, 2, "//")

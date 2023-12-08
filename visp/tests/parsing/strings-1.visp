@@ -1,0 +1,65 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let value "r:\rt:\tn:\na:\a\"")
+
+(printfn "string is '%s'" value)
+(printfn "string is '%s'" """r:\rt:\tn:\na:\a""")
+(printfn "string is '%s'" #r"""r:\rt:\tn:\na:\a""")
+(printfn "string is '%s'" """
+  multiple lines are okay?
+""")
+(do
+  (do
+    (do
+      (printfn "string is '%s'" """
+        multiple lines are okay?
+      """)
+    )))
+
+(fn genTestHeader (moduleName)
+  (->> (sprintf """
+  // AUTO GENERATED
+  // DO NOT MODIFY BY HAND
+
+  namespace %s
+
+  open Xunit
+
+  module %s
+  """ moduleName moduleName)
+    ))
+
+(let lf System.Environment.NewLine)
+
+(fn genTestTemplate ((prefix: string) (path: string))
+  (let path (.Replace path "\\" "/"))
+  (let testname (->> path #(.Replace %1 "/" "_")))
+
+  (do
+    (do
+      (let template (sprintf #r"""
+        [<Fact>]
+        let ``%s %s`` () = TestUtils.runTest "%s"
+      """ prefix testname path))
+      (let template2 $"""
+        [<Fact>]
+        let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"
+      """)
+      (let template3 $$"""
+        [<Fact>]
+        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"
+      """)
+      (let template4 $$"""
+        [<Fact>]
+        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{(+ 1 2 3)}} {{(+ 1 2 3)}} {(+ 1 2 3)}"
+      """)
+      (+ template lf template2 lf template3 lf template4 lf)
+    ))
+)
+
+(+ (genTestHeader "Temp") System.Environment.NewLine (genTestTemplate "example" "example"))

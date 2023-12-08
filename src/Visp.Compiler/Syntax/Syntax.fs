@@ -63,6 +63,8 @@ type SynStringKind =
     | Regular
     | Verbatim
     | TripleQuote
+    | Interpolated of plain: int
+    | InterpolatedTripleQuote of triple: int
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynConst =
@@ -153,6 +155,7 @@ type SynExpr =
     | Cons of lhs: SynExpr * rhs: SynExpr * range: range
     | Concat of lhs: SynExpr * rhs: SynExpr * range: range
     | Const of constant: SynConst * range: range
+    | Literal of constant: SynConst * range: range
     | Quote of shorthand: bool * expr: SynQuoted * range: range
     | Quasiquote of shorthand: bool * expr: SynQuasiquote * range: range
     | Begin of exprs: SynExpr list * kind: BeginKind * range: range
@@ -222,6 +225,7 @@ type SynExpr =
         | Cons(range = r)
         | Concat(range = r)
         | Match(range = r)
+        | Literal(range = r)
         | Tuple(range = r)
         | Pair(range = r)
         | RangeExpr(range = r)
@@ -272,6 +276,10 @@ type SynExpr =
     member this.withRangeOf(r: range) =
         match this with
         | _ -> this
+
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynInterpolatedStringPart =
+    | String of value: string * range: range
+    | FillExpr of fillExpr: SynExpr * qualifiers: Ident option
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynAttribute =
     { TypeName: SynType

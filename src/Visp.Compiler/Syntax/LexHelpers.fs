@@ -11,6 +11,7 @@ open System
 open Visp.Compiler.Syntax.Macros
 open Visp.Common
 open System.IO
+open FSharp.Text.Lexing
 
 [<RequireQualifiedAccess>]
 type TokenStreamMode =
@@ -71,6 +72,8 @@ type LexMode =
 
 type LexArgs =
     { mutable mode: LexMode
+      mutable stringNest: LexerInterpolatedStringNesting
+      mutable interpolationDelimiterLength: int
       mutable depth: int }
 
     member this.Nested m =
@@ -96,11 +99,15 @@ type LexArgs =
         this.mode <- LexMode.Default
         this.depth <- 0
 
-let mkDefaultLextArgs () = { mode = LexMode.Default; depth = 0 }
+let mkDefaultLextArgs () =
+    { mode = LexMode.Default
+      depth = 0
+      interpolationDelimiterLength = 0
+      stringNest = [] }
 
 let mkTokenStreamArgs () =
-    { mode = LexMode.TokenStream(TokenStreamMode.Macro)
-      depth = 0 }
+    { mkDefaultLextArgs () with
+        mode = LexMode.TokenStream(TokenStreamMode.Macro) }
 
 type StringBuffer = Text.StringBuilder
 
@@ -113,6 +120,14 @@ type LexerStringFinisherContext =
 let addUnicodeString (buf: StringBuffer) (s: string) =
     buf.Append(s) |> ignore
     ()
+
+let addUnicodeChar (buf: StringBuffer) (ch: char) =
+    buf.Append(ch) |> ignore
+    ()
+
+let lastNewline (buf: StringBuffer) =
+    let len = buf.Length
+    0
 
 type LexerStringFinisher =
     | LexerStringFinisher of
@@ -184,6 +199,33 @@ let keywordToTokenMap = keywordTokenList |> Map.ofList
 let tryGetKeyword w = keywordToTokenMap.TryFind w
 
 let alwaysSymbol (s: string) = SYMBOL(s)
+
+let escape c =
+    match c with
+    | '\\' -> '\\'
+    | '\'' -> '\''
+    | 'a' -> char 7
+    | 'f' -> char 12
+    | 'v' -> char 11
+    | 'n' -> '\n'
+    | 't' -> '\t'
+    | 'b' -> '\b'
+    | 'r' -> '\r'
+    | c -> c
+
+let unescape c =
+    match c with
+    | '\'' -> "\\'"
+    | '\\' -> "\\\\"
+    | '\n' -> "\\n"
+    | '\r' -> "\\r"
+    | '\t' -> "\\t"
+    | '\b' -> "\\b"
+    | '"' -> "\\\""
+    | it when it = char 7 -> "\\a"
+    | it when it = char 12 -> "\\f"
+    | it when it = char 11 -> "\\v"
+    | it -> string it
 
 let isLetter (ch: char) = System.Char.IsLetter(ch)
 
