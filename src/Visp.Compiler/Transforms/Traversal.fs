@@ -120,8 +120,7 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     yield! loop name
                     yield! loop value
 
-                | SynExpr.FsYield(exprs, _) -> yield! loop exprs
-
+                | SynExpr.FsYield(exprs, _, _) -> yield! loop exprs
                 | SynExpr.LambdaDef(SynLambda(_, exprs, _))
                 | SynExpr.Begin(exprs, _, _)
                 | SynExpr.New(_, exprs, _)
