@@ -4,18 +4,33 @@
 
 module Visp.Syntax.SynWriter
 
+open SpanUtils.Extensions
 open Visp.Compiler.Writer
 open Visp.Common
 open Visp.Compiler.Syntax
 open Visp.Compiler.Text
 open System.Globalization
+open System.Collections.Generic
 
 open Visp.Runtime.Library.CompileHelpers
 
 type SynWriter(writer: CustomFileWriter) =
+    let letStack = new Stack<bool>()
+
+    member _.EnterLet() = letStack.Push(true)
+
+    member _.LeaveLet() = letStack.Pop() |> ignore
+
+    member _.InLet() =
+        match letStack.TryPeek() with
+        | false, _ -> false
+        | true, it -> it
+
     member _.knownMethods = getMethods ()
 
     member _.writer = writer
+
+    member d.IndentLevel = d.writer.IndentLevel
 
     member this.Write(text: string) = this.writer.Write(text)
 
@@ -25,7 +40,6 @@ type SynWriter(writer: CustomFileWriter) =
 
     member this.Write(it: decimal) =
         this.writer.Write(it.ToString(CultureInfo.InvariantCulture))
-
 
 let mkSynWriter w = new SynWriter(w)
 
@@ -75,31 +89,6 @@ type WriteState =
         match this with
         | InlineNoParens -> false
         | _ -> true
-
-// type WriteState =
-//     { indent: bool
-//       line: bool
-//       parens: bool
-//       newline: bool }
-
-// let wsNoneNoParens =
-//     { indent = false
-//       line = false
-//       parens = false
-//       newline = true }
-
-// let wsNone =
-//     { indent = false
-//       line = false
-//       parens = true
-//       newline = true }
-
-// let WriteState.Body =
-//     { indent = true
-//       line = true
-//       parens = true
-//       newline = true }
-
 
 let mkCh c = Text.Char c
 let mkStr c = Text.String c
@@ -175,6 +164,73 @@ module Write =
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
 
+    let escapeString (w: SynWriter) (str: string) =
+        let mutable finalIndentLevel = 0
+
+        let mutable lines = str.EnumerateSplitLines()
+
+        while lines.MoveNext() do
+            let cur = lines.Current
+            let mutable enu = cur.GetEnumerator()
+            let mutable isDone = false
+
+            let mutable level = 0
+
+            while not isDone && enu.MoveNext() do
+                let ch = enu.Current
+
+                if not (System.Char.IsWhiteSpace ch) then
+                    isDone <- true
+                else
+                    level <- level + 1
+
+                ()
+
+            finalIndentLevel <- level
+            ()
+
+
+        let mutable sb = PooledStringBuilder.Get()
+
+        // if finalIndentLevel = 0 then
+        let mutable lastNewline = false
+        let mutable indent = 1
+        let mutable enu = str.GetEnumerator()
+
+        if w.InLet() && finalIndentLevel > 0 then
+            finalIndentLevel <- finalIndentLevel - w.IndentLevel
+            printfn "%i vs %i" finalIndentLevel w.IndentLevel
+
+        while (enu.MoveNext()) do
+            let mutable ch = enu.Current
+
+            if ch = '\n' && finalIndentLevel > 0 then
+                lastNewline <- true
+                indent <- 1
+                sb <- sb.Append ch
+            else if lastNewline && ch = ' ' then
+                while (indent < finalIndentLevel && ch = ' ' && enu.MoveNext()) do
+                    indent <- indent + 1
+                    ch <- enu.Current
+                    ()
+
+                if ch <> ' ' then
+                    sb <- sb.Append ch
+
+                while ch = ' ' && enu.MoveNext() do
+                    ch <- enu.Current
+                    sb <- sb.Append ch
+                    ()
+
+                lastNewline <- false
+            else
+                lastNewline <- false
+                sb <- sb.Append ch
+
+            ()
+
+        sb.ToStringAndReturn()
+
     let normalizeString name =
         let mutable sb = PooledStringBuilder.Get()
         let mutable needs_escape = false
@@ -225,7 +281,6 @@ module Write =
             writeType w typ
             char w ')'
 
-
     let writeConst (w: SynWriter) (toValue: bool) (cnst: SynConst) =
         if toValue then
             let fromName =
@@ -239,6 +294,13 @@ module Write =
         | SynConst.String(str, kind, _) ->
             match kind with
             | SynStringKind.Regular -> surroundWithCh w '"' (flip string str) '"'
+            | SynStringKind.Interpolated nest ->
+                let prefix = new string ('$', nest)
+                surroundWithString w (prefix + "\"") (flip string str) "\""
+            | SynStringKind.InterpolatedTripleQuote nest ->
+                let prefix = new string ('$', nest)
+
+                surroundWithString w (prefix + "\"\"\"") (flip string str) "\"\"\""
             | SynStringKind.TripleQuote -> surroundWithString w "\"\"\"" (flip string str) "\"\"\""
             | SynStringKind.Verbatim -> failwith "unsupported"
 
@@ -575,13 +637,7 @@ module Write =
 
         | SynExpr.SimpleMut(name, body, range) ->
             startExpr w st range
-
-            string w "let mutable "
-            synName w name
-            string w " ="
-            use _ = withIndent w false
-            newline w
-            writeExpr w WriteState.Body body
+            writeLetFull w st true name body
             ()
 
         | SynExpr.Set(name, body, range) ->
@@ -700,6 +756,10 @@ module Write =
             string w "] |> HashMap.ofList"
 
         | SynExpr.Const(cnst, _) ->
+            indentIf w st
+            writeConst w false cnst
+
+        | SynExpr.Literal(cnst, _) ->
             indentIf w st
             writeConst w false cnst
 
@@ -1134,15 +1194,32 @@ module Write =
                 writeExpr w WriteState.Body expr
                 newline w
 
+    and private writeLetFull (w: SynWriter) (st: WriteState) mut (name: SynName) (body: SynExpr) =
+        w.EnterLet()
 
-    and private writeLet w (st: WriteState) (name: SynName) (body: SynExpr) =
+        let isLiteral =
+            not mut
+            && match body with
+               | SynExpr.Literal _ -> true
+               | _ -> false
+
+        if isLiteral then
+            string w "[<Literal>]"
+            newline w
+            indent w
+
         string w "let "
+
+        if mut then
+            string w "mutable "
+
         synName w name
         string w " ="
 
         let should_indent =
             match body with
             | SynExpr.Const _
+            | SynExpr.Literal _
             | SynExpr.Keyword _
             | SynExpr.Symbol _ -> false
             | _ -> true
@@ -1155,6 +1232,13 @@ module Write =
             space w
             writeExpr w WriteState.Inline body
 
+        w.LeaveLet()
+
+        ()
+
+
+    and private writeLet w (st: WriteState) (name: SynName) (body: SynExpr) =
+        writeLetFull w st false name body
         ()
 
     and private writeExprInParens w (st: WriteState) ex =

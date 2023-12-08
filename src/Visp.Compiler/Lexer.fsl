@@ -26,7 +26,7 @@ let unexpected_char mode (lexbuf: LexBuffer<_>) =
   let file = lexbuf.EndPos.FileName
   failwith (sprintf "%s SyntaxError: Unexpected char: '%s' %s:line %d Column: %d" mode (lexeme lexbuf) file (lexbuf.StartPos.Line+1) lexbuf.StartPos.Column)
 
-let startString (lexbuf: LexBuffer<_>) =
+let startString nesting (lexbuf: LexBuffer<_>) =
     let buf = StringBuffer()
     let m = lexbuf.LexemeRange
     let startp = lexbuf.StartPos
@@ -35,13 +35,35 @@ let startString (lexbuf: LexBuffer<_>) =
             // Adjust the start-of-token mark back to the true start of the token
             lexbuf.StartPos <- startp
 
+            let isPart = context.HasFlag(LexerStringFinisherContext.InterpolatedPart)
             let isTripleQuote = context.HasFlag(LexerStringFinisherContext.TripleQuote)
+
             let synStringKind =
               if isTripleQuote then
+                if kind.IsInterpolated then
+                  Syntax.SynStringKind.InterpolatedTripleQuote nesting
+                else
                   Syntax.SynStringKind.TripleQuote
               else
+                if kind.IsInterpolated then
+                  Syntax.SynStringKind.Interpolated nesting
+                else
                   Syntax.SynStringKind.Regular
 
+            // if kind.IsInterpolated then
+            //   let s = buf.ToString()
+            //   // if kind.IsInterpolatedFirst then
+            //   //   if isPart then
+            //   //     INTERP_STRING_BEGIN_PART (s, synStringKind, cont)
+            //   //   else
+            //   //     INTERP_STRING_BEGIN_END (s, synStringKind, cont)
+            //   // else
+            //   //   if isPart then
+            //   //     INTERP_STRING_PART (s, cont)
+            //   //   else
+            //   //     INTERP_STRING_END (s, cont)
+            //   STRING(buf.ToString(), Syntax.SynStringKind.Interpolated, cont)
+            // else
             STRING(buf.ToString(), synStringKind, cont)
         )
 
@@ -57,6 +79,9 @@ let letter = ['A'-'Z'] | ['a'-'z']
 
 let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' '&' '^' ]
 let SymbolicExtra = [ '.' '\'' '/' ]
+
+// https://github.com/dotnet/fsharp/blob/ade794633b4bb495da85c92ee780068b9c6f7344/src/Compiler/lex.fsl#L300
+let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b' | 'r'))
 
 let ident_start_char = letter | SymbolicStartCharacters
 let ident_char = ( ident_start_char | digit | SymbolicExtra )
@@ -150,20 +175,41 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "false"    { FALSE }
   | "nil"      { NIL }
   | '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       singleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
   | "#r" '"' '"' '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
+  | '$' '"' '"' '"'
+    { let buf, fin, m = startString 1 lexbuf
+      // TODO: validate
+      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
+  | ('$'+) '"' '"' '"'
+    {
+      let nest = lexeme lexbuf |> Seq.takeWhile (fun c -> c = '$') |> Seq.length
+      let buf, fin, m = startString nest lexbuf
+      // TODO: validate
+      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
   | '"' '"' '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
+
+  | '$' '"'
+    { let buf, fin, m = startString 1 lexbuf
+      // TODO: validate
+      singleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
   | '*'        { OP_MULT }
   | '/'        { OP_DIV }
   | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
@@ -223,19 +269,41 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
       else
         INT32 (int (text.TrimEnd('l'))) }
   | decimal    { DECIMAL (decimal (lexeme lexbuf)) }
+
+  | '$' '"'
+    { let buf, fin, m = startString 1 lexbuf
+      // TODO: validate
+      singleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
   | '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       singleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
 
+  | '$' '"' '"' '"'
+    { let buf, fin, m = startString 1 lexbuf
+      // TODO: validate
+      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
+  | ('$'+) '"' '"' '"'
+    {
+      let nest = lexeme lexbuf |> Seq.takeWhile (fun c -> c = '$') |> Seq.length
+      let buf, fin, m = startString nest lexbuf
+      // TODO: validate
+      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
+    }
+
   | '"' '"' '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
+
   | "#r" '"' '"' '"'
-    { let buf, fin, m = startString lexbuf
+    { let buf, fin, m = startString 0 lexbuf
       // TODO: validate
       tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
     }
@@ -267,8 +335,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
  | '"'
     { let (buf, fin, _m, kind, args) = sargs
-      //let cont = LexCont.Token(args.ifdefStack, args.stringNest)
-      let cont = LexCont.Token(())
+      let cont = LexCont.Token(args.stringNest)
       fin.Finish buf kind (LexerStringFinisherContext()) cont
     }
  | newline
@@ -277,19 +344,21 @@ and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
     addUnicodeString buf (lexeme lexbuf)
     singleQuoteString sargs skip lexbuf
   }
- | _
+ | escape_char
+   {
+     let (buf, _fin, m, kind, args) = sargs
+     addUnicodeString buf (lexeme lexbuf)
+     singleQuoteString sargs skip lexbuf
+   }
+  | _
     { let (buf, _fin, m, kind, args) = sargs
       addUnicodeString buf (lexeme lexbuf)
-//      if not skip then
-//          STRING_TEXT (LexCont.String(args.ifdefStack, args.stringNest, LexerStringStyle.SingleQuote, kind, args.interpolationDelimiterLength, m))
-//      else
       singleQuoteString sargs skip lexbuf }
 
 and tripleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
  | '"' '"' '"'
     { let (buf, fin, _m, kind, args) = sargs
-      //let cont = LexCont.Token(args.ifdefStack, args.stringNest)
-      let cont = LexCont.Token(())
+      let cont = LexCont.Token(args.stringNest)
       fin.Finish buf kind (LexerStringFinisherContext.TripleQuote) cont
     }
  | newline
@@ -298,10 +367,13 @@ and tripleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
     addUnicodeString buf (lexeme lexbuf)
     tripleQuoteString sargs skip lexbuf
   }
+ // | escape_char
+ //   {
+ //     let (buf, _fin, m, kind, args) = sargs
+ //     addUnicodeString buf (lexeme lexbuf)
+ //     singleQuoteString sargs skip lexbuf
+ //   }
  | _
     { let (buf, _fin, m, kind, args) = sargs
       addUnicodeString buf (lexeme lexbuf)
-//      if not skip then
-//          STRING_TEXT (LexCont.String(args.ifdefStack, args.stringNest, LexerStringStyle.SingleQuote, kind, args.interpolationDelimiterLength, m))
-//      else
       tripleQuoteString sargs skip lexbuf }

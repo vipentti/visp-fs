@@ -12,6 +12,8 @@ module Writer =
     type CustomFileWriter(streamWriter: TextWriter, indentationFactor: int, commentPrefix: string) =
         let mutable indentation = 0
 
+        member _.IndentLevel = indentation * indentationFactor
+
         member this.WriteSpaces(count: int32) =
             for _ in 0 .. count - 1 do
                 streamWriter.Write(' ')

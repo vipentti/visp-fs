@@ -9,10 +9,14 @@
     <Compile Include="Number.fs" />
     <Compile Include="RuntimeState.fs" />
     <Compile Include="Value.fs" />
+    <Compile Include="StringMethods.fs" />
     <Compile Include="CoreMethods.fs" />
     <Compile Include="Helpers.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Visp.Common\Visp.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SpanUtils" Version="0.4.0" />
   </ItemGroup>
 </Project>

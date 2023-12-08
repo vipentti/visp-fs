@@ -116,9 +116,25 @@ type LexerStringKind =
           IsInterpolatedFirst = false }
 
 
+/// Represents the degree of nesting of '{..}' and the style of the string to continue afterwards, in an interpolation fill.
+/// Nesting counters and styles of outer interpolating strings are pushed on this stack.
+type LexerInterpolatedStringNesting = (int * LexerStringStyle * int * Text.range) list
+
 [<RequireQualifiedAccess>]
 type LexerContinuation =
-    | Token of unit
-    | String of style: LexerStringStyle * kind: LexerStringKind * delimLen: int * range: Text.range
+    | Token of nesting: LexerInterpolatedStringNesting
+    | String of
+        nesting: LexerInterpolatedStringNesting *
+        style: LexerStringStyle *
+        kind: LexerStringKind *
+        delimLen: int *
+        range: Text.range
+
+    static member Default = Token([])
+
+    member x.LexerInterpStringNesting =
+        match x with
+        | Token(nesting = nesting)
+        | String(nesting = nesting) -> nesting
 
 and LexCont = LexerContinuation

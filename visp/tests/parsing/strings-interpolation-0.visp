@@ -1,0 +1,13 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let value "hello world")
+
+(printfn "string is '%s'" $"interpolated: {value} {value.Length}")
+(printfn "string is '%s'" $"""interpolated: {value} {value.Length}""")
+(printfn "string is '%s'" $$"""interpolated: {value} {{ value }} {{ value.Length }}""")
+(printfn "string is '%s'" $$$"""interpolated: {value} {{ value }} {{{ value }}} {{{ value.Length }}}""")

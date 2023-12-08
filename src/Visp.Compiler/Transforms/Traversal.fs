@@ -173,6 +173,7 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                 | SynExpr.Quote _ -> ()
                 | SynExpr.Quasiquote _ -> ()
                 | SynExpr.Const _ -> ()
+                | SynExpr.Literal _ -> ()
                 | SynExpr.Keyword _ -> ()
                 | SynExpr.Symbol _ -> ()
                 | SynExpr.TypeAlias _ -> ()

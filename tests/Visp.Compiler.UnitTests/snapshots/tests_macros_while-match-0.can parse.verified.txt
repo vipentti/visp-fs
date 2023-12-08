@@ -34,8 +34,7 @@ let visp_result_todo =
   // line 21 @"while-match-0.visp"
   (
     // line 21 @"while-match-0.visp"
-    let mutable notdone =
-      true
+    let mutable notdone = true
     // line 21 @"while-match-0.visp"
     while CoreMethods.isTruthy(notdone) do
       // line 21 @"while-match-0.visp"

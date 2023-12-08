@@ -10,9 +10,9 @@ string is: '
 '
 test is: '
 let ``can parse hello`` =
-  TestUtils.runTest hello
-  |> Async.AwaitTask
-  '
+TestUtils.runTest hello
+|> Async.AwaitTask
+'
 ()
 
 ExitCode: 0

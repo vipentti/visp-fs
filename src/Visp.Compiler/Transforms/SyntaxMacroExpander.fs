@@ -204,7 +204,7 @@ let private evaluatePatterns
                 | SynConst.Int64 dec -> res.Add(INT64 dec)
                 | SynConst.Unit -> res.Add(UNIT)
                 | SynConst.Nil -> res.Add(NIL)
-                | SynConst.String(s, k, _) -> res.Add(STRING(s, k, ParseHelpers.LexCont.Token()))
+                | SynConst.String(s, k, _) -> res.Add(STRING(s, k, ParseHelpers.LexCont.Token([])))
 
                 ()
 

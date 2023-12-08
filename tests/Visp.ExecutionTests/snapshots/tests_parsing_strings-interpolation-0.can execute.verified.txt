@@ -1,0 +1,7 @@
+﻿string is 'interpolated: hello world 11'
+string is 'interpolated: hello world 11'
+string is 'interpolated: {value} hello world 11'
+string is 'interpolated: {value} {{ value }} hello world 11'
+()
+
+ExitCode: 0
