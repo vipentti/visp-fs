@@ -50,7 +50,21 @@ class Build :
 
     public Solution CurrentSolution => From<IHazSolution>().Solution;
 
-    public IEnumerable<Project> TestProjects => CurrentSolution.GetAllProjects("*Tests*");
+    public bool IsMacOs =>
+        System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.OSX);
+
+    public bool IsWindows =>
+        System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform.Windows);
+
+    public IEnumerable<Project> UnitTests =>
+        CurrentSolution.GetAllProjects("*UnitTests");
+
+    public IEnumerable<Project> ExecutionTests =>
+        CurrentSolution.GetAllProjects("*ExecutionTests");
+
+    // Run only unit tests in CI on Windows & MacOS beecause execution tests take a while.
+    public IEnumerable<Project> TestProjects =>
+        IsServerBuild && (IsMacOs || IsWindows) ? UnitTests : UnitTests.Concat(ExecutionTests);
 
     bool IUseCsharpier.UseGlobalTool => false;
     bool IUseFantomas.UseGlobalTool => false;
