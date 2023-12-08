@@ -749,8 +749,8 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
                             ),
                         CompletionProvider =
                             new CompletionOptions(
-                                ResolveProvider = false,
-                                TriggerCharacters = [| "$"; "_" |]
+                                ResolveProvider = false
+                            // TriggerCharacters = [| "$"; "_" |]
                             ),
                         DocumentSymbolProvider = true
                     // TODO: Rest of capabilities

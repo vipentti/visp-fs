@@ -10,8 +10,7 @@ let value = 1
 // line 11 @"variables-0.visp"
 printfn ("value is %i") (value)
 // line 14 @"variables-0.visp"
-let mutable valuemut =
-  1
+let mutable valuemut = 1
 // line 15 @"variables-0.visp"
 printfn ("valuemut is %i") (valuemut)
 // line 19 @"variables-0.visp"

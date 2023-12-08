@@ -36,6 +36,8 @@
     <Compile Include="$(FsYaccOutputFolder)Parser.fs" />
     <Compile Include="Syntax\LexHelpers.fs" />
     <Compile Include="$(FsLexOutputFolder)Lexer.fs" />
+    <Compile Include="ParseUtils.fs" />
+    <Compile Include="Transforms\StringLifter.fs" />
     <Compile Include="Transforms\SyntaxMacroExpander.fs" />
     <Compile Include="Syntax\SynWriter.fs" />
     <Compile Include="CoreParser.fs" />
@@ -46,6 +48,7 @@
     <ProjectReference Include="..\Visp.Runtime.Library\Visp.Runtime.Library.fsproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SpanUtils" Version="0.4.0" />
     <PackageReference Include="FsLexYacc" Version="11.2.0" />
     <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.87" />
   </ItemGroup>

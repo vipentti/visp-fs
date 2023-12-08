@@ -114,6 +114,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Quote _ -> expr
         | SynExpr.Quasiquote _ -> expr
         | SynExpr.Const _ -> expr
+        | SynExpr.Literal _ -> expr
         | SynExpr.Keyword _ -> expr
         | SynExpr.Symbol _ -> expr
         | SynExpr.TypeAlias _ -> expr

@@ -6,8 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 8 @"example-3.visp"
-let mutable value =
-  "initial"
+let mutable value = "initial"
 // line 9 @"example-3.visp"
 printfn ("value is %s") (value)
 // line 10 @"example-3.visp"

@@ -51,6 +51,16 @@ module ``tests_hashset_hashset-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/hashset/hashset-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/strings-interpolation-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-1`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/strings-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_match-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/match-0.visp"

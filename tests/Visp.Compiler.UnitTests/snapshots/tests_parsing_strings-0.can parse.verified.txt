@@ -6,27 +6,36 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 9 @"strings-0.visp"
-printfn ("string is: '%s'") ("
+[<Literal>]
+let ``LiftedString1_strings-0`` = "
   this is
   a multiline
   string
-")
+"
 // line 15 @"strings-0.visp"
-printfn ("string is: '%s'") ("""
+[<Literal>]
+let ``LiftedString3_strings-0`` = """
   this is
   a multiline
   string
-""")
+"""
+// line 22 @"strings-0.visp"
+[<Literal>]
+let ``LiftedString4_strings-0`` = """
+let ``can parse %s`` =
+TestUtils.runTest %s
+|> Async.AwaitTask
+"""
+// line 9 @"strings-0.visp"
+printfn ("string is: '%s'") (``LiftedString1_strings-0``)
+// line 15 @"strings-0.visp"
+printfn ("string is: '%s'") (``LiftedString3_strings-0``)
 // line 21 @"strings-0.visp"
 let ``generate-test`` path =
   // line 22 @"strings-0.visp"
   let template =
     // line 22 @"strings-0.visp"
-    sprintf ("""
-let ``can parse %s`` =
-  TestUtils.runTest %s
-  |> Async.AwaitTask
-  """) (path) (path)
+    sprintf (``LiftedString4_strings-0``) (path) (path)
   template
 
 // line 30 @"strings-0.visp"
