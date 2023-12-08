@@ -36,10 +36,13 @@ type SynWriter(writer: CustomFileWriter) =
 
     member this.Write(text: char) = this.writer.Write(text)
 
-    member this.Write(it: int32) = this.writer.Write(it)
-
-    member this.Write(it: decimal) =
-        this.writer.Write(it.ToString(CultureInfo.InvariantCulture))
+    member d.TW = d.writer.Inner
+// member this.Write(it: int32) = this.writer.Write(it)
+// member this.Write(it: int64) = this.writer.Write(it)
+// member this.Write(it: int16) = this.writer.Write(it)
+// member this.Write(it: byte) = this.writer.Write(it)
+// member this.Write(it: decimal) =
+//     this.writer.Write(it.ToString(CultureInfo.InvariantCulture))
 
 let mkSynWriter w = new SynWriter(w)
 
@@ -290,6 +293,9 @@ module Write =
 
             string w fromName
 
+
+        let tw = w.TW
+
         match cnst with
         | SynConst.String(str, kind, _) ->
             match kind with
@@ -304,11 +310,46 @@ module Write =
             | SynStringKind.TripleQuote -> surroundWithString w "\"\"\"" (flip string str) "\"\"\""
             | SynStringKind.Verbatim -> failwith "unsupported"
 
-        | SynConst.Int32(value) -> w.Write(value)
+        | SynConst.SByte(value) ->
+            tw.Write(value)
+            tw.Write('y')
+        | SynConst.Int16(value) ->
+            tw.Write(value)
+            tw.Write('s')
         | SynConst.Int64(value) ->
-            w.Write(value)
-            w.Write('L')
-        | SynConst.Decimal(value) -> w.Write(value)
+            tw.Write(value)
+            tw.Write('L')
+        | SynConst.Byte(value) ->
+            tw.Write(value)
+            tw.Write('u')
+            tw.Write('y')
+        | SynConst.UInt16(value) ->
+            tw.Write(value)
+            tw.Write('u')
+            tw.Write('s')
+        | SynConst.UInt32(value) ->
+            tw.Write(value)
+            tw.Write('u')
+            tw.Write('l')
+        | SynConst.UInt64(value) ->
+            tw.Write(value)
+            tw.Write('U')
+            tw.Write('L')
+        | SynConst.Single(value) ->
+            tw.Write(value)
+            tw.Write('f')
+        | SynConst.IntPtr(value) ->
+            tw.Write(value)
+            tw.Write('n')
+        | SynConst.UIntPtr(value) ->
+            tw.Write(value)
+            tw.Write('u')
+            tw.Write('n')
+        | SynConst.Decimal(value) ->
+            tw.Write(value)
+            tw.Write('M')
+        | SynConst.Int32(value) -> tw.Write(value)
+        | SynConst.Double(value) -> tw.Write(value)
         | SynConst.Char(value) ->
             w.Write('\'')
 

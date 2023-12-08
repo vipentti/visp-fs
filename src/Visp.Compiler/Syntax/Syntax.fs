@@ -71,17 +71,16 @@ type SynConst =
     | Unit
     | Nil
     | Bool of bool
-    //| SByte of sbyte
-    //| Byte of byte
-    //| Int16 of int16
-    //| UInt16 of uint16
-    //| UInt32 of uint32
-    //| Int64 of int64
-    //| UInt64 of uint64
-    //| IntPtr of int64
-    //| UIntPtr of uint64
-    //| Single of single
-    //| Double of double
+    | SByte of sbyte
+    | Byte of byte
+    | Int16 of int16
+    | UInt16 of uint16
+    | UInt32 of uint32
+    | UInt64 of uint64
+    | IntPtr of int64
+    | UIntPtr of uint64
+    | Single of single
+    | Double of double
     | Int64 of int64
     | Int32 of int32
     | Char of char
