@@ -1,0 +1,6 @@
+﻿(syntax-macro matchfnexample
+  [(_ sym m ...)
+    (fn sym (arg)
+      (match arg
+        m
+        ...))])
