@@ -211,6 +211,11 @@ module ``tests_macros_cond-macro-1`` =
     let ``can execute`` () = TestUtils.runTest "tests/macros/cond-macro-1.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_struct-macro-2`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/struct-macro-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_chars-in-macros-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/chars-in-macros-0.visp"
