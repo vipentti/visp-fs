@@ -1,0 +1,216 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day9")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(type HistList ()
+  (let items (new ResizeArray<int64>))
+
+  (member _.Items items)
+
+  (member _.Count (+Count items))
+
+  (member fn _.EnsureCapacity (c)
+    (ignore (.EnsureCapacity items c))
+    ())
+
+  (member fn _.Add (it)
+    (.Add items it))
+
+  (member fn _.First ()
+    (begin
+      (.[0] items)
+    ))
+
+  (member fn _.Last ()
+    (begin
+      (let c (+Count items))
+      (.[(dec c)] items)
+    ))
+
+  (member fn _.Get ([i: int32])
+    (.[i] items))
+
+  (override fn _.ToString()
+    (let sb (new System.Text.StringBuilder))
+    (fn append ([text: string]) (ignore (.Append sb text)))
+
+    (append "[")
+    (for/in [it items]
+      (append (sprintf "%A" it))
+      (append "; ")
+    )
+    (if (> (+Count items) 0)
+      (set! (+Length sb) (- (+Length sb) 2))
+    )
+    (append "]")
+
+    (.ToString sb)
+  )
+)
+
+(module HistList
+  (fn forall (predicate [source: HistList])
+    (Seq.forall predicate (+Items source)))
+
+  (fn windowed (windowSize [source: HistList])
+    (Seq.windowed windowSize (+Items source)))
+
+  (fn pairs ([source: HistList])
+    (seq
+      (let end (dec (+Count source)))
+      (for/in [index (!range 0 .. end)]
+        (let next (inc index))
+        (if (<= next end)
+          (yield ((.Get source index) . (.Get source next)))
+        )
+      )))
+
+  (fn fold (folder state [source: HistList])
+   (Seq.fold folder state (+Items source)))
+)
+
+(fn mkHistList () (new HistList))
+
+(fn mkHistListCap (c)
+  (let it (mkHistList))
+  (.EnsureCapacity it c)
+  it)
+
+(fn ParseHistory [(text: string)]
+  (mut lines (SplitLines text))
+
+  (let res (new ResizeArray<_>))
+
+  (while (.MoveNext lines)
+    (let line lines.Current)
+
+    (mut parts (line.EnumerateSplitSubstrings (#\space , splitOptions)))
+
+    (let temp (mkHistList))
+
+    (while (.MoveNext parts)
+      (let cur parts.Current)
+      (.Add temp (span->int64 cur))
+      ())
+    ()
+    (.Add res temp)
+  )
+
+  (List.ofSeq res))
+
+(let hist (ParseHistory fileText))
+
+;; (type HistList list<int64>)
+
+(fn AllZeros ([ls: HistList])
+  (->> ls
+    (HistList.forall #(= %1 0))))
+
+(fn Diff ([ls: HistList])
+  (->> ls
+    (HistList.pairs)
+    (Seq.fold #(begin
+      (let [cur: HistList] %1)
+      (let win %2)
+      (let a (fst win))
+      (let b (snd win))
+      (.Add cur (- b a))
+      cur
+    ) (mkHistListCap (+Count ls)))))
+
+(fn ExtrapolateForward ([items: ResizeArray<HistList>])
+  (let len (+Count items))
+
+  (mut prev 0L)
+  (mut first true)
+
+  (for/in [index (!range (dec len) .. -1 .. 0)]
+    (let it (.[index] items))
+
+    (if first
+      (begin
+        (set! first false)
+      )
+      (begin
+        ;; Next list
+        (let last (.Last it))
+        (let value (+ prev last))
+        (set! prev value)
+      )
+    ))
+
+  prev)
+
+(fn ExtrapolateBackward ([items: ResizeArray<HistList>])
+  (let len (+Count items))
+
+  (mut prev 0L)
+  (mut first true)
+
+  (for/in [index (!range (dec len) .. -1 .. 0)]
+    (let it (.[index] items))
+
+    (if first
+      (begin
+        (set! first false)
+        ;; (.Add it prev)
+      )
+      (begin
+        ;; Next list
+        (let last (.First it))
+        (let value (- last prev))
+        (set! prev value)
+      )
+    ))
+
+  prev)
+
+(fn HandleSeq (extrap [ls: HistList])
+  (let items (new ResizeArray<HistList>))
+  (.Add items ls)
+  (mut current ls)
+  (while (not (AllZeros current))
+    (set! current (Diff current))
+    (.Add items current)
+  )
+
+  (extrap items))
+
+(let part1 (->> hist
+  (List.map (HandleSeq ExtrapolateForward))
+  (List.reduce add)
+))
+
+(WriteResult "part1" part1 (if example 114L 1993300041L))
+
+(let part2 (->> hist
+  (List.map (HandleSeq ExtrapolateBackward))
+  (List.reduce add)
+))
+
+(WriteResult "part2" part2 (if example 2L 1038L))
