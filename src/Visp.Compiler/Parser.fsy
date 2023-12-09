@@ -21,6 +21,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %start start
 %start raw_expr
+%start raw_macro_body
 
 %token EOF
 %token LPAREN RPAREN
@@ -128,6 +129,9 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_syntyped
 %nonassoc prec_record_with_members
 
+%nonassoc prec_record_expr_only
+%nonassoc prec_record_init
+
 %nonassoc prec_recover
 // %nonassoc EOF
 
@@ -138,6 +142,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %type <ParsedFile> start
 %type <SynExpr> raw_expr
+%type <SynMacroBody> raw_macro_body
 
 %%
 
@@ -145,6 +150,8 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 start: prog { $1 }
 
 raw_expr: expr { $1 }
+
+raw_macro_body: macro_body { $1 }
 
 prog:
     | file_fragments
@@ -379,6 +386,11 @@ macro_pat:
     | constant { SynMacroPat.Const(fst $1, snd $1) }
     | LPAREN macro_pat_list RPAREN { SynMacroPat.List($2, lhs parseState) }
     | LBRACKET macro_pat_list RBRACKET { SynMacroPat.List($2, lhs parseState) }
+    | DOT { SynMacroPat.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
+    | COMMA { SynMacroPat.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
+    | COLON { SynMacroPat.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
+    | COLON_COLON { SynMacroPat.Trivia(SynMacroTriviaKind.ColonColon, lhs parseState) }
+    | BAR { SynMacroPat.Trivia(SynMacroTriviaKind.Bar, lhs parseState) }
     | symbol {
         let text = $1
         let symText = (Syntax.textOfSymbol text)
@@ -396,12 +408,19 @@ rev_macro_body_list:
 
 macro_body:
     | constant { SynMacroBody.Const(fst $1, snd $1) }
+    | LPAREN macro_name RPAREN
+        { let mNameBody = SynMacroBody.Symbol($2)
+          SynMacroBody.Call(SynMacroCall($2, [mNameBody], lhs parseState))}
+    | LPAREN macro_name macro_body_list RPAREN
+        { let mNameBody = SynMacroBody.Symbol($2)
+          SynMacroBody.Call(SynMacroCall($2, mNameBody :: $3, lhs parseState)) }
     | LPAREN RPAREN { SynMacroBody.List(SynListKind.List, [], lhs parseState) }
     | LBRACKET RBRACKET { SynMacroBody.List(SynListKind.Vector, [], lhs parseState) }
     | LBRACE RBRACE { SynMacroBody.List(SynListKind.HashMap, [], lhs parseState) }
     | HASH_BRACE RBRACE { SynMacroBody.List(SynListKind.HashSet, [], lhs parseState) }
     | HASH_PAREN RPAREN { SynMacroBody.List(SynListKind.HashParen, [], lhs parseState) }
     | HASH_BRACKET RBRACKET { SynMacroBody.List(SynListKind.AttributeList, [], lhs parseState) }
+    | BRACE_BAR BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, [], lhs parseState) }
 
     | LPAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.List, $2, lhs parseState) }
     | LBRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.Vector, $2, lhs parseState) }
@@ -409,9 +428,11 @@ macro_body:
     | HASH_BRACE macro_body_list RBRACE { SynMacroBody.List(SynListKind.HashSet, $2, lhs parseState) }
     | HASH_PAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.HashParen, $2, lhs parseState) }
     | HASH_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.AttributeList, $2, lhs parseState) }
+    | BRACE_BAR macro_body_list BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, $2, lhs parseState) }
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
     | COLON { SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
+    | COLON_COLON { SynMacroBody.Trivia(SynMacroTriviaKind.ColonColon, lhs parseState) }
     | BAR { SynMacroBody.Trivia(SynMacroTriviaKind.Bar, lhs parseState) }
     | keyword { SynMacroBody.Keyword($1) }
     | symbol {
@@ -760,10 +781,13 @@ rev_record_init_bar_list:
     | rev_record_init_bar_list record_init_init { $2 :: $1 }
 
 record_init_init:
-    | record_init
+    | record_init %prec prec_record_init
         { let s, e = $1
           SynInit(s, e, lhs parseState)
         }
+    // | expr %prec prec_record_expr_only
+    //     { SynInit(Syntax.mkSynSymbol "_" (lhs parseState), $1, lhs parseState)
+    //     }
 
 record_init_list: rev_record_init_list { List.rev $1 }
 rev_record_init_list:
