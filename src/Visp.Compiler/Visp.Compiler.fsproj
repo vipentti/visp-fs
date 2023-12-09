@@ -14,6 +14,7 @@
     <Compile Include="Transforms\Traversal.fs" />
     <Compile Include="Transforms\Helpers.fs" />
     <Compile Include="Transforms\Common.fs" />
+    <Compile Include="Syntax\SyntaxPrinter.fs" />
     <Compile Include="Transforms\LastExpressionUpdater.fs" />
     <Compile Include="Transforms\QuasiquoteExpander.fs" />
     <Compile Include="Transforms\BuiltinMacroExpander.fs" />
@@ -48,6 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Visp.Common\Visp.Common.csproj" />
     <ProjectReference Include="..\Visp.Runtime.Library\Visp.Runtime.Library.fsproj" />
+    <ProjectReference Include="..\PrettyPrinter\PrettyPrinter.fsproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SpanUtils" Version="0.4.0" />

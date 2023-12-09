@@ -42,6 +42,10 @@ type SynKeyword = SynKeyword of ident: Ident
 
 type SynKeyword with
 
+    member this.Text =
+        let (SynKeyword(id)) = this
+        id.idText
+
     member this.Range =
         let (SynKeyword(id)) = this
         id.idRange

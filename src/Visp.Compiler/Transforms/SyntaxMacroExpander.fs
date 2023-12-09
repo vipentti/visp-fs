@@ -4,6 +4,7 @@
 
 module Visp.Compiler.Transforms.SyntaxMacros
 
+open Visp.Compiler.SyntaxPrinter
 open Visp.Common
 open Visp.Compiler.Syntax
 open Visp.Compiler.Transforms
@@ -481,7 +482,10 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
         evaluateMacroToEvaluatedBody macro call |> evaluatedBodyToMacroBody range
 
     while hasInteralMacroCalls evaluated do
+        // printfn "%s" (evaluated.Pretty ())
         evaluated <- evalBody evaluated |> evaluatedBodyToMacroBody range
+
+    // printfn "%s" (evaluated.Pretty ())
 
     evaluatedBodyToExpr range <| EvaluatedBody.Item evaluated
 
