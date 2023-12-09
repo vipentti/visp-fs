@@ -96,6 +96,8 @@ type token =
   | HASH_BRACE
   | HASH_PAREN
   | HASH_BRACKET
+  | BRACE_BAR
+  | BAR_BRACE
   | LBRACKET
   | RBRACKET
   | LPAREN
@@ -197,6 +199,8 @@ type tokenId =
     | TOKEN_HASH_BRACE
     | TOKEN_HASH_PAREN
     | TOKEN_HASH_BRACKET
+    | TOKEN_BRACE_BAR
+    | TOKEN_BAR_BRACE
     | TOKEN_LBRACKET
     | TOKEN_RBRACKET
     | TOKEN_LPAREN
@@ -226,6 +230,7 @@ type nonTerminalId =
     | NONTERM_expr_list_or_empty
     | NONTERM_recover
     | NONTERM_expr
+    | NONTERM_brace_bar
     | NONTERM_lambda_short_expr_list
     | NONTERM_vector_start
     | NONTERM_inside_parens
@@ -299,6 +304,9 @@ type nonTerminalId =
     | NONTERM_syntyped
     | NONTERM_record_members
     | NONTERM_record_init_expr
+    | NONTERM_record_init_bar_list
+    | NONTERM_rev_record_init_bar_list
+    | NONTERM_record_init_init
     | NONTERM_record_init_list
     | NONTERM_rev_record_init_list
     | NONTERM_record_init_parens

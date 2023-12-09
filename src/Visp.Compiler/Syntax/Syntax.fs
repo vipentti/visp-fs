@@ -2,7 +2,7 @@
 // Distributed under the MIT License.
 // https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
 
-namespace Visp.Compiler.Syntax
+namespace rec Visp.Compiler.Syntax
 
 open Visp.Compiler.Writer
 open Visp.Compiler.Text
@@ -334,6 +334,7 @@ and [<RequireQualifiedAccess>] SynListKind =
     | HashSet
     | HashParen
     | AttributeList
+    | BraceBar
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | List of kind: SynListKind * exprs: SynMacroBody list * range: range
