@@ -25,7 +25,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token EOF
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
-%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET
+%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE
 %token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
 %token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
 %token BANG_RANGE FOR_IN BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
@@ -76,11 +76,11 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc QUOTE_SYM
 %nonassoc LPAREN HASH_PAREN
 %nonassoc LBRACKET
-%nonassoc LBRACE HASH_BRACE
+%nonassoc LBRACE HASH_BRACE BRACE_BAR
 %nonassoc HASH_BRACKET
 %nonassoc RPAREN
 %nonassoc RBRACKET
-%nonassoc RBRACE
+%nonassoc RBRACE BAR_BRACE
 %nonassoc AT
 %nonassoc BANG_TUPLE
 
@@ -226,7 +226,13 @@ expr:
         { SynExpr.LambdaShort($2, lhs parseState)}
     | vector_start
         { $1 }
+
+    | brace_bar { $1 }
     | inside_parens %prec prec_paren { $1 }
+
+brace_bar:
+    | BRACE_BAR record_init_bar_list BAR_BRACE { SynExpr.RecordInit($2, lhs parseState) }
+    | BRACE_BAR record_init_bar_list recover { SynExpr.RecordInit([], lhs parseState) }
 
 lambda_short_expr_list:
     | parens_expr { $1 }
@@ -747,6 +753,17 @@ record_members:
 
 record_init_expr:
     | RINIT record_init_list { SynExpr.RecordInit($2, lhs parseState) }
+
+record_init_bar_list: rev_record_init_bar_list { List.rev $1 }
+rev_record_init_bar_list:
+    | record_init_init { [$1] }
+    | rev_record_init_bar_list record_init_init { $2 :: $1 }
+
+record_init_init:
+    | record_init
+        { let s, e = $1
+          SynInit(s, e, lhs parseState)
+        }
 
 record_init_list: rev_record_init_list { List.rev $1 }
 rev_record_init_list:

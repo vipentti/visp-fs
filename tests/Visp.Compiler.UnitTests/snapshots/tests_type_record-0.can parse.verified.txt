@@ -17,12 +17,20 @@ type Mapping =
 let temp =
   // line 17 @"record-0.visp"
   { src = 1; Mapping.dest = 2; range = 3 }
-// line 19 @"record-0.visp"
+// line 18 @"record-0.visp"
 printfn ("Record is %A") (temp)
-// line 21 @"record-0.visp"
+// line 19 @"record-0.visp"
 (temp.Stuff())
+// line 21 @"record-0.visp"
+let temp2 =
+  // line 21 @"record-0.visp"
+  { src = 3; Mapping.dest = 5; range = 8 }
 // line 23 @"record-0.visp"
+printfn ("Record is %A") (temp2)
+// line 24 @"record-0.visp"
+(temp2.Stuff())
+// line 27 @"record-0.visp"
 let visp_result_todo = ()
-// line 23 @"record-0.visp"
+// line 27 @"record-0.visp"
 printfn ("%A") (visp_result_todo)
 
