@@ -1,0 +1,17 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro CountExprsExampleTest1
+  [(_) 0]
+  [(_ _) 1]
+  [(_ head tail ...)
+    (+ 1 (CountExprsExampleTest1 tail ...))]
+)
+
+(let exprCount (CountExprsExampleTest1 [] [] [] [] [] [] []))
+
+(printfn "exprs: %A" exprCount)
