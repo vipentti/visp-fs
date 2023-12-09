@@ -17,11 +17,12 @@ type Range (start: int64, len: int64) =
   // line 8 @"struct-example-1.visp"
   member _.End =
         // line 8 @"struct-example-1.visp"
-    CoreMethods.``add``(start, len)
+    (start) +
+    (len)
   // line 8 @"struct-example-1.visp"
   member d.Offset v =
     // line 8 @"struct-example-1.visp"
-    CoreMethods.``sub``(v, (d.Start))
+    v - (d.Start)
 
   // line 8 @"struct-example-1.visp"
   member d.Contains v =
@@ -78,13 +79,14 @@ type SourceDestMap (dest: int64, src: int64, len: int64) =
       ((d.Src).Contains src))
       then
         // line 29 @"struct-example-1.visp"
-        CoreMethods.``add``(d
+        (d
           |> (fun a1 ->
             // line 29 @"struct-example-1.visp"
             (a1.Dest))
           |> (fun a1 ->
             // line 29 @"struct-example-1.visp"
-            (a1.Start)), ((d.Src).Offset src))
+            (a1.Start))) +
+        (((d.Src).Offset src))
       else
         // line 29 @"struct-example-1.visp"
         if CoreMethods.isTruthy(
