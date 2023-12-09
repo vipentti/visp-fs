@@ -267,6 +267,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "#(" { HASH_PAREN }
   | "#[" { HASH_BRACKET }
   | "#{" { HASH_BRACE }
+  | "{|" { BRACE_BAR }
+  | "|}" { BAR_BRACE }
   | ".." { DOTDOT }
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }
@@ -490,6 +492,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "#("          { HASH_PAREN }
   | "#["          { HASH_BRACKET }
   | "#{"          { HASH_BRACE }
+  | "{|"          { BRACE_BAR }
+  | "|}"          { BAR_BRACE }
 
   | "..." { SYMBOL (lexeme lexbuf) }
 

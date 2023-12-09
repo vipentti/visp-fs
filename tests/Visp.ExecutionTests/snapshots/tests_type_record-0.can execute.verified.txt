@@ -2,6 +2,10 @@
   dest = 2L
   range = 3L }
 doing stuff 1L
+Record is { src = 3L
+  dest = 5L
+  range = 8L }
+doing stuff 3L
 ()
 
 ExitCode: 0

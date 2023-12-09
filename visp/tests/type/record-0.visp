@@ -15,9 +15,13 @@
 )
 
 (let temp (rinit [src 1] [Mapping.dest 2] [range 3]))
-
 (printfn "Record is %A" temp)
-
 (.Stuff temp)
+
+(let temp2 {| src 3 Mapping.dest 5 range 8 |})
+
+(printfn "Record is %A" temp2)
+(.Stuff temp2)
+
 
 ()
