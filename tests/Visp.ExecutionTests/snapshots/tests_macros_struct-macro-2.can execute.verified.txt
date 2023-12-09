@@ -1,0 +1,6 @@
+﻿Example Struct is struct-macro-2+Example
+Example IsValueType true
+Example Result is 3
+()
+
+ExitCode: 0

@@ -1,0 +1,32 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro MyStruct2
+  [(_ typ (arg ctor ...) body ...)
+    (begin
+      (#[Struct]
+        type typ (arg ctor ...)
+        body ...
+      )
+
+      (fn (m-concat-id mk typ)
+        ((m-map m-name (arg ctor ...)))
+        (new typ (m-map m-name (arg ctor ...))))
+    )
+  ])
+
+(MyStruct2 Example ([x: int] [y: int])
+  (member _.X x)
+  (member _.Y y)
+
+  (member fn d.Sum () (+ (+X d) (+Y d))))
+
+(let instance (mkExample 1 2))
+
+(printfn "Example Struct is %A" instance)
+(printfn "Example IsValueType %A" (->> instance .GetType +IsValueType))
+(printfn "Example Result is %i" (.Sum instance))
