@@ -241,6 +241,10 @@ let specialSymbol (s: string) =
     | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(PROP_PLUS s)
     | it when it.Length > 1 && it[0] = '.' && isLetter it[1] -> Some(DOT_METHOD s)
     | it when it.Length > 1 && it[0] = '-' && isLetter it[1] -> Some(APPLY_METHOD s)
+    | "+" -> Some(OP_PLUS)
+    | "-" -> Some(OP_MINUS)
+    | "/" -> Some(OP_DIV)
+    | "*" -> Some(OP_MULT)
     | _ -> None
 
 let symbolOrKeyword (s: string) =
