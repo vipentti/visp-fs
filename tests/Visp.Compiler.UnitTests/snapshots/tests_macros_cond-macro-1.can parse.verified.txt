@@ -15,11 +15,11 @@ let visp_result_todo =
     then
       // line 22 @"cond-macro-1.visp"
       
-        // line 22 @"cond-macro-1.visp"
-        printfn ("body here1")
-        // line 22 @"cond-macro-1.visp"
-        printfn ("body here2")
-        ()
+      // line 22 @"cond-macro-1.visp"
+      printfn ("body here1")
+      // line 22 @"cond-macro-1.visp"
+      printfn ("body here2")
+      ()
     else
       // line 22 @"cond-macro-1.visp"
       if CoreMethods.isTruthy(
@@ -27,10 +27,10 @@ let visp_result_todo =
         then
           // line 22 @"cond-macro-1.visp"
           
-            // line 22 @"cond-macro-1.visp"
-            printfn ("here1")
-            // line 22 @"cond-macro-1.visp"
-            printfn ("here2")
+          // line 22 @"cond-macro-1.visp"
+          printfn ("here1")
+          // line 22 @"cond-macro-1.visp"
+          printfn ("here2")
         else
           // line 22 @"cond-macro-1.visp"
           if CoreMethods.isTruthy(
@@ -38,10 +38,10 @@ let visp_result_todo =
             then
               // line 22 @"cond-macro-1.visp"
               
-                // line 22 @"cond-macro-1.visp"
-                printfn ("default1")
-                // line 22 @"cond-macro-1.visp"
-                printfn ("default2")
+              // line 22 @"cond-macro-1.visp"
+              printfn ("default1")
+              // line 22 @"cond-macro-1.visp"
+              printfn ("default2")
             else
               // line 22 @"cond-macro-1.visp"
               failwith ("unreachable")

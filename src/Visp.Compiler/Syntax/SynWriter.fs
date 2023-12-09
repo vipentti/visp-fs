@@ -410,6 +410,14 @@ module Write =
 
         ()
 
+    let private writeBodyNoIndent<'a>
+        (w: SynWriter)
+        (wrt: SynWriter -> WriteState -> 'a -> unit)
+        (items: seq<'a>)
+        =
+        newline w
+        writeSeq w WriteState.Body newline wrt items
+
     let private writeBody<'a>
         (w: SynWriter)
         (wrt: SynWriter -> WriteState -> 'a -> unit)
@@ -628,7 +636,10 @@ module Write =
             if kind = BeginKind.Do then
                 char w '('
 
-            writeBody w writeExpr expr
+            if kind = BeginKind.Do then
+                writeBody w writeExpr expr
+            else
+                writeBodyNoIndent w writeExpr expr
 
             if kind = BeginKind.Do then
                 char w ')'
