@@ -25,6 +25,18 @@ let (|DiscardPredicate|Not|) (pat: SynMacroPat) =
     | SynMacroPat.List([ MatchingText "?discard" true ], _) -> DiscardPredicate
     | _ -> Not
 
+let (|SymText|_|) (pat: SynMacroBody) =
+    match pat with
+    | SynMacroBody.Symbol it -> Some(it.Text)
+    | _ -> None
+
+let (|SpecialCall|_|) call (pat: SynMacroBody) =
+    match pat with
+    | SynMacroBody.List(k, (SynMacroBody.Symbol sym) :: rest, r) when sym.Text = call ->
+        Some(k, rest, r)
+    | _ -> None
+
+
 let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
     // printfn "looking for\n%A\nin\n%A" args pats
     // TODO: Determine pattern matching
@@ -142,14 +154,12 @@ type private TokenizeArgs =
                 t.mode <- TokenizeMode.Default
                 t.depth <- 0
 
-let private evaluatePatterns
-    (body: SynMacroBody)
-    (pats: Dictionary<string, BoundPatternBody>)
-    (range: range)
-    : SynExpr =
+type private BoundPats = Dictionary<string, BoundPatternBody>
+
+let private evaluatePatterns (body: SynMacroBody) (pats: BoundPats) (range: range) : SynExpr =
 
 
-    let findPattern bod (pats: Dictionary<string, BoundPatternBody>) =
+    let findPattern (pats: BoundPats) bod =
         match bod with
         | SynMacroBody.Symbol sym ->
             match pats.TryGetValue(sym.Text) with
@@ -157,23 +167,77 @@ let private evaluatePatterns
             | true, n -> Some(n)
         | _ -> None
 
+    let rec getBody (pats: BoundPats) bod =
+        match findPattern pats bod with
+        | Some(it) ->
+            match it with
+            | BoundPatternBody.Item it -> getBody pats it
+            | BoundPatternBody.List lst -> lst |> List.map (getBody pats) |> List.concat
+        | None -> [ bod ]
+
     let rec tokenize
-        (pats: Dictionary<string, BoundPatternBody>)
+        (pats: BoundPats)
         (res: ResizeArray<token>)
         (args: TokenizeArgs)
-        (f: SynMacroBody)
+        (currentBody: SynMacroBody)
         =
+
+        let handleSymbol args text =
+            match args.mode with
+            | TokenizeMode.Macro -> res.Add(SYMBOL text)
+            | TokenizeMode.Default ->
+                let tok = LexHelpers.symbolOrKeyword text
+
+                match tok with
+                | MACRO_NAME _
+                | SYNTAX_MACRO -> args.StartMacro()
+                | _ -> ()
+
+                res.Add(tok)
 
         let bound_tokenize = tokenize pats res args
 
-        match findPattern f pats with
+        match findPattern pats currentBody with
         | Some(pat) ->
             match pat with
             | BoundPatternBody.Item(it) -> bound_tokenize it
             | BoundPatternBody.List(lst) -> lst |> List.iter bound_tokenize
 
         | None ->
-            match f with
+            match currentBody with
+            | SpecialCall "m-concat-id" (_, call_args, _) ->
+                match call_args with
+                | arg1 :: arg2 :: [] ->
+                    match ((getBody pats arg1), (getBody pats arg2)) with
+                    | ([ SymText lhs ], [ SymText rhs ]) -> handleSymbol args (lhs + rhs)
+                    | _ -> failwithf "todo concat id %A" call_args
+
+                | _ -> failwithf "todo concat id %A" call_args
+
+                ()
+            | SpecialCall "m-map" (_, call_args, _) ->
+                match call_args with
+                | (SymText method) :: (SynMacroBody.List(_, list, _)) :: [] ->
+                    let argz = list |> List.map (getBody pats) |> List.concat
+
+                    match method with
+                    | "m-name" ->
+                        let names =
+                            argz
+                            |> List.choose (function
+                                | SynMacroBody.Symbol it -> Some(it)
+                                | SynMacroBody.List(_, SynMacroBody.Symbol it :: _, _) -> Some(it)
+                                | SynMacroBody.Ellipsis _ -> None
+                                | it -> failwithf "unsupported m-map %A" it)
+                            |> List.map _.Text
+
+                        names |> List.iter (handleSymbol args)
+
+                    | _ -> failwithf "unsupported m-map method: %A %A" method call_args
+
+                | _ -> failwithf "todo concat id %A" call_args
+
+                ()
             | SynMacroBody.List(kind, lst, _) ->
                 res.Add(openToken kind)
 
@@ -218,18 +282,7 @@ let private evaluatePatterns
 
                 ()
 
-            | SynMacroBody.Symbol sym ->
-                match args.mode with
-                | TokenizeMode.Macro -> res.Add(SYMBOL sym.Text)
-                | TokenizeMode.Default ->
-                    let tok = LexHelpers.symbolOrKeyword sym.Text
-
-                    match tok with
-                    | MACRO_NAME _
-                    | SYNTAX_MACRO -> args.StartMacro()
-                    | _ -> ()
-
-                    res.Add(tok)
+            | SynMacroBody.Symbol sym -> handleSymbol args sym.Text
 
     use pooled = PooledList.GetPooled<token>()
     let res = pooled.Value
