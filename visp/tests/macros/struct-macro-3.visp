@@ -1,0 +1,47 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro MyStruct3
+  [(_ typ (arg ctor ...) body ...)
+    (#[Struct]
+      type typ (arg ctor ...)
+      body ...
+    )
+  ])
+
+(syntax-macro my-and-3
+  [(_) true]
+  [(_ one) one]
+  [(_ cond exprs ...)
+    (if cond
+      (my-and-3 exprs ...)
+      false)
+  ])
+
+(MyStruct3 Range ([start: int64] [len: int64])
+  (member _.Start start)
+  (member _.Len len)
+  (member _.End (+ start len))
+
+  (member fn d.Offset (v)
+    (- v (+Start d)))
+
+  (member fn d.Contains (v)
+    (my-and-3
+      (>= v (+Start d))
+      (< v (+End d)))
+  )
+
+  (override fn t.ToString ()
+    (sprintf "Range(%i, %i)" (+Start t) (+Len t)))
+)
+
+(let instance (new Range 1 2))
+
+(printfn "Example Struct is %A" instance)
+(printfn "Example IsValueType %A" (->> instance .GetType +IsValueType))
+(printfn "Example Result is %A" (.ToString instance))

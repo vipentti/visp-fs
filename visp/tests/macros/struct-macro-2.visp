@@ -6,16 +6,17 @@
 ;; vim: set syntax=clojure:
 
 (syntax-macro MyStruct2
-  [(_ typ (arg ctor ...) body ...)
+  [(_ typ ((arg1 : argtyp1) (argrest : argresttyp) ...) body ...)
     (begin
       (#[Struct]
-        type typ (arg ctor ...)
+        type typ ((arg1 : argtyp1) (argrest : argresttyp) ...)
         body ...
       )
 
       (fn (m-concat-id mk typ)
-        ((m-map m-name (arg ctor ...)))
-        (new typ (m-map m-name (arg ctor ...))))
+        (arg1 argrest ...)
+        (new typ arg1 argrest ...)
+      )
     )
   ])
 

@@ -7,46 +7,46 @@ open Visp.Runtime.Library
 let state = { Todo = () }
 // line 8 @"struct-macro-2.visp"
 let macro_MyStruct2 = "__MACRO_INIT__"
-// line 22 @"struct-macro-2.visp"
+// line 23 @"struct-macro-2.visp"
 
 [<Struct()>]
-// line 22 @"struct-macro-2.visp"
+// line 23 @"struct-macro-2.visp"
 type Example (x: int, y: int) =
-  // line 22 @"struct-macro-2.visp"
+  // line 23 @"struct-macro-2.visp"
   member _.X =
         x
-  // line 22 @"struct-macro-2.visp"
+  // line 23 @"struct-macro-2.visp"
   member _.Y =
         y
-  // line 22 @"struct-macro-2.visp"
+  // line 23 @"struct-macro-2.visp"
   member d.Sum () =
-    // line 22 @"struct-macro-2.visp"
+    // line 23 @"struct-macro-2.visp"
     ((d.X)) +
     ((d.Y))
 
-// line 22 @"struct-macro-2.visp"
+// line 23 @"struct-macro-2.visp"
 let mkExample x y =
-  // line 22 @"struct-macro-2.visp"
+  // line 23 @"struct-macro-2.visp"
   (new Example(x, y))
 
-// line 28 @"struct-macro-2.visp"
+// line 29 @"struct-macro-2.visp"
 let instance =
-  // line 28 @"struct-macro-2.visp"
+  // line 29 @"struct-macro-2.visp"
   mkExample (1) (2)
-// line 30 @"struct-macro-2.visp"
-printfn ("Example Struct is %A") (instance)
 // line 31 @"struct-macro-2.visp"
+printfn ("Example Struct is %A") (instance)
+// line 32 @"struct-macro-2.visp"
 printfn ("Example IsValueType %A") (instance
   |> (fun a1 ->
-    // line 31 @"struct-macro-2.visp"
+    // line 32 @"struct-macro-2.visp"
     (a1.GetType()))
   |> (fun a1 ->
-    // line 31 @"struct-macro-2.visp"
+    // line 32 @"struct-macro-2.visp"
     (a1.IsValueType)))
-// line 32 @"struct-macro-2.visp"
+// line 33 @"struct-macro-2.visp"
 let visp_result_todo =
-  // line 32 @"struct-macro-2.visp"
+  // line 33 @"struct-macro-2.visp"
   printfn ("Example Result is %i") ((instance.Sum()))
-// line 32 @"struct-macro-2.visp"
+// line 33 @"struct-macro-2.visp"
 printfn ("%A") (visp_result_todo)
 
