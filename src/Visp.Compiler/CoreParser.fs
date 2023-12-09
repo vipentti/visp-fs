@@ -4,6 +4,7 @@
 
 namespace Visp.Compiler.Core
 
+open Visp.Compiler.SyntaxPrinter
 open System.IO
 open FSharp.Text.Lexing
 open Visp.Compiler
@@ -128,7 +129,7 @@ let state = { Todo = () }
         try
             let mutable res = start tokenizer lexbuf
 
-            // eprintfn "%A" res
+            eprintfn "%s" (res.Pretty())
 
             if returnLast then
                 res <- Transforms.LastExpressionUpdater.update res
