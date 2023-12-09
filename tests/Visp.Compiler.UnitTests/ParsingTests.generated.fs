@@ -231,6 +231,16 @@ module ``tests_macros_cond-macro-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/macros/cond-macro-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_struct-macro-3`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/macros/struct-macro-3.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_macros_my-rinit-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/macros/my-rinit-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_struct-macro-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/macros/struct-macro-0.visp"

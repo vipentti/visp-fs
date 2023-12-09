@@ -48,6 +48,29 @@ type private TraversalTree<'T when 'T: not struct>() =
 
         childs.Add(child)
 
+let depthFirstMacroBodyPred (pred: SynMacroBody -> bool) (bod: SynMacroBody) =
+    let rec main_loop (pred: SynMacroBody -> bool) (bod: SynMacroBody) =
+        let loop = main_loop pred
+
+        seq {
+            yield bod
+
+            if pred bod then
+                match bod with
+                | SynMacroBody.Call(SynMacroCall(_, it, _))
+                | SynMacroBody.List(_, it, _) ->
+                    for e in it do
+                        yield! loop e
+
+                | SynMacroBody.Discard _
+                | SynMacroBody.Ellipsis _
+                | SynMacroBody.Symbol _
+                | SynMacroBody.Keyword _
+                | SynMacroBody.Trivia _
+                | SynMacroBody.Const _ -> ()
+        }
+
+    main_loop pred bod
 
 /// <summary>
 /// Depth-first sequence of this expr and its sub-expressions unless the predicate returns false.

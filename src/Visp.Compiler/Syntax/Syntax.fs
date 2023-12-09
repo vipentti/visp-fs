@@ -299,7 +299,11 @@ and SynBinding = SynBinding of name: SynName * expr: SynExpr * range: range
 
 and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: range
 
-and SynMacroCall = SynMacroCall of name: SynSymbol * args: SynMacroBody list * range: range
+and SynMacroCall =
+    | SynMacroCall of name: SynSymbol * args: SynMacroBody list * range: range
+
+    member this.Name = let (SynMacroCall(name = n)) = this in n
+    member this.NameText = let (SynMacroCall(name = n)) = this in n.Text
 
 and SynMacroCase = SynMacroCase of pats: SynMacroPat list * body: SynMacroBody * range: range
 
@@ -319,6 +323,7 @@ and [<RequireQualifiedAccess>] SynMacroPat =
     | Symbol of name: SynSymbol * range: range
     | Ellipsis of range: range
     | Discard of range: range
+    | Trivia of kind: SynMacroTriviaKind * range: range
 
 and [<RequireQualifiedAccess>] SynMacroTriviaKind =
     | Dot
@@ -338,6 +343,7 @@ and [<RequireQualifiedAccess>] SynListKind =
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | List of kind: SynListKind * exprs: SynMacroBody list * range: range
+    | Call of SynMacroCall
     | Const of constant: SynConst * range: range
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
