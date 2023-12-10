@@ -136,6 +136,30 @@ type BeginKind =
     | Begin
     | Do
 
+[<RequireQualifiedAccess>]
+type CollectionKind =
+    | Paren
+    | Bracket
+    | Brace
+    | HashBrace
+    | HashParen
+    | HashBracket
+    | BraceBar
+    | FsList
+    | FsArray
+    | FsMap
+    | FsSet
+    | FsVec
+
+[<NoEquality; NoComparison>]
+type SynCollection<'T> =
+    | SynCollection of kind: CollectionKind * exprs: 'T list * range: range
+
+    member t.Range = let (SynCollection(range = it)) = t in it
+    member t.Items = let (SynCollection(exprs = it)) = t in it
+
+type SynExprs = SynCollection<SynExpr>
+
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynExpr =
     // special operator application
@@ -171,16 +195,9 @@ type SynExpr =
     | While of cond: SynExpr * body: SynExpr list * range: range
     | Pair of lhs: SynExpr * rhs: SynExpr * range: range
     | Tuple of exprs: SynExpr list * range: range
-    | FsArray of exprs: SynExpr list * range: range
-    | FsMap of exprs: SynExpr list * range: range
-    | FsSet of exprs: SynExpr list * range: range
-    | FsVec of exprs: SynExpr list * range: range
+    | Collection of SynExprs
     | FsSeq of exprs: SynExpr list * range: range
     | FsYield of expr: SynExpr * bang: bool * range: range
-    | List of exprs: SynExpr list * range: range
-    | Vector of exprs: SynExpr list * range: range
-    | HashMap of exprs: SynExpr list * range: range
-    | HashSet of exprs: SynExpr list * range: range
     | DotIndex of target: SynExpr * index: SynExpr * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
     | DotMethod of
@@ -222,6 +239,7 @@ type SynExpr =
     member this.Range =
         match this with
         | Op op -> op.Range
+        | Collection op -> op.Range
         | Symbol(SynSymbol(id)) -> id.idRange
         | Keyword(SynKeyword(id)) -> id.idRange
 
@@ -255,16 +273,8 @@ type SynExpr =
         | Set(range = r)
         | If(range = r)
         | While(range = r)
-        | FsMap(range = r)
-        | FsArray(range = r)
-        | FsSet(range = r)
-        | FsVec(range = r)
         | FsSeq(range = r)
         | FsYield(range = r)
-        | List(range = r)
-        | Vector(range = r)
-        | HashMap(range = r)
-        | HashSet(range = r)
         | DotIndex(range = r)
         | DotProperty(range = r)
         | DotMethod(range = r)
@@ -428,6 +438,20 @@ and [<RequireQualifiedAccess>] SynOp =
     | Div of args: SynExpr list * range: range
     | Minus of args: SynExpr list * range: range
 
+    member this.OperatorChar =
+        match this with
+        | Plus _ -> '+'
+        | Mult _ -> '+'
+        | Div _ -> '+'
+        | Minus _ -> '+'
+
+    member this.Exprs =
+        match this with
+        | Plus(args = r)
+        | Mult(args = r)
+        | Div(args = r)
+        | Minus(args = r) -> r
+
     member this.Range =
         match this with
         | Plus(range = r)
@@ -454,6 +478,81 @@ and [<RequireQualifiedAccess>] SynArg =
         | InferredArg(name = name) -> name.Text
 
 and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
+
+module Coll =
+    let mkList its r =
+        (SynCollection(CollectionKind.Paren, its, r))
+
+    let mkVector its r =
+        (SynCollection(CollectionKind.Bracket, its, r))
+
+    let mkHashParen its r =
+        (SynCollection(CollectionKind.HashParen, its, r))
+
+    let mkHashBracket its r =
+        (SynCollection(CollectionKind.HashBracket, its, r))
+
+    let mkBraceBar its r =
+        (SynCollection(CollectionKind.BraceBar, its, r))
+
+    let mkHashMap its r =
+        (SynCollection(CollectionKind.Brace, its, r))
+
+    let mkHashSet its r =
+        (SynCollection(CollectionKind.HashBrace, its, r))
+
+    let mkFsList its r =
+        (SynCollection(CollectionKind.FsList, its, r))
+
+    let mkFsArray its r =
+        (SynCollection(CollectionKind.FsArray, its, r))
+
+    let mkFsSet its r =
+        (SynCollection(CollectionKind.FsSet, its, r))
+
+    let mkFsVec its r =
+        (SynCollection(CollectionKind.FsVec, its, r))
+
+    let mkFsMap its r =
+        (SynCollection(CollectionKind.FsMap, its, r))
+
+
+module CollExpr =
+    let mkList its r = Coll.mkList its r |> SynExpr.Collection
+
+    let mkVector its r =
+        Coll.mkVector its r |> SynExpr.Collection
+
+    let mkHashMap its r =
+        Coll.mkHashMap its r |> SynExpr.Collection
+
+    let mkHashSet its r =
+        Coll.mkHashSet its r |> SynExpr.Collection
+
+    let mkFsList its r =
+        Coll.mkFsList its r |> SynExpr.Collection
+
+    let mkFsArray its r =
+        Coll.mkFsArray its r |> SynExpr.Collection
+
+    let mkFsSet its r =
+        Coll.mkFsSet its r |> SynExpr.Collection
+
+    let mkFsVec its r =
+        Coll.mkFsVec its r |> SynExpr.Collection
+
+    let mkFsMap its r =
+        Coll.mkFsMap its r |> SynExpr.Collection
+
+    let mkHashParen its r =
+        Coll.mkHashParen its r |> SynExpr.Collection
+
+    let mkHashBracket its r =
+        Coll.mkHashBracket its r |> SynExpr.Collection
+
+    let mkBraceBar its r =
+        Coll.mkBraceBar its r |> SynExpr.Collection
+
 
 module Syntax =
     let UnitExpr r = SynExpr.Const(SynConst.Unit, r)
@@ -535,6 +634,7 @@ module Syntax =
 
     let mkInferredArg s range =
         SynArg.InferredArg(mkSynSymbol s range, range)
+
 
     // let withoutCommaOrDots (l: SynMatchPattern list) =
     //     List.filter

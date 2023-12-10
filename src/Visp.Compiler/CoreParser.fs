@@ -129,7 +129,7 @@ let state = { Todo = () }
         try
             let mutable res = start tokenizer lexbuf
 
-            eprintfn "%s" (res.Pretty())
+            // eprintfn "%s" (res.Pretty())
 
             if returnLast then
                 res <- Transforms.LastExpressionUpdater.update res
