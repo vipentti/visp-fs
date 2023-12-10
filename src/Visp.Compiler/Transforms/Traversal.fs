@@ -143,20 +143,16 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     yield! loop name
                     yield! loop value
 
+                | SynExpr.Collection it ->
+                    for e in it.Items do
+                        yield! loop e
+
                 | SynExpr.FsYield(exprs, _, _) -> yield! loop exprs
                 | SynExpr.LambdaDef(SynLambda(_, exprs, _))
                 | SynExpr.Begin(exprs, _, _)
                 | SynExpr.New(_, exprs, _)
                 | SynExpr.Tuple(exprs, _)
-                | SynExpr.FsSeq(exprs, _)
-                | SynExpr.FsSet(exprs, _)
-                | SynExpr.FsArray(exprs, _)
-                | SynExpr.FsMap(exprs, _)
-                | SynExpr.FsVec(exprs, _)
-                | SynExpr.List(exprs, _)
-                | SynExpr.Vector(exprs, _)
-                | SynExpr.HashMap(exprs, _)
-                | SynExpr.HashSet(exprs, _) ->
+                | SynExpr.FsSeq(exprs, _) ->
                     for e in exprs do
                         yield! loop e
 

@@ -497,6 +497,7 @@ module Write =
         | SynExpr.SyntaxMacroCall _ -> failwithf "unsupported %A" expr
         | SynExpr.SyntaxMacro _ -> failwithf "unsupported %A" expr
         | SynExpr.LambdaShort _ -> failwithf "unsupported %O" expr
+        | SynExpr.Collection it -> writeCollectionExprs w st it
         | SynExpr.Match(exprs, pats, range) ->
             use _ = startNewlineExpr w st range
 
@@ -702,53 +703,6 @@ module Write =
             writeExpr w WriteState.Inline body
             ()
 
-        | SynExpr.FsVec(items, range) ->
-            startExpr w st range
-            fmtprintf w "let temp = ResizeArray<_>(%i)" items.Length
-
-            writeSeqLeading
-                w
-                WriteState.Newline
-                newlineIndent
-                (fun ws _ a ->
-                    string w "temp.Add("
-                    writeExpr ws WriteState.Arg a
-                    string w ")")
-                items
-
-            newlineIndent w
-            string w "temp"
-
-
-        | SynExpr.Vector(items, range) ->
-            startExpr w st range
-            fmtprintf w "let temp = Vector(%i)" items.Length
-
-            writeSeqLeading
-                w
-                WriteState.Newline
-                newlineIndent
-                (fun ws _ a ->
-                    string w "temp.Add(Value.from("
-                    writeExpr ws WriteState.Arg a
-                    string w "))")
-                items
-
-            newlineIndent w
-            string w "temp"
-
-        | SynExpr.List(items, range) ->
-            startExpr w st range
-            string w "["
-            // TODO: Don't filter units and handle them correctly
-            items
-            |> Seq.filter (function
-                | SynExpr.Const(SynConst.Unit, _) -> false
-                | _ -> true)
-            |> writeInlineSeparated w ";" writeExpr
-
-            string w "]"
-
         | SynExpr.Pair(lhs, rhs, range) ->
             startExpr w st range
             string w "("
@@ -762,51 +716,6 @@ module Write =
             string w "("
             writeInlineCommaSeparated w writeExpr exprs
             string w ")"
-
-
-        | SynExpr.FsArray(items, range) ->
-            startExpr w st range
-            string w "[|"
-            writeInlineSemicolon w writeExpr items
-            string w "|]"
-
-        | SynExpr.FsSet(items, range) ->
-            startExpr w st range
-            string w "["
-            writeInlineSemicolon w writeExpr items
-            string w "] |> Set.ofList"
-
-        | SynExpr.FsMap(items, range) ->
-            startExpr w st range
-            string w "["
-            writeInlineSemicolon w writeExpr items
-            string w "] |> Map.ofList"
-
-        | SynExpr.HashSet(items, range) ->
-            startExpr w st range
-            string w "["
-            writeInlineSemicolon w writeExprToValue items
-            string w "] |> HashSet.ofList"
-
-        | SynExpr.HashMap(items, range) ->
-            startExpr w st range
-            string w "["
-
-            writeSeq
-                w
-                WriteState.Inline
-                (flip char ';')
-                (fun w st (key, value) ->
-                    char w '('
-                    writeExprToValue w st key
-                    char w ','
-                    char w ' '
-                    writeExprToValue w st value
-                    char w ')'
-                    ())
-                (pairUp items)
-
-            string w "] |> HashMap.ofList"
 
         | SynExpr.Const(cnst, _) ->
             indentIf w st
@@ -1180,6 +1089,111 @@ module Write =
                 inits
 
             string w " }"
+
+    and private writeCollectionExprs w st (SynCollection(kind, items, range) as c) =
+        match kind with
+        | CollectionKind.Paren
+        | CollectionKind.HashBracket
+        | CollectionKind.BraceBar
+        | CollectionKind.HashParen -> failwithf "unsupported collection expr: %A" kind
+
+        | CollectionKind.Brace ->
+            startExpr w st range
+            string w "["
+
+            writeSeq
+                w
+                WriteState.Inline
+                (flip char ';')
+                (fun w st (key, value) ->
+                    char w '('
+                    writeExprToValue w st key
+                    char w ','
+                    char w ' '
+                    writeExprToValue w st value
+                    char w ')'
+                    ())
+                (pairUp items)
+
+            string w "] |> HashMap.ofList"
+
+        | CollectionKind.Bracket
+        | CollectionKind.FsVec ->
+            startExpr w st range
+
+            fmtprintf
+                w
+                "let temp = %s(%i)"
+                (if kind = CollectionKind.Bracket then
+                     "Vector"
+                 else
+                     "ResizeArray<_>")
+                items.Length
+
+            writeSeqLeading
+                w
+                WriteState.Newline
+                newlineIndent
+                (fun ws _ a ->
+                    string w "temp.Add("
+
+                    if kind = CollectionKind.Bracket then
+                        string w "Value.from("
+
+                    writeExpr ws WriteState.Arg a
+
+                    if kind = CollectionKind.Bracket then
+                        string w ")"
+
+                    string w ")")
+                items
+
+            newlineIndent w
+            string w "temp"
+
+        | CollectionKind.HashBrace
+        | CollectionKind.FsArray
+        | CollectionKind.FsList
+        | CollectionKind.FsMap
+        | CollectionKind.FsSet ->
+            startExpr w st range
+            string w "["
+
+            if kind = CollectionKind.FsArray then
+                string w "|"
+
+            let writer =
+                if kind = CollectionKind.HashBrace then
+                    writeExprToValue
+                else
+                    writeExpr
+
+            let items =
+                if kind = CollectionKind.FsList then
+                    items
+                    |> List.choose (function
+                        | SynExpr.Const(SynConst.Unit, _) -> None
+                        | it -> Some(it))
+                else
+                    items
+
+            writeInlineSemicolon w writer items
+
+            if kind = CollectionKind.FsArray then
+                string w "|"
+
+            string w "]"
+
+            if kind = CollectionKind.FsMap then
+                string w " |> Map.ofList"
+
+            if kind = CollectionKind.FsSet then
+                string w " |> Set.ofList"
+
+            if kind = CollectionKind.HashBrace then
+                string w " |> HashSet.ofList"
+
+        ()
 
     and private writeAttributes w _ (attributes: SynAttributes) =
         string w "[<"

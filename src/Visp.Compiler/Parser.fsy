@@ -225,10 +225,8 @@ expr:
     | AT expr %prec prec_at_expr { SynExpr.Deref(true, $2, lhs parseState) }
     | QUOTE_SYM quoted_expr %prec prec_at_expr
         { SynExpr.Quote(true, $2, lhs parseState) }
-    | LBRACE expr_list_or_empty RBRACE
-        { SynExpr.HashMap($2, lhs parseState)}
-    | HASH_BRACE expr_list_or_empty RBRACE
-        { SynExpr.HashSet($2, lhs parseState)}
+    | LBRACE expr_list_or_empty RBRACE { CollExpr.mkHashMap $2 (lhs parseState)}
+    | HASH_BRACE expr_list_or_empty RBRACE { CollExpr.mkHashSet $2 (lhs parseState)}
     | HASH_PAREN lambda_short_expr_list RPAREN
         { SynExpr.LambdaShort($2, lhs parseState)}
     | vector_start
@@ -244,10 +242,10 @@ brace_bar:
 lambda_short_expr_list:
     | parens_expr { $1 }
 
+
 vector_start:
-    | LBRACKET RBRACKET { SynExpr.Vector([], lhs parseState) }
-    | LBRACKET expr_list RBRACKET
-        { SynExpr.Vector($2, lhs parseState) }
+    | LBRACKET RBRACKET { CollExpr.mkVector [] (lhs parseState) }
+    | LBRACKET expr_list RBRACKET { CollExpr.mkVector $2 (lhs parseState) }
 
 inside_parens:
     | LPAREN RPAREN { SynExpr.Const (SynConst.Unit, lhs parseState) }
@@ -283,7 +281,7 @@ parens_expr:
     | expr COMMA dotted_exprs
         { SynExpr.Tuple($1 :: $3, lhs parseState)}
     | expr COLON_COLON colon_colon_exprs
-        { SynExpr.List($1 :: $3, lhs parseState)}
+        { CollExpr.mkFsList ($1 :: $3) (lhs parseState)}
     | function_def %prec prec_fn { $1 }
     | macro_def { $1 }
     | function_call %prec prec_call { $1 }
@@ -329,17 +327,17 @@ parens_expr:
     | BANG_TUPLE %prec prec_normal_tuple { SynExpr.Tuple([], lhs parseState)}
     | BANG_TUPLE expr_list %prec prec_normal_tuple { SynExpr.Tuple($2, lhs parseState)}
 
-    | BANG_MAP { SynExpr.FsMap([], lhs parseState)}
-    | BANG_MAP expr_list { SynExpr.FsMap($2, lhs parseState)}
+    | BANG_MAP { CollExpr.mkFsMap [] (lhs parseState)}
+    | BANG_MAP expr_list { CollExpr.mkFsMap $2 (lhs parseState)}
 
-    | BANG_SET { SynExpr.FsSet([], lhs parseState)}
-    | BANG_SET expr_list { SynExpr.FsSet($2, lhs parseState)}
+    | BANG_SET { CollExpr.mkFsSet [] (lhs parseState)}
+    | BANG_SET expr_list { CollExpr.mkFsSet $2 (lhs parseState)}
 
-    | BANG_ARRAY { SynExpr.FsArray([], lhs parseState)}
-    | BANG_ARRAY expr_list { SynExpr.FsArray($2, lhs parseState)}
+    | BANG_ARRAY { CollExpr.mkFsArray [] (lhs parseState)}
+    | BANG_ARRAY expr_list { CollExpr.mkFsArray $2 (lhs parseState)}
 
-    | BANG_VEC { SynExpr.FsVec([], lhs parseState)}
-    | BANG_VEC expr_list { SynExpr.FsVec($2, lhs parseState)}
+    | BANG_VEC { CollExpr.mkFsVec [] (lhs parseState)}
+    | BANG_VEC expr_list { CollExpr.mkFsVec $2 (lhs parseState)}
 
     | SEQ expr_list { SynExpr.FsSeq($2, lhs parseState) }
     | YIELD expr { SynExpr.FsYield($2, $1, lhs parseState) }
@@ -530,8 +528,8 @@ rparen_or_rbracket:
     | RBRACKET { () }
 
 list_expr:
-    | BANG_LIST { SynExpr.List([], lhs parseState)}
-    | BANG_LIST expr_list { SynExpr.List($2, lhs parseState)}
+    | BANG_LIST { CollExpr.mkFsList [] (lhs parseState)}
+    | BANG_LIST expr_list { CollExpr.mkFsList $2 (lhs parseState)}
 
 for_in_expr:
     | FOR_IN lparen_or_lbracket name expr rparen_or_rbracket expr_list

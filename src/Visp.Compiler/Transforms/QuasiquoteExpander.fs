@@ -82,7 +82,7 @@ module QuasiquoteExpander =
 
         | SynQuasiquote.Keyword sym -> SynExpr.Keyword sym
 
-        | SynQuasiquote.Vector(exprs, range) -> SynExpr.Vector(toSynExprs exprs range, range)
+        // | SynQuasiquote.Vector(exprs, range) -> SynExpr.Vector(toSynExprs exprs range, range)
 
         | _ -> failwithf "unsupported expr %O at %O" expr range
     //| _ -> SynExpr.Const (SynConst.Nil, range)
