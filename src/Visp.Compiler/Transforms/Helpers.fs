@@ -76,14 +76,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Tuple(exprs, range) -> SynExpr.Tuple(List.map bound_transform exprs, range)
         | SynExpr.FsYield(exprs, b, range) -> SynExpr.FsYield(bound_transform exprs, b, range)
         | SynExpr.FsSeq(exprs, range) -> SynExpr.FsSeq(List.map bound_transform exprs, range)
-        | SynExpr.FsSet(exprs, range) -> SynExpr.FsSet(List.map bound_transform exprs, range)
-        | SynExpr.FsArray(exprs, range) -> SynExpr.FsArray(List.map bound_transform exprs, range)
-        | SynExpr.FsMap(exprs, range) -> SynExpr.FsMap(List.map bound_transform exprs, range)
-        | SynExpr.FsVec(exprs, range) -> SynExpr.FsVec(List.map bound_transform exprs, range)
-        | SynExpr.List(exprs, range) -> SynExpr.List(List.map bound_transform exprs, range)
-        | SynExpr.Vector(exprs, range) -> SynExpr.Vector(List.map bound_transform exprs, range)
-        | SynExpr.HashMap(exprs, range) -> SynExpr.HashMap(List.map bound_transform exprs, range)
-        | SynExpr.HashSet(exprs, range) -> SynExpr.HashSet(List.map bound_transform exprs, range)
+        | SynExpr.Collection(SynCollection(kind, exprs, range)) ->
+            SynExpr.Collection(SynCollection(kind, List.map bound_transform exprs, range))
         | SynExpr.DotIndex(target, index, range) ->
             SynExpr.DotIndex(bound_transform target, bound_transform index, range)
         | SynExpr.DotProperty(target, property, range) ->
