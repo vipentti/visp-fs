@@ -492,6 +492,10 @@ prop_plus:
 dot_expr:
     | DOT_BRACKET expr RBRACKET expr
         { SynExpr.DotIndex($4, $2, lhs parseState)}
+    | DOT_BRACKET expr RBRACKET recover
+        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), $2, lhs parseState)}
+    | DOT_BRACKET expr recover
+        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), $2, lhs parseState)}
     | DOT_PLUS symbol expr
         { SynExpr.DotProperty($3, $2, lhs parseState)}
     | prop_plus expr

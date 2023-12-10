@@ -492,6 +492,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "#("          { HASH_PAREN }
   | "#["          { HASH_BRACKET }
   | "#{"          { HASH_BRACE }
+  | ".["          { DOT_BRACKET }
   | "{|"          { BRACE_BAR }
   | "|}"          { BAR_BRACE }
 
