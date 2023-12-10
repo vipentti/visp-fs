@@ -1,0 +1,359 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day10")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(type Grid array<array<char>>)
+
+(struct Pos ([x: int32] [y: int32])
+  (member _.X x)
+  (member _.Y y)
+
+  (override fn _.ToString ()
+    (sprintf "Pos(x: %A, y: %A)" x y)
+  )
+)
+
+(module Pos
+  (fn Adjacent ([p: Pos])
+    (seq
+      (let y (+Y p))
+      (let x (+X p))
+
+      (yield (mkPos x (dec y)))
+      (yield (mkPos x (inc y)))
+      (yield (mkPos (dec x) y))
+      (yield (mkPos (inc x) y))
+    ))
+  (fn AdjacentBy ([ch: char] [p: Pos])
+    (seq
+      (let y (+Y p))
+      (let x (+X p))
+
+      (match ch
+        [#\|
+          (yield (mkPos x (dec y)))
+          (yield (mkPos x (inc y)))
+        ]
+        [#\-
+          (yield (mkPos (dec x) y))
+          (yield (mkPos (inc x) y))
+        ]
+        [#\L
+          (yield (mkPos x (dec y)))
+          (yield (mkPos (inc x) y))
+        ]
+        [#\J
+          (yield (mkPos x (dec y)))
+          (yield (mkPos (dec x) y))
+        ]
+        [#\7
+          (yield (mkPos x (inc y)))
+          (yield (mkPos (dec x) y))
+        ]
+        [#\F
+          (yield (mkPos x (inc y)))
+          (yield (mkPos (inc x) y))
+        ]
+        [_ ()]
+      )
+    ))
+)
+
+(type TileMap ([grid: Grid] [start: Pos])
+  (let grid grid)
+  (let start start)
+  (let height (+Length grid))
+  (let width (+Length (.[0] grid)))
+  (override fn _.ToString()
+    (sprintf "TileMap(%A)\n%A" start grid)
+  )
+
+  (member _.Start start)
+
+  (member d.StartCh
+    (begin
+      (let [t : Option<char>] (.[start] d))
+
+      (+Value t)
+    ))
+
+  (member _.Width width)
+  (member _.Height height)
+
+  (member _.Item
+    (get ([pos: Pos])
+      (let y (+Y pos))
+      (let x (+X pos))
+
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+
+          (let row (.[y] grid))
+          (Some (.[x] row))
+        ]
+        [_ None])
+    )
+    (set ([pos: Pos]) ch
+      (let y (+Y pos))
+      (let x (+X pos))
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+
+          (let row (.[y] grid))
+          (set! (.[x] row) ch)
+        ]
+        [_ ()])
+    )
+  ))
+
+
+(fn ConnectsToStart ([tm: TileMap] [ch: char] [pos: Pos])
+  (->> pos
+    (Pos.AdjacentBy ch)
+    (Seq.exists #(= (+Start tm) %1))
+  ))
+
+(fn AllPoints ([tm: TileMap])
+  (seq
+    (let w (dec (+Width tm)))
+    (let h (dec (+Height tm)))
+
+    (for/in [yp (!range 0 .. h)]
+      (for/in [xp (!range 0 .. w)]
+        (yield (mkPos xp yp))
+      ))))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let res (new ResizeArray<_>))
+  (mut index 0)
+  (mut ypos 0)
+  (mut xpos 0)
+
+  (while (lines.MoveNext)
+    (let line lines.Current)
+    (if (not (+IsEmpty line))
+      (begin
+        (let foundStart (.IndexOf line #\S))
+
+        (if (>= foundStart 0)
+          (begin
+            (set! xpos foundStart)
+            (set! ypos index)))
+
+        (let arr (.ToArray line))
+
+        (.Add res arr)
+
+        (set! index (inc index))
+      )))
+
+  (let start (mkPos xpos ypos))
+
+  (let tm (new TileMap (.ToArray res) start))
+
+  (let adj (->> start
+    (Pos.Adjacent)
+    (Seq.choose #(match (.[%1] tm)
+      [None None]
+      [(Some ch)
+        (if (ConnectsToStart tm ch %1)
+          (Some %1)
+          None)
+      ]))
+    (Set.ofSeq)))
+
+  (printfn "arr: %A" adj)
+
+  (if (not (= (+Count adj) 2))
+    (failwithf "unsupported adj: %A" adj))
+
+  (let chars (!list
+    #\|
+    #\-
+    #\L
+    #\J
+    #\7
+    #\F
+  ))
+
+  (let startCh (->> chars
+    (List.pick #(begin
+      (let ch %1)
+      (let ths (->> (Pos.AdjacentBy ch start) (Set.ofSeq)))
+
+      (if (= adj ths)
+        (Some ch)
+        None)
+    ))
+    ))
+
+  (printfn "start: %A" startCh)
+
+  (set! (.[start] tm) startCh)
+
+
+  tm
+)
+
+(fn rec FindLoop ([tm: TileMap] [accum: list<Pos>] [vis: Set<Pos>] [steps: int] [ch: char] [pos: Pos])
+  ;; (printfn "%A %A" ch pos)
+  (let adj (->> pos
+    (Pos.AdjacentBy ch)
+    (Seq.filter #(match (.[%1] tm)
+      [None false]
+      [(Some ch)
+        (match ch
+          [#\. false]
+          [#\S false]
+          [_ (not (Set.contains %1 vis))]
+        )]
+    ))
+    (List.ofSeq)
+    ))
+
+  (cond_
+    [(and (+IsEmpty adj) (ConnectsToStart tm ch pos))
+      (Some (List.rev accum))]
+    [(+IsEmpty adj) None]
+    [_
+      (->> adj
+        (Seq.tryPick #(match (.[%1] tm)
+          [(Some ch)
+            (FindLoop tm (cons %1 accum) (Set.add %1 vis) (inc steps) ch %1)
+          ]
+          [None None]
+        )))
+    ])
+  )
+
+(fn PointInPolygon ([testPos: Pos] [poly: array<Pos>])
+  (mut result true)
+  (let count (+Length poly))
+  (let end (dec count))
+
+  (mut enu (->> (seq (!range 0 .. end)) .GetEnumerator))
+  (mut loop true)
+
+  (let testX (+X testPos))
+  (let testY (+Y testPos))
+
+  ;; n>2 Keep track of cross product sign changes
+  (mut pos 0)
+  (mut neg 0)
+
+  (while (and loop (.MoveNext enu))
+    (let i (+Current enu))
+    (let pt (.[i] poly))
+    (cond_
+      [(= testPos pt)
+        (set! result true)
+        (set! loop false)]
+      [_
+        (begin
+          (let x1 (+X pt))
+          (let y1 (+Y pt))
+
+          (let i2 (rem (inc i) count))
+
+          (let pt2 (.[i2] poly))
+
+          (let x2 (+X pt2))
+          (let y2 (+Y pt2))
+
+          ;; Compute the cross product
+          (let d (-
+            (* (- testX x1) (- y2 y1))
+            (* (- testY y1) (- x2 x1))
+          ))
+
+          (printfn "d: %A %A %A" d pt pt2)
+
+          (cond_
+            [(> d 0)
+              (set! pos (inc pos))
+            ]
+            [(< d 0)
+              (set! neg (inc neg))
+            ]
+            [_ ()]
+          )
+
+          (cond_
+            ;; sign changes
+            [(and (> pos 0) (> neg 0))
+              (set! result false)
+              (set! loop false)
+            ]
+            [_ ()]
+          )
+
+          ()
+        )
+      ])
+
+    ())
+
+  result)
+
+
+(let tilemap (ParseFile fileText))
+
+(let loop (FindLoop tilemap (!list (+Start tilemap)) (!set (+Start tilemap)) 0 (+StartCh tilemap) (+Start tilemap)))
+
+(let part1 (->> loop (Option.map #(/ (+Length %1) 2)) +Value))
+(let pts (->> loop (Option.map #(Set.ofList %1)) +Value))
+
+(WriteResult "part1" part1 (if example 8 6931))
+
+(let width (+Width tilemap))
+(let height (+Height tilemap))
+
+(let lx (/ width 4))
+(let ly (/ height 4))
+
+(let lastX (- width lx))
+(let lastY (- height ly))
+
+(mut points 0)
+
+(for/in [yp (!range ly .. (dec lastY))]
+  (for/in [xp (!range lx .. (dec lastX))]
+    (if (not (Set.contains (mkPos xp yp) pts))
+      (set! points (inc points))
+    )
+  ))
+
+(let part2 points)
+
+(WriteResult "part2" part2 (if example 1 357))
+
+()
