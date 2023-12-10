@@ -34,7 +34,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token AT
 %token OPEN MODULE
 %token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
-%token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
+%token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
@@ -838,13 +838,32 @@ rev_member_list:
 member:
     | LPAREN member_in_parens RPAREN { $2 }
 
+member_name:
+    | MEMBER symbol { $2 }
+
+member_get:
+    | LPAREN MEMBER_GET arg_list_start expr_list_or_empty RPAREN
+        { SynMemberGet($3, $4, lhs parseState) }
+
+member_set:
+    | LPAREN MEMBER_SET arg_list_start name expr_list_or_empty RPAREN
+        { SynMemberSet($3, $4, $5, lhs parseState) }
+
+member_member_in_parens:
+    | member_name member_get { SynTypeMember.GetSet($1, Some($2), None, lhs parseState) }
+    | member_name member_set { SynTypeMember.GetSet($1, None, Some($2), lhs parseState) }
+    | member_name member_get member_set { SynTypeMember.GetSet($1, Some($2), Some($3), lhs parseState) }
+    | member_name member_set member_get { SynTypeMember.GetSet($1, Some($3), Some($2), lhs parseState) }
+    | member_name expr { SynTypeMember.Member($1, $2, lhs parseState) }
+
 member_in_parens:
     | LET name expr
         { SynTypeMember.Let($2, $3, lhs parseState) }
     | MUT name expr
         { SynTypeMember.Mut($2, $3, lhs parseState) }
-    | MEMBER symbol expr
-        { SynTypeMember.Member($2, $3, lhs parseState) }
+    | member_member_in_parens { $1 }
+    // | MEMBER symbol expr
+    //     { SynTypeMember.Member($2, $3, lhs parseState) }
     | MEMBERFN symbol arg_list_start expr_list
         { SynTypeMember.MemberFn($2, $3, $4, (lhs parseState)) }
     | MEMBER FN symbol arg_list_start expr_list
@@ -903,10 +922,7 @@ rev_name_list:
     | rev_name_list name { $2 :: $1 }
 
 symbol:
-    | SYMBOL
-        { let text = $1
-          SynSymbol(Ident(text, lhs parseState))
-        }
+    | SYMBOL { SynSymbol(Ident($1, lhs parseState)) }
 
 macro_name:
     | MACRO_NAME

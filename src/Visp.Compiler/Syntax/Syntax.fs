@@ -392,10 +392,21 @@ and [<RequireQualifiedAccess>] SynMatchPattern =
     | Discard of range: range
     | Trivia of kind: SynPatternTriviaKind * range: range
 
+and SynMemberGet =
+    | SynMemberGet of args: SynArg list * exprs: SynExpr list * range: range
+
+    member t.Range = let (SynMemberGet(range = r)) = t in r
+
+and SynMemberSet =
+    | SynMemberSet of args: SynArg list * value: SynName * exprs: SynExpr list * range: range
+
+    member t.Range = let (SynMemberSet(range = r)) = t in r
+
 and [<RequireQualifiedAccess>] SynTypeMember =
     | Let of name: SynName * value: SynExpr * range: range
     | Mut of name: SynName * value: SynExpr * range: range
     | Member of name: SynSymbol * value: SynExpr * range: range
+    | GetSet of name: SynSymbol * get: SynMemberGet option * set: SynMemberSet option * range: range
     | MemberFn of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
     | OverrideMember of name: SynSymbol * value: SynExpr * range: range
     | OverrideFn of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range

@@ -11,7 +11,27 @@ open System
 open Visp.Compiler.Syntax.Macros
 open Visp.Common
 open System.IO
-open FSharp.Text.Lexing
+open System.Collections.Generic
+
+[<RequireQualifiedAccess>]
+type LexContext =
+    | Default
+    | LParen
+    | Member
+
+type LexContextStack() =
+    let stack = new Stack<LexContext>()
+
+    member _.Count = stack.Count
+
+    member _.Push(c) = stack.Push c
+
+    member _.Pop() = stack.Pop() |> ignore
+
+    member _.Current =
+        match stack.TryPeek() with
+        | false, _ -> LexContext.Default
+        | true, it -> it
 
 [<RequireQualifiedAccess>]
 type TokenStreamMode =
@@ -72,6 +92,7 @@ type LexMode =
 
 type LexArgs =
     { diagnosticsLogger: DiagnosticsLogger.DiagnosticsLogger
+      contextStack: LexContextStack
       mutable mode: LexMode
       mutable stringNest: LexerInterpolatedStringNesting
       mutable interpolationDelimiterLength: int
@@ -82,6 +103,14 @@ type LexArgs =
         this.Nest()
 
     member this.Nest() = this.depth <- this.depth + 1
+
+    member t.PushContext(c: LexContext) = t.contextStack.Push(c)
+
+    member t.CurrentContext = t.contextStack.Current
+
+    member t.ContextCount = t.contextStack.Count
+
+    member t.PopContext() = t.contextStack.Pop()
 
     member this.NestIfNotDefault() =
         if not this.mode.IsDefaultMode then
@@ -102,6 +131,7 @@ type LexArgs =
 
 let mkDefaultLextArgs () =
     { diagnosticsLogger = DiagnosticsLogger.DiagnosticsThreadStatics.DiagnosticsLogger
+      contextStack = new LexContextStack()
       mode = LexMode.Default
       depth = 0
       interpolationDelimiterLength = 0
@@ -197,11 +227,43 @@ let keywordTokenList =
       ("yield", YIELD false)
       ("yield!", YIELD true) ]
 
+let contextSpecificKeywords =
+    [ (LexContext.Member,
+       [ ("get", MEMBER_GET)
+         ("set", MEMBER_SET)
+
+         ]) ]
+
+let contextSpecificKeywordsMap =
+    contextSpecificKeywords
+    |> List.map (fun (it, rs) -> (it, Map.ofList rs))
+    |> Map.ofList
+
 let keywordToTokenMap = keywordTokenList |> Map.ofList
 
-let tryGetKeyword w = keywordToTokenMap.TryFind w
+let tokenToKeywordList = keywordTokenList |> List.map (fun (x, y) -> (y, x))
 
 let alwaysSymbol (s: string) = SYMBOL(s)
+
+
+let tryGetKeywordTextForToken (w: token) =
+    tokenToKeywordList
+    |> List.tryPick (fun (x, y) -> if w = x then Some(y) else None)
+
+let getKeywordTextForToken (w: token) =
+    tokenToKeywordList |> List.pick (fun (x, y) -> if w = x then Some(y) else None)
+
+let symbolForKeywordToken (w: token) =
+    getKeywordTextForToken w |> alwaysSymbol
+
+let tryGetContextKeyword (ctx: LexContext) w =
+    contextSpecificKeywordsMap.TryFind(ctx)
+    |> Option.bind (fun ctx -> ctx.TryFind(w))
+
+let tryGetKeyword (ctx: LexContext) w =
+    match tryGetContextKeyword ctx w with
+    | Some(it) -> Some(it)
+    | None -> keywordToTokenMap.TryFind w
 
 let escape c =
     match c with
@@ -247,8 +309,8 @@ let specialSymbol (s: string) =
     | "*" -> Some(OP_MULT)
     | _ -> None
 
-let symbolOrKeyword (s: string) =
-    match tryGetKeyword s with
+let symbolOrKeyword (ctx: LexContext) (s: string) =
+    match tryGetKeyword ctx s with
     | Some(tok) -> tok
     | None ->
         if macroTable.IsMacro(s) then

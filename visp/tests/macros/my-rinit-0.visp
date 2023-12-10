@@ -16,7 +16,7 @@
 
 (syntax-macro MyRinit
   [(_ (sym val) (s v) ...)
-    {| sym val (m-alternate s v) ...|}
+    {| sym val (m-alternate s v) |}
   ])
 
 (let temp (MyRinit [src 1] [Mapping.dest 2] [range 3]))

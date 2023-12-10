@@ -17,7 +17,7 @@ let mkTokenizerWithArgs args =
             | LexMode.Default -> Lexer.token args false buf
             | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
 
-        // eprintfn "%A %A %i" next args.mode args.depth
+        // eprintfn "%A %A %i %i %A" next args.mode args.depth args.ContextCount args.CurrentContext
 
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
@@ -30,16 +30,38 @@ let mkTokenizerWithArgs args =
             macroTable.AddMacroName s
             ()
         | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
+
+        | MEMBER ->
+            if args.CurrentContext = LexContext.LParen then
+                args.PopContext()
+                args.PushContext LexContext.Member
+
         | HASH_PAREN
         | HASH_BRACKET
         | LPAREN
         | LBRACE
         | LBRACKET
-        | HASH_BRACE -> args.NestIfNotDefault()
+        | HASH_BRACE ->
+            if next = LPAREN || next = HASH_PAREN then
+                let ctx =
+                    if args.CurrentContext = LexContext.Default then
+                        LexContext.LParen
+                    else
+                        args.CurrentContext
+
+                args.PushContext ctx
+
+            args.NestIfNotDefault()
         | RPAREN
         | RBRACE
-        | RBRACKET -> args.UnnestIfNotDefault()
+        | RBRACKET ->
+            if next = RPAREN then
+                args.PopContext()
+
+            args.UnnestIfNotDefault()
         | _ -> ()
+
+
 
         next
 

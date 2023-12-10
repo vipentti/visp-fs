@@ -268,6 +268,7 @@ let memberToSymbolDetails memval var (mem: SynTypeMember) =
         var (Syntax.textOfName name, true, Syntax.rangeOfName name |> textRangeToSyntaxRange)
     | SynTypeMember.Let(name = name) ->
         var (Syntax.textOfName name, false, Syntax.rangeOfName name |> textRangeToSyntaxRange)
+    | SynTypeMember.GetSet(name = name)
     | SynTypeMember.Member(name = name)
     | SynTypeMember.OverrideMember(name = name) ->
         (memval (

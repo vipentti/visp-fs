@@ -1491,7 +1491,7 @@ and token (args: LexArgs) (skip: bool) lexbuf =
 # 466 "Lexer.fsl"
                                
                      let text = lexeme lexbuf
-                     symbolOrKeyword text
+                     symbolOrKeyword args.CurrentContext text
                    
 # 1496 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
