@@ -4,6 +4,7 @@
 
 module rec Visp.Compiler.SyntaxPrinter
 
+open System.Runtime.CompilerServices
 open PrettyPrinter
 open PrettyPrinter.Print
 open Visp.Compiler.Syntax
@@ -68,6 +69,18 @@ let constToDoc =
         // but let's wait until there is a need
         Print.text (prefix + quotes + raw + quotes)
 
+let rec macroPatToDoc =
+    function
+    | SynMacroPat.Const(it, _) -> constToDoc it
+    | SynMacroPat.Ellipsis _ -> Print.text "..."
+    | SynMacroPat.Discard _ -> Print.text "_"
+    | SynMacroPat.Symbol(it, _) -> Print.text it.Text
+    | SynMacroPat.Trivia(it, _) -> macroTriviaToDoc it
+    | SynMacroPat.List(pats, _) ->
+        let docs = pats |> List.map macroPatToDoc |> hsep
+
+        parens docs
+
 let macroTriviaToDoc =
     function
     | SynMacroTriviaKind.Dot -> Print.char '.'
@@ -106,6 +119,42 @@ let rec macroBodyToDoc =
             | SynListKind.HashSet -> Print.enclose (Print.text "#{") (Print.text "}")
 
         surround body
+
+type SynMacroPat with
+
+    member this.Pretty() =
+        let doc = macroPatToDoc this
+        let sb = PooledStringBuilder.Get()
+        use sw = new StringWriter(sb)
+        Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+        sb.ToStringAndReturn()
+
+[<Extension>]
+type Extensions =
+    [<Extension>]
+    static member inline Pretty(xs: list<SynMacroPat>) =
+        let doc = parens <| (List.map macroPatToDoc xs |> hsep)
+        let sb = PooledStringBuilder.Get()
+        use sw = new StringWriter(sb)
+        Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+        sb.ToStringAndReturn()
+
+    [<Extension>]
+    static member inline Pretty(xs: list<SynMacroBody>) =
+        let doc = parens <| (List.map macroBodyToDoc xs |> hsep)
+        let sb = PooledStringBuilder.Get()
+        use sw = new StringWriter(sb)
+        Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+        sb.ToStringAndReturn()
+
+// type List<'T> with
+//     member this.Pretty() =
+//         let doc = macroPatToDoc this
+//         let sb = PooledStringBuilder.Get()
+//         use sw = new StringWriter(sb)
+//         Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+//         sb.ToStringAndReturn()
+
 
 type SynMacroBody with
 
@@ -278,3 +327,10 @@ type ParsedFile with
         use sw = new StringWriter(sb)
         Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
         sb.ToStringAndReturn()
+
+
+let docToString doc =
+    let sb = PooledStringBuilder.Get()
+    use sw = new StringWriter(sb)
+    Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+    sb.ToStringAndReturn()

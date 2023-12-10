@@ -80,51 +80,13 @@ let state = { Todo = () }
             eprintfn "Message: %A" ctx.Message
         | _ -> ()
 
-    let private mkTokenizerWithArgs args =
-        let tokens args buf =
-            let next =
-                match args.mode with
-                | LexMode.Default -> Lexer.token args false buf
-                | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
-
-            // eprintfn "%A %A %i" next args.mode args.depth
-
-            match next with
-            | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
-            | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
-                args.Nested <| LexMode.TokenStream TokenStreamMode.Quote
-            | QUASIQUOTE_KW -> args.Nested <| LexMode.TokenStream TokenStreamMode.Quasiquote
-            | SYNTAX_MACRO -> args.Nested <| LexMode.TokenStream TokenStreamMode.SyntaxMacroStart
-            | SYMBOL s when args.mode.IsSyntaxMacroStart ->
-                args.mode <- LexMode.TokenStream TokenStreamMode.Macro
-                macroTable.AddMacroName s
-                ()
-            | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
-            | HASH_PAREN
-            | HASH_BRACKET
-            | LPAREN
-            | LBRACE
-            | LBRACKET
-            | HASH_BRACE -> args.NestIfNotDefault()
-            | RPAREN
-            | RBRACE
-            | RBRACKET -> args.UnnestIfNotDefault()
-            | _ -> ()
-
-            next
-
-        tokens args
-
-    let private mkTokenizer () =
-        mkTokenizerWithArgs <| mkDefaultLextArgs ()
-
     let parseFile filePath returnLast =
         let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
 
         use _ = stream
         use _ = reader
 
-        let tokenizer = mkTokenizer ()
+        let tokenizer = ParseUtils.mkTokenizer ()
 
         try
             let mutable res = start tokenizer lexbuf
@@ -149,7 +111,7 @@ let state = { Todo = () }
         let lexbuf = LexBuffer<_>.FromString str
         lexbuf.EndPos <- Position.FirstLine fileName
 
-        let tokenizer = mkTokenizerWithArgs <| mkTokenStreamArgs ()
+        let tokenizer = ParseUtils.mkTokenizerWithArgs <| mkTokenStreamArgs ()
 
         seq {
             while not lexbuf.IsPastEndOfStream do
@@ -163,7 +125,7 @@ let state = { Todo = () }
         let lexbuf = LexBuffer<_>.FromString str
         lexbuf.EndPos <- Position.FirstLine fileName
 
-        let tokenizer = mkTokenizer ()
+        let tokenizer = ParseUtils.mkTokenizer ()
 
         try
             let res = SyntaxParser.start tokenizer lexbuf

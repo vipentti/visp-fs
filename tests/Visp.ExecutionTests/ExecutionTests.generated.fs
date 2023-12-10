@@ -21,6 +21,11 @@ module ``tests_dot_dot-shorthands`` =
     let ``can execute`` () = TestUtils.runTest "tests/dot/dot-shorthands.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_member-get-set-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/member-get-set-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_type-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/type-0.visp"

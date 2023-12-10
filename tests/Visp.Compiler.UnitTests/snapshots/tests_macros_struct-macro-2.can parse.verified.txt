@@ -11,7 +11,7 @@ let macro_MyStruct2 = "__MACRO_INIT__"
 
 [<Struct()>]
 // line 23 @"struct-macro-2.visp"
-type Example (x: int, y: int) =
+type Example (x: int, y: int, z: int, w: int) =
   // line 23 @"struct-macro-2.visp"
   member _.X =
         x
@@ -19,34 +19,42 @@ type Example (x: int, y: int) =
   member _.Y =
         y
   // line 23 @"struct-macro-2.visp"
+  member _.Z =
+        z
+  // line 23 @"struct-macro-2.visp"
+  member _.W =
+        w
+  // line 23 @"struct-macro-2.visp"
   member d.Sum () =
     // line 23 @"struct-macro-2.visp"
     ((d.X)) +
-    ((d.Y))
+    ((d.Y)) +
+    ((d.Z)) +
+    ((d.W))
 
 // line 23 @"struct-macro-2.visp"
-let mkExample x y =
+let mkExample x y z w =
   // line 23 @"struct-macro-2.visp"
-  (new Example(x, y))
+  (new Example(x, y, z, w))
 
-// line 29 @"struct-macro-2.visp"
-let instance =
-  // line 29 @"struct-macro-2.visp"
-  mkExample (1) (2)
 // line 31 @"struct-macro-2.visp"
+let instance =
+  // line 31 @"struct-macro-2.visp"
+  mkExample (1) (2) (3) (4)
+// line 33 @"struct-macro-2.visp"
 printfn ("Example Struct is %A") (instance)
-// line 32 @"struct-macro-2.visp"
+// line 34 @"struct-macro-2.visp"
 printfn ("Example IsValueType %A") (instance
   |> (fun a1 ->
-    // line 32 @"struct-macro-2.visp"
+    // line 34 @"struct-macro-2.visp"
     (a1.GetType()))
   |> (fun a1 ->
-    // line 32 @"struct-macro-2.visp"
+    // line 34 @"struct-macro-2.visp"
     (a1.IsValueType)))
-// line 33 @"struct-macro-2.visp"
+// line 35 @"struct-macro-2.visp"
 let visp_result_todo =
-  // line 33 @"struct-macro-2.visp"
+  // line 35 @"struct-macro-2.visp"
   printfn ("Example Result is %i") ((instance.Sum()))
-// line 33 @"struct-macro-2.visp"
+// line 35 @"struct-macro-2.visp"
 printfn ("%A") (visp_result_todo)
 

@@ -465,7 +465,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
   | ident      {
       let text = lexeme lexbuf
-      symbolOrKeyword text
+      symbolOrKeyword args.CurrentContext text
     }
   | _ { unexpected_char "token" lexbuf }
 

@@ -1225,6 +1225,22 @@ module Write =
             if st.parens then
                 char w ')'
 
+    // and private writeArgs w args =
+    //     writeSeq w WriteState.Inline space writeArg args
+    and private writeMemSet w (SynMemberSet(args, value, exprs, _)) =
+        string w "set ("
+        writeSeq w WriteState.Inline (flip string ", ") writeArg args
+        string w ") "
+        writeName w WriteState.Inline value
+        string w " ="
+        writeBody w writeExpr exprs
+
+    and private writeMemGet w (SynMemberGet(args, exprs, _)) =
+        string w "get ("
+        writeSeq w WriteState.Inline (flip string ", ") writeArg args
+        string w ") ="
+        writeBody w writeExpr exprs
+
     and private writeMember w st (mem: SynTypeMember) =
         match mem with
         | SynTypeMember.Let(name, expr, range) ->
@@ -1240,6 +1256,33 @@ module Write =
             newline w
             writeExpr w WriteState.Body body
             ()
+        | SynTypeMember.GetSet(name, get, set, range) ->
+            startExpr w st range
+            fmtprintf w "member %s" (Syntax.textOfSymbol name)
+            use _ = withIndent w false
+            newlineIndent w
+
+            match (get, set) with
+            | (Some get, Some set) ->
+                startExpr w st get.Range
+                string w "with "
+                writeMemGet w get
+                newlineIndent w
+                startExpr w st set.Range
+                string w "and "
+                writeMemSet w set
+                ()
+            | (Some get, None) ->
+                startExpr w st get.Range
+                string w "with "
+                writeMemGet w get
+
+            | (None, Some set) ->
+                startExpr w st set.Range
+                string w "with "
+                writeMemSet w set
+            | (None, None) -> failwith "missing both getter and setter."
+
         | SynTypeMember.Member(name, expr, range) ->
             startExpr w st range
             fmtprintf w "member %s =" (Syntax.textOfSymbol name)

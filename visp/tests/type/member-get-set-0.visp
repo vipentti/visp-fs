@@ -1,0 +1,45 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type GetOnly<^T> ([items: array<^T>])
+  (let items items)
+  (member _.Item
+    (get ([i: int])
+      (.[i] items))))
+
+(type SetOnly<^T> ([items: array<^T>])
+  (let items items)
+  (member _.Item
+    (set ([i: int]) v
+      (set! (.[i] items) v))))
+
+(type GetAndSet<^T> ([items: array<^T>])
+  (let items items)
+  (member _.Item
+    (get ([i: int])
+      (.[i] items))
+    (set ([i: int]) v
+      (set! (.[i] items) v)))
+  )
+
+(let array (!array 1 2 3 4 5))
+
+(let getOnly (new GetOnly<_> array))
+(let setOnly (new SetOnly<_> array))
+(let getAndSet (new GetAndSet<_> array))
+
+(printfn "%A" (.[0] getOnly))
+
+(set! (.[0] setOnly) 99)
+
+(printfn "%A" array)
+
+(set! (.[1] getAndSet) 99)
+
+(printfn "%A" (.[1] getAndSet))
+
+(printfn "%A" array)
