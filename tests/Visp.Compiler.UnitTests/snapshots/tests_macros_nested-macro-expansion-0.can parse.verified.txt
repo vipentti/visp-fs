@@ -1,0 +1,106 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"nested-macro-expansion-0.visp"
+type Grid = array<array<char>>
+// line 10 @"nested-macro-expansion-0.visp"
+
+[<Struct()>]
+// line 10 @"nested-macro-expansion-0.visp"
+type Pos (x: int32, y: int32) =
+  // line 10 @"nested-macro-expansion-0.visp"
+  member _.X =
+        x
+  // line 10 @"nested-macro-expansion-0.visp"
+  member _.Y =
+        y
+  // line 10 @"nested-macro-expansion-0.visp"
+  override _.ToString () =
+    // line 10 @"nested-macro-expansion-0.visp"
+    sprintf ("Pos(x: %A, y: %A)") (x) (y)
+
+// line 10 @"nested-macro-expansion-0.visp"
+let mkPos x y =
+  // line 10 @"nested-macro-expansion-0.visp"
+  (new Pos(x, y))
+
+// line 19 @"nested-macro-expansion-0.visp"
+type TileMap (grid: Grid, start: Pos) =
+  // line 20 @"nested-macro-expansion-0.visp"
+  let grid = grid
+  // line 21 @"nested-macro-expansion-0.visp"
+  let start = start
+  // line 22 @"nested-macro-expansion-0.visp"
+  override _.ToString () =
+    // line 23 @"nested-macro-expansion-0.visp"
+    sprintf ("TileMap(%A)\n%A") (start) (grid)
+
+  // line 26 @"nested-macro-expansion-0.visp"
+  member _.Start =
+        start
+  // line 28 @"nested-macro-expansion-0.visp"
+  member _.Item
+        // line 29 @"nested-macro-expansion-0.visp"
+    with get ((pos: Pos)) =
+      // line 30 @"nested-macro-expansion-0.visp"
+      let y =
+        // line 30 @"nested-macro-expansion-0.visp"
+        (pos.Y)
+      // line 31 @"nested-macro-expansion-0.visp"
+      let x =
+        // line 31 @"nested-macro-expansion-0.visp"
+        (pos.X)
+      // line 33 @"nested-macro-expansion-0.visp"
+      if CoreMethods.isTruthy(
+        
+          if CoreMethods.isTruthy(
+            
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(y, 0))
+                then
+                  // line 33 @"nested-macro-expansion-0.visp"
+                  CoreMethods.``lt``(y, (grid.Length))
+                else
+                  false)
+            then
+              // line 33 @"nested-macro-expansion-0.visp"
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(x, 0))
+                then
+                  // line 33 @"nested-macro-expansion-0.visp"
+                  CoreMethods.``lt``(x, ((grid.[0]).Length))
+                else
+                  false
+            else
+              false)
+        then
+          // line 33 @"nested-macro-expansion-0.visp"
+          
+          // line 33 @"nested-macro-expansion-0.visp"
+          let row =
+            // line 33 @"nested-macro-expansion-0.visp"
+            (grid.[y])
+          // line 33 @"nested-macro-expansion-0.visp"
+          Some ((row.[x]))
+        else
+          // line 33 @"nested-macro-expansion-0.visp"
+          if CoreMethods.isTruthy(
+            true)
+            then
+              // line 33 @"nested-macro-expansion-0.visp"
+              
+              None
+            else
+              // line 33 @"nested-macro-expansion-0.visp"
+              failwith ("unreachable")
+// line 43 @"nested-macro-expansion-0.visp"
+let visp_result_todo =
+  // line 43 @"nested-macro-expansion-0.visp"
+  printfn ("OK")
+// line 43 @"nested-macro-expansion-0.visp"
+printfn ("%A") (visp_result_todo)
+
