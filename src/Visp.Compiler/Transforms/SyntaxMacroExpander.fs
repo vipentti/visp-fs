@@ -2,9 +2,10 @@
 // Distributed under the MIT License.
 // https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
 
-module Visp.Compiler.Transforms.SyntaxMacros
+module rec Visp.Compiler.Transforms.SyntaxMacros
 
 open Visp.Compiler.SyntaxPrinter
+open PrettyPrinter
 open Visp.Common
 open Visp.Compiler.Syntax
 open Visp.Compiler.Transforms
@@ -14,6 +15,7 @@ open Visp.Compiler
 open FSharp.Text.Lexing
 open Visp.Compiler.Syntax.Macros
 open System.Collections.Generic
+open Visp.Compiler.LexHelpers
 
 
 let (|MatchingText|) str (pat: SynMacroPat) =
@@ -115,9 +117,12 @@ let rec private bindPatterns
         use tempPool = PooledDictionary.GetPooled<string, ResizeArray<_>>()
         let temp = tempPool.Value
 
+        // eprintfn "args: %s" (args.Pretty())
+
         for arg in args do
             match arg with
             | SynMacroBody.List(_, exprs, _) ->
+                // eprintfn "Binding: %s to %s" (arg.Pretty()) (lst.Pretty())
                 for (lhs, rhs) in Seq.zip lst exprs do
                     match (lhs, rhs) with
                     | (SynMacroPat.Discard _, _) -> ()
@@ -193,14 +198,18 @@ type private TokenizeMode =
 
 type private TokenizeArgs =
     { mutable depth: int32
-      mutable mode: TokenizeMode }
+      mutable mode: TokenizeMode
+      ctx: LexHelpers.LexContextStack }
 
     static member Default() =
         { depth = 0
-          mode = TokenizeMode.Default }
+          mode = TokenizeMode.Default
+          ctx = LexHelpers.LexContextStack() }
 
     static member Macro() =
-        { depth = 1; mode = TokenizeMode.Macro }
+        { depth = 1
+          mode = TokenizeMode.Macro
+          ctx = LexHelpers.LexContextStack() }
 
     member t.TryNest() =
         if t.mode = TokenizeMode.Macro then
@@ -220,7 +229,7 @@ type private TokenizeArgs =
 
 type private BoundPats = Dictionary<string, BoundPatternBody>
 
-[<NoEquality; NoComparison; RequireQualifiedAccess>]
+[<NoEquality; NoComparison; RequireQualifiedAccess; StructuredFormatDisplay("{StructuredDisplay}")>]
 type EvaluatedBody =
     | Item of SynMacroBody
     | List of kind: SynListKind * items: EvaluatedBody list
@@ -232,9 +241,26 @@ type EvaluatedBody =
         | Splice(items = it) -> Some(it)
         | _ -> None
 
+    member d.StructuredDisplay = evaluatedBodyToDoc d |> docToString
+
+let rec evaluatedBodyToDoc =
+    function
+    | EvaluatedBody.Item it -> Print.parens <| Print.hsep [ Print.text "item"; macroBodyToDoc it ]
+    | EvaluatedBody.List(kind, items) ->
+        let nested = items |> List.map evaluatedBodyToDoc |> Print.hsep
+        Print.parens <| Print.hsep [ text "coll"; text $"{kind}"; nested ]
+    | EvaluatedBody.Splice(items) ->
+        let nested = items |> List.map evaluatedBodyToDoc |> Print.hsep
+        Print.parens <| Print.hsep [ Print.text "splice"; nested ]
+
 let (|EvaluatedItems|_|) =
     function
     | EvaluatedBody.List(_, it) -> Some(it)
+    | EvaluatedBody.Splice(it) -> Some(it)
+    | _ -> None
+
+let (|SpliceItems|_|) =
+    function
     | EvaluatedBody.Splice(it) -> Some(it)
     | _ -> None
 
@@ -282,6 +308,17 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
 
             EvaluatedBody.Item(SynMacroBody.Symbol(Syntax.mkSynSymbol id r))
 
+        | SpecialCall "m-alternate-sep" (_, call_args, _) ->
+            let args = call_args |> List.map bound_evaluate
+
+            match args with
+            | (sep :: EvaluatedItems lhs :: EvaluatedItems rhs :: []) ->
+                EvaluatedBody.Splice(
+                    List.zip lhs rhs |> List.map (fun (x, y) -> [ x; sep; y ]) |> List.concat
+                )
+
+            | _ -> failwithf "args: %A" args
+
         | SpecialCall "m-alternate" (_, call_args, _) ->
             let args = call_args |> List.map bound_evaluate
 
@@ -295,8 +332,15 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
 
 
         | SynMacroBody.List(kind, args, _) ->
-            let items = args |> List.map bound_evaluate
-            EvaluatedBody.List(kind, items)
+            // let items = args |> List.map bound_evaluate
+            // eprintfn "orig:%s\neval:\n%A" (args.Pretty()) items
+
+            // EvaluatedBody.List(kind, items)
+            // EvaluatedBody.List(kind,
+            evaluateList pats kind args []
+        //)
+        //EvaluatedBody.L
+        // evaluateList pats kind args
         | SynMacroBody.Call it -> evaluateMacroCall it
         | SynMacroBody.Trivia _
         | SynMacroBody.Symbol _
@@ -304,6 +348,60 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
         | SynMacroBody.Ellipsis _
         | SynMacroBody.Const _
         | SynMacroBody.Discard _ -> EvaluatedBody.Item currentBody
+
+and private evaluateList pats kind (args: SynMacroBody list) accum =
+    // let rec loop pats kind args =
+    //     match args with
+    // |
+    // | _ -> failwith "todo"
+
+    match args with
+    | (SynMacroBody.List(_, lst, _) :: SynMacroBody.Ellipsis _ :: rest) ->
+        let evaled = lst |> List.map (evaluateBody pats)
+
+        let splicable =
+            match lst with
+            | (SynMacroBody.Symbol _) :: (SynMacroBody.Trivia _) :: (SynMacroBody.Symbol _) :: [] ->
+                let lhs = List.item 0 evaled
+                let trivia = List.item 1 evaled
+                let rhs = List.item 2 evaled
+
+                match (lhs, rhs) with
+                | (EvaluatedItems lhs), (EvaluatedItems rhs) ->
+                    let items =
+                        List.zip lhs rhs
+                        |> List.map (fun (x, y) -> (EvaluatedBody.List(kind, [ x; trivia; y ])))
+
+                    EvaluatedBody.Splice(items)
+                | _ -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
+            | (SynMacroBody.Symbol _) :: (SynMacroBody.Symbol _) :: [] ->
+                let lhs = List.item 0 evaled
+                let rhs = List.item 1 evaled
+
+                match (lhs, rhs) with
+                | (EvaluatedItems lhs), (EvaluatedItems rhs) ->
+                    let items =
+                        List.zip lhs rhs
+                        |> List.map (fun (x, y) -> (EvaluatedBody.List(kind, [ x; y ])))
+
+                    EvaluatedBody.Splice(items)
+                | _ -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
+            | lst -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
+
+        (evaluateList pats kind rest (splicable :: accum))
+    | a :: rest ->
+
+        let item = evaluateBody pats a
+        evaluateList pats kind rest (item :: accum)
+    // item :: (evaluateList pats kind rest accum)
+    | [] -> (EvaluatedBody.List(kind, List.rev accum))
+
+
+// | _ ->
+//     let items = args |> List.map (evaluateBody pats)
+// EvaluatedBody.List(kind, items)
+// | SynMacroBody.List _ -> failwith "todo"
+
 
 
 and private evaluateMacroCall (SynMacroCall(name = name) as call) =
@@ -334,7 +432,7 @@ let rec private tokenizeEvaluated
         match args.mode with
         | TokenizeMode.Macro -> res.Add(SYMBOL text)
         | TokenizeMode.Default ->
-            let tok = LexHelpers.symbolOrKeyword text
+            let tok = LexHelpers.symbolOrKeyword args.ctx.Current text
 
             match tok with
             | MACRO_NAME _
@@ -351,11 +449,19 @@ let rec private tokenizeEvaluated
     | EvaluatedBody.List(kind, lst) ->
         res.Add(openToken kind)
 
+        let mutable didPush = false
+
         let lst =
             match lst with
             | (EvaluatedSymbolText it) :: rest when macroTable.IsMacro it ->
                 args.StartMacro()
                 res.Add(MACRO_NAME it)
+                rest
+            | (EvaluatedSymbolText "member") :: rest when args.mode = TokenizeMode.Default ->
+                // args.StartMacro()
+                res.Add(MEMBER)
+                args.ctx.Push LexContext.Member
+                didPush <- true
                 rest
             | it ->
                 args.TryNest()
@@ -365,6 +471,10 @@ let rec private tokenizeEvaluated
         lst |> List.iter bound_tokenize
 
         args.TryUnnest()
+
+        if didPush then
+            args.ctx.Pop()
+
         res.Add(closeToken kind)
 
     | EvaluatedBody.Item it ->
@@ -464,6 +574,13 @@ let evaluatedBodyToExpr range evaluated =
     let res = pooled.Value
     let args = TokenizeArgs.Default()
     tokenizeEvaluated res args evaluated
+
+    // printfn "tokens:"
+
+    // for tok in res do
+    //     printf "%A " tok
+
+    // printfn ""
     tokensToExpr res range
 
 let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, args, range) as call) =
@@ -482,10 +599,10 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
         evaluateMacroToEvaluatedBody macro call |> evaluatedBodyToMacroBody range
 
     while hasInteralMacroCalls evaluated do
-        // printfn "%s" (evaluated.Pretty ())
+        // printfn "%s" (evaluated.Pretty())
         evaluated <- evalBody evaluated |> evaluatedBodyToMacroBody range
 
-    // printfn "%s" (evaluated.Pretty ())
+    // printfn "%s" (evaluated.Pretty())
 
     evaluatedBodyToExpr range <| EvaluatedBody.Item evaluated
 

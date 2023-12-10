@@ -220,6 +220,19 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
 
                     for mem in members do
                         match mem with
+                        | SynTypeMember.GetSet(_, get, set, _) ->
+                            match get with
+                            | None -> ()
+                            | Some(SynMemberGet(_, exprs, _)) ->
+                                for e in exprs do
+                                    yield! loop e
+
+                            match set with
+                            | None -> ()
+                            | Some(SynMemberSet(_, _, exprs, _)) ->
+                                for e in exprs do
+                                    yield! loop e
+
                         | SynTypeMember.Let(_, e, _)
                         | SynTypeMember.Mut(_, e, _)
                         | SynTypeMember.Member(_, e, _)

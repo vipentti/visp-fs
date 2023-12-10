@@ -81,10 +81,15 @@
 )
 
 (syntax-macro struct
-  [(_ typ (arg ctor ...) body ...)
-    (#[Struct]
-      type typ (arg ctor ...)
-      body ...
+  [(_ typ ((arg1 : argtyp1) (argrest : argresttyp) ...) body ...)
+    (begin
+      (#[Struct]
+        type typ ((arg1 : argtyp1) (argrest : argresttyp) ...)
+        body ...
+      )
+
+      (fn (m-concat-id mk typ) (arg1 argrest ...)
+        (new typ arg1 argrest ...))
     )
   ])
 

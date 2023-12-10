@@ -175,6 +175,12 @@ and private fixAttributes bound_transform attributes =
 
 
 and private fixMembers bound_transform members =
+    let tfGet (SynMemberGet(args, exprs, range)) =
+        SynMemberGet(args, List.map bound_transform exprs, range)
+
+    let tfSet (SynMemberSet(args, k, exprs, range)) =
+        SynMemberSet(args, k, List.map bound_transform exprs, range)
+
     let tfmember =
         function
         | SynTypeMember.Let(name, expr, range) ->
@@ -189,6 +195,9 @@ and private fixMembers bound_transform members =
             SynTypeMember.OverrideMember(name, bound_transform expr, range)
         | SynTypeMember.OverrideFn(name, args, expr, range) ->
             SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
+        | SynTypeMember.GetSet(name, get, set, range) ->
+            SynTypeMember.GetSet(name, Option.map tfGet get, Option.map tfSet set, range)
+
 
     members |> List.map tfmember
 

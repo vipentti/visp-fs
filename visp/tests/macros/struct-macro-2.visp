@@ -20,13 +20,15 @@
     )
   ])
 
-(MyStruct2 Example ([x: int] [y: int])
+(MyStruct2 Example ([x: int] [y: int] [z: int] [w: int])
   (member _.X x)
   (member _.Y y)
+  (member _.Z z)
+  (member _.W w)
 
-  (member fn d.Sum () (+ (+X d) (+Y d))))
+  (member fn d.Sum () (+ (+X d) (+Y d) (+Z d) (+W d))))
 
-(let instance (mkExample 1 2))
+(let instance (mkExample 1 2 3 4))
 
 (printfn "Example Struct is %A" instance)
 (printfn "Example IsValueType %A" (->> instance .GetType +IsValueType))

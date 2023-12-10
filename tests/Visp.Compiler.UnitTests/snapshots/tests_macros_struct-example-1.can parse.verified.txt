@@ -5,6 +5,8 @@
 open Visp.Runtime.Library
 
 let state = { Todo = () }
+// line 8 @"struct-example-1.visp"
+
 [<Struct()>]
 // line 8 @"struct-example-1.visp"
 type Range (start: int64, len: int64) =
@@ -40,6 +42,11 @@ type Range (start: int64, len: int64) =
     // line 8 @"struct-example-1.visp"
     sprintf ("Range(%i, %i)") ((t.Start)) ((t.Len))
 
+// line 8 @"struct-example-1.visp"
+let mkRange start len =
+  // line 8 @"struct-example-1.visp"
+  (new Range(start, len))
+
 // line 26 @"struct-example-1.visp"
 printfn ("Range is: %A") ((new Range(0, 5)))
 // line 27 @"struct-example-1.visp"
@@ -47,6 +54,8 @@ printfn ("Range end is: %A") ((new Range(0, 5))
   |> (fun a1 ->
     // line 27 @"struct-example-1.visp"
     (a1.End)))
+// line 29 @"struct-example-1.visp"
+
 [<Struct()>]
 // line 29 @"struct-example-1.visp"
 type SourceDestMap (dest: int64, src: int64, len: int64) =
@@ -101,6 +110,11 @@ type SourceDestMap (dest: int64, src: int64, len: int64) =
   override t.ToString () =
     // line 29 @"struct-example-1.visp"
     sprintf ("(%A, %A, %i)") ((t.Dest)) ((t.Src)) ((t.Len))
+
+// line 29 @"struct-example-1.visp"
+let mkSourceDestMap dest src len =
+  // line 29 @"struct-example-1.visp"
+  (new SourceDestMap(dest, src, len))
 
 // line 51 @"struct-example-1.visp"
 let visp_result_todo = ()

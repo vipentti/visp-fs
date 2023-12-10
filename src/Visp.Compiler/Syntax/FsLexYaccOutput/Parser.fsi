@@ -42,6 +42,8 @@ type token =
   | MEMBER
   | MEMBERS
   | MEMBERFN
+  | MEMBER_GET
+  | MEMBER_SET
   | OVERRIDE
   | MACRO
   | MATCH
@@ -145,6 +147,8 @@ type tokenId =
     | TOKEN_MEMBER
     | TOKEN_MEMBERS
     | TOKEN_MEMBERFN
+    | TOKEN_MEMBER_GET
+    | TOKEN_MEMBER_SET
     | TOKEN_OVERRIDE
     | TOKEN_MACRO
     | TOKEN_MATCH
@@ -323,6 +327,10 @@ type nonTerminalId =
     | NONTERM_member_list
     | NONTERM_rev_member_list
     | NONTERM_member
+    | NONTERM_member_name
+    | NONTERM_member_get
+    | NONTERM_member_set
+    | NONTERM_member_member_in_parens
     | NONTERM_member_in_parens
     | NONTERM_tok_lparen
     | NONTERM_empty_bindings
