@@ -180,12 +180,14 @@ let openToken =
     | SynListKind.AttributeList -> HASH_BRACKET
     | SynListKind.HashParen -> HASH_PAREN
     | SynListKind.BraceBar -> BRACE_BAR
+    | SynListKind.DotBracket -> DOT_BRACKET
 
 let closeToken =
     function
     | SynListKind.List -> RPAREN
     | SynListKind.HashParen -> RPAREN
     | SynListKind.Vector -> RBRACKET
+    | SynListKind.DotBracket -> RBRACKET
     | SynListKind.HashMap -> RBRACE
     | SynListKind.HashSet -> RBRACE
     | SynListKind.AttributeList -> RBRACKET
@@ -479,7 +481,11 @@ let rec private tokenizeEvaluated
 
     | EvaluatedBody.Item it ->
         match it with
-        | SynMacroBody.Call it -> failwithf "macro call should be evaluated: %A" it
+        | SynMacroBody.Call it ->
+            if args.mode = TokenizeMode.Macro then
+                bound_tokenize <| evaluateMacroCall it
+            else
+                failwithf "macro call should be evaluated: %A" it
         | SynMacroBody.Symbol sym -> handleSymbol args sym.Text
         | SynMacroBody.List(kind, lst, _) ->
             let evaled = EvaluatedBody.List(kind, List.map mkItem lst)

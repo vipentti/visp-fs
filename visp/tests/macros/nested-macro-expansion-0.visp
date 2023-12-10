@@ -1,0 +1,43 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type Grid array<array<char>>)
+
+(struct Pos ([x: int32] [y: int32])
+  (member _.X x)
+  (member _.Y y)
+
+  (override fn _.ToString ()
+    (sprintf "Pos(x: %A, y: %A)" x y)
+  )
+)
+
+(type TileMap ([grid: Grid] [start: Pos])
+  (let grid grid)
+  (let start start)
+  (override fn _.ToString()
+    (sprintf "TileMap(%A)\n%A" start grid)
+  )
+
+  (member _.Start start)
+
+  (member _.Item
+    (get ([pos: Pos])
+      (let y (+Y pos))
+      (let x (+X pos))
+
+      (cond_
+        [(and (and (>= y 0) (< y (+Length grid)))
+              (and (>= x 0) (< x (+Length (.[0] grid)))))
+
+          (let row (.[y] grid))
+          (Some (.[x] row))
+        ]
+        [_ None]))
+  ))
+
+(printfn "OK")

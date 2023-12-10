@@ -419,6 +419,7 @@ macro_body:
     | HASH_PAREN RPAREN { SynMacroBody.List(SynListKind.HashParen, [], lhs parseState) }
     | HASH_BRACKET RBRACKET { SynMacroBody.List(SynListKind.AttributeList, [], lhs parseState) }
     | BRACE_BAR BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, [], lhs parseState) }
+    | DOT_BRACKET RBRACKET { SynMacroBody.List(SynListKind.DotBracket, [], lhs parseState) }
 
     | LPAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.List, $2, lhs parseState) }
     | LBRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.Vector, $2, lhs parseState) }
@@ -427,6 +428,7 @@ macro_body:
     | HASH_PAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.HashParen, $2, lhs parseState) }
     | HASH_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.AttributeList, $2, lhs parseState) }
     | BRACE_BAR macro_body_list BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, $2, lhs parseState) }
+    | DOT_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.DotBracket, $2, lhs parseState) }
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
     | COLON { SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
