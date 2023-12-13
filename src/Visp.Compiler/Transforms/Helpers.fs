@@ -79,7 +79,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Collection(SynCollection(kind, exprs, range)) ->
             SynExpr.Collection(SynCollection(kind, List.map bound_transform exprs, range))
         | SynExpr.DotIndex(target, index, range) ->
-            SynExpr.DotIndex(bound_transform target, bound_transform index, range)
+            SynExpr.DotIndex(bound_transform target, List.map bound_transform index, range)
         | SynExpr.DotProperty(target, property, range) ->
             SynExpr.DotProperty(bound_transform target, property, range)
         | SynExpr.DotMethod(target, method, args, kind, range) ->
@@ -99,6 +99,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 List.map
                     (function
                     | SynThreadable.Expr(it, r) -> SynThreadable.Expr(bound_transform it, r)
+                    | SynThreadable.Index(it, r) ->
+                        SynThreadable.Index(List.map bound_transform it, r)
                     | it -> it)
                     body,
                 range

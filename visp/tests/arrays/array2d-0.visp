@@ -1,0 +1,25 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type Grid char[,])
+
+(let arr (Array2D.create 5 5 #\.))
+
+(let y 4)
+
+(printfn "arr[0,0]=%A" (.[0,0] arr))
+(printfn "arr[1,2]=%A" (.[1, 1] arr))
+(printfn "arr[3,3]=%A" (Array2D.get arr 3 3))
+
+(set! (.[2, 2] arr) #\#)
+(set! (.[3, 4] arr) #\#)
+(set! (.[4, 4] arr) #\#)
+(printfn "arr[3,4]=%A" (->> arr .[(- y 1), (+ 1 1 1 1)]))
+(printfn "arr[4,4]=%A" (->> arr .[y, (+ 1 1 1 1)]))
+
+
+arr

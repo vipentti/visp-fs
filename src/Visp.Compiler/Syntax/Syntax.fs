@@ -198,7 +198,7 @@ type SynExpr =
     | Collection of SynExprs
     | FsSeq of exprs: SynExpr list * range: range
     | FsYield of expr: SynExpr * bang: bool * range: range
-    | DotIndex of target: SynExpr * index: SynExpr * range: range
+    | DotIndex of target: SynExpr * index: SynExpr list * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
     | DotMethod of
         target: SynExpr *
@@ -375,7 +375,7 @@ and [<RequireQualifiedAccess>] SynMatch =
 
 and [<RequireQualifiedAccess>] SynThreadable =
     | Expr of value: SynExpr * range: range
-    | Index of expr: SynExpr * range: range
+    | Index of expr: SynExpr list * range: range
     | Property of symbol: SynSymbol * range: range
     | Method of symbol: SynSymbol * kind: DotMethodKind * range: range
 

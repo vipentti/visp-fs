@@ -163,7 +163,9 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     yield! loop rhs
                 | SynExpr.DotIndex(target, index, _) ->
                     yield! loop target
-                    yield! loop index
+
+                    for e in index do
+                        yield! loop e
                 | SynExpr.DotProperty(target, _, _) -> yield! loop target
                 | SynExpr.DotMethod(target, _, args, _, _) ->
                     yield! loop target
@@ -183,6 +185,9 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for it in body do
                         match it with
                         | SynThreadable.Expr(it, _) -> yield! loop it
+                        | SynThreadable.Index(it, _) ->
+                            for e in it do
+                                yield! loop e
                         | _ -> ()
                 | SynExpr.MacroCall _ -> ()
                 | SynExpr.MacroDef _ -> ()
