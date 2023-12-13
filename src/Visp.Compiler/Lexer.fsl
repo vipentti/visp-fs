@@ -208,6 +208,7 @@ let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b'
 let ident_start_char = letter | SymbolicStartCharacters
 let ident_char = ( ident_start_char | digit | SymbolicExtra )
 let ident = ident_start_char ident_char*
+let ident_array = letter (letter | digit)* '[' (',')* ']'
 
 let anyspace = [' ' '\t' '\r' '\n']
 let whitespace = [' ' '\t']+
@@ -467,6 +468,10 @@ rule token (args: LexArgs) (skip: bool) = parse
       let text = lexeme lexbuf
       symbolOrKeyword args.CurrentContext text
     }
+  | ident_array      {
+      let text = lexeme lexbuf
+      SYMBOL text
+    }
   | _ { unexpected_char "token" lexbuf }
 
 and tokenStream (args: LexArgs) (skip: bool) = parse
@@ -710,6 +715,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
         SYMBOL text
     else
       SYMBOL text }
+  | ident_array { SYMBOL (lexeme lexbuf)}
   | _ { unexpected_char "tokenStream" lexbuf }
 
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse

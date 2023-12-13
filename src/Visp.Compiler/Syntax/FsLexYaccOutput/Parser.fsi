@@ -267,6 +267,9 @@ type nonTerminalId =
     | NONTERM_rev_threadable_list
     | NONTERM_threadable
     | NONTERM_prop_plus
+    | NONTERM_expr_comma_list
+    | NONTERM_rev_expr_comma_list
+    | NONTERM_dot_bracket_expr_raw
     | NONTERM_dot_expr
     | NONTERM_lparen_or_lbracket
     | NONTERM_rparen_or_rbracket

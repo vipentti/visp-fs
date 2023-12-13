@@ -479,8 +479,8 @@ threadable:
         { SynThreadable.Method($1, DotMethodKind.Tuple, lhs parseState) }
     | apply_method
         { SynThreadable.Method($1, DotMethodKind.Apply, lhs parseState) }
-    | DOT_BRACKET expr RBRACKET
-        { SynThreadable.Index($2, lhs parseState) }
+    | dot_bracket_expr_raw
+        { SynThreadable.Index($1, lhs parseState) }
     | expr
         { SynThreadable.Expr($1, lhs parseState) }
 
@@ -491,13 +491,24 @@ prop_plus:
           SynSymbol(Ident(text, rhs parseState 1))
         }
 
+expr_comma_list: rev_expr_comma_list { List.rev $1 }
+rev_expr_comma_list:
+    | expr { [$1] }
+    | rev_expr_comma_list COMMA expr { $3 :: $1 }
+
+dot_bracket_expr_raw:
+    | DOT_BRACKET expr RBRACKET
+        { [$2] }
+    | DOT_BRACKET expr COMMA rev_expr_comma_list RBRACKET
+        { $2 :: $4 }
+
 dot_expr:
-    | DOT_BRACKET expr RBRACKET expr
-        { SynExpr.DotIndex($4, $2, lhs parseState)}
-    | DOT_BRACKET expr RBRACKET recover
-        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), $2, lhs parseState)}
+    | dot_bracket_expr_raw expr
+        { SynExpr.DotIndex($2, $1, lhs parseState)}
+    | dot_bracket_expr_raw recover
+        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), $1, lhs parseState)}
     | DOT_BRACKET expr recover
-        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), $2, lhs parseState)}
+        { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), [$2], lhs parseState)}
     | DOT_PLUS symbol expr
         { SynExpr.DotProperty($3, $2, lhs parseState)}
     | prop_plus expr
@@ -520,8 +531,8 @@ dot_expr:
     | DOT expr prop_plus
         { SynExpr.DotProperty($2, $3, lhs parseState) }
 
-    | DOT expr DOT_BRACKET expr RBRACKET
-        { SynExpr.DotIndex($2, $4, lhs parseState) }
+    | DOT expr dot_bracket_expr_raw
+        { SynExpr.DotIndex($2, $3, lhs parseState) }
     | DOT expr symbol expr_list
         { SynExpr.DotMethod($2, $3, $4, DotMethodKind.Tuple, lhs parseState) }
 
@@ -967,7 +978,7 @@ raw_syntype_ident:
         }
 
 syntype_ident:
-    | raw_syntype_ident_text { SynType.Ident(Ident($1, lhs parseState))}
+    | raw_syntype_ident_text %prec prec_syn_type { SynType.Ident(Ident($1, lhs parseState))}
     | QUOTE_SYM raw_syntype_ident_text
         { let text = $2
           SynType.Ident(Ident("'" + text, lhs parseState))

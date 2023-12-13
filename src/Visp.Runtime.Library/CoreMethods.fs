@@ -251,6 +251,7 @@ module CompileHelpers =
     let getFsharpListMethods () =
         Array.concat
             [| getFsharpCollectionModuleMethods "Array"
+               getFsharpCollectionModuleMethods "Array2D"
                getFsharpCollectionModuleMethods "List"
                getFsharpCollectionModuleMethods "Map"
                getFsharpCollectionModuleMethods "Seq"
