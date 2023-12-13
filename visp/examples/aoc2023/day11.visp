@@ -1,0 +1,166 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day11")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(type Grid char[,])
+(type Point int64*int64)
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let res (new ResizeArray<_>))
+  (mut index 0)
+  (mut ypos 0)
+  (mut xpos 0)
+  (while (lines.MoveNext)
+    (let line lines.Current)
+    (if (not (+IsEmpty line))
+      (begin
+        (let arr (.ToArray line))
+        (.Add res arr)
+      )))
+
+  (array2D (.ToArray res)))
+
+(fn IsEmptyColumn ([grid: Grid] [x: int])
+  (let height (Array2D.length1 grid))
+
+  (fn rec loop ([grid: Grid] [y: int] [x: int])
+    (cond_
+      [(< y height)
+        (match (.[y, x] grid)
+          [#\# false]
+          [_ (loop grid (inc y) x)]
+        )
+      ]
+      [_ true]
+    ))
+  (loop grid 0 x)
+)
+
+(fn IsEmptyRow ([grid: Grid] [y: int])
+  (let width (Array2D.length2 grid))
+
+  (fn rec loop ([grid: Grid] [y: int] [x: int])
+    (cond_
+      [(< x width)
+        (match (.[y, x] grid)
+          [#\# false]
+          [_ (loop grid y (inc x))]
+        )
+      ]
+      [_ true]
+    ))
+
+  (loop grid y 0))
+
+
+(fn FindGalaxies ([grid: Grid] [increase: int64])
+  (let height (Array2D.length1 grid))
+  (let width (Array2D.length2 grid))
+  (let hend (dec height))
+  (let wend (dec width))
+
+  (mut yi 0L)
+
+  (let res (new ResizeArray<_>))
+
+  (let increase (Math.Max ((dec increase), 1L)))
+
+  (for/to [y (0 to hend)]
+    (if (IsEmptyRow grid y)
+      (set! yi (+ yi increase))
+      (begin
+        (mut xi 0L)
+
+        (for/to [x (0 to wend)]
+          (cond_
+            [(IsEmptyColumn grid x)
+              (set! xi (+ xi increase))
+            ]
+            [_
+              (match (.[y, x] grid)
+                [#\#
+                  (.Add res (yi . xi))
+                ]
+                [_ ()]
+              )
+            ]
+          )
+
+          ()
+          (set! xi (inc xi))
+        )
+      ))
+
+    (set! yi (inc yi))
+  )
+
+  (List.ofSeq res))
+
+;; https://stackoverflow.com/a/1231711
+(fn rec combinations ([n: int] [lst: list<^T>])
+  (match (n . lst)
+    [(0 . _) (!list (!list))]
+    [(_ . []) (!list)]
+    [(k . x :: xs )
+      (concat
+        (List.map #(concat (!list x) %1)
+          (combinations (dec k) xs)
+        )
+        (combinations k xs)
+      )
+    ])
+  )
+
+(fn ManhattanDistance ([lhs: Point] [rhs: Point])
+  (match (lhs . rhs)
+    [((y0 , x0), (y1 , x1))
+      (+ (abs (- x0 x1)) (abs (- y0 y1)))
+    ]))
+
+(fn CombDist ([lst : list<Point>])
+  (match lst
+    [(lhs :: rhs :: _)
+      (ManhattanDistance lhs rhs)
+    ]
+    [_ 0]
+  ))
+
+(let tiles (ParseFile fileText))
+(let galaxiespart1 (FindGalaxies tiles 1))
+(let part1combs (combinations 2 galaxiespart1))
+(let part1 (->> part1combs (Seq.map CombDist) (Seq.reduce add)))
+
+(WriteResult "part1" part1 (if example 374 9965032L))
+
+(let galaxiespart2 (FindGalaxies tiles (if example 100 1_000_000L)))
+(let part2combs (combinations 2 galaxiespart2))
+(let part2 (->> part2combs (Seq.map CombDist) (Seq.reduce add)))
+
+(WriteResult "part2" part2 (if example 8410 550358864332L))
