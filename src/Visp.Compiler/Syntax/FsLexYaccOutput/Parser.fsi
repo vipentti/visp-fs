@@ -74,6 +74,7 @@ type token =
   | DOTDOT
   | BANG_RANGE
   | FOR_IN
+  | FOR_TO
   | BANG_LIST
   | BANG_MAP
   | BANG_SET
@@ -179,6 +180,7 @@ type tokenId =
     | TOKEN_DOTDOT
     | TOKEN_BANG_RANGE
     | TOKEN_FOR_IN
+    | TOKEN_FOR_TO
     | TOKEN_BANG_LIST
     | TOKEN_BANG_MAP
     | TOKEN_BANG_SET
@@ -275,6 +277,7 @@ type nonTerminalId =
     | NONTERM_rparen_or_rbracket
     | NONTERM_list_expr
     | NONTERM_for_in_expr
+    | NONTERM_for_to_expr
     | NONTERM_range_expr
     | NONTERM_if_expr
     | NONTERM_quoted_exprs

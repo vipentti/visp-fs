@@ -554,6 +554,16 @@ module Write =
 
                     ())
                 pats
+        | SynExpr.ForTo(name, start, finish, body, down, range) ->
+            use _ = startNewlineExpr w st range
+            string w "for "
+            writeName w WriteState.Inline name
+            string w " = "
+            writeExpr w WriteState.Inline start
+            if down then string w " downto " else string w " to "
+            writeExpr w WriteState.Inline finish
+            string w " do"
+            writeBody w writeExpr body
 
         | SynExpr.ForIn(name, bind, body, range) ->
             use _ = startNewlineExpr w st range

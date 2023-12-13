@@ -21,6 +21,16 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 range
             )
 
+        | SynExpr.ForTo(name, start, finish, body, down, range) ->
+            SynExpr.ForTo(
+                name,
+                bound_transform start,
+                bound_transform finish,
+                List.map bound_transform body,
+                down,
+                range
+            )
+
         | SynExpr.ForIn(name, binding, body, range) ->
             SynExpr.ForIn(name, bound_transform binding, List.map bound_transform body, range)
 

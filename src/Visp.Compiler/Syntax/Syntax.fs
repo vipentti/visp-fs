@@ -232,6 +232,13 @@ type SynExpr =
     | ThreadLast of exprs: SynThreadable list * range: range
     | RangeExpr of first: SynExpr * step: SynExpr option * last: SynExpr * range: range
     | ForIn of name: SynName * binding: SynExpr * body: SynExpr list * range: range
+    | ForTo of
+        name: SynName *
+        start: SynExpr *
+        finish: SynExpr *
+        body: SynExpr list *
+        down: bool *
+        range: range
     | Match of expr: SynExpr * pats: SynMatch list * range: range
 
     member this.writeTo(writer: CustomFileWriter) = ()
@@ -252,6 +259,7 @@ type SynExpr =
         | RangeExpr(range = r)
         | LambdaShort(range = r)
         | ForIn(range = r)
+        | ForTo(range = r)
         | MacroDef(range = r)
         | MacroCall(range = r)
         | Union(range = r)
