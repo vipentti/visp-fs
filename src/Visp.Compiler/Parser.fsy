@@ -29,7 +29,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE
 %token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
 %token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
-%token BANG_RANGE FOR_IN BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
+%token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
 %token AT
 %token OPEN MODULE
@@ -294,6 +294,7 @@ parens_expr:
     | record_expr { $1 }
     | union_expr { $1 }
     | for_in_expr { $1 }
+    | for_to_expr { $1 }
     | record_init_expr { $1 }
     | range_expr { $1 }
     | list_expr { $1 }
@@ -551,6 +552,13 @@ list_expr:
 for_in_expr:
     | FOR_IN lparen_or_lbracket name expr rparen_or_rbracket expr_list
         { SynExpr.ForIn($3, $4, $6, lhs parseState) }
+
+for_to_expr:
+    | FOR_TO lparen_or_lbracket name lparen_or_lbracket expr SYMBOL expr rparen_or_rbracket rparen_or_rbracket expr_list
+        {
+            let down = $6 = "downto"
+            SynExpr.ForTo($3, $5, $7, $10, down, lhs parseState)
+        }
 
 range_expr:
     | BANG_RANGE expr DOTDOT expr DOTDOT expr

@@ -193,6 +193,7 @@ let keywordTokenList =
       ("fn", FN)
       ("fn*", FNSTAR)
       ("for/in", FOR_IN)
+      ("for/to", FOR_TO)
       ("->", THREAD_FIRST)
       ("->>", THREAD_LAST)
       ("if", IF_KW)
