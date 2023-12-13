@@ -91,6 +91,13 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
 
                     for b in body do
                         yield! loop b
+                | SynExpr.ForTo(_, start, finish, body, _, _) ->
+                    yield! loop start
+                    yield! loop finish
+
+                    for b in body do
+                        yield! loop b
+
                 | SynExpr.ForIn(_, binding, body, _) ->
                     yield! loop binding
 

@@ -1,0 +1,30 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn func1 ()
+  (for/to [var (1 to 10)]
+    (printf "%d " var))
+  (printfn ""))
+
+(fn func2 ()
+  (for/to [var (10 downto 1)]
+    (printf "%d " var))
+  (printfn ""))
+
+(func1)
+(func2)
+
+(fn start (x y) (- x (* 2 y)))
+(fn end (x y) (+ x (* 2 y)))
+
+(fn func3 (x y)
+  (for/to [var ((start x y) to (end x y))]
+    (printf "%d " var))
+  (printfn "")
+)
+
+(func3 10 4)

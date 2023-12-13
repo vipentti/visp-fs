@@ -1,0 +1,56 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"for-to-0.visp"
+let func1 () =
+  // line 9 @"for-to-0.visp"
+  for var = 1 to 10 do
+    // line 10 @"for-to-0.visp"
+    printf ("%d ") (var)
+  // line 11 @"for-to-0.visp"
+  printfn ("")
+
+// line 13 @"for-to-0.visp"
+let func2 () =
+  // line 14 @"for-to-0.visp"
+  for var = 10 downto 1 do
+    // line 15 @"for-to-0.visp"
+    printf ("%d ") (var)
+  // line 16 @"for-to-0.visp"
+  printfn ("")
+
+// line 18 @"for-to-0.visp"
+func1 ()
+// line 19 @"for-to-0.visp"
+func2 ()
+// line 21 @"for-to-0.visp"
+let start x y =
+  // line 21 @"for-to-0.visp"
+  x - 2 * y
+
+// line 22 @"for-to-0.visp"
+let _end x y =
+  // line 22 @"for-to-0.visp"
+  (x) +
+  (2 * y)
+
+// line 24 @"for-to-0.visp"
+let func3 x y =
+  // line 25 @"for-to-0.visp"
+  for var = start (x) (y) to _end (x) (y) do
+    // line 26 @"for-to-0.visp"
+    printf ("%d ") (var)
+  // line 27 @"for-to-0.visp"
+  printfn ("")
+
+// line 30 @"for-to-0.visp"
+let visp_result_todo =
+  // line 30 @"for-to-0.visp"
+  func3 (10) (4)
+// line 30 @"for-to-0.visp"
+printfn ("%A") (visp_result_todo)
+

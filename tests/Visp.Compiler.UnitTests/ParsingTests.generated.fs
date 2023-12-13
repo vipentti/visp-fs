@@ -16,6 +16,11 @@ module ``tests_while_while-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/while/while-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_for-to_for-to-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/for-to/for-to-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_dot_dot-shorthands`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/dot/dot-shorthands.visp"
