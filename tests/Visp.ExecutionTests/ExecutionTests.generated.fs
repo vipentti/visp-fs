@@ -101,6 +101,11 @@ module ``tests_parsing_let-values`` =
     let ``can execute`` () = TestUtils.runTest "tests/parsing/let-values.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_arrays_array2d-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/arrays/array2d-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_atom_atom-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/atom/atom-0.visp"

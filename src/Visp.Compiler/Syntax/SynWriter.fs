@@ -885,7 +885,7 @@ module Write =
 
             writeExpr w WriteState.Inline inst
             string w ".["
-            writeExpr w WriteState.Inline prop
+            writeInlineCommaSeparated w writeExpr prop
             string w "]"
 
             if st.parens then
