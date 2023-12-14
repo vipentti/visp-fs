@@ -17,8 +17,6 @@ let mkTokenizerWithArgs args =
             | LexMode.Default -> Lexer.token args false buf
             | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
 
-        // eprintfn "%A %A %i %i %A" next args.mode args.depth args.ContextCount args.CurrentContext
-
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
         | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
@@ -38,6 +36,7 @@ let mkTokenizerWithArgs args =
 
         | HASH_PAREN
         | HASH_BRACKET
+        | DOT_BRACKET
         | LPAREN
         | LBRACE
         | LBRACKET
@@ -61,9 +60,11 @@ let mkTokenizerWithArgs args =
             args.UnnestIfNotDefault()
         | _ -> ()
 
-
+        // eprintfn "%A %A %i %i %A" next args.mode args.depth args.ContextCount args.CurrentContext
 
         next
+
+    // eprintfn ""
 
     tokens args
 
