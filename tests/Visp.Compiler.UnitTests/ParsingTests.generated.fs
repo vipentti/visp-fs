@@ -11,6 +11,11 @@ namespace ParsingTests
 open Xunit
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_while_while-1`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/while/while-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_while_while-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/while/while-0.visp"

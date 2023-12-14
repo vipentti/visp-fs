@@ -1,0 +1,29 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn inline DiffByOne ([lhs: array<^T>] [rhs: array<^T>])
+  (mut index 0)
+  (mut loop true)
+  (mut diff 0)
+
+  (while (and loop (< index (+Length lhs)))
+    (let lhs (.[index] lhs))
+    (let rhs (.[index] rhs))
+
+    (unless (= lhs rhs)
+      (set! diff (inc diff)))
+
+    (when (> diff 1)
+      (set! loop false))
+
+    (set! index (inc index))
+  )
+
+  (= diff 1))
+
+
+(printfn "OK")
