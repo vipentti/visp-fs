@@ -1,0 +1,159 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 7 @"nested-macro-expansion-1.visp"
+open System
+
+// line 9 @"nested-macro-expansion-1.visp"
+let Something () =
+  // line 10 @"nested-macro-expansion-1.visp"
+  let work =
+    // line 10 @"nested-macro-expansion-1.visp"
+    (new ResizeArray<int*int*int64>())
+  // line 12 @"nested-macro-expansion-1.visp"
+  let conditions =
+    // line 12 @"nested-macro-expansion-1.visp"
+    [||]
+  // line 13 @"nested-macro-expansion-1.visp"
+  let broken =
+    // line 13 @"nested-macro-expansion-1.visp"
+    [||]
+  // line 14 @"nested-macro-expansion-1.visp"
+  let possibleOffsets =
+    // line 14 @"nested-macro-expansion-1.visp"
+    [||]
+  // line 16 @"nested-macro-expansion-1.visp"
+  let PopWork () =
+    // line 17 @"nested-macro-expansion-1.visp"
+    let r =
+      // line 17 @"nested-macro-expansion-1.visp"
+      (work.[0])
+    // line 18 @"nested-macro-expansion-1.visp"
+    (work.RemoveAt(0))
+    r
+
+  // line 21 @"nested-macro-expansion-1.visp"
+  let EnqueueWork bi offsetEnd nextPos count =
+    ()
+
+  // line 24 @"nested-macro-expansion-1.visp"
+  let mutable result = 0L
+  // line 26 @"nested-macro-expansion-1.visp"
+  while CoreMethods.isTruthy(CoreMethods.``gt``((work.Count), 0)) do
+    // line 27 @"nested-macro-expansion-1.visp"
+    match PopWork () with
+      | (bi , off , count) ->
+        // line 29 @"nested-macro-expansion-1.visp"
+        printfn ("(%A,%A,%A)") (bi) (off) (count)
+        // line 30 @"nested-macro-expansion-1.visp"
+        let brokenLength =
+          // line 30 @"nested-macro-expansion-1.visp"
+          (broken.[bi])
+        // line 31 @"nested-macro-expansion-1.visp"
+        let offsetEnd =
+          // line 31 @"nested-macro-expansion-1.visp"
+          (off) +
+          (brokenLength)
+        // line 38 @"nested-macro-expansion-1.visp"
+        if CoreMethods.isTruthy(
+          CoreMethods.``not``(
+            if CoreMethods.isTruthy(
+              (
+                // line 38 @"nested-macro-expansion-1.visp"
+                let orTemp =
+                  // line 38 @"nested-macro-expansion-1.visp"
+                  CoreMethods.``eq?``(off, 0)
+                // line 38 @"nested-macro-expansion-1.visp"
+                if CoreMethods.isTruthy(
+                  orTemp)
+                  then
+                    orTemp
+                  else
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    CoreMethods.``neq?``((conditions.[dec (off)]), '#')))
+              then
+                // line 38 @"nested-macro-expansion-1.visp"
+                if CoreMethods.isTruthy(
+                  (
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    let orTemp =
+                      // line 38 @"nested-macro-expansion-1.visp"
+                      CoreMethods.``eq?``(offsetEnd, (conditions.Length))
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    if CoreMethods.isTruthy(
+                      orTemp)
+                      then
+                        orTemp
+                      else
+                        // line 38 @"nested-macro-expansion-1.visp"
+                        if CoreMethods.isTruthy(
+                          CoreMethods.``lt``(offsetEnd, (conditions.Length)))
+                          then
+                            // line 38 @"nested-macro-expansion-1.visp"
+                            CoreMethods.``neq?``((conditions.[offsetEnd]), '#')
+                          else
+                            false))
+                  then
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    CoreMethods.``not``(((conditions.AsSpan(off, brokenLength)).Contains('.')))
+                  else
+                    false
+              else
+                false))
+          then
+            // line 38 @"nested-macro-expansion-1.visp"
+            
+            ()
+          else
+            // line 38 @"nested-macro-expansion-1.visp"
+            if CoreMethods.isTruthy(
+              CoreMethods.``eq?``(bi, dec (brokenLength)))
+              then
+                // line 38 @"nested-macro-expansion-1.visp"
+                
+                // line 38 @"nested-macro-expansion-1.visp"
+                if CoreMethods.isTruthy(
+                  CoreMethods.``not``(((conditions.AsSpan(offsetEnd)).Contains('#'))))
+                  then
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    result <- (result) +
+                    (count)
+              else
+                // line 38 @"nested-macro-expansion-1.visp"
+                if CoreMethods.isTruthy(
+                  Value.keyword(":else"))
+                  then
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    let mutable nextPossibleIndex =
+                      // line 38 @"nested-macro-expansion-1.visp"
+                      System.Array.BinarySearch (possibleOffsets, inc (offsetEnd))
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    if CoreMethods.isTruthy(
+                      CoreMethods.``lt``(nextPossibleIndex, 0))
+                      then
+                        // line 38 @"nested-macro-expansion-1.visp"
+                        
+                        // line 38 @"nested-macro-expansion-1.visp"
+                        nextPossibleIndex <- bcompl (nextPossibleIndex)
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    EnqueueWork (inc (bi)) (offsetEnd) (nextPossibleIndex) (count)
+                  else
+                    // line 38 @"nested-macro-expansion-1.visp"
+                    failwith ("unbalanced cond")
+        ()
+
+// line 67 @"nested-macro-expansion-1.visp"
+let visp_result_todo =
+  // line 67 @"nested-macro-expansion-1.visp"
+  printfn ("OK")
+// line 67 @"nested-macro-expansion-1.visp"
+printfn ("%A") (visp_result_todo)
+

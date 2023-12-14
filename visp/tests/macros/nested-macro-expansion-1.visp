@@ -1,0 +1,67 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System)
+
+(fn Something ()
+  (let work (new ResizeArray<int*int*int64>))
+
+  (let conditions (!array))
+  (let broken (!array))
+  (let possibleOffsets (!array))
+
+  (fn PopWork ()
+    (let r (.[0] work))
+    (.RemoveAt work 0)
+    r)
+
+  (fn EnqueueWork (bi offsetEnd nextPos count)
+    ())
+
+  (mut result 0L)
+
+  (while (> (+Count work) 0)
+    (match (PopWork)
+      [(bi . off . count)
+        (printfn "(%A,%A,%A)" bi off count)
+        (let brokenLength (.[bi] broken))
+        (let offsetEnd (+ off brokenLength))
+
+        ;; TODO: continue
+        ;; !((offset == 0 || conditions[offset - 1] != '#')
+        ;;   && (offsetEnd == conditions.Length || offsetEnd < conditions.Length && conditions[offsetEnd] != '#')
+        ;;   && !conditions.AsSpan(offset, brokenLength).Contains('.'))
+
+        (cond_
+          [(not
+              (and
+                (or (= off 0) (!= (.[(dec off)] conditions) #\#))
+                (or (= offsetEnd (+Length conditions))
+                    (and (< offsetEnd (+Length conditions))
+                        (!= (.[offsetEnd] conditions) #\#)))
+                (not (.Contains (.AsSpan conditions off brokenLength) #\.))
+              ))
+            ()
+          ]
+
+          [(= bi (dec brokenLength))
+            (unless (.Contains (.AsSpan conditions offsetEnd) #\#)
+              (set! result (+ result count)))
+          ]
+          [:else
+            (mut nextPossibleIndex (System.Array.BinarySearch (possibleOffsets . (inc offsetEnd))))
+
+            (when (< nextPossibleIndex 0)
+              (set! nextPossibleIndex (bcompl nextPossibleIndex)))
+            (EnqueueWork (inc bi) offsetEnd nextPossibleIndex count)
+          ]
+        )
+        ()
+      ])
+    )
+)
+
+(printfn "OK")
