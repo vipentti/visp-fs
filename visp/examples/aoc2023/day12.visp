@@ -1,0 +1,192 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day12")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(let splitOptions
+  (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries))
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(type Template array<char>*array<int>)
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+  (let res (new ResizeArray<_>))
+
+  (while (lines.MoveNext)
+    (let line lines.Current)
+    (unless (+IsEmpty line)
+      (mut parts (line.EnumerateSplitSubstrings (#\space, splitOptions)))
+      (let _ (parts.MoveNext))
+      (let template (parts.Current.ToArray))
+      ;; (let template (parts.Current.ToString))
+      (let _ (parts.MoveNext))
+      (let rest parts.Current)
+
+      (mut configs (rest.EnumerateSplitSubstrings (#\, , splitOptions)))
+
+      (let temp (new ResizeArray<_>))
+
+      (while (configs.MoveNext)
+        (.Add temp (span->int32 configs.Current)))
+
+      ;; (printfn "%A %A" template temp)
+
+      (.Add res (template . (Array.ofSeq temp)))
+    )
+    ())
+
+  (.ToArray res))
+
+(fn Unfold ([template: Template])
+  (let conditions (fst template))
+  (let broken (snd template))
+
+  (let unfoldedConditions (Array.concat (!array
+    conditions
+    (!array #\?)
+    conditions
+    (!array #\?)
+    conditions
+    (!array #\?)
+    conditions
+    (!array #\?)
+    conditions
+  )))
+  (let unfoldedBroken (Array.concat (!array
+    broken
+    broken
+    broken
+    broken
+    broken
+  )))
+
+  (unfoldedConditions . unfoldedBroken)
+)
+
+(fn FindConfigurations ([template: Template])
+  (mut result 0L)
+  (let conditions (fst template))
+  (let broken (snd template))
+
+  (let possibleOffsets (->> conditions
+    (Seq.mapi #(begin (%2 . %1)))
+    (Seq.filter #(not (= (fst %1) #\.)))
+    (Seq.map snd)
+    (Array.ofSeq)
+  ))
+  ;; (printfn "%A" possibleOffsets)
+
+  (let work (new ResizeArray<int*int*int64>))
+
+  (fn PopWork ()
+    (let r (.[0] work))
+    (.RemoveAt work 0)
+    r)
+
+  (fn UpdateWorkCount (wi addCount)
+    (match (.[wi] work)
+      [(bi . off . count)
+        (set! (.[wi] work) (bi . off . (+ count addCount)))
+      ]))
+
+  (fn EnqueueWork (bi offsetEnd nextPos count)
+    (fn rec inner (i maxCount)
+      (cond_
+        [(< i maxCount)
+          (let nextOffset (.[i] possibleOffsets))
+          (cond_
+            [(.Contains (.AsSpan conditions offsetEnd (- nextOffset offsetEnd)) #\#)
+              ()]
+            [_
+              (let wi (->> work (Seq.tryFindIndex #(match %1
+                [(brokenIndex, offset, _)
+                  (and (= bi brokenIndex) (= offset nextOffset))
+                ]
+              ))))
+
+              (match wi
+                [(Some wi) (UpdateWorkCount wi count)]
+                [None (.Add work (bi . nextOffset . count))]
+              )
+              (inner (inc i) maxCount)
+            ])]
+        [_ ()]))
+
+      (inner nextPos (+Length possibleOffsets)))
+
+  (EnqueueWork 0 0 0 1)
+
+  (while (> (+Count work) 0)
+    (match (PopWork)
+      [(bi . off . count)
+        ;; (printfn "(%A,%A,%A)" bi off count)
+        (let brokenLength (.[bi] broken))
+        (let offsetEnd (+ off brokenLength))
+
+        (cond_
+          [(not
+              (and
+                (or (= off 0) (!= (.[(dec off)] conditions) #\#))
+                (or (= offsetEnd (+Length conditions))
+                    (and (< offsetEnd (+Length conditions))
+                        (!= (.[offsetEnd] conditions) #\#)))
+                (not (.Contains (.AsSpan conditions off brokenLength) #\.))
+              ))
+            ()
+          ]
+
+          [(= bi (dec (+Length broken)))
+            (unless (.Contains (.AsSpan conditions offsetEnd) #\#)
+              (set! result (+ result count)))
+          ]
+          [_
+            (mut nextPossibleIndex (System.Array.BinarySearch (possibleOffsets . (inc offsetEnd))))
+            (when (< nextPossibleIndex 0)
+              (set! nextPossibleIndex (bcompl nextPossibleIndex)))
+            (EnqueueWork (inc bi) offsetEnd nextPossibleIndex count)
+          ])]))
+
+  result)
+
+(let parsed (ParseFile fileText))
+
+;; (printfn "%A" parsed)
+
+;;(let configs (FindConfigurations (.[0] parsed)))
+(let part1 (->> parsed
+  (Array.map FindConfigurations)
+  (Seq.reduce add)
+))
+
+(WriteResult "part1" part1 (if example 21 6949))
+
+(let part2 (->> parsed
+  (Array.map Unfold)
+  (Array.map FindConfigurations)
+  (Seq.reduce add)
+))
+
+(WriteResult "part2" part2 (if example 525152 51456609952403L))
+
+()
