@@ -1,0 +1,242 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day13")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(type Grid char[,])
+
+(fn inline Height ([g: Grid])
+  (Array2D.length1 g))
+
+(fn inline Width ([g: Grid])
+  (Array2D.length2 g))
+
+(fn inline RowSlice ([g: Grid] [col: int])
+  (.[*, col] g))
+
+(fn inline ColSlice ([g: Grid] [row: int])
+  (.[row, *] g))
+
+(fn inline DiffCount ([lhs: array<^T>] [rhs: array<^T>])
+  (mut index 0)
+  (mut loop true)
+  (mut diff 0)
+
+  (while (and loop (< index (+Length lhs)))
+    (let lhs (.[index] lhs))
+    (let rhs (.[index] rhs))
+
+    (unless (= lhs rhs)
+      (set! diff (inc diff)))
+
+    (when (> diff 1)
+      (set! loop false))
+
+    (set! index (inc index))
+  )
+
+  diff)
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(fn ParseFile ([text: string])
+  (let res (new ResizeArray<_>))
+  (mut lines (SplitLines text))
+
+  (let temp (new ResizeArray<_>))
+  (while (.MoveNext lines)
+    (mut line (+Current lines))
+    (cond_
+      [(and (+IsEmpty line) (> (+Count temp) 0))
+        (.Add res (array2D (.ToArray temp)))
+        (.Clear temp)
+      ]
+      [_
+        (.Add temp (.ToArray line))
+
+        (while (and (not (+IsEmpty line)) (.MoveNext lines))
+          (set! line (+Current lines))
+          (unless (+IsEmpty line)
+            (.Add temp (.ToArray line))
+          ))
+
+        (when (+IsEmpty line)
+          (.Add res (array2D (.ToArray temp)))
+          (.Clear temp)
+        )
+      ]
+    ))
+
+  (unless (= 0 (+Count temp))
+      (.Add res (array2D (.ToArray temp))))
+
+  (.ToArray res))
+
+(fn FindMirror ([grid: Grid] sliceFn [maxSize: int])
+
+  (mut index 0)
+  (mut loop true)
+  (mut result 0)
+
+  (let end (dec maxSize))
+
+  (while (and loop (< index end))
+    (let lhs (sliceFn grid index))
+    (let rhs (sliceFn grid (inc index)))
+
+    (cond_
+      [(= lhs rhs)
+        ;; (printfn "possible mirror %A" index)
+
+        (mut next (->> index inc inc))
+        (mut prev (dec index))
+        (mut inner true)
+        (mut found true)
+
+        (while (and inner (>= prev 0) (< next maxSize))
+          (let lhs (sliceFn grid prev))
+          (let rhs (sliceFn grid next))
+          (cond_
+            [(!= lhs rhs)
+              (set! found false)
+              (set! inner false)
+            ]
+            [(= lhs rhs)
+              ()
+            ])
+
+          (set! next (inc next))
+          (set! prev (dec prev))
+        )
+
+        (when found
+          (set! result (inc index))
+          (set! loop false)
+        )]
+      [_ ()]
+    )
+
+    (set! index (inc index))
+    ())
+
+  result)
+
+(fn Normalize ([v: int])
+  (match v
+    [0 -1]
+    [_ v])
+)
+
+(fn FindMirrorPart2 ([prevValue: int] [grid: Grid] sliceFn [maxSize: int])
+
+  (mut index 0)
+  (mut loop true)
+  (mut result 0)
+
+  (let end (dec maxSize))
+
+  (while (and loop (< index end))
+    (let lhs (sliceFn grid index))
+    (let rhs (sliceFn grid (inc index)))
+
+    (let mainDiff (DiffCount lhs rhs))
+    (mut diffFound (= mainDiff 1))
+
+    (cond_
+      [(<= mainDiff 1)
+        ;; (printfn "possible mirror %A" index)
+
+        (mut next (->> index inc inc))
+        (mut prev (dec index))
+        (mut inner true)
+        (mut found true)
+
+        (while (and inner (>= prev 0) (< next maxSize))
+          (let lhs (sliceFn grid prev))
+          (let rhs (sliceFn grid next))
+          (let diffc (DiffCount lhs rhs))
+          (cond_
+            [(= diffc 0) ()]
+            [(and (not diffFound) (= diffc 1))
+                ;; (printfn "diff by one at I: %A %A %A %A %A" index prev next lhs rhs)
+                (set! diffFound true)
+              ()]
+            [(>= diffc 1)
+              (set! inner false)
+              (set! found false)
+            ]
+          )
+
+          (set! next (inc next))
+          (set! prev (dec prev))
+        )
+
+        (let temp (inc index))
+
+        (when (and found (!= temp prevValue))
+          (set! result temp)
+          (set! loop false)
+        )]
+      [_ ()]
+    )
+
+    (set! index (inc index))
+    ())
+
+  result)
+
+(fn FindVerticalMirrorNew ([grid: Grid])
+  (let width (Width grid))
+
+  (FindMirror grid RowSlice width))
+
+(fn FindHorizontalMirrorNew ([grid: Grid])
+  (FindMirror grid ColSlice (Height grid)))
+
+(let groups (ParseFile fileText))
+(printfn "")
+
+(let verticals (->> groups (Array.map FindVerticalMirrorNew)))
+
+;; (let verticals (->> groups (Seq.map FindVerticalMirrorNew) (Seq.reduce add)))
+
+(printfn "")
+
+(let horizontals (->> groups (Array.map FindHorizontalMirrorNew)))
+
+(let horizontal (->> horizontals (Seq.map #(* 100 %1)) (Seq.reduce add)))
+
+(let part1 (+ (Seq.reduce add verticals) horizontal))
+
+(WriteResult "part1" part1 (if example 405 33122))
+
+(let p2verts (->> (Array.zip verticals groups) (Array.map #(FindMirrorPart2 (Normalize (fst %1)) (snd %1) RowSlice (Width (snd %1))))))
+(let p2horz (->> (Array.zip horizontals groups) (Array.map #(FindMirrorPart2 (Normalize (fst %1)) (snd %1) ColSlice (Height (snd %1))))))
+
+(let part2 (+ (Seq.reduce add p2verts)
+  (->> p2horz (Seq.map #(* 100 %1)) (Seq.reduce add))))
+
+(WriteResult "part2" part2 (if example 400 32312))
+
+()
