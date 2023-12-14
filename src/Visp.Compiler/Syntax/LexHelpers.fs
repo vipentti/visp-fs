@@ -18,6 +18,7 @@ type LexContext =
     | Default
     | LParen
     | Member
+    | Match
 
 type LexContextStack() =
     let stack = new Stack<LexContext>()
@@ -223,7 +224,6 @@ let keywordTokenList =
       ("type", TYPE)
       ("union", UNION)
       ("unquote", UNQUOTE_KW)
-      ("when", WHEN)
       ("while", WHILE)
       ("yield", YIELD false)
       ("yield!", YIELD true) ]
@@ -233,7 +233,8 @@ let contextSpecificKeywords =
        [ ("get", MEMBER_GET)
          ("set", MEMBER_SET)
 
-         ]) ]
+         ])
+      (LexContext.Match, [ ("when", WHEN) ]) ]
 
 let contextSpecificKeywordsMap =
     contextSpecificKeywords
