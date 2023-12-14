@@ -495,6 +495,7 @@ prop_plus:
 expr_comma_list: rev_expr_comma_list { List.rev $1 }
 rev_expr_comma_list:
     | expr { [$1] }
+    | OP_MULT { [(Syntax.mkSynSymbolExpr "*" (rhs parseState 1))] }
     | rev_expr_comma_list COMMA expr { $3 :: $1 }
 
 dot_bracket_expr_raw:
@@ -502,6 +503,8 @@ dot_bracket_expr_raw:
         { [$2] }
     | DOT_BRACKET expr COMMA rev_expr_comma_list RBRACKET
         { $2 :: $4 }
+    | DOT_BRACKET OP_MULT COMMA rev_expr_comma_list RBRACKET
+        { (Syntax.mkSynSymbolExpr "*" (rhs parseState 2)) :: $4 }
 
 dot_expr:
     | dot_bracket_expr_raw expr
