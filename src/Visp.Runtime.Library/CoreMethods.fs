@@ -32,6 +32,7 @@ module private CompareHelpers =
 module Bitwise =
     let inline bor (lhs: 'a) (rhs: 'a) = lhs ||| rhs
     let inline band (lhs: 'a) (rhs: 'a) = lhs &&& rhs
+    let inline bcompl (lhs: 'a) = ~~~lhs
 
 
 type CoreMethods =
@@ -66,6 +67,8 @@ type CoreMethods =
     static member inline ``null?``<'a when 'a: null and 'a: equality>(v: 'a) = v = null
 
     static member ``eq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs = rhs
+
+    static member ``neq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs <> rhs
 
     static member ``all-eq?``<'a when 'a: equality>([<ParamArray>] args: 'a[]) =
         CompareHelpers.allSatisfy (=) args
@@ -168,6 +171,7 @@ module CompileHelpers =
 
         let extras =
             [ ("=", nameof CoreMethods.``eq?``)
+              ("!=", nameof CoreMethods.``neq?``)
               ("<", nameof CoreMethods.lt)
               (">", nameof CoreMethods.gt)
               ("<=", nameof CoreMethods.lte)
