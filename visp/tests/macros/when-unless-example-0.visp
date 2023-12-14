@@ -1,0 +1,27 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro MyWhen1
+  [(_ test body ...)
+    (if test
+      (begin body ...))
+  ])
+
+(syntax-macro MyUnless1
+  [(_ test body ...)
+    (if (not test)
+      (begin body ...))
+  ])
+
+(MyWhen1 true
+  (printfn "inside when 1")
+  (printfn "inside when 2")
+)
+
+(MyUnless1 false
+  (printfn "inside unless 3")
+  (printfn "inside unless 4"))

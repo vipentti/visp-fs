@@ -7,6 +7,18 @@
 
 ;; core-macros
 
+(syntax-macro when
+  [(_ test body ...)
+    (if test
+      (begin body ...))
+  ])
+
+(syntax-macro unless
+  [(_ test body ...)
+    (if (not test)
+      (begin body ...))
+  ])
+
 (syntax-macro and
   [(_) true]
   [(_ one) one]

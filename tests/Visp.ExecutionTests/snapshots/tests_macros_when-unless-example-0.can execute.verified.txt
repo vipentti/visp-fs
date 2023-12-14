@@ -1,0 +1,7 @@
+﻿inside when 1
+inside when 2
+inside unless 3
+inside unless 4
+()
+
+ExitCode: 0
