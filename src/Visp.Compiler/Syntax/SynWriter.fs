@@ -869,7 +869,12 @@ module Write =
                 string w ")"
             | DotMethodKind.Apply ->
                 string w " "
-                writeArgSpace w writeExpr args
+
+                if args.Length = 1 then
+                    writeArgSpace w writeExpr args
+                else
+                    writeArgSpace w writeExprInParens args
+
                 ()
 
             string w ")"
@@ -1388,6 +1393,7 @@ module Write =
         ()
 
     and private writeExprInParens w (st: WriteState) ex =
+        // TODO: Should we check if we have a tuple and then not add parens?
         char w '('
         writeExpr w st ex
         char w ')'

@@ -28,7 +28,7 @@ let mapping =
   // line 20 @"member-fn-0.visp"
   (new Mapping())
 // line 21 @"member-fn-0.visp"
-(mapping.AddRange 0 1 5)
+(mapping.AddRange (0) (1) (5))
 // line 23 @"member-fn-0.visp"
 let visp_result_todo = ()
 // line 23 @"member-fn-0.visp"

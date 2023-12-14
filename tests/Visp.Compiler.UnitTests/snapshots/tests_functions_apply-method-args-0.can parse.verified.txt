@@ -1,0 +1,207 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"apply-method-args-0.visp"
+type Grid = char[,]
+// line 11 @"apply-method-args-0.visp"
+
+[<Struct()>]
+// line 11 @"apply-method-args-0.visp"
+type Pos (x: int32, y: int32) =
+  // line 11 @"apply-method-args-0.visp"
+  member _.X =
+        x
+  // line 11 @"apply-method-args-0.visp"
+  member _.Y =
+        y
+  // line 11 @"apply-method-args-0.visp"
+  override _.ToString () =
+    // line 11 @"apply-method-args-0.visp"
+    sprintf ("(y: %A, x: %A)") (y) (x)
+
+// line 11 @"apply-method-args-0.visp"
+let mkPos x y =
+  // line 11 @"apply-method-args-0.visp"
+  (new Pos(x, y))
+
+// line 19 @"apply-method-args-0.visp"
+let inline NorthOf (p: Pos) =
+  // line 20 @"apply-method-args-0.visp"
+  mkPos ((p.X)) (dec ((p.Y)))
+
+// line 22 @"apply-method-args-0.visp"
+type TileMap (grid: Grid, rocks: array<Pos>) =
+  // line 23 @"apply-method-args-0.visp"
+  let grid = grid
+  // line 24 @"apply-method-args-0.visp"
+  let height =
+    // line 24 @"apply-method-args-0.visp"
+    Array2D.length1 (grid)
+  // line 25 @"apply-method-args-0.visp"
+  let width =
+    // line 25 @"apply-method-args-0.visp"
+    Array2D.length2 (grid)
+  // line 27 @"apply-method-args-0.visp"
+  member _.Rocks =
+        rocks
+  // line 29 @"apply-method-args-0.visp"
+  override _.ToString () =
+    // line 30 @"apply-method-args-0.visp"
+    sprintf ("TileMap\n%A") (grid)
+
+  // line 32 @"apply-method-args-0.visp"
+  member t.MoveRock (from: Pos) (_to: Pos) =
+    // line 33 @"apply-method-args-0.visp"
+    match (t.[from]) with
+      | (Some 'O') ->
+        // line 35 @"apply-method-args-0.visp"
+        match (t.[_to]) with
+          | (Some '.') ->
+            // line 37 @"apply-method-args-0.visp"
+            t.[from] <- '.'
+            // line 38 @"apply-method-args-0.visp"
+            t.[_to] <- 'O'
+            true
+          | _ ->
+            false
+      | _ ->
+        false
+
+  // line 46 @"apply-method-args-0.visp"
+  member _.Item
+        // line 47 @"apply-method-args-0.visp"
+    with get ((pos: Pos)) =
+      // line 48 @"apply-method-args-0.visp"
+      let y =
+        // line 48 @"apply-method-args-0.visp"
+        (pos.Y)
+      // line 49 @"apply-method-args-0.visp"
+      let x =
+        // line 49 @"apply-method-args-0.visp"
+        (pos.X)
+      // line 51 @"apply-method-args-0.visp"
+      if CoreMethods.isTruthy(
+        
+          if CoreMethods.isTruthy(
+            
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(y, 0))
+                then
+                  // line 51 @"apply-method-args-0.visp"
+                  CoreMethods.``lt``(y, height)
+                else
+                  false)
+            then
+              // line 51 @"apply-method-args-0.visp"
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(x, 0))
+                then
+                  // line 51 @"apply-method-args-0.visp"
+                  CoreMethods.``lt``(x, width)
+                else
+                  false
+            else
+              false)
+        then
+          // line 51 @"apply-method-args-0.visp"
+          
+          // line 51 @"apply-method-args-0.visp"
+          Some ((grid.[y, x]))
+        else
+          // line 51 @"apply-method-args-0.visp"
+          if CoreMethods.isTruthy(
+            true)
+            then
+              // line 51 @"apply-method-args-0.visp"
+              
+              None
+            else
+              // line 51 @"apply-method-args-0.visp"
+              failwith ("unreachable")
+        // line 58 @"apply-method-args-0.visp"
+    and set ((pos: Pos)) ch =
+      // line 59 @"apply-method-args-0.visp"
+      let y =
+        // line 59 @"apply-method-args-0.visp"
+        (pos.Y)
+      // line 60 @"apply-method-args-0.visp"
+      let x =
+        // line 60 @"apply-method-args-0.visp"
+        (pos.X)
+      // line 61 @"apply-method-args-0.visp"
+      if CoreMethods.isTruthy(
+        
+          if CoreMethods.isTruthy(
+            
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(y, 0))
+                then
+                  // line 61 @"apply-method-args-0.visp"
+                  CoreMethods.``lt``(y, height)
+                else
+                  false)
+            then
+              // line 61 @"apply-method-args-0.visp"
+              if CoreMethods.isTruthy(
+                CoreMethods.``gte``(x, 0))
+                then
+                  // line 61 @"apply-method-args-0.visp"
+                  CoreMethods.``lt``(x, width)
+                else
+                  false
+            else
+              false)
+        then
+          // line 61 @"apply-method-args-0.visp"
+          
+          // line 61 @"apply-method-args-0.visp"
+          grid.[y, x] <- ch
+        else
+          // line 61 @"apply-method-args-0.visp"
+          if CoreMethods.isTruthy(
+            true)
+            then
+              // line 61 @"apply-method-args-0.visp"
+              
+              ()
+            else
+              // line 61 @"apply-method-args-0.visp"
+              failwith ("unreachable")
+// line 72 @"apply-method-args-0.visp"
+let TiltNorth (tm: TileMap) =
+  // line 73 @"apply-method-args-0.visp"
+  let rocks =
+    // line 73 @"apply-method-args-0.visp"
+    (tm.Rocks)
+  // line 74 @"apply-method-args-0.visp"
+  let rocksToMove =
+    // line 74 @"apply-method-args-0.visp"
+    rocks
+      |> Array.filter ((fun arg1 ->
+        // line 74 @"apply-method-args-0.visp"
+        CoreMethods.``gt``((arg1.Y), 0)))
+  // line 77 @"apply-method-args-0.visp"
+  for rock in rocksToMove do
+    // line 78 @"apply-method-args-0.visp"
+    printfn ("%A") (rock)
+    // line 79 @"apply-method-args-0.visp"
+    let mutable pos = rock
+    // line 80 @"apply-method-args-0.visp"
+    while CoreMethods.isTruthy((tm.MoveRock (pos) (NorthOf (pos)))) do
+      // line 81 @"apply-method-args-0.visp"
+      pos <- NorthOf (pos)
+  // line 84 @"apply-method-args-0.visp"
+  printfn ("%A") (tm)
+  ()
+
+// line 88 @"apply-method-args-0.visp"
+let visp_result_todo =
+  // line 88 @"apply-method-args-0.visp"
+  printfn ("OK")
+// line 88 @"apply-method-args-0.visp"
+printfn ("%A") (visp_result_todo)
+
