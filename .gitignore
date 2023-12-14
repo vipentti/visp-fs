@@ -1,5 +1,6 @@
 ## Additions to default dotnet gitignore
 
+*.output
 *.fsyacc.output
 
 appsettings.local.*
