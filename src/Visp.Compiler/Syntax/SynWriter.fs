@@ -895,7 +895,15 @@ module Write =
 
             writeExpr w WriteState.Inline inst
             string w ".["
-            writeInlineCommaSeparated w writeExpr prop
+
+            writeInlineCommaSeparated
+                w
+                (fun w st ex ->
+                    match ex with
+                    | Patterns.SymbolWith "*" -> string w "*"
+                    | it -> writeExpr w st it)
+                prop
+
             string w "]"
 
             if st.parens then
