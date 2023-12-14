@@ -34,6 +34,11 @@ let mkTokenizerWithArgs args =
                 args.PopContext()
                 args.PushContext LexContext.Member
 
+        | MATCH ->
+            if args.CurrentContext = LexContext.LParen then
+                args.PopContext()
+                args.PushContext LexContext.Match
+
         | HASH_PAREN
         | HASH_BRACKET
         | DOT_BRACKET

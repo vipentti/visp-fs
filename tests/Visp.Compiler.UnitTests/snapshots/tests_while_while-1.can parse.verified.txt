@@ -1,0 +1,60 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"while-1.visp"
+let inline DiffByOne (lhs: array<'T>) (rhs: array<'T>) =
+  // line 9 @"while-1.visp"
+  let mutable index = 0
+  // line 10 @"while-1.visp"
+  let mutable loop = true
+  // line 11 @"while-1.visp"
+  let mutable diff = 0
+  // line 13 @"while-1.visp"
+  while CoreMethods.isTruthy(
+    if CoreMethods.isTruthy(
+      loop)
+      then
+        // line 13 @"while-1.visp"
+        CoreMethods.``lt``(index, (lhs.Length))
+      else
+        false) do
+    // line 14 @"while-1.visp"
+    let lhs =
+      // line 14 @"while-1.visp"
+      (lhs.[index])
+    // line 15 @"while-1.visp"
+    let rhs =
+      // line 15 @"while-1.visp"
+      (rhs.[index])
+    // line 17 @"while-1.visp"
+    if CoreMethods.isTruthy(
+      CoreMethods.``not``(CoreMethods.``eq?``(lhs, rhs)))
+      then
+        // line 17 @"while-1.visp"
+        
+        // line 17 @"while-1.visp"
+        diff <- inc (diff)
+    // line 20 @"while-1.visp"
+    if CoreMethods.isTruthy(
+      CoreMethods.``gt``(diff, 1))
+      then
+        // line 20 @"while-1.visp"
+        
+        // line 20 @"while-1.visp"
+        loop <- false
+    // line 23 @"while-1.visp"
+    index <- inc (index)
+  // line 26 @"while-1.visp"
+  CoreMethods.``eq?``(diff, 1)
+
+// line 29 @"while-1.visp"
+let visp_result_todo =
+  // line 29 @"while-1.visp"
+  printfn ("OK")
+// line 29 @"while-1.visp"
+printfn ("%A") (visp_result_todo)
+
