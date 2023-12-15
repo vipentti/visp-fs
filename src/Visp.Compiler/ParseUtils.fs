@@ -41,6 +41,8 @@ let mkTokenizerWithArgs args =
 
         | HASH_PAREN
         | HASH_BRACKET
+        | BRACE_BAR
+        | BRACKET_BAR
         | DOT_BRACKET
         | LPAREN
         | LBRACE
@@ -56,6 +58,9 @@ let mkTokenizerWithArgs args =
                 args.PushContext ctx
 
             args.NestIfNotDefault()
+
+        | BAR_BRACKET
+        | BAR_BRACE
         | RPAREN
         | RBRACE
         | RBRACKET ->

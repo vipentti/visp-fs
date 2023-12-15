@@ -64,6 +64,8 @@ type CoreMethods =
 
     static member inline rem_impl (lhs: 'a) (rhs: 'a) : 'a = lhs % rhs
 
+    static member inline euc_rem_impl (a: 'a) (b: 'a) = (a % b + b) % b
+
     static member inline ``null?``<'a when 'a: null and 'a: equality>(v: 'a) = v = null
 
     static member ``eq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs = rhs
