@@ -363,6 +363,7 @@ and [<RequireQualifiedAccess>] SynListKind =
     | AttributeList
     | BraceBar
     | DotBracket
+    | BracketBar
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | List of kind: SynListKind * exprs: SynMacroBody list * range: range

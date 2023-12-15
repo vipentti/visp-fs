@@ -26,7 +26,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token EOF
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
-%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE
+%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE BRACKET_BAR BAR_BRACKET
 %token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
 %token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
 %token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
@@ -76,11 +76,11 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 %nonassoc QUOTE_SYM
 %nonassoc LPAREN HASH_PAREN
-%nonassoc LBRACKET
+%nonassoc LBRACKET BRACKET_BAR
 %nonassoc LBRACE HASH_BRACE BRACE_BAR
 %nonassoc HASH_BRACKET
 %nonassoc RPAREN
-%nonassoc RBRACKET
+%nonassoc RBRACKET BAR_BRACKET
 %nonassoc RBRACE BAR_BRACE
 %nonassoc AT
 %nonassoc BANG_TUPLE
@@ -233,11 +233,17 @@ expr:
         { $1 }
 
     | brace_bar { $1 }
+    | bracket_bar { $1 }
     | inside_parens %prec prec_paren { $1 }
 
 brace_bar:
     | BRACE_BAR record_init_bar_list BAR_BRACE { SynExpr.RecordInit($2, lhs parseState) }
     | BRACE_BAR record_init_bar_list recover { SynExpr.RecordInit([], lhs parseState) }
+
+bracket_bar:
+    | BRACKET_BAR recover { CollExpr.mkFsArray [] (lhs parseState)}
+    | BRACKET_BAR BAR_BRACKET { CollExpr.mkFsArray [] (lhs parseState)}
+    | BRACKET_BAR expr_list BAR_BRACKET { CollExpr.mkFsArray $2 (lhs parseState)}
 
 lambda_short_expr_list:
     | parens_expr { $1 }
@@ -420,6 +426,7 @@ macro_body:
     | HASH_PAREN RPAREN { SynMacroBody.List(SynListKind.HashParen, [], lhs parseState) }
     | HASH_BRACKET RBRACKET { SynMacroBody.List(SynListKind.AttributeList, [], lhs parseState) }
     | BRACE_BAR BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, [], lhs parseState) }
+    | BRACKET_BAR BAR_BRACKET { SynMacroBody.List(SynListKind.BracketBar, [], lhs parseState) }
     | DOT_BRACKET RBRACKET { SynMacroBody.List(SynListKind.DotBracket, [], lhs parseState) }
 
     | LPAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.List, $2, lhs parseState) }
@@ -429,6 +436,7 @@ macro_body:
     | HASH_PAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.HashParen, $2, lhs parseState) }
     | HASH_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.AttributeList, $2, lhs parseState) }
     | BRACE_BAR macro_body_list BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, $2, lhs parseState) }
+    | BRACKET_BAR macro_body_list BAR_BRACKET { SynMacroBody.List(SynListKind.BracketBar, $2, lhs parseState) }
     | DOT_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.DotBracket, $2, lhs parseState) }
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }

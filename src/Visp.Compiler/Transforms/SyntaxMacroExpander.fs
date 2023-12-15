@@ -181,6 +181,7 @@ let openToken =
     | SynListKind.HashParen -> HASH_PAREN
     | SynListKind.BraceBar -> BRACE_BAR
     | SynListKind.DotBracket -> DOT_BRACKET
+    | SynListKind.BracketBar -> BRACKET_BAR
 
 let closeToken =
     function
@@ -192,6 +193,7 @@ let closeToken =
     | SynListKind.HashSet -> RBRACE
     | SynListKind.AttributeList -> RBRACKET
     | SynListKind.BraceBar -> BAR_BRACE
+    | SynListKind.BracketBar -> BAR_BRACKET
 
 [<RequireQualifiedAccess>]
 type private TokenizeMode =

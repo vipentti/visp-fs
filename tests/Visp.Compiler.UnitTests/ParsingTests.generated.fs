@@ -126,6 +126,11 @@ module ``tests_arrays_array2d-1`` =
     let ``can parse`` () = TestUtils.runTest "tests/arrays/array2d-1.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_arrays_array-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/arrays/array-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_atom_atom-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/atom/atom-0.visp"
