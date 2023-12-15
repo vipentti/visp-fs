@@ -13,6 +13,12 @@
       (begin body ...))
   ])
 
+(syntax-macro when_
+  [(_ test body ...)
+    (if test
+      (begin body ...))
+  ])
+
 (syntax-macro unless
   [(_ test body ...)
     (if (not test)
