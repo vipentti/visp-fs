@@ -1,0 +1,238 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day14")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(type Grid char[,])
+
+(struct Pos ([x: int32] [y: int32])
+  (member _.X x)
+  (member _.Y y)
+
+  (override fn _.ToString ()
+    (sprintf "(y: %A, x: %A)" y x)
+  ))
+
+(fn inline NorthOf ([p: Pos])
+  (mkPos (+X p) (dec (+Y p))))
+
+(fn inline SouthOf ([p: Pos])
+  (mkPos (+X p) (inc (+Y p))))
+
+(fn inline WestOf ([p: Pos])
+  (mkPos (dec (+X p)) (+Y p)))
+
+(fn inline EastOf ([p: Pos])
+  (mkPos (inc (+X p)) (+Y p)))
+
+(union Dir
+  North
+  West
+  South
+  East)
+
+(fn GetFun ([d: Dir])
+  (match d
+    [North NorthOf]
+    [South SouthOf]
+    [West WestOf]
+    [East EastOf]
+  ))
+
+(type TileMap ([grid: Grid] [rocks: array<Pos>])
+  (let grid grid)
+  (let height (Array2D.length1 grid))
+  (let width (Array2D.length2 grid))
+  (mut rocks rocks)
+
+  (member _.Grid grid)
+  (member _.Rocks rocks)
+  (member _.Height height)
+  (member _.Width width)
+
+  (member fn _.SetRocks (r)
+    (set! rocks r))
+
+  (override fn _.ToString()
+    (sprintf "TileMap\n%A" grid))
+
+  (member fn _.Serialize ()
+    (let sb (new System.Text.StringBuilder))
+
+    (for/to [y (0 to (dec height))]
+      (for/to [x (0 to (dec width))]
+        (let _ (.Append sb (.[y, x] grid)))
+        ()
+      )
+      (let _ (.AppendLine sb))
+      ()
+    )
+
+    (.ToString sb)
+  )
+
+  (member fn t.MoveRock ([from: Pos] [to: Pos])
+    (match (.[from] t)
+      [(Some #\O)
+        (match (.[to] t)
+          [(Some #\.)
+            (set! (.[from] t) #\.)
+            (set! (.[to] t) #\O)
+            true
+          ]
+          [_ false]
+        ) ]
+      [_ false]
+    ))
+
+  (member _.Item
+    (get ([pos: Pos])
+      (let y (+Y pos))
+      (let x (+X pos))
+
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+          (Some (.[y, x] grid))
+        ]
+        [_ None])
+    )
+    (set ([pos: Pos]) ch
+      (let y (+Y pos))
+      (let x (+X pos))
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+
+          (set! (.[y, x] grid) ch)
+        ]
+        [_ ()])
+    )
+  )
+)
+
+(fn ParseFile ([text: string])
+  (let res (new ResizeArray<_>))
+  (mut lines (SplitLines text))
+
+  (let temp (new ResizeArray<_>))
+  (mut yindex 0)
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (for/to [xindex (0 to (dec (+Length line)))]
+        (let ch (.[xindex] line))
+        (match ch
+          [#\O
+            (.Add temp (mkPos xindex yindex))
+          ]
+          [_ ()]
+        ))
+
+      (.Add res (.ToArray line))
+      (set! yindex (inc yindex))
+    ))
+
+  (new TileMap (array2D (.ToArray res)) (.ToArray temp)))
+
+(fn SortRocks ([d: Dir] [rs: array<Pos>])
+  (match d
+    [North (->> rs (Array.sortBy #(+Y %1))) ]
+    [South (->> rs (Array.sortByDescending #(+Y %1))) ]
+    [West (->> rs (Array.sortBy #(+X %1))) ]
+    [East (->> rs (Array.sortByDescending #(+X %1))) ]
+  ))
+
+(fn Tilt (dir [tm: TileMap])
+  (let rocks (SortRocks dir (+Rocks tm)))
+  (let newRocks (new ResizeArray<_> (+Length rocks)))
+  (let dirFn (GetFun dir))
+
+  (for/in [rock rocks]
+    (mut pos rock)
+    (while (-MoveRock tm pos (dirFn pos))
+      (set! pos (dirFn pos)))
+    (.Add newRocks pos))
+
+  (.SetRocks tm (.ToArray newRocks))
+  tm)
+
+(fn Cycle ([tm: TileMap])
+  (->> tm
+    (Tilt North)
+    (Tilt West)
+    (Tilt South)
+    (Tilt East)
+  ))
+
+(fn CountLoad ([tm: TileMap])
+  (let grid (+Grid tm))
+  (let height (+Height tm))
+  (let width (+Width tm))
+  (mut load 0)
+
+  (for/to [y (0 to (dec height))]
+    (for/to [x (0 to (dec width))]
+      (match (.[y, x] grid)
+        [#\O (set! load (+ load (- height y)))]
+        [_ ()]
+      )))
+
+  load
+)
+
+(fn Part2 ([tm: TileMap])
+  (let MAX 1_000_000_000)
+  (mut tm tm)
+  (mut cache (!map))
+
+  (mut index 0)
+  (while (< index MAX)
+    (set! tm (Cycle tm))
+    (let str (.Serialize tm))
+
+    (match (Map.tryFind str cache)
+      [(Some start)
+        (set! index (- MAX (rem (- MAX index) (- index start))))
+      ]
+      [None ()])
+
+    (set! cache (Map.add str index cache))
+    (set! index (inc index)))
+
+  (->> tm CountLoad))
+
+
+(let tiles (ParseFile fileText))
+(let tiles2 (ParseFile fileText))
+
+(let part1 (->> tiles (Tilt North) CountLoad))
+
+(WriteResult "part1" part1 (if example 136 112773))
+
+(let part2 (->> tiles2 Part2))
+
+(WriteResult "part2" part2 (if example 64 98894))
