@@ -1,0 +1,149 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day15")
+(let filepath $"""./inputs/{day}{(if example "_example" "")}.txt""")
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(fn GetAscii ([text: string])
+  (System.Text.Encoding.ASCII.GetBytes text))
+
+(fn Hash ([text: string])
+  (mut hash 0)
+
+  (let ascii (GetAscii text))
+
+  (for/in [byt ascii]
+    (set! hash (+ hash (int byt)))
+    (set! hash (* hash 17))
+    (set! hash (rem hash 256))
+  )
+
+  hash)
+
+(union Operation
+  [Add int string int]
+  [Remove int string]
+
+  (member t.Label
+    (match t
+      [(Add (_, text, _)) text]
+      [(Remove (_, text)) text])
+  )
+
+  (member t.Box
+    (match t
+      [(Add (h, _, _)) h]
+      [(Remove (h, _)) h])
+  )
+)
+
+(fn ToOperation ([text: string])
+  (cond_
+    [(.Contains text #\=)
+      (let parts (.Split text #\=))
+      (let hash (Hash (.[0] parts)))
+      (Operation.Add (hash, (.[0] parts), (int (.[1] parts))))
+    ]
+    [(.EndsWith text #\-)
+      (let parts (.Split text #\-))
+      (let hash (Hash (.[0] parts)))
+      (Operation.Remove (hash, (.[0] parts)))
+    ]
+  ))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let results (new ResizeArray<_>))
+
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (mut sections (SpanSplitChars [| #\, |] line))
+      (while (.MoveNext sections)
+        (.Add results (.ToString (+Current sections))))
+    ))
+
+  (.ToArray results))
+
+(fn Part2 ([operations: array<Operation>])
+  (let boxes (Array.init 256 #(begin
+    (let _ %1)
+    (new ResizeArray<_>)
+  )))
+
+  (for/in [op operations]
+    (let box (+Box op))
+    (let arr (.[box] boxes))
+
+    (match op
+      [(Operation.Add (_, text, v))
+        (match (Seq.tryFindIndex #(= (fst %1) text) arr)
+          [(Some ind)
+            (set! (.[ind] arr) (text, v))
+          ]
+          [None
+            (.Add arr (text ,v))
+          ])
+      ]
+      [(Operation.Remove (_, text))
+        (match (Seq.tryFindIndex #(= (fst %1) text) arr)
+          [(Some ind)
+            (.RemoveAt arr ind)
+          ]
+          [None ()]
+        )
+      ]
+    )
+  )
+
+  (mut result 0)
+  (mut bi 1)
+
+  (for/in [b boxes]
+    (let sum (->> b (Seq.mapi #(* bi (inc %1) (snd %2))) (Seq.fold add 0)))
+    (set! result (+ result sum))
+    (set! bi (inc bi))
+  )
+
+  result)
+
+(let data (ParseFile fileText))
+
+(let part1 (->> data (Array.map Hash) (Array.reduce add)))
+
+
+(WriteResult "part1" part1 (if example 1320 521341))
+
+(let operations (->> data (Array.map ToOperation)))
+
+(let part2 (Part2 operations))
+
+(WriteResult "part2" part2 (if example 145 252782))
+
+()
