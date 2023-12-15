@@ -115,6 +115,7 @@ let rec macroBodyToDoc =
             | SynListKind.Vector -> Print.brackets
             | SynListKind.DotBracket -> Print.enclose (Print.text ".[") (Print.text "]")
             | SynListKind.BraceBar -> Print.enclose (Print.text "{|") (Print.text "|}")
+            | SynListKind.BracketBar -> Print.enclose (Print.text "[|") (Print.text "|]")
             | SynListKind.HashParen -> Print.enclose (Print.text "#(") (Print.text ")")
             | SynListKind.AttributeList -> Print.enclose (Print.text "#[") (Print.text "]")
             | SynListKind.HashSet -> Print.enclose (Print.text "#{") (Print.text "}")
