@@ -32,7 +32,12 @@ module LastExpressionUpdater =
         match decl with
         | SynModuleDecl.Expr(expr, range) ->
             [ SynModuleDecl.Expr(
-                  SynExpr.SimpleLet(Syntax.mkInferredName "visp_result_todo" range, expr, range),
+                  SynExpr.LetOrUse(
+                      Syntax.mkInferredName "visp_result_todo" range,
+                      expr,
+                      LetFlags.None,
+                      range
+                  ),
                   range
               )
               SynModuleDecl.Expr(

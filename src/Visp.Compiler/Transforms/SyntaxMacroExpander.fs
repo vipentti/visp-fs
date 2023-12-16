@@ -629,9 +629,10 @@ let expand (expr: SynExpr) =
             let text = (Syntax.textOfSymbol name)
             macroTable.AddMacro text macro
 
-            SynExpr.SimpleLet(
+            SynExpr.LetOrUse(
                 Syntax.mkInferredName ("macro_" + text) r,
                 Syntax.mkSynString "__MACRO_INIT__" r,
+                LetFlags.None,
                 r
             )
         | it -> it

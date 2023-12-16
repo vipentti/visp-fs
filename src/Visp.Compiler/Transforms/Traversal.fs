@@ -142,8 +142,6 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                             yield! loop arg
 
                 | SynExpr.LetOrUse(_, expr, _, _)
-                | SynExpr.SimpleLet(_, expr, _)
-                | SynExpr.SimpleMut(_, expr, _)
                 | SynExpr.Atom(expr, _)
                 | SynExpr.Deref(_, expr, _) -> yield! loop expr
 

@@ -254,33 +254,19 @@ let rec exprToDoc =
 
         parens <| cat [ text "set!"; space; binding; space; body ]
 
-    | SynExpr.SimpleMut(name, value, _) ->
+    | SynExpr.LetOrUse(name, value, flags, _) ->
         let binding = nameToDoc name
 
         let body = exprToDoc value
 
         parens
         <| hcat
-            [ text "let"
-              space
-              text "mutable"
-              space
-              binding
-              if isAtomic value then
-                  space
-                  body
-              else
-                  line
-                  indent 2 body ]
-
-    | SynExpr.SimpleLet(name, value, _) ->
-        let binding = nameToDoc name
-
-        let body = exprToDoc value
-
-        parens
-        <| hcat
-            [ text "let"
+            [ text (
+                  if flags.HasFlag(LetFlags.Use) then "use"
+                  else if flags.HasFlag(LetFlags.Mutable) then "mut"
+                  else "let"
+              )
+              if flags.HasFlag(LetFlags.Bang) then char '!' else mempty
               space
               binding
               if isAtomic value then

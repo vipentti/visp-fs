@@ -77,10 +77,6 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.New(typ, args, range) -> SynExpr.New(typ, List.map bound_transform args, range)
         | SynExpr.LetOrUse(name, value, flags, range) ->
             SynExpr.LetOrUse(name, bound_transform value, flags, range)
-        | SynExpr.SimpleLet(name, value, range) ->
-            SynExpr.SimpleLet(name, bound_transform value, range)
-        | SynExpr.SimpleMut(name, value, range) ->
-            SynExpr.SimpleMut(name, bound_transform value, range)
         | SynExpr.Set(name, value, range) ->
             SynExpr.Set(bound_transform name, bound_transform value, range)
         | SynExpr.Pair(lhs, rhs, range) ->
