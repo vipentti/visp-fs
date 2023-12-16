@@ -32,7 +32,7 @@ printfn ("Example Struct is %A") (instance)
 printfn ("Example IsValueType %A") (instance
   |> (fun a1 ->
     // line 25 @"struct-macro-0.visp"
-    (a1.GetType()))
+    a1.GetType())
   |> (fun a1 ->
     // line 25 @"struct-macro-0.visp"
     (a1.IsValueType)))

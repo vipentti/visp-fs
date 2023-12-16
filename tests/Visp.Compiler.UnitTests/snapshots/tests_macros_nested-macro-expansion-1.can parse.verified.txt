@@ -33,7 +33,7 @@ let Something () =
       // line 17 @"nested-macro-expansion-1.visp"
       (work.[0])
     // line 18 @"nested-macro-expansion-1.visp"
-    (work.RemoveAt(0))
+    work.RemoveAt(0)
     r
 
   // line 21 @"nested-macro-expansion-1.visp"
