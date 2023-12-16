@@ -414,6 +414,25 @@ rev_macro_body_list:
     | macro_body { [$1] }
     | rev_macro_body_list macro_body { $2 :: $1 }
 
+
+macro_open_kind:
+    | LPAREN { SynListKind.Paren }
+    | LBRACKET { SynListKind.Bracket }
+    | LBRACE { SynListKind.Brace }
+    | HASH_BRACE { SynListKind.HashBrace }
+    | HASH_PAREN { SynListKind.HashParen }
+    | HASH_BRACKET { SynListKind.HashBracket }
+    | BRACE_BAR { SynListKind.BraceBar }
+    | BRACKET_BAR { SynListKind.BracketBar }
+    | DOT_BRACKET { SynListKind.DotBracket }
+
+macro_close_kind:
+    | RPAREN { () }
+    | RBRACKET { () }
+    | RBRACE { () }
+    | BAR_BRACE { () }
+    | BAR_BRACKET { () }
+
 macro_body:
     | constant { SynMacroBody.Const(fst $1, snd $1) }
     | LPAREN macro_name RPAREN
@@ -422,25 +441,10 @@ macro_body:
     | LPAREN macro_name macro_body_list RPAREN
         { let mNameBody = SynMacroBody.Symbol($2)
           SynMacroBody.Call(SynMacroCall($2, mNameBody :: $3, lhs parseState)) }
-    | LPAREN RPAREN { SynMacroBody.List(SynListKind.List, [], lhs parseState) }
-    | LBRACKET RBRACKET { SynMacroBody.List(SynListKind.Vector, [], lhs parseState) }
-    | LBRACE RBRACE { SynMacroBody.List(SynListKind.HashMap, [], lhs parseState) }
-    | HASH_BRACE RBRACE { SynMacroBody.List(SynListKind.HashSet, [], lhs parseState) }
-    | HASH_PAREN RPAREN { SynMacroBody.List(SynListKind.HashParen, [], lhs parseState) }
-    | HASH_BRACKET RBRACKET { SynMacroBody.List(SynListKind.AttributeList, [], lhs parseState) }
-    | BRACE_BAR BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, [], lhs parseState) }
-    | BRACKET_BAR BAR_BRACKET { SynMacroBody.List(SynListKind.BracketBar, [], lhs parseState) }
-    | DOT_BRACKET RBRACKET { SynMacroBody.List(SynListKind.DotBracket, [], lhs parseState) }
 
-    | LPAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.List, $2, lhs parseState) }
-    | LBRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.Vector, $2, lhs parseState) }
-    | LBRACE macro_body_list RBRACE { SynMacroBody.List(SynListKind.HashMap, $2, lhs parseState) }
-    | HASH_BRACE macro_body_list RBRACE { SynMacroBody.List(SynListKind.HashSet, $2, lhs parseState) }
-    | HASH_PAREN macro_body_list RPAREN { SynMacroBody.List(SynListKind.HashParen, $2, lhs parseState) }
-    | HASH_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.AttributeList, $2, lhs parseState) }
-    | BRACE_BAR macro_body_list BAR_BRACE { SynMacroBody.List(SynListKind.BraceBar, $2, lhs parseState) }
-    | BRACKET_BAR macro_body_list BAR_BRACKET { SynMacroBody.List(SynListKind.BracketBar, $2, lhs parseState) }
-    | DOT_BRACKET macro_body_list RBRACKET { SynMacroBody.List(SynListKind.DotBracket, $2, lhs parseState) }
+    | macro_open_kind macro_close_kind { SynMacroBody.List($1, [], lhs parseState) }
+    | macro_open_kind macro_body_list macro_close_kind { SynMacroBody.List($1, $2, lhs parseState) }
+
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
     | COLON { SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) }
