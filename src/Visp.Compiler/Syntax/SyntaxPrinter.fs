@@ -110,15 +110,15 @@ let rec macroBodyToDoc =
 
         let surround =
             match kind with
-            | SynListKind.List -> Print.parens
-            | SynListKind.HashMap -> Print.braces
-            | SynListKind.Vector -> Print.brackets
+            | SynListKind.Paren -> Print.parens
+            | SynListKind.Brace -> Print.braces
+            | SynListKind.Bracket -> Print.brackets
             | SynListKind.DotBracket -> Print.enclose (Print.text ".[") (Print.text "]")
             | SynListKind.BraceBar -> Print.enclose (Print.text "{|") (Print.text "|}")
             | SynListKind.BracketBar -> Print.enclose (Print.text "[|") (Print.text "|]")
             | SynListKind.HashParen -> Print.enclose (Print.text "#(") (Print.text ")")
-            | SynListKind.AttributeList -> Print.enclose (Print.text "#[") (Print.text "]")
-            | SynListKind.HashSet -> Print.enclose (Print.text "#{") (Print.text "}")
+            | SynListKind.HashBracket -> Print.enclose (Print.text "#[") (Print.text "]")
+            | SynListKind.HashBrace -> Print.enclose (Print.text "#{") (Print.text "}")
 
         surround body
 

@@ -380,12 +380,12 @@ and [<RequireQualifiedAccess>] SynMacroTriviaKind =
     | Bar
 
 and [<RequireQualifiedAccess>] SynListKind =
-    | List
-    | Vector
-    | HashMap
-    | HashSet
+    | Paren
+    | Bracket
+    | Brace
+    | HashBrace
     | HashParen
-    | AttributeList
+    | HashBracket
     | BraceBar
     | DotBracket
     | BracketBar
