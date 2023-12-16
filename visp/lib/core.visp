@@ -70,3 +70,12 @@
 
 (fn inline lcm64 (a b)
   (/ (* a b) (gcd64 a b)))
+
+
+(fn GetCurrentDirectory () (System.IO.Directory.GetCurrentDirectory))
+
+(fn TryGetEnvVar ([v: string])
+  (match (.GetEnvironmentVariable System.Environment v)
+    [null None]
+    [it (Some it)]
+  ))
