@@ -16,7 +16,8 @@ printfn "value is %O" result
 // line 15 @"example-14.visp"
 let items =
   // line 15 @"example-14.visp"
-  Value.from([Value.from(1);Value.from(2);Value.from(3);Value.from(4);Value.from(5)])
+  Value.from(
+    [Value.from(1);Value.from(2);Value.from(3);Value.from(4);Value.from(5)])
 // line 18 @"example-14.visp"
 let result2 =
   // line 18 @"example-14.visp"

@@ -46,7 +46,10 @@ module QuasiquoteExpander =
         match expr with
         | SynQuasiquote.Unquote(expr, r) -> Syntax.mkValue expr r
 
-        | SynQuasiquote.List(exprs, range) -> qqExprs exprs range depth
+        | SynQuasiquote.Collection(SynCollection(kind, exprs, range)) ->
+            match kind with
+            | CollectionKind.Paren -> qqExprs exprs range depth
+            | _ -> failwithf "unsupported qq collection: %A %A" kind exprs
 
         | SynQuasiquote.Symbol sym -> SynExpr.Quote(false, (SynQuoted.Symbol sym), range)
 
@@ -94,8 +97,8 @@ module QuasiquoteExpander =
 
     and private toQuoted (ex: SynQuasiquote) (range: range) =
         match ex with
-        | SynQuasiquote.List(exprs, range) -> SynQuoted.List((toQuotedList exprs range), range)
-        // | _ -> SynQuoted.Const (SynConst.Nil, range)
+        | SynQuasiquote.Collection(SynCollection(kind, exprs, range)) ->
+            SynQuoted.Collection(SynCollection(kind, (toQuotedList exprs range), range))
         | _ -> failwithf "unsupported expr %O at %O" ex range
 
     and private toQuotedList (ex: SynQuasiquote list) (range: range) =

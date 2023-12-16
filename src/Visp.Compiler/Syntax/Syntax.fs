@@ -165,6 +165,7 @@ type CollectionKind =
     | HashBrace
     | HashParen
     | HashBracket
+    | DotBracket
     | BraceBar
     | FsList
     | FsArray
@@ -432,24 +433,19 @@ and [<RequireQualifiedAccess>] SynTypeMember =
 and [<RequireQualifiedAccess>] SynDirective = Open of path: SynSymbol * range: range
 
 and [<RequireQualifiedAccess>] SynQuoted =
-    | EmptyList of range: range
-    | List of exprs: SynQuoted list * range: range
-    | Vector of exprs: SynQuoted list * range: range
-    | HashMap of exprs: SynQuoted list * range: range
-    | HashSet of exprs: SynQuoted list * range: range
+    | EmptyList of range
+    | Collection of SynCollection<SynQuoted>
     | Const of constant: SynConst * range: range
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
 
 and [<RequireQualifiedAccess>] SynQuasiquote =
-    | List of exprs: SynQuasiquote list * range: range
-    | Vector of exprs: SynQuasiquote list * range: range
+    | Collection of SynCollection<SynQuasiquote>
     | Const of constant: SynConst * range: range
     | Symbol of value: SynSymbol
     | Keyword of value: SynKeyword
     | Unquote of expr: SynExpr * range: range
     | SpliceUnquote of expr: SynExpr * range: range
-    | Op of SynOp
 
 and [<RequireQualifiedAccess>] SynOp =
     | Plus of args: SynExpr list * range: range
