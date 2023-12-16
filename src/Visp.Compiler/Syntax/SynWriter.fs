@@ -657,10 +657,6 @@ module Write =
             startExpr w st range
             writeLetFullNew w st name body flags
 
-        | SynExpr.SimpleLet(name, body, range) ->
-            startExpr w st range
-            writeLet w st name body
-
         | SynExpr.Keyword kw -> writeQuoted w st (SynQuoted.Keyword kw)
 
         | SynExpr.Begin(expr, kind, range) ->
@@ -703,7 +699,7 @@ module Write =
             | None -> ()
 
 
-        | SynExpr.LetStar(bindings, body, range) ->
+        | SynExpr.LetStar(bindings, body, _) ->
             indentIf w st
             string w "("
 
@@ -719,11 +715,6 @@ module Write =
             writeSeqLeading w WriteState.Body newline writeExpr body
 
             string w ")"
-
-        | SynExpr.SimpleMut(name, body, range) ->
-            startExpr w st range
-            writeLetFull w st true name body
-            ()
 
         | SynExpr.Set(name, body, range) ->
             startExpr w st range

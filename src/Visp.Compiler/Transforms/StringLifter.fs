@@ -40,12 +40,13 @@ let liftLiteralStrings (file: ParsedFile) =
                 | SynStringKind.TripleQuote ->
                     if Visp.Runtime.Library.StringMethods.isMultilineString raw then
                         let bind =
-                            SynExpr.SimpleLet(
+                            SynExpr.LetOrUse(
                                 Syntax.mkInferredName name constRange,
                                 SynExpr.Literal(
                                     SynConst.String(normalized, kind, stringRange),
                                     constRange
                                 ),
+                                LetFlags.None,
                                 constRange
                             )
 

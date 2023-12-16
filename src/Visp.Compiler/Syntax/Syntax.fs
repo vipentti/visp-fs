@@ -209,8 +209,6 @@ type SynExpr =
     | Begin of exprs: SynExpr list * kind: BeginKind * range: range
     | New of typ: SynType * args: SynExpr list * range: range
     | LetOrUse of name: SynName * value: SynExpr * flags: LetFlags * range: range
-    | SimpleLet of name: SynName * value: SynExpr * range: range
-    | SimpleMut of name: SynName * value: SynExpr * range: range
     | LetStar of bindings: SynBinding list * body: SynExpr list * range: range
     | Set of name: SynExpr * value: SynExpr * range: range
     | If of cond: SynExpr * main: SynExpr * alt: SynExpr option * range: range
@@ -302,8 +300,6 @@ type SynExpr =
         | New(range = r)
         | Computation(range = r)
         | LetOrUse(range = r)
-        | SimpleLet(range = r)
-        | SimpleMut(range = r)
         | LetStar(range = r)
         | Set(range = r)
         | If(range = r)
