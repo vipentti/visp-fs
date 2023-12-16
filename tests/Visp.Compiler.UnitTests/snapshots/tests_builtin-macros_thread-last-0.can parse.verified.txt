@@ -15,7 +15,7 @@ let rx =
 // line 11 @"thread-last-0.visp"
 let ms =
   // line 11 @"thread-last-0.visp"
-  (rx.Match("Game 1:"))
+  rx.Match("Game 1:")
 // line 13 @"thread-last-0.visp"
 printfn ("Groups %A") ((ms.Groups))
 // line 15 @"thread-last-0.visp"

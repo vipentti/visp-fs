@@ -15,9 +15,9 @@ let sb =
   // line 13 @"example-10.visp"
   (new StringBuilder())
 // line 15 @"example-10.visp"
-(sb.Append("hello"))
+sb.Append("hello")
 // line 16 @"example-10.visp"
-(sb.Append("world"))
+sb.Append("world")
 // line 18 @"example-10.visp"
 let visp_result_todo =
   // line 18 @"example-10.visp"
