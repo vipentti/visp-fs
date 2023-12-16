@@ -261,8 +261,6 @@ type SynExpr =
         range: range
     | Match of expr: SynExpr * pats: SynMatch list * range: range
 
-    member this.writeTo(writer: CustomFileWriter) = ()
-
     member this.Range =
         match this with
         | Op op -> op.Range
@@ -312,11 +310,6 @@ type SynExpr =
         | ThreadLast(range = r)
         | Deref(range = r) -> r
 
-
-    member this.withRangeOf(r: range) =
-        match this with
-        | _ -> this
-
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynInterpolatedStringPart =
     | String of value: string * range: range
     | FillExpr of fillExpr: SynExpr * qualifiers: Ident option
@@ -353,10 +346,6 @@ and [<RequireQualifiedAccess>] UnionField =
     | Named of name: SynSymbol * typ: SynType * range: range
 
 and UnionCase = UnionCase of name: SynSymbol * fields: UnionField list * range: range
-
-and [<RequireQualifiedAccess>] RecordContent =
-    | Label of RecordLabel
-    | Member of SynTypeMember
 
 and [<RequireQualifiedAccess>] SynMacroPat =
     | Const of value: SynConst * range: range
@@ -442,16 +431,6 @@ and [<RequireQualifiedAccess>] SynTypeMember =
 
 and [<RequireQualifiedAccess>] SynDirective = Open of path: SynSymbol * range: range
 
-and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynValue =
-    | EmptyList of range: range
-    | List of exprs: SynValue list * range: range
-    | Vector of exprs: SynValue list * range: range
-    | HashMap of exprs: SynValue list * range: range
-    | HashSet of exprs: SynValue list * range: range
-    | Const of constant: SynConst * range: range
-    | Symbol of value: SynSymbol
-    | Keyword of value: SynKeyword
-
 and [<RequireQualifiedAccess>] SynQuoted =
     | EmptyList of range: range
     | List of exprs: SynQuoted list * range: range
@@ -481,9 +460,9 @@ and [<RequireQualifiedAccess>] SynOp =
     member this.OperatorChar =
         match this with
         | Plus _ -> '+'
-        | Mult _ -> '+'
-        | Div _ -> '+'
-        | Minus _ -> '+'
+        | Mult _ -> '*'
+        | Div _ -> '/'
+        | Minus _ -> '-'
 
     member this.Exprs =
         match this with
@@ -516,8 +495,6 @@ and [<RequireQualifiedAccess>] SynArg =
         match d with
         | TypedArg(name = name)
         | InferredArg(name = name) -> name.Text
-
-and VispProgram = VispProgram of directives: SynDirective list * exprs: SynExpr list
 
 module Coll =
     let mkList its r =
@@ -697,22 +674,6 @@ module Syntax =
         | ex -> SynExpr.FunctionCall(ex, args, r)
 
     let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
-
-    let partitionMembers (r: RecordContent list) =
-        let labels, members =
-            r
-            |> List.partition (function
-                | RecordContent.Label _ -> true
-                | _ -> false)
-
-        (labels
-         |> List.choose (function
-             | RecordContent.Label it -> Some it
-             | _ -> None),
-         members
-         |> List.choose (function
-             | RecordContent.Member it -> Some it
-             | _ -> None))
 
     let partitionChoices<'a, 'b> (r: Choice<'a, 'b> list) =
         (r
