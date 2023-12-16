@@ -340,23 +340,15 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             |> Seq.map (memberToSymbolDetails SymbolDetails.UnionMember SymbolDetails.Variable)
         )
 
-    | SynExpr.SimpleMut(name, _, _) ->
+    | SynExpr.LetOrUse(name, _, f, _) ->
         syms.Add(
             SymbolDetails.Variable(
                 Syntax.textOfName name,
-                true,
+                f.HasFlag(LetFlags.Mutable),
                 Syntax.rangeOfName name |> textRangeToSyntaxRange
             )
         )
 
-    | SynExpr.SimpleLet(name, _, _) ->
-        syms.Add(
-            SymbolDetails.Variable(
-                Syntax.textOfName name,
-                false,
-                Syntax.rangeOfName name |> textRangeToSyntaxRange
-            )
-        )
     | SynExpr.Symbol sym ->
         syms.Add(SymbolDetails.Variable(sym.Text, false, sym.Range |> textRangeToSyntaxRange))
     | _ -> ()
