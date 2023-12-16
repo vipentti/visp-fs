@@ -125,6 +125,13 @@ type FunctionFlags =
     | Inline = 1
     | Recursive = 2
 
+[<System.Flags; RequireQualifiedAccess>]
+type LetFlags =
+    | None = 0
+    | Use = 1
+    | Mutable = 2
+    | Bang = 4
+
 [<RequireQualifiedAccess>]
 type DotMethodKind =
     | Tuple
@@ -187,6 +194,7 @@ type SynExpr =
     | Quasiquote of shorthand: bool * expr: SynQuasiquote * range: range
     | Begin of exprs: SynExpr list * kind: BeginKind * range: range
     | New of typ: SynType * args: SynExpr list * range: range
+    | LetOrUse of name: SynName * value: SynExpr * flags: LetFlags * range: range
     | SimpleLet of name: SynName * value: SynExpr * range: range
     | SimpleMut of name: SynName * value: SynExpr * range: range
     | LetStar of bindings: SynBinding list * body: SynExpr list * range: range
@@ -275,6 +283,7 @@ type SynExpr =
         | Quasiquote(range = r)
         | Begin(range = r)
         | New(range = r)
+        | LetOrUse(range = r)
         | SimpleLet(range = r)
         | SimpleMut(range = r)
         | LetStar(range = r)

@@ -636,6 +636,10 @@ module Write =
             writeExpr w WriteState.Arg expr
             string w ")"
 
+        | SynExpr.LetOrUse(name, body, flags, range) ->
+            startExpr w st range
+            writeLetFullNew w st name body flags
+
         | SynExpr.SimpleLet(name, body, range) ->
             startExpr w st range
             writeLet w st name body
@@ -1344,6 +1348,61 @@ module Write =
             for expr in body do
                 writeExpr w WriteState.Body expr
                 newline w
+
+    and private writeLetFullNew
+        (w: SynWriter)
+        (_: WriteState)
+        (name: SynName)
+        (body: SynExpr)
+        (flags: LetFlags)
+        =
+        w.EnterLet()
+
+        let isLiteral =
+            not (flags.HasFlag(LetFlags.Mutable))
+            && match body with
+               | SynExpr.Literal _ -> true
+               | _ -> false
+
+        if isLiteral then
+            string w "[<Literal>]"
+            newline w
+            indent w
+
+        if flags.HasFlag(LetFlags.Use) then
+            string w "use"
+        else
+            string w "let"
+
+        if flags.HasFlag(LetFlags.Bang) then
+            string w "!"
+
+        if (flags.HasFlag(LetFlags.Mutable)) then
+            string w " mutable"
+
+        space w
+
+        synName w name
+        string w " ="
+
+        let should_indent =
+            match body with
+            | SynExpr.Const _
+            | SynExpr.Literal _
+            | SynExpr.Keyword _
+            | SynExpr.Symbol _ -> false
+            | _ -> true
+
+        if should_indent then
+            use _ = withIndent w false
+            newline w
+            writeExpr w WriteState.Body body
+        else
+            space w
+            writeExpr w WriteState.Inline body
+
+        w.LeaveLet()
+        ()
 
     and private writeLetFull (w: SynWriter) (st: WriteState) mut (name: SynName) (body: SynExpr) =
         w.EnterLet()
