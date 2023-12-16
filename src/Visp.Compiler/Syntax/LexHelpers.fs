@@ -192,6 +192,7 @@ let keywordTokenList =
       ("concat", CONCAT)
       ("cons", CONS)
       ("deref", DEREF_KW)
+      ("do!", DO_BANG)
       ("do", DO_KW)
       ("fn", FN)
       ("fn*", FNSTAR)

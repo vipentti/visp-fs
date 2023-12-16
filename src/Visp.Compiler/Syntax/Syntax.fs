@@ -144,6 +144,7 @@ type LetFlags =
     | Use = 1
     | Mutable = 2
     | Bang = 4
+    | And = 8
 
 [<RequireQualifiedAccess>]
 type DotMethodKind =
@@ -221,6 +222,7 @@ type SynExpr =
     | FsSeq of exprs: SynExpr list * range: range
     | FsYield of expr: SynExpr * bang: bool * range: range
     | FsReturn of expr: SynExpr * bang: bool * range: range
+    | FsDo of expr: SynExpr * bang: bool * range: range
     | DotIndex of target: SynExpr * index: SynExpr list * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
     | DotMethod of
@@ -308,6 +310,7 @@ type SynExpr =
         | While(range = r)
         | FsSeq(range = r)
         | FsYield(range = r)
+        | FsDo(range = r)
         | FsReturn(range = r)
         | DotIndex(range = r)
         | DotProperty(range = r)

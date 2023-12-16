@@ -575,6 +575,11 @@ module Write =
             writeBody w writeExpr body
             ()
 
+        | SynExpr.FsDo(expr, _, range) ->
+            startExpr w st range
+            string w "do! "
+            writeExprInParens w WriteState.Inline expr
+
         | SynExpr.FsYield(expr, bang, range) ->
             startExpr w st range
             if bang then string w "yield! " else string w "yield "
