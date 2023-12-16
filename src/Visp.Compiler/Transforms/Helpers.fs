@@ -86,7 +86,10 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Pair(lhs, rhs, range) ->
             SynExpr.Pair(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Tuple(exprs, range) -> SynExpr.Tuple(List.map bound_transform exprs, range)
+        | SynExpr.FsReturn(exprs, b, range) -> SynExpr.FsReturn(bound_transform exprs, b, range)
         | SynExpr.FsYield(exprs, b, range) -> SynExpr.FsYield(bound_transform exprs, b, range)
+        | SynExpr.Computation(it, exprs, range) ->
+            SynExpr.Computation(it, List.map bound_transform exprs, range)
         | SynExpr.FsSeq(exprs, range) -> SynExpr.FsSeq(List.map bound_transform exprs, range)
         | SynExpr.Collection(SynCollection(kind, exprs, range)) ->
             SynExpr.Collection(SynCollection(kind, List.map bound_transform exprs, range))

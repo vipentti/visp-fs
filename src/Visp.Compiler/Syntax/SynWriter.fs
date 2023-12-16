@@ -580,6 +580,18 @@ module Write =
             if bang then string w "yield! " else string w "yield "
             writeExprInParens w WriteState.Inline expr
 
+        | SynExpr.FsReturn(expr, bang, range) ->
+            startExpr w st range
+            if bang then string w "return! " else string w "return "
+            writeExprInParens w WriteState.Inline expr
+
+        | SynExpr.Computation(builder, exprs, range) ->
+            startExpr w st range
+            symbol w builder false
+            string w " {"
+            writeBody w writeExpr exprs
+            string w "}"
+
         | SynExpr.FsSeq(exprs, range) ->
             startExpr w st range
             string w "seq {"

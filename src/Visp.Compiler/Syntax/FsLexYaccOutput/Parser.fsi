@@ -25,6 +25,7 @@ type token =
   | INT32_DOT_DOT of (int32 * bool)
   | INT16 of (int16 * bool)
   | INT8 of (sbyte * bool)
+  | RETURN of (bool)
   | YIELD of (bool)
   | INLINE
   | REC
@@ -56,6 +57,7 @@ type token =
   | LET
   | USE
   | LET_BANG
+  | USE_BANG
   | LETSTAR
   | MUT
   | SET
@@ -135,6 +137,7 @@ type tokenId =
     | TOKEN_INT32_DOT_DOT
     | TOKEN_INT16
     | TOKEN_INT8
+    | TOKEN_RETURN
     | TOKEN_YIELD
     | TOKEN_INLINE
     | TOKEN_REC
@@ -166,6 +169,7 @@ type tokenId =
     | TOKEN_LET
     | TOKEN_USE
     | TOKEN_LET_BANG
+    | TOKEN_USE_BANG
     | TOKEN_LETSTAR
     | TOKEN_MUT
     | TOKEN_SET
