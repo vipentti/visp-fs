@@ -198,8 +198,6 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                             for e in it do
                                 yield! loop e
                         | _ -> ()
-                | SynExpr.MacroCall _ -> ()
-                | SynExpr.MacroDef _ -> ()
                 | SynExpr.SyntaxMacroCall _ -> ()
                 | SynExpr.SyntaxMacro _ -> ()
                 | SynExpr.Quote _ -> ()
