@@ -211,7 +211,6 @@ type SynExpr =
     | Set of name: SynExpr * value: SynExpr * range: range
     | If of cond: SynExpr * main: SynExpr * alt: SynExpr option * range: range
     | While of cond: SynExpr * body: SynExpr list * range: range
-    | Pair of lhs: SynExpr * rhs: SynExpr * range: range
     | Tuple of exprs: SynExpr list * range: range
     | Collection of SynExprs
     | Computation of builder: SynSymbol * exprs: SynExpr list * range: range
@@ -276,7 +275,6 @@ type SynExpr =
         | Match(range = r)
         | Literal(range = r)
         | Tuple(range = r)
-        | Pair(range = r)
         | RangeExpr(range = r)
         | LambdaShort(range = r)
         | ForIn(range = r)

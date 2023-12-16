@@ -723,14 +723,6 @@ module Write =
             writeExpr w WriteState.Inline body
             ()
 
-        | SynExpr.Pair(lhs, rhs, range) ->
-            startExpr w st range
-            string w "("
-            writeExpr w WriteState.Inline lhs
-            string w ", "
-            writeExpr w WriteState.Inline rhs
-            string w ")"
-
         | SynExpr.Tuple(exprs, range) ->
             startExpr w st range
             string w "("
