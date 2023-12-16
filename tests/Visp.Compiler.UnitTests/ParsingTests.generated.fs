@@ -101,6 +101,11 @@ module ``tests_parsing_lambda-shorthand-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/parsing/lambda-shorthand-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-1`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/strings-interpolation-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_props`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/props.visp"
