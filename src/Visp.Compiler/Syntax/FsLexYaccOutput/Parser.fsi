@@ -58,6 +58,7 @@ type token =
   | USE
   | LET_BANG
   | USE_BANG
+  | DO_BANG
   | LETSTAR
   | MUT
   | SET
@@ -170,6 +171,7 @@ type tokenId =
     | TOKEN_USE
     | TOKEN_LET_BANG
     | TOKEN_USE_BANG
+    | TOKEN_DO_BANG
     | TOKEN_LETSTAR
     | TOKEN_MUT
     | TOKEN_SET
