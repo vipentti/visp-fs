@@ -1,0 +1,20 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 10 @"strings-interpolation-1.visp"
+let inline ``LiftedString2_strings-interpolation-1`` value =
+  $"interpolated: {value} {value} {value}"
+
+// line 8 @"strings-interpolation-1.visp"
+let value = "hello world"
+// line 10 @"strings-interpolation-1.visp"
+let visp_result_todo =
+  // line 10 @"strings-interpolation-1.visp"
+  printfn ("string is '%s'") (``LiftedString2_strings-interpolation-1`` (value))
+// line 10 @"strings-interpolation-1.visp"
+printfn ("%A") (visp_result_todo)
+

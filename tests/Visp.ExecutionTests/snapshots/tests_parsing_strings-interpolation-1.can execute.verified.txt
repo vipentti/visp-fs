@@ -1,0 +1,4 @@
+﻿string is 'interpolated: hello world hello world hello world'
+()
+
+ExitCode: 0
