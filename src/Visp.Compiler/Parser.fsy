@@ -33,11 +33,12 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token DOTDOT
 %token AT
 %token OPEN MODULE
-%token FN FNSTAR LET USE LET_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
+%token FN FNSTAR LET USE LET_BANG USE_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
+%token <bool> RETURN
 
 /* bool indicates if INT8 was 'bad' max_int+1, e.g. '128' */
 %token <sbyte * bool> INT8
@@ -348,6 +349,7 @@ parens_expr:
 
     | SEQ expr_list { SynExpr.FsSeq($2, lhs parseState) }
     | YIELD expr { SynExpr.FsYield($2, $1, lhs parseState) }
+    | RETURN expr { SynExpr.FsReturn($2, $1, lhs parseState) }
 
 macro_call_expr:
     | macro_call { SynExpr.SyntaxMacroCall($1) }
@@ -687,6 +689,8 @@ let:
         { SynExpr.LetOrUse($2, $3, LetFlags.None, lhs parseState) }
     | LET_BANG name expr
         { SynExpr.LetOrUse($2, $3, LetFlags.Bang, lhs parseState) }
+    | USE_BANG name expr
+        { SynExpr.LetOrUse($2, $3, LetFlags.Bang ||| LetFlags.Use, lhs parseState) }
     // TODO: Report error
     | LET name
         { let r = lhs parseState
@@ -697,6 +701,9 @@ let:
     | LET_BANG name
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
+    | USE_BANG name
+        { let r = lhs parseState
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang ||| LetFlags.Use, r) }
     // TODO: Report error
     | LET
         { let r = lhs parseState
@@ -707,6 +714,9 @@ let:
     | USE
         { let r = lhs parseState
           SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
+    | USE_BANG
+        { let r = lhs parseState
+          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use ||| LetFlags.Bang, r) }
 
 mut:
     | MUT name expr
@@ -1151,7 +1161,7 @@ arg_in_parens_or_brackets:
         { SynArg.InferredArg($1, lhs parseState) }
 
 function_call:
-    | expr expr_list { SynExpr.FunctionCall($1, $2, (lhs parseState))}
+    | expr expr_list { Syntax.mkFunctionCallOrCexpr $1 $2 (lhs parseState)}
     | expr { SynExpr.FunctionCall($1, [], (lhs parseState))}
 
 function_call_args:

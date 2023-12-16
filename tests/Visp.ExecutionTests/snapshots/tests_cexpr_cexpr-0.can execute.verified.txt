@@ -1,0 +1,6 @@
+﻿x is 1
+x is 2
+x is 3
+()
+
+ExitCode: 0

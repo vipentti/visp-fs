@@ -1,0 +1,30 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"cexpr-1.visp"
+open System.Threading
+
+// line 10 @"cexpr-1.visp"
+let SomeTaskCode (cancellationToken: CancellationToken) =
+  // line 11 @"cexpr-1.visp"
+  task {
+    // line 12 @"cexpr-1.visp"
+    cancellationToken.ThrowIfCancellationRequested()
+    // line 13 @"cexpr-1.visp"
+    printfn ("continuing...")
+    // line 14 @"cexpr-1.visp"
+    return (1)}
+
+// line 17 @"cexpr-1.visp"
+let visp_result_todo =
+  // line 17 @"cexpr-1.visp"
+  SomeTaskCode ((CancellationToken.None))
+    |> Async.AwaitTask
+    |> Async.RunSynchronously
+// line 17 @"cexpr-1.visp"
+printfn ("%A") (visp_result_todo)
+
