@@ -185,8 +185,6 @@ type SynExprs = SynCollection<SynExpr>
 type SynExpr =
     // special operator application
     | Op of SynOp
-    | MacroDef of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
-    | MacroCall of name: SynSymbol * args: SynValue list * range: range
     | SyntaxMacroCall of call: SynMacroCall
     | SyntaxMacro of macro: SynMacro
     | FunctionDef of
@@ -283,8 +281,6 @@ type SynExpr =
         | LambdaShort(range = r)
         | ForIn(range = r)
         | ForTo(range = r)
-        | MacroDef(range = r)
-        | MacroCall(range = r)
         | Union(range = r)
         | FunctionDef(range = r)
         | Record(range = r)
