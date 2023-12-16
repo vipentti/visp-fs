@@ -76,8 +76,6 @@ let rec transform (func: SynExpr -> SynExpr) expr =
             SynExpr.LetOrUse(name, bound_transform value, flags, range)
         | SynExpr.Set(name, value, range) ->
             SynExpr.Set(bound_transform name, bound_transform value, range)
-        | SynExpr.Pair(lhs, rhs, range) ->
-            SynExpr.Pair(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Tuple(exprs, range) -> SynExpr.Tuple(List.map bound_transform exprs, range)
         | SynExpr.FsReturn(exprs, b, range) -> SynExpr.FsReturn(bound_transform exprs, b, range)
         | SynExpr.FsYield(exprs, b, range) -> SynExpr.FsYield(bound_transform exprs, b, range)

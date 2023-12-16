@@ -165,7 +165,6 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for e in exprs do
                         yield! loop e
 
-                | SynExpr.Pair(lhs, rhs, _)
                 | SynExpr.Concat(lhs, rhs, _)
                 | SynExpr.Cons(lhs, rhs, _) ->
                     yield! loop lhs

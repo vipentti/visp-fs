@@ -2144,10 +2144,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 287 "Parser.fsy"
+# 285 "Parser.fsy"
                                SynExpr.Tuple(_1 :: _3, lhs parseState)
                    )
-# 287 "Parser.fsy"
+# 285 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2152 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2156,10 +2156,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 289 "Parser.fsy"
+# 287 "Parser.fsy"
                                SynExpr.Tuple(_1 :: _3, lhs parseState)
                    )
-# 289 "Parser.fsy"
+# 287 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2164 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2168,10 +2168,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 291 "Parser.fsy"
+# 289 "Parser.fsy"
                                CollExpr.mkFsList (_1 :: _3) (lhs parseState)
                    )
-# 291 "Parser.fsy"
+# 289 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2176 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2179,10 +2179,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 292 "Parser.fsy"
+# 290 "Parser.fsy"
                                                         _1 
                    )
-# 292 "Parser.fsy"
+# 290 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2187 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2190,10 +2190,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 293 "Parser.fsy"
+# 291 "Parser.fsy"
                                                            _1 
                    )
-# 293 "Parser.fsy"
+# 291 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2198 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2201,10 +2201,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 294 "Parser.fsy"
+# 292 "Parser.fsy"
                                  _1 
                    )
-# 294 "Parser.fsy"
+# 292 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2209 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2212,10 +2212,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 295 "Parser.fsy"
+# 293 "Parser.fsy"
                                      _1 
                    )
-# 295 "Parser.fsy"
+# 293 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2220 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2223,10 +2223,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 296 "Parser.fsy"
+# 294 "Parser.fsy"
                                  _1 
                    )
-# 296 "Parser.fsy"
+# 294 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2231 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2234,10 +2234,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 297 "Parser.fsy"
+# 295 "Parser.fsy"
                                  _1 
                    )
-# 297 "Parser.fsy"
+# 295 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2242 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2245,10 +2245,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 298 "Parser.fsy"
+# 296 "Parser.fsy"
                                      _1 
                    )
-# 298 "Parser.fsy"
+# 296 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2253 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2256,10 +2256,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 299 "Parser.fsy"
+# 297 "Parser.fsy"
                                        _1 
                    )
-# 299 "Parser.fsy"
+# 297 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2264 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2267,10 +2267,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 300 "Parser.fsy"
+# 298 "Parser.fsy"
                                          _1 
                    )
-# 300 "Parser.fsy"
+# 298 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2275 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2278,10 +2278,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 301 "Parser.fsy"
+# 299 "Parser.fsy"
                                         _1 
                    )
-# 301 "Parser.fsy"
+# 299 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2286 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2289,10 +2289,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 302 "Parser.fsy"
+# 300 "Parser.fsy"
                                          _1 
                    )
-# 302 "Parser.fsy"
+# 300 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2297 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2300,10 +2300,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 303 "Parser.fsy"
+# 301 "Parser.fsy"
                                          _1 
                    )
-# 303 "Parser.fsy"
+# 301 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2308 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2311,10 +2311,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 304 "Parser.fsy"
+# 302 "Parser.fsy"
                                               _1 
                    )
-# 304 "Parser.fsy"
+# 302 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2319 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2322,10 +2322,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 305 "Parser.fsy"
+# 303 "Parser.fsy"
                                         _1 
                    )
-# 305 "Parser.fsy"
+# 303 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2330 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2333,10 +2333,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 306 "Parser.fsy"
+# 304 "Parser.fsy"
                                        _1 
                    )
-# 306 "Parser.fsy"
+# 304 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2341 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2344,10 +2344,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 307 "Parser.fsy"
+# 305 "Parser.fsy"
                                         _1 
                    )
-# 307 "Parser.fsy"
+# 305 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2352 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2355,10 +2355,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 308 "Parser.fsy"
+# 306 "Parser.fsy"
                                       _1 
                    )
-# 308 "Parser.fsy"
+# 306 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2363 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2366,10 +2366,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 309 "Parser.fsy"
+# 307 "Parser.fsy"
                                        _1 
                    )
-# 309 "Parser.fsy"
+# 307 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2374 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2377,10 +2377,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 310 "Parser.fsy"
+# 308 "Parser.fsy"
                                          _1 
                    )
-# 310 "Parser.fsy"
+# 308 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2385 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2388,10 +2388,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 311 "Parser.fsy"
+# 309 "Parser.fsy"
                                                      SynExpr.Op(_1) 
                    )
-# 311 "Parser.fsy"
+# 309 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2396 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2399,10 +2399,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 312 "Parser.fsy"
+# 310 "Parser.fsy"
                                                _1 
                    )
-# 312 "Parser.fsy"
+# 310 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2407 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2410,10 +2410,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 313 "Parser.fsy"
+# 311 "Parser.fsy"
                                              _1 
                    )
-# 313 "Parser.fsy"
+# 311 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2418 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2421,10 +2421,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 315 "Parser.fsy"
+# 313 "Parser.fsy"
                                SynExpr.Quote(false, _2, lhs parseState) 
                    )
-# 315 "Parser.fsy"
+# 313 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2429 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2432,10 +2432,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 317 "Parser.fsy"
+# 315 "Parser.fsy"
                                SynExpr.Quasiquote(false, _2, lhs parseState) 
                    )
-# 317 "Parser.fsy"
+# 315 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2440 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2443,10 +2443,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 319 "Parser.fsy"
+# 317 "Parser.fsy"
                                SynExpr.Begin(_2, BeginKind.Begin, lhs parseState) 
                    )
-# 319 "Parser.fsy"
+# 317 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2451 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2454,10 +2454,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 321 "Parser.fsy"
+# 319 "Parser.fsy"
                                SynExpr.Begin(_2, BeginKind.Do, lhs parseState) 
                    )
-# 321 "Parser.fsy"
+# 319 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2462 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2465,10 +2465,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 322 "Parser.fsy"
+# 320 "Parser.fsy"
                                       _1 
                    )
-# 322 "Parser.fsy"
+# 320 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2473 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2476,10 +2476,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 324 "Parser.fsy"
+# 322 "Parser.fsy"
                                SynExpr.Atom(_2, lhs parseState) 
                    )
-# 324 "Parser.fsy"
+# 322 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2484 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2487,10 +2487,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 326 "Parser.fsy"
+# 324 "Parser.fsy"
                                SynExpr.Deref(false, _2, lhs parseState) 
                    )
-# 326 "Parser.fsy"
+# 324 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2495 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2499,10 +2499,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 328 "Parser.fsy"
+# 326 "Parser.fsy"
                                SynExpr.While(_2, _3, lhs parseState) 
                    )
-# 328 "Parser.fsy"
+# 326 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2507 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2510,10 +2510,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 330 "Parser.fsy"
+# 328 "Parser.fsy"
                                SynExpr.ThreadFirst (_2, lhs parseState)
                    )
-# 330 "Parser.fsy"
+# 328 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2518 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2521,20 +2521,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 332 "Parser.fsy"
+# 330 "Parser.fsy"
                                SynExpr.ThreadLast (_2, lhs parseState)
                    )
-# 332 "Parser.fsy"
+# 330 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2529 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 334 "Parser.fsy"
+# 332 "Parser.fsy"
                                                                 SynExpr.Tuple([], lhs parseState)
                    )
-# 334 "Parser.fsy"
+# 332 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2539 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2542,20 +2542,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 335 "Parser.fsy"
+# 333 "Parser.fsy"
                                                                           SynExpr.Tuple(_2, lhs parseState)
                    )
-# 335 "Parser.fsy"
+# 333 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2550 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 337 "Parser.fsy"
+# 335 "Parser.fsy"
                                       CollExpr.mkFsMap [] (lhs parseState)
                    )
-# 337 "Parser.fsy"
+# 335 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2560 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2563,20 +2563,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 338 "Parser.fsy"
+# 336 "Parser.fsy"
                                                 CollExpr.mkFsMap _2 (lhs parseState)
                    )
-# 338 "Parser.fsy"
+# 336 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2571 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 340 "Parser.fsy"
+# 338 "Parser.fsy"
                                       CollExpr.mkFsSet [] (lhs parseState)
                    )
-# 340 "Parser.fsy"
+# 338 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2581 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2584,20 +2584,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 341 "Parser.fsy"
+# 339 "Parser.fsy"
                                                 CollExpr.mkFsSet _2 (lhs parseState)
                    )
-# 341 "Parser.fsy"
+# 339 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2592 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 343 "Parser.fsy"
+# 341 "Parser.fsy"
                                         CollExpr.mkFsArray [] (lhs parseState)
                    )
-# 343 "Parser.fsy"
+# 341 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2602 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2605,20 +2605,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 344 "Parser.fsy"
+# 342 "Parser.fsy"
                                                   CollExpr.mkFsArray _2 (lhs parseState)
                    )
-# 344 "Parser.fsy"
+# 342 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2613 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 346 "Parser.fsy"
+# 344 "Parser.fsy"
                                       CollExpr.mkFsVec [] (lhs parseState)
                    )
-# 346 "Parser.fsy"
+# 344 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2623 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2626,10 +2626,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 347 "Parser.fsy"
+# 345 "Parser.fsy"
                                                 CollExpr.mkFsVec _2 (lhs parseState)
                    )
-# 347 "Parser.fsy"
+# 345 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2634 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2637,10 +2637,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 349 "Parser.fsy"
+# 347 "Parser.fsy"
                                            SynExpr.FsSeq(_2, lhs parseState) 
                    )
-# 349 "Parser.fsy"
+# 347 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2645 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2649,10 +2649,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 350 "Parser.fsy"
+# 348 "Parser.fsy"
                                         SynExpr.FsYield(_2, _1, lhs parseState) 
                    )
-# 350 "Parser.fsy"
+# 348 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2657 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2661,10 +2661,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 351 "Parser.fsy"
+# 349 "Parser.fsy"
                                          SynExpr.FsReturn(_2, _1, lhs parseState) 
                    )
-# 351 "Parser.fsy"
+# 349 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2669 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2672,10 +2672,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 352 "Parser.fsy"
+# 350 "Parser.fsy"
                                           SynExpr.FsDo(_2, true, lhs parseState) 
                    )
-# 352 "Parser.fsy"
+# 350 "Parser.fsy"
                  : 'gentype_parens_expr));
 # 2680 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2683,10 +2683,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 355 "Parser.fsy"
+# 353 "Parser.fsy"
                                         SynExpr.SyntaxMacroCall(_1) 
                    )
-# 355 "Parser.fsy"
+# 353 "Parser.fsy"
                  : 'gentype_macro_call_expr));
 # 2691 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2694,11 +2694,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 359 "Parser.fsy"
+# 357 "Parser.fsy"
                                let mNameBody = SynMacroBody.Symbol(_1)
                                SynMacroCall(_1, [mNameBody], lhs parseState) 
                    )
-# 359 "Parser.fsy"
+# 357 "Parser.fsy"
                  : 'gentype_macro_call));
 # 2703 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2707,11 +2707,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 362 "Parser.fsy"
+# 360 "Parser.fsy"
                                let mNameBody = SynMacroBody.Symbol(_1)
                                SynMacroCall(_1, mNameBody :: _2, lhs parseState) 
                    )
-# 362 "Parser.fsy"
+# 360 "Parser.fsy"
                  : 'gentype_macro_call));
 # 2716 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2719,10 +2719,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 366 "Parser.fsy"
+# 364 "Parser.fsy"
                                           SynExpr.SyntaxMacro(_1)
                    )
-# 366 "Parser.fsy"
+# 364 "Parser.fsy"
                  : 'gentype_syntax_macro_expr));
 # 2727 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2731,10 +2731,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 370 "Parser.fsy"
+# 368 "Parser.fsy"
                                SynMacro(_2, _3, lhs parseState )
                    )
-# 370 "Parser.fsy"
+# 368 "Parser.fsy"
                  : 'gentype_syntax_macro));
 # 2739 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2742,10 +2742,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 372 "Parser.fsy"
+# 370 "Parser.fsy"
                                                     List.rev _1 
                    )
-# 372 "Parser.fsy"
+# 370 "Parser.fsy"
                  : 'gentype_macro_cases));
 # 2750 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2753,10 +2753,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 374 "Parser.fsy"
+# 372 "Parser.fsy"
                                               [_1] 
                    )
-# 374 "Parser.fsy"
+# 372 "Parser.fsy"
                  : 'gentype_rev_macro_cases));
 # 2761 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2765,10 +2765,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 375 "Parser.fsy"
+# 373 "Parser.fsy"
                                                               _2 :: _1 
                    )
-# 375 "Parser.fsy"
+# 373 "Parser.fsy"
                  : 'gentype_rev_macro_cases));
 # 2773 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2777,10 +2777,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 379 "Parser.fsy"
+# 377 "Parser.fsy"
                                SynMacroCase(_2, _3, lhs parseState) 
                    )
-# 379 "Parser.fsy"
+# 377 "Parser.fsy"
                  : 'gentype_macro_case_start));
 # 2785 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2789,10 +2789,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 381 "Parser.fsy"
+# 379 "Parser.fsy"
                                SynMacroCase(_2, _3, lhs parseState) 
                    )
-# 381 "Parser.fsy"
+# 379 "Parser.fsy"
                  : 'gentype_macro_case_start));
 # 2797 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2800,10 +2800,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 384 "Parser.fsy"
+# 382 "Parser.fsy"
                                                           _2 
                    )
-# 384 "Parser.fsy"
+# 382 "Parser.fsy"
                  : 'gentype_macro_case_pat));
 # 2808 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2811,10 +2811,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 385 "Parser.fsy"
+# 383 "Parser.fsy"
                                                               _2 
                    )
-# 385 "Parser.fsy"
+# 383 "Parser.fsy"
                  : 'gentype_macro_case_pat));
 # 2819 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2822,10 +2822,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 387 "Parser.fsy"
+# 385 "Parser.fsy"
                                                           List.rev _1 
                    )
-# 387 "Parser.fsy"
+# 385 "Parser.fsy"
                  : 'gentype_macro_pat_list));
 # 2830 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2833,10 +2833,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 389 "Parser.fsy"
+# 387 "Parser.fsy"
                                        [_1] 
                    )
-# 389 "Parser.fsy"
+# 387 "Parser.fsy"
                  : 'gentype_rev_macro_pat_list));
 # 2841 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2845,10 +2845,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 390 "Parser.fsy"
+# 388 "Parser.fsy"
                                                           _2 :: _1 
                    )
-# 390 "Parser.fsy"
+# 388 "Parser.fsy"
                  : 'gentype_rev_macro_pat_list));
 # 2853 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2856,10 +2856,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 393 "Parser.fsy"
+# 391 "Parser.fsy"
                                       SynMacroPat.Const(fst _1, snd _1) 
                    )
-# 393 "Parser.fsy"
+# 391 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2864 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2867,10 +2867,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 394 "Parser.fsy"
+# 392 "Parser.fsy"
                                                           SynMacroPat.List(_2, lhs parseState) 
                    )
-# 394 "Parser.fsy"
+# 392 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2875 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2878,60 +2878,60 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 395 "Parser.fsy"
+# 393 "Parser.fsy"
                                                               SynMacroPat.List(_2, lhs parseState) 
                    )
-# 395 "Parser.fsy"
+# 393 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2886 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 396 "Parser.fsy"
+# 394 "Parser.fsy"
                                  SynMacroPat.Trivia(SynMacroTriviaKind.Dot, lhs parseState) 
                    )
-# 396 "Parser.fsy"
+# 394 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2896 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 397 "Parser.fsy"
+# 395 "Parser.fsy"
                                    SynMacroPat.Trivia(SynMacroTriviaKind.Comma, lhs parseState) 
                    )
-# 397 "Parser.fsy"
+# 395 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2906 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 398 "Parser.fsy"
+# 396 "Parser.fsy"
                                    SynMacroPat.Trivia(SynMacroTriviaKind.Colon, lhs parseState) 
                    )
-# 398 "Parser.fsy"
+# 396 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2916 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 399 "Parser.fsy"
+# 397 "Parser.fsy"
                                          SynMacroPat.Trivia(SynMacroTriviaKind.ColonColon, lhs parseState) 
                    )
-# 399 "Parser.fsy"
+# 397 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2926 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 400 "Parser.fsy"
+# 398 "Parser.fsy"
                                  SynMacroPat.Trivia(SynMacroTriviaKind.Bar, lhs parseState) 
                    )
-# 400 "Parser.fsy"
+# 398 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2936 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2939,7 +2939,7 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 401 "Parser.fsy"
+# 399 "Parser.fsy"
                                    
                              let text = _1
                              let symText = (Syntax.textOfSymbol text)
@@ -2950,7 +2950,7 @@ let _fsyacc_reductions = lazy [|
                              else
                                  SynMacroPat.Symbol (text, lhs parseState) 
                    )
-# 401 "Parser.fsy"
+# 399 "Parser.fsy"
                  : 'gentype_macro_pat));
 # 2955 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2958,10 +2958,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 411 "Parser.fsy"
+# 409 "Parser.fsy"
                                                             List.rev _1 
                    )
-# 411 "Parser.fsy"
+# 409 "Parser.fsy"
                  : 'gentype_macro_body_list));
 # 2966 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2969,10 +2969,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 413 "Parser.fsy"
+# 411 "Parser.fsy"
                                         [_1] 
                    )
-# 413 "Parser.fsy"
+# 411 "Parser.fsy"
                  : 'gentype_rev_macro_body_list));
 # 2977 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -2981,150 +2981,150 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 414 "Parser.fsy"
+# 412 "Parser.fsy"
                                                             _2 :: _1 
                    )
-# 414 "Parser.fsy"
+# 412 "Parser.fsy"
                  : 'gentype_rev_macro_body_list));
 # 2989 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 418 "Parser.fsy"
+# 416 "Parser.fsy"
                                     SynListKind.Paren 
                    )
-# 418 "Parser.fsy"
+# 416 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 2999 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 419 "Parser.fsy"
+# 417 "Parser.fsy"
                                       SynListKind.Bracket 
                    )
-# 419 "Parser.fsy"
+# 417 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3009 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 420 "Parser.fsy"
+# 418 "Parser.fsy"
                                     SynListKind.Brace 
                    )
-# 420 "Parser.fsy"
+# 418 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3019 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 421 "Parser.fsy"
+# 419 "Parser.fsy"
                                         SynListKind.HashBrace 
                    )
-# 421 "Parser.fsy"
+# 419 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3029 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 422 "Parser.fsy"
+# 420 "Parser.fsy"
                                         SynListKind.HashParen 
                    )
-# 422 "Parser.fsy"
+# 420 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3039 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 423 "Parser.fsy"
+# 421 "Parser.fsy"
                                           SynListKind.HashBracket 
                    )
-# 423 "Parser.fsy"
+# 421 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3049 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 424 "Parser.fsy"
+# 422 "Parser.fsy"
                                        SynListKind.BraceBar 
                    )
-# 424 "Parser.fsy"
+# 422 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3059 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 425 "Parser.fsy"
+# 423 "Parser.fsy"
                                          SynListKind.BracketBar 
                    )
-# 425 "Parser.fsy"
+# 423 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3069 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 426 "Parser.fsy"
+# 424 "Parser.fsy"
                                          SynListKind.DotBracket 
                    )
-# 426 "Parser.fsy"
+# 424 "Parser.fsy"
                  : 'gentype_macro_open_kind));
 # 3079 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 429 "Parser.fsy"
+# 427 "Parser.fsy"
                                     () 
                    )
-# 429 "Parser.fsy"
+# 427 "Parser.fsy"
                  : 'gentype_macro_close_kind));
 # 3089 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 430 "Parser.fsy"
+# 428 "Parser.fsy"
                                       () 
                    )
-# 430 "Parser.fsy"
+# 428 "Parser.fsy"
                  : 'gentype_macro_close_kind));
 # 3099 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 431 "Parser.fsy"
+# 429 "Parser.fsy"
                                     () 
                    )
-# 431 "Parser.fsy"
+# 429 "Parser.fsy"
                  : 'gentype_macro_close_kind));
 # 3109 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 432 "Parser.fsy"
+# 430 "Parser.fsy"
                                        () 
                    )
-# 432 "Parser.fsy"
+# 430 "Parser.fsy"
                  : 'gentype_macro_close_kind));
 # 3119 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 433 "Parser.fsy"
+# 431 "Parser.fsy"
                                          () 
                    )
-# 433 "Parser.fsy"
+# 431 "Parser.fsy"
                  : 'gentype_macro_close_kind));
 # 3129 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3132,10 +3132,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 436 "Parser.fsy"
+# 434 "Parser.fsy"
                                       SynMacroBody.Const(fst _1, snd _1) 
                    )
-# 436 "Parser.fsy"
+# 434 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3140 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3143,11 +3143,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 438 "Parser.fsy"
+# 436 "Parser.fsy"
                                let mNameBody = SynMacroBody.Symbol(_2)
                                SynMacroBody.Call(SynMacroCall(_2, [mNameBody], lhs parseState))
                    )
-# 438 "Parser.fsy"
+# 436 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3152 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3156,11 +3156,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 441 "Parser.fsy"
+# 439 "Parser.fsy"
                                let mNameBody = SynMacroBody.Symbol(_2)
                                SynMacroBody.Call(SynMacroCall(_2, mNameBody :: _3, lhs parseState)) 
                    )
-# 441 "Parser.fsy"
+# 439 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3165 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3169,10 +3169,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 444 "Parser.fsy"
+# 442 "Parser.fsy"
                                                               SynMacroBody.List(_1, [], lhs parseState) 
                    )
-# 444 "Parser.fsy"
+# 442 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3177 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3182,60 +3182,60 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 445 "Parser.fsy"
+# 443 "Parser.fsy"
                                                                               SynMacroBody.List(_1, _2, lhs parseState) 
                    )
-# 445 "Parser.fsy"
+# 443 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3190 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 447 "Parser.fsy"
+# 445 "Parser.fsy"
                                  SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) 
                    )
-# 447 "Parser.fsy"
+# 445 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3200 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 448 "Parser.fsy"
+# 446 "Parser.fsy"
                                    SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) 
                    )
-# 448 "Parser.fsy"
+# 446 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3210 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 449 "Parser.fsy"
+# 447 "Parser.fsy"
                                    SynMacroBody.Trivia(SynMacroTriviaKind.Colon, lhs parseState) 
                    )
-# 449 "Parser.fsy"
+# 447 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3220 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 450 "Parser.fsy"
+# 448 "Parser.fsy"
                                          SynMacroBody.Trivia(SynMacroTriviaKind.ColonColon, lhs parseState) 
                    )
-# 450 "Parser.fsy"
+# 448 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3230 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 451 "Parser.fsy"
+# 449 "Parser.fsy"
                                  SynMacroBody.Trivia(SynMacroTriviaKind.Bar, lhs parseState) 
                    )
-# 451 "Parser.fsy"
+# 449 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3240 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3243,10 +3243,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 452 "Parser.fsy"
+# 450 "Parser.fsy"
                                      SynMacroBody.Keyword(_1) 
                    )
-# 452 "Parser.fsy"
+# 450 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3251 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3254,7 +3254,7 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 453 "Parser.fsy"
+# 451 "Parser.fsy"
                                    
                              let text = _1
                              let symText = (Syntax.textOfSymbol text)
@@ -3265,7 +3265,7 @@ let _fsyacc_reductions = lazy [|
                              else
                                  SynMacroBody.Symbol (text) 
                    )
-# 453 "Parser.fsy"
+# 451 "Parser.fsy"
                  : 'gentype_macro_body));
 # 3270 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3274,10 +3274,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 465 "Parser.fsy"
+# 463 "Parser.fsy"
                                SynExpr.Cons(_2, _3, lhs parseState)
                    )
-# 465 "Parser.fsy"
+# 463 "Parser.fsy"
                  : 'gentype_cons_expr));
 # 3282 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3285,20 +3285,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 467 "Parser.fsy"
+# 465 "Parser.fsy"
                                SynExpr.Cons(_2, Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)
                    )
-# 467 "Parser.fsy"
+# 465 "Parser.fsy"
                  : 'gentype_cons_expr));
 # 3293 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 469 "Parser.fsy"
+# 467 "Parser.fsy"
                                SynExpr.Cons(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)
                    )
-# 469 "Parser.fsy"
+# 467 "Parser.fsy"
                  : 'gentype_cons_expr));
 # 3303 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3307,10 +3307,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 473 "Parser.fsy"
+# 471 "Parser.fsy"
                                SynExpr.Concat(_2, _3, lhs parseState)
                    )
-# 473 "Parser.fsy"
+# 471 "Parser.fsy"
                  : 'gentype_concat_expr));
 # 3315 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3318,20 +3318,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 475 "Parser.fsy"
+# 473 "Parser.fsy"
                                SynExpr.Concat(_2, Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)
                    )
-# 475 "Parser.fsy"
+# 473 "Parser.fsy"
                  : 'gentype_concat_expr));
 # 3326 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 477 "Parser.fsy"
+# 475 "Parser.fsy"
                                SynExpr.Concat(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)
                    )
-# 477 "Parser.fsy"
+# 475 "Parser.fsy"
                  : 'gentype_concat_expr));
 # 3336 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3339,10 +3339,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 481 "Parser.fsy"
+# 479 "Parser.fsy"
                                SynExpr.New(_2, [], lhs parseState) 
                    )
-# 481 "Parser.fsy"
+# 479 "Parser.fsy"
                  : 'gentype_new_expr));
 # 3347 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3351,10 +3351,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 483 "Parser.fsy"
+# 481 "Parser.fsy"
                                SynExpr.New(_2, _3, lhs parseState) 
                    )
-# 483 "Parser.fsy"
+# 481 "Parser.fsy"
                  : 'gentype_new_expr));
 # 3359 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3362,10 +3362,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 485 "Parser.fsy"
+# 483 "Parser.fsy"
                                                             List.rev _1 
                    )
-# 485 "Parser.fsy"
+# 483 "Parser.fsy"
                  : 'gentype_threadable_list));
 # 3370 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3373,10 +3373,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 487 "Parser.fsy"
+# 485 "Parser.fsy"
                                         [_1] 
                    )
-# 487 "Parser.fsy"
+# 485 "Parser.fsy"
                  : 'gentype_rev_threadable_list));
 # 3381 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3385,10 +3385,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 488 "Parser.fsy"
+# 486 "Parser.fsy"
                                                             _2 :: _1 
                    )
-# 488 "Parser.fsy"
+# 486 "Parser.fsy"
                  : 'gentype_rev_threadable_list));
 # 3393 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3396,10 +3396,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 492 "Parser.fsy"
+# 490 "Parser.fsy"
                                SynThreadable.Property(_1, lhs parseState) 
                    )
-# 492 "Parser.fsy"
+# 490 "Parser.fsy"
                  : 'gentype_threadable));
 # 3404 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3407,10 +3407,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 494 "Parser.fsy"
+# 492 "Parser.fsy"
                                SynThreadable.Method(_1, DotMethodKind.Tuple, lhs parseState) 
                    )
-# 494 "Parser.fsy"
+# 492 "Parser.fsy"
                  : 'gentype_threadable));
 # 3415 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3418,10 +3418,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 496 "Parser.fsy"
+# 494 "Parser.fsy"
                                SynThreadable.Method(_1, DotMethodKind.Apply, lhs parseState) 
                    )
-# 496 "Parser.fsy"
+# 494 "Parser.fsy"
                  : 'gentype_threadable));
 # 3426 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3429,10 +3429,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 498 "Parser.fsy"
+# 496 "Parser.fsy"
                                SynThreadable.Index(_1, lhs parseState) 
                    )
-# 498 "Parser.fsy"
+# 496 "Parser.fsy"
                  : 'gentype_threadable));
 # 3437 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3440,10 +3440,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 500 "Parser.fsy"
+# 498 "Parser.fsy"
                                SynThreadable.Expr(_1, lhs parseState) 
                    )
-# 500 "Parser.fsy"
+# 498 "Parser.fsy"
                  : 'gentype_threadable));
 # 3448 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3451,13 +3451,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 504 "Parser.fsy"
+# 502 "Parser.fsy"
                               
                                let text = (_1).TrimStart('+')
                                SynSymbol(Ident(text, rhs parseState 1))
                              
                    )
-# 504 "Parser.fsy"
+# 502 "Parser.fsy"
                  : 'gentype_prop_plus));
 # 3462 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3465,10 +3465,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 509 "Parser.fsy"
+# 507 "Parser.fsy"
                                                             List.rev _1 
                    )
-# 509 "Parser.fsy"
+# 507 "Parser.fsy"
                  : 'gentype_expr_comma_list));
 # 3473 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3476,20 +3476,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 511 "Parser.fsy"
+# 509 "Parser.fsy"
                                   [_1] 
                    )
-# 511 "Parser.fsy"
+# 509 "Parser.fsy"
                  : 'gentype_rev_expr_comma_list));
 # 3484 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 512 "Parser.fsy"
+# 510 "Parser.fsy"
                                      [(Syntax.mkSynSymbolExpr "*" (rhs parseState 1))] 
                    )
-# 512 "Parser.fsy"
+# 510 "Parser.fsy"
                  : 'gentype_rev_expr_comma_list));
 # 3494 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3498,10 +3498,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 513 "Parser.fsy"
+# 511 "Parser.fsy"
                                                             _3 :: _1 
                    )
-# 513 "Parser.fsy"
+# 511 "Parser.fsy"
                  : 'gentype_rev_expr_comma_list));
 # 3506 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3509,10 +3509,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 517 "Parser.fsy"
+# 515 "Parser.fsy"
                                [_2] 
                    )
-# 517 "Parser.fsy"
+# 515 "Parser.fsy"
                  : 'gentype_dot_bracket_expr_raw));
 # 3517 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3521,10 +3521,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 519 "Parser.fsy"
+# 517 "Parser.fsy"
                                _2 :: _4 
                    )
-# 519 "Parser.fsy"
+# 517 "Parser.fsy"
                  : 'gentype_dot_bracket_expr_raw));
 # 3529 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3532,10 +3532,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 521 "Parser.fsy"
+# 519 "Parser.fsy"
                                (Syntax.mkSynSymbolExpr "*" (rhs parseState 2)) :: _4 
                    )
-# 521 "Parser.fsy"
+# 519 "Parser.fsy"
                  : 'gentype_dot_bracket_expr_raw));
 # 3540 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3544,10 +3544,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 525 "Parser.fsy"
+# 523 "Parser.fsy"
                                SynExpr.DotIndex(_2, _1, lhs parseState)
                    )
-# 525 "Parser.fsy"
+# 523 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3552 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3556,10 +3556,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 527 "Parser.fsy"
+# 525 "Parser.fsy"
                                SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), _1, lhs parseState)
                    )
-# 527 "Parser.fsy"
+# 525 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3564 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3568,10 +3568,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 529 "Parser.fsy"
+# 527 "Parser.fsy"
                                SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), [_2], lhs parseState)
                    )
-# 529 "Parser.fsy"
+# 527 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3576 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3580,10 +3580,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 531 "Parser.fsy"
+# 529 "Parser.fsy"
                                SynExpr.DotProperty(_3, _2, lhs parseState)
                    )
-# 531 "Parser.fsy"
+# 529 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3588 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3592,10 +3592,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 533 "Parser.fsy"
+# 531 "Parser.fsy"
                                SynExpr.DotProperty(_2, _1, lhs parseState)
                    )
-# 533 "Parser.fsy"
+# 531 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3600 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3605,10 +3605,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 535 "Parser.fsy"
+# 533 "Parser.fsy"
                                SynExpr.DotMethod(_2, _1, _3, DotMethodKind.Tuple, lhs parseState) 
                    )
-# 535 "Parser.fsy"
+# 533 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3613 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3617,10 +3617,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 537 "Parser.fsy"
+# 535 "Parser.fsy"
                                SynExpr.DotMethod(_2, _1, [], DotMethodKind.Tuple, lhs parseState) 
                    )
-# 537 "Parser.fsy"
+# 535 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3625 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3630,10 +3630,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 539 "Parser.fsy"
+# 537 "Parser.fsy"
                                SynExpr.DotMethod(_2, _1, _3, DotMethodKind.Apply, lhs parseState) 
                    )
-# 539 "Parser.fsy"
+# 537 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3638 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3642,10 +3642,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 541 "Parser.fsy"
+# 539 "Parser.fsy"
                                SynExpr.DotMethod(_2, _1, [], DotMethodKind.Apply, lhs parseState) 
                    )
-# 541 "Parser.fsy"
+# 539 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3650 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3654,7 +3654,7 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 543 "Parser.fsy"
+# 541 "Parser.fsy"
                               
                                let text = Syntax.textOfSymbol _3
                                if text.StartsWith('+') then
@@ -3662,7 +3662,7 @@ let _fsyacc_reductions = lazy [|
                                else
                                  SynExpr.DotMethod(_2, _3, [], DotMethodKind.Tuple, lhs parseState) 
                    )
-# 543 "Parser.fsy"
+# 541 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3667 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3671,10 +3671,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 550 "Parser.fsy"
+# 548 "Parser.fsy"
                                SynExpr.DotProperty(_2, _3, lhs parseState) 
                    )
-# 550 "Parser.fsy"
+# 548 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3679 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3683,10 +3683,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 553 "Parser.fsy"
+# 551 "Parser.fsy"
                                SynExpr.DotIndex(_2, _3, lhs parseState) 
                    )
-# 553 "Parser.fsy"
+# 551 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3691 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3696,60 +3696,60 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 555 "Parser.fsy"
+# 553 "Parser.fsy"
                                SynExpr.DotMethod(_2, _3, _4, DotMethodKind.Tuple, lhs parseState) 
                    )
-# 555 "Parser.fsy"
+# 553 "Parser.fsy"
                  : 'gentype_dot_expr));
 # 3704 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 558 "Parser.fsy"
+# 556 "Parser.fsy"
                                     () 
                    )
-# 558 "Parser.fsy"
+# 556 "Parser.fsy"
                  : 'gentype_lparen_or_lbracket));
 # 3714 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 559 "Parser.fsy"
+# 557 "Parser.fsy"
                                       () 
                    )
-# 559 "Parser.fsy"
+# 557 "Parser.fsy"
                  : 'gentype_lparen_or_lbracket));
 # 3724 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 562 "Parser.fsy"
+# 560 "Parser.fsy"
                                     () 
                    )
-# 562 "Parser.fsy"
+# 560 "Parser.fsy"
                  : 'gentype_rparen_or_rbracket));
 # 3734 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 563 "Parser.fsy"
+# 561 "Parser.fsy"
                                       () 
                    )
-# 563 "Parser.fsy"
+# 561 "Parser.fsy"
                  : 'gentype_rparen_or_rbracket));
 # 3744 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 566 "Parser.fsy"
+# 564 "Parser.fsy"
                                        CollExpr.mkFsList [] (lhs parseState)
                    )
-# 566 "Parser.fsy"
+# 564 "Parser.fsy"
                  : 'gentype_list_expr));
 # 3754 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3757,10 +3757,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 567 "Parser.fsy"
+# 565 "Parser.fsy"
                                                  CollExpr.mkFsList _2 (lhs parseState)
                    )
-# 567 "Parser.fsy"
+# 565 "Parser.fsy"
                  : 'gentype_list_expr));
 # 3765 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3772,10 +3772,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 571 "Parser.fsy"
+# 569 "Parser.fsy"
                                SynExpr.ForIn(_3, _4, _6, lhs parseState) 
                    )
-# 571 "Parser.fsy"
+# 569 "Parser.fsy"
                  : 'gentype_for_in_expr));
 # 3780 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3791,13 +3791,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 575 "Parser.fsy"
+# 573 "Parser.fsy"
                               
                                  let down = _6 = "downto"
                                  SynExpr.ForTo(_3, _5, _7, _10, down, lhs parseState)
                              
                    )
-# 575 "Parser.fsy"
+# 573 "Parser.fsy"
                  : 'gentype_for_to_expr));
 # 3802 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3807,10 +3807,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 582 "Parser.fsy"
+# 580 "Parser.fsy"
                                SynExpr.RangeExpr (_2, Some(_4), _6, lhs parseState) 
                    )
-# 582 "Parser.fsy"
+# 580 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3815 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3820,10 +3820,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 584 "Parser.fsy"
+# 582 "Parser.fsy"
                                SynExpr.RangeExpr (_2, Some(_3), _4, lhs parseState) 
                    )
-# 584 "Parser.fsy"
+# 582 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3828 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3832,10 +3832,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 586 "Parser.fsy"
+# 584 "Parser.fsy"
                                SynExpr.RangeExpr (_2, None, _4, lhs parseState) 
                    )
-# 586 "Parser.fsy"
+# 584 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3840 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3844,10 +3844,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 588 "Parser.fsy"
+# 586 "Parser.fsy"
                                SynExpr.RangeExpr (_2, None, _3, lhs parseState) 
                    )
-# 588 "Parser.fsy"
+# 586 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3852 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3857,10 +3857,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 590 "Parser.fsy"
+# 588 "Parser.fsy"
                                SynExpr.RangeExpr (_1, Some(_3), _5, lhs parseState) 
                    )
-# 590 "Parser.fsy"
+# 588 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3865 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3869,10 +3869,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 592 "Parser.fsy"
+# 590 "Parser.fsy"
                                SynExpr.RangeExpr (_1, None, _3, lhs parseState) 
                    )
-# 592 "Parser.fsy"
+# 590 "Parser.fsy"
                  : 'gentype_range_expr));
 # 3877 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3881,10 +3881,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 596 "Parser.fsy"
+# 594 "Parser.fsy"
                                SynExpr.If(_2, _3, None, lhs parseState) 
                    )
-# 596 "Parser.fsy"
+# 594 "Parser.fsy"
                  : 'gentype_if_expr));
 # 3889 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3894,10 +3894,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 598 "Parser.fsy"
+# 596 "Parser.fsy"
                                SynExpr.If(_2, _3, Some _4, lhs parseState) 
                    )
-# 598 "Parser.fsy"
+# 596 "Parser.fsy"
                  : 'gentype_if_expr));
 # 3902 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3905,10 +3905,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 600 "Parser.fsy"
+# 598 "Parser.fsy"
                                                       List.rev _1 
                    )
-# 600 "Parser.fsy"
+# 598 "Parser.fsy"
                  : 'gentype_quoted_exprs));
 # 3913 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3916,10 +3916,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 602 "Parser.fsy"
+# 600 "Parser.fsy"
                                          [_1] 
                    )
-# 602 "Parser.fsy"
+# 600 "Parser.fsy"
                  : 'gentype_rev_quoted_exprs));
 # 3924 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3928,10 +3928,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 603 "Parser.fsy"
+# 601 "Parser.fsy"
                                                           _2 :: _1 
                    )
-# 603 "Parser.fsy"
+# 601 "Parser.fsy"
                  : 'gentype_rev_quoted_exprs));
 # 3936 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3939,10 +3939,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 606 "Parser.fsy"
+# 604 "Parser.fsy"
                                       SynQuoted.Const(fst _1, snd _1) 
                    )
-# 606 "Parser.fsy"
+# 604 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 3947 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3950,10 +3950,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 607 "Parser.fsy"
+# 605 "Parser.fsy"
                                     SynQuoted.Symbol(_1) 
                    )
-# 607 "Parser.fsy"
+# 605 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 3958 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3961,10 +3961,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 608 "Parser.fsy"
+# 606 "Parser.fsy"
                                      SynQuoted.Keyword(_1) 
                    )
-# 608 "Parser.fsy"
+# 606 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 3969 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3972,10 +3972,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 610 "Parser.fsy"
+# 608 "Parser.fsy"
                                SynQuoted.List (_2, lhs parseState) 
                    )
-# 610 "Parser.fsy"
+# 608 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 3980 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3983,10 +3983,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 612 "Parser.fsy"
+# 610 "Parser.fsy"
                                SynQuoted.Vector (_2, lhs parseState) 
                    )
-# 612 "Parser.fsy"
+# 610 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 3991 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -3994,10 +3994,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 614 "Parser.fsy"
+# 612 "Parser.fsy"
                                SynQuoted.HashMap (_2, lhs parseState) 
                    )
-# 614 "Parser.fsy"
+# 612 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 4002 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4005,10 +4005,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 616 "Parser.fsy"
+# 614 "Parser.fsy"
                                SynQuoted.HashSet (_2, lhs parseState) 
                    )
-# 616 "Parser.fsy"
+# 614 "Parser.fsy"
                  : 'gentype_quoted_expr));
 # 4013 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4016,20 +4016,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 618 "Parser.fsy"
+# 616 "Parser.fsy"
                                                     List.rev _1 
                    )
-# 618 "Parser.fsy"
+# 616 "Parser.fsy"
                  : 'gentype_value_exprs));
 # 4024 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 620 "Parser.fsy"
+# 618 "Parser.fsy"
                              [] 
                    )
-# 620 "Parser.fsy"
+# 618 "Parser.fsy"
                  : 'gentype_rev_value_exprs));
 # 4034 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4037,10 +4037,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 621 "Parser.fsy"
+# 619 "Parser.fsy"
                                         [_1] 
                    )
-# 621 "Parser.fsy"
+# 619 "Parser.fsy"
                  : 'gentype_rev_value_exprs));
 # 4045 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4049,10 +4049,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 622 "Parser.fsy"
+# 620 "Parser.fsy"
                                                         _2 :: _1 
                    )
-# 622 "Parser.fsy"
+# 620 "Parser.fsy"
                  : 'gentype_rev_value_exprs));
 # 4057 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4060,10 +4060,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 625 "Parser.fsy"
+# 623 "Parser.fsy"
                                       SynValue.Const(fst _1, snd _1) 
                    )
-# 625 "Parser.fsy"
+# 623 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4068 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4071,10 +4071,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 626 "Parser.fsy"
+# 624 "Parser.fsy"
                                     SynValue.Symbol(_1) 
                    )
-# 626 "Parser.fsy"
+# 624 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4079 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4082,10 +4082,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 627 "Parser.fsy"
+# 625 "Parser.fsy"
                                      SynValue.Keyword(_1) 
                    )
-# 627 "Parser.fsy"
+# 625 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4090 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4093,10 +4093,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 629 "Parser.fsy"
+# 627 "Parser.fsy"
                                SynValue.List (_2, lhs parseState) 
                    )
-# 629 "Parser.fsy"
+# 627 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4101 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4104,10 +4104,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 631 "Parser.fsy"
+# 629 "Parser.fsy"
                                SynValue.Vector (_2, lhs parseState) 
                    )
-# 631 "Parser.fsy"
+# 629 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4112 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4115,10 +4115,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 633 "Parser.fsy"
+# 631 "Parser.fsy"
                                SynValue.HashMap (_2, lhs parseState) 
                    )
-# 633 "Parser.fsy"
+# 631 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4123 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4126,10 +4126,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 635 "Parser.fsy"
+# 633 "Parser.fsy"
                                SynValue.HashSet (_2, lhs parseState) 
                    )
-# 635 "Parser.fsy"
+# 633 "Parser.fsy"
                  : 'gentype_value_expr));
 # 4134 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4137,10 +4137,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 637 "Parser.fsy"
+# 635 "Parser.fsy"
                                                                 List.rev _1 
                    )
-# 637 "Parser.fsy"
+# 635 "Parser.fsy"
                  : 'gentype_quasiquoted_exprs));
 # 4145 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4148,10 +4148,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 639 "Parser.fsy"
+# 637 "Parser.fsy"
                                               [_1] 
                    )
-# 639 "Parser.fsy"
+# 637 "Parser.fsy"
                  : 'gentype_rev_quasiquoted_exprs));
 # 4156 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4160,10 +4160,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 640 "Parser.fsy"
+# 638 "Parser.fsy"
                                                                     _2 :: _1 
                    )
-# 640 "Parser.fsy"
+# 638 "Parser.fsy"
                  : 'gentype_rev_quasiquoted_exprs));
 # 4168 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4171,10 +4171,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 643 "Parser.fsy"
+# 641 "Parser.fsy"
                                       SynQuasiquote.Const(fst _1, snd _1) 
                    )
-# 643 "Parser.fsy"
+# 641 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4179 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4182,10 +4182,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 644 "Parser.fsy"
+# 642 "Parser.fsy"
                                     SynQuasiquote.Symbol(_1) 
                    )
-# 644 "Parser.fsy"
+# 642 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4190 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4193,10 +4193,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 645 "Parser.fsy"
+# 643 "Parser.fsy"
                                      SynQuasiquote.Keyword(_1) 
                    )
-# 645 "Parser.fsy"
+# 643 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4201 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4204,10 +4204,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 646 "Parser.fsy"
+# 644 "Parser.fsy"
                                        SynQuasiquote.Op(_1) 
                    )
-# 646 "Parser.fsy"
+# 644 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4212 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4215,10 +4215,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 647 "Parser.fsy"
+# 645 "Parser.fsy"
                                      _1 
                    )
-# 647 "Parser.fsy"
+# 645 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4223 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4226,10 +4226,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 648 "Parser.fsy"
+# 646 "Parser.fsy"
                                             _1 
                    )
-# 648 "Parser.fsy"
+# 646 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4234 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4237,10 +4237,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 650 "Parser.fsy"
+# 648 "Parser.fsy"
                                SynQuasiquote.List (_2, lhs parseState) 
                    )
-# 650 "Parser.fsy"
+# 648 "Parser.fsy"
                  : 'gentype_quasiquoted_expr));
 # 4245 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4248,10 +4248,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 654 "Parser.fsy"
+# 652 "Parser.fsy"
                                SynQuasiquote.Unquote (_3, lhs parseState)
                    )
-# 654 "Parser.fsy"
+# 652 "Parser.fsy"
                  : 'gentype_unquote));
 # 4256 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4259,10 +4259,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 658 "Parser.fsy"
+# 656 "Parser.fsy"
                                SynQuasiquote.SpliceUnquote (_3, lhs parseState)
                    )
-# 658 "Parser.fsy"
+# 656 "Parser.fsy"
                  : 'gentype_splice_unquote));
 # 4267 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4270,30 +4270,30 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 661 "Parser.fsy"
+# 659 "Parser.fsy"
                                                                    _2 
                    )
-# 661 "Parser.fsy"
+# 659 "Parser.fsy"
                  : 'gentype_operators));
 # 4278 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 665 "Parser.fsy"
+# 663 "Parser.fsy"
                                SynOp.Plus([], lhs parseState)
                    )
-# 665 "Parser.fsy"
+# 663 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4288 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 667 "Parser.fsy"
+# 665 "Parser.fsy"
                                SynOp.Mult([], lhs parseState)
                    )
-# 667 "Parser.fsy"
+# 665 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4298 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4301,10 +4301,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 669 "Parser.fsy"
+# 667 "Parser.fsy"
                                SynOp.Plus(_2, lhs parseState)
                    )
-# 669 "Parser.fsy"
+# 667 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4309 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4312,10 +4312,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 671 "Parser.fsy"
+# 669 "Parser.fsy"
                                SynOp.Mult(_2, lhs parseState)
                    )
-# 671 "Parser.fsy"
+# 669 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4320 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4323,10 +4323,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 673 "Parser.fsy"
+# 671 "Parser.fsy"
                                SynOp.Minus(_2, lhs parseState)
                    )
-# 673 "Parser.fsy"
+# 671 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4331 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4334,10 +4334,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 675 "Parser.fsy"
+# 673 "Parser.fsy"
                                SynOp.Div(_2, lhs parseState)
                    )
-# 675 "Parser.fsy"
+# 673 "Parser.fsy"
                  : 'gentype_operators_not_in_parens));
 # 4342 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4346,10 +4346,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 679 "Parser.fsy"
+# 677 "Parser.fsy"
                                SynExpr.Set(_2, _3, lhs parseState) 
                    )
-# 679 "Parser.fsy"
+# 677 "Parser.fsy"
                  : 'gentype_set));
 # 4354 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4357,22 +4357,22 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 682 "Parser.fsy"
+# 680 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.Set(_2, Syntax.parserRecoveryExpr r, r) 
                    )
-# 682 "Parser.fsy"
+# 680 "Parser.fsy"
                  : 'gentype_set));
 # 4366 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 686 "Parser.fsy"
+# 684 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.Set(Syntax.parserRecoveryExpr r, Syntax.parserRecoveryExpr r, r) 
                    )
-# 686 "Parser.fsy"
+# 684 "Parser.fsy"
                  : 'gentype_set));
 # 4377 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4381,10 +4381,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 691 "Parser.fsy"
+# 689 "Parser.fsy"
                                SynExpr.LetOrUse(_2, _3, LetFlags.Use, lhs parseState) 
                    )
-# 691 "Parser.fsy"
+# 689 "Parser.fsy"
                  : 'gentype_let));
 # 4389 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4393,10 +4393,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 693 "Parser.fsy"
+# 691 "Parser.fsy"
                                SynExpr.LetOrUse(_2, _3, LetFlags.None, lhs parseState) 
                    )
-# 693 "Parser.fsy"
+# 691 "Parser.fsy"
                  : 'gentype_let));
 # 4401 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4405,10 +4405,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 695 "Parser.fsy"
+# 693 "Parser.fsy"
                                SynExpr.LetOrUse(_2, _3, LetFlags.Bang, lhs parseState) 
                    )
-# 695 "Parser.fsy"
+# 693 "Parser.fsy"
                  : 'gentype_let));
 # 4413 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4417,10 +4417,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 697 "Parser.fsy"
+# 695 "Parser.fsy"
                                SynExpr.LetOrUse(_2, _3, LetFlags.Bang ||| LetFlags.Use, lhs parseState) 
                    )
-# 697 "Parser.fsy"
+# 695 "Parser.fsy"
                  : 'gentype_let));
 # 4425 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4428,11 +4428,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 700 "Parser.fsy"
+# 698 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(_2, Syntax.parserRecoveryExpr r, LetFlags.None, r) 
                    )
-# 700 "Parser.fsy"
+# 698 "Parser.fsy"
                  : 'gentype_let));
 # 4437 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4440,11 +4440,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 703 "Parser.fsy"
+# 701 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(_2, Syntax.parserRecoveryExpr r, LetFlags.Use, r) 
                    )
-# 703 "Parser.fsy"
+# 701 "Parser.fsy"
                  : 'gentype_let));
 # 4449 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4452,11 +4452,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 706 "Parser.fsy"
+# 704 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(_2, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) 
                    )
-# 706 "Parser.fsy"
+# 704 "Parser.fsy"
                  : 'gentype_let));
 # 4461 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4464,55 +4464,55 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 709 "Parser.fsy"
+# 707 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(_2, Syntax.parserRecoveryExpr r, LetFlags.Bang ||| LetFlags.Use, r) 
                    )
-# 709 "Parser.fsy"
+# 707 "Parser.fsy"
                  : 'gentype_let));
 # 4473 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 713 "Parser.fsy"
+# 711 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.None, r) 
                    )
-# 713 "Parser.fsy"
+# 711 "Parser.fsy"
                  : 'gentype_let));
 # 4484 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 716 "Parser.fsy"
+# 714 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) 
                    )
-# 716 "Parser.fsy"
+# 714 "Parser.fsy"
                  : 'gentype_let));
 # 4495 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 719 "Parser.fsy"
+# 717 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) 
                    )
-# 719 "Parser.fsy"
+# 717 "Parser.fsy"
                  : 'gentype_let));
 # 4506 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 722 "Parser.fsy"
+# 720 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use ||| LetFlags.Bang, r) 
                    )
-# 722 "Parser.fsy"
+# 720 "Parser.fsy"
                  : 'gentype_let));
 # 4517 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4521,10 +4521,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 727 "Parser.fsy"
+# 725 "Parser.fsy"
                                SynExpr.LetOrUse(_2, _3, LetFlags.Mutable, lhs parseState) 
                    )
-# 727 "Parser.fsy"
+# 725 "Parser.fsy"
                  : 'gentype_mut));
 # 4529 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4532,22 +4532,22 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 730 "Parser.fsy"
+# 728 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(_2, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) 
                    )
-# 730 "Parser.fsy"
+# 728 "Parser.fsy"
                  : 'gentype_mut));
 # 4541 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 734 "Parser.fsy"
+# 732 "Parser.fsy"
                                let r = lhs parseState
                                SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) 
                    )
-# 734 "Parser.fsy"
+# 732 "Parser.fsy"
                  : 'gentype_mut));
 # 4552 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4556,10 +4556,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 739 "Parser.fsy"
+# 737 "Parser.fsy"
                                SynExpr.LetStar(_2, _3, lhs parseState) 
                    )
-# 739 "Parser.fsy"
+# 737 "Parser.fsy"
                  : 'gentype_letstar));
 # 4564 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4568,10 +4568,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 743 "Parser.fsy"
+# 741 "Parser.fsy"
                                SynExpr.TypeAlias(_2, _3, lhs parseState) 
                    )
-# 743 "Parser.fsy"
+# 741 "Parser.fsy"
                  : 'gentype_type_expr));
 # 4576 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4581,10 +4581,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 745 "Parser.fsy"
+# 743 "Parser.fsy"
                                SynExpr.Type(_2, _3, _4, [], lhs parseState) 
                    )
-# 745 "Parser.fsy"
+# 743 "Parser.fsy"
                  : 'gentype_type_expr));
 # 4589 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4595,10 +4595,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 747 "Parser.fsy"
+# 745 "Parser.fsy"
                                SynExpr.Type(_3, _4, _5, _1, lhs parseState) 
                    )
-# 747 "Parser.fsy"
+# 745 "Parser.fsy"
                  : 'gentype_type_expr));
 # 4603 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4607,13 +4607,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 751 "Parser.fsy"
+# 749 "Parser.fsy"
                               
                                  let labels, members = Syntax.partitionChoices _3
                                  SynExpr.Union(_2, labels, members, [] , lhs parseState)
                              
                    )
-# 751 "Parser.fsy"
+# 749 "Parser.fsy"
                  : 'gentype_union_expr));
 # 4618 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4623,13 +4623,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 756 "Parser.fsy"
+# 754 "Parser.fsy"
                               
                                  let labels, members = Syntax.partitionChoices _4
                                  SynExpr.Union(_3, labels, members, _1 , lhs parseState)
                              
                    )
-# 756 "Parser.fsy"
+# 754 "Parser.fsy"
                  : 'gentype_union_expr));
 # 4634 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4637,10 +4637,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 761 "Parser.fsy"
+# 759 "Parser.fsy"
                                                                             List.rev _1 
                    )
-# 761 "Parser.fsy"
+# 759 "Parser.fsy"
                  : 'gentype_union_labels_or_members));
 # 4645 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4648,10 +4648,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 763 "Parser.fsy"
+# 761 "Parser.fsy"
                                                           [_1] 
                    )
-# 763 "Parser.fsy"
+# 761 "Parser.fsy"
                  : 'gentype_rev_union_labels_or_members));
 # 4656 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4660,10 +4660,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 764 "Parser.fsy"
+# 762 "Parser.fsy"
                                                                                       _2 :: _1 
                    )
-# 764 "Parser.fsy"
+# 762 "Parser.fsy"
                  : 'gentype_rev_union_labels_or_members));
 # 4668 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4671,10 +4671,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 767 "Parser.fsy"
+# 765 "Parser.fsy"
                                     Choice1Of2(UnionCase(_1, [], lhs parseState)) 
                    )
-# 767 "Parser.fsy"
+# 765 "Parser.fsy"
                  : 'gentype_union_label_or_member_parens));
 # 4679 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4682,10 +4682,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 768 "Parser.fsy"
+# 766 "Parser.fsy"
                                                                  _2 
                    )
-# 768 "Parser.fsy"
+# 766 "Parser.fsy"
                  : 'gentype_union_label_or_member_parens));
 # 4690 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4693,10 +4693,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 769 "Parser.fsy"
+# 767 "Parser.fsy"
                                                                      _2 
                    )
-# 769 "Parser.fsy"
+# 767 "Parser.fsy"
                  : 'gentype_union_label_or_member_parens));
 # 4701 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4705,10 +4705,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 773 "Parser.fsy"
+# 771 "Parser.fsy"
                                Choice2Of2(SynTypeMember.Member(_2, _3, lhs parseState)) 
                    )
-# 773 "Parser.fsy"
+# 771 "Parser.fsy"
                  : 'gentype_union_label_or_member));
 # 4713 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4718,10 +4718,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 775 "Parser.fsy"
+# 773 "Parser.fsy"
                                Choice2Of2(SynTypeMember.MemberFn(_3, _4, _5, (lhs parseState))) 
                    )
-# 775 "Parser.fsy"
+# 773 "Parser.fsy"
                  : 'gentype_union_label_or_member));
 # 4726 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4729,10 +4729,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 777 "Parser.fsy"
+# 775 "Parser.fsy"
                                Choice1Of2(UnionCase(_1, [], lhs parseState)) 
                    )
-# 777 "Parser.fsy"
+# 775 "Parser.fsy"
                  : 'gentype_union_label_or_member));
 # 4737 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4741,10 +4741,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 779 "Parser.fsy"
+# 777 "Parser.fsy"
                                Choice1Of2(UnionCase(_1, _2, lhs parseState)) 
                    )
-# 779 "Parser.fsy"
+# 777 "Parser.fsy"
                  : 'gentype_union_label_or_member));
 # 4749 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4752,10 +4752,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 781 "Parser.fsy"
+# 779 "Parser.fsy"
                                                       List.rev _1 
                    )
-# 781 "Parser.fsy"
+# 779 "Parser.fsy"
                  : 'gentype_union_fields));
 # 4760 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4763,10 +4763,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 783 "Parser.fsy"
+# 781 "Parser.fsy"
                                          [_1] 
                    )
-# 783 "Parser.fsy"
+# 781 "Parser.fsy"
                  : 'gentype_rev_union_fields));
 # 4771 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4775,10 +4775,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 784 "Parser.fsy"
+# 782 "Parser.fsy"
                                                           _2 :: _1 
                    )
-# 784 "Parser.fsy"
+# 782 "Parser.fsy"
                  : 'gentype_rev_union_fields));
 # 4783 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4786,10 +4786,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 787 "Parser.fsy"
+# 785 "Parser.fsy"
                                            UnionField.Type(_1, lhs parseState) 
                    )
-# 787 "Parser.fsy"
+# 785 "Parser.fsy"
                  : 'gentype_union_field));
 # 4794 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4798,10 +4798,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 789 "Parser.fsy"
+# 787 "Parser.fsy"
                                UnionField.Named(_2, _4, lhs parseState) 
                    )
-# 789 "Parser.fsy"
+# 787 "Parser.fsy"
                  : 'gentype_union_field));
 # 4806 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4810,10 +4810,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 791 "Parser.fsy"
+# 789 "Parser.fsy"
                                UnionField.Named(_2, _4, lhs parseState) 
                    )
-# 791 "Parser.fsy"
+# 789 "Parser.fsy"
                  : 'gentype_union_field));
 # 4818 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4822,13 +4822,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 795 "Parser.fsy"
+# 793 "Parser.fsy"
                               
                                  let labels, members = Syntax.partitionMembers _3
                                  SynExpr.Record(_2, labels, members, [] , lhs parseState)
                              
                    )
-# 795 "Parser.fsy"
+# 793 "Parser.fsy"
                  : 'gentype_record_expr));
 # 4833 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4838,13 +4838,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 800 "Parser.fsy"
+# 798 "Parser.fsy"
                               
                                  let labels, members = Syntax.partitionMembers _4
                                  SynExpr.Record(_3, labels, members, _1 , lhs parseState)
                              
                    )
-# 800 "Parser.fsy"
+# 798 "Parser.fsy"
                  : 'gentype_record_expr));
 # 4849 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4852,10 +4852,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 805 "Parser.fsy"
+# 803 "Parser.fsy"
                                                                               List.rev _1 
                    )
-# 805 "Parser.fsy"
+# 803 "Parser.fsy"
                  : 'gentype_record_labels_or_members));
 # 4860 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4863,10 +4863,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 807 "Parser.fsy"
+# 805 "Parser.fsy"
                                                            [_1] 
                    )
-# 807 "Parser.fsy"
+# 805 "Parser.fsy"
                  : 'gentype_rev_record_labels_or_members));
 # 4871 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4875,10 +4875,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 808 "Parser.fsy"
+# 806 "Parser.fsy"
                                                                                         _2 :: _1 
                    )
-# 808 "Parser.fsy"
+# 806 "Parser.fsy"
                  : 'gentype_rev_record_labels_or_members));
 # 4883 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4886,10 +4886,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 811 "Parser.fsy"
+# 809 "Parser.fsy"
                                                                   _2 
                    )
-# 811 "Parser.fsy"
+# 809 "Parser.fsy"
                  : 'gentype_record_label_or_member_parens));
 # 4894 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4897,10 +4897,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 812 "Parser.fsy"
+# 810 "Parser.fsy"
                                                                       _2 
                    )
-# 812 "Parser.fsy"
+# 810 "Parser.fsy"
                  : 'gentype_record_label_or_member_parens));
 # 4905 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4909,10 +4909,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 816 "Parser.fsy"
+# 814 "Parser.fsy"
                                RecordContent.Member(SynTypeMember.Member(_2, _3, lhs parseState)) 
                    )
-# 816 "Parser.fsy"
+# 814 "Parser.fsy"
                  : 'gentype_record_label_or_member));
 # 4917 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4922,10 +4922,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 818 "Parser.fsy"
+# 816 "Parser.fsy"
                                RecordContent.Member(SynTypeMember.MemberFn(_3, _4, _5, (lhs parseState))) 
                    )
-# 818 "Parser.fsy"
+# 816 "Parser.fsy"
                  : 'gentype_record_label_or_member));
 # 4930 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4934,10 +4934,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 820 "Parser.fsy"
+# 818 "Parser.fsy"
                                RecordContent.Label (RecordLabel(RecordLabelKind.Default, _1, _3, lhs parseState)) 
                    )
-# 820 "Parser.fsy"
+# 818 "Parser.fsy"
                  : 'gentype_record_label_or_member));
 # 4942 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4946,10 +4946,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 822 "Parser.fsy"
+# 820 "Parser.fsy"
                                RecordContent.Label (RecordLabel(RecordLabelKind.Mutable, _2, _4, lhs parseState)) 
                    )
-# 822 "Parser.fsy"
+# 820 "Parser.fsy"
                  : 'gentype_record_label_or_member));
 # 4954 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4957,20 +4957,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 824 "Parser.fsy"
+# 822 "Parser.fsy"
                                                   List.rev _1 
                    )
-# 824 "Parser.fsy"
+# 822 "Parser.fsy"
                  : 'gentype_typed_list));
 # 4965 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 826 "Parser.fsy"
+# 824 "Parser.fsy"
                                    [] 
                    )
-# 826 "Parser.fsy"
+# 824 "Parser.fsy"
                  : 'gentype_rev_typed_list));
 # 4975 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4978,10 +4978,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 827 "Parser.fsy"
+# 825 "Parser.fsy"
                                                           [_1] 
                    )
-# 827 "Parser.fsy"
+# 825 "Parser.fsy"
                  : 'gentype_rev_typed_list));
 # 4986 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -4990,10 +4990,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 828 "Parser.fsy"
+# 826 "Parser.fsy"
                                                                          _2 :: _1 
                    )
-# 828 "Parser.fsy"
+# 826 "Parser.fsy"
                  : 'gentype_rev_typed_list));
 # 4998 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5002,10 +5002,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 832 "Parser.fsy"
+# 830 "Parser.fsy"
                                SynTyped(_2, _4, lhs parseState )
                    )
-# 832 "Parser.fsy"
+# 830 "Parser.fsy"
                  : 'gentype_syntyped));
 # 5010 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5014,10 +5014,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 834 "Parser.fsy"
+# 832 "Parser.fsy"
                                SynTyped(_2, _4, lhs parseState )
                    )
-# 834 "Parser.fsy"
+# 832 "Parser.fsy"
                  : 'gentype_syntyped));
 # 5022 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5025,10 +5025,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 837 "Parser.fsy"
+# 835 "Parser.fsy"
                                                                      _3 
                    )
-# 837 "Parser.fsy"
+# 835 "Parser.fsy"
                  : 'gentype_record_members));
 # 5033 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5036,10 +5036,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 840 "Parser.fsy"
+# 838 "Parser.fsy"
                                                     SynExpr.RecordInit(_2, lhs parseState) 
                    )
-# 840 "Parser.fsy"
+# 838 "Parser.fsy"
                  : 'gentype_record_init_expr));
 # 5044 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5047,10 +5047,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 842 "Parser.fsy"
+# 840 "Parser.fsy"
                                                                       List.rev _1 
                    )
-# 842 "Parser.fsy"
+# 840 "Parser.fsy"
                  : 'gentype_record_init_bar_list));
 # 5055 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5058,10 +5058,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 844 "Parser.fsy"
+# 842 "Parser.fsy"
                                               [_1] 
                    )
-# 844 "Parser.fsy"
+# 842 "Parser.fsy"
                  : 'gentype_rev_record_init_bar_list));
 # 5066 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5070,10 +5070,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 845 "Parser.fsy"
+# 843 "Parser.fsy"
                                                                        _2 :: _1 
                    )
-# 845 "Parser.fsy"
+# 843 "Parser.fsy"
                  : 'gentype_rev_record_init_bar_list));
 # 5078 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5081,12 +5081,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 849 "Parser.fsy"
+# 847 "Parser.fsy"
                                let s, e = _1
                                SynInit(s, e, lhs parseState)
                              
                    )
-# 849 "Parser.fsy"
+# 847 "Parser.fsy"
                  : 'gentype_record_init_init));
 # 5091 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5094,10 +5094,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 856 "Parser.fsy"
+# 854 "Parser.fsy"
                                                               List.rev _1 
                    )
-# 856 "Parser.fsy"
+# 854 "Parser.fsy"
                  : 'gentype_record_init_list));
 # 5102 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5105,10 +5105,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 858 "Parser.fsy"
+# 856 "Parser.fsy"
                                                 [_1] 
                    )
-# 858 "Parser.fsy"
+# 856 "Parser.fsy"
                  : 'gentype_rev_record_init_list));
 # 5113 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5117,10 +5117,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 859 "Parser.fsy"
+# 857 "Parser.fsy"
                                                                      _2 :: _1 
                    )
-# 859 "Parser.fsy"
+# 857 "Parser.fsy"
                  : 'gentype_rev_record_init_list));
 # 5125 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5128,13 +5128,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 862 "Parser.fsy"
+# 860 "Parser.fsy"
                                                       
                              let s, e = _2
                              SynInit(s, e, lhs parseState)
                           
                    )
-# 862 "Parser.fsy"
+# 860 "Parser.fsy"
                  : 'gentype_record_init_parens));
 # 5139 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5142,13 +5142,13 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 866 "Parser.fsy"
+# 864 "Parser.fsy"
                                                           
                              let s, e = _2
                              SynInit(s, e, lhs parseState)
                          
                    )
-# 866 "Parser.fsy"
+# 864 "Parser.fsy"
                  : 'gentype_record_init_parens));
 # 5153 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5157,10 +5157,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 872 "Parser.fsy"
+# 870 "Parser.fsy"
                                          (_1, _2) 
                    )
-# 872 "Parser.fsy"
+# 870 "Parser.fsy"
                  : 'gentype_record_init));
 # 5165 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5168,10 +5168,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 874 "Parser.fsy"
+# 872 "Parser.fsy"
                                                           List.rev _1 
                    )
-# 874 "Parser.fsy"
+# 872 "Parser.fsy"
                  : 'gentype_attribute_list));
 # 5176 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5179,10 +5179,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 876 "Parser.fsy"
+# 874 "Parser.fsy"
                                        [_1] 
                    )
-# 876 "Parser.fsy"
+# 874 "Parser.fsy"
                  : 'gentype_rev_attribute_list));
 # 5187 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5191,10 +5191,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 877 "Parser.fsy"
+# 875 "Parser.fsy"
                                                           _2 :: _1 
                    )
-# 877 "Parser.fsy"
+# 875 "Parser.fsy"
                  : 'gentype_rev_attribute_list));
 # 5199 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5202,10 +5202,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 881 "Parser.fsy"
+# 879 "Parser.fsy"
                                { Attributes = _2; Range = (lhs parseState) } 
                    )
-# 881 "Parser.fsy"
+# 879 "Parser.fsy"
                  : 'gentype_attr_list));
 # 5210 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5213,10 +5213,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 883 "Parser.fsy"
+# 881 "Parser.fsy"
                                                   List.rev _1 
                    )
-# 883 "Parser.fsy"
+# 881 "Parser.fsy"
                  : 'gentype_attributes));
 # 5221 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5224,10 +5224,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 885 "Parser.fsy"
+# 883 "Parser.fsy"
                                                             [_1] 
                    )
-# 885 "Parser.fsy"
+# 883 "Parser.fsy"
                  : 'gentype_rev_attributes));
 # 5232 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5236,10 +5236,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 886 "Parser.fsy"
+# 884 "Parser.fsy"
                                                                                      _3 :: _1 
                    )
-# 886 "Parser.fsy"
+# 884 "Parser.fsy"
                  : 'gentype_rev_attributes));
 # 5244 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5248,10 +5248,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 887 "Parser.fsy"
+# 885 "Parser.fsy"
                                                           _3 :: _1 
                    )
-# 887 "Parser.fsy"
+# 885 "Parser.fsy"
                  : 'gentype_rev_attributes));
 # 5256 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5260,10 +5260,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 891 "Parser.fsy"
+# 889 "Parser.fsy"
                                { TypeName = _1; ArgExpr = _2; Range = lhs parseState } 
                    )
-# 891 "Parser.fsy"
+# 889 "Parser.fsy"
                  : 'gentype_attribute));
 # 5268 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5271,20 +5271,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 893 "Parser.fsy"
+# 891 "Parser.fsy"
                                { TypeName = _1; ArgExpr = Syntax.UnitExpr <| lhs parseState; Range = lhs parseState } 
                    )
-# 893 "Parser.fsy"
+# 891 "Parser.fsy"
                  : 'gentype_attribute));
 # 5279 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 896 "Parser.fsy"
+# 894 "Parser.fsy"
                              [] 
                    )
-# 896 "Parser.fsy"
+# 894 "Parser.fsy"
                  : 'gentype_member_list_start));
 # 5289 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5292,10 +5292,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 897 "Parser.fsy"
+# 895 "Parser.fsy"
                                          _1 
                    )
-# 897 "Parser.fsy"
+# 895 "Parser.fsy"
                  : 'gentype_member_list_start));
 # 5300 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5303,10 +5303,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 899 "Parser.fsy"
+# 897 "Parser.fsy"
                                                     List.rev _1 
                    )
-# 899 "Parser.fsy"
+# 897 "Parser.fsy"
                  : 'gentype_member_list));
 # 5311 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5314,10 +5314,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 901 "Parser.fsy"
+# 899 "Parser.fsy"
                                                       [_1] 
                    )
-# 901 "Parser.fsy"
+# 899 "Parser.fsy"
                  : 'gentype_rev_member_list));
 # 5322 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5326,10 +5326,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 902 "Parser.fsy"
+# 900 "Parser.fsy"
                                                     _2 :: _1 
                    )
-# 902 "Parser.fsy"
+# 900 "Parser.fsy"
                  : 'gentype_rev_member_list));
 # 5334 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5337,10 +5337,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 905 "Parser.fsy"
+# 903 "Parser.fsy"
                                                             _2 
                    )
-# 905 "Parser.fsy"
+# 903 "Parser.fsy"
                  : 'gentype_member));
 # 5345 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5348,10 +5348,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 908 "Parser.fsy"
+# 906 "Parser.fsy"
                                            _2 
                    )
-# 908 "Parser.fsy"
+# 906 "Parser.fsy"
                  : 'gentype_member_name));
 # 5356 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5360,10 +5360,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 912 "Parser.fsy"
+# 910 "Parser.fsy"
                                SynMemberGet(_3, _4, lhs parseState) 
                    )
-# 912 "Parser.fsy"
+# 910 "Parser.fsy"
                  : 'gentype_member_get));
 # 5368 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5373,10 +5373,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 916 "Parser.fsy"
+# 914 "Parser.fsy"
                                SynMemberSet(_3, _4, _5, lhs parseState) 
                    )
-# 916 "Parser.fsy"
+# 914 "Parser.fsy"
                  : 'gentype_member_set));
 # 5381 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5385,10 +5385,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 919 "Parser.fsy"
+# 917 "Parser.fsy"
                                                     SynTypeMember.GetSet(_1, Some(_2), None, lhs parseState) 
                    )
-# 919 "Parser.fsy"
+# 917 "Parser.fsy"
                  : 'gentype_member_member_in_parens));
 # 5393 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5397,10 +5397,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 920 "Parser.fsy"
+# 918 "Parser.fsy"
                                                     SynTypeMember.GetSet(_1, None, Some(_2), lhs parseState) 
                    )
-# 920 "Parser.fsy"
+# 918 "Parser.fsy"
                  : 'gentype_member_member_in_parens));
 # 5405 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5410,10 +5410,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 921 "Parser.fsy"
+# 919 "Parser.fsy"
                                                                SynTypeMember.GetSet(_1, Some(_2), Some(_3), lhs parseState) 
                    )
-# 921 "Parser.fsy"
+# 919 "Parser.fsy"
                  : 'gentype_member_member_in_parens));
 # 5418 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5423,10 +5423,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 922 "Parser.fsy"
+# 920 "Parser.fsy"
                                                                SynTypeMember.GetSet(_1, Some(_3), Some(_2), lhs parseState) 
                    )
-# 922 "Parser.fsy"
+# 920 "Parser.fsy"
                  : 'gentype_member_member_in_parens));
 # 5431 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5435,10 +5435,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 923 "Parser.fsy"
+# 921 "Parser.fsy"
                                               SynTypeMember.Member(_1, _2, lhs parseState) 
                    )
-# 923 "Parser.fsy"
+# 921 "Parser.fsy"
                  : 'gentype_member_member_in_parens));
 # 5443 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5447,10 +5447,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 927 "Parser.fsy"
+# 925 "Parser.fsy"
                                SynTypeMember.Let(_2, _3, lhs parseState) 
                    )
-# 927 "Parser.fsy"
+# 925 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5455 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5459,10 +5459,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 929 "Parser.fsy"
+# 927 "Parser.fsy"
                                SynTypeMember.Mut(_2, _3, lhs parseState) 
                    )
-# 929 "Parser.fsy"
+# 927 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5467 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5470,10 +5470,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 930 "Parser.fsy"
+# 928 "Parser.fsy"
                                                      _1 
                    )
-# 930 "Parser.fsy"
+# 928 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5478 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5483,10 +5483,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 934 "Parser.fsy"
+# 932 "Parser.fsy"
                                SynTypeMember.MemberFn(_2, _3, _4, (lhs parseState)) 
                    )
-# 934 "Parser.fsy"
+# 932 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5491 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5496,10 +5496,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 936 "Parser.fsy"
+# 934 "Parser.fsy"
                                SynTypeMember.MemberFn(_3, _4, _5, (lhs parseState)) 
                    )
-# 936 "Parser.fsy"
+# 934 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5504 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5508,10 +5508,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 938 "Parser.fsy"
+# 936 "Parser.fsy"
                                SynTypeMember.OverrideMember(_2, _3, lhs parseState) 
                    )
-# 938 "Parser.fsy"
+# 936 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5516 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5521,40 +5521,40 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 940 "Parser.fsy"
+# 938 "Parser.fsy"
                                SynTypeMember.OverrideFn(_3, _4, _5, (lhs parseState)) 
                    )
-# 940 "Parser.fsy"
+# 938 "Parser.fsy"
                  : 'gentype_member_in_parens));
 # 5529 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 943 "Parser.fsy"
+# 941 "Parser.fsy"
                                     () 
                    )
-# 943 "Parser.fsy"
+# 941 "Parser.fsy"
                  : 'gentype_tok_lparen));
 # 5539 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 946 "Parser.fsy"
+# 944 "Parser.fsy"
                                            [] 
                    )
-# 946 "Parser.fsy"
+# 944 "Parser.fsy"
                  : 'gentype_empty_bindings));
 # 5549 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 947 "Parser.fsy"
+# 945 "Parser.fsy"
                                                [] 
                    )
-# 947 "Parser.fsy"
+# 945 "Parser.fsy"
                  : 'gentype_empty_bindings));
 # 5559 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5562,10 +5562,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 950 "Parser.fsy"
+# 948 "Parser.fsy"
                                             _1 
                    )
-# 950 "Parser.fsy"
+# 948 "Parser.fsy"
                  : 'gentype_binding_list_start));
 # 5570 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5573,10 +5573,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 951 "Parser.fsy"
+# 949 "Parser.fsy"
                                                         _2 
                    )
-# 951 "Parser.fsy"
+# 949 "Parser.fsy"
                  : 'gentype_binding_list_start));
 # 5581 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5584,10 +5584,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 952 "Parser.fsy"
+# 950 "Parser.fsy"
                                                             _2 
                    )
-# 952 "Parser.fsy"
+# 950 "Parser.fsy"
                  : 'gentype_binding_list_start));
 # 5592 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5595,10 +5595,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 954 "Parser.fsy"
+# 952 "Parser.fsy"
                                                       List.rev _1 
                    )
-# 954 "Parser.fsy"
+# 952 "Parser.fsy"
                  : 'gentype_binding_list));
 # 5603 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5606,10 +5606,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 956 "Parser.fsy"
+# 954 "Parser.fsy"
                                                         [_1] 
                    )
-# 956 "Parser.fsy"
+# 954 "Parser.fsy"
                  : 'gentype_rev_binding_list));
 # 5614 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5618,10 +5618,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 957 "Parser.fsy"
+# 955 "Parser.fsy"
                                                       _2 :: _1 
                    )
-# 957 "Parser.fsy"
+# 955 "Parser.fsy"
                  : 'gentype_rev_binding_list));
 # 5626 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5630,10 +5630,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 960 "Parser.fsy"
+# 958 "Parser.fsy"
                                        SynBinding(_1, _2, lhs parseState) 
                    )
-# 960 "Parser.fsy"
+# 958 "Parser.fsy"
                  : 'gentype_binding));
 # 5638 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5641,10 +5641,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 963 "Parser.fsy"
+# 961 "Parser.fsy"
                                     SynName.Inferred(_1, lhs parseState) 
                    )
-# 963 "Parser.fsy"
+# 961 "Parser.fsy"
                  : 'gentype_name));
 # 5649 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5652,10 +5652,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 964 "Parser.fsy"
+# 962 "Parser.fsy"
                                                               _1 
                    )
-# 964 "Parser.fsy"
+# 962 "Parser.fsy"
                  : 'gentype_name));
 # 5660 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5663,10 +5663,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 967 "Parser.fsy"
+# 965 "Parser.fsy"
                                                                       _2 
                    )
-# 967 "Parser.fsy"
+# 965 "Parser.fsy"
                  : 'gentype_name_in_parens_or_brackets_start));
 # 5671 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5674,10 +5674,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 968 "Parser.fsy"
+# 966 "Parser.fsy"
                                                                           _2 
                    )
-# 968 "Parser.fsy"
+# 966 "Parser.fsy"
                  : 'gentype_name_in_parens_or_brackets_start));
 # 5682 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5686,10 +5686,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 972 "Parser.fsy"
+# 970 "Parser.fsy"
                                SynName.Typed(_1, _3, lhs parseState) 
                    )
-# 972 "Parser.fsy"
+# 970 "Parser.fsy"
                  : 'gentype_name_in_parens_or_brackets));
 # 5694 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5697,30 +5697,30 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 974 "Parser.fsy"
+# 972 "Parser.fsy"
                                SynName.Inferred(_1, lhs parseState) 
                    )
-# 974 "Parser.fsy"
+# 972 "Parser.fsy"
                  : 'gentype_name_in_parens_or_brackets));
 # 5705 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 977 "Parser.fsy"
+# 975 "Parser.fsy"
                                            [] 
                    )
-# 977 "Parser.fsy"
+# 975 "Parser.fsy"
                  : 'gentype_empty_name_list));
 # 5715 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 978 "Parser.fsy"
+# 976 "Parser.fsy"
                                                [] 
                    )
-# 978 "Parser.fsy"
+# 976 "Parser.fsy"
                  : 'gentype_empty_name_list));
 # 5725 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5728,10 +5728,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 981 "Parser.fsy"
+# 979 "Parser.fsy"
                                              _1 
                    )
-# 981 "Parser.fsy"
+# 979 "Parser.fsy"
                  : 'gentype_name_list_start));
 # 5736 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5739,10 +5739,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 982 "Parser.fsy"
+# 980 "Parser.fsy"
                                                      _2 
                    )
-# 982 "Parser.fsy"
+# 980 "Parser.fsy"
                  : 'gentype_name_list_start));
 # 5747 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5750,10 +5750,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 983 "Parser.fsy"
+# 981 "Parser.fsy"
                                                          _2 
                    )
-# 983 "Parser.fsy"
+# 981 "Parser.fsy"
                  : 'gentype_name_list_start));
 # 5758 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5761,10 +5761,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 985 "Parser.fsy"
+# 983 "Parser.fsy"
                                                 List.rev _1 
                    )
-# 985 "Parser.fsy"
+# 983 "Parser.fsy"
                  : 'gentype_name_list));
 # 5769 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5772,10 +5772,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 987 "Parser.fsy"
+# 985 "Parser.fsy"
                                                   [_1] 
                    )
-# 987 "Parser.fsy"
+# 985 "Parser.fsy"
                  : 'gentype_rev_name_list));
 # 5780 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5784,10 +5784,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 988 "Parser.fsy"
+# 986 "Parser.fsy"
                                                 _2 :: _1 
                    )
-# 988 "Parser.fsy"
+# 986 "Parser.fsy"
                  : 'gentype_rev_name_list));
 # 5792 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5795,10 +5795,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 991 "Parser.fsy"
+# 989 "Parser.fsy"
                                     SynSymbol(Ident(_1, lhs parseState)) 
                    )
-# 991 "Parser.fsy"
+# 989 "Parser.fsy"
                  : 'gentype_symbol));
 # 5803 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5806,12 +5806,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 995 "Parser.fsy"
+# 993 "Parser.fsy"
                                let text = _1
                                SynSymbol(Ident(text, lhs parseState))
                              
                    )
-# 995 "Parser.fsy"
+# 993 "Parser.fsy"
                  : 'gentype_macro_name));
 # 5816 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5819,12 +5819,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1001 "Parser.fsy"
+# 999 "Parser.fsy"
                                let text = _1
                                SynSymbol(Ident(text.TrimStart '.', lhs parseState))
                              
                    )
-# 1001 "Parser.fsy"
+# 999 "Parser.fsy"
                  : 'gentype_dot_method));
 # 5829 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5832,12 +5832,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1007 "Parser.fsy"
+# 1005 "Parser.fsy"
                                let text = _1
                                SynSymbol(Ident(text.TrimStart '-', lhs parseState))
                              
                    )
-# 1007 "Parser.fsy"
+# 1005 "Parser.fsy"
                  : 'gentype_apply_method));
 # 5842 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5845,22 +5845,22 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1013 "Parser.fsy"
+# 1011 "Parser.fsy"
                                let text = _1
                                SynKeyword(Ident(text, lhs parseState))
                              
                    )
-# 1013 "Parser.fsy"
+# 1011 "Parser.fsy"
                  : 'gentype_keyword));
 # 5855 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1018 "Parser.fsy"
+# 1016 "Parser.fsy"
                                                         () 
                    )
-# 1018 "Parser.fsy"
+# 1016 "Parser.fsy"
                  : 'gentype_syn_comma));
 # 5865 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5868,10 +5868,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1021 "Parser.fsy"
+# 1019 "Parser.fsy"
                                                         _1 
                    )
-# 1021 "Parser.fsy"
+# 1019 "Parser.fsy"
                  : 'gentype_raw_syntype_ident_text));
 # 5876 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5879,12 +5879,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1025 "Parser.fsy"
+# 1023 "Parser.fsy"
                                let text = _1
                                SynType.Ident(Ident(text, lhs parseState))
                              
                    )
-# 1025 "Parser.fsy"
+# 1023 "Parser.fsy"
                  : 'gentype_raw_syntype_ident));
 # 5889 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5892,10 +5892,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1030 "Parser.fsy"
+# 1028 "Parser.fsy"
                                                                         SynType.Ident(Ident(_1, lhs parseState))
                    )
-# 1030 "Parser.fsy"
+# 1028 "Parser.fsy"
                  : 'gentype_syntype_ident));
 # 5900 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5903,12 +5903,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1032 "Parser.fsy"
+# 1030 "Parser.fsy"
                                let text = _2
                                SynType.Ident(Ident("'" + text, lhs parseState))
                              
                    )
-# 1032 "Parser.fsy"
+# 1030 "Parser.fsy"
                  : 'gentype_syntype_ident));
 # 5913 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5917,14 +5917,14 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1036 "Parser.fsy"
+# 1034 "Parser.fsy"
                               
                                  let text = _1
                                  let rest = _3
                                  SynType.Ident(Ident(text + "," + (String.concat "," rest), lhs parseState))
                              
                    )
-# 1036 "Parser.fsy"
+# 1034 "Parser.fsy"
                  : 'gentype_syntype_ident));
 # 5929 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5932,10 +5932,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1042 "Parser.fsy"
+# 1040 "Parser.fsy"
                                                                   List.rev _1 
                    )
-# 1042 "Parser.fsy"
+# 1040 "Parser.fsy"
                  : 'gentype_syntype_comma_list));
 # 5940 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5943,10 +5943,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1044 "Parser.fsy"
+# 1042 "Parser.fsy"
                                                                         [_1] 
                    )
-# 1044 "Parser.fsy"
+# 1042 "Parser.fsy"
                  : 'gentype_rev_syntype_comma_list));
 # 5951 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5955,10 +5955,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1045 "Parser.fsy"
+# 1043 "Parser.fsy"
                                                                                       _3 :: _1 
                    )
-# 1045 "Parser.fsy"
+# 1043 "Parser.fsy"
                  : 'gentype_rev_syntype_comma_list));
 # 5963 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5966,10 +5966,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1048 "Parser.fsy"
+# 1046 "Parser.fsy"
                                          (_1, (rhs parseState 1))
                    )
-# 1048 "Parser.fsy"
+# 1046 "Parser.fsy"
                  : 'gentype_constant));
 # 5974 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5977,11 +5977,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1052 "Parser.fsy"
+# 1050 "Parser.fsy"
                                let (raw, kind, _) = _1
                                SynConst.String(raw, kind, (lhs parseState))
                    )
-# 1052 "Parser.fsy"
+# 1050 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 5986 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -5989,11 +5989,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1055 "Parser.fsy"
+# 1053 "Parser.fsy"
                              if snd _1 then errorR(mkDiagnosticWithText (SR.lexOutsideEightBitSigned(), lhs parseState))
                              SynConst.SByte(fst _1) 
                    )
-# 1055 "Parser.fsy"
+# 1053 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 5998 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6001,10 +6001,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1059 "Parser.fsy"
+# 1057 "Parser.fsy"
                              SynConst.Byte _1 
                    )
-# 1059 "Parser.fsy"
+# 1057 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6009 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6012,11 +6012,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1062 "Parser.fsy"
+# 1060 "Parser.fsy"
                              if snd _1 then errorR(mkDiagnosticWithText (SR.lexOutsideSixteenBitSigned(), lhs parseState))
                              SynConst.Int16 (fst _1) 
                    )
-# 1062 "Parser.fsy"
+# 1060 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6021 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6024,10 +6024,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1066 "Parser.fsy"
+# 1064 "Parser.fsy"
                              SynConst.UInt16 _1 
                    )
-# 1066 "Parser.fsy"
+# 1064 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6032 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6035,11 +6035,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1069 "Parser.fsy"
+# 1067 "Parser.fsy"
                              if snd _1 then errorR(mkDiagnosticWithText (SR.lexOutsideThirtyTwoBitSigned(), lhs parseState))
                              SynConst.Int32 (fst _1) 
                    )
-# 1069 "Parser.fsy"
+# 1067 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6044 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6047,10 +6047,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1073 "Parser.fsy"
+# 1071 "Parser.fsy"
                              SynConst.UInt32 _1 
                    )
-# 1073 "Parser.fsy"
+# 1071 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6055 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6058,11 +6058,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1076 "Parser.fsy"
+# 1074 "Parser.fsy"
                              if snd _1 then errorR(mkDiagnosticWithText (SR.lexOutsideSixtyFourBitSigned(), lhs parseState))
                              SynConst.Int64 (fst _1) 
                    )
-# 1076 "Parser.fsy"
+# 1074 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6067 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6070,10 +6070,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1080 "Parser.fsy"
+# 1078 "Parser.fsy"
                              SynConst.UInt64 _1 
                    )
-# 1080 "Parser.fsy"
+# 1078 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6078 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6081,11 +6081,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1083 "Parser.fsy"
+# 1081 "Parser.fsy"
                              if snd _1 then errorR(mkDiagnosticWithText (SR.lexOutsideNativeSigned(), lhs parseState))
                              SynConst.IntPtr(fst _1) 
                    )
-# 1083 "Parser.fsy"
+# 1081 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6090 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6093,10 +6093,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1087 "Parser.fsy"
+# 1085 "Parser.fsy"
                              SynConst.UIntPtr _1 
                    )
-# 1087 "Parser.fsy"
+# 1085 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6101 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6104,10 +6104,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1090 "Parser.fsy"
+# 1088 "Parser.fsy"
                              SynConst.Single _1 
                    )
-# 1090 "Parser.fsy"
+# 1088 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6112 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6115,10 +6115,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1093 "Parser.fsy"
+# 1091 "Parser.fsy"
                              SynConst.Double _1 
                    )
-# 1093 "Parser.fsy"
+# 1091 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6123 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6126,50 +6126,50 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1095 "Parser.fsy"
+# 1093 "Parser.fsy"
                                      SynConst.Decimal(_1)
                    )
-# 1095 "Parser.fsy"
+# 1093 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6134 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1097 "Parser.fsy"
+# 1095 "Parser.fsy"
                                   SynConst.Bool(true)
                    )
-# 1097 "Parser.fsy"
+# 1095 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6144 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1098 "Parser.fsy"
+# 1096 "Parser.fsy"
                                    SynConst.Bool(false)
                    )
-# 1098 "Parser.fsy"
+# 1096 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6154 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1099 "Parser.fsy"
+# 1097 "Parser.fsy"
                                  SynConst.Nil 
                    )
-# 1099 "Parser.fsy"
+# 1097 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6164 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1100 "Parser.fsy"
+# 1098 "Parser.fsy"
                                   SynConst.Unit 
                    )
-# 1100 "Parser.fsy"
+# 1098 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6174 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6177,11 +6177,11 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1102 "Parser.fsy"
+# 1100 "Parser.fsy"
                                let text = _1
                                SynConst.Char(parseChar text) 
                    )
-# 1102 "Parser.fsy"
+# 1100 "Parser.fsy"
                  : 'gentype_rawConstant));
 # 6186 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6191,10 +6191,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1107 "Parser.fsy"
+# 1105 "Parser.fsy"
                                SynExpr.FunctionDef(_2, FunctionFlags.None, _3, _4, (lhs parseState)) 
                    )
-# 1107 "Parser.fsy"
+# 1105 "Parser.fsy"
                  : 'gentype_function_def));
 # 6199 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6204,10 +6204,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1109 "Parser.fsy"
+# 1107 "Parser.fsy"
                                SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, _5, (lhs parseState)) 
                    )
-# 1109 "Parser.fsy"
+# 1107 "Parser.fsy"
                  : 'gentype_function_def));
 # 6212 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6217,10 +6217,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1111 "Parser.fsy"
+# 1109 "Parser.fsy"
                                SynExpr.FunctionDef(_4, FunctionFlags.Recursive ||| FunctionFlags.Inline, _5, _6, (lhs parseState)) 
                    )
-# 1111 "Parser.fsy"
+# 1109 "Parser.fsy"
                  : 'gentype_function_def));
 # 6225 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6230,10 +6230,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1113 "Parser.fsy"
+# 1111 "Parser.fsy"
                                SynExpr.FunctionDef(_3, FunctionFlags.Recursive, _4, _5, (lhs parseState)) 
                    )
-# 1113 "Parser.fsy"
+# 1111 "Parser.fsy"
                  : 'gentype_function_def));
 # 6238 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6242,10 +6242,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1115 "Parser.fsy"
+# 1113 "Parser.fsy"
                                SynExpr.LambdaDef(SynLambda(_2, _3, (lhs parseState))) 
                    )
-# 1115 "Parser.fsy"
+# 1113 "Parser.fsy"
                  : 'gentype_function_def));
 # 6250 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6254,10 +6254,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1117 "Parser.fsy"
+# 1115 "Parser.fsy"
                                SynExpr.LambdaDef(SynLambda(_2, _3, (lhs parseState))) 
                    )
-# 1117 "Parser.fsy"
+# 1115 "Parser.fsy"
                  : 'gentype_function_def));
 # 6262 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6265,20 +6265,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1118 "Parser.fsy"
+# 1116 "Parser.fsy"
                                                                         _1 
                    )
-# 1118 "Parser.fsy"
+# 1116 "Parser.fsy"
                  : 'gentype_function_def));
 # 6273 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1123 "Parser.fsy"
+# 1121 "Parser.fsy"
                                SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) 
                    )
-# 1123 "Parser.fsy"
+# 1121 "Parser.fsy"
                  : 'gentype_invalid_function_def));
 # 6283 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6286,10 +6286,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1126 "Parser.fsy"
+# 1124 "Parser.fsy"
                                SynExpr.FunctionDef(_2, FunctionFlags.None, [], [], lhs parseState) 
                    )
-# 1126 "Parser.fsy"
+# 1124 "Parser.fsy"
                  : 'gentype_invalid_function_def));
 # 6294 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6297,10 +6297,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1129 "Parser.fsy"
+# 1127 "Parser.fsy"
                                SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) 
                    )
-# 1129 "Parser.fsy"
+# 1127 "Parser.fsy"
                  : 'gentype_invalid_function_def));
 # 6305 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6309,10 +6309,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1132 "Parser.fsy"
+# 1130 "Parser.fsy"
                                SynExpr.FunctionDef(_2, FunctionFlags.None, _3, [], (lhs parseState)) 
                    )
-# 1132 "Parser.fsy"
+# 1130 "Parser.fsy"
                  : 'gentype_invalid_function_def));
 # 6317 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6321,40 +6321,40 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1134 "Parser.fsy"
+# 1132 "Parser.fsy"
                                SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, [], (lhs parseState)) 
                    )
-# 1134 "Parser.fsy"
+# 1132 "Parser.fsy"
                  : 'gentype_invalid_function_def));
 # 6329 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1137 "Parser.fsy"
+# 1135 "Parser.fsy"
                                   [] 
                    )
-# 1137 "Parser.fsy"
+# 1135 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6339 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1138 "Parser.fsy"
+# 1136 "Parser.fsy"
                                            [] 
                    )
-# 1138 "Parser.fsy"
+# 1136 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6349 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1139 "Parser.fsy"
+# 1137 "Parser.fsy"
                                                [] 
                    )
-# 1139 "Parser.fsy"
+# 1137 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6359 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6364,10 +6364,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1140 "Parser.fsy"
+# 1138 "Parser.fsy"
                                                                             _2 
                    )
-# 1140 "Parser.fsy"
+# 1138 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6372 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6376,10 +6376,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1141 "Parser.fsy"
+# 1139 "Parser.fsy"
                                                                            [] 
                    )
-# 1141 "Parser.fsy"
+# 1139 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6384 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6387,10 +6387,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1142 "Parser.fsy"
+# 1140 "Parser.fsy"
                                                         [] 
                    )
-# 1142 "Parser.fsy"
+# 1140 "Parser.fsy"
                  : 'gentype_arg_list_start));
 # 6395 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6398,10 +6398,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1144 "Parser.fsy"
+# 1142 "Parser.fsy"
                                               List.rev _1 
                    )
-# 1144 "Parser.fsy"
+# 1142 "Parser.fsy"
                  : 'gentype_arg_list));
 # 6406 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6409,10 +6409,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1146 "Parser.fsy"
+# 1144 "Parser.fsy"
                                                 [_1] 
                    )
-# 1146 "Parser.fsy"
+# 1144 "Parser.fsy"
                  : 'gentype_rev_arg_list));
 # 6417 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6421,10 +6421,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1147 "Parser.fsy"
+# 1145 "Parser.fsy"
                                               _2 :: _1 
                    )
-# 1147 "Parser.fsy"
+# 1145 "Parser.fsy"
                  : 'gentype_rev_arg_list));
 # 6429 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6432,10 +6432,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1150 "Parser.fsy"
+# 1148 "Parser.fsy"
                                     SynArg.InferredArg(_1, lhs parseState) 
                    )
-# 1150 "Parser.fsy"
+# 1148 "Parser.fsy"
                  : 'gentype_arg));
 # 6440 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6443,10 +6443,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1151 "Parser.fsy"
+# 1149 "Parser.fsy"
                                                              _1 
                    )
-# 1151 "Parser.fsy"
+# 1149 "Parser.fsy"
                  : 'gentype_arg));
 # 6451 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6454,10 +6454,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1154 "Parser.fsy"
+# 1152 "Parser.fsy"
                                                                      _2 
                    )
-# 1154 "Parser.fsy"
+# 1152 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets_start));
 # 6462 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6465,10 +6465,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1155 "Parser.fsy"
+# 1153 "Parser.fsy"
                                                                          _2 
                    )
-# 1155 "Parser.fsy"
+# 1153 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets_start));
 # 6473 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6477,10 +6477,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1159 "Parser.fsy"
+# 1157 "Parser.fsy"
                                SynArg.TypedArg(_1, _3, lhs parseState) 
                    )
-# 1159 "Parser.fsy"
+# 1157 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets));
 # 6485 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6488,10 +6488,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1161 "Parser.fsy"
+# 1159 "Parser.fsy"
                                SynArg.InferredArg(_1, lhs parseState) 
                    )
-# 1161 "Parser.fsy"
+# 1159 "Parser.fsy"
                  : 'gentype_arg_in_parens_or_brackets));
 # 6496 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6500,10 +6500,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1164 "Parser.fsy"
+# 1162 "Parser.fsy"
                                             Syntax.mkFunctionCallOrCexpr _1 _2 (lhs parseState)
                    )
-# 1164 "Parser.fsy"
+# 1162 "Parser.fsy"
                  : 'gentype_function_call));
 # 6508 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6511,10 +6511,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1165 "Parser.fsy"
+# 1163 "Parser.fsy"
                                   SynExpr.FunctionCall(_1, [], (lhs parseState))
                    )
-# 1165 "Parser.fsy"
+# 1163 "Parser.fsy"
                  : 'gentype_function_call));
 # 6519 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6522,10 +6522,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1168 "Parser.fsy"
+# 1166 "Parser.fsy"
                                              _1 
                    )
-# 1168 "Parser.fsy"
+# 1166 "Parser.fsy"
                  : 'gentype_function_call_args));
 # 6530 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6533,20 +6533,20 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1169 "Parser.fsy"
+# 1167 "Parser.fsy"
                                        _1 
                    )
-# 1169 "Parser.fsy"
+# 1167 "Parser.fsy"
                  : 'gentype_function_call_args));
 # 6541 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1172 "Parser.fsy"
+# 1170 "Parser.fsy"
                              [] 
                    )
-# 1172 "Parser.fsy"
+# 1170 "Parser.fsy"
                  : 'gentype_empty_call_args));
 # 6551 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6555,10 +6555,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1176 "Parser.fsy"
+# 1174 "Parser.fsy"
                                SynExpr.Match (_2, _3, lhs parseState)
                    )
-# 1176 "Parser.fsy"
+# 1174 "Parser.fsy"
                  : 'gentype_match_expr));
 # 6563 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6566,22 +6566,22 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1179 "Parser.fsy"
+# 1177 "Parser.fsy"
                                let r = lhs parseState;
                                SynExpr.Match (_2, [], r)
                    )
-# 1179 "Parser.fsy"
+# 1177 "Parser.fsy"
                  : 'gentype_match_expr));
 # 6575 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1183 "Parser.fsy"
+# 1181 "Parser.fsy"
                                let r = lhs parseState;
                                SynExpr.Match (Syntax.parserRecoveryExpr r, [], r)
                    )
-# 1183 "Parser.fsy"
+# 1181 "Parser.fsy"
                  : 'gentype_match_expr));
 # 6586 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6589,10 +6589,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1186 "Parser.fsy"
+# 1184 "Parser.fsy"
                                                   List.rev _1 
                    )
-# 1186 "Parser.fsy"
+# 1184 "Parser.fsy"
                  : 'gentype_match_list));
 # 6597 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6600,10 +6600,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1188 "Parser.fsy"
+# 1186 "Parser.fsy"
                                          [_1] 
                    )
-# 1188 "Parser.fsy"
+# 1186 "Parser.fsy"
                  : 'gentype_rev_match_list));
 # 6608 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6612,10 +6612,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1189 "Parser.fsy"
+# 1187 "Parser.fsy"
                                                         _2 :: _1 
                    )
-# 1189 "Parser.fsy"
+# 1187 "Parser.fsy"
                  : 'gentype_rev_match_list));
 # 6620 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6625,10 +6625,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1192 "Parser.fsy"
+# 1190 "Parser.fsy"
                                                                          _2 
                    )
-# 1192 "Parser.fsy"
+# 1190 "Parser.fsy"
                  : 'gentype_match_start));
 # 6633 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6637,12 +6637,12 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1194 "Parser.fsy"
+# 1192 "Parser.fsy"
                                                                   
                              Syntax.parserRecoveryMatch (lhs parseState)
                           
                    )
-# 1194 "Parser.fsy"
+# 1192 "Parser.fsy"
                  : 'gentype_match_start));
 # 6647 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6651,10 +6651,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1200 "Parser.fsy"
+# 1198 "Parser.fsy"
                                SynMatch.SynMatch(_1, None, _2, lhs parseState) 
                    )
-# 1200 "Parser.fsy"
+# 1198 "Parser.fsy"
                  : 'gentype_match));
 # 6659 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6664,10 +6664,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1203 "Parser.fsy"
+# 1201 "Parser.fsy"
                                SynMatch.SynMatch(_1, Some(_4), _6, lhs parseState) 
                    )
-# 1203 "Parser.fsy"
+# 1201 "Parser.fsy"
                  : 'gentype_match));
 # 6672 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6675,10 +6675,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1205 "Parser.fsy"
+# 1203 "Parser.fsy"
                                                                                           List.rev _1 
                    )
-# 1205 "Parser.fsy"
+# 1203 "Parser.fsy"
                  : 'gentype_match_tuple_list));
 # 6683 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6686,10 +6686,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1207 "Parser.fsy"
+# 1205 "Parser.fsy"
                                                                     [_1] 
                    )
-# 1207 "Parser.fsy"
+# 1205 "Parser.fsy"
                  : 'gentype_rev_match_tuple_list));
 # 6694 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6698,10 +6698,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1209 "Parser.fsy"
+# 1207 "Parser.fsy"
                                _3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.Comma, (rhs parseState 2))) :: _1 
                    )
-# 1209 "Parser.fsy"
+# 1207 "Parser.fsy"
                  : 'gentype_rev_match_tuple_list));
 # 6706 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6710,10 +6710,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1211 "Parser.fsy"
+# 1209 "Parser.fsy"
                                _3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.Dot, (rhs parseState 2))) :: _1 
                    )
-# 1211 "Parser.fsy"
+# 1209 "Parser.fsy"
                  : 'gentype_rev_match_tuple_list));
 # 6718 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6722,10 +6722,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1213 "Parser.fsy"
+# 1211 "Parser.fsy"
                                _3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.ColonColon, (rhs parseState 2))) :: _1 
                    )
-# 1213 "Parser.fsy"
+# 1211 "Parser.fsy"
                  : 'gentype_rev_match_tuple_list));
 # 6730 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6734,10 +6734,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1215 "Parser.fsy"
+# 1213 "Parser.fsy"
                                _2 :: _1 
                    )
-# 1215 "Parser.fsy"
+# 1213 "Parser.fsy"
                  : 'gentype_rev_match_tuple_list));
 # 6742 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6745,10 +6745,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1218 "Parser.fsy"
+# 1216 "Parser.fsy"
                                                                      SynMatchPattern.Const(fst _1, snd _1) 
                    )
-# 1218 "Parser.fsy"
+# 1216 "Parser.fsy"
                  : 'gentype_match_pattern));
 # 6753 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6756,7 +6756,7 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1219 "Parser.fsy"
+# 1217 "Parser.fsy"
                                    
                              let text = _1
                              if ((Syntax.textOfSymbol text) = "_") then
@@ -6764,27 +6764,27 @@ let _fsyacc_reductions = lazy [|
                              else
                                  SynMatchPattern.Symbol (text, lhs parseState) 
                    )
-# 1219 "Parser.fsy"
+# 1217 "Parser.fsy"
                  : 'gentype_match_pattern));
 # 6769 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1226 "Parser.fsy"
+# 1224 "Parser.fsy"
                                SynMatchPattern.Trivia(SynPatternTriviaKind.Brackets, (lhs parseState)) 
                    )
-# 1226 "Parser.fsy"
+# 1224 "Parser.fsy"
                  : 'gentype_match_pattern));
 # 6779 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1228 "Parser.fsy"
+# 1226 "Parser.fsy"
                                SynMatchPattern.Trivia(SynPatternTriviaKind.Brackets, (lhs parseState)) 
                    )
-# 1228 "Parser.fsy"
+# 1226 "Parser.fsy"
                  : 'gentype_match_pattern));
 # 6789 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6792,10 +6792,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1230 "Parser.fsy"
+# 1228 "Parser.fsy"
                                SynMatchPattern.Tuple (_3, lhs parseState) 
                    )
-# 1230 "Parser.fsy"
+# 1228 "Parser.fsy"
                  : 'gentype_match_pattern));
 # 6800 "Syntax/FsLexYaccOutput/Parser.fs"
         (fun (parseState : FSharp.Text.Parsing.IParseState) ->
@@ -6803,10 +6803,10 @@ let _fsyacc_reductions = lazy [|
             Microsoft.FSharp.Core.Operators.box
                 (
                    (
-# 1232 "Parser.fsy"
+# 1230 "Parser.fsy"
                                SynMatchPattern.List(_2, lhs parseState) 
                    )
-# 1232 "Parser.fsy"
+# 1230 "Parser.fsy"
                  : 'gentype_match_pattern));
 |]
 # 6812 "Syntax/FsLexYaccOutput/Parser.fs"
