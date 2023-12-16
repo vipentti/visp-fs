@@ -109,11 +109,16 @@ let liftLiteralStrings (file: ParsedFile) =
                                     variables.Add(argName)
                                     argIndex <- argIndex + 1
                                     resultSb.Append(op).Append(argName).Append(cl) |> ignore
+                                    expressions.Add(expr)
                                 else
                                     resultSb.Append(op).Append(varName).Append(cl) |> ignore
-                                    variables.Add(varName)
 
-                                expressions.Add(expr)
+                                    match Seq.tryFindIndex (fun it -> it = varName) variables with
+                                    | Some _ -> ()
+                                    | None ->
+                                        variables.Add(varName)
+                                        expressions.Add(expr)
+
 
                                 span <- currentSlice.Slice(closeIndex + cl.Length)
                                 ()
