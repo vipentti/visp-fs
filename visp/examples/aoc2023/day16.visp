@@ -1,0 +1,317 @@
+﻿
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day16")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(type Grid char[,])
+
+(union Dir
+  Up
+  Left
+  Down
+  Right
+  )
+
+(struct Pos ([x: int32] [y: int32])
+  (member _.X x)
+  (member _.Y y)
+
+  (override fn _.ToString ()
+    (sprintf "(y: %A, x: %A)" y x)
+  ))
+
+
+(fn inline UpOf ([p: Pos])
+  (mkPos (+X p) (dec (+Y p))))
+
+(fn inline DownOf ([p: Pos])
+  (mkPos (+X p) (inc (+Y p))))
+
+(fn inline LeftOf ([p: Pos])
+  (mkPos (dec (+X p)) (+Y p)))
+
+(fn inline RightOf ([p: Pos])
+  (mkPos (inc (+X p)) (+Y p)))
+
+(fn GetDirFun ([d: Dir])
+  (match d
+    [Up UpOf]
+    [Down DownOf]
+    [Left LeftOf]
+    [Right RightOf]
+  ))
+
+(type TileMap ([grid: Grid])
+  (let grid grid)
+  (let height (Array2D.length1 grid))
+  (let width (Array2D.length2 grid))
+
+  (member _.Grid grid)
+  (member _.Height height)
+  (member _.Width width)
+
+  (override fn t.ToString()
+    (sprintf "TileMap\n%s" (.Serialize t)))
+
+  (member fn _.Serialize ()
+    (let sb (new System.Text.StringBuilder))
+
+    (for/to [y (0 to (dec height))]
+      (for/to [x (0 to (dec width))]
+        (let _ (.Append sb (.[y, x] grid)))
+        ())
+      (let _ (.AppendLine sb))
+      ())
+
+    (.ToString sb))
+
+  (member _.Item
+    (get ([pos: Pos])
+      (let y (+Y pos))
+      (let x (+X pos))
+
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+          (Some (.[y, x] grid))
+        ]
+        [_ None])
+    )
+    (set ([pos: Pos]) ch
+      (let y (+Y pos))
+      (let x (+X pos))
+      (cond_
+        [(and (and (>= y 0) (< y height))
+              (and (>= x 0) (< x width)))
+
+          (set! (.[y, x] grid) ch)
+        ]
+        [_ ()])
+    )))
+
+(type Beam ([p: Pos] [d: Dir] [s: Set<Pos*Dir>])
+  (mut pos p)
+  (mut dir d)
+  (mut visited (->> s (Set.add (p . d))))
+
+  (member fn _.Contains (p d)
+    (Set.contains (p . d) visited))
+
+  (member _.Pos pos)
+  (member _.Dir dir)
+  (member _.X (+X pos))
+  (member _.Y (+Y pos))
+  (member _.Visited visited)
+
+  (member fn _.SetPosDir (p d)
+    (set! pos p)
+    (set! dir d)
+    ;(ignore (.Add visited (p . d)))
+    (set! visited (Set.add (p . d) visited)))
+
+  (override fn t.ToString ()
+    (sprintf "Beam(y: %A, x: %A, d: %A, vis: %A)" (+Y t) (+X t) dir visited))
+)
+
+(fn mkBeam (p d) (new Beam p d (!set)))
+(fn cloneBeam (p d s) (new Beam p d s))
+
+(fn MoveBeam ([tm: TileMap] [beam: Beam])
+  (let dir (+Dir beam))
+  (let next (->> (+Pos beam) (GetDirFun dir)))
+  ;; (printfn "next: %A" next)
+
+  (mut nextBeam None)
+  (mut nextDir dir)
+  (mut canMove true)
+
+  (match (.[next] tm)
+    [None (set! canMove false)]
+    [(Some ch)
+      (match ch
+        [#\. ()]
+        [#\|
+          (match dir
+            [Up ()]
+            [Down ()]
+            [Left
+              (set! nextDir Up)
+              (set! nextBeam (Some (cloneBeam next Down (+Visited beam))))
+            ]
+            [Right
+              (set! nextDir Up)
+              (set! nextBeam (Some (cloneBeam next Down (+Visited beam))))
+            ]
+          )
+        ]
+        [#\-
+          (match dir
+            [Left ()]
+            [Right ()]
+            [Up
+              (set! nextDir Left)
+              (set! nextBeam (Some (cloneBeam next Right (+Visited beam))))
+            ]
+            [Down
+              (set! nextDir Left)
+              (set! nextBeam (Some (cloneBeam next Right (+Visited beam))))
+            ]
+          )
+        ]
+        [#\/
+          (match dir
+            [Right (set! nextDir Up)]
+            [Left (set! nextDir Down)]
+            [Up (set! nextDir Right) ]
+            [Down (set! nextDir Left)]
+          )
+        ]
+        [#\\
+          (match dir
+            [Left (set! nextDir Up)]
+            [Right (set! nextDir Down)]
+            [Up (set! nextDir Left)]
+            [Down (set! nextDir Right)]
+          )
+        ]
+
+        [_ (failwithf "unsupported char %A" ch)]
+      )
+    ]
+  )
+
+  (cond_
+    [(and canMove (not (-Contains beam next nextDir)))
+      (-SetPosDir beam next nextDir)
+      (Some nextBeam)
+    ]
+    [_ None])
+)
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let res (new ResizeArray<_>))
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (.Add res (.ToArray line))
+    ))
+
+  (new TileMap (array2D (.ToArray res))))
+
+(fn Part1 ([tm: TileMap] [beam: Beam])
+  (let beams (!vec beam))
+  (mut activeBeams (!set ((+Pos beam) . (+Dir beam))))
+  (mut loop true)
+  (mut index 0)
+
+  (let temp (!vec))
+  (while loop
+    (.Clear temp)
+    (mut couldMove false)
+    (for/in [beam beams]
+      (match (MoveBeam tm beam)
+        [(Some next)
+          ;; (printfn "%A" beam)
+          (set! couldMove true)
+          (match next
+            [None ()]
+            [(Some next)
+              (unless (Set.contains ((+Pos next) . (+Dir next)) activeBeams)
+                (.Add temp next)
+                (set! activeBeams (Set.add ((+Pos next) . (+Dir next)) activeBeams))
+              )
+
+              ]
+          )
+        ]
+        [None ()]
+      ))
+
+    (unless couldMove
+      ;; (printfn "no more moving beams after %A" index)
+      (set! loop false))
+
+    (.AddRange beams temp)
+
+    (set! index (inc index))
+  )
+
+  (->> beams
+    (Seq.map #(+Visited %1))
+    (Set.unionMany)
+    (Set.map #(fst %1))
+    (Set.filter #(+IsSome (.[%1] tm)))
+    (Set.count)
+  ))
+
+(fn Part2 ([tm: TileMap])
+  (let lastW (dec (+Width tm)))
+  (let lastH (dec (+Height tm)))
+
+  (let startZero 0)
+  (let startW lastW)
+  (let startH lastH)
+
+  (let starts (->>
+    (seq->
+      (for/to [y (0 to lastH)]
+        (yield (mkBeam (mkPos startZero y) Right))
+        (yield (mkBeam (mkPos startW y) Left))
+      )
+      (for/to [x (0 to lastW)]
+        (yield (mkBeam (mkPos x startZero) Down))
+        (yield (mkBeam (mkPos x startH) Up))
+      )
+    )
+    (Array.ofSeq)
+  ))
+
+  (->>
+    starts
+    (Array.map (Part1 tm))
+    (Array.max)
+  )
+)
+
+(let tiles (ParseFile fileText))
+
+(printfn "%A" tiles)
+
+(let part1 (Part1 tiles (mkBeam (mkPos -1 0) Right)))
+
+(WriteResult "part1" part1 (if example 46 6994))
+
+(let part2 (Part2 tiles))
+
+(WriteResult "part2" part2 (if example 51 7488))
+
+()
