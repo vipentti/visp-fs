@@ -10,11 +10,11 @@ let arr =
   // line 8 @"array-0.visp"
   [|1;2;3;4;5|]
 // line 10 @"array-0.visp"
-printfn ("arr[0] %A") ((arr.[0]))
+printfn "arr[0] %A" ((arr.[0]))
 // line 11 @"array-0.visp"
-printfn ("arr[1] %A") ((arr.[1]))
+printfn "arr[1] %A" ((arr.[1]))
 // line 13 @"array-0.visp"
 let visp_result_todo = arr
 // line 13 @"array-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

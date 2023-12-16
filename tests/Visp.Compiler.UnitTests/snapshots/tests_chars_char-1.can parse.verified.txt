@@ -6,13 +6,13 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 8 @"char-1.visp"
-printfn ("Char is '%03o'") (int ('\n'))
+printfn "Char is '%03o'" (int '\n')
 // line 9 @"char-1.visp"
-printfn ("Char is '%03o'") (int ('\r'))
+printfn "Char is '%03o'" (int '\r')
 // line 10 @"char-1.visp"
 let visp_result_todo =
   // line 10 @"char-1.visp"
-  printfn ("Char is '%03o'") (int ('\t'))
+  printfn "Char is '%03o'" (int '\t')
 // line 10 @"char-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

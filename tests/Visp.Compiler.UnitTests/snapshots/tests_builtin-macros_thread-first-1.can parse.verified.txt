@@ -18,8 +18,8 @@ let visp_result_todo =
       arg)
     |> (fun arg ->
       // line 15 @"thread-first-1.visp"
-      printfn ("arg is %O") (arg)
+      printfn "arg is %O" arg
       arg)
 // line 11 @"thread-first-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

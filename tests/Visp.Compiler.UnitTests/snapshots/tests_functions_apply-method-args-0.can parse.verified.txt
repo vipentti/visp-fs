@@ -21,7 +21,7 @@ type Pos (x: int32, y: int32) =
   // line 11 @"apply-method-args-0.visp"
   override _.ToString () =
     // line 11 @"apply-method-args-0.visp"
-    sprintf ("(y: %A, x: %A)") (y) (x)
+    sprintf "(y: %A, x: %A)" y x
 
 // line 11 @"apply-method-args-0.visp"
 let mkPos x y =
@@ -40,18 +40,18 @@ type TileMap (grid: Grid, rocks: array<Pos>) =
   // line 24 @"apply-method-args-0.visp"
   let height =
     // line 24 @"apply-method-args-0.visp"
-    Array2D.length1 (grid)
+    Array2D.length1 grid
   // line 25 @"apply-method-args-0.visp"
   let width =
     // line 25 @"apply-method-args-0.visp"
-    Array2D.length2 (grid)
+    Array2D.length2 grid
   // line 27 @"apply-method-args-0.visp"
   member _.Rocks =
         rocks
   // line 29 @"apply-method-args-0.visp"
   override _.ToString () =
     // line 30 @"apply-method-args-0.visp"
-    sprintf ("TileMap\n%A") (grid)
+    sprintf "TileMap\n%A" grid
 
   // line 32 @"apply-method-args-0.visp"
   member t.MoveRock (from: Pos) (_to: Pos) =
@@ -121,7 +121,7 @@ type TileMap (grid: Grid, rocks: array<Pos>) =
               None
             else
               // line 51 @"apply-method-args-0.visp"
-              failwith ("unreachable")
+              failwith "unreachable"
         // line 58 @"apply-method-args-0.visp"
     and set ((pos: Pos)) ch =
       // line 59 @"apply-method-args-0.visp"
@@ -170,7 +170,7 @@ type TileMap (grid: Grid, rocks: array<Pos>) =
               ()
             else
               // line 61 @"apply-method-args-0.visp"
-              failwith ("unreachable")
+              failwith "unreachable"
 // line 72 @"apply-method-args-0.visp"
 let TiltNorth (tm: TileMap) =
   // line 73 @"apply-method-args-0.visp"
@@ -187,21 +187,21 @@ let TiltNorth (tm: TileMap) =
   // line 77 @"apply-method-args-0.visp"
   for rock in rocksToMove do
     // line 78 @"apply-method-args-0.visp"
-    printfn ("%A") (rock)
+    printfn "%A" rock
     // line 79 @"apply-method-args-0.visp"
     let mutable pos = rock
     // line 80 @"apply-method-args-0.visp"
-    while CoreMethods.isTruthy((tm.MoveRock (pos) (NorthOf (pos)))) do
+    while CoreMethods.isTruthy((tm.MoveRock pos (NorthOf pos))) do
       // line 81 @"apply-method-args-0.visp"
-      pos <- NorthOf (pos)
+      pos <- NorthOf pos
   // line 84 @"apply-method-args-0.visp"
-  printfn ("%A") (tm)
+  printfn "%A" tm
   ()
 
 // line 88 @"apply-method-args-0.visp"
 let visp_result_todo =
   // line 88 @"apply-method-args-0.visp"
-  printfn ("OK")
+  printfn "OK"
 // line 88 @"apply-method-args-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

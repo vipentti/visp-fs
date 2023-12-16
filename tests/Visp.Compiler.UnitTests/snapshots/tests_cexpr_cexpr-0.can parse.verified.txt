@@ -10,13 +10,13 @@ let visp_result_todo =
   // line 8 @"cexpr-0.visp"
   for x in seq {
     // line 9 @"cexpr-0.visp"
-    yield (1)
+    yield 1
     // line 10 @"cexpr-0.visp"
-    yield (2)
+    yield 2
     // line 11 @"cexpr-0.visp"
-    yield (3)} do
+    yield 3} do
     // line 12 @"cexpr-0.visp"
-    printfn ("x is %i") (x)
+    printfn "x is %i" x
 // line 8 @"cexpr-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

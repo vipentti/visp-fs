@@ -21,11 +21,11 @@ let myObject =
   // line 14 @"type-0.visp"
   (new MyType(99))
 // line 16 @"type-0.visp"
-printfn ("%O") (myObject)
+printfn "%O" myObject
 // line 17 @"type-0.visp"
 let visp_result_todo =
   // line 17 @"type-0.visp"
-  printfn ("%O") ((myObject.Foo))
+  printfn "%O" ((myObject.Foo))
 // line 17 @"type-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

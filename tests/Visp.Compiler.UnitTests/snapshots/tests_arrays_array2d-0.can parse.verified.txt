@@ -10,15 +10,15 @@ type Grid = char[,]
 // line 10 @"array2d-0.visp"
 let arr =
   // line 10 @"array2d-0.visp"
-  Array2D.create (5) (5) ('.')
+  Array2D.create 5 5 '.'
 // line 12 @"array2d-0.visp"
 let y = 4
 // line 14 @"array2d-0.visp"
-printfn ("arr[0,0]=%A") ((arr.[0, 0]))
+printfn "arr[0,0]=%A" ((arr.[0, 0]))
 // line 15 @"array2d-0.visp"
-printfn ("arr[1,2]=%A") ((arr.[1, 1]))
+printfn "arr[1,2]=%A" ((arr.[1, 1]))
 // line 16 @"array2d-0.visp"
-printfn ("arr[3,3]=%A") (Array2D.get (arr) (3) (3))
+printfn "arr[3,3]=%A" (Array2D.get arr 3 3)
 // line 18 @"array2d-0.visp"
 arr.[2, 2] <- '#'
 // line 19 @"array2d-0.visp"
@@ -26,23 +26,23 @@ arr.[3, 4] <- '#'
 // line 20 @"array2d-0.visp"
 arr.[4, 4] <- '#'
 // line 21 @"array2d-0.visp"
-printfn ("arr[3,4]=%A") (arr
+printfn "arr[3,4]=%A" (arr
   |> (fun a1 ->
     // line 21 @"array2d-0.visp"
-    (a1.[y - 1, (1) +
-    (1) +
-    (1) +
-    (1)])))
+    (a1.[y - 1, 1 +
+    1 +
+    1 +
+    1])))
 // line 22 @"array2d-0.visp"
-printfn ("arr[4,4]=%A") (arr
+printfn "arr[4,4]=%A" (arr
   |> (fun a1 ->
     // line 22 @"array2d-0.visp"
-    (a1.[y, (1) +
-    (1) +
-    (1) +
-    (1)])))
+    (a1.[y, 1 +
+    1 +
+    1 +
+    1])))
 // line 25 @"array2d-0.visp"
 let visp_result_todo = arr
 // line 25 @"array2d-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

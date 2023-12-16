@@ -26,7 +26,7 @@ let visp_result_todo =
               3
             else
               // line 8 @"cond-0.visp"
-              failwith ("unreachable cond")
+              failwith "unreachable cond"
 // line 8 @"cond-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

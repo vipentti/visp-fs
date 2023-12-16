@@ -8,39 +8,39 @@ let state = { Todo = () }
 // line 10 @"example-1.visp"
 let hello (name: string) =
   // line 12 @"example-1.visp"
-  printfn ("hello %s") (name)
+  printfn "hello %s" name
 
 // line 16 @"example-1.visp"
 let ``hello-no-types`` name =
   // line 17 @"example-1.visp"
-  printfn ("hello %s") (name)
+  printfn "hello %s" name
 
 // line 20 @"example-1.visp"
 let ``hello-with-vector`` (name: string) =
   // line 21 @"example-1.visp"
-  printfn ("hello %s") (name)
+  printfn "hello %s" name
 
 // line 24 @"example-1.visp"
 let anon =
   // line 24 @"example-1.visp"
   (fun name ->
     // line 24 @"example-1.visp"
-    printfn ("hello %s") (name))
+    printfn "hello %s" name)
 // line 26 @"example-1.visp"
-hello ("test")
+hello "test"
 // line 27 @"example-1.visp"
-``hello-no-types`` ("no types")
+``hello-no-types`` "no types"
 // line 28 @"example-1.visp"
-``hello-with-vector`` ("vector")
+``hello-with-vector`` "vector"
 // line 29 @"example-1.visp"
-anon ("anon")
+anon "anon"
 // line 31 @"example-1.visp"
 let visp_result_todo =
   // line 31 @"example-1.visp"
     // line 31 @"example-1.visp"
   (fun name ->
     // line 32 @"example-1.visp"
-    printfn ("hello %s") (name)) ("lambda")
+    printfn "hello %s" name) "lambda"
 // line 31 @"example-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

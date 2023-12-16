@@ -27,21 +27,21 @@ TestUtils.runTest %s
 |> Async.AwaitTask
 """
 // line 9 @"strings-0.visp"
-printfn ("string is: '%s'") (``LiftedString1_strings-0``)
+printfn "string is: '%s'" ``LiftedString1_strings-0``
 // line 15 @"strings-0.visp"
-printfn ("string is: '%s'") (``LiftedString3_strings-0``)
+printfn "string is: '%s'" ``LiftedString3_strings-0``
 // line 21 @"strings-0.visp"
 let ``generate-test`` path =
   // line 22 @"strings-0.visp"
   let template =
     // line 22 @"strings-0.visp"
-    sprintf (``LiftedString4_strings-0``) (path) (path)
+    sprintf ``LiftedString4_strings-0`` path path
   template
 
 // line 30 @"strings-0.visp"
 let visp_result_todo =
   // line 30 @"strings-0.visp"
-  printfn ("test is: '%s'") (``generate-test`` ("hello"))
+  printfn "test is: '%s'" (``generate-test`` "hello")
 // line 30 @"strings-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

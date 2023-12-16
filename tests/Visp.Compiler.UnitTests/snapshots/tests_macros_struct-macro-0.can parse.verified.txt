@@ -27,9 +27,9 @@ let instance =
   // line 22 @"struct-macro-0.visp"
   (new Example(1, 2))
 // line 24 @"struct-macro-0.visp"
-printfn ("Example Struct is %A") (instance)
+printfn "Example Struct is %A" instance
 // line 25 @"struct-macro-0.visp"
-printfn ("Example IsValueType %A") (instance
+printfn "Example IsValueType %A" (instance
   |> (fun a1 ->
     // line 25 @"struct-macro-0.visp"
     a1.GetType())
@@ -39,7 +39,7 @@ printfn ("Example IsValueType %A") (instance
 // line 26 @"struct-macro-0.visp"
 let visp_result_todo =
   // line 26 @"struct-macro-0.visp"
-  printfn ("Example Result is %i") ((instance.Sum()))
+  printfn "Example Result is %i" ((instance.Sum()))
 // line 26 @"struct-macro-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

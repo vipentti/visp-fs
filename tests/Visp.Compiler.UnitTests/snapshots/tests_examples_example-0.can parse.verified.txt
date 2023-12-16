@@ -8,12 +8,12 @@ let state = { Todo = () }
 // line 10 @"example-0.visp"
 let hello (name: string) =
   // line 12 @"example-0.visp"
-  printfn ("hello %s") (name)
+  printfn "hello %s" name
 
 // line 14 @"example-0.visp"
 let visp_result_todo =
   // line 14 @"example-0.visp"
-  hello ("world")
+  hello "world"
 // line 14 @"example-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

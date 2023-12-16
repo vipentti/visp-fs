@@ -1216,7 +1216,7 @@ module Write =
                 if kind = CollectionKind.HashBrace then
                     writeExprToValue
                 else
-                    writeExpr
+                    writeExprInParens
 
             let items =
                 if kind = CollectionKind.FsList then
@@ -1475,10 +1475,22 @@ module Write =
         ()
 
     and private writeExprInParens w (st: WriteState) ex =
-        // TODO: Should we check if we have a tuple and then not add parens?
-        char w '('
+        let needsParens =
+            match ex with
+            | SynExpr.Const _
+            | SynExpr.Tuple _
+            | SynExpr.Literal _
+            | SynExpr.Symbol _ -> false
+
+            | _ -> true
+
+        if needsParens then
+            char w '('
+
         writeExpr w st ex
-        char w ')'
+
+        if needsParens then
+            char w ')'
 
     and private writeOp w (st: WriteState) (op: SynOp) =
         let opState = WriteState.Inline

@@ -11,7 +11,7 @@ type Mapping =
     // line 13 @"my-rinit-0.visp"
     member this.Stuff () =
       // line 14 @"my-rinit-0.visp"
-      printfn ("doing stuff %A") ((this.src))
+      printfn "doing stuff %A" ((this.src))
 
 // line 17 @"my-rinit-0.visp"
 let macro_MyRinit = "__MACRO_INIT__"
@@ -20,11 +20,11 @@ let temp =
   // line 22 @"my-rinit-0.visp"
   { src = 1; Mapping.dest = 2; range = 3 }
 // line 23 @"my-rinit-0.visp"
-printfn ("Record is %A") (temp)
+printfn "Record is %A" temp
 // line 24 @"my-rinit-0.visp"
 temp.Stuff()
 // line 26 @"my-rinit-0.visp"
 let visp_result_todo = ()
 // line 26 @"my-rinit-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

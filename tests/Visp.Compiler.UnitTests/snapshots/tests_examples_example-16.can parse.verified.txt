@@ -25,8 +25,8 @@ let visp_result_todo =
                   // line 15 @"example-16.visp"
                   (fun () ->
                     // line 15 @"example-16.visp"
-                    (captured_variable) +
-                    (1))
+                    captured_variable +
+                    1)
                 // line 16 @"example-16.visp"
                 third_fun ()))
           // line 18 @"example-16.visp"
@@ -34,5 +34,5 @@ let visp_result_todo =
     // line 21 @"example-16.visp"
     CoreMethods.``str``(state, Value.from(first_fun ())))
 // line 8 @"example-16.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

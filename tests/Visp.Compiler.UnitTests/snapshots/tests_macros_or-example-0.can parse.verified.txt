@@ -8,13 +8,13 @@ let state = { Todo = () }
 // line 8 @"or-example-0.visp"
 let ``macro_my-or`` = "__MACRO_INIT__"
 // line 20 @"or-example-0.visp"
-printfn ("my-or %A") (false)
+printfn "my-or %A" false
 // line 21 @"or-example-0.visp"
-printfn ("my-or %A") (false)
+printfn "my-or %A" false
 // line 22 @"or-example-0.visp"
-printfn ("my-or %A") (true)
+printfn "my-or %A" true
 // line 23 @"or-example-0.visp"
-printfn ("my-or %A") ((
+printfn "my-or %A" ((
   // line 23 @"or-example-0.visp"
   let orTemp = true
   // line 23 @"or-example-0.visp"
@@ -25,7 +25,7 @@ printfn ("my-or %A") ((
     else
       false))
 // line 24 @"or-example-0.visp"
-printfn ("my-or %A") ((
+printfn "my-or %A" ((
   // line 24 @"or-example-0.visp"
   let orTemp = true
   // line 24 @"or-example-0.visp"
@@ -36,7 +36,7 @@ printfn ("my-or %A") ((
     else
       true))
 // line 25 @"or-example-0.visp"
-printfn ("my-or %A") ((
+printfn "my-or %A" ((
   // line 25 @"or-example-0.visp"
   let orTemp = true
   // line 25 @"or-example-0.visp"
@@ -57,7 +57,7 @@ printfn ("my-or %A") ((
           else
             false)))
 // line 26 @"or-example-0.visp"
-printfn ("my-or %A") ((
+printfn "my-or %A" ((
   // line 26 @"or-example-0.visp"
   let orTemp = true
   // line 26 @"or-example-0.visp"
@@ -78,13 +78,13 @@ printfn ("my-or %A") ((
           else
             true)))
 // line 28 @"or-example-0.visp"
-printfn ("my-or %A") (Value.bool (false))
+printfn "my-or %A" (Value.bool false)
 // line 29 @"or-example-0.visp"
-printfn ("my-or %A") ((
+printfn "my-or %A" ((
   // line 29 @"or-example-0.visp"
   let orTemp =
     // line 29 @"or-example-0.visp"
-    Value.bool (false)
+    Value.bool false
   // line 29 @"or-example-0.visp"
   if CoreMethods.isTruthy(
     orTemp)
@@ -92,15 +92,15 @@ printfn ("my-or %A") ((
       orTemp
     else
       // line 29 @"or-example-0.visp"
-      Value.string ("this works, yay")))
+      Value.string "this works, yay"))
 // line 30 @"or-example-0.visp"
 let visp_result_todo =
   // line 30 @"or-example-0.visp"
-  printfn ("my-or %A") ((
+  printfn "my-or %A" ((
     // line 30 @"or-example-0.visp"
     let orTemp =
       // line 30 @"or-example-0.visp"
-      Value.bool (false)
+      Value.bool false
     // line 30 @"or-example-0.visp"
     if CoreMethods.isTruthy(
       orTemp)
@@ -112,7 +112,7 @@ let visp_result_todo =
           // line 30 @"or-example-0.visp"
           let orTemp =
             // line 30 @"or-example-0.visp"
-            Value.bool (false)
+            Value.bool false
           // line 30 @"or-example-0.visp"
           if CoreMethods.isTruthy(
             orTemp)
@@ -120,7 +120,7 @@ let visp_result_todo =
               orTemp
             else
               // line 30 @"or-example-0.visp"
-              Value.string ("this works, yay"))))
+              Value.string "this works, yay")))
 // line 30 @"or-example-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 
