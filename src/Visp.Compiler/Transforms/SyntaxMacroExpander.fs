@@ -173,11 +173,11 @@ let rec private bindPatterns
 
 let openToken =
     function
-    | SynListKind.List -> LPAREN
-    | SynListKind.Vector -> LBRACKET
-    | SynListKind.HashMap -> LBRACE
-    | SynListKind.HashSet -> HASH_BRACE
-    | SynListKind.AttributeList -> HASH_BRACKET
+    | SynListKind.Paren -> LPAREN
+    | SynListKind.Bracket -> LBRACKET
+    | SynListKind.Brace -> LBRACE
+    | SynListKind.HashBrace -> HASH_BRACE
+    | SynListKind.HashBracket -> HASH_BRACKET
     | SynListKind.HashParen -> HASH_PAREN
     | SynListKind.BraceBar -> BRACE_BAR
     | SynListKind.DotBracket -> DOT_BRACKET
@@ -185,13 +185,13 @@ let openToken =
 
 let closeToken =
     function
-    | SynListKind.List -> RPAREN
+    | SynListKind.Paren -> RPAREN
     | SynListKind.HashParen -> RPAREN
-    | SynListKind.Vector -> RBRACKET
+    | SynListKind.Bracket -> RBRACKET
     | SynListKind.DotBracket -> RBRACKET
-    | SynListKind.HashMap -> RBRACE
-    | SynListKind.HashSet -> RBRACE
-    | SynListKind.AttributeList -> RBRACKET
+    | SynListKind.Brace -> RBRACE
+    | SynListKind.HashBrace -> RBRACE
+    | SynListKind.HashBracket -> RBRACKET
     | SynListKind.BraceBar -> BAR_BRACE
     | SynListKind.BracketBar -> BAR_BRACKET
 
