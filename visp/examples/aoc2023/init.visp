@@ -1,0 +1,136 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require Flurl.Http "4.0.0")
+
+(open System)
+(open System.IO)
+(open Flurl.Http)
+
+(fn GetFileTemplate (day)
+  $$"""
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "{{day}}")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+()
+"""
+)
+
+(fn TryGetNamedArg (name)
+  (match (Array.tryFindIndex #(= name %1) ARGV)
+    [(Some index)
+      (if (< (inc index) (+Length ARGV))
+        (Some (.[(inc index)] ARGV))
+        None)
+    ]
+    [None None]))
+
+(fn Run ()
+  (let dayNr (match (TryGetNamedArg "--day")
+    [(Some it) it]
+    [None (failwithf "Missing --day")]
+  ))
+
+  (let sessionToken (match (TryGetNamedArg "--session")
+    [(Some it) it]
+    [None (match (TryGetEnvVar "AOC_SESSION")
+      [(Some it) it]
+      [None (failwithf "Missing either --session or env:AOC_SESSION")]
+    )]
+  ))
+
+  (printfn "Setting up day %s" dayNr)
+
+  (let dayName $"day{dayNr}")
+
+  (let exampleInput $"{dayName}_example.txt")
+  (let mainInput $"{dayName}.txt")
+
+  (printfn "CWD: %A" (GetCurrentDirectory))
+
+  (let targetFile (->>
+    (Path.Combine ((GetCurrentDirectory) . $"{dayName}.visp"))
+    (Path.GetFullPath)
+  ))
+
+  (let inputPath (->>
+    (Path.Combine ((GetCurrentDirectory) . "inputs"))
+    (Path.GetFullPath)
+  ))
+
+  (let exampleInputPath (->> (-Combine Path (inputPath . exampleInput)) (Path.GetFullPath)))
+  (let mainInputPath (->> (-Combine Path (inputPath . mainInput)) (Path.GetFullPath)))
+
+  (unless (.Exists File targetFile)
+    (printfn "new %s" targetFile)
+    (.WriteAllText System.IO.File targetFile (GetFileTemplate dayName) (+UTF8 System.Text.Encoding))
+  )
+
+  (unless (.Exists File exampleInputPath)
+    (printfn "new %s" exampleInputPath)
+    (.WriteAllText System.IO.File exampleInputPath "" (+UTF8 System.Text.Encoding))
+  )
+
+  (unless (.Exists File mainInputPath)
+    (printfn "new %s" mainInputPath)
+    (->> (task->
+      (let! content
+        (begin
+          (let url $"https://adventofcode.com/2023/day/{dayNr}/input")
+          (printfn "downloading: %s" url)
+          (->> url
+            #(-WithCookie %1 ("session" . sessionToken))
+            .GetStringAsync
+          )
+        )
+      )
+      (do! (.WriteAllTextAsync System.IO.File mainInputPath content (+UTF8 System.Text.Encoding))))
+
+      (Async.AwaitTask)
+      (Async.RunSynchronously)
+
+    )
+  )
+
+  ;; (cond_
+  ;;   [(.Exists File targetFile)
+  ;;     (printfn "%s found" targetFile)
+  ;;   ]
+  ;;   [_
+  ;;     (printfn "new %s" targetFile)
+  ;;   ]
+  ;; )
+)
+
+(Run)
