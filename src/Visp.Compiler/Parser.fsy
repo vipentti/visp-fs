@@ -411,6 +411,15 @@ rev_macro_body_list:
     | macro_body { [$1] }
     | rev_macro_body_list macro_body { $2 :: $1 }
 
+collection_open_kind:
+    | LPAREN { CollectionKind.Paren }
+    | LBRACKET { CollectionKind.Bracket }
+    | LBRACE { CollectionKind.Brace }
+    | HASH_BRACE { CollectionKind.HashBrace }
+    | HASH_BRACKET { CollectionKind.HashBracket }
+    | BRACE_BAR { CollectionKind.BraceBar }
+    | BRACKET_BAR { CollectionKind.FsArray }
+    | DOT_BRACKET { CollectionKind.DotBracket }
 
 macro_open_kind:
     | LPAREN { SynListKind.Paren }
@@ -422,6 +431,13 @@ macro_open_kind:
     | BRACE_BAR { SynListKind.BraceBar }
     | BRACKET_BAR { SynListKind.BracketBar }
     | DOT_BRACKET { SynListKind.DotBracket }
+
+collection_close_kind:
+    | RPAREN { () }
+    | RBRACKET { () }
+    | RBRACE { () }
+    | BAR_BRACE { () }
+    | BAR_BRACKET { () }
 
 macro_close_kind:
     | RPAREN { () }
@@ -604,14 +620,10 @@ quoted_expr:
     | constant { SynQuoted.Const(fst $1, snd $1) }
     | symbol { SynQuoted.Symbol($1) }
     | keyword { SynQuoted.Keyword($1) }
-    | LPAREN quoted_exprs RPAREN
-        { SynQuoted.List ($2, lhs parseState) }
-    | LBRACKET quoted_exprs RBRACKET
-        { SynQuoted.Vector ($2, lhs parseState) }
-    | LBRACE quoted_exprs RBRACE
-        { SynQuoted.HashMap ($2, lhs parseState) }
-    | HASH_BRACE quoted_exprs RBRACE
-        { SynQuoted.HashSet ($2, lhs parseState) }
+    | collection_open_kind collection_close_kind
+        { SynQuoted.Collection(SynCollection($1, [], lhs parseState)) }
+    | collection_open_kind quoted_exprs collection_close_kind
+        { SynQuoted.Collection(SynCollection($1, $2, lhs parseState)) }
 
 quasiquoted_exprs: rev_quasiquoted_exprs { List.rev $1 }
 rev_quasiquoted_exprs:
@@ -622,11 +634,12 @@ quasiquoted_expr:
     | constant { SynQuasiquote.Const(fst $1, snd $1) }
     | symbol { SynQuasiquote.Symbol($1) }
     | keyword { SynQuasiquote.Keyword($1) }
-    | operators { SynQuasiquote.Op($1) }
     | unquote { $1 }
     | splice_unquote { $1 }
-    | LPAREN quasiquoted_exprs RPAREN
-        { SynQuasiquote.List ($2, lhs parseState) }
+    | collection_open_kind collection_close_kind
+        { SynQuasiquote.Collection(SynCollection($1, [], lhs parseState)) }
+    | collection_open_kind quasiquoted_exprs collection_close_kind
+        { SynQuasiquote.Collection(SynCollection($1, $2, lhs parseState)) }
 
 unquote:
     | LPAREN UNQUOTE_KW expr RPAREN
