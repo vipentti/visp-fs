@@ -10,8 +10,8 @@ let state = { Todo = () }
 // line 11 @"while-0.visp"
 let inc (v: Value) =
   // line 12 @"while-0.visp"
-  Value.from ((1L) +
-  (unwrapInt (v)))
+  Value.from (1L +
+  (unwrapInt v))
 
 // line 14 @"while-0.visp"
 let count =
@@ -22,9 +22,9 @@ let visp_result_todo =
   // line 15 @"while-0.visp"
   while CoreMethods.isTruthy(CoreMethods.``lt``(unwrapInt (deref (count)), 5L)) do
     // line 16 @"while-0.visp"
-    printfn ("in loop %O") (deref (count))
+    printfn "in loop %O" (deref (count))
     // line 17 @"while-0.visp"
     CoreMethods.``swap!``(Value.from(count), inc)
 // line 15 @"while-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

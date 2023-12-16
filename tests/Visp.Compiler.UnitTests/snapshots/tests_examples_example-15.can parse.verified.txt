@@ -14,14 +14,14 @@ let visp_result_todo =
       // line 9 @"example-15.visp"
       let second_capture =
         // line 9 @"example-15.visp"
-        (captured_arg) +
-        (1)
+        captured_arg +
+        1
       // line 10 @"example-15.visp"
             // line 10 @"example-15.visp"
       (fun () ->
         // line 10 @"example-15.visp"
-        (captured_arg) +
-        (second_capture)) ())) (99)
+        captured_arg +
+        second_capture) ())) 99
 // line 8 @"example-15.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

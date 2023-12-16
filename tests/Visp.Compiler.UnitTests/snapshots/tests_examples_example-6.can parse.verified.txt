@@ -17,7 +17,7 @@ let values =
 // line 10 @"example-6.visp"
 let visp_result_todo =
   // line 10 @"example-6.visp"
-  printfn ("values are %O") (values)
+  printfn "values are %O" values
 // line 10 @"example-6.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

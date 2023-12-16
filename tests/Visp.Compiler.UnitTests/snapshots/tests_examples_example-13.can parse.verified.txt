@@ -10,7 +10,7 @@ let quasiquoted =
   // line 9 @"example-13.visp"
   Value.from ((Value.symbol("hello"))::((Value.symbol("world"))::((Value.symbol("in"))::((Value.symbol("quotes"))::([])))))
 // line 11 @"example-13.visp"
-printfn ("quasiquoted is: %O") (quasiquoted)
+printfn "quasiquoted is: %O" quasiquoted
 // line 13 @"example-13.visp"
 let next_quasiquoted =
   // line 13 @"example-13.visp"
@@ -18,7 +18,7 @@ let next_quasiquoted =
 // line 16 @"example-13.visp"
 let visp_result_todo =
   // line 16 @"example-13.visp"
-  printfn ("next_quasiquoted is: %O") (next_quasiquoted)
+  printfn "next_quasiquoted is: %O" next_quasiquoted
 // line 16 @"example-13.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

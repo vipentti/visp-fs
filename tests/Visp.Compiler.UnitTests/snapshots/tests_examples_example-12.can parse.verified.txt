@@ -10,7 +10,7 @@ let quoted =
   // line 9 @"example-12.visp"
   Value.from([Value.symbol("hello");Value.symbol("world");Value.symbol("in");Value.symbol("quotes")])
 // line 11 @"example-12.visp"
-printfn ("quoted is: %O") (quoted)
+printfn "quoted is: %O" quoted
 // line 13 @"example-12.visp"
 let next_quoted =
   // line 13 @"example-12.visp"
@@ -18,7 +18,7 @@ let next_quoted =
 // line 16 @"example-12.visp"
 let visp_result_todo =
   // line 16 @"example-12.visp"
-  printfn ("next_quoted is: %O") (next_quoted)
+  printfn "next_quoted is: %O" next_quoted
 // line 16 @"example-12.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

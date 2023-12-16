@@ -12,5 +12,5 @@ let visp_result_todo =
     |> (fun arg ->
       arg)
 // line 7 @"thread-first-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

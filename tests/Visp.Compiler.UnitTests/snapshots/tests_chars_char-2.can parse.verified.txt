@@ -8,7 +8,7 @@ let state = { Todo = () }
 // line 9 @"char-2.visp"
 let visp_result_todo =
   // line 9 @"char-2.visp"
-  printfn ("Chars are %A") (('=', '|', '<', '>'))
+  printfn "Chars are %A" ('=', '|', '<', '>')
 // line 9 @"char-2.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

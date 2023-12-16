@@ -29,5 +29,5 @@ let visp_result_todo =
       // line 14 @"if-0.visp"
       alt ()
 // line 12 @"if-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

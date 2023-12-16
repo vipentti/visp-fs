@@ -10,13 +10,13 @@ type Grid = char[,]
 // line 10 @"array2d-1.visp"
 let arr =
   // line 10 @"array2d-1.visp"
-  Array2D.create (5) (5) ('.')
+  Array2D.create 5 5 '.'
 // line 12 @"array2d-1.visp"
-printfn ("arr[*,0]=%A") ((arr.[*, 0]))
+printfn "arr[*,0]=%A" ((arr.[*, 0]))
 // line 13 @"array2d-1.visp"
-printfn ("arr[0,*]=%A") ((arr.[0, *]))
+printfn "arr[0,*]=%A" ((arr.[0, *]))
 // line 15 @"array2d-1.visp"
 let visp_result_todo = arr
 // line 15 @"array2d-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

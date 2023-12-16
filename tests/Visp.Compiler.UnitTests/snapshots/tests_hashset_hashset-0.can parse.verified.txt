@@ -12,7 +12,7 @@ let set =
 // line 13 @"hashset-0.visp"
 let visp_result_todo =
   // line 13 @"hashset-0.visp"
-  printfn ("%O") (set)
+  printfn "%O" set
 // line 13 @"hashset-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

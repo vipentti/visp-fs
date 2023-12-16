@@ -19,8 +19,8 @@ type Range (start: int64, len: int64) =
   // line 8 @"struct-example-1.visp"
   member _.End =
         // line 8 @"struct-example-1.visp"
-    (start) +
-    (len)
+    start +
+    len
   // line 8 @"struct-example-1.visp"
   member d.Offset v =
     // line 8 @"struct-example-1.visp"
@@ -40,7 +40,7 @@ type Range (start: int64, len: int64) =
   // line 8 @"struct-example-1.visp"
   override t.ToString () =
     // line 8 @"struct-example-1.visp"
-    sprintf ("Range(%i, %i)") ((t.Start)) ((t.Len))
+    sprintf "Range(%i, %i)" ((t.Start)) ((t.Len))
 
 // line 8 @"struct-example-1.visp"
 let mkRange start len =
@@ -48,9 +48,9 @@ let mkRange start len =
   (new Range(start, len))
 
 // line 26 @"struct-example-1.visp"
-printfn ("Range is: %A") ((new Range(0, 5)))
+printfn "Range is: %A" ((new Range(0, 5)))
 // line 27 @"struct-example-1.visp"
-printfn ("Range end is: %A") ((new Range(0, 5))
+printfn "Range end is: %A" ((new Range(0, 5))
   |> (fun a1 ->
     // line 27 @"struct-example-1.visp"
     (a1.End)))
@@ -104,12 +104,12 @@ type SourceDestMap (dest: int64, src: int64, len: int64) =
             src
           else
             // line 29 @"struct-example-1.visp"
-            failwith ("unreachable cond")
+            failwith "unreachable cond"
 
   // line 29 @"struct-example-1.visp"
   override t.ToString () =
     // line 29 @"struct-example-1.visp"
-    sprintf ("(%A, %A, %i)") ((t.Dest)) ((t.Src)) ((t.Len))
+    sprintf "(%A, %A, %i)" ((t.Dest)) ((t.Src)) ((t.Len))
 
 // line 29 @"struct-example-1.visp"
 let mkSourceDestMap dest src len =
@@ -119,5 +119,5 @@ let mkSourceDestMap dest src len =
 // line 51 @"struct-example-1.visp"
 let visp_result_todo = ()
 // line 51 @"struct-example-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

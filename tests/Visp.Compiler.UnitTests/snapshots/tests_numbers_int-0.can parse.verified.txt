@@ -6,13 +6,13 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 9 @"int-0.visp"
-printfn ("int32 is %A") (99)
+printfn "int32 is %A" 99
 // line 10 @"int-0.visp"
-printfn ("int32 is %A") (99)
+printfn "int32 is %A" 99
 // line 11 @"int-0.visp"
 let visp_result_todo =
   // line 11 @"int-0.visp"
-  printfn ("int64 is %A") (99L)
+  printfn "int64 is %A" 99L
 // line 11 @"int-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

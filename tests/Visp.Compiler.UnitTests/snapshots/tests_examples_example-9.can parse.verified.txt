@@ -10,21 +10,21 @@ let decimals =
   // line 9 @"example-9.visp"
   (new ResizeArray<_>())
 // line 11 @"example-9.visp"
-decimals.Add(decimal (1))
+decimals.Add(decimal 1)
 // line 13 @"example-9.visp"
-printfn ("number of decimals: %i") ((decimals.Count))
+printfn "number of decimals: %i" ((decimals.Count))
 // line 15 @"example-9.visp"
-decimals.Add(decimal (2))
+decimals.Add(decimal 2)
 // line 17 @"example-9.visp"
-printfn ("number of decimals: %i") ((decimals.Count))
+printfn "number of decimals: %i" ((decimals.Count))
 // line 19 @"example-9.visp"
-printfn ("decimals 0 is %f") ((decimals.[0]))
+printfn "decimals 0 is %f" ((decimals.[0]))
 // line 21 @"example-9.visp"
 let index = 1
 // line 23 @"example-9.visp"
 let visp_result_todo =
   // line 23 @"example-9.visp"
-  printfn ("decimals 1 is %f") ((decimals.[index]))
+  printfn "decimals 1 is %f" ((decimals.[index]))
 // line 23 @"example-9.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

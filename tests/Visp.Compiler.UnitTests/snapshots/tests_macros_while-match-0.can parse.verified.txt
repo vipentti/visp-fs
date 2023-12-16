@@ -21,9 +21,9 @@ type Counter () =
         // line 13 @"while-match-0.visp"
         (
           // line 14 @"while-match-0.visp"
-          count <- inc (count)
+          count <- inc count
           // line 15 @"while-match-0.visp"
-          Some (count))
+          Some count)
 
 // line 19 @"while-match-0.visp"
 let counter =
@@ -44,7 +44,7 @@ let visp_result_todo =
             false
           | (Some c) ->
             // line 21 @"while-match-0.visp"
-            printfn ("Count is: %i") (c)
+            printfn "Count is: %i" c
             // line 21 @"while-match-0.visp"
             let _ =
               // line 21 @"while-match-0.visp"
@@ -52,5 +52,5 @@ let visp_result_todo =
             true
     ())
 // line 21 @"while-match-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 
