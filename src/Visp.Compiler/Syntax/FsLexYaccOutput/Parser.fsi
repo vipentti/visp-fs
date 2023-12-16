@@ -300,9 +300,6 @@ type nonTerminalId =
     | NONTERM_quoted_exprs
     | NONTERM_rev_quoted_exprs
     | NONTERM_quoted_expr
-    | NONTERM_value_exprs
-    | NONTERM_rev_value_exprs
-    | NONTERM_value_expr
     | NONTERM_quasiquoted_exprs
     | NONTERM_rev_quasiquoted_exprs
     | NONTERM_quasiquoted_expr
