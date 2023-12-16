@@ -290,7 +290,6 @@ parens_expr:
     | expr COLON_COLON colon_colon_exprs
         { CollExpr.mkFsList ($1 :: $3) (lhs parseState)}
     | function_def %prec prec_fn { $1 }
-    | macro_def { $1 }
     | function_call %prec prec_call { $1 }
     | let { $1 }
     | letstar { $1 }
@@ -1133,10 +1132,6 @@ invalid_function_def:
         { SynExpr.FunctionDef($2, FunctionFlags.None, $3, [], (lhs parseState)) }
     | FN INLINE symbol arg_list_start %prec prec_invalid_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, [], (lhs parseState)) }
-
-macro_def:
-    | MACRO symbol arg_list_start expr_list
-        { SynExpr.MacroDef($2, $3, $4, (lhs parseState)) }
 
 arg_list_start:
     | UNIT { [] }
