@@ -17,6 +17,14 @@ type Ident(text: string, range: range) =
         let newText = this.idText
         Ident(newText.TrimStart(ch), this.idRange)
 
+    member this.TrimEnd(s: string) =
+        let mutable newText = this.idText
+
+        for i = (s.Length - 1) downto 0 do
+            newText <- newText.TrimEnd(s[i])
+
+        Ident(newText, this.idRange)
+
     override _.ToString() = text
 
 type SynSymbol =
@@ -25,6 +33,11 @@ type SynSymbol =
     member this.trimStart(ch: char) =
         let (SynSymbol id) = this
         let newId = id.trimStart ch
+        SynSymbol newId
+
+    member this.TrimEnd(ch: string) =
+        let (SynSymbol id) = this
+        let newId = id.TrimEnd ch
         SynSymbol newId
 
     member this.TextEquals(SynSymbol(other)) =
@@ -204,8 +217,10 @@ type SynExpr =
     | Pair of lhs: SynExpr * rhs: SynExpr * range: range
     | Tuple of exprs: SynExpr list * range: range
     | Collection of SynExprs
+    | Computation of builder: SynSymbol * exprs: SynExpr list * range: range
     | FsSeq of exprs: SynExpr list * range: range
     | FsYield of expr: SynExpr * bang: bool * range: range
+    | FsReturn of expr: SynExpr * bang: bool * range: range
     | DotIndex of target: SynExpr * index: SynExpr list * range: range
     | DotProperty of target: SynExpr * property: SynSymbol * range: range
     | DotMethod of
@@ -283,6 +298,7 @@ type SynExpr =
         | Quasiquote(range = r)
         | Begin(range = r)
         | New(range = r)
+        | Computation(range = r)
         | LetOrUse(range = r)
         | SimpleLet(range = r)
         | SimpleMut(range = r)
@@ -292,6 +308,7 @@ type SynExpr =
         | While(range = r)
         | FsSeq(range = r)
         | FsYield(range = r)
+        | FsReturn(range = r)
         | DotIndex(range = r)
         | DotProperty(range = r)
         | DotMethod(range = r)
@@ -546,6 +563,21 @@ module Coll =
     let mkFsMap its r =
         (SynCollection(CollectionKind.FsMap, its, r))
 
+module Patterns =
+    let (|IdentWith|) (it: Ident) = (it.idText)
+
+    let (|SymbolWith|) (it: SynExpr) =
+        match it with
+        | SynExpr.Symbol(SynSymbol(id)) -> id.idText
+        | _ -> ""
+
+    let (|SymbolText|) (it: SynExpr) =
+        match it with
+        | SynExpr.Symbol(sym) -> Some(sym.Text)
+        | _ -> None
+
+    let (|Text|) (it: SynSymbol) = it.Text
+
 
 module CollExpr =
     let mkList its r = Coll.mkList its r |> SynExpr.Collection
@@ -665,13 +697,11 @@ module Syntax =
     let mkInferredArg s range =
         SynArg.InferredArg(mkSynSymbol s range, range)
 
-
-    // let withoutCommaOrDots (l: SynMatchPattern list) =
-    //     List.filter
-    //         (function
-    //         | SynMatchPattern.CommaOrDot _ -> false
-    //         | _ -> true)
-    //         l
+    let mkFunctionCallOrCexpr ex args r =
+        match ex with
+        | SynExpr.Symbol(SynSymbol(id) as sym) when id.idText.EndsWith("->") && id.idText.Length > 2 ->
+            SynExpr.Computation(sym.TrimEnd("->"), args, r)
+        | ex -> SynExpr.FunctionCall(ex, args, r)
 
     let symbolTextEquals (a: SynSymbol) b = a.TextEquals b
 
@@ -780,21 +810,6 @@ type QualifiedNameOfFile =
 
     member x.Range = (let (QualifiedNameOfFile t) = x in t.idRange)
 
-
-module Patterns =
-    let (|IdentWith|) (it: Ident) = (it.idText)
-
-    let (|SymbolWith|) (it: SynExpr) =
-        match it with
-        | SynExpr.Symbol(SynSymbol(id)) -> id.idText
-        | _ -> ""
-
-    let (|SymbolText|) (it: SynExpr) =
-        match it with
-        | SynExpr.Symbol(sym) -> Some(sym.Text)
-        | _ -> None
-
-    let (|Text|) (it: SynSymbol) = it.Text
 
 
 module Keywords =

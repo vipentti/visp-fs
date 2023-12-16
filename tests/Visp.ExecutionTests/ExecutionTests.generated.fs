@@ -171,6 +171,16 @@ module ``tests_hashmap_hashmap-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/hashmap/hashmap-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_cexpr_cexpr-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/cexpr/cexpr-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_cexpr_cexpr-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/cexpr/cexpr-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_for-in_for-in-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/for-in/for-in-0.visp"
