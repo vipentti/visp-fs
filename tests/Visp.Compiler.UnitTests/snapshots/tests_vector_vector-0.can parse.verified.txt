@@ -24,7 +24,7 @@ let empty =
 // line 11 @"vector-0.visp"
 vec.[1] <- Value.int (-1)
 // line 13 @"vector-0.visp"
-(empty.Add(Value.int (99)))
+empty.Add(Value.int (99))
 // line 15 @"vector-0.visp"
 printfn ("%O") (empty)
 // line 17 @"vector-0.visp"

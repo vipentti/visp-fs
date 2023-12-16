@@ -10,11 +10,11 @@ let decimals =
   // line 9 @"example-9.visp"
   (new ResizeArray<_>())
 // line 11 @"example-9.visp"
-(decimals.Add(decimal (1)))
+decimals.Add(decimal (1))
 // line 13 @"example-9.visp"
 printfn ("number of decimals: %i") ((decimals.Count))
 // line 15 @"example-9.visp"
-(decimals.Add(decimal (2)))
+decimals.Add(decimal (2))
 // line 17 @"example-9.visp"
 printfn ("number of decimals: %i") ((decimals.Count))
 // line 19 @"example-9.visp"

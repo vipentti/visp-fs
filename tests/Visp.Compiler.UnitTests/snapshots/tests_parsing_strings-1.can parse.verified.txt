@@ -84,14 +84,14 @@ let genTestTemplate (prefix: string) (path: string) =
   // line 40 @"strings-1.visp"
   let path =
     // line 40 @"strings-1.visp"
-    (path.Replace("\\", "/"))
+    path.Replace("\\", "/")
   // line 41 @"strings-1.visp"
   let testname =
     // line 41 @"strings-1.visp"
     path
       |> (fun arg1 ->
         // line 41 @"strings-1.visp"
-        (arg1.Replace("/", "_")))
+        arg1.Replace("/", "_"))
   // line 43 @"strings-1.visp"
   (
     // line 44 @"strings-1.visp"

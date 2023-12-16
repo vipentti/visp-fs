@@ -22,7 +22,7 @@ let temp =
 // line 23 @"my-rinit-0.visp"
 printfn ("Record is %A") (temp)
 // line 24 @"my-rinit-0.visp"
-(temp.Stuff())
+temp.Stuff()
 // line 26 @"my-rinit-0.visp"
 let visp_result_todo = ()
 // line 26 @"my-rinit-0.visp"

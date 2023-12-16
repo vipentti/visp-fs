@@ -48,7 +48,7 @@ let visp_result_todo =
             // line 21 @"while-match-0.visp"
             let _ =
               // line 21 @"while-match-0.visp"
-              (counter.DoStuff())
+              counter.DoStuff()
             true
     ())
 // line 21 @"while-match-0.visp"

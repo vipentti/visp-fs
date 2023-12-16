@@ -23,7 +23,7 @@ printfn ("%O") ((vec.[1]))
 // line 13 @"dot-shorthands.visp"
 printfn ("%O") ((System.Int64.MaxValue))
 // line 15 @"dot-shorthands.visp"
-(vec.Add(Value.int (64)))
+vec.Add(Value.int (64))
 // line 17 @"dot-shorthands.visp"
 let visp_result_todo =
   // line 17 @"dot-shorthands.visp"

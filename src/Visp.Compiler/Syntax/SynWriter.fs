@@ -861,7 +861,12 @@ module Write =
 
         | SynExpr.DotMethod(inst, method, args, kind, range) ->
             startExpr w st range
-            string w "("
+
+            let parens = st <> WriteState.Body && st <> WriteState.Newline
+
+            if parens then
+                string w "("
+
             writeExpr w WriteState.Inline inst
             string w "."
             symbol w method true
@@ -881,7 +886,8 @@ module Write =
 
                 ()
 
-            string w ")"
+            if parens then
+                string w ")"
 
         | SynExpr.DotProperty(inst, prop, range) ->
             startExpr w st range

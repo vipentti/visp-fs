@@ -10,11 +10,11 @@ let (ints: ResizeArray<int32>) =
   // line 10 @"example-8.visp"
   (new ResizeArray<_>())
 // line 12 @"example-8.visp"
-(ints.Add(1))
+ints.Add(1)
 // line 14 @"example-8.visp"
 printfn ("number of ints: %i") ((ints.Count))
 // line 16 @"example-8.visp"
-(ints.Add(2))
+ints.Add(2)
 // line 18 @"example-8.visp"
 let visp_result_todo =
   // line 18 @"example-8.visp"
