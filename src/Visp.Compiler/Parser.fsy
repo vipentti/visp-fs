@@ -33,7 +33,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token DOTDOT
 %token AT
 %token OPEN MODULE
-%token FN FNSTAR LET LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
+%token FN FNSTAR LET USE LET_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
@@ -681,28 +681,44 @@ set:
           SynExpr.Set(Syntax.parserRecoveryExpr r, Syntax.parserRecoveryExpr r, r) }
 
 let:
+    | USE name expr
+        { SynExpr.LetOrUse($2, $3, LetFlags.Use, lhs parseState) }
     | LET name expr
-        { SynExpr.SimpleLet($2, $3, lhs parseState) }
+        { SynExpr.LetOrUse($2, $3, LetFlags.None, lhs parseState) }
+    | LET_BANG name expr
+        { SynExpr.LetOrUse($2, $3, LetFlags.Bang, lhs parseState) }
     // TODO: Report error
     | LET name
         { let r = lhs parseState
-          SynExpr.SimpleLet($2, Syntax.parserRecoveryExpr r, r) }
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
+    | USE name
+        { let r = lhs parseState
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
+    | LET_BANG name
+        { let r = lhs parseState
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
     // TODO: Report error
     | LET
         { let r = lhs parseState
-          SynExpr.SimpleLet(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
+    | LET_BANG
+        { let r = lhs parseState
+          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
+    | USE
+        { let r = lhs parseState
+          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
 
 mut:
     | MUT name expr
-        { SynExpr.SimpleMut($2, $3, lhs parseState) }
+        { SynExpr.LetOrUse($2, $3, LetFlags.Mutable, lhs parseState) }
     // TODO: Report error
     | MUT name
         { let r = lhs parseState
-          SynExpr.SimpleMut($2, Syntax.parserRecoveryExpr r, r) }
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
     // TODO: Report error
     | MUT
         { let r = lhs parseState
-          SynExpr.SimpleMut(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
 
 letstar:
     | LETSTAR binding_list_start expr_list

@@ -54,6 +54,8 @@ type token =
   | FN
   | FNSTAR
   | LET
+  | USE
+  | LET_BANG
   | LETSTAR
   | MUT
   | SET
@@ -162,6 +164,8 @@ type tokenId =
     | TOKEN_FN
     | TOKEN_FNSTAR
     | TOKEN_LET
+    | TOKEN_USE
+    | TOKEN_LET_BANG
     | TOKEN_LETSTAR
     | TOKEN_MUT
     | TOKEN_SET
