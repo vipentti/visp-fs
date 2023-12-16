@@ -96,6 +96,14 @@ type WriteState =
 let mkCh c = Text.Char c
 let mkStr c = Text.String c
 
+type WriteFun<'a> = (SynWriter -> WriteState -> 'a -> unit)
+
+type CollectionWriters<'a> =
+    { plain: WriteFun<'a>
+      parens: WriteFun<'a>
+      value: WriteFun<'a>
+      filter: ('a -> bool) }
+
 module Write =
     open Visp.Runtime.Library
     let flip f a b = f b a
@@ -1121,11 +1129,13 @@ module Write =
 
             string w " }"
 
-    and private writeCollectionExprs w st (SynCollection(kind, items, range) as c) =
+    and private writeCollection w st (writers: CollectionWriters<'a>) (cl: SynCollection<'a>) =
+        let (SynCollection(kind, items, range)) = cl
+
         match kind with
-        | CollectionKind.Paren
         | CollectionKind.HashBracket
         | CollectionKind.BraceBar
+        | CollectionKind.DotBracket
         | CollectionKind.HashParen -> failwithf "unsupported collection expr: %A" kind
 
         | CollectionKind.Brace ->
@@ -1138,10 +1148,10 @@ module Write =
                 (flip char ';')
                 (fun w st (key, value) ->
                     char w '('
-                    writeExprToValue w st key
+                    writers.value w st key
                     char w ','
                     char w ' '
-                    writeExprToValue w st value
+                    writers.value w st value
                     char w ')'
                     ())
                 (pairUp items)
@@ -1171,7 +1181,7 @@ module Write =
                     if kind = CollectionKind.Bracket then
                         string w "Value.from("
 
-                    writeExpr ws WriteState.Arg a
+                    writers.plain ws WriteState.Arg a
 
                     if kind = CollectionKind.Bracket then
                         string w ")"
@@ -1182,6 +1192,7 @@ module Write =
             newlineIndent w
             string w "temp"
 
+        | CollectionKind.Paren
         | CollectionKind.HashBrace
         | CollectionKind.FsArray
         | CollectionKind.FsList
@@ -1195,16 +1206,13 @@ module Write =
 
             let writer =
                 if kind = CollectionKind.HashBrace then
-                    writeExprToValue
+                    writers.value
                 else
-                    writeExprInParens
+                    writers.parens
 
             let items =
-                if kind = CollectionKind.FsList then
-                    items
-                    |> List.choose (function
-                        | SynExpr.Const(SynConst.Unit, _) -> None
-                        | it -> Some(it))
+                if kind = CollectionKind.FsList || kind = CollectionKind.Paren then
+                    items |> List.filter (writers.filter)
                 else
                     items
 
@@ -1225,6 +1233,19 @@ module Write =
                 string w " |> HashSet.ofList"
 
         ()
+
+    and private writeCollectionExprs w st c =
+        writeCollection
+            w
+            st
+            { plain = writeExpr
+              value = writeExprToValue
+              parens = writeExprInParens
+              filter =
+                function
+                | SynExpr.Const(SynConst.Unit, _) -> false
+                | _ -> true }
+            c
 
     and private writeAttributes w _ (attributes: SynAttributes) =
         string w "[<"
@@ -1571,6 +1592,22 @@ module Write =
             char w ')'
 
 
+    and private writeQuotedInParens w (st: WriteState) ex =
+        let needsParens =
+            match ex with
+            | SynQuoted.Const _
+            | SynQuoted.Symbol _ -> false
+
+            | _ -> true
+
+        if needsParens then
+            char w '('
+
+        writeQuoted w st ex
+
+        if needsParens then
+            char w ')'
+
     and private writeQuoted w st (expr: SynQuoted) =
         match expr with
         | SynQuoted.Const(cnst, range) ->
@@ -1579,11 +1616,22 @@ module Write =
         | SynQuoted.EmptyList range ->
             startExpr w st range
             string w "[]"
-        | SynQuoted.List(items, range) ->
+        | SynQuoted.Collection(SynCollection(_, _, range) as col) ->
             startExpr w st range
-            string w "Value.from(["
-            writeSeq w WriteState.Inline (flip char ';') writeQuoted items
-            string w "])"
+            string w "Value.from("
+            use _ = withIndent w false
+            newlineIndent w
+
+            writeCollection
+                w
+                st
+                { plain = writeQuoted
+                  value = writeQuoted
+                  parens = writeQuotedInParens
+                  filter = (fun _ -> true) }
+                col
+
+            string w ")"
         | SynQuoted.Keyword(SynKeyword id) ->
             startExpr w st id.idRange
             fmtprintf w "Value.keyword(\"%s\")" id.idText
@@ -1591,52 +1639,6 @@ module Write =
         | SynQuoted.Symbol(SynSymbol id) ->
             startExpr w st id.idRange
             fmtprintf w "Value.symbol(\"%s\")" id.idText
-
-        | SynQuoted.Vector(items, range) ->
-            use _ = startNewlineExpr w st range
-            string w "( "
-            fmtprintf w "let temp = Vector(%i)" items.Length
-
-            use _ = withIndent w false
-
-            writeSeqLeading
-                w
-                WriteState.Newline
-                newlineIndent
-                (fun ws _ a ->
-                    string w "temp.Add(Value.from("
-                    writeQuoted ws WriteState.Arg a
-                    string w "))")
-                items
-
-            newlineIndent w
-            string w "Value.vector(temp))"
-
-        | SynQuoted.HashSet(items, range) ->
-            startExpr w st range
-            string w "["
-            writeInlineSemicolon w writeQuoted items
-            string w "] |> HashSet.ofList"
-
-        | SynQuoted.HashMap(items, range) ->
-            startExpr w st range
-            string w "["
-
-            writeSeq
-                w
-                WriteState.Inline
-                (flip char ';')
-                (fun w st (key, value) ->
-                    char w '('
-                    writeQuoted w st key
-                    char w ','
-                    char w ' '
-                    writeQuoted w st value
-                    char w ')'
-                    ())
-                (pairUp items)
-
-            string w "] |> HashMap.ofList"
 
     let writeParsedFile w (ParsedFile(fragments)) =
         let rec writeModuleDecls w (decls: SynModuleDecl list) =
