@@ -8,13 +8,13 @@ let state = { Todo = () }
 // line 8 @"and-example-0.visp"
 let ``macro_my-and`` = "__MACRO_INIT__"
 // line 17 @"and-example-0.visp"
-printfn ("my-and %A") (true)
+printfn "my-and %A" true
 // line 18 @"and-example-0.visp"
-printfn ("my-and %A") (false)
+printfn "my-and %A" false
 // line 19 @"and-example-0.visp"
-printfn ("my-and %A") (true)
+printfn "my-and %A" true
 // line 20 @"and-example-0.visp"
-printfn ("my-and %A") (
+printfn "my-and %A" (
   if CoreMethods.isTruthy(
     true)
     then
@@ -22,7 +22,7 @@ printfn ("my-and %A") (
     else
       false)
 // line 21 @"and-example-0.visp"
-printfn ("my-and %A") (
+printfn "my-and %A" (
   if CoreMethods.isTruthy(
     true)
     then
@@ -30,7 +30,7 @@ printfn ("my-and %A") (
     else
       false)
 // line 22 @"and-example-0.visp"
-printfn ("my-and %A") (
+printfn "my-and %A" (
   if CoreMethods.isTruthy(
     true)
     then
@@ -46,7 +46,7 @@ printfn ("my-and %A") (
 // line 23 @"and-example-0.visp"
 let visp_result_todo =
   // line 23 @"and-example-0.visp"
-  printfn ("my-and %A") (
+  printfn "my-and %A" (
     if CoreMethods.isTruthy(
       true)
       then
@@ -60,5 +60,5 @@ let visp_result_todo =
       else
         false)
 // line 23 @"and-example-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

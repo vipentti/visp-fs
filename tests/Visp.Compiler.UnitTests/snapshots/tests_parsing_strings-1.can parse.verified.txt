@@ -57,13 +57,13 @@ let inline ``LiftedString18_strings-1`` prefix testname exprArg0 exprArg1 =
 // line 8 @"strings-1.visp"
 let value = "r:\rt:\tn:\na:\a\""
 // line 10 @"strings-1.visp"
-printfn ("string is '%s'") (value)
+printfn "string is '%s'" value
 // line 11 @"strings-1.visp"
-printfn ("string is '%s'") ("""r:\rt:\tn:\na:\a""")
+printfn "string is '%s'" """r:\rt:\tn:\na:\a"""
 // line 12 @"strings-1.visp"
-printfn ("string is '%s'") ("""r:\rt:\tn:\na:\a""")
+printfn "string is '%s'" """r:\rt:\tn:\na:\a"""
 // line 13 @"strings-1.visp"
-printfn ("string is '%s'") (``LiftedString7_strings-1``)
+printfn "string is '%s'" ``LiftedString7_strings-1``
 // line 16 @"strings-1.visp"
 (
   // line 17 @"strings-1.visp"
@@ -71,11 +71,11 @@ printfn ("string is '%s'") (``LiftedString7_strings-1``)
     // line 18 @"strings-1.visp"
     (
       // line 19 @"strings-1.visp"
-      printfn ("string is '%s'") (``LiftedString9_strings-1``))))
+      printfn "string is '%s'" ``LiftedString9_strings-1``)))
 // line 24 @"strings-1.visp"
 let genTestHeader moduleName =
   // line 25 @"strings-1.visp"
-  sprintf (``LiftedString10_strings-1``) (moduleName) (moduleName)
+  sprintf ``LiftedString10_strings-1`` moduleName moduleName
 
 // line 37 @"strings-1.visp"
 let lf = System.Environment.NewLine
@@ -99,39 +99,39 @@ let genTestTemplate (prefix: string) (path: string) =
       // line 45 @"strings-1.visp"
       let template =
         // line 45 @"strings-1.visp"
-        sprintf (``LiftedString15_strings-1``) (prefix) (testname) (path)
+        sprintf ``LiftedString15_strings-1`` prefix testname path
       // line 49 @"strings-1.visp"
       let template2 =
         // line 49 @"strings-1.visp"
-        ``LiftedString16_strings-1`` (prefix) (testname) (path)
+        ``LiftedString16_strings-1`` prefix testname path
       // line 53 @"strings-1.visp"
       let template3 =
         // line 53 @"strings-1.visp"
-        ``LiftedString17_strings-1`` (prefix) (testname) (path)
+        ``LiftedString17_strings-1`` prefix testname path
       // line 57 @"strings-1.visp"
       let template4 =
         // line 57 @"strings-1.visp"
-        ``LiftedString18_strings-1`` (prefix) (testname) ((1) +
-        (2) +
-        (3)) ((1) +
-        (2) +
-        (3))
+        ``LiftedString18_strings-1`` prefix testname (1 +
+        2 +
+        3) (1 +
+        2 +
+        3)
       // line 61 @"strings-1.visp"
-      (template) +
-      (lf) +
-      (template2) +
-      (lf) +
-      (template3) +
-      (lf) +
-      (template4) +
-      (lf)))
+      template +
+      lf +
+      template2 +
+      lf +
+      template3 +
+      lf +
+      template4 +
+      lf))
 
 // line 65 @"strings-1.visp"
 let visp_result_todo =
   // line 65 @"strings-1.visp"
-  (genTestHeader ("Temp")) +
-  (System.Environment.NewLine) +
-  (genTestTemplate ("example") ("example"))
+  (genTestHeader "Temp") +
+  System.Environment.NewLine +
+  (genTestTemplate "example" "example")
 // line 65 @"strings-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

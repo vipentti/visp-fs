@@ -56,19 +56,19 @@ let getAndSet =
   // line 33 @"member-get-set-0.visp"
   (new GetAndSet<_>(array))
 // line 35 @"member-get-set-0.visp"
-printfn ("%A") ((getOnly.[0]))
+printfn "%A" ((getOnly.[0]))
 // line 37 @"member-get-set-0.visp"
 setOnly.[0] <- 99
 // line 39 @"member-get-set-0.visp"
-printfn ("%A") (array)
+printfn "%A" array
 // line 41 @"member-get-set-0.visp"
 getAndSet.[1] <- 99
 // line 43 @"member-get-set-0.visp"
-printfn ("%A") ((getAndSet.[1]))
+printfn "%A" ((getAndSet.[1]))
 // line 45 @"member-get-set-0.visp"
 let visp_result_todo =
   // line 45 @"member-get-set-0.visp"
-  printfn ("%A") (array)
+  printfn "%A" array
 // line 45 @"member-get-set-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

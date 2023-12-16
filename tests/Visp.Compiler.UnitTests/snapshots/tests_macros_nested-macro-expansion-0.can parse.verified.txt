@@ -21,7 +21,7 @@ type Pos (x: int32, y: int32) =
   // line 10 @"nested-macro-expansion-0.visp"
   override _.ToString () =
     // line 10 @"nested-macro-expansion-0.visp"
-    sprintf ("Pos(x: %A, y: %A)") (x) (y)
+    sprintf "Pos(x: %A, y: %A)" x y
 
 // line 10 @"nested-macro-expansion-0.visp"
 let mkPos x y =
@@ -37,7 +37,7 @@ type TileMap (grid: Grid, start: Pos) =
   // line 22 @"nested-macro-expansion-0.visp"
   override _.ToString () =
     // line 23 @"nested-macro-expansion-0.visp"
-    sprintf ("TileMap(%A)\n%A") (start) (grid)
+    sprintf "TileMap(%A)\n%A" start grid
 
   // line 26 @"nested-macro-expansion-0.visp"
   member _.Start =
@@ -96,11 +96,11 @@ type TileMap (grid: Grid, start: Pos) =
               None
             else
               // line 33 @"nested-macro-expansion-0.visp"
-              failwith ("unreachable")
+              failwith "unreachable"
 // line 43 @"nested-macro-expansion-0.visp"
 let visp_result_todo =
   // line 43 @"nested-macro-expansion-0.visp"
-  printfn ("OK")
+  printfn "OK"
 // line 43 @"nested-macro-expansion-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

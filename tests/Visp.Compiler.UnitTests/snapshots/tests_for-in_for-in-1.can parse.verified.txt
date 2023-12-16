@@ -10,7 +10,7 @@ let visp_result_todo =
   // line 8 @"for-in-1.visp"
   for var in [1;2;3;4;5;6] do
     // line 9 @"for-in-1.visp"
-    printfn ("var is: %O") (var)
+    printfn "var is: %O" var
 // line 8 @"for-in-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

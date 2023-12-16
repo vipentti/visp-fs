@@ -16,9 +16,9 @@ if CoreMethods.isTruthy(
     // line 20 @"when-unless-example-0.visp"
     
     // line 20 @"when-unless-example-0.visp"
-    printfn ("inside when 1")
+    printfn "inside when 1"
     // line 20 @"when-unless-example-0.visp"
-    printfn ("inside when 2")
+    printfn "inside when 2"
 // line 25 @"when-unless-example-0.visp"
 let visp_result_todo =
   // line 25 @"when-unless-example-0.visp"
@@ -28,9 +28,9 @@ let visp_result_todo =
       // line 25 @"when-unless-example-0.visp"
       
       // line 25 @"when-unless-example-0.visp"
-      printfn ("inside unless 3")
+      printfn "inside unless 3"
       // line 25 @"when-unless-example-0.visp"
-      printfn ("inside unless 4")
+      printfn "inside unless 4"
 // line 25 @"when-unless-example-0.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

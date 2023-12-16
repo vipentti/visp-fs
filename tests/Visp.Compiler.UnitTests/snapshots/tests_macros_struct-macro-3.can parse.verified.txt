@@ -21,8 +21,8 @@ type Range (start: int64, len: int64) =
   // line 25 @"struct-macro-3.visp"
   member _.End =
         // line 25 @"struct-macro-3.visp"
-    (start) +
-    (len)
+    start +
+    len
   // line 25 @"struct-macro-3.visp"
   member d.Offset v =
     // line 25 @"struct-macro-3.visp"
@@ -42,16 +42,16 @@ type Range (start: int64, len: int64) =
   // line 25 @"struct-macro-3.visp"
   override t.ToString () =
     // line 25 @"struct-macro-3.visp"
-    sprintf ("Range(%i, %i)") ((t.Start)) ((t.Len))
+    sprintf "Range(%i, %i)" ((t.Start)) ((t.Len))
 
 // line 43 @"struct-macro-3.visp"
 let instance =
   // line 43 @"struct-macro-3.visp"
   (new Range(1, 2))
 // line 45 @"struct-macro-3.visp"
-printfn ("Example Struct is %A") (instance)
+printfn "Example Struct is %A" instance
 // line 46 @"struct-macro-3.visp"
-printfn ("Example IsValueType %A") (instance
+printfn "Example IsValueType %A" (instance
   |> (fun a1 ->
     // line 46 @"struct-macro-3.visp"
     a1.GetType())
@@ -61,7 +61,7 @@ printfn ("Example IsValueType %A") (instance
 // line 47 @"struct-macro-3.visp"
 let visp_result_todo =
   // line 47 @"struct-macro-3.visp"
-  printfn ("Example Result is %A") ((instance.ToString()))
+  printfn "Example Result is %A" ((instance.ToString()))
 // line 47 @"struct-macro-3.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

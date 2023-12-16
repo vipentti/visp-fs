@@ -17,23 +17,23 @@ let lambda =
     match arg with
       | (a , b) ->
         // line 28 @"syntax-macro-2.visp"
-        (a) +
-        (b))
+        a +
+        b)
 // line 29 @"syntax-macro-2.visp"
 let named arg =
   // line 29 @"syntax-macro-2.visp"
   match arg with
     | (a , b) ->
       // line 29 @"syntax-macro-2.visp"
-      (a) +
-      (b)
+      a +
+      b
 
 // line 32 @"syntax-macro-2.visp"
-printfn ("lambda: %i") (lambda (1, 2))
+printfn "lambda: %i" (lambda (1, 2))
 // line 33 @"syntax-macro-2.visp"
 let visp_result_todo =
   // line 33 @"syntax-macro-2.visp"
-  printfn ("named: %i") (named (1, 2))
+  printfn "named: %i" (named (1, 2))
 // line 33 @"syntax-macro-2.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

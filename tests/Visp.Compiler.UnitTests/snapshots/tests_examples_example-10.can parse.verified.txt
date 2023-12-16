@@ -21,7 +21,7 @@ sb.Append("world")
 // line 18 @"example-10.visp"
 let visp_result_todo =
   // line 18 @"example-10.visp"
-  printfn ("sb contains: %s") ((sb.ToString()))
+  printfn "sb contains: %s" ((sb.ToString()))
 // line 18 @"example-10.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

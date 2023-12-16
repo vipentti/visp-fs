@@ -15,7 +15,7 @@ let visp_result_todo =
     // line 10 @"example-17.visp"
     let banaani = "banaani"
     // line 12 @"example-17.visp"
-    sprintf ("%s %s %s") (hello) (world) (banaani))
+    sprintf "%s %s %s" hello world banaani)
 // line 8 @"example-17.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

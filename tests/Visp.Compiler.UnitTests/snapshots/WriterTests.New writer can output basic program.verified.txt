@@ -8,8 +8,8 @@ let state = { Todo = () }
 // line 4 @"test"
 let hello (name: string) =
   // line 6 @"test"
-  sprintf ("hello %s") (name)
+  sprintf "hello %s" name
 
 // line 8 @"test"
-hello ("world")
+hello "world"
 

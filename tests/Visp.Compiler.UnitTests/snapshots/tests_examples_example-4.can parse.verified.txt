@@ -8,7 +8,7 @@ let state = { Todo = () }
 // line 9 @"example-4.visp"
 let mutable value = "initial"
 // line 10 @"example-4.visp"
-printfn ("value is %s") (value)
+printfn "value is %s" value
 // line 12 @"example-4.visp"
 let foo =
   // line 12 @"example-4.visp"
@@ -16,15 +16,15 @@ let foo =
     // line 12 @"example-4.visp"
     value <- arg)
 // line 14 @"example-4.visp"
-foo ("hello")
+foo "hello"
 // line 15 @"example-4.visp"
-printfn ("value is %s") (value)
+printfn "value is %s" value
 // line 17 @"example-4.visp"
-foo ("world")
+foo "world"
 // line 18 @"example-4.visp"
 let visp_result_todo =
   // line 18 @"example-4.visp"
-  printfn ("value is %s") (value)
+  printfn "value is %s" value
 // line 18 @"example-4.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

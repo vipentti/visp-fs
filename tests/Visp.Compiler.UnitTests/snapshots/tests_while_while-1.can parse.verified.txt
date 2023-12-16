@@ -37,7 +37,7 @@ let inline DiffByOne (lhs: array<'T>) (rhs: array<'T>) =
         // line 17 @"while-1.visp"
         
         // line 17 @"while-1.visp"
-        diff <- inc (diff)
+        diff <- inc diff
     // line 20 @"while-1.visp"
     if CoreMethods.isTruthy(
       CoreMethods.``gt``(diff, 1))
@@ -47,14 +47,14 @@ let inline DiffByOne (lhs: array<'T>) (rhs: array<'T>) =
         // line 20 @"while-1.visp"
         loop <- false
     // line 23 @"while-1.visp"
-    index <- inc (index)
+    index <- inc index
   // line 26 @"while-1.visp"
   CoreMethods.``eq?``(diff, 1)
 
 // line 29 @"while-1.visp"
 let visp_result_todo =
   // line 29 @"while-1.visp"
-  printfn ("OK")
+  printfn "OK"
 // line 29 @"while-1.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 

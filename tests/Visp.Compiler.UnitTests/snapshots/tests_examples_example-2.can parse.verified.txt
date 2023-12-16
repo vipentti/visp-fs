@@ -10,12 +10,12 @@ let hello argname =
   // line 12 @"example-2.visp"
   let name = argname
   // line 13 @"example-2.visp"
-  printfn ("hello %s") (name)
+  printfn "hello %s" name
 
 // line 15 @"example-2.visp"
 let visp_result_todo =
   // line 15 @"example-2.visp"
-  hello ("world")
+  hello "world"
 // line 15 @"example-2.visp"
-printfn ("%A") (visp_result_todo)
+printfn "%A" visp_result_todo
 
