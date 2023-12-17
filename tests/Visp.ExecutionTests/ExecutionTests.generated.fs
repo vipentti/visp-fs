@@ -31,6 +31,16 @@ module ``tests_dot_dot-shorthands`` =
     let ``can execute`` () = TestUtils.runTest "tests/dot/dot-shorthands.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_pats_fn-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/pats/fn-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_pats_let-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/pats/let-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_member-get-set-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/member-get-set-0.visp"
@@ -149,6 +159,11 @@ module ``tests_vector_vector-0`` =
 module ``tests_numbers_int-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/numbers/int-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_collections_list-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/collections/list-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_chars_char-1`` =

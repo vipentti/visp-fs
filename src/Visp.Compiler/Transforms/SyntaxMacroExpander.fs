@@ -182,6 +182,7 @@ let openToken =
     | SynListKind.BraceBar -> BRACE_BAR
     | SynListKind.DotBracket -> DOT_BRACKET
     | SynListKind.BracketBar -> BRACKET_BAR
+    | SynListKind.ParenBar -> PAREN_BAR
 
 let closeToken =
     function
@@ -194,6 +195,7 @@ let closeToken =
     | SynListKind.HashBracket -> RBRACKET
     | SynListKind.BraceBar -> BAR_BRACE
     | SynListKind.BracketBar -> BAR_BRACKET
+    | SynListKind.ParenBar -> BAR_PAREN
 
 [<RequireQualifiedAccess>]
 type private TokenizeMode =
@@ -630,7 +632,7 @@ let expand (expr: SynExpr) =
             macroTable.AddMacro text macro
 
             SynExpr.LetOrUse(
-                Syntax.mkInferredName ("macro_" + text) r,
+                Syntax.mkInferredNamePat ("macro_" + text) r,
                 Syntax.mkSynString "__MACRO_INIT__" r,
                 LetFlags.None,
                 r

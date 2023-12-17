@@ -23,7 +23,7 @@
 
 (let splitOptions StringSplitOptions.TrimEntries)
 
-(type Grid char[,])
+(typedef Grid char[,])
 
 (fn inline Height ([g: Grid])
   (Array2D.length1 g))

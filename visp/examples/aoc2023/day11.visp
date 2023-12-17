@@ -27,8 +27,8 @@
 (fn SplitLines ([text: string])
   (text.EnumerateSplitSubstrings ((!array #\lf #\cr), splitOptions)))
 
-(type Grid char[,])
-(type Point int64*int64)
+(typedef Grid char[,])
+(typedef Point int64*int64)
 
 (fn ParseFile ([text: string])
   (mut lines (SplitLines text))

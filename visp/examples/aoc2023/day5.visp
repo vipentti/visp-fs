@@ -33,7 +33,7 @@
   (destType: string)
   (mappings: seq<Mapping>))
 
-(type range int64*int64)
+(typedef range int64*int64)
 
 (fn inRange (num (mapping: Mapping))
   (and (>= num (+src mapping))

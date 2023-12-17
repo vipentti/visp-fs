@@ -5,11 +5,9 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(typedef Grid char[,])
+(let lst (| 1 2 3 |))
 
-(let arr (Array2D.create 5 5 #\.))
+(printfn "List.head: %A" (List.head lst))
+(printfn "List.tail: %A" (List.tail lst))
 
-(printfn "arr[*,0]=%A" (.[*,0] arr))
-(printfn "arr[0,*]=%A" (.[0,*] arr))
-
-arr
+lst

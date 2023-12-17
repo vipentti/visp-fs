@@ -35,7 +35,9 @@ let transformLambdaShortHands (expr: SynExpr) =
                         index <- index + 1
 
                         parameters.Add(
-                            SynArg.InferredArg(Syntax.mkSynSymbol name id.idRange, id.idRange)
+                            //SynArg.InferredArg(Syntax.mkSynSymbol name id.idRange, id.idRange)
+                            //Syntax.mkInferredNamePat name id.idRange
+                            (name, id.idRange)
                         )
 
                     ()
@@ -55,7 +57,15 @@ let transformLambdaShortHands (expr: SynExpr) =
                     expr
 
             SynExpr.LambdaDef(
-                SynLambda(parameters |> Seq.sortBy _.NameText |> List.ofSeq, [ body ], range)
+                SynLambda(
+                    parameters
+                    |> Seq.sortBy fst
+                    |> Seq.map (fun (n, r) -> Syntax.mkInferredNamePat n r)
+                    |> List.ofSeq
+                    |> (fun lst -> SynPat.Args(SynArgPats.List(lst), range)),
+                    [ body ],
+                    range
+                )
             )
 
         | _ -> expr

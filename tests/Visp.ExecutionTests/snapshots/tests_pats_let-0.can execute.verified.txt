@@ -1,0 +1,10 @@
+﻿n is: hello
+x is: 1
+y is: 2
+x2 is: 3
+y2 is: 4
+x3 is: 5
+x4 is: 7
+()
+
+ExitCode: 0

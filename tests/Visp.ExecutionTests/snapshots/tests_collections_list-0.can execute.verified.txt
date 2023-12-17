@@ -1,0 +1,5 @@
+﻿List.head: 1
+List.tail: [2; 3]
+[1; 2; 3]
+
+ExitCode: 0

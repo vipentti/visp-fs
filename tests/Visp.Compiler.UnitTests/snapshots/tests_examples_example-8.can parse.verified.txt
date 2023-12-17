@@ -6,7 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 9 @"example-8.visp"
-let (ints: ResizeArray<int32>) =
+let ints: ResizeArray<int32> =
   // line 10 @"example-8.visp"
   (new ResizeArray<_>())
 // line 12 @"example-8.visp"

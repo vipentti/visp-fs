@@ -20,7 +20,7 @@ let count =
 // line 15 @"while-0.visp"
 let visp_result_todo =
   // line 15 @"while-0.visp"
-  while CoreMethods.isTruthy(CoreMethods.``lt``(unwrapInt (deref (count)), 5L)) do
+  while CoreMethods.isTruthy((unwrapInt (deref (count))) < 5L) do
     // line 16 @"while-0.visp"
     printfn "in loop %O" (deref (count))
     // line 17 @"while-0.visp"

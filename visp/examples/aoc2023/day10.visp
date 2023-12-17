@@ -27,7 +27,7 @@
 
 (let fileText (System.IO.File.ReadAllText filepath))
 
-(type Grid array<array<char>>)
+(typedef Grid array<array<char>>)
 
 (struct Pos ([x: int32] [y: int32])
   (member _.X x)

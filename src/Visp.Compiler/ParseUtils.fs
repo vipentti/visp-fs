@@ -43,6 +43,7 @@ let mkTokenizerWithArgs args =
         | HASH_BRACKET
         | BRACE_BAR
         | BRACKET_BAR
+        | PAREN_BAR
         | DOT_BRACKET
         | LPAREN
         | LBRACE
@@ -59,6 +60,7 @@ let mkTokenizerWithArgs args =
 
             args.NestIfNotDefault()
 
+        | BAR_PAREN
         | BAR_BRACKET
         | BAR_BRACE
         | RPAREN
