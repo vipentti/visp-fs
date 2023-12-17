@@ -6,7 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 8 @"type-alias-0.visp"
-type range = int64*int64
+type range = (int64 * int64)
 // line 10 @"type-alias-0.visp"
 let things (r: range) =
   // line 11 @"type-alias-0.visp"

@@ -57,7 +57,7 @@
     (List.ofSeq))
 )
 
-(type race int32*int32)
+(typedef race int32*int32)
 
 (let races (ParseRaces contents))
 

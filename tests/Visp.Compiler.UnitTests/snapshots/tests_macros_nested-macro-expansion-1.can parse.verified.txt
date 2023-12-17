@@ -43,7 +43,7 @@ let Something () =
   // line 24 @"nested-macro-expansion-1.visp"
   let mutable result = 0L
   // line 26 @"nested-macro-expansion-1.visp"
-  while CoreMethods.isTruthy(CoreMethods.``gt``((work.Count), 0)) do
+  while CoreMethods.isTruthy(((work.Count)) > 0) do
     // line 27 @"nested-macro-expansion-1.visp"
     match PopWork () with
       | (bi , off , count) ->

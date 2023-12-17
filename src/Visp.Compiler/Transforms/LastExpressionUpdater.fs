@@ -33,7 +33,7 @@ module LastExpressionUpdater =
         | SynModuleDecl.Expr(expr, range) ->
             [ SynModuleDecl.Expr(
                   SynExpr.LetOrUse(
-                      Syntax.mkInferredName "visp_result_todo" range,
+                      Syntax.mkInferredNamePat "visp_result_todo" range,
                       expr,
                       LetFlags.None,
                       range

@@ -1,0 +1,44 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"let-0.visp"
+let n: string = "hello"
+// line 10 @"let-0.visp"
+printfn "n is: %s" n
+// line 12 @"let-0.visp"
+let (x , y): int * int =
+  // line 12 @"let-0.visp"
+  (1, 2)
+// line 13 @"let-0.visp"
+printfn "x is: %i" x
+// line 14 @"let-0.visp"
+printfn "y is: %i" y
+// line 16 @"let-0.visp"
+let (x2 , y2) =
+  // line 16 @"let-0.visp"
+  (3, 4)
+// line 17 @"let-0.visp"
+printfn "x2 is: %i" x2
+// line 18 @"let-0.visp"
+printfn "y2 is: %i" y2
+// line 20 @"let-0.visp"
+let (x3 , _) =
+  // line 20 @"let-0.visp"
+  (5, 6)
+// line 21 @"let-0.visp"
+printfn "x3 is: %i" x3
+// line 23 @"let-0.visp"
+let (x4: int , _) =
+  // line 23 @"let-0.visp"
+  (7, 8)
+// line 24 @"let-0.visp"
+let visp_result_todo =
+  // line 24 @"let-0.visp"
+  printfn "x4 is: %i" x4
+// line 24 @"let-0.visp"
+printfn "%A" visp_result_todo
+

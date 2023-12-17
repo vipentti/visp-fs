@@ -9,7 +9,7 @@ let state = { Todo = () }
 let macro_MyStruct = "__MACRO_INIT__"
 [<Struct()>]
 // line 16 @"struct-macro-0.visp"
-type Example (x: int, y: int) =
+type Example (x: int , y: int) =
   // line 16 @"struct-macro-0.visp"
   member _.X =
         x

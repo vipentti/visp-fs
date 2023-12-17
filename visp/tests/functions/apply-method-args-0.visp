@@ -6,7 +6,7 @@
 ;; vim: set syntax=clojure:
 
 
-(type Grid char[,])
+(typedef Grid char[,])
 
 (struct Pos ([x: int32] [y: int32])
   (member _.X x)

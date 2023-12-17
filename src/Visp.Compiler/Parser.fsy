@@ -10,12 +10,16 @@ open Visp.Compiler.DiagnosticsLogger
 open Visp.Compiler.StringResources
 open Visp.Compiler.Syntax
 open Visp.Compiler.ParseHelpers
+open Visp.Runtime.Library
 open FSharp.Text.Parsing
 
 // This function is called by the generated parser code. Returning initiates error recovery
 // It must be called precisely "parse_error_rich"
 let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
     raise (SyntaxError(box ctxt, (lhs ctxt.ParseState))))
+
+
+let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 
 %}
 
@@ -26,15 +30,15 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %token EOF
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
-%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE BRACKET_BAR BAR_BRACKET
+%token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE PAREN_BAR BAR_PAREN BRACKET_BAR BAR_BRACKET
 %token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
-%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM
+%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS
 %token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
 %token AT
 %token OPEN MODULE
 %token FN FNSTAR LET USE LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
-%token ATOM_KW DEREF_KW WHILE TYPE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
+%token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
@@ -74,13 +78,14 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 
 // https://github.com/dotnet/fsharp/blob/363e8768ecd3e537aff643e0ea6da89115f249c2/src/Compiler/pars.fsy#L189
 
+%nonassoc prec_coll_open prec_coll_close
 
 %nonassoc QUOTE_SYM
-%nonassoc LPAREN HASH_PAREN
+%nonassoc LPAREN HASH_PAREN PAREN_BAR
 %nonassoc LBRACKET BRACKET_BAR
 %nonassoc LBRACE HASH_BRACE BRACE_BAR
 %nonassoc HASH_BRACKET
-%nonassoc RPAREN
+%nonassoc RPAREN BAR_PAREN
 %nonassoc RBRACKET BAR_BRACKET
 %nonassoc RBRACE BAR_BRACE
 %nonassoc AT
@@ -95,6 +100,26 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL
 %nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
 %nonassoc HASH_IDENT
+%nonassoc prec_symbol
+%nonassoc prec_name_list
+%nonassoc prec_syn_type_paren_op
+
+%nonassoc prec_type_expr
+%nonassoc prec_type_pat
+
+%nonassoc prec_syn_type_paren
+%nonassoc prec_syn_type_mult
+%nonassoc prec_syn_type_generic
+%nonassoc prec_syn_type_array
+%nonassoc prec_syn_pat
+%nonassoc prec_syn_pat_open
+%nonassoc prec_syn_type_open
+
+
+%nonassoc OP_LESS OP_GREATER
+
+%nonassoc OP_MULT
+%nonassoc COLON
 
 // %left COMMA
 // %right COMMA
@@ -102,6 +127,7 @@ let parse_error_rich = Some(fun (ctxt: ParseErrorContext<_>) ->
 %nonassoc prec_attribute
 
 %nonassoc prec_attribute_comma
+
 
 %nonassoc prec_dot_no_paren
 %nonassoc prec_paren
@@ -206,6 +232,12 @@ module_help:
         { let (raw, _, _) = $3
           SynModuleDecl.Require($2, raw, lhs parseState) }
 
+syn_symbol:
+    | SYMBOL {Syntax.mkSynSymbol $1 (rhs parseState 1)}
+
+symbol:
+    | SYMBOL { SynSymbol(Ident($1, lhs parseState)) }
+
 expr_list: rev_expr_list { List.rev $1 }
 rev_expr_list:
     | expr %prec prec_expr { [$1] }
@@ -235,6 +267,7 @@ expr:
 
     | brace_bar { $1 }
     | bracket_bar { $1 }
+    | paren_bar { $1 }
     | inside_parens %prec prec_paren { $1 }
 
 brace_bar:
@@ -245,6 +278,11 @@ bracket_bar:
     | BRACKET_BAR recover { CollExpr.mkFsArray [] (lhs parseState)}
     | BRACKET_BAR BAR_BRACKET { CollExpr.mkFsArray [] (lhs parseState)}
     | BRACKET_BAR expr_list BAR_BRACKET { CollExpr.mkFsArray $2 (lhs parseState)}
+
+paren_bar:
+    | PAREN_BAR recover { CollExpr.mkFsList [] (lhs parseState)}
+    | PAREN_BAR BAR_PAREN { CollExpr.mkFsList [] (lhs parseState)}
+    | PAREN_BAR expr_list BAR_PAREN { CollExpr.mkFsList $2 (lhs parseState)}
 
 lambda_short_expr_list:
     | parens_expr { $1 }
@@ -412,14 +450,15 @@ rev_macro_body_list:
     | rev_macro_body_list macro_body { $2 :: $1 }
 
 collection_open_kind:
-    | LPAREN { CollectionKind.Paren }
-    | LBRACKET { CollectionKind.Bracket }
+    | LPAREN %prec prec_coll_open { CollectionKind.Paren }
+    | LBRACKET %prec prec_coll_open { CollectionKind.Bracket }
     | LBRACE { CollectionKind.Brace }
     | HASH_BRACE { CollectionKind.HashBrace }
     | HASH_BRACKET { CollectionKind.HashBracket }
     | BRACE_BAR { CollectionKind.BraceBar }
     | BRACKET_BAR { CollectionKind.FsArray }
-    | DOT_BRACKET { CollectionKind.DotBracket }
+    | PAREN_BAR { CollectionKind.FsList }
+    | DOT_BRACKET %prec prec_coll_open { CollectionKind.DotBracket }
 
 macro_open_kind:
     | LPAREN { SynListKind.Paren }
@@ -431,10 +470,11 @@ macro_open_kind:
     | BRACE_BAR { SynListKind.BraceBar }
     | BRACKET_BAR { SynListKind.BracketBar }
     | DOT_BRACKET { SynListKind.DotBracket }
+    | PAREN_BAR { SynListKind.ParenBar }
 
 collection_close_kind:
-    | RPAREN { () }
-    | RBRACKET { () }
+    | RPAREN %prec prec_coll_close { () }
+    | RBRACKET %prec prec_coll_close { () }
     | RBRACE { () }
     | BAR_BRACE { () }
     | BAR_BRACKET { () }
@@ -581,11 +621,11 @@ list_expr:
     | BANG_LIST expr_list { CollExpr.mkFsList $2 (lhs parseState)}
 
 for_in_expr:
-    | FOR_IN lparen_or_lbracket name expr rparen_or_rbracket expr_list
+    | FOR_IN lparen_or_lbracket syn_pat expr rparen_or_rbracket expr_list
         { SynExpr.ForIn($3, $4, $6, lhs parseState) }
 
 for_to_expr:
-    | FOR_TO lparen_or_lbracket name lparen_or_lbracket expr SYMBOL expr rparen_or_rbracket rparen_or_rbracket expr_list
+    | FOR_TO lparen_or_lbracket syn_symbol lparen_or_lbracket expr SYMBOL expr rparen_or_rbracket rparen_or_rbracket expr_list
         {
             let down = $6 = "downto"
             SynExpr.ForTo($3, $5, $7, $10, down, lhs parseState)
@@ -652,19 +692,29 @@ splice_unquote:
 operators:
     | LPAREN operators_not_in_parens RPAREN { $2 }
 
+op_sym:
+    | OP_PLUS    { Syntax.mkSynSymbol "+" (rhs parseState 1) }
+    | OP_DIV     { Syntax.mkSynSymbol "/" (rhs parseState 1) }
+    | OP_MULT    { Syntax.mkSynSymbol "*" (rhs parseState 1) }
+    | OP_MINUS   { Syntax.mkSynSymbol "-" (rhs parseState 1) }
+    | OP_GREATER { Syntax.mkSynSymbol ">" (rhs parseState 1) }
+    | OP_LESS    { Syntax.mkSynSymbol "<" (rhs parseState 1) }
+
 operators_not_in_parens:
-    | OP_PLUS
-        { SynOp.Plus([], lhs parseState)}
-    | OP_MULT
-        { SynOp.Mult([], lhs parseState)}
-    | OP_PLUS expr_list
-        { SynOp.Plus($2, lhs parseState)}
-    | OP_MULT expr_list
-        { SynOp.Mult($2, lhs parseState)}
-    | OP_MINUS expr_list
-        { SynOp.Minus($2, lhs parseState)}
-    | OP_DIV expr_list
-        { SynOp.Div($2, lhs parseState)}
+    | op_sym { SynOp.Infix($1, [], lhs parseState) }
+    | op_sym expr_list { SynOp.Infix($1, $2, lhs parseState) }
+    // | OP_PLUS
+    //     { SynOp.Plus([], lhs parseState)}
+    // | OP_MULT
+    //     { SynOp.Mult([], lhs parseState)}
+    // | OP_PLUS expr_list
+    //     { SynOp.Plus($2, lhs parseState)}
+    // | OP_MULT expr_list
+    //     { SynOp.Mult($2, lhs parseState)}
+    // | OP_MINUS expr_list
+    //     { SynOp.Minus($2, lhs parseState)}
+    // | OP_DIV expr_list
+    //     { SynOp.Div($2, lhs parseState)}
 
 set:
     | SET expr expr
@@ -679,64 +729,97 @@ set:
           SynExpr.Set(Syntax.parserRecoveryExpr r, Syntax.parserRecoveryExpr r, r) }
 
 let:
-    | USE name expr
+    | USE syn_pat expr
         { SynExpr.LetOrUse($2, $3, LetFlags.Use, lhs parseState) }
-    | LET name expr
+    | LET syn_pat expr
         { SynExpr.LetOrUse($2, $3, LetFlags.None, lhs parseState) }
-    | LET_BANG name expr
+    | LET_BANG syn_pat expr
         { SynExpr.LetOrUse($2, $3, LetFlags.Bang, lhs parseState) }
-    | USE_BANG name expr
+    | USE_BANG syn_pat expr
         { SynExpr.LetOrUse($2, $3, LetFlags.Bang ||| LetFlags.Use, lhs parseState) }
     // TODO: Report error
-    | LET name
+    | LET syn_pat
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
-    | USE name
+    | USE syn_pat
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
-    | LET_BANG name
+    | LET_BANG syn_pat
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
-    | USE_BANG name
+    | USE_BANG syn_pat
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang ||| LetFlags.Use, r) }
     // TODO: Report error
     | LET
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
     | LET_BANG
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
     | USE
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
     | USE_BANG
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Use ||| LetFlags.Bang, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Use ||| LetFlags.Bang, r) }
 
 mut:
-    | MUT name expr
+    | MUT syn_pat expr
         { SynExpr.LetOrUse($2, $3, LetFlags.Mutable, lhs parseState) }
     // TODO: Report error
-    | MUT name
+    | MUT syn_pat
         { let r = lhs parseState
           SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
     // TODO: Report error
     | MUT
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryName r, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
 
 letstar:
     | LETSTAR binding_list_start expr_list
         { SynExpr.LetStar($2, $3, lhs parseState) }
 
 type_expr:
-    | TYPE symbol syntype_ident
+    | TYPEALIAS syn_symbol syn_type
         { SynExpr.TypeAlias($2, $3, lhs parseState) }
-    | TYPE symbol name_list_start member_list_start
+    | TYPE syn_symbol tuple_arg_pats %prec prec_type_expr
+        { SynExpr.Type($2, $3, [], [], lhs parseState) }
+    | TYPE syn_symbol tuple_arg_pats member_list_start
         { SynExpr.Type($2, $3, $4, [], lhs parseState) }
-    | attribute_list TYPE symbol name_list_start member_list_start
+    | attribute_list TYPE syn_symbol tuple_arg_pats member_list_start
         { SynExpr.Type($3, $4, $5, $1, lhs parseState) }
+
+tuple_arg_pats:
+    | UNIT { SynPat.Args(SynArgPats.Tuple([]), lhs parseState) }
+    | LPAREN RPAREN { SynPat.Args(SynArgPats.Tuple([]), lhs parseState) }
+    | LBRACKET RBRACKET { SynPat.Args(SynArgPats.Tuple([]), lhs parseState) }
+    | LPAREN syn_pat_trivia_list RPAREN
+        { let lst = $2
+          let lst =
+            List.intersperse (SynPat.Trivia (SynPatternTriviaKind.Comma, rhs parseState 1)) lst
+
+          SynPat.Args(SynArgPats.Tuple(lst), lhs parseState)
+        }
+    | LBRACKET syn_pat_trivia_list RBRACKET
+        { let lst = $2
+          let lst =
+            List.intersperse (SynPat.Trivia (SynPatternTriviaKind.Comma, rhs parseState 1)) lst
+          SynPat.Args(SynArgPats.Tuple(lst), lhs parseState)
+        }
+
+list_arg_pats:
+    | UNIT { SynPat.Args(SynArgPats.List([]), lhs parseState) }
+    | LPAREN RPAREN { SynPat.Args(SynArgPats.List([]), lhs parseState) }
+    | LBRACKET RBRACKET { SynPat.Args(SynArgPats.List([]), lhs parseState) }
+    | LPAREN syn_pat_trivia_list RPAREN
+        { let lst = $2
+          SynPat.Args(SynArgPats.List(lst), lhs parseState)
+        }
+    | LBRACKET syn_pat_trivia_list RBRACKET
+        { let lst = $2
+          SynPat.Args(SynArgPats.List(lst), lhs parseState)
+        }
 
 union_expr:
     | UNION symbol union_labels_or_members
@@ -763,7 +846,7 @@ union_label_or_member_parens:
 union_label_or_member:
     | MEMBER symbol expr
         { Choice2Of2(SynTypeMember.Member($2, $3, lhs parseState)) }
-    | MEMBER FN symbol arg_list_start expr_list
+    | MEMBER FN symbol list_arg_pats expr_list
         { Choice2Of2(SynTypeMember.MemberFn($3, $4, $5, (lhs parseState))) }
     | symbol
         { Choice1Of2(UnionCase($1, [], lhs parseState)) }
@@ -806,7 +889,7 @@ record_label_or_member_parens:
 record_label_or_member:
     | MEMBER symbol expr
         { Choice1Of2(SynTypeMember.Member($2, $3, lhs parseState)) }
-    | MEMBER FN symbol arg_list_start expr_list
+    | MEMBER FN symbol list_arg_pats expr_list
         { Choice1Of2(SynTypeMember.MemberFn($3, $4, $5, (lhs parseState))) }
     | symbol COLON syntype_ident
         { Choice2Of2 (RecordLabel(RecordLabelKind.Default, $1, $3, lhs parseState)) }
@@ -885,7 +968,6 @@ attribute:
         { { TypeName = $1; ArgExpr = Syntax.UnitExpr <| lhs parseState; Range = lhs parseState } }
 
 member_list_start:
-    | { [] }
     | member_list { $1 }
 
 member_list: rev_member_list { List.rev $1 }
@@ -900,11 +982,11 @@ member_name:
     | MEMBER symbol { $2 }
 
 member_get:
-    | LPAREN MEMBER_GET arg_list_start expr_list_or_empty RPAREN
+    | LPAREN MEMBER_GET tuple_arg_pats expr_list_or_empty RPAREN
         { SynMemberGet($3, $4, lhs parseState) }
 
 member_set:
-    | LPAREN MEMBER_SET arg_list_start name expr_list_or_empty RPAREN
+    | LPAREN MEMBER_SET tuple_arg_pats syn_pat expr_list_or_empty RPAREN
         { SynMemberSet($3, $4, $5, lhs parseState) }
 
 member_member_in_parens:
@@ -915,20 +997,20 @@ member_member_in_parens:
     | member_name expr { SynTypeMember.Member($1, $2, lhs parseState) }
 
 member_in_parens:
-    | LET name expr
+    | LET syn_pat expr
         { SynTypeMember.Let($2, $3, lhs parseState) }
-    | MUT name expr
+    | MUT syn_pat expr
         { SynTypeMember.Mut($2, $3, lhs parseState) }
     | member_member_in_parens { $1 }
     // | MEMBER symbol expr
     //     { SynTypeMember.Member($2, $3, lhs parseState) }
-    | MEMBERFN symbol arg_list_start expr_list
+    | MEMBERFN syn_symbol list_arg_pats expr_list
         { SynTypeMember.MemberFn($2, $3, $4, (lhs parseState)) }
-    | MEMBER FN symbol arg_list_start expr_list
+    | MEMBER FN syn_symbol list_arg_pats expr_list
         { SynTypeMember.MemberFn($3, $4, $5, (lhs parseState)) }
-    | OVERRIDE symbol expr
+    | OVERRIDE syn_symbol expr
         { SynTypeMember.OverrideMember($2, $3, lhs parseState) }
-    | OVERRIDE FN symbol arg_list_start expr_list
+    | OVERRIDE FN syn_symbol list_arg_pats expr_list
         { SynTypeMember.OverrideFn($3, $4, $5, (lhs parseState)) }
 
 tok_lparen:
@@ -949,7 +1031,7 @@ rev_binding_list:
     | rev_binding_list binding { $2 :: $1 }
 
 binding:
-    | name expr { SynBinding($1, $2, lhs parseState) }
+    | syn_pat expr { SynBinding($1, $2, lhs parseState) }
 
 name:
     | symbol { SynName.Inferred($1, lhs parseState) }
@@ -970,17 +1052,15 @@ empty_name_list:
     | LBRACKET RBRACKET { [] }
 
 name_list_start:
-    | empty_name_list { $1 }
-    | LPAREN name_list RPAREN { $2 }
-    | LBRACKET name_list RBRACKET { $2 }
+    | empty_name_list %prec prec_name_list { $1 }
+    | LPAREN name_list RPAREN %prec prec_name_list { $2 }
+    | LBRACKET name_list RBRACKET %prec prec_name_list { $2 }
 
 name_list: rev_name_list { List.rev $1 }
 rev_name_list:
     | name %prec prec_name { [$1] }
     | rev_name_list name { $2 :: $1 }
 
-symbol:
-    | SYMBOL { SynSymbol(Ident($1, lhs parseState)) }
 
 macro_name:
     | MACRO_NAME
@@ -1012,12 +1092,6 @@ syn_comma:
 raw_syntype_ident_text:
     | SYMBOL %prec prec_syn_type { $1 }
 
-raw_syntype_ident:
-    | SYMBOL %prec prec_syn_type
-        { let text = $1
-          SynType.Ident(Ident(text, lhs parseState))
-        }
-
 syntype_ident:
     | raw_syntype_ident_text %prec prec_syn_type { SynType.Ident(Ident($1, lhs parseState))}
     | QUOTE_SYM raw_syntype_ident_text
@@ -1030,6 +1104,63 @@ syntype_ident:
             let rest = $3
             SynType.Ident(Ident(text + "," + (String.concat "," rest), lhs parseState))
         }
+
+// syn_type_paren_open:
+//     | LPAREN %prec prec_syn_type_paren_op { () }
+//     | LBRACKET %prec prec_syn_type_paren_op { () }
+//
+// syn_type_paren_close:
+//     | RPAREN %prec prec_syn_type_paren { () }
+//     | RBRACKET %prec prec_syn_type_paren { () }
+//
+// syn_type_paren:
+//     | syn_type_paren_open syn_type syn_type_paren_close { SynType.Paren($2, lhs parseState) }
+//     // | LBRACKET syn_type RBRACKET { SynType.Paren($2, lhs parseState) }
+
+syn_type:
+    // | syn_type_paren %prec prec_syn_type_paren { $1 }
+    | LPAREN syn_type RPAREN %prec prec_syn_type_paren
+        { SynType.Paren($2, lhs parseState) }
+    | LBRACKET syn_type RBRACKET %prec prec_syn_type_paren
+        { SynType.Paren($2, lhs parseState) }
+    // | LPAREN syn_type recover %prec prec_syn_type_paren
+    //     { SynType.Paren($2, lhs parseState) }
+    // | LBRACKET syn_type recover %prec prec_syn_type_paren
+    //     { SynType.Paren($2, lhs parseState) }
+    | syn_type OP_MULT syn_type_tuple_list %prec prec_syn_type_mult
+        { SynType.Tuple(false, SynTypeTupleSegment.Type($1) :: SynTypeTupleSegment.Star(rhs parseState 2) :: $3, lhs parseState) }
+    | SYMBOL %prec prec_syn_type
+      { let text = $1
+        if (text = "_") then
+            SynType.Discard(lhs parseState)
+        else
+            SynType.Ident(Ident(text, lhs parseState)) }
+    | syn_type arrayTypeSuffixHelp %prec prec_syn_type_array
+        { SynType.Array($2, $1, lhs parseState) }
+    | syn_type OP_LESS syn_type OP_GREATER %prec prec_syn_type_generic
+        { SynType.Generic($1, [$3], lhs parseState) }
+    | syn_type OP_LESS syn_type COMMA syn_type_generic_list OP_GREATER %prec prec_syn_type_generic
+        { SynType.Generic($1, $3 :: $5, lhs parseState) }
+
+syn_type_generic_list: rev_syn_type_generic_list { List.rev $1 }
+rev_syn_type_generic_list:
+    | { [] }
+    | syn_type %prec prec_syn_type_generic { [$1] }
+    | rev_syn_type_generic_list COMMA syn_type %prec prec_syn_type_generic { $3 :: $1 }
+
+arrayTypeSuffixHelp: arrayTypeSuffix %prec prec_syn_type_array { $1 }
+arrayTypeSuffix:
+  | LBRACKET RBRACKET { 1 }
+  | LBRACKET COMMA RBRACKET { 2 }
+  | LBRACKET COMMA COMMA RBRACKET { 3 }
+  | LBRACKET COMMA COMMA COMMA RBRACKET { 4 }
+  | LBRACKET COMMA COMMA COMMA COMMA RBRACKET { 5 }
+  | LBRACKET COMMA COMMA COMMA COMMA COMMA RBRACKET { 6 }
+
+syn_type_tuple_list: rev_syn_type_tuple_list %prec prec_syn_type_mult { List.rev $1 }
+rev_syn_type_tuple_list:
+    | syn_type %prec prec_syn_type_mult { [SynTypeTupleSegment.Type($1)] }
+    | rev_syn_type_tuple_list OP_MULT syn_type %prec prec_syn_type_mult { SynTypeTupleSegment.Type($3) :: SynTypeTupleSegment.Star(rhs parseState 2) :: $1 }
 
 syntype_comma_list: rev_syntype_comma_list { List.rev $1 }
 rev_syntype_comma_list:
@@ -1095,34 +1226,36 @@ rawConstant:
           SynConst.Char(parseChar text) }
 
 function_def:
-    | FN symbol arg_list_start expr_list %prec prec_fn
+    | FN symbol function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($2, FunctionFlags.None, $3, $4, (lhs parseState)) }
-    | FN INLINE symbol arg_list_start expr_list %prec prec_fn
+    | FN INLINE symbol function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, $5, (lhs parseState)) }
-    | FN REC INLINE symbol arg_list_start expr_list %prec prec_fn
+    | FN REC INLINE symbol function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($4, FunctionFlags.Recursive ||| FunctionFlags.Inline, $5, $6, (lhs parseState)) }
-    | FN REC symbol arg_list_start expr_list %prec prec_fn
+    | FN REC symbol function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Recursive, $4, $5, (lhs parseState)) }
-    | FN arg_list_start expr_list %prec prec_lambda_def
+    | FN function_def_args expr_list %prec prec_lambda_def
         { SynExpr.LambdaDef(SynLambda($2, $3, (lhs parseState))) }
-    | FNSTAR arg_list_start expr_list
+    | FNSTAR function_def_args expr_list
         { SynExpr.LambdaDef(SynLambda($2, $3, (lhs parseState))) }
     | invalid_function_def %prec prec_invalid_fn { $1 }
+
+function_def_args: list_arg_pats { $1 }
 
 invalid_function_def:
     // TODO: Report
     | FN %prec prec_invalid_fn
-        { SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) }
+        { SynExpr.LambdaDef(SynLambda(mkRecoveryPat parseState, [], (lhs parseState))) }
     // TODO: Report
     | FN symbol %prec prec_invalid_fn
-        { SynExpr.FunctionDef($2, FunctionFlags.None, [], [], lhs parseState) }
+        { SynExpr.FunctionDef($2, FunctionFlags.None, mkRecoveryPat parseState, [], lhs parseState) }
     // TODO: Report
-    | FN arg_list_start %prec prec_invalid_fn
-        { SynExpr.LambdaDef(SynLambda([], [], (lhs parseState))) }
+    | FN function_def_args %prec prec_invalid_fn
+        { SynExpr.LambdaDef(SynLambda(mkRecoveryPat parseState, [], (lhs parseState))) }
     // TODO: Report
-    | FN symbol arg_list_start %prec prec_invalid_fn
+    | FN symbol function_def_args %prec prec_invalid_fn
         { SynExpr.FunctionDef($2, FunctionFlags.None, $3, [], (lhs parseState)) }
-    | FN INLINE symbol arg_list_start %prec prec_invalid_fn
+    | FN INLINE symbol function_def_args %prec prec_invalid_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, [], (lhs parseState)) }
 
 arg_list_start:
@@ -1222,3 +1355,56 @@ match_pattern:
         { SynMatchPattern.Tuple ($3, lhs parseState) }
     | LPAREN match_tuple_list RPAREN
         { SynMatchPattern.List($2, lhs parseState) }
+
+syn_pat_list: rev_syn_pat_list { List.rev $1 }
+rev_syn_pat_list:
+    | syn_pat %prec prec_match_pattern { [$1] }
+
+syn_trivia_kind:
+    | COMMA { SynPatternTriviaKind.Comma }
+    | DOT { SynPatternTriviaKind.Dot }
+    | COLON_COLON { SynPatternTriviaKind.ColonColon }
+
+syn_pat_trivia:
+    | syn_trivia_kind { SynPat.Trivia($1, rhs parseState 1) }
+
+syn_pat_trivia_list: rev_syn_pat_trivia_list { List.rev $1 }
+rev_syn_pat_trivia_list:
+    | syn_pat %prec prec_syn_pat { [$1] }
+    | rev_syn_pat_trivia_list syn_pat_trivia syn_pat %prec prec_syn_pat { $3 :: $2 :: $1 }
+    | rev_syn_pat_trivia_list syn_pat %prec prec_syn_pat { $2 :: $1 }
+
+pat_open_kind:
+    | LPAREN %prec prec_syn_pat_open { CollectionKind.Paren }
+    | LBRACKET %prec prec_syn_pat_open { CollectionKind.Bracket }
+    | BRACKET_BAR %prec prec_syn_pat_open { CollectionKind.FsArray }
+    | PAREN_BAR %prec prec_syn_pat_open  { CollectionKind.FsList }
+
+syn_pat:
+    | constant %prec prec_match_pattern_const { SynPat.Const(fst $1, snd $1) }
+    // | syn_pat COLON syn_type %prec prec_syn_type
+    //     { SynPat.Typed($1, $3, lhs parseState) }
+    | pat_open_kind syn_pat COLON syn_type collection_close_kind %prec prec_syn_type
+        { SynPat.Typed($2, $4, lhs parseState) }
+    // | LBRACKET syn_pat COLON syn_type RBRACKET %prec prec_syn_type
+    //     { SynPat.Typed($2, $4, lhs parseState) }
+    | SYMBOL %prec prec_syn_pat {
+        let text = $1
+        if (text = "_") then
+            SynPat.Discard (lhs parseState)
+        else
+            SynPat.Named (Syntax.mkSynSymbol text (rhs parseState 1), (rhs parseState 1)) }
+    | pat_open_kind collection_close_kind %prec prec_syn_pat
+        { SynPat.Collection(SynCollection($1, [], lhs parseState)) }
+
+    | pat_open_kind syn_pat_trivia_list collection_close_kind %prec prec_syn_pat
+        { SynPat.Collection(SynCollection($1, $2, lhs parseState)) }
+
+    // | LPAREN syn_pat RPAREN
+    //     { SynPat.Paren($2, lhs parseState) }
+    // | LBRACKET syn_pat RBRACKET
+    //     { SynPat.Paren($2, lhs parseState) }
+    // | LPAREN syn_pat recover
+    //     { SynPat.Paren($2, lhs parseState) }
+    // | LBRACKET syn_pat recover
+    //     { SynPat.Paren($2, lhs parseState) }

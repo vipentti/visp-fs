@@ -58,10 +58,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Op op ->
 
             match op with
-            | SynOp.Plus(args, range) -> SynOp.Plus(List.map bound_transform args, range)
-            | SynOp.Div(args, range) -> SynOp.Div(List.map bound_transform args, range)
-            | SynOp.Minus(args, range) -> SynOp.Minus(List.map bound_transform args, range)
-            | SynOp.Mult(args, range) -> SynOp.Mult(List.map bound_transform args, range)
+            | SynOp.Infix(o, args, range) -> SynOp.Infix(o, List.map bound_transform args, range)
             |> SynExpr.Op
 
         | SynExpr.Cons(lhs, rhs, range) ->

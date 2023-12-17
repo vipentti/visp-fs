@@ -41,7 +41,7 @@ let liftLiteralStrings (file: ParsedFile) =
                     if Visp.Runtime.Library.StringMethods.isMultilineString raw then
                         let bind =
                             SynExpr.LetOrUse(
-                                Syntax.mkInferredName name constRange,
+                                Syntax.mkInferredNamePat name constRange,
                                 SynExpr.Literal(
                                     SynConst.String(normalized, kind, stringRange),
                                     constRange
@@ -132,14 +132,14 @@ let liftLiteralStrings (file: ParsedFile) =
 
                     let args =
                         variables
-                        |> Seq.map (fun it -> Syntax.mkInferredArg it constRange)
+                        |> Seq.map (fun it -> Syntax.mkInferredNamePat it constRange)
                         |> List.ofSeq
 
                     let func =
                         SynExpr.FunctionDef(
                             Syntax.mkSynSymbol name constRange,
                             FunctionFlags.Inline,
-                            args,
+                            SynPat.Args(SynArgPats.List(args), constRange),
                             [ SynExpr.Const(
                                   SynConst.String(resultSb.ToStringAndReturn(), kind, stringRange),
                                   constRange

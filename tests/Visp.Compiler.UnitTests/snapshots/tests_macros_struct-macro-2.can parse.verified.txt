@@ -11,7 +11,7 @@ let macro_MyStruct2 = "__MACRO_INIT__"
 
 [<Struct()>]
 // line 23 @"struct-macro-2.visp"
-type Example (x: int, y: int, z: int, w: int) =
+type Example (x: int , y: int , z: int , w: int) =
   // line 23 @"struct-macro-2.visp"
   member _.X =
         x

@@ -1,0 +1,24 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(let [n: string] "hello")
+
+(printfn "n is: %s" n)
+
+(let [(x, y) : int * int] (1, 2))
+(printfn "x is: %i" x)
+(printfn "y is: %i" y)
+
+(let (x2, y2) (3, 4))
+(printfn "x2 is: %i" x2)
+(printfn "y2 is: %i" y2)
+
+(let (x3, _) (5, 6))
+(printfn "x3 is: %i" x3)
+
+(let ([x4: int], _) (7, 8))
+(printfn "x4 is: %i" x4)

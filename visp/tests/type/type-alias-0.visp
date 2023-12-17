@@ -5,7 +5,7 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(type range int64*int64)
+(typedef range (int64 * int64))
 
 (fn things ([r : range])
   (+ (fst r) (snd r)))
