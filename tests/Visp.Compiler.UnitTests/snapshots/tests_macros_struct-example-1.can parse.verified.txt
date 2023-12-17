@@ -9,7 +9,7 @@ let state = { Todo = () }
 
 [<Struct()>]
 // line 8 @"struct-example-1.visp"
-type Range (start: int64, len: int64) =
+type Range (start: int64 , len: int64) =
   // line 8 @"struct-example-1.visp"
   member _.Start =
         start
@@ -58,7 +58,7 @@ printfn "Range end is: %A" ((new Range(0, 5))
 
 [<Struct()>]
 // line 29 @"struct-example-1.visp"
-type SourceDestMap (dest: int64, src: int64, len: int64) =
+type SourceDestMap (dest: int64 , src: int64 , len: int64) =
   // line 29 @"struct-example-1.visp"
   member _.Dest =
         // line 29 @"struct-example-1.visp"

@@ -29,12 +29,12 @@ module QuasiquoteExpander =
         | ex :: rest -> (expand ex) :: expandExprs rest
         | _ -> []
 
-    and private expandSynOp (op: SynOp) =
-        match op with
-        | SynOp.Plus(args, range) -> SynOp.Plus(expandExprs args, range)
-        | SynOp.Minus(args, range) -> SynOp.Minus(expandExprs args, range)
-        | SynOp.Div(args, range) -> SynOp.Div(expandExprs args, range)
-        | SynOp.Mult(args, range) -> SynOp.Mult(expandExprs args, range)
+    // and private expandSynOp (op: SynOp) =
+    //     match op with
+    //     | SynOp.Plus(args, range) -> SynOp.Plus(expandExprs args, range)
+    //     | SynOp.Minus(args, range) -> SynOp.Minus(expandExprs args, range)
+    //     | SynOp.Div(args, range) -> SynOp.Div(expandExprs args, range)
+    //     | SynOp.Mult(args, range) -> SynOp.Mult(expandExprs args, range)
 
     and private expandSynLambda (SynLambda(args, body, range)) =
         SynLambda(args, expandExprs body, range)

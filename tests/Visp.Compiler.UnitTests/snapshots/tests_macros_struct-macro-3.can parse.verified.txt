@@ -11,7 +11,7 @@ let macro_MyStruct3 = "__MACRO_INIT__"
 let ``macro_my-and-3`` = "__MACRO_INIT__"
 [<Struct()>]
 // line 25 @"struct-macro-3.visp"
-type Range (start: int64, len: int64) =
+type Range (start: int64 , len: int64) =
   // line 25 @"struct-macro-3.visp"
   member _.Start =
         start

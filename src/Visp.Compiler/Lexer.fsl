@@ -199,8 +199,8 @@ let xieee64 = xinteger 'L' 'F'
 
 // ----- numbers ----
 
-let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '<' '>' '&' '^' ]
-let SymbolicExtra = [ '.' '\'' '/' ]
+let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '=' '&' '^' '<' '>']
+let SymbolicExtra = [ '.' '\'' '/']
 
 // https://github.com/dotnet/fsharp/blob/ade794633b4bb495da85c92ee780068b9c6f7344/src/Compiler/lex.fsl#L300
 let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b' | 'r'))
@@ -208,7 +208,7 @@ let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b'
 let ident_start_char = letter | SymbolicStartCharacters
 let ident_char = ( ident_start_char | digit | SymbolicExtra )
 let ident = ident_start_char ident_char*
-let ident_array = letter (letter | digit)* '[' (',')* ']'
+// let ident_array = letter (letter | digit)* '[' (',')* ']'
 
 let anyspace = [' ' '\t' '\r' '\n']
 let whitespace = [' ' '\t']+
@@ -272,6 +272,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "|}" { BAR_BRACE }
   | "[|" { BRACKET_BAR }
   | "|]" { BAR_BRACKET }
+  | "(|"          { PAREN_BAR }
+  | "|)"          { BAR_PAREN }
   | ".." { DOTDOT }
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }
@@ -422,6 +424,11 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '-' { OP_MINUS }
   | '.' { DOT }
 
+  | "->>" { THREAD_LAST }
+  | "->" { THREAD_FIRST }
+  | "<" { OP_LESS }
+  | ">" { OP_GREATER }
+
   | "#()"     { UNIT }
   | "unit"     { UNIT }
   | "true"     { TRUE }
@@ -470,10 +477,6 @@ rule token (args: LexArgs) (skip: bool) = parse
       let text = lexeme lexbuf
       symbolOrKeyword args.CurrentContext text
     }
-  | ident_array      {
-      let text = lexeme lexbuf
-      SYMBOL text
-    }
   | _ { unexpected_char "token" lexbuf }
 
 and tokenStream (args: LexArgs) (skip: bool) = parse
@@ -504,6 +507,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "|}"          { BAR_BRACE }
   | "[|"          { BRACKET_BAR }
   | "|]"          { BAR_BRACKET }
+  | "(|"          { PAREN_BAR }
+  | "|)"          { BAR_PAREN }
 
   | "..." { SYMBOL (lexeme lexbuf) }
 
@@ -719,7 +724,6 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
         SYMBOL text
     else
       SYMBOL text }
-  | ident_array { SYMBOL (lexeme lexbuf)}
   | _ { unexpected_char "tokenStream" lexbuf }
 
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse

@@ -11,7 +11,7 @@ type Grid = char[,]
 
 [<Struct()>]
 // line 11 @"apply-method-args-0.visp"
-type Pos (x: int32, y: int32) =
+type Pos (x: int32 , y: int32) =
   // line 11 @"apply-method-args-0.visp"
   member _.X =
         x
@@ -34,7 +34,7 @@ let inline NorthOf (p: Pos) =
   mkPos ((p.X)) (dec ((p.Y)))
 
 // line 22 @"apply-method-args-0.visp"
-type TileMap (grid: Grid, rocks: array<Pos>) =
+type TileMap (grid: Grid , rocks: array<Pos>) =
   // line 23 @"apply-method-args-0.visp"
   let grid = grid
   // line 24 @"apply-method-args-0.visp"
@@ -74,7 +74,7 @@ type TileMap (grid: Grid, rocks: array<Pos>) =
   // line 46 @"apply-method-args-0.visp"
   member _.Item
         // line 47 @"apply-method-args-0.visp"
-    with get ((pos: Pos)) =
+    with get (pos: Pos) =
       // line 48 @"apply-method-args-0.visp"
       let y =
         // line 48 @"apply-method-args-0.visp"
@@ -123,7 +123,7 @@ type TileMap (grid: Grid, rocks: array<Pos>) =
               // line 51 @"apply-method-args-0.visp"
               failwith "unreachable"
         // line 58 @"apply-method-args-0.visp"
-    and set ((pos: Pos)) ch =
+    and set (pos: Pos) ch =
       // line 59 @"apply-method-args-0.visp"
       let y =
         // line 59 @"apply-method-args-0.visp"
@@ -183,7 +183,7 @@ let TiltNorth (tm: TileMap) =
     rocks
       |> Array.filter ((fun arg1 ->
         // line 74 @"apply-method-args-0.visp"
-        CoreMethods.``gt``((arg1.Y), 0)))
+        ((arg1.Y)) > 0))
   // line 77 @"apply-method-args-0.visp"
   for rock in rocksToMove do
     // line 78 @"apply-method-args-0.visp"

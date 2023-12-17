@@ -8,13 +8,12 @@ let state = { Todo = () }
 // line 8 @"while-match-0.visp"
 type Counter () =
   // line 9 @"while-match-0.visp"
-  let mutable count =
-    0
+  let mutable count = 0
   // line 10 @"while-match-0.visp"
   member _.DoStuff () =
     // line 11 @"while-match-0.visp"
     if CoreMethods.isTruthy(
-      CoreMethods.``gt``(count, 6))
+      count > 6)
       then
         None
       else

@@ -126,20 +126,20 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for arg in args do
                         yield! loop arg
 
-                | SynExpr.Op(op) ->
-                    match op with
-                    | SynOp.Plus(args, _) ->
-                        for arg in args do
-                            yield! loop arg
-                    | SynOp.Div(args, _) ->
-                        for arg in args do
-                            yield! loop arg
-                    | SynOp.Minus(args, _) ->
-                        for arg in args do
-                            yield! loop arg
-                    | SynOp.Mult(args, _) ->
-                        for arg in args do
-                            yield! loop arg
+                | SynExpr.Op(SynOp.Infix(_, args, _)) ->
+                    for arg in args do
+                        yield! loop arg
+                // match op with
+                // | SynOp.Plus(args, _) ->
+                //     for arg in args do
+                //         yield! loop arg
+                // | SynOp.Div(args, _) ->
+                //     for arg in args do
+                //         yield! loop arg
+                // | SynOp.Minus(args, _) ->
+                //     for arg in args do
+                //         yield! loop arg
+                // | SynOp.Mult(args, _) ->
 
                 | SynExpr.LetOrUse(_, expr, _, _)
                 | SynExpr.Atom(expr, _)

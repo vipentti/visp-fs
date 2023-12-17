@@ -265,9 +265,13 @@ type SymbolDetails =
 let memberToSymbolDetails memval var (mem: SynTypeMember) =
     match mem with
     | SynTypeMember.Mut(name = name) ->
-        var (Syntax.textOfName name, true, Syntax.rangeOfName name |> textRangeToSyntaxRange)
+        // TODO: Add back support
+        ()
+    // var (Syntax.textOfName name, true, Syntax.rangeOfName name |> textRangeToSyntaxRange)
     | SynTypeMember.Let(name = name) ->
-        var (Syntax.textOfName name, false, Syntax.rangeOfName name |> textRangeToSyntaxRange)
+        // TODO: Add back support
+        ()
+    // var (Syntax.textOfName name, false, Syntax.rangeOfName name |> textRangeToSyntaxRange)
     | SynTypeMember.GetSet(name = name)
     | SynTypeMember.Member(name = name)
     | SynTypeMember.OverrideMember(name = name) ->
@@ -300,12 +304,15 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.Add(SymbolDetails.Function(Syntax.textOfSymbol name, textRangeToSyntaxRange r))
 
-        syms.AddRange(
-            List.map
-                (fun x -> (Syntax.textOfArg x, Syntax.rangeOfArg x |> textRangeToSyntaxRange))
-                args
-            |> List.map SymbolDetails.Parameter
-        )
+    // TODO: Add back parameter support
+    // match args
+    // | SynPat.Collection(SynCollection(_, args, _)) ->
+    // syms.AddRange(
+    //     List.map
+    //         (fun x -> (Syntax.textOfArg x, Syntax.rangeOfArg x |> textRangeToSyntaxRange))
+    //         args
+    //     |> List.map SymbolDetails.Parameter
+    // )
 
     | SynExpr.Record(name, _, members, _, _)
     | SynExpr.Type(name, _, members, _, _) ->
@@ -316,10 +323,11 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             )
         )
 
-        syms.AddRange(
-            members
-            |> Seq.map (memberToSymbolDetails SymbolDetails.Member SymbolDetails.Variable)
-        )
+    // TODO: Add back support
+    // syms.AddRange(
+    //     members
+    //     |> Seq.map (memberToSymbolDetails SymbolDetails.Member SymbolDetails.Variable)
+    // )
 
     | SynExpr.Union(name, cases, members, _, _) ->
         syms.Add(
@@ -335,19 +343,25 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
                 (SymbolDetails.UnionMember(name.Text, false, name.Range |> textRangeToSyntaxRange)))
         )
 
-        syms.AddRange(
-            members
-            |> Seq.map (memberToSymbolDetails SymbolDetails.UnionMember SymbolDetails.Variable)
-        )
+    // TODO: Add back support
+    // syms.AddRange(
+    //     members
+    //     |> Seq.map (memberToSymbolDetails SymbolDetails.UnionMember SymbolDetails.Variable)
+    // )
 
     | SynExpr.LetOrUse(name, _, f, _) ->
-        syms.Add(
-            SymbolDetails.Variable(
-                Syntax.textOfName name,
-                f.HasFlag(LetFlags.Mutable),
-                Syntax.rangeOfName name |> textRangeToSyntaxRange
+        match name with
+        | SynPat.Typed(SynPat.Named(name, _), _, _)
+        | SynPat.Named(name, _) ->
+            syms.Add(
+                SymbolDetails.Variable(
+                    name.Text,
+                    f.HasFlag(LetFlags.Mutable),
+                    name.Range |> textRangeToSyntaxRange
+                )
             )
-        )
+        // TODO: Handle rest of the cases
+        | _ -> ()
 
     | SynExpr.Symbol sym ->
         syms.Add(SymbolDetails.Variable(sym.Text, false, sym.Range |> textRangeToSyntaxRange))

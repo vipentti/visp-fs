@@ -12,7 +12,7 @@ type GetOnly<'T> (items: array<'T>) =
   // line 10 @"member-get-set-0.visp"
   member _.Item
         // line 11 @"member-get-set-0.visp"
-    with get ((i: int)) =
+    with get (i: int) =
       // line 12 @"member-get-set-0.visp"
       (items.[i])
 // line 14 @"member-get-set-0.visp"
@@ -22,7 +22,7 @@ type SetOnly<'T> (items: array<'T>) =
   // line 16 @"member-get-set-0.visp"
   member _.Item
         // line 17 @"member-get-set-0.visp"
-    with set ((i: int)) v =
+    with set (i: int) v =
       // line 18 @"member-get-set-0.visp"
       items.[i] <- v
 // line 20 @"member-get-set-0.visp"
@@ -32,11 +32,11 @@ type GetAndSet<'T> (items: array<'T>) =
   // line 22 @"member-get-set-0.visp"
   member _.Item
         // line 23 @"member-get-set-0.visp"
-    with get ((i: int)) =
+    with get (i: int) =
       // line 24 @"member-get-set-0.visp"
       (items.[i])
         // line 25 @"member-get-set-0.visp"
-    and set ((i: int)) v =
+    and set (i: int) v =
       // line 26 @"member-get-set-0.visp"
       items.[i] <- v
 // line 29 @"member-get-set-0.visp"

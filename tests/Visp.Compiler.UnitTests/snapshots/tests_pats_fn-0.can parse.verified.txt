@@ -1,0 +1,58 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"fn-0.visp"
+let ``no-type`` s =
+  // line 8 @"fn-0.visp"
+  printfn "no-type %A" s
+
+// line 9 @"fn-0.visp"
+``no-type`` "hello"
+// line 11 @"fn-0.visp"
+let ``with-type`` (s: string) =
+  // line 11 @"fn-0.visp"
+  printfn "with-type %A" s
+
+// line 12 @"fn-0.visp"
+``with-type`` "hello"
+// line 14 @"fn-0.visp"
+let ``with-type-multiple`` (s: string) (b: int) =
+  // line 15 @"fn-0.visp"
+  printfn "with-type-multiple %A" s
+  // line 16 @"fn-0.visp"
+  printfn "with-type-multiple %A" b
+
+// line 18 @"fn-0.visp"
+``with-type-multiple`` "hello" 99
+// line 20 @"fn-0.visp"
+let ``with-tuple`` (x , y) =
+  // line 20 @"fn-0.visp"
+  printfn "with-tuple %A" (x, y)
+
+// line 21 @"fn-0.visp"
+``with-tuple`` (1, 2)
+// line 23 @"fn-0.visp"
+let ``with-tuple-type`` ((x , y): int * int) =
+  // line 23 @"fn-0.visp"
+  printfn "with-tuple-type %A" (x, y)
+
+// line 24 @"fn-0.visp"
+``with-tuple-type`` (1, 2)
+// line 26 @"fn-0.visp"
+let ``with-tuple-multiple`` ((x , y): int * int) ((x2 , y2): int * int) =
+  // line 27 @"fn-0.visp"
+  printfn "with-tuple-multiple %A" (x, y)
+  // line 28 @"fn-0.visp"
+  printfn "with-tuple-multiple %A" (x2, y2)
+
+// line 30 @"fn-0.visp"
+``with-tuple-multiple`` (1, 2) (3, 4)
+// line 32 @"fn-0.visp"
+let visp_result_todo = ()
+// line 32 @"fn-0.visp"
+printfn "%A" visp_result_todo
+

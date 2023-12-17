@@ -115,6 +115,7 @@ let rec macroBodyToDoc =
             | SynListKind.Bracket -> Print.brackets
             | SynListKind.DotBracket -> Print.enclose (Print.text ".[") (Print.text "]")
             | SynListKind.BraceBar -> Print.enclose (Print.text "{|") (Print.text "|}")
+            | SynListKind.ParenBar -> Print.enclose (Print.text "(|") (Print.text "|)")
             | SynListKind.BracketBar -> Print.enclose (Print.text "[|") (Print.text "|]")
             | SynListKind.HashParen -> Print.enclose (Print.text "#(") (Print.text ")")
             | SynListKind.HashBracket -> Print.enclose (Print.text "#[") (Print.text "]")
@@ -171,16 +172,22 @@ let nameToDoc =
     function
     | SynName.Inferred(it, _) -> text it.Text
     | SynName.Typed(name, typ, _) ->
-        brackets <| (cat [ text name.Text; colon; space; text typ.Text ])
+        brackets <| (cat [ text name.Text; colon; space; text "todo types" ])
+
+let patToDoc =
+    function
+    | SynPat.Named(it, _) -> text it.Text
+    | it -> failwithf "todo pat: %A" it
 
 let argToDoc =
     function
     | SynArg.InferredArg(it, _) -> text it.Text
     | SynArg.TypedArg(name, typ, _) ->
-        brackets <| (cat [ text name.Text; colon; space; text typ.Text ])
+        brackets <| (cat [ text name.Text; colon; space; text "todo types" ])
 
 let lambdaToDoc (SynLambda(args, body, _)) =
-    let args = List.map argToDoc args |> hsep |> parens
+    //let args = List.map argToDoc args |> hsep |> parens
+    let args = patToDoc args
 
     let body = List.map exprToDoc body |> vsep
 
@@ -201,7 +208,7 @@ let opToDoc (op: SynOp) =
 
     parens
     <| hcat
-        [ char <| op.OperatorChar
+        [ text <| op.OperatorChar
           if not args.IsEmpty then space else mempty
           args |> List.map exprToDoc |> hsep ]
 
@@ -244,7 +251,8 @@ let rec exprToDoc =
               space
               sym name
               space
-              List.map argToDoc args |> hsep |> parens
+              //List.map argToDoc args |> hsep |> parens
+              patToDoc args
               line
               indent 2 (List.map exprToDoc body |> vsep) ]
 
@@ -255,7 +263,7 @@ let rec exprToDoc =
         parens <| cat [ text "set!"; space; binding; space; body ]
 
     | SynExpr.LetOrUse(name, value, flags, _) ->
-        let binding = nameToDoc name
+        let binding = patToDoc name
 
         let body = exprToDoc value
 

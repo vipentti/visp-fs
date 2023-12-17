@@ -64,16 +64,38 @@ type SynKeyword with
         id.idRange
 
 type LongIdent = Ident list
+// https://github.com/dotnet/fsharp/blob/fce0cf00585c12174fa3e51e4fc34afe784b9b4e/src/Compiler/pars.fsy#L6298
 
 type SynLongIdent = SynLongIdent of id: LongIdent * dotRanges: range list * trivia: unit option list
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynType =
     | Ident of Ident
+    | Generic of typeName: SynType * typeArgs: SynType list * range: range
+    | Array of rank: int * elemType: SynType * range: range
+    | Tuple of isStruct: bool * segments: SynTypeTupleSegment list * range: range
+    | Discard of range: range
+    | Fun of argType: SynType * returnType: SynType * range: range
+    | Paren of innerType: SynType * range: range
 
-    member this.Text =
-        let (Ident id) = this
-        id.idText
+    member t.Range =
+        match t with
+        | SynType.Ident it -> it.idRange
+        | SynType.Generic(range = range)
+        | SynType.Array(range = range)
+        | SynType.Discard(range = range)
+        | SynType.Fun(range = range)
+        | SynType.Paren(range = range)
+        | SynType.Tuple(range = range) -> range
+
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynTypeTupleSegment =
+    | Type of typeName: SynType
+    | Star of range: range
+
+    member t.Range =
+        match t with
+        | SynTypeTupleSegment.Star it -> it
+        | SynTypeTupleSegment.Type it -> it.Range
 
 [<Struct; RequireQualifiedAccess>]
 type SynStringKind =
@@ -191,7 +213,7 @@ type SynExpr =
     | FunctionDef of
         name: SynSymbol *
         flags: FunctionFlags *
-        args: SynArg list *
+        args: SynPat *
         body: SynExpr list *
         range: range
     | FunctionCall of name: SynExpr * args: SynExpr list * range: range
@@ -207,7 +229,7 @@ type SynExpr =
     | Quasiquote of shorthand: bool * expr: SynQuasiquote * range: range
     | Begin of exprs: SynExpr list * kind: BeginKind * range: range
     | New of typ: SynType * args: SynExpr list * range: range
-    | LetOrUse of name: SynName * value: SynExpr * flags: LetFlags * range: range
+    | LetOrUse of pat: SynPat * value: SynExpr * flags: LetFlags * range: range
     | LetStar of bindings: SynBinding list * body: SynExpr list * range: range
     | Set of name: SynExpr * value: SynExpr * range: range
     | If of cond: SynExpr * main: SynExpr * alt: SynExpr option * range: range
@@ -238,7 +260,7 @@ type SynExpr =
     | RecordInit of inits: SynInit list * range: range
     | Type of
         name: SynSymbol *
-        args: SynName list *
+        args: SynPat *
         members: SynTypeMember list *
         attributes: SynAttributes *
         range: range
@@ -252,9 +274,9 @@ type SynExpr =
     | ThreadFirst of exprs: SynExpr list * range: range
     | ThreadLast of exprs: SynThreadable list * range: range
     | RangeExpr of first: SynExpr * step: SynExpr option * last: SynExpr * range: range
-    | ForIn of name: SynName * binding: SynExpr * body: SynExpr list * range: range
+    | ForIn of name: SynPat * binding: SynExpr * body: SynExpr list * range: range
     | ForTo of
-        name: SynName *
+        name: SynSymbol *
         start: SynExpr *
         finish: SynExpr *
         body: SynExpr list *
@@ -330,7 +352,7 @@ and SynAttributes = SynAttributeList list
 
 and SynInit = SynInit of name: SynSymbol * expr: SynExpr * range: range
 
-and SynBinding = SynBinding of name: SynName * expr: SynExpr * range: range
+and SynBinding = SynBinding of name: SynPat * expr: SynExpr * range: range
 
 and SynMacro = SynMacro of name: SynSymbol * cases: SynMacroCase list * range: range
 
@@ -373,6 +395,7 @@ and [<RequireQualifiedAccess>] SynListKind =
     | BraceBar
     | DotBracket
     | BracketBar
+    | ParenBar
 
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | List of kind: SynListKind * exprs: SynMacroBody list * range: range
@@ -403,6 +426,28 @@ and [<RequireQualifiedAccess>] SynPatternTriviaKind =
     | ColonColon
     | Brackets
 
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynArgPats =
+    | Tuple of SynPat list
+    | List of SynPat list
+
+    member x.Patterns =
+        match x with
+        | Tuple pats -> pats
+        | List pats -> pats
+
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
+    | Const of constant: SynConst * range: range
+    | Named of name: SynSymbol * range: range
+    | Typed of pat: SynPat * targetType: SynType * range: range
+    // | Tuple of isStruct: bool * pats: SynPat list * range: range
+    | Args of argPats: SynArgPats * range: range
+    // | Paren of pat: SynPat * range: range
+    // | ListCons of lhs: SynPat * rhs: SynPat * range: range
+    | Trivia of kind: SynPatternTriviaKind * range: range
+    | Collection of SynCollection<SynPat>
+    /// _
+    | Discard of range: range
+
 and [<RequireQualifiedAccess>] SynMatchPattern =
     | Const of value: SynConst * range: range
     | Tuple of pats: SynMatchPattern list * range: range
@@ -412,23 +457,23 @@ and [<RequireQualifiedAccess>] SynMatchPattern =
     | Trivia of kind: SynPatternTriviaKind * range: range
 
 and SynMemberGet =
-    | SynMemberGet of args: SynArg list * exprs: SynExpr list * range: range
+    | SynMemberGet of args: SynPat * exprs: SynExpr list * range: range
 
     member t.Range = let (SynMemberGet(range = r)) = t in r
 
 and SynMemberSet =
-    | SynMemberSet of args: SynArg list * value: SynName * exprs: SynExpr list * range: range
+    | SynMemberSet of args: SynPat * value: SynPat * exprs: SynExpr list * range: range
 
     member t.Range = let (SynMemberSet(range = r)) = t in r
 
 and [<RequireQualifiedAccess>] SynTypeMember =
-    | Let of name: SynName * value: SynExpr * range: range
-    | Mut of name: SynName * value: SynExpr * range: range
+    | Let of name: SynPat * value: SynExpr * range: range
+    | Mut of name: SynPat * value: SynExpr * range: range
     | Member of name: SynSymbol * value: SynExpr * range: range
     | GetSet of name: SynSymbol * get: SynMemberGet option * set: SynMemberSet option * range: range
-    | MemberFn of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
+    | MemberFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
     | OverrideMember of name: SynSymbol * value: SynExpr * range: range
-    | OverrideFn of name: SynSymbol * args: SynArg list * body: SynExpr list * range: range
+    | OverrideFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
 
 and [<RequireQualifiedAccess>] SynDirective = Open of path: SynSymbol * range: range
 
@@ -448,34 +493,16 @@ and [<RequireQualifiedAccess>] SynQuasiquote =
     | SpliceUnquote of expr: SynExpr * range: range
 
 and [<RequireQualifiedAccess>] SynOp =
-    | Plus of args: SynExpr list * range: range
-    | Mult of args: SynExpr list * range: range
-    | Div of args: SynExpr list * range: range
-    | Minus of args: SynExpr list * range: range
+    | Infix of op: SynSymbol * args: SynExpr list * range: range
 
-    member this.OperatorChar =
-        match this with
-        | Plus _ -> '+'
-        | Mult _ -> '*'
-        | Div _ -> '/'
-        | Minus _ -> '-'
+    member this.OperatorChar = let (Infix(op = op)) = this in op.Text
 
-    member this.Exprs =
-        match this with
-        | Plus(args = r)
-        | Mult(args = r)
-        | Div(args = r)
-        | Minus(args = r) -> r
+    member this.Exprs = let (Infix(args = e)) = this in e
 
-    member this.Range =
-        match this with
-        | Plus(range = r)
-        | Mult(range = r)
-        | Div(range = r)
-        | Minus(range = r) -> r
+    member this.Range = let (Infix(range = r)) = this in r
 
 and SynLambda =
-    | SynLambda of args: SynArg list * body: SynExpr list * range: range
+    | SynLambda of args: SynPat * body: SynExpr list * range: range
 
     member this.Range =
         let (SynLambda(_, _, rng)) = this
@@ -599,6 +626,9 @@ module Syntax =
     let parserRecoveryName r =
         SynName.Inferred(parserRecoverySymbol r, r)
 
+    let parserRecoveryPat r = SynPat.Named(parserRecoverySymbol r, r)
+
+
     let parserRecoveryMatch r =
         SynMatch.SynMatch(SynMatchPattern.Const(parserRecoveryConst r, r), None, [], r)
 
@@ -653,6 +683,9 @@ module Syntax =
 
     let mkInferredName n range =
         SynName.Inferred(mkSynSymbol n range, range)
+
+    let mkInferredNamePat n range =
+        SynPat.Named(mkSynSymbol n range, range)
 
     let mkValue v r =
         mkFunctionCall (mkSynSymbolExpr "Value.from" r) [ v ] r

@@ -39,6 +39,7 @@ type token =
   | DEREF_KW
   | WHILE
   | TYPE
+  | TYPEALIAS
   | RECORD
   | MEMBER
   | MEMBERS
@@ -91,6 +92,8 @@ type token =
   | OP_MULT
   | OP_DIV
   | QUOTE_SYM
+  | OP_GREATER
+  | OP_LESS
   | TRUE
   | FALSE
   | NIL
@@ -106,6 +109,8 @@ type token =
   | HASH_BRACKET
   | BRACE_BAR
   | BAR_BRACE
+  | PAREN_BAR
+  | BAR_PAREN
   | BRACKET_BAR
   | BAR_BRACKET
   | LBRACKET
@@ -152,6 +157,7 @@ type tokenId =
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
     | TOKEN_TYPE
+    | TOKEN_TYPEALIAS
     | TOKEN_RECORD
     | TOKEN_MEMBER
     | TOKEN_MEMBERS
@@ -204,6 +210,8 @@ type tokenId =
     | TOKEN_OP_MULT
     | TOKEN_OP_DIV
     | TOKEN_QUOTE_SYM
+    | TOKEN_OP_GREATER
+    | TOKEN_OP_LESS
     | TOKEN_TRUE
     | TOKEN_FALSE
     | TOKEN_NIL
@@ -219,6 +227,8 @@ type tokenId =
     | TOKEN_HASH_BRACKET
     | TOKEN_BRACE_BAR
     | TOKEN_BAR_BRACE
+    | TOKEN_PAREN_BAR
+    | TOKEN_BAR_PAREN
     | TOKEN_BRACKET_BAR
     | TOKEN_BAR_BRACKET
     | TOKEN_LBRACKET
@@ -247,6 +257,8 @@ type nonTerminalId =
     | NONTERM_hash_ident_arg
     | NONTERM_module_parens
     | NONTERM_module_help
+    | NONTERM_syn_symbol
+    | NONTERM_symbol
     | NONTERM_expr_list
     | NONTERM_rev_expr_list
     | NONTERM_expr_list_or_empty
@@ -254,6 +266,7 @@ type nonTerminalId =
     | NONTERM_expr
     | NONTERM_brace_bar
     | NONTERM_bracket_bar
+    | NONTERM_paren_bar
     | NONTERM_lambda_short_expr_list
     | NONTERM_vector_start
     | NONTERM_inside_parens
@@ -308,12 +321,15 @@ type nonTerminalId =
     | NONTERM_unquote
     | NONTERM_splice_unquote
     | NONTERM_operators
+    | NONTERM_op_sym
     | NONTERM_operators_not_in_parens
     | NONTERM_set
     | NONTERM_let
     | NONTERM_mut
     | NONTERM_letstar
     | NONTERM_type_expr
+    | NONTERM_tuple_arg_pats
+    | NONTERM_list_arg_pats
     | NONTERM_union_expr
     | NONTERM_union_labels_or_members
     | NONTERM_rev_union_labels_or_members
@@ -367,20 +383,26 @@ type nonTerminalId =
     | NONTERM_name_list_start
     | NONTERM_name_list
     | NONTERM_rev_name_list
-    | NONTERM_symbol
     | NONTERM_macro_name
     | NONTERM_dot_method
     | NONTERM_apply_method
     | NONTERM_keyword
     | NONTERM_syn_comma
     | NONTERM_raw_syntype_ident_text
-    | NONTERM_raw_syntype_ident
     | NONTERM_syntype_ident
+    | NONTERM_syn_type
+    | NONTERM_syn_type_generic_list
+    | NONTERM_rev_syn_type_generic_list
+    | NONTERM_arrayTypeSuffixHelp
+    | NONTERM_arrayTypeSuffix
+    | NONTERM_syn_type_tuple_list
+    | NONTERM_rev_syn_type_tuple_list
     | NONTERM_syntype_comma_list
     | NONTERM_rev_syntype_comma_list
     | NONTERM_constant
     | NONTERM_rawConstant
     | NONTERM_function_def
+    | NONTERM_function_def_args
     | NONTERM_invalid_function_def
     | NONTERM_arg_list_start
     | NONTERM_arg_list
@@ -399,6 +421,14 @@ type nonTerminalId =
     | NONTERM_match_tuple_list
     | NONTERM_rev_match_tuple_list
     | NONTERM_match_pattern
+    | NONTERM_syn_pat_list
+    | NONTERM_rev_syn_pat_list
+    | NONTERM_syn_trivia_kind
+    | NONTERM_syn_pat_trivia
+    | NONTERM_syn_pat_trivia_list
+    | NONTERM_rev_syn_pat_trivia_list
+    | NONTERM_pat_open_kind
+    | NONTERM_syn_pat
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int
 

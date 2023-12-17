@@ -279,20 +279,6 @@ module Write =
 
     let symbol (w: SynWriter) (SynSymbol(id)) (escape: bool) = name w (id.idText) escape
 
-    let writeType w (typ: SynType) =
-        match typ with
-        | SynType.Ident(id) -> name w (id.idText) false
-
-    let synName (w: SynWriter) (n: SynName) =
-        match n with
-        | SynName.Inferred(n, _) -> symbol w n true
-        | SynName.Typed(nm, typ, _) ->
-            char w '('
-            symbol w nm true
-            string w ": "
-            writeType w typ
-            char w ')'
-
     let writeConst (w: SynWriter) (toValue: bool) (cnst: SynConst) =
         if toValue then
             let fromName =
@@ -497,6 +483,125 @@ module Write =
         | a :: b :: tail -> (a, b) :: pairUp tail
         | _ -> [] // Handles the case where there are fewer than 2 elements left
 
+    let rec writeType w (typ: SynType) =
+        match typ with
+        | SynType.Ident(id) -> name w (id.idText) false
+        | SynType.Paren(inner, _) ->
+            char w '('
+            writeType w inner
+            char w ')'
+        | SynType.Discard _ -> char w '_'
+        | SynType.Generic(tn, targs, _) ->
+            writeType w tn
+            char w '<'
+            writeInlineCommaSeparated w writeTypeHelp targs
+            char w '>'
+            ()
+        | SynType.Array(rank, elem, _) ->
+            writeType w elem
+            char w '['
+
+            for _ = 1 to (rank - 1) do
+                char w ','
+
+            char w ']'
+        | SynType.Tuple(_, segs, _) ->
+            let writeSeg w _ =
+                function
+                | SynTypeTupleSegment.Star _ -> string w "*"
+                | SynTypeTupleSegment.Type it -> writeType w it
+
+            writeInlineSpaceSeparated w writeSeg segs
+
+            ()
+        | SynType.Fun _ -> failwithf "unsupported SynType: %A" typ
+
+    and writeTypeHelp w _ = writeType w
+
+
+    let synName (w: SynWriter) (n: SynName) =
+        match n with
+        | SynName.Inferred(n, _) -> symbol w n true
+        | SynName.Typed(nm, typ, _) ->
+            char w '('
+            symbol w nm true
+            string w ": "
+            writeType w typ
+            char w ')'
+
+    let rec synPat (w: SynWriter) (n: SynPat) =
+        match n with
+        | SynPat.Const(cnst, _) ->
+            writeConst w false cnst
+            ()
+        | SynPat.Trivia(kind, _) ->
+            match kind with
+            | SynPatternTriviaKind.Brackets -> string w "[]"
+            | SynPatternTriviaKind.ColonColon -> string w "::"
+            | SynPatternTriviaKind.Comma
+            | SynPatternTriviaKind.Dot -> string w ","
+        | SynPat.Discard _ -> string w "_"
+        | SynPat.Named(n, _) -> symbol w n true
+        // | SynPat.Paren(sub, _) ->
+        //     char w '('
+        //     synPat w sub
+        //     char w ')'
+        | SynPat.Typed(sub, typ, _) ->
+            synPat w sub
+            string w ": "
+            writeType w typ
+        // | SynPat.Tuple(st, pats, _) ->
+        //     if st then
+        //         string w "struct"
+        //     char w '('
+        //     writeSeq w WriteState.InlineNoParens (flip string ",") (fun w s i -> synPat w i) pats
+        //     char w ')'
+        // | SynPat.ListCons (lhs, rhs, _) ->
+        //     synPat w lhs
+        //     string w "::"
+        //     synPat w rhs
+        | SynPat.Args(args, _) ->
+            match args with
+            | SynArgPats.Tuple pats ->
+                if pats.IsEmpty then
+                    string w "()"
+                else
+                    string w "("
+                    writeInlineSpaceSeparated w writeSynPat pats
+                    string w ")"
+            | SynArgPats.List pats ->
+                if pats.IsEmpty then
+                    string w "()"
+                else
+                    writeInlineSpaceSeparated
+                        w
+                        (fun w _ tp ->
+                            match tp with
+                            | SynPat.Typed _ as it ->
+                                string w "("
+                                synPat w it
+                                string w ")"
+                            | it -> synPat w it)
+                        pats
+        | SynPat.Collection(SynCollection(kind, its, _)) ->
+            match kind with
+            | CollectionKind.Paren
+            | CollectionKind.Bracket ->
+                // failwithf "unsupported pat collection: %A %A" kind its
+
+                string w "("
+                writeInlineSpaceSeparated w writeSynPat its
+                string w ")"
+                ()
+            | CollectionKind.FsList
+            | CollectionKind.FsArray ->
+                failwithf "unsupported pat collection: %A" its
+                ()
+
+            | it -> failwithf "unsupported pat collection: %A" it
+
+    and writeSynPat (w: SynWriter) (_: WriteState) = synPat w
+
     let rec writeExpr (w: SynWriter) (st: WriteState) (expr: SynExpr) =
 
         match expr with
@@ -563,7 +668,7 @@ module Write =
         | SynExpr.ForTo(name, start, finish, body, down, range) ->
             use _ = startNewlineExpr w st range
             string w "for "
-            writeName w WriteState.Inline name
+            symbol w name true
             string w " = "
             writeExpr w WriteState.Inline start
             if down then string w " downto " else string w " to "
@@ -574,7 +679,7 @@ module Write =
         | SynExpr.ForIn(name, bind, body, range) ->
             use _ = startNewlineExpr w st range
             string w "for "
-            writeName w WriteState.Inline name
+            synPat w name
             string w " in "
             writeExpr w WriteState.Inline bind
             string w " do"
@@ -638,7 +743,8 @@ module Write =
 
             symbol w name_ true
             space w
-            writeArgsOrEmpty w args
+            //writeArgsOrEmpty w args
+            synPat w args
             string w " ="
 
             use _ = withIndent w false
@@ -715,7 +821,7 @@ module Write =
                 let (SynBinding(name, body, _r)) = bind
                 newline w
                 startExpr w WriteState.Body _r
-                writeLet w st name body
+                writeLetFullNew w st name body LetFlags.None
                 ()
 
             writeSeqLeading w WriteState.Body newline writeExpr body
@@ -1071,12 +1177,15 @@ module Write =
             startExpr w st range
             fmtprintf w "type %s" (symbolText name)
 
-            if args.IsEmpty then
-                string w " ()"
-            else
-                string w " ("
-                writeSeq w WriteState.InlineNoParens (flip string ", ") writeName args
-                string w ")"
+            space w
+            synPat w args
+
+            // if args.IsEmpty then
+            //     string w " ()"
+            // else
+            //     string w " ("
+            //     writeSeq w WriteState.InlineNoParens (flip string ", ") writeName args
+            //     string w ")"
 
             string w " ="
             writeBody w writeMember members
@@ -1101,7 +1210,12 @@ module Write =
                     if kind = RecordLabelKind.Mutable then
                         string w "mutable "
 
-                    fmtprintf w "%s: %s" name.Text typ.Text
+                    string w name.Text
+                    string w ": "
+
+                    match typ with
+                    | SynType.Ident it -> string w it.idText
+                    | it -> failwithf "unsupported typ: %A" it
 
                     ())
                 labels
@@ -1263,50 +1377,50 @@ module Write =
         string w ">]"
         ()
 
-    and private writeName w st (name: SynName) =
-        match name with
-        | SynName.Inferred(n, _) -> symbol w n true
-        | SynName.Typed(nm, typ, _) ->
-            if st.parens then
-                char w '('
+    // and private writeName w st (name: SynName) =
+    //     match name with
+    //     | SynName.Inferred(n, _) -> symbol w n true
+    //     | SynName.Typed(nm, typ, _) ->
+    //         if st.parens then
+    //             char w '('
 
-            symbol w nm true
-            string w ": "
-            writeType w typ
+    //         symbol w nm true
+    //         string w ": "
+    //         writeType w typ
 
-            if st.parens then
-                char w ')'
+    //         if st.parens then
+    //             char w ')'
 
     // and private writeArgs w args =
     //     writeSeq w WriteState.Inline space writeArg args
     and private writeMemSet w (SynMemberSet(args, value, exprs, _)) =
-        string w "set ("
-        writeSeq w WriteState.Inline (flip string ", ") writeArg args
-        string w ") "
-        writeName w WriteState.Inline value
+        string w "set "
+        synPat w args
+        // writeSeq w WriteState.Inline (flip string ", ") writeArg args
+        string w " "
+        //writeName w WriteState.Inline value
+        synPat w value
         string w " ="
         writeBody w writeExpr exprs
 
     and private writeMemGet w (SynMemberGet(args, exprs, _)) =
-        string w "get ("
-        writeSeq w WriteState.Inline (flip string ", ") writeArg args
-        string w ") ="
+        string w "get "
+        synPat w args
+        string w " ="
+        // string w "get ("
+        // writeSeq w WriteState.Inline (flip string ", ") writeArg args
+        // string w ") ="
         writeBody w writeExpr exprs
 
     and private writeMember w st (mem: SynTypeMember) =
         match mem with
         | SynTypeMember.Let(name, expr, range) ->
             startExpr w st range
-            writeLet w st name expr
+            writeLetFullNew w st name expr LetFlags.None
             ()
-        | SynTypeMember.Mut(name, body, range) ->
+        | SynTypeMember.Mut(name, expr, range) ->
             startExpr w st range
-            string w "let mutable "
-            synName w name
-            string w " ="
-            use _ = withIndent w false
-            newline w
-            writeExpr w WriteState.Body body
+            writeLetFullNew w st name expr LetFlags.Mutable
             ()
         | SynTypeMember.GetSet(name, get, set, range) ->
             startExpr w st range
@@ -1353,7 +1467,7 @@ module Write =
             startExpr w st range
             fmtprintf w "override %s" (Syntax.textOfSymbol name)
             space w
-            writeArgsOrEmpty w args
+            synPat w args
             string w " ="
             use _ = withIndent w false
             newline w
@@ -1365,7 +1479,7 @@ module Write =
             startExpr w st range
             fmtprintf w "member %s" (Syntax.textOfSymbol name)
             space w
-            writeArgsOrEmpty w args
+            synPat w args
             string w " ="
             use _ = withIndent w false
             newline w
@@ -1377,7 +1491,7 @@ module Write =
     and private writeLetFullNew
         (w: SynWriter)
         (_: WriteState)
-        (name: SynName)
+        (name: SynPat)
         (body: SynExpr)
         (flags: LetFlags)
         =
@@ -1407,7 +1521,7 @@ module Write =
 
         space w
 
-        synName w name
+        synPat w name
         string w " ="
 
         let should_indent =
@@ -1494,13 +1608,13 @@ module Write =
         if needsParens then
             char w ')'
 
-    and private writeOp w (st: WriteState) (op: SynOp) =
+    and private writeOp w (st: WriteState) (SynOp.Infix(op, args, r)) =
         let opState = WriteState.Inline
 
-        match op with
-        | SynOp.Plus(args, r) ->
-            startExpr w st r
+        startExpr w st r
 
+        match op.Text with
+        | "+" ->
             match args with
             | [] -> string w "0"
             | [ one ] -> writeExpr w st one
@@ -1513,39 +1627,33 @@ module Write =
                         newlineIndent w)
                     writeExprInParens
                     rest
-
-        | SynOp.Mult(args, r) ->
-            startExpr w st r
-
+        | "*" ->
             match args with
             | [] -> string w "LanguagePrimitives.GenericOne"
             | [ one ] -> writeExpr w st one
             | rest -> writeSeq w WriteState.Inline (flip string " * ") writeExpr rest
-        | SynOp.Div(args, r) ->
-            startExpr w st r
 
+        | "/" ->
             match args with
             | [ one ] ->
                 string w "LanguagePrimitives.GenericOne / "
                 writeExprInParens w WriteState.Inline one
             | rest -> writeSeq w WriteState.Inline (flip string " / ") writeExprInParens rest
-        | SynOp.Minus(args, r) ->
-            startExpr w st r
-
+        | "-" ->
             match args with
             | [ one ] ->
                 char w '-'
                 writeExpr w opState one
-
             | rest -> writeSeq w WriteState.Inline (flip string " - ") writeExpr rest
 
+        | op -> writeInlineSeparated w ($" {op} ") writeExprInParens args
 
         ()
 
     and private writeSynLambda w (st: WriteState) (SynLambda(args, body, range)) =
         startExpr w st range
         string w "(fun "
-        writeArgsOrEmpty w args
+        synPat w args
         string w " ->"
         writeBody w writeExpr body
         string w ")"

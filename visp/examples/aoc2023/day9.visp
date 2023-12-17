@@ -125,7 +125,7 @@
 
 (let hist (ParseHistory fileText))
 
-;; (type HistList list<int64>)
+;; (typedef HistList list<int64>)
 
 (fn AllZeros ([ls: HistList])
   (->> ls

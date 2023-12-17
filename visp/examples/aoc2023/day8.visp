@@ -78,8 +78,8 @@
 
 (let map (ParseFile fileText))
 
-(type Dict Dictionary<string,string*string>)
-(type MapType list<char>*Dict)
+(typedef Dict Dictionary<string,string*string>)
+(typedef MapType list<char>*Dict)
 
 (fn GetNext ([d: Dict] [ins: char] [cur: string])
   (match (.TryGetValue d cur)

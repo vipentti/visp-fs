@@ -1,0 +1,32 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn no-type (s) (printfn "no-type %A" s))
+(no-type "hello")
+
+(fn with-type ([s: string]) (printfn "with-type %A" s))
+(with-type "hello")
+
+(fn with-type-multiple ([s: string] [b: int])
+  (printfn "with-type-multiple %A" s)
+  (printfn "with-type-multiple %A" b)
+  )
+(with-type-multiple "hello" 99)
+
+(fn with-tuple ((x, y)) (printfn "with-tuple %A" (x . y)))
+(with-tuple (1 . 2))
+
+(fn with-tuple-type ([(x, y): int * int]) (printfn "with-tuple-type %A" (x . y)))
+(with-tuple-type (1 . 2))
+
+(fn with-tuple-multiple ([(x, y): int * int] [(x2, y2): int * int])
+  (printfn "with-tuple-multiple %A" (x . y))
+  (printfn "with-tuple-multiple %A" (x2 . y2))
+  )
+(with-tuple-multiple (1 . 2) (3 . 4))
+
+()

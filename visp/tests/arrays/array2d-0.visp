@@ -5,7 +5,7 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(type Grid char[,])
+(typedef Grid char[,])
 
 (let arr (Array2D.create 5 5 #\.))
 
