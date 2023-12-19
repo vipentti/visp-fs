@@ -1,0 +1,290 @@
+﻿
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require FSharpx.Collections "3.1.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open FSharpx.Collections)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day17")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(union Dir
+  Up
+  Left
+  Down
+  Right)
+
+(fn inline RevDir [d]
+  (match d
+    [Up Down]
+    [Left Right]
+    [Right Left]
+    [Down Up]
+  ))
+
+(let AllDirs (| Up Left Down Right |))
+
+(typedef Pos int * int)
+(typedef Grid int[,])
+
+(record Node
+  [pos: Pos]
+  [dir: Dir]
+  [steps: int])
+
+(fn inline LeftOf ([(x, y): Pos]) ((dec x), y))
+(fn inline RightOf ([(x, y): Pos]) ((inc x), y))
+(fn inline UpOf ([(x, y): Pos]) (x, (dec y)))
+(fn inline DownOf ([(x, y): Pos]) (x, (inc y)))
+
+(fn inline GetDirFun ([d: Dir])
+  (match d
+    [Up UpOf]
+    [Down DownOf]
+    [Left LeftOf]
+    [Right RightOf]
+  ))
+
+(fn inline TurnLeft ([d: Dir])
+  (match d
+    [Up Left]
+    [Left Down]
+    [Down Right]
+    [Right Up]))
+
+(fn inline TurnRight ([d: Dir])
+  (match d
+    [Up Right]
+    [Left Up]
+    [Down Left]
+    [Right Down]))
+
+(type PrioPos ([p: Pos] [prio: int] [d: Dir])
+  (let pos p)
+  (let prio prio)
+  (let dir d)
+
+  (member _.Pos pos)
+  (member _.Prio prio)
+  (member _.Dir dir)
+
+  (override fn t.ToString ()
+    (sprintf "PrioPos(%A, %A, %A)" (+Prio t) (+Pos t) (+Dir t)))
+
+  (override fn t.GetHashCode ()
+    (.GetHashCode prio))
+
+  (override fn t.Equals (other)
+    (match other
+      [(:? PrioPos v)
+        (.Equals (:> t IEquatable<_>) v)
+      ]
+      [_ false]
+    ))
+
+  (interface IEquatable<PrioPos>
+    (member fn t.Equals (other)
+      (let lhs ((+Prio t) . (+Pos t) . (+Dir t)))
+      (let rhs ((+Prio other) . (+Pos other) . (+Dir other)))
+      (= lhs rhs)))
+
+  (interface IComparable
+    (member fn t.CompareTo (other)
+      (match other
+        [(:? PrioPos v)
+          (.CompareTo (:> t IComparable<_>) v)
+        ]
+        [null 1]
+        [_ -1]
+      )))
+
+  (interface IComparable<PrioPos>
+    (member fn t.CompareTo (other)
+      (let lhs (+Prio t))
+      (let rhs (+Prio other))
+      (.CompareTo lhs rhs)
+    ))
+)
+
+(fn inline mkPrioPos (p prio d) (new PrioPos p prio d))
+
+(fn inline Width ([g: Grid]) (Array2D.length2 g))
+(fn inline Height ([g: Grid]) (Array2D.length1 g))
+
+(fn inline InGrid ([(x, y): Pos] [g: Grid])
+  (and
+    (and (>= x 0) (< x (Width g)))
+    (and (>= y 0) (< y (Height g)))))
+
+(fn inline Get ([(x, y): Pos] [g: Grid])
+  (cond_
+    [(InGrid (x, y) g) (Some (.[y, x] g))]
+    [_ None]
+  ))
+
+(fn MoveNode [v dir]
+  {|
+    dir dir
+    pos (->> (+pos v) (GetDirFun dir))
+    steps (if (= dir (+dir v)) (inc (+steps v)) 1)
+  |})
+
+(fn NodeNbrs ([gr: Grid] node)
+  (->> AllDirs
+    (List.filter #(and
+      (!= %1 (RevDir (+dir node)))
+      (or
+        (< (+steps node) 3)
+        (!= %1 (+dir node)))
+    ))
+    (List.map (MoveNode node))
+    (List.filter #(InGrid (+pos %1) gr))
+  ))
+
+(fn NodeNbrsPart2 ([gr: Grid] node)
+  (let possibleDirections
+    (cond_
+      [(and (> (+steps node) 0) (< (+steps node) 4)) (| (+dir node) |)]
+      [_
+        (->> AllDirs
+          (List.filter #(and
+            (!= %1 (RevDir (+dir node)))
+            (or
+              (< (+steps node) 10)
+              (!= %1 (+dir node)))
+          ))
+        )
+      ]
+    )
+  )
+  (->> possibleDirections
+      (List.map (MoveNode node))
+      (List.filter #(InGrid (+pos %1) gr))
+  ))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+  (let res (new ResizeArray<_>))
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (.Add res (->> (.ToArray line) (Array.map char->value)))
+    ))
+
+  (array2D (.ToArray res)))
+
+(typedef PrioHeap Heap<PrioPos>)
+
+(fn inline Insert ([p: PrioPos] pq)
+  (Heap.insert p pq))
+
+(fn inline Pop ([pq: PrioHeap])
+  (Heap.uncons pq))
+
+(fn Contains (pos dir [pq: PrioHeap])
+  (->> pq
+    (Heap.toSeq)
+    (Seq.exists #(begin
+      (let p (+Pos %1))
+      (let d (+Dir %1))
+      (= (p . d) (pos . dir))
+    ))))
+
+(fn Djikstra ([gr: Grid] nbrfun start stepsLeft [doneFun : (Node -> bool)])
+  (let neighbours (nbrfun gr))
+  (fn loss ((x, y)) (.[y, x] gr))
+  (fn pop (vs)
+    (let v (->> vs (Set.minElement)))
+    (v, (Set.remove v vs)))
+
+  (fn rec loop (queue visited)
+    (let ((l, v), nq) (pop queue))
+    (cond_
+      [(doneFun v) (l, v)]
+      [_
+        (let (que_, vis_)
+          (->> (neighbours v)
+            (List.fold #(begin
+              (let (qq, vv) %1)
+              (let vprime %2)
+              (let newLoss (+ l (loss (+pos vprime))))
+
+              (match (Map.tryFind vprime vv)
+                [None
+                  (
+                    (Set.add (newLoss, vprime) qq)
+                    .
+                    (Map.add vprime (newLoss, v) vv)
+                  )
+                ]
+                [(Some (knownLoss, _))
+                  (cond_
+                    [(<= knownLoss newLoss)
+                      (qq, vv)
+                    ]
+                    [_
+                      (
+                        (Set.add (newLoss, vprime) qq)
+                        .
+                        (Map.add vprime (newLoss, v) vv)
+                      )
+                    ]
+                  )]))
+              (nq, visited))
+          ))
+
+        (loop que_ vis_)
+      ]
+    ))
+
+  (loop (Set.singleton (0, {| dir Right pos start steps stepsLeft |})) Map.empty))
+
+(fn FindMinimumPath ([g: Grid])
+  (let TARGET ((dec (Width g)) . (dec (Height g))))
+  (fn reachedFinal ([node: Node])
+    (= (+pos node) TARGET))
+
+  (Djikstra g NodeNbrs (0, 0) 0 reachedFinal))
+
+(fn Part2 ([g: Grid])
+  (let TARGET ((dec (Width g)) . (dec (Height g))))
+  (fn reachedFinal ([node: Node])
+    (and (>= (+steps node) 4) (= (+pos node) TARGET)))
+
+  (Djikstra g NodeNbrsPart2 (0, 0) 0 reachedFinal))
+
+(let grid (ParseFile fileText))
+
+(let (part1, _) (FindMinimumPath grid))
+
+(WriteResult "part1" part1 (if example 102 638))
+
+(let (part2, _) (Part2 grid))
+
+(WriteResult "part2" part2 (if example 94 748))
+
+()
