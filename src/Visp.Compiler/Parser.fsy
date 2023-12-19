@@ -116,7 +116,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc prec_syn_type_open
 
 
-%nonassoc OP_LESS OP_GREATER
+%nonassoc OP_LESS OP_GREATER THREAD_FIRST
 
 %nonassoc OP_MULT
 %nonassoc COLON
@@ -1126,6 +1126,8 @@ syn_type:
             SynType.Discard(lhs parseState)
         else
             SynType.Ident(Ident(text, lhs parseState)) }
+    | syn_type THREAD_FIRST syn_type %prec prec_syn_type_array
+        { SynType.Fun ($1, $3, lhs parseState) }
     | syn_type arrayTypeSuffixHelp %prec prec_syn_type_array
         { SynType.Array($2, $1, lhs parseState) }
     | syn_type OP_LESS syn_type OP_GREATER %prec prec_syn_type_generic

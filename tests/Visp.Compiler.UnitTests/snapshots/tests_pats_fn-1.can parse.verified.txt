@@ -1,0 +1,25 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"fn-1.visp"
+let WithPred (pred: ('T -> bool)) t =
+  // line 9 @"fn-1.visp"
+  pred t
+
+// line 11 @"fn-1.visp"
+printfn "WithPred: %A" (WithPred ((fun arg1 ->
+  // line 11 @"fn-1.visp"
+  CoreMethods.``eq?``(arg1, 1))) 1)
+// line 12 @"fn-1.visp"
+printfn "WithPred: %A" (WithPred ((fun arg1 ->
+  // line 12 @"fn-1.visp"
+  CoreMethods.``eq?``(arg1, 1))) 0)
+// line 14 @"fn-1.visp"
+let visp_result_todo = ()
+// line 14 @"fn-1.visp"
+printfn "%A" visp_result_todo
+
