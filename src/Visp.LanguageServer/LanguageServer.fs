@@ -454,13 +454,15 @@ type VispDocumentItem =
             | Some(it) -> it
             | None -> [||]
 
-
     member this.Reset() = ()
 
     member this.Parse() =
         try
             eprintfn "Parsing %s" (this.Uri.ToString())
-            let file = Core.CoreParser.parseString (this.Text) (this.Uri.ToString())
+
+            let file =
+                Core.CoreParser.parseString (this.Text) (this.Uri.ToString())
+                |> Transforms.Helpers.transformParsedFile Core.CoreParser.expandExpr
 
             let syms = ResizeArray<SymbolDetails>()
 
