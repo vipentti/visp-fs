@@ -1,0 +1,42 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(union Dir
+  Up
+  Left
+  Down
+  Right)
+
+(typedef Pos int * int)
+
+(record Node
+  [pos: Pos]
+  [dir: Dir]
+  [steps: int])
+
+(fn inline LeftOf ([(x, y): Pos]) ((dec x), y))
+(fn inline RightOf ([(x, y): Pos]) ((inc x), y))
+(fn inline UpOf ([(x, y): Pos]) (x, (dec y)))
+(fn inline DownOf ([(x, y): Pos]) (x, (inc y)))
+
+(fn inline GetDirFun ([d: Dir])
+  (match d
+    [Up UpOf]
+    [Down DownOf]
+    [Left LeftOf]
+    [Right RightOf]
+  ))
+
+(fn MoveNode [v dir]
+  {|
+    dir dir
+    pos (->> (+pos v) (GetDirFun dir))
+    steps (if (= dir (+dir v)) (inc (+steps v)) 1)
+  |}
+)
+
+(printfn "OK")

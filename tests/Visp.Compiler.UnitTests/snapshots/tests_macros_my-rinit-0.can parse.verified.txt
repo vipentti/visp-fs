@@ -18,7 +18,14 @@ let macro_MyRinit = "__MACRO_INIT__"
 // line 22 @"my-rinit-0.visp"
 let temp =
   // line 22 @"my-rinit-0.visp"
-  { src = 1; Mapping.dest = 2; range = 3 }
+  {
+    // line 22 @"my-rinit-0.visp"
+    src = 1
+    // line 22 @"my-rinit-0.visp"
+    Mapping.dest = 2
+    // line 22 @"my-rinit-0.visp"
+    range = 3
+  }
 // line 23 @"my-rinit-0.visp"
 printfn "Record is %A" temp
 // line 24 @"my-rinit-0.visp"

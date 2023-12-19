@@ -1,0 +1,83 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"record-1.visp"
+type Dir =
+  // line 9 @"record-1.visp"
+  | Up
+  // line 10 @"record-1.visp"
+  | Left
+  // line 11 @"record-1.visp"
+  | Down
+  // line 12 @"record-1.visp"
+  | Right
+
+// line 14 @"record-1.visp"
+type Pos = int * int
+// line 16 @"record-1.visp"
+type Node =
+  { pos: Pos; dir: Dir; steps: int }
+// line 21 @"record-1.visp"
+let inline LeftOf ((x , y): Pos) =
+  // line 21 @"record-1.visp"
+  (dec x, y)
+
+// line 22 @"record-1.visp"
+let inline RightOf ((x , y): Pos) =
+  // line 22 @"record-1.visp"
+  (inc x, y)
+
+// line 23 @"record-1.visp"
+let inline UpOf ((x , y): Pos) =
+  // line 23 @"record-1.visp"
+  (x, dec y)
+
+// line 24 @"record-1.visp"
+let inline DownOf ((x , y): Pos) =
+  // line 24 @"record-1.visp"
+  (x, inc y)
+
+// line 26 @"record-1.visp"
+let inline GetDirFun (d: Dir) =
+  // line 27 @"record-1.visp"
+  match d with
+    | Up ->
+      UpOf
+    | Down ->
+      DownOf
+    | Left ->
+      LeftOf
+    | Right ->
+      RightOf
+
+// line 34 @"record-1.visp"
+let MoveNode v dir =
+  // line 35 @"record-1.visp"
+  {
+    // line 36 @"record-1.visp"
+    dir = dir
+    // line 37 @"record-1.visp"
+    pos = (v.pos)
+      |> GetDirFun dir
+    // line 38 @"record-1.visp"
+    steps = 
+      if CoreMethods.isTruthy(
+        CoreMethods.``eq?``(dir, (v.dir)))
+        then
+          // line 38 @"record-1.visp"
+          inc ((v.steps))
+        else
+          1
+  }
+
+// line 42 @"record-1.visp"
+let visp_result_todo =
+  // line 42 @"record-1.visp"
+  printfn "OK"
+// line 42 @"record-1.visp"
+printfn "%A" visp_result_todo
+
