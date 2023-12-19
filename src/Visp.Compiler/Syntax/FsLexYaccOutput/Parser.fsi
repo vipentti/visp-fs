@@ -348,9 +348,6 @@ type nonTerminalId =
     | NONTERM_rev_record_labels_or_members
     | NONTERM_record_label_or_member_parens
     | NONTERM_record_label_or_member
-    | NONTERM_typed_list
-    | NONTERM_rev_typed_list
-    | NONTERM_syntyped
     | NONTERM_record_members
     | NONTERM_record_init_expr
     | NONTERM_record_init_bar_list
@@ -409,12 +406,6 @@ type nonTerminalId =
     | NONTERM_function_def
     | NONTERM_function_def_args
     | NONTERM_invalid_function_def
-    | NONTERM_arg_list_start
-    | NONTERM_arg_list
-    | NONTERM_rev_arg_list
-    | NONTERM_arg
-    | NONTERM_arg_in_parens_or_brackets_start
-    | NONTERM_arg_in_parens_or_brackets
     | NONTERM_function_call
     | NONTERM_function_call_args
     | NONTERM_empty_call_args

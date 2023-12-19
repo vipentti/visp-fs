@@ -643,8 +643,7 @@ module Syntax =
 
     let parserRecoveryPat r = SynPat.Named(parserRecoverySymbol r, r)
 
-    // let parserRecoveryMatchPat r =
-    //     SynMatch.SynMatch(SynMatchPattern.Const(parserRecoveryConst r, r), None, [], r)
+    let parserRecoveryType r = SynType.Ident(Ident(parserRecovery, r))
 
     let parserRecoveryMatch r =
         SynMatch.SynMatch(SynPat.Const(parserRecoveryConst r, r), None, [], r)
