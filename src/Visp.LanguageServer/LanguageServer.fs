@@ -134,6 +134,10 @@ let textRangeToSyntaxRange (r: Visp.Compiler.Text.range) =
     result.End <- new Position(r.EndLine, r.EndColumn)
     result
 
+let fmtMemberName (s: string) =
+    let i = s.IndexOf '.'
+    if i >= 0 then s.Substring(i + 1) else s
+
 [<RequireQualifiedAccess>]
 type SymbolDetails =
     | FsharpMethod of text: string * details: string * range: Range
@@ -236,6 +240,11 @@ type SymbolDetails =
     member this.InsertText =
         match this with
         | Interop(it, _) -> it
+        | Member(text, fn, _) ->
+            if fn then
+                "." + (fmtMemberName text)
+            else
+                "+" + (fmtMemberName text)
         | _ -> null
 
     member this.Detail =
@@ -272,7 +281,7 @@ let rec textRangeOfPat =
         | SynArgPats.Tuple(pats) -> List.concat (List.map textRangeOfPat pats)
     | _ -> []
 
-let memberToSymbolDetails memval var (mem: SynTypeMember) =
+let memberToSymbolDetails _ memval var (mem: SynTypeMember) =
     match mem with
     | SynTypeMember.Mut(name = name) ->
         textRangeOfPat name |> List.map (fun (a, r) -> var (a, true, r))
@@ -284,7 +293,12 @@ let memberToSymbolDetails memval var (mem: SynTypeMember) =
     | SynTypeMember.OverrideMember(name = name) ->
         [ (memval (
               Syntax.textOfSymbol name,
-              true,
+              false,
+              Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+          ))
+          (memval (
+              "+" + (fmtMemberName name.Text),
+              false,
               Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
           )) ]
 
@@ -292,7 +306,12 @@ let memberToSymbolDetails memval var (mem: SynTypeMember) =
     | SynTypeMember.OverrideFn(name = name) ->
         [ (memval (
               Syntax.textOfSymbol name,
-              false,
+              true,
+              Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+          ))
+          (memval (
+              "." + (fmtMemberName name.Text),
+              true,
               Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
           )) ]
 
@@ -326,7 +345,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.AddRange(
             members
-            |> Seq.map (memberToSymbolDetails SymbolDetails.Member SymbolDetails.Variable)
+            |> Seq.map (memberToSymbolDetails name.Text SymbolDetails.Member SymbolDetails.Variable)
             |> Seq.concat
         )
 
@@ -338,15 +357,27 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             )
         )
 
+        let unionName = name.Text
+
         syms.AddRange(
             cases
             |> Seq.map (fun (UnionCase(name, _, _)) ->
-                (SymbolDetails.UnionMember(name.Text, false, name.Range |> textRangeToSyntaxRange)))
+                [ (SymbolDetails.UnionMember(
+                      name.Text,
+                      false,
+                      name.Range |> textRangeToSyntaxRange
+                  ))
+                  (SymbolDetails.UnionMember(
+                      unionName + "." + name.Text,
+                      false,
+                      name.Range |> textRangeToSyntaxRange
+                  )) ])
+            |> Seq.concat
         )
 
         syms.AddRange(
             members
-            |> Seq.map (memberToSymbolDetails SymbolDetails.Member SymbolDetails.Variable)
+            |> Seq.map (memberToSymbolDetails unionName SymbolDetails.Member SymbolDetails.Variable)
             |> Seq.concat
         )
 

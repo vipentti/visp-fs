@@ -589,10 +589,14 @@ dot_expr:
         { SynExpr.DotMethod($2, $1, $3, DotMethodKind.Tuple, lhs parseState) }
     | dot_method expr
         { SynExpr.DotMethod($2, $1, [], DotMethodKind.Tuple, lhs parseState) }
+    | dot_method
+        { SynExpr.DotMethod(Syntax.parserRecoveryExpr (lhs parseState), $1, [], DotMethodKind.Tuple, lhs parseState) }
     | apply_method expr expr_list
         { SynExpr.DotMethod($2, $1, $3, DotMethodKind.Apply, lhs parseState) }
     | apply_method expr
         { SynExpr.DotMethod($2, $1, [], DotMethodKind.Apply, lhs parseState) }
+    | apply_method
+        { SynExpr.DotMethod(Syntax.parserRecoveryExpr (lhs parseState), $1, [], DotMethodKind.Apply, lhs parseState) }
     | DOT expr symbol
         {
           let text = Syntax.textOfSymbol $3
@@ -607,6 +611,8 @@ dot_expr:
         { SynExpr.DotIndex($2, $3, lhs parseState) }
     | DOT expr symbol expr_list
         { SynExpr.DotMethod($2, $3, $4, DotMethodKind.Tuple, lhs parseState) }
+    | DOT
+        { SynExpr.DotMethod(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoverySymbol (lhs parseState), [], DotMethodKind.Tuple, lhs parseState) }
 
 lparen_or_lbracket:
     | LPAREN { () }
