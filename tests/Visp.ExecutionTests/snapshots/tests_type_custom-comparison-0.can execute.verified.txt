@@ -1,0 +1,6 @@
+﻿Nil < String true
+Nil > String false
+String = String true
+()
+
+ExitCode: 0

@@ -1,0 +1,29 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn IsString ([lhs: obj])
+  (match lhs
+    [(:? string) true]
+    [_ false]
+  ))
+
+(fn AreEqualStrings ([lhs: obj] [rhs: obj])
+  (match (lhs, rhs)
+    [((:? string lhss) . (:? string rhss))
+      (= lhss rhss)
+    ]
+    [_ false]
+  )
+)
+
+(printfn "IsString: %A" (IsString 1))
+(printfn "IsString: %A" (IsString "foo"))
+
+(printfn "AreEqualStrings: %A" (AreEqualStrings 1 2))
+(printfn "AreEqualStrings: %A" (AreEqualStrings "foo" 2))
+(printfn "AreEqualStrings: %A" (AreEqualStrings "foo" "foo"))
+(printfn "AreEqualStrings: %A" (AreEqualStrings "foo" "bar"))

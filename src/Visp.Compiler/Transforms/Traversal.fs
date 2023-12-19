@@ -229,29 +229,39 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                         for attr in attrlist.Attributes do
                             yield! loop attr.ArgExpr
 
+                    let rec loop_members (pred: SynExpr -> bool) (mem: SynTypeMember) =
+                        seq {
+                            match mem with
+                            | SynTypeMember.GetSet(_, get, set, _) ->
+                                match get with
+                                | None -> ()
+                                | Some(SynMemberGet(_, exprs, _)) ->
+                                    for e in exprs do
+                                        yield! loop e
+
+                                match set with
+                                | None -> ()
+                                | Some(SynMemberSet(_, _, exprs, _)) ->
+                                    for e in exprs do
+                                        yield! loop e
+
+                            | SynTypeMember.Let(_, e, _)
+                            | SynTypeMember.Mut(_, e, _)
+                            | SynTypeMember.Member(_, e, _)
+                            | SynTypeMember.OverrideMember(_, e, _) -> yield! loop e
+                            | SynTypeMember.MemberFn(_, _, body, _)
+                            | SynTypeMember.OverrideFn(_, _, body, _) ->
+                                for e in body do
+                                    yield! loop e
+
+                            | SynTypeMember.Interface(_, mems, _) ->
+                                for m in mems do
+                                    yield! loop_members pred m
+                        }
+
                     for mem in members do
-                        match mem with
-                        | SynTypeMember.GetSet(_, get, set, _) ->
-                            match get with
-                            | None -> ()
-                            | Some(SynMemberGet(_, exprs, _)) ->
-                                for e in exprs do
-                                    yield! loop e
+                        yield! loop_members pred mem
 
-                            match set with
-                            | None -> ()
-                            | Some(SynMemberSet(_, _, exprs, _)) ->
-                                for e in exprs do
-                                    yield! loop e
-
-                        | SynTypeMember.Let(_, e, _)
-                        | SynTypeMember.Mut(_, e, _)
-                        | SynTypeMember.Member(_, e, _)
-                        | SynTypeMember.OverrideMember(_, e, _) -> yield! loop e
-                        | SynTypeMember.MemberFn(_, _, body, _)
-                        | SynTypeMember.OverrideFn(_, _, body, _) ->
-                            for e in body do
-                                yield! loop e
         }
 
     main_loop pred expr

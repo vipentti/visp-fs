@@ -13,7 +13,7 @@ let macro_matchfnexample = "__MACRO_INIT__"
 let name arg =
   // line 21 @"syntax-macro-0.visp"
   match arg with
-    | (a, b) ->
+    | (a , b) ->
       // line 21 @"syntax-macro-0.visp"
       a +
       b
@@ -24,7 +24,7 @@ let name arg =
 let name2 tup =
   // line 27 @"syntax-macro-0.visp"
   match tup with
-    | (a, b) ->
+    | (a , b) ->
       // line 28 @"syntax-macro-0.visp"
       a +
       b

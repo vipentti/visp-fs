@@ -1,0 +1,43 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"match-1.visp"
+let IsString (lhs: obj) =
+  // line 9 @"match-1.visp"
+  match lhs with
+    | :? string ->
+      true
+    | _ ->
+      false
+
+// line 14 @"match-1.visp"
+let AreEqualStrings (lhs: obj) (rhs: obj) =
+  // line 15 @"match-1.visp"
+  match (lhs, rhs) with
+    | ((:? string as lhss) , (:? string as rhss)) ->
+      // line 17 @"match-1.visp"
+      CoreMethods.``eq?``(lhss, rhss)
+    | _ ->
+      false
+
+// line 23 @"match-1.visp"
+printfn "IsString: %A" (IsString 1)
+// line 24 @"match-1.visp"
+printfn "IsString: %A" (IsString "foo")
+// line 26 @"match-1.visp"
+printfn "AreEqualStrings: %A" (AreEqualStrings 1 2)
+// line 27 @"match-1.visp"
+printfn "AreEqualStrings: %A" (AreEqualStrings "foo" 2)
+// line 28 @"match-1.visp"
+printfn "AreEqualStrings: %A" (AreEqualStrings "foo" "foo")
+// line 29 @"match-1.visp"
+let visp_result_todo =
+  // line 29 @"match-1.visp"
+  printfn "AreEqualStrings: %A" (AreEqualStrings "foo" "bar")
+// line 29 @"match-1.visp"
+printfn "%A" visp_result_todo
+

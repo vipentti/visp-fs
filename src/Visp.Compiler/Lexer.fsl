@@ -428,6 +428,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "->" { THREAD_FIRST }
   | "<" { OP_LESS }
   | ">" { OP_GREATER }
+  | ":>" { COLON_GREATER }
+  | ":?" { COLON_QMARK }
 
   | "#()"     { UNIT }
   | "unit"     { UNIT }
@@ -472,7 +474,8 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   | '*'        { OP_MULT }
   | '/'        { OP_DIV }
-  | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
+  | ':' propShort { KEYWORD (lexeme lexbuf) }
+  | ':' ident_char+ { SYMBOL (lexeme lexbuf) }
   | ident      {
       let text = lexeme lexbuf
       symbolOrKeyword args.CurrentContext text
@@ -703,7 +706,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
     }
 
   // Exprs
-  | ':' ident_char+ { KEYWORD (lexeme lexbuf) }
+  | ':' propShort { KEYWORD (lexeme lexbuf) }
+  | ':' ident_char+ { SYMBOL (lexeme lexbuf) }
   | '.' ident_char+ {
       let text = lexeme lexbuf;
       SYMBOL text }
