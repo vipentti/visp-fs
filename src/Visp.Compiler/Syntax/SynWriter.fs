@@ -514,7 +514,11 @@ module Write =
             writeInlineSpaceSeparated w writeSeg segs
 
             ()
-        | SynType.Fun _ -> failwithf "unsupported SynType: %A" typ
+        | SynType.Fun(arg, ret, _) ->
+            writeType w arg
+            string w " -> "
+            writeType w ret
+            ()
 
     and writeTypeHelp w _ = writeType w
 
