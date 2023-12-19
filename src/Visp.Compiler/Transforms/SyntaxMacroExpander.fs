@@ -566,12 +566,12 @@ let tokensToFunc (tokens: ResizeArray<token>) (range: range) func =
     try
         func getTokens lexbuf
     with :? ParseHelpers.SyntaxError as syn ->
-        printfn "tokens:"
+        eprintfn "tokens:"
 
         for tok in tokens do
-            printf "%A " tok
+            eprintf "%A " tok
 
-        printfn ""
+        eprintfn ""
         LexHelpers.outputSyntaxError syn
         reraise ()
 
