@@ -488,6 +488,12 @@ macro_body:
     | LPAREN macro_name macro_body_list RPAREN
         { let mNameBody = SynMacroBody.Symbol($2)
           SynMacroBody.Call(SynMacroCall($2, mNameBody :: $3, lhs parseState)) }
+    | HASH_PAREN macro_name RPAREN
+        { let mNameBody = SynMacroBody.Symbol($2)
+          SynMacroBody.Call(SynMacroCall($2, [mNameBody], lhs parseState))}
+    | HASH_PAREN macro_name macro_body_list RPAREN
+        { let mNameBody = SynMacroBody.Symbol($2)
+          SynMacroBody.Call(SynMacroCall($2, mNameBody :: $3, lhs parseState)) }
 
     | macro_open_kind collection_close_kind { SynMacroBody.List($1, [], lhs parseState) }
     | macro_open_kind macro_body_list collection_close_kind { SynMacroBody.List($1, $2, lhs parseState) }
@@ -577,8 +583,14 @@ dot_expr:
         { SynExpr.DotIndex(Syntax.parserRecoveryExpr (lhs parseState), [$2], lhs parseState)}
     | DOT_PLUS symbol expr
         { SynExpr.DotProperty($3, $2, lhs parseState)}
+    | DOT_PLUS symbol
+        { SynExpr.DotProperty(Syntax.parserRecoveryExpr (lhs parseState), $2, lhs parseState)}
+    | DOT_PLUS
+        { SynExpr.DotProperty(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoverySymbol (lhs parseState), lhs parseState)}
     | prop_plus expr
         { SynExpr.DotProperty($2, $1, lhs parseState)}
+    | prop_plus
+        { SynExpr.DotProperty(Syntax.parserRecoveryExpr (lhs parseState), $1, lhs parseState)}
     | dot_method expr expr_list
         { SynExpr.DotMethod($2, $1, $3, DotMethodKind.Tuple, lhs parseState) }
     | dot_method expr
