@@ -286,6 +286,11 @@ module ``tests_macros_struct-example-1`` =
     let ``can execute`` () = TestUtils.runTest "tests/macros/struct-example-1.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_bar-parens-in-macro-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/macros/bar-parens-in-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_count-exprs-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/macros/count-exprs-0.visp"
