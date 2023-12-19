@@ -33,12 +33,7 @@ let transformLambdaShortHands (expr: SynExpr) =
 
                         dict.[id.idText] <- name
                         index <- index + 1
-
-                        parameters.Add(
-                            //SynArg.InferredArg(Syntax.mkSynSymbol name id.idRange, id.idRange)
-                            //Syntax.mkInferredNamePat name id.idRange
-                            (name, id.idRange)
-                        )
+                        parameters.Add((name, id.idRange))
 
                     ()
                 | _ -> ()

@@ -458,21 +458,24 @@ let rec private tokenizeEvaluated
         let mutable didPush = false
 
         let lst =
-            match lst with
-            | (EvaluatedSymbolText it) :: rest when macroTable.IsMacro it ->
-                args.StartMacro()
-                res.Add(MACRO_NAME it)
-                rest
-            | (EvaluatedSymbolText "member") :: rest when args.mode = TokenizeMode.Default ->
-                // args.StartMacro()
-                res.Add(MEMBER)
-                args.ctx.Push LexContext.Member
-                didPush <- true
-                rest
-            | it ->
+            if kind = SynListKind.Paren then
+                match lst with
+                | (EvaluatedSymbolText it) :: rest when macroTable.IsMacro it ->
+                    args.StartMacro()
+                    res.Add(MACRO_NAME it)
+                    rest
+                | (EvaluatedSymbolText "member") :: rest when args.mode = TokenizeMode.Default ->
+                    // args.StartMacro()
+                    res.Add(MEMBER)
+                    args.ctx.Push LexContext.Member
+                    didPush <- true
+                    rest
+                | it ->
+                    args.TryNest()
+                    it
+            else
                 args.TryNest()
-                it
-
+                lst
 
         lst |> List.iter bound_tokenize
 
@@ -563,6 +566,12 @@ let tokensToFunc (tokens: ResizeArray<token>) (range: range) func =
     try
         func getTokens lexbuf
     with :? ParseHelpers.SyntaxError as syn ->
+        printfn "tokens:"
+
+        for tok in tokens do
+            printf "%A " tok
+
+        printfn ""
         LexHelpers.outputSyntaxError syn
         reraise ()
 
