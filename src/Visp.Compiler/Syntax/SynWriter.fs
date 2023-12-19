@@ -542,24 +542,17 @@ module Write =
             | SynPatternTriviaKind.Dot -> string w ","
         | SynPat.Discard _ -> string w "_"
         | SynPat.Named(n, _) -> symbol w n true
-        // | SynPat.Paren(sub, _) ->
-        //     char w '('
-        //     synPat w sub
-        //     char w ')'
         | SynPat.Typed(sub, typ, _) ->
             synPat w sub
             string w ": "
             writeType w typ
-        // | SynPat.Tuple(st, pats, _) ->
-        //     if st then
-        //         string w "struct"
-        //     char w '('
-        //     writeSeq w WriteState.InlineNoParens (flip string ",") (fun w s i -> synPat w i) pats
-        //     char w ')'
-        // | SynPat.ListCons (lhs, rhs, _) ->
-        //     synPat w lhs
-        //     string w "::"
-        //     synPat w rhs
+        | SynPat.As(lhs, rhs, _) ->
+            synPat w lhs
+            string w " as "
+            synPat w rhs
+        | SynPat.IsInst(typ, _) ->
+            string w ":? "
+            writeType w typ
         | SynPat.Args(args, _) ->
             match args with
             | SynArgPats.Tuple pats ->
@@ -585,13 +578,14 @@ module Write =
                         pats
         | SynPat.Collection(SynCollection(kind, its, _)) ->
             match kind with
-            | CollectionKind.Paren
-            | CollectionKind.Bracket ->
-                // failwithf "unsupported pat collection: %A %A" kind its
-
+            | CollectionKind.Paren ->
                 string w "("
                 writeInlineSpaceSeparated w writeSynPat its
                 string w ")"
+            | CollectionKind.Bracket ->
+                string w "["
+                writeInlineSpaceSeparated w writeSynPat its
+                string w "]"
                 ()
             | CollectionKind.FsList
             | CollectionKind.FsArray ->
@@ -650,7 +644,8 @@ module Write =
 
 
                     string w "| "
-                    writeMatchPattern w st pat
+                    //writeMatchPattern w st pat
+                    synPat w pat
                     string w " "
 
                     match cond with
@@ -1488,6 +1483,12 @@ module Write =
                 writeExpr w WriteState.Body expr
                 newline w
 
+        | SynTypeMember.Interface(name, mems, range) ->
+            startExpr w st range
+            fmtprintf w "interface %s with" name.Text
+            writeBody w writeMember mems
+
+
     and private writeLetFullNew
         (w: SynWriter)
         (_: WriteState)
@@ -1645,6 +1646,16 @@ module Write =
                 char w '-'
                 writeExpr w opState one
             | rest -> writeSeq w WriteState.Inline (flip string " - ") writeExpr rest
+
+        | ":>" ->
+            match args with
+            | [ lhs; rhs ] ->
+                string w "("
+                writeExpr w WriteState.Inline lhs
+                string w " :> "
+                writeExpr w WriteState.Inline rhs
+                string w ")"
+            | _ -> writeInlineSeparated w ($" {op} ") writeExprInParens args
 
         | op -> writeInlineSeparated w ($" {op} ") writeExprInParens args
 

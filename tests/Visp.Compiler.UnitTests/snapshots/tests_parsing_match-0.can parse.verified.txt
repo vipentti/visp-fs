@@ -17,7 +17,7 @@ match "hello" with
     printfn "default"
 // line 19 @"match-0.visp"
 match (1, 2) with
-  | (a, 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
+  | (a , 2) when CoreMethods.isTruthy(CoreMethods.``gte``(a, 0)) ->
     // line 22 @"match-0.visp"
     printfn "a is %A" a
   | _ ->

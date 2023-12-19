@@ -1,0 +1,62 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(open System)
+
+(#[CustomEquality | CustomComparison | RequireQualifiedAccess]
+  union MyCustomValue
+  Nil
+  [String string]
+
+  (override fn t.GetHashCode ()
+    (match t
+      [Nil 919321]
+      [(String s) (System.HashCode.Combine ("string", s))]
+    ))
+
+  (override fn t.Equals (other)
+    (match other
+      [(:? MyCustomValue v)
+        (.Equals (:> t IEquatable<_>) v)
+      ]
+      [_ false]
+    ))
+
+  (interface IEquatable<MyCustomValue>
+    (member fn t.Equals (other)
+      (match (t, other)
+        [(Nil . Nil) true]
+        [((String lhs) . (String rhs)) (= lhs rhs)]
+        [(_ . _) false]
+      )
+    ))
+
+  (interface IComparable
+    (member fn t.CompareTo (other)
+      (match other
+        [(:? MyCustomValue v)
+          (.CompareTo (:> t IComparable<_>) v)
+        ]
+        [null 1]
+        [_ -1]
+      )))
+
+  (interface IComparable<MyCustomValue>
+    (member fn t.CompareTo (other)
+      (match (t, other)
+        [(Nil, Nil) 0]
+        [(Nil, (String _)) -1]
+        [((String _), Nil) 1]
+        [((String lhs), (String rhs)) (.CompareTo lhs rhs)]
+      )))
+)
+
+(printfn "Nil < String %A" (< MyCustomValue.Nil (MyCustomValue.String "hello")))
+(printfn "Nil > String %A" (> MyCustomValue.Nil (MyCustomValue.String "hello")))
+(printfn "String = String %A" (= (MyCustomValue.String "hello") (MyCustomValue.String "hello")))
+
+()

@@ -40,6 +40,7 @@ type token =
   | WHILE
   | TYPE
   | TYPEALIAS
+  | INTERFACE
   | RECORD
   | MEMBER
   | MEMBERS
@@ -94,6 +95,7 @@ type token =
   | QUOTE_SYM
   | OP_GREATER
   | OP_LESS
+  | COLON_QMARK
   | TRUE
   | FALSE
   | NIL
@@ -102,6 +104,7 @@ type token =
   | COMMA
   | UNIT
   | BAR
+  | COLON_GREATER
   | LBRACE
   | RBRACE
   | HASH_BRACE
@@ -158,6 +161,7 @@ type tokenId =
     | TOKEN_WHILE
     | TOKEN_TYPE
     | TOKEN_TYPEALIAS
+    | TOKEN_INTERFACE
     | TOKEN_RECORD
     | TOKEN_MEMBER
     | TOKEN_MEMBERS
@@ -212,6 +216,7 @@ type tokenId =
     | TOKEN_QUOTE_SYM
     | TOKEN_OP_GREATER
     | TOKEN_OP_LESS
+    | TOKEN_COLON_QMARK
     | TOKEN_TRUE
     | TOKEN_FALSE
     | TOKEN_NIL
@@ -220,6 +225,7 @@ type tokenId =
     | TOKEN_COMMA
     | TOKEN_UNIT
     | TOKEN_BAR
+    | TOKEN_COLON_GREATER
     | TOKEN_LBRACE
     | TOKEN_RBRACE
     | TOKEN_HASH_BRACE

@@ -1,0 +1,93 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"custom-comparison-0.visp"
+open System
+
+[<CustomEquality(); CustomComparison(); RequireQualifiedAccess()>]
+// line 10 @"custom-comparison-0.visp"
+type MyCustomValue =
+  // line 12 @"custom-comparison-0.visp"
+  | Nil
+  // line 13 @"custom-comparison-0.visp"
+  | String of string
+
+  // line 15 @"custom-comparison-0.visp"
+  override t.GetHashCode () =
+    // line 16 @"custom-comparison-0.visp"
+    match t with
+      | Nil ->
+        919321
+      | (String s) ->
+        // line 18 @"custom-comparison-0.visp"
+        System.HashCode.Combine ("string", s)
+
+  // line 21 @"custom-comparison-0.visp"
+  override t.Equals other =
+    // line 22 @"custom-comparison-0.visp"
+    match other with
+      | (:? MyCustomValue as v) ->
+        // line 24 @"custom-comparison-0.visp"
+        (t :> IEquatable<_>).Equals(v)
+      | _ ->
+        false
+
+  // line 29 @"custom-comparison-0.visp"
+  interface IEquatable<MyCustomValue> with
+    // line 30 @"custom-comparison-0.visp"
+    member t.Equals other =
+      // line 31 @"custom-comparison-0.visp"
+      match (t, other) with
+        | (Nil , Nil) ->
+          true
+        | ((String lhs) , (String rhs)) ->
+          // line 33 @"custom-comparison-0.visp"
+          CoreMethods.``eq?``(lhs, rhs)
+        | (_ , _) ->
+          false
+
+  // line 38 @"custom-comparison-0.visp"
+  interface IComparable with
+    // line 39 @"custom-comparison-0.visp"
+    member t.CompareTo other =
+      // line 40 @"custom-comparison-0.visp"
+      match other with
+        | (:? MyCustomValue as v) ->
+          // line 42 @"custom-comparison-0.visp"
+          (t :> IComparable<_>).CompareTo(v)
+        | null ->
+          1
+        | _ ->
+          -1
+
+  // line 48 @"custom-comparison-0.visp"
+  interface IComparable<MyCustomValue> with
+    // line 49 @"custom-comparison-0.visp"
+    member t.CompareTo other =
+      // line 50 @"custom-comparison-0.visp"
+      match (t, other) with
+        | (Nil , Nil) ->
+          0
+        | (Nil , (String _)) ->
+          -1
+        | ((String _) , Nil) ->
+          1
+        | ((String lhs) , (String rhs)) ->
+          // line 54 @"custom-comparison-0.visp"
+          lhs.CompareTo(rhs)
+
+// line 58 @"custom-comparison-0.visp"
+printfn "Nil < String %A" (MyCustomValue.Nil < (MyCustomValue.String "hello"))
+// line 59 @"custom-comparison-0.visp"
+printfn "Nil > String %A" (MyCustomValue.Nil > (MyCustomValue.String "hello"))
+// line 60 @"custom-comparison-0.visp"
+printfn "String = String %A" (CoreMethods.``eq?``(MyCustomValue.String "hello", MyCustomValue.String "hello"))
+// line 62 @"custom-comparison-0.visp"
+let visp_result_todo = ()
+// line 62 @"custom-comparison-0.visp"
+printfn "%A" visp_result_todo
+

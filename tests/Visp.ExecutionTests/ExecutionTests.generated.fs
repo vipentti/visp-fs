@@ -51,6 +51,11 @@ module ``tests_type_type-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/type-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_custom-comparison-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/custom-comparison-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_member-fn-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/member-fn-0.visp"
@@ -129,6 +134,11 @@ module ``tests_parsing_call-tuple-args-0`` =
 module ``tests_parsing_let-values`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/let-values.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_parsing_match-1`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/match-1.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_arrays_array2d-0`` =
