@@ -1223,20 +1223,19 @@ module Write =
 
         | SynExpr.RecordInit(inits, range) ->
             startExpr w st range
-            string w "{ "
+            string w "{"
 
-            writeSeq
+            writeBody
                 w
-                WriteState.Inline
-                (flip string "; ")
-                (fun w st (SynInit(name, expr, _)) ->
+                (fun w st (SynInit(name, expr, range)) ->
+                    startExpr w st range
                     symbol w name true
                     string w " = "
-                    writeExpr w st expr
-                    ())
+                    writeExpr w WriteState.Inline expr)
                 inits
 
-            string w " }"
+            newlineIndent w
+            string w "}"
 
     and private writeCollection w st (writers: CollectionWriters<'a>) (cl: SynCollection<'a>) =
         let (SynCollection(kind, items, range)) = cl

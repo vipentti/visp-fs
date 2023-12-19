@@ -16,7 +16,14 @@ type Mapping =
 // line 17 @"record-0.visp"
 let temp =
   // line 17 @"record-0.visp"
-  { src = 1; Mapping.dest = 2; range = 3 }
+  {
+    // line 17 @"record-0.visp"
+    src = 1
+    // line 17 @"record-0.visp"
+    Mapping.dest = 2
+    // line 17 @"record-0.visp"
+    range = 3
+  }
 // line 18 @"record-0.visp"
 printfn "Record is %A" temp
 // line 19 @"record-0.visp"
@@ -24,7 +31,14 @@ temp.Stuff()
 // line 21 @"record-0.visp"
 let temp2 =
   // line 21 @"record-0.visp"
-  { src = 3; Mapping.dest = 5; range = 8 }
+  {
+    // line 21 @"record-0.visp"
+    src = 3
+    // line 21 @"record-0.visp"
+    Mapping.dest = 5
+    // line 21 @"record-0.visp"
+    range = 8
+  }
 // line 23 @"record-0.visp"
 printfn "Record is %A" temp2
 // line 24 @"record-0.visp"
