@@ -298,7 +298,6 @@ type nonTerminalId =
     | NONTERM_collection_open_kind
     | NONTERM_macro_open_kind
     | NONTERM_collection_close_kind
-    | NONTERM_macro_close_kind
     | NONTERM_macro_body
     | NONTERM_cons_expr
     | NONTERM_concat_expr

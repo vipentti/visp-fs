@@ -478,13 +478,7 @@ collection_close_kind:
     | RBRACE { () }
     | BAR_BRACE { () }
     | BAR_BRACKET { () }
-
-macro_close_kind:
-    | RPAREN { () }
-    | RBRACKET { () }
-    | RBRACE { () }
-    | BAR_BRACE { () }
-    | BAR_BRACKET { () }
+    | BAR_PAREN { () }
 
 macro_body:
     | constant { SynMacroBody.Const(fst $1, snd $1) }
@@ -495,8 +489,8 @@ macro_body:
         { let mNameBody = SynMacroBody.Symbol($2)
           SynMacroBody.Call(SynMacroCall($2, mNameBody :: $3, lhs parseState)) }
 
-    | macro_open_kind macro_close_kind { SynMacroBody.List($1, [], lhs parseState) }
-    | macro_open_kind macro_body_list macro_close_kind { SynMacroBody.List($1, $2, lhs parseState) }
+    | macro_open_kind collection_close_kind { SynMacroBody.List($1, [], lhs parseState) }
+    | macro_open_kind macro_body_list collection_close_kind { SynMacroBody.List($1, $2, lhs parseState) }
 
     | DOT { SynMacroBody.Trivia(SynMacroTriviaKind.Dot, lhs parseState) }
     | COMMA { SynMacroBody.Trivia(SynMacroTriviaKind.Comma, lhs parseState) }
