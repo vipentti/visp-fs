@@ -62,9 +62,9 @@ class Build :
     public IEnumerable<Project> ExecutionTests =>
         CurrentSolution.GetAllProjects("*ExecutionTests");
 
-    // Run only unit tests in CI on Windows & MacOS beecause execution tests take a while.
+    // Run only unit tests in CI because execution tests take a while.
     public IEnumerable<Project> TestProjects =>
-        IsServerBuild && (IsMacOs || IsWindows) ? UnitTests : UnitTests.Concat(ExecutionTests);
+        IsServerBuild ? UnitTests : UnitTests.Concat(ExecutionTests);
 
     bool IUseCsharpier.UseGlobalTool => false;
     bool IUseFantomas.UseGlobalTool => false;
