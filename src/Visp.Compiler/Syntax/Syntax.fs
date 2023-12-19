@@ -284,6 +284,15 @@ type SynExpr =
         range: range
     | Match of expr: SynExpr * pats: SynMatch list * range: range
 
+
+    member t.IsAtomic =
+        match t with
+        | SynExpr.Const _ -> true
+        | SynExpr.Literal _ -> true
+        | SynExpr.Symbol _ -> true
+        | SynExpr.Keyword _ -> true
+        | _ -> false
+
     member this.Range =
         match this with
         | Op op -> op.Range
