@@ -176,7 +176,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
 
   (printfn "target %s" parserTargetDir)
   ;; (let output (genParserTests vispRoot files))
-  (.WriteAllText System.IO.File parserTargetFile output (+UTF8 System.Text.Encoding))
+  (.WriteAllText System.IO.File parserTargetFile output)
 )
 
 (fn WriteExecutionTests (projectRoot vispRoot files)
@@ -197,10 +197,10 @@ let ``%s %s`` () = TestUtils.runTest "%s"
 
   (printfn "target %s" targetDir)
   ;; (let output (genParserTests vispRoot files))
-  (.WriteAllText System.IO.File targetfile output (+UTF8 System.Text.Encoding))
+  (.WriteAllText System.IO.File targetfile output)
   ;; (printfn "target %s" targetDir)
   ;; (let output (genExecutionTests vispRoot files))
-  ;; (.WriteAllText System.IO.File targetfile output (+UTF8 System.Text.Encoding))
+  ;; (.WriteAllText System.IO.File targetfile output)
 )
 
 (fn run ()

@@ -94,12 +94,12 @@
 
   (unless (.Exists File targetFile)
     (printfn "new %s" targetFile)
-    (.WriteAllText System.IO.File targetFile (GetFileTemplate dayName) (+UTF8 System.Text.Encoding))
+    (.WriteAllText System.IO.File targetFile (GetFileTemplate dayName))
   )
 
   (unless (.Exists File exampleInputPath)
     (printfn "new %s" exampleInputPath)
-    (.WriteAllText System.IO.File exampleInputPath "" (+UTF8 System.Text.Encoding))
+    (.WriteAllText System.IO.File exampleInputPath "")
   )
 
   (unless (.Exists File mainInputPath)
@@ -115,7 +115,7 @@
           )
         )
       )
-      (do! (.WriteAllTextAsync System.IO.File mainInputPath content (+UTF8 System.Text.Encoding))))
+      (do! (.WriteAllTextAsync System.IO.File mainInputPath content)))
 
       (Async.AwaitTask)
       (Async.RunSynchronously)
