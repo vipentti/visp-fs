@@ -31,14 +31,14 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
 %token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE PAREN_BAR BAR_PAREN BRACKET_BAR BAR_BRACKET
-%token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
-%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS
+%token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR COLON_GREATER
+%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS COLON_QMARK
 %token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
 %token AT
 %token OPEN MODULE
 %token FN FNSTAR LET USE LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
-%token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
+%token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
@@ -693,28 +693,17 @@ operators:
     | LPAREN operators_not_in_parens RPAREN { $2 }
 
 op_sym:
-    | OP_PLUS    { Syntax.mkSynSymbol "+" (rhs parseState 1) }
-    | OP_DIV     { Syntax.mkSynSymbol "/" (rhs parseState 1) }
-    | OP_MULT    { Syntax.mkSynSymbol "*" (rhs parseState 1) }
-    | OP_MINUS   { Syntax.mkSynSymbol "-" (rhs parseState 1) }
-    | OP_GREATER { Syntax.mkSynSymbol ">" (rhs parseState 1) }
-    | OP_LESS    { Syntax.mkSynSymbol "<" (rhs parseState 1) }
+    | OP_PLUS       { Syntax.mkSynSymbol "+" (rhs parseState 1) }
+    | OP_DIV        { Syntax.mkSynSymbol "/" (rhs parseState 1) }
+    | OP_MULT       { Syntax.mkSynSymbol "*" (rhs parseState 1) }
+    | OP_MINUS      { Syntax.mkSynSymbol "-" (rhs parseState 1) }
+    | OP_GREATER    { Syntax.mkSynSymbol ">" (rhs parseState 1) }
+    | OP_LESS       { Syntax.mkSynSymbol "<" (rhs parseState 1) }
+    | COLON_GREATER { Syntax.mkSynSymbol ":>" (rhs parseState 1) }
 
 operators_not_in_parens:
     | op_sym { SynOp.Infix($1, [], lhs parseState) }
     | op_sym expr_list { SynOp.Infix($1, $2, lhs parseState) }
-    // | OP_PLUS
-    //     { SynOp.Plus([], lhs parseState)}
-    // | OP_MULT
-    //     { SynOp.Mult([], lhs parseState)}
-    // | OP_PLUS expr_list
-    //     { SynOp.Plus($2, lhs parseState)}
-    // | OP_MULT expr_list
-    //     { SynOp.Mult($2, lhs parseState)}
-    // | OP_MINUS expr_list
-    //     { SynOp.Minus($2, lhs parseState)}
-    // | OP_DIV expr_list
-    //     { SynOp.Div($2, lhs parseState)}
 
 set:
     | SET expr expr
@@ -844,10 +833,7 @@ union_label_or_member_parens:
     | LBRACKET union_label_or_member RBRACKET { $2 }
 
 union_label_or_member:
-    | MEMBER symbol expr
-        { Choice2Of2(SynTypeMember.Member($2, $3, lhs parseState)) }
-    | MEMBER FN symbol list_arg_pats expr_list
-        { Choice2Of2(SynTypeMember.MemberFn($3, $4, $5, (lhs parseState))) }
+    | member_in_parens { Choice2Of2($1) }
     | symbol
         { Choice1Of2(UnionCase($1, [], lhs parseState)) }
     | symbol union_fields
@@ -887,10 +873,7 @@ record_label_or_member_parens:
     | LBRACKET record_label_or_member RBRACKET { $2 }
 
 record_label_or_member:
-    | MEMBER symbol expr
-        { Choice1Of2(SynTypeMember.Member($2, $3, lhs parseState)) }
-    | MEMBER FN symbol list_arg_pats expr_list
-        { Choice1Of2(SynTypeMember.MemberFn($3, $4, $5, (lhs parseState))) }
+    | member_in_parens { Choice1Of2($1) }
     | symbol COLON syntype_ident
         { Choice2Of2 (RecordLabel(RecordLabelKind.Default, $1, $3, lhs parseState)) }
     | MUT symbol COLON syntype_ident
@@ -1002,8 +985,6 @@ member_in_parens:
     | MUT syn_pat expr
         { SynTypeMember.Mut($2, $3, lhs parseState) }
     | member_member_in_parens { $1 }
-    // | MEMBER symbol expr
-    //     { SynTypeMember.Member($2, $3, lhs parseState) }
     | MEMBERFN syn_symbol list_arg_pats expr_list
         { SynTypeMember.MemberFn($2, $3, $4, (lhs parseState)) }
     | MEMBER FN syn_symbol list_arg_pats expr_list
@@ -1012,6 +993,10 @@ member_in_parens:
         { SynTypeMember.OverrideMember($2, $3, lhs parseState) }
     | OVERRIDE FN syn_symbol list_arg_pats expr_list
         { SynTypeMember.OverrideFn($3, $4, $5, (lhs parseState)) }
+    | INTERFACE syn_symbol
+        { SynTypeMember.Interface($2, [], lhs parseState)}
+    | INTERFACE syn_symbol member_list
+        { SynTypeMember.Interface($2, $3, lhs parseState)}
 
 tok_lparen:
     | LPAREN { () }
@@ -1321,10 +1306,10 @@ match_start:
      }
 
 match:
-    | match_pattern expr_list
+    | syn_pat expr_list
         { SynMatch.SynMatch($1, None, $2, lhs parseState) }
 
-    | match_pattern LPAREN WHEN expr RPAREN expr_list
+    | syn_pat LPAREN WHEN expr RPAREN expr_list
         { SynMatch.SynMatch($1, Some($4), $6, lhs parseState) }
 
 match_tuple_list: rev_match_tuple_list %prec prec_match_tuple_list { List.rev $1 }
@@ -1382,29 +1367,26 @@ pat_open_kind:
 
 syn_pat:
     | constant %prec prec_match_pattern_const { SynPat.Const(fst $1, snd $1) }
-    // | syn_pat COLON syn_type %prec prec_syn_type
-    //     { SynPat.Typed($1, $3, lhs parseState) }
     | pat_open_kind syn_pat COLON syn_type collection_close_kind %prec prec_syn_type
         { SynPat.Typed($2, $4, lhs parseState) }
-    // | LBRACKET syn_pat COLON syn_type RBRACKET %prec prec_syn_type
-    //     { SynPat.Typed($2, $4, lhs parseState) }
     | SYMBOL %prec prec_syn_pat {
         let text = $1
         if (text = "_") then
             SynPat.Discard (lhs parseState)
         else
             SynPat.Named (Syntax.mkSynSymbol text (rhs parseState 1), (rhs parseState 1)) }
+    | pat_open_kind COLON_QMARK syn_type collection_close_kind
+        { SynPat.IsInst($3, lhs parseState) }
+    | pat_open_kind COLON_QMARK syn_type syn_pat collection_close_kind
+        { let r = lhs parseState
+          SynPat.mkInParens (SynPat.As(SynPat.IsInst($3, rhs2 parseState 2 3), $4, r)) r
+        }
     | pat_open_kind collection_close_kind %prec prec_syn_pat
         { SynPat.Collection(SynCollection($1, [], lhs parseState)) }
 
     | pat_open_kind syn_pat_trivia_list collection_close_kind %prec prec_syn_pat
         { SynPat.Collection(SynCollection($1, $2, lhs parseState)) }
-
-    // | LPAREN syn_pat RPAREN
-    //     { SynPat.Paren($2, lhs parseState) }
-    // | LBRACKET syn_pat RBRACKET
-    //     { SynPat.Paren($2, lhs parseState) }
-    // | LPAREN syn_pat recover
-    //     { SynPat.Paren($2, lhs parseState) }
-    // | LBRACKET syn_pat recover
-    //     { SynPat.Paren($2, lhs parseState) }
+    | LPAREN BANG_TUPLE syn_pat_trivia_list RPAREN
+    { let lst = List.intersperse (SynPat.Trivia (SynPatternTriviaKind.Comma, rhs parseState 1)) $3
+      SynPat.Collection(SynCollection(CollectionKind.Paren, lst, lhs parseState))
+    }

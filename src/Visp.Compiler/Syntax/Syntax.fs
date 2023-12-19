@@ -408,11 +408,7 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynMacroBody =
     | Trivia of kind: SynMacroTriviaKind * range: range
 
 and [<RequireQualifiedAccess>] SynMatch =
-    | SynMatch of
-        pattern: SynMatchPattern *
-        cond: SynExpr option *
-        body: SynExpr list *
-        range: range
+    | SynMatch of pattern: SynPat * cond: SynExpr option * body: SynExpr list * range: range
 
 and [<RequireQualifiedAccess>] SynThreadable =
     | Expr of value: SynExpr * range: range
@@ -447,6 +443,9 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
     | Collection of SynCollection<SynPat>
     /// _
     | Discard of range: range
+    /// :?
+    | IsInst of pat: SynType * range: range
+    | As of lhsPat: SynPat * rhsPat: SynPat * range: range
 
 and [<RequireQualifiedAccess>] SynMatchPattern =
     | Const of value: SynConst * range: range
@@ -474,6 +473,7 @@ and [<RequireQualifiedAccess>] SynTypeMember =
     | MemberFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
     | OverrideMember of name: SynSymbol * value: SynExpr * range: range
     | OverrideFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
+    | Interface of name: SynSymbol * members: SynTypeMember list * range: range
 
 and [<RequireQualifiedAccess>] SynDirective = Open of path: SynSymbol * range: range
 
@@ -608,6 +608,12 @@ module CollExpr =
     let mkBraceBar its r =
         Coll.mkBraceBar its r |> SynExpr.Collection
 
+module SynPat =
+    let mkParenCollection ls r =
+        SynPat.Collection(SynCollection(CollectionKind.Paren, ls, r))
+
+    let mkInParens ls r = mkParenCollection [ ls ] r
+
 
 module Syntax =
     let UnitExpr r = SynExpr.Const(SynConst.Unit, r)
@@ -628,9 +634,11 @@ module Syntax =
 
     let parserRecoveryPat r = SynPat.Named(parserRecoverySymbol r, r)
 
+    // let parserRecoveryMatchPat r =
+    //     SynMatch.SynMatch(SynMatchPattern.Const(parserRecoveryConst r, r), None, [], r)
 
     let parserRecoveryMatch r =
-        SynMatch.SynMatch(SynMatchPattern.Const(parserRecoveryConst r, r), None, [], r)
+        SynMatch.SynMatch(SynPat.Const(parserRecoveryConst r, r), None, [], r)
 
     let textOfIdent (id: Ident) = id.idText
     let rangeOfIdent (id: Ident) = id.idRange

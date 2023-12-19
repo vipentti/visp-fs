@@ -1,0 +1,9 @@
+﻿IsString: false
+IsString: true
+AreEqualStrings: false
+AreEqualStrings: false
+AreEqualStrings: true
+AreEqualStrings: false
+()
+
+ExitCode: 0

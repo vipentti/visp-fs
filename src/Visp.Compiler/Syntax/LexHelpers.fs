@@ -17,6 +17,7 @@ open System.Collections.Generic
 type LexContext =
     | Default
     | LParen
+    | Type
     | Member
     | Match
 
@@ -239,11 +240,8 @@ let keywordTokenList =
       ("yield", YIELD false) ]
 
 let contextSpecificKeywords =
-    [ (LexContext.Member,
-       [ ("get", MEMBER_GET)
-         ("set", MEMBER_SET)
-
-         ])
+    [ (LexContext.Member, [ ("get", MEMBER_GET); ("set", MEMBER_SET); ("interface", INTERFACE) ])
+      (LexContext.Type, [ ("interface", INTERFACE) ])
       (LexContext.Match, [ ("when", WHEN) ]) ]
 
 let contextSpecificKeywordsMap =

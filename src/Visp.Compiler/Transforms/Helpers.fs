@@ -187,7 +187,7 @@ and private fixMembers bound_transform members =
     let tfSet (SynMemberSet(args, k, exprs, range)) =
         SynMemberSet(args, k, List.map bound_transform exprs, range)
 
-    let tfmember =
+    let rec tfmember =
         function
         | SynTypeMember.Let(name, expr, range) ->
             SynTypeMember.Let(name, bound_transform expr, range)
@@ -203,6 +203,8 @@ and private fixMembers bound_transform members =
             SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
         | SynTypeMember.GetSet(name, get, set, range) ->
             SynTypeMember.GetSet(name, Option.map tfGet get, Option.map tfSet set, range)
+        | SynTypeMember.Interface(name, mems, r) ->
+            SynTypeMember.Interface(name, List.map tfmember mems, r)
 
 
     members |> List.map tfmember

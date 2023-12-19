@@ -30,7 +30,7 @@ let mkTokenizerWithArgs args =
         | MACRO_NAME _ -> args.Nested <| LexMode.TokenStream TokenStreamMode.Macro
 
         | MEMBER ->
-            if args.CurrentContext = LexContext.LParen then
+            if args.CurrentContext = LexContext.LParen || args.CurrentContext = LexContext.Type then
                 args.PopContext()
                 args.PushContext LexContext.Member
 
@@ -38,6 +38,13 @@ let mkTokenizerWithArgs args =
             if args.CurrentContext = LexContext.LParen then
                 args.PopContext()
                 args.PushContext LexContext.Match
+
+        | UNION
+        | RECORD
+        | TYPE ->
+            if args.CurrentContext = LexContext.LParen then
+                args.PopContext()
+                args.PushContext LexContext.Type
 
         | HASH_PAREN
         | HASH_BRACKET
