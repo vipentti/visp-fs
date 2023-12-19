@@ -1,0 +1,14 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn WithPred ([pred: (^T -> bool)] t)
+  (pred t))
+
+(printfn "WithPred: %A" (WithPred #(= %1 1) 1))
+(printfn "WithPred: %A" (WithPred #(= %1 1) 0))
+
+()
