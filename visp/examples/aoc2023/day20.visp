@@ -1,0 +1,399 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([text: ReadOnlySpan<char>] [ch: array<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(fn SpanSplitString ([text: ReadOnlySpan<char>] [ch: string])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day20")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(typedef Destinations list<string>)
+
+(union State On Off)
+
+(union Pulse Low High)
+
+(record FlipFlop [mut state: State]
+  (member fn t.Toggle ()
+    (match (+state t)
+      [State.Off (set! (+state t) State.On) State.Off]
+      [State.On (set! (+state t) State.Off) State.On]
+    )
+  ))
+
+(fn mkFlipFlop () {| [state State.Off] |})
+
+(typedef States Dictionary < string,Pulse >)
+
+(fn WriteStates ([sb: System.Text.StringBuilder] [s: States])
+  (fn inline Append ([s: string]) (ignore (.Append sb s)))
+  (fn inline AppendLine ([s: string]) (ignore (.AppendLine sb s)))
+
+  (Append "[")
+  (for/in [kvp s]
+    (Append "[")
+    (Append (+Key kvp))
+    (Append ",")
+    (Append (sprintf "%A" (+Value kvp)))
+    (Append "],")
+  )
+
+  (when (> (+Count s) 0)
+    (set! (+Length sb) (dec (+Length sb))))
+
+  (Append "]")
+)
+
+(fn DisplayStates ([s: States])
+  (let sb (new System.Text.StringBuilder))
+  (WriteStates sb s)
+  (.ToString sb))
+
+(record Conj [states: States]
+
+  (member t.Item
+    (get (s) (.[s] (+states t)))
+    (set (s) v (set! (.[s] (+states t)) v))
+  )
+
+  (member t.AllHigh
+    (begin
+      (->> (+states t) +Values (Seq.forall #(= Pulse.High %1)))
+    ))
+
+  (member fn t.WriteTo ([sb: System.Text.StringBuilder])
+    (->> (.Append sb "{ states = ") ignore)
+    (WriteStates sb (+states t))
+    (->> (.Append sb " }") ignore)
+  )
+
+  (override fn t.ToString()
+    (let sb (new System.Text.StringBuilder))
+    (.WriteTo t sb)
+    (.ToString sb)
+  )
+)
+
+(fn mkConj () {| [states (new States)] |})
+
+(union ModType
+  Broadcast
+  FlipFlop
+  Conj
+)
+
+(union Mod
+  [Broadcast [dest: Destinations]]
+  [Flip [flop: FlipFlop] [dest: Destinations]]
+  [Conj [conj: Conj] [dest: Destinations]]
+
+  (member t.Destinations
+    (match t
+      [(Broadcast dest) dest]
+      [(Flip (_, dest)) dest]
+      [(Conj (_, dest)) dest]
+    ))
+
+  (member t.Prefix
+    (match t
+      [(Broadcast _) ""]
+      [(Flip _) "%"]
+      [(Conj _) "&"]
+    ))
+
+  (member fn t.WriteTo ([sb: System.Text.StringBuilder])
+    (match t
+      [(Mod.Broadcast dest)
+        (ignore (.Append sb (sprintf "Broadast %A" dest)))
+      ]
+      [(Mod.Flip (flop, dest))
+        (ignore (.Append sb (sprintf "Flip (%A, %A)" flop dest)))
+      ]
+      [(Mod.Conj (conj, dest))
+        (ignore (.Append sb "Conj ("))
+        (.WriteTo conj sb)
+        (ignore (.Append sb (sprintf ", %A)" dest)))
+      ]
+    ))
+
+  (override fn t.ToString ()
+    (let sb (new System.Text.StringBuilder))
+    (.WriteTo t sb)
+    (.ToString sb)
+  )
+)
+
+(typedef Modules Dictionary < string,Mod >)
+
+(fn DisplayMods ([ms: Modules])
+  (let sb (new System.Text.StringBuilder))
+  (for/in [kvp ms]
+    (ignore (.Append sb (+Key kvp)))
+    (ignore (.Append sb " -> "))
+    (.WriteTo (+Value kvp) sb)
+    (ignore (.AppendLine sb))
+  )
+  (.ToString sb)
+)
+
+(fn Serialize ([ms: Modules])
+  (let sb (new System.Text.StringBuilder))
+  (for/in [kvp ms]
+    (let key (+Key kvp))
+    (let mod (+Value kvp))
+
+    (ignore (.Append sb (+Prefix mod)))
+    (ignore (.Append sb key))
+    (ignore (.Append sb " -> "))
+    (for/in [dest (+Destinations mod)]
+      (ignore (.Append sb dest))
+      (ignore (.Append sb ", "))
+    )
+    (when (> (+Length (+Destinations mod)) 0)
+      (set! (+Length sb) (- (+Length sb) 2)))
+
+    (ignore (.AppendLine sb)))
+
+  (.ToString sb)
+)
+
+(fn ShowMods ([ms: Modules])
+  (let str (Serialize ms))
+  (printfn "%s" str)
+)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+  (let res (new Modules))
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (mut parts (SpanSplitString line "->"))
+      (ignore (.MoveNext parts))
+      (let nameSpan (+Current parts))
+
+      (ignore (.MoveNext parts))
+      (let destSpan (+Current parts))
+      (mut destEnu (SpanSplitString destSpan ","))
+
+      (mut dests (||))
+      (while (.MoveNext destEnu)
+        (let dest (.ToString (+Current destEnu)))
+        (set! dests (cons dest dests)))
+
+      (set! dests (List.rev dests))
+
+      ;; (printfn "%A dests" dests)
+
+      (let (name, typ)
+        (match (.[0] nameSpan)
+          [#\%
+            (let name (.ToString (.Slice nameSpan 1)))
+            (name . (Mod.Flip ((mkFlipFlop), dests)))
+          ]
+          [#\&
+            (let name (.ToString (.Slice nameSpan 1)))
+            (name . (Mod.Conj ((mkConj), dests)))
+          ]
+          [_
+            (let name (.ToString nameSpan))
+            (name . (Mod.Broadcast dests))
+          ]
+        ))
+
+      (set! (.[name] res) typ)
+    ))
+
+  (mut temp (!map))
+
+  (for/in [kvp res]
+    (match (+Value kvp)
+      [(Mod.Conj (conj, _))
+        (set! temp (Map.add (+Key kvp) conj temp))
+      ]
+      [_ ()]
+    ))
+
+  (for/in [kvp res]
+    (for/in [dest (->> kvp +Value +Destinations)]
+      (match (Map.tryFind dest temp)
+        [(Some conj)
+          (set! (.[(+Key kvp)] conj) Pulse.Low)
+        ]
+        [None ()]
+      )))
+
+
+  res
+)
+
+(typedef BtnPred (string -> string -> Pulse -> bool))
+
+(fn PressButton ([mods: Modules] [pred: BtnPred])
+  (let que (new Queue<_>))
+
+  (fn inline Push (p) (.Enqueue que p))
+  (fn inline Pop (p) (.Dequeue que))
+  (fn inline HasItems () (> (+Count que) 0))
+
+  (Push ("button" . "broadcaster" . Pulse.Low))
+
+  (mut lows 0L)
+  (mut highs 0L)
+  (mut found false)
+  (mut looping true)
+
+  (while (and looping (HasItems))
+    (let (sender, target, pulse) (Pop))
+
+    (match pulse
+      [Pulse.Low (set! lows (inc lows))]
+      [Pulse.High (set! highs (inc highs))])
+
+    (cond_
+      [(pred sender target pulse)
+        (set! found true)
+        (set! looping false)
+      ]
+      [_
+        (match (.TryGetValue mods target)
+          [(true, mod)
+            (let (dests, newpulse)
+              (match mod
+                [(Mod.Broadcast dests) (dests . pulse)]
+                [(Mod.Flip (flip, dests))
+                  (match pulse
+                    [Pulse.High ((||) . pulse)]
+                    [Pulse.Low (dests . (match (.Toggle flip)
+                      [State.Off Pulse.High]
+                      [State.On Pulse.Low]
+                    ))]
+                  )
+                ]
+                [(Mod.Conj (conj, dests))
+                  (set! (.[sender] conj) pulse)
+                  (dests . (if (+AllHigh conj) Pulse.Low Pulse.High))
+                ]
+              ))
+
+            (->> dests (List.iter #(Push (target . %1 . newpulse))))
+          ]
+          [_ ()])
+      ]))
+
+  (lows . highs . found))
+
+(fn CloneMods ([ms: Modules]) (->> ms Serialize ParseFile))
+
+(fn PressButton1K ([mods: Modules])
+  (mut lows 0L)
+  (mut highs 0L)
+  (fn inline AlwaysFalse (_ _ _) false)
+
+  (for/to [_ (1 to 1000)]
+    (let (ls, hs, _) (PressButton mods AlwaysFalse))
+    (set! lows (+ lows ls))
+    (set! highs (+ highs hs))
+  )
+
+  (* lows highs)
+)
+
+(fn PressButtonUntil ([mods: Modules] [pred: BtnPred])
+  (mut looping true)
+  (mut count 0L)
+
+  (while looping
+    (let (_, _, found) (PressButton mods pred))
+    (up! count inc)
+    (when found
+      (set! looping false)
+    ))
+
+  count)
+
+(fn Part2 ([mods: Modules])
+
+  (let thoseWhoTargetRx (->> mods
+    (Seq.choose #(begin
+      (let key (+Key %1))
+      (let value (+Value %1))
+      (if (List.exists #(= %1 "rx") (+Destinations value))
+        (Some key)
+        None
+      )
+    ))
+    (Set.ofSeq)
+  ))
+
+  ;; (printfn "%A" thoseWhoTargetRx)
+
+  (let thoseWhoTargetThoseWhoTargetRx (->> mods
+    (Seq.choose #(begin
+      (if (List.exists #(Set.contains %1 thoseWhoTargetRx) (->> %1 +Value +Destinations))
+        (Some (->> %1 +Key))
+        None
+      )
+    ))
+
+    (Array.ofSeq)
+  ))
+
+  ;; (printfn "%A" thoseWhoTargetThoseWhoTargetRx)
+
+  (let predsAndClones (->> thoseWhoTargetThoseWhoTargetRx
+    (Array.map #(begin
+      (let sender %1)
+      (let cl (CloneMods mods))
+      (cl . #(and (= %1 sender) (= %3 Pulse.High) (Set.contains %2 thoseWhoTargetRx)))
+    ))
+  ))
+
+  (let looped (->> predsAndClones
+    (Array.map #(PressButtonUntil (fst %1) (snd %1)))
+  ))
+
+  ;; (printfn "%A" looped)
+
+  (->> looped
+    (Array.reduce lcm64))
+)
+
+(let modules (ParseFile fileText))
+
+(let part1 (PressButton1K modules))
+
+(WriteResult "part1" part1 (if example 32000000L 670984704L))
+
+(unless example
+  (let part2 (Part2 (ParseFile fileText)))
+
+  (WriteResult "part2" part2 (if example -1 262775362119547L)))
+
+()

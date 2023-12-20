@@ -111,3 +111,10 @@
     )
   ])
 
+(syntax-macro up!
+  [(_ id fun extra ...)
+    (begin
+      (set! id (fun id extra ...))
+    )
+  ]
+)
