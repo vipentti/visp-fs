@@ -911,6 +911,7 @@ record_init_init:
         { let s, e = $1
           SynInit(s, e, lhs parseState)
         }
+    | record_init_parens { $1 }
     // | expr %prec prec_record_expr_only
     //     { SynInit(Syntax.mkSynSymbol "_" (lhs parseState), $1, lhs parseState)
     //     }
@@ -1281,6 +1282,9 @@ match_start:
      }
 
 match:
+    | syn_pat
+        { SynMatch.SynMatch($1, None, [], lhs parseState) }
+
     | syn_pat expr_list
         { SynMatch.SynMatch($1, None, $2, lhs parseState) }
 
