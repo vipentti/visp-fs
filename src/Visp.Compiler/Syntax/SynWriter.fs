@@ -1211,10 +1211,7 @@ module Write =
 
                     string w name.Text
                     string w ": "
-
-                    match typ with
-                    | SynType.Ident it -> string w it.idText
-                    | it -> failwithf "unsupported typ: %A" it
+                    writeType w typ
 
                     ())
                 labels
