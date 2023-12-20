@@ -1,0 +1,363 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(fn SpanEq [(lhs: ReadOnlySpan<char>) (s: string)]
+  (.Equals lhs (.AsSpan s) System.StringComparison.Ordinal))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day18")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(module Array2D
+  (fn ToSeq ([arr: ^T[,]])
+    (seq->
+      (let h (dec (Array2D.length1 arr)))
+      (let w (dec (Array2D.length2 arr)))
+      (for/to [y (0 to h)]
+        (for/to [x (0 to w)]
+          (yield (.[y, x] arr))
+        )
+      )))
+)
+
+(union Dir
+  Up
+  Left
+  Down
+  Right)
+
+(typedef Pos int * int)
+
+(fn inline LeftOf ([(x, y): Pos]) ((dec x), y))
+(fn inline RightOf ([(x, y): Pos]) ((inc x), y))
+(fn inline UpOf ([(x, y): Pos]) (x, (dec y)))
+(fn inline DownOf ([(x, y): Pos]) (x, (inc y)))
+
+(fn inline GetDirFun ([d: Dir])
+  (match d
+    [Up UpOf]
+    [Down DownOf]
+    [Left LeftOf]
+    [Right RightOf]
+  ))
+
+(record Ins [dir: Dir] [amt: int] [col: string])
+
+(fn GetFixedIns ([ins: Ins])
+  (let col (+col ins))
+  (let hex (.Substring col 1 5))
+
+  (let dir (match (.[6] col)
+    [#\0 Dir.Right]
+    [#\1 Dir.Down]
+    [#\2 Dir.Left]
+    [#\3 Dir.Up]
+    [_ (failwithf "unreachable")]
+  ))
+
+  (let amt (System.Int32.Parse (hex, System.Globalization.NumberStyles.HexNumber)))
+
+  ;; (printfn "%A %A" dir amt)
+
+  {| dir dir amt amt col col |}
+)
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let res (!vec))
+
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (mut parts (SpanSplitChars [| #\space |] line))
+      (let _ (.MoveNext parts))
+      (let dir_ (+Current parts))
+      (let dir (cond_
+        [(SpanEq dir_ "R") Dir.Right]
+        [(SpanEq dir_ "L") Dir.Left]
+        [(SpanEq dir_ "U") Dir.Up]
+        [(SpanEq dir_ "D") Dir.Down]
+      ))
+
+      (let _ (.MoveNext parts))
+      (let amount (span->int32 (+Current parts)))
+
+      (let _ (.MoveNext parts))
+      (let color (.ToString (.Trim (+Current parts) [| #\( #\) |])))
+
+      ;; (printfn "%A %A %A" dir amount color)
+
+      (.Add res {| dir dir amt amount col color |})
+      ())
+    ())
+
+  (.ToArray res)
+)
+
+(fn Display ([gr: char[,]])
+  (let sb (new System.Text.StringBuilder))
+
+  (for/to [y (0 to (dec (Array2D.length1 gr)))]
+    (for/to [x (0 to (dec (Array2D.length2 gr)))]
+      (let _ (.Append sb (.[y, x] gr)))
+      ())
+    (let _ (.AppendLine sb))
+    ())
+
+  (.ToString sb)
+)
+
+(fn IsDot ([gr: char[,]] [y: int] [x: int])
+  (= (.[y, x] gr) #\.)
+)
+
+(let OFFSETS [|
+  (-1, -1)
+  (0, -1)
+  (1, -1)
+  (-1, 0)
+  (1, 0)
+  (-1, 1)
+  (0, 1)
+  (1, 1)
+|])
+
+(fn FindFillStart ([grid: char[,]])
+  (fn rec inner ([grid: char[,]] [line_idx: int])
+    (let row (.[line_idx, *] grid))
+    (mut first (Array.findIndex #(= %1 #\#) row))
+    (let last (Array.findIndexBack #(= %1 #\#) row))
+
+    (mut looping true)
+    (mut found None)
+    (while (and looping (< first last))
+      (cond_
+        [(= #\. (.[first] row))
+          (set! found (Some (first, line_idx)))
+          (set! looping false)
+        ]
+        [_
+          (set! first (inc first))
+        ]))
+
+    (match found
+      [(Some it) it]
+      [None (inner grid (inc line_idx))]
+    ))
+
+  (inner grid 0)
+)
+
+(fn FloodFill ([grid: char[,]] [start: Pos])
+  (let queue (new Queue<_>))
+
+  (fn inline Push (p) (.Enqueue queue p))
+  (fn inline Pop () (.Dequeue queue))
+  (fn inline IsEmpty () (= 0 (+Count queue)))
+
+  (Push start)
+
+  (let HEIGHT (Array2D.length1 grid))
+  (let WIDTH (Array2D.length2 grid))
+
+  (while (not (IsEmpty))
+    (let (x, y) (Pop))
+
+    (cond_
+      [(= #\# (.[y, x] grid)) ()]
+      [_
+        (set! (.[y, x] grid) #\#)
+
+        (for/in [(ox, oy) OFFSETS]
+          (let (nx, ny) ((+ x ox) , (+ y oy)))
+
+          (cond_
+            [(and
+              (and (>= nx 0) (< nx WIDTH))
+              (and (>= ny 0) (< ny HEIGHT))
+              (= #\. (.[ny, nx] grid))
+            )
+              (Push (nx, ny))
+            ()]
+            [_
+              ()
+            ]
+          )
+        )
+      ]
+    )
+  )
+
+
+  ()
+)
+
+(fn GetPositions ([instructions: array<Ins>])
+
+  (let positions (!vec))
+
+  (mut current (0, 0))
+  (mut first true)
+
+  (for/in [ins instructions]
+    (let color (+col ins))
+    (let amount (+amt ins))
+    (let dir (+dir ins))
+
+    (cond_
+      [first
+        (set! first false)
+        (.Add positions (current . color))
+      ]
+      [_ () ])
+
+    (let dirfun (GetDirFun dir))
+
+    (for/to [_ (1 to amount)]
+      (let next (->> current (dirfun)))
+
+      (.Add positions (next . color))
+
+      (set! current next)
+    )
+    ()
+  )
+
+  (.ToArray positions))
+
+(fn Part1 ([instructions: array<Ins>])
+  (let positions (!vec))
+
+  (mut current (0, 0))
+  (mut first true)
+  (for/in [ins instructions]
+    (let color (+col ins))
+    (let amount (+amt ins))
+    (let dir (+dir ins))
+
+    (cond_
+      [first
+        (set! first false)
+        (.Add positions (current . color))
+      ]
+      [_ () ])
+
+    (let dirfun (GetDirFun dir))
+
+    (for/to [_ (1 to amount)]
+      (let next (->> current (dirfun)))
+
+      (.Add positions (next . color))
+
+      (set! current next)
+    )
+    ()
+  )
+
+  (let minX (->> positions (Seq.map fst) (Seq.map fst) (Seq.min)))
+  (let maxX (->> positions (Seq.map fst) (Seq.map fst) (Seq.max)))
+  (let minY (->> positions (Seq.map fst) (Seq.map snd) (Seq.min)))
+  (let maxY (->> positions (Seq.map fst) (Seq.map snd) (Seq.max)))
+  (printfn "SIZE: %A" (minX, maxX, minY, maxY))
+
+  (let diffX (- maxX minX))
+  (let diffY (- maxY minY))
+
+  (let poly (->> positions (Seq.map fst) (Seq.map #(begin
+    (let (ox, oy) %1)
+    ((+ (abs minX) ox) , (+ (abs minY) oy))
+  )) (Set.ofSeq)))
+
+  (let grid (Array2D.create (inc (- maxY minY)) (inc (- maxX minX)) #\.))
+
+  (let HEIGHT (Array2D.length1 grid))
+  (let WIDTH (Array2D.length2 grid))
+  (printfn "(H, W) %A" (HEIGHT, WIDTH))
+
+  (for/in [((x, y) . _) positions]
+    (set! (.[(+ y (abs minY)), (+ x (abs minX))] grid) #\#))
+
+  ;; (printfn "%A" poly)
+  ;; (printfn "%s" (Display grid))
+
+  (let start (FindFillStart grid))
+  (printfn "%A" start)
+
+  (FloodFill grid start)
+
+  (->> (Array2D.ToSeq grid)
+    (Seq.fold #(match %2
+      [#\# (inc %1)]
+      [_ %1]
+    ) 0L)
+  ))
+
+
+(fn Part2 ([instructions: array<Ins>])
+  (fn Shoelace ([vs: array<Pos>])
+    (let area
+      (->> vs
+        (Seq.windowed 2)
+        (Seq.map #(begin
+          (let (p0x, p0y) (.[0] %1))
+          (let (p1x, p1y) (.[1] %1))
+          (int64 (+
+            (- (* p0x p1y) (* p0y p1x))
+            (abs (- p0x p1x))
+            (abs (- p0y p1y))
+          ))
+        ))
+        (Seq.reduce add))
+    )
+
+    (let (fx, fy) (.[0] vs))
+    (let (lx, ly) (.[(dec (+Length vs))] vs))
+
+    (let area (+ area (int64 (abs (- (* lx fy) (* ly lx))))))
+
+    (inc (/ area 2L))
+  )
+
+  (let vertices (Array.map fst (GetPositions instructions)))
+
+  (Shoelace vertices))
+
+(let parsed (ParseFile fileText))
+
+;; (printfn "%A" parsed)
+
+(let part1 (Part1 parsed))
+
+(WriteResult "part1" part1 (if example 62 62573))
+
+(let part2 (->> parsed (Array.map GetFixedIns) (Part2)))
+
+(WriteResult "part2" part2 (if example 952408144115L 54662804037719L))
+
+()
