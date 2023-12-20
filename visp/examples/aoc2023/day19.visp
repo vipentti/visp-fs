@@ -1,0 +1,323 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([text: ReadOnlySpan<char>] [ch: array<char>] )
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day19")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(union Op Gt Lt)
+(union Cat X M A S)
+
+(record Condition
+  [cat: Cat]
+  [op: Op]
+  [value: int])
+
+(record Workflow
+  [condition: Option<Condition>]
+  [target: string])
+
+(typedef Workflows array<Workflow>)
+
+(fn DefaultTarget ([flows: Workflows])
+  (->> flows
+    (Seq.pick #(match (+condition %1)
+      [None (Some (+target %1))]
+      [_ None]
+    ))
+  ))
+
+(record Ratings
+  [X: int]
+  [M: int]
+  [A: int]
+  [S: int])
+
+(typedef Pos int * int)
+
+(fn inline SumRatings ([r: Ratings])
+  (+ (+X r) (+M r) (+A r) (+S r)))
+
+(fn inline Select ([cat: Cat] [r: Ratings])
+  (match cat
+    [X (+X r)]
+    [M (+M r)]
+    [A (+A r)]
+    [S (+S r)]
+  ))
+
+(fn inline MatchesCond ([cnd: Condition] [r: Ratings])
+  (let val (Select (+cat cnd) r))
+  (match (+op cnd)
+    [Lt (< val (+value cnd))]
+    [Gt (> val (+value cnd))]
+  ))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (mut looping true)
+  ;; Parse workflows
+  (mut result (!map))
+
+  (while (and looping (.MoveNext lines))
+    (let line (+Current lines))
+    (cond_
+      [(+IsEmpty line) (set! looping false)]
+      [_
+        (let lbrace (.IndexOf line #\{ ))
+        (let rbrace (.IndexOf line #\} ))
+        (let name (.ToString (.Slice line 0 lbrace)))
+
+        (let flowParts (.Slice line (inc lbrace) (dec (- rbrace lbrace))))
+
+        ;; (printfn "%A" name)
+        ;; (printfn "%A" (.ToString flowParts))
+
+        (mut flowEnu (SpanSplitChars flowParts [|#\,|]))
+
+        (let steps (!vec))
+
+        (while (.MoveNext flowEnu)
+          (let part (+Current flowEnu))
+          (cond_
+            [(.Contains part #\:)
+              (let partIndex (.IndexOf part #\:))
+
+              (let conditionParts (.Slice part 0 partIndex))
+
+              ;; (printfn "condition %A" (.ToString conditionParts))
+
+              (let catCahr (.[0] conditionParts))
+              (let condCh (.[1] conditionParts))
+              (let condVal (span->int32 (.Slice conditionParts 2)))
+
+              (let condition
+                {|
+                  cat (match catCahr
+                    [#\a Cat.A]
+                    [#\x Cat.X]
+                    [#\s Cat.S]
+                    [#\m Cat.M]
+                    [_ (failwith "unreachable")]
+                  )
+                  op (match condCh
+                    [#\< Op.Lt]
+                    [#\> Op.Gt]
+                    [_ (failwith "unreachable")]
+                  )
+                  value condVal
+                |})
+              (let target (.Slice part (inc partIndex)))
+              (let flow {| condition (Some condition) target (.ToString target) |})
+              ;; (printfn "%A" flow)
+              (.Add steps flow)
+            ]
+            [_
+              (let target part)
+              (let flow {| condition None target (.ToString target) |})
+              ;; (printfn "no cond")
+              (.Add steps flow)
+            ]
+          )
+          ()
+        )
+
+        (set! result (Map.add name (.ToArray steps) result))
+      ]
+    ))
+
+  (let ratingParts (!vec))
+
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (let trimmed (.Trim line [| #\{ #\} |]))
+      ;; (printfn "%A" (.ToString trimmed))
+
+      (mut partsEnu (SpanSplitChars trimmed [|#\,|]))
+
+      (let _ (.MoveNext partsEnu))
+      (let X (span->int32 (.Slice (+Current partsEnu) 2)))
+      (let _ (.MoveNext partsEnu))
+      (let M (span->int32 (.Slice (+Current partsEnu) 2)))
+      (let _ (.MoveNext partsEnu))
+      (let A (span->int32 (.Slice (+Current partsEnu) 2)))
+      (let _ (.MoveNext partsEnu))
+      (let S (span->int32 (.Slice (+Current partsEnu) 2)))
+
+      (let rex {| X X M M A A S S })
+
+      (.Add ratingParts rex)
+
+    ))
+
+  (result . (.ToArray ratingParts))
+)
+
+(fn ApplyWorkflow ([flows: array<Workflow>] (ratings: Ratings))
+  (mut looping true)
+  (mut result None)
+  (mut enu (->> (Seq.ofArray flows) .GetEnumerator))
+  (while (and looping (.MoveNext enu))
+    (let flow (+Current enu))
+    (match (+condition flow)
+      [(Some cnd)
+        (when_ (MatchesCond cnd ratings)
+          (set! result (Some (+target flow)))
+          (set! looping false)
+        )
+      ]
+      [None
+        (set! result (Some (+target flow)))
+        (set! looping false)
+      ]))
+
+  result
+)
+
+(fn ApplyWorkflows [(flows: Map < string, Workflows >) (ratings: Ratings)]
+  (mut currentFlow (Map.find "in" flows))
+  (mut isAccepted false)
+  (mut looping true)
+
+  (while looping
+    (match (ApplyWorkflow currentFlow ratings)
+      [(Some "R")
+        (set! looping false)
+      ]
+      [(Some "A")
+        (set! isAccepted true)
+        (set! looping false)
+      ]
+      [(Some other)
+        (set! currentFlow (Map.find other flows))
+      ]
+      [None
+        (set! looping false)
+      ]
+    ))
+
+  isAccepted)
+
+(let g_SpanIndex (!map (Cat.X , 0) (Cat.M , 1) (Cat.A , 2) (Cat.S, 3)))
+(fn inline CatToIndex (c) (Map.find c g_SpanIndex))
+
+(fn Part2Combinations ([flows: Map < string, Workflows >] [dest: string] [spans: array<Pos>])
+
+  (fn rec InnerLoop ([flows: Map < string, Workflows >] [dest: string] [spans: array<Pos>] [ind: int])
+    (cond_
+      [(= dest "A")
+        (->> spans (Seq.map #(begin (let (s, e) %1) (int64 (inc (- e s))))) (Seq.reduce mul))
+      ]
+      [(= dest "R") 0L]
+
+      [_
+        (let rules (Map.find dest flows))
+
+        (cond_
+          [(< ind (+Length rules))
+            (let flow (.[ind] rules))
+
+            (match (+condition flow)
+              [(Some rule)
+                (let ruleIndex (CatToIndex (+cat rule)))
+                (let (start, end) (.[ruleIndex] spans))
+
+                (let op (+op rule))
+                (let value (+value rule))
+
+                (cond_
+                  [(or (and (= op Op.Lt) (>= start value))
+                      (and (= op Op.Gt) (<= end value)))
+                    (InnerLoop flows dest spans (inc ind))
+                  ]
+                  [(or (and (= op Op.Lt) (< end value))
+                       (and (= op Op.Gt) (> start value)))
+                    (InnerLoop flows (+target flow) spans 0)
+                  ]
+                  [(= op Op.Lt)
+                    (let lhs (start, (dec value)))
+                    (let rhs (value, end))
+
+                    (let lowers (Array.copy spans))
+                    (let higher (Array.copy spans))
+
+                    (set! (.[ruleIndex] lowers) lhs)
+                    (set! (.[ruleIndex] higher) rhs)
+
+                    (+
+                      (InnerLoop flows (+target flow) lowers 0)
+                      (InnerLoop flows dest higher 0)
+                    )
+                  ]
+                  [_
+                    (let lhs (start, value))
+                    (let rhs ((inc value), end))
+
+                    (let lowers (Array.copy spans))
+                    (let higher (Array.copy spans))
+
+                    (set! (.[ruleIndex] lowers) lhs)
+                    (set! (.[ruleIndex] higher) rhs)
+
+                    (+
+                      (InnerLoop flows dest lowers 0)
+                      (InnerLoop flows (+target flow) higher 0)
+                    )
+                  ]
+                )
+              ]
+              [None (InnerLoop flows (+target flow) spans 0)]
+            )]
+
+          [_
+            (InnerLoop flows (DefaultTarget rules) spans 0)
+          ])
+      ]
+    )
+  )
+
+  (InnerLoop flows dest spans 0)
+)
+
+(let (flows, parts) (ParseFile fileText))
+
+(let part1 (->> parts
+  (Array.filter (ApplyWorkflows flows))
+  (Array.map SumRatings)
+  (Array.reduce add)
+))
+
+(WriteResult "part1" part1 (if example 19114 346230))
+
+(let part2 (Part2Combinations flows "in" [| (1, 4000) (1, 4000) (1, 4000) (1, 4000) |]))
+
+(WriteResult "part2" part2 (if example 167409079868000L 124693661917133L))
+
+()
