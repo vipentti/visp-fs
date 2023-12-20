@@ -171,7 +171,7 @@ module Write =
 
 
     let reservedWords =
-        [ "fun"; "then"; "done"; "val"; "end"; "begin"; "mod"; "to"; "with" ]
+        [ "fun"; "then"; "done"; "val"; "end"; "begin"; "mod"; "to"; "with"; "fixed" ]
         |> Set.ofList
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
