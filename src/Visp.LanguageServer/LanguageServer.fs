@@ -334,6 +334,14 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.AddRange(textRangeOfPat args |> List.map SymbolDetails.Parameter)
 
+    | SynExpr.TypeAlias(name, _, _) ->
+        syms.Add(
+            SymbolDetails.Type(
+                Syntax.textOfSymbol name,
+                Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
+            )
+        )
+
     | SynExpr.Record(name, _, members, _, _)
     | SynExpr.Type(name, _, members, _, _) ->
         syms.Add(
