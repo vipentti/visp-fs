@@ -41,6 +41,7 @@
 (fn inline mul [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
 (fn inline div [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
 (fn inline rem [(lhs: ^a) (rhs: ^a)] (CoreMethods.rem_impl lhs rhs))
+(fn inline erem [(lhs: ^a) (rhs: ^a)] (CoreMethods.euc_rem_impl lhs rhs))
 (fn inline sub1 [a] (- a LanguagePrimitives.GenericOne))
 (fn inline dec [a] (- a LanguagePrimitives.GenericOne))
 (fn inline add1 [a] (+ a LanguagePrimitives.GenericOne))
