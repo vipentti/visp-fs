@@ -60,13 +60,13 @@ let Something () =
           brokenLength
         // line 38 @"nested-macro-expansion-1.visp"
         if CoreMethods.isTruthy(
-          CoreMethods.``not``(
+          (CoreMethods.``not``((
             if CoreMethods.isTruthy(
-              (
+              ((
                 // line 38 @"nested-macro-expansion-1.visp"
                 let orTemp =
                   // line 38 @"nested-macro-expansion-1.visp"
-                  CoreMethods.``eq?``(off, 0)
+                  off = 0
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(
                   orTemp)
@@ -74,15 +74,16 @@ let Something () =
                     orTemp
                   else
                     // line 38 @"nested-macro-expansion-1.visp"
-                    CoreMethods.``neq?``((conditions.[dec off]), '#')))
+                                        // line 38 @"nested-macro-expansion-1.visp"
+                    ((conditions.[dec off])) <> '#')))
               then
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(
-                  (
+                  ((
                     // line 38 @"nested-macro-expansion-1.visp"
                     let orTemp =
                       // line 38 @"nested-macro-expansion-1.visp"
-                      CoreMethods.``eq?``(offsetEnd, (conditions.Length))
+                      offsetEnd = ((conditions.Length))
                     // line 38 @"nested-macro-expansion-1.visp"
                     if CoreMethods.isTruthy(
                       orTemp)
@@ -91,19 +92,20 @@ let Something () =
                       else
                         // line 38 @"nested-macro-expansion-1.visp"
                         if CoreMethods.isTruthy(
-                          CoreMethods.``lt``(offsetEnd, (conditions.Length)))
+                          (offsetEnd < ((conditions.Length))))
                           then
                             // line 38 @"nested-macro-expansion-1.visp"
-                            CoreMethods.``neq?``((conditions.[offsetEnd]), '#')
+                                                        // line 38 @"nested-macro-expansion-1.visp"
+                            ((conditions.[offsetEnd])) <> '#'
                           else
-                            false))
+                            false)))
                   then
                     // line 38 @"nested-macro-expansion-1.visp"
-                    CoreMethods.``not``(((conditions.AsSpan(off, brokenLength)).Contains('.')))
+                    CoreMethods.``not``((((conditions.AsSpan(off, brokenLength)).Contains('.'))))
                   else
                     false
               else
-                false))
+                false))))
           then
             // line 38 @"nested-macro-expansion-1.visp"
             
@@ -111,13 +113,13 @@ let Something () =
           else
             // line 38 @"nested-macro-expansion-1.visp"
             if CoreMethods.isTruthy(
-              CoreMethods.``eq?``(bi, dec brokenLength))
+              (bi = (dec brokenLength)))
               then
                 // line 38 @"nested-macro-expansion-1.visp"
                 
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(
-                  CoreMethods.``not``(((conditions.AsSpan(offsetEnd)).Contains('#'))))
+                  (CoreMethods.``not``((((conditions.AsSpan(offsetEnd)).Contains('#'))))))
                   then
                     // line 38 @"nested-macro-expansion-1.visp"
                     
@@ -127,7 +129,7 @@ let Something () =
               else
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(
-                  Value.keyword(":else"))
+                  (Value.keyword(":else")))
                   then
                     // line 38 @"nested-macro-expansion-1.visp"
                     
@@ -137,7 +139,7 @@ let Something () =
                       System.Array.BinarySearch (possibleOffsets, inc offsetEnd)
                     // line 38 @"nested-macro-expansion-1.visp"
                     if CoreMethods.isTruthy(
-                      CoreMethods.``lt``(nextPossibleIndex, 0))
+                      (nextPossibleIndex < 0))
                       then
                         // line 38 @"nested-macro-expansion-1.visp"
                         

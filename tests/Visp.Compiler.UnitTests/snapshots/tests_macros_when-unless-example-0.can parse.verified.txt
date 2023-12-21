@@ -23,7 +23,7 @@ if CoreMethods.isTruthy(
 let visp_result_todo =
   // line 25 @"when-unless-example-0.visp"
   if CoreMethods.isTruthy(
-    CoreMethods.``not``(false))
+    (CoreMethods.``not``(false)))
     then
       // line 25 @"when-unless-example-0.visp"
       

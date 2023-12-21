@@ -13,7 +13,7 @@ type Counter () =
   member _.DoStuff () =
     // line 11 @"while-match-0.visp"
     if CoreMethods.isTruthy(
-      count > 6)
+      (count > 6))
       then
         None
       else

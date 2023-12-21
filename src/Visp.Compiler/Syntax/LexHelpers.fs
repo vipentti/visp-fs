@@ -317,6 +317,15 @@ let specialSymbol (s: string) =
     | "-" -> Some(OP_MINUS)
     | "/" -> Some(OP_DIV)
     | "*" -> Some(OP_MULT)
+    | ">" -> Some(OP_GREATER)
+    | ">=" -> Some(GREATER_EQUALS)
+    | "<" -> Some(OP_LESS)
+    | "<=" -> Some(LESS_EQUALS)
+    | "!=" -> Some(BANG_EQUALS)
+    | "=" -> Some(EQUALS)
+    | "&&" -> Some(AMP_AMP)
+    | "||" -> Some(BAR_BAR)
+    | ">>" -> Some(GREATER_GREATER)
     | _ -> None
 
 let symbolOrKeyword (ctx: LexContext) (s: string) =

@@ -11,7 +11,7 @@ let ``macro_my-cond_`` = "__MACRO_INIT__"
 let visp_result_todo =
   // line 22 @"cond-macro-1.visp"
   if CoreMethods.isTruthy(
-    CoreMethods.``gt``(0, 1))
+    (0 > 1))
     then
       // line 22 @"cond-macro-1.visp"
       
@@ -23,7 +23,7 @@ let visp_result_todo =
     else
       // line 22 @"cond-macro-1.visp"
       if CoreMethods.isTruthy(
-        CoreMethods.``lt``(1, 0))
+        (1 < 0))
         then
           // line 22 @"cond-macro-1.visp"
           

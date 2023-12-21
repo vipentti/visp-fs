@@ -56,27 +56,27 @@ type TileMap (grid: Grid , start: Pos) =
         (pos.X)
       // line 33 @"nested-macro-expansion-0.visp"
       if CoreMethods.isTruthy(
-        
+        (
           if CoreMethods.isTruthy(
-            
+            (
               if CoreMethods.isTruthy(
-                CoreMethods.``gte``(y, 0))
+                (y >= 0))
                 then
                   // line 33 @"nested-macro-expansion-0.visp"
-                  CoreMethods.``lt``(y, (grid.Length))
+                  y < ((grid.Length))
                 else
-                  false)
+                  false))
             then
               // line 33 @"nested-macro-expansion-0.visp"
               if CoreMethods.isTruthy(
-                CoreMethods.``gte``(x, 0))
+                (x >= 0))
                 then
                   // line 33 @"nested-macro-expansion-0.visp"
-                  CoreMethods.``lt``(x, ((grid.[0]).Length))
+                  x < (((grid.[0]).Length))
                 else
                   false
             else
-              false)
+              false))
         then
           // line 33 @"nested-macro-expansion-0.visp"
           

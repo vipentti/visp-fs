@@ -30,10 +30,10 @@ type Range (start: int64 , len: int64) =
   member d.Contains v =
     // line 8 @"struct-example-1.visp"
     if CoreMethods.isTruthy(
-      CoreMethods.``gte``(v, (d.Start)))
+      (v >= ((d.Start))))
       then
         // line 8 @"struct-example-1.visp"
-        CoreMethods.``lt``(v, (d.End))
+        v < ((d.End))
       else
         false
 
@@ -85,7 +85,7 @@ type SourceDestMap (dest: int64 , src: int64 , len: int64) =
   member d.Get src =
     // line 29 @"struct-example-1.visp"
     if CoreMethods.isTruthy(
-      ((d.Src).Contains src))
+      (((d.Src).Contains src)))
       then
         // line 29 @"struct-example-1.visp"
         (d
@@ -99,7 +99,7 @@ type SourceDestMap (dest: int64 , src: int64 , len: int64) =
       else
         // line 29 @"struct-example-1.visp"
         if CoreMethods.isTruthy(
-          Value.keyword(":else"))
+          (Value.keyword(":else")))
           then
             src
           else

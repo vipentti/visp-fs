@@ -32,10 +32,10 @@ type Range (start: int64 , len: int64) =
   member d.Contains v =
     // line 25 @"struct-macro-3.visp"
     if CoreMethods.isTruthy(
-      CoreMethods.``gte``(v, (d.Start)))
+      (v >= ((d.Start))))
       then
         // line 25 @"struct-macro-3.visp"
-        CoreMethods.``lt``(v, (d.End))
+        v < ((d.End))
       else
         false
 

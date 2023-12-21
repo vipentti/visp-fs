@@ -46,7 +46,7 @@ type MyCustomValue =
           true
         | ((String lhs) , (String rhs)) ->
           // line 33 @"custom-comparison-0.visp"
-          CoreMethods.``eq?``(lhs, rhs)
+          lhs = rhs
         | (_ , _) ->
           false
 
@@ -85,7 +85,7 @@ printfn "Nil < String %A" (MyCustomValue.Nil < (MyCustomValue.String "hello"))
 // line 59 @"custom-comparison-0.visp"
 printfn "Nil > String %A" (MyCustomValue.Nil > (MyCustomValue.String "hello"))
 // line 60 @"custom-comparison-0.visp"
-printfn "String = String %A" (CoreMethods.``eq?``(MyCustomValue.String "hello", MyCustomValue.String "hello"))
+printfn "String = String %A" ((MyCustomValue.String "hello") = (MyCustomValue.String "hello"))
 // line 62 @"custom-comparison-0.visp"
 let visp_result_todo = ()
 // line 62 @"custom-comparison-0.visp"

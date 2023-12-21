@@ -51,6 +51,12 @@ type SynSymbol =
         let (SynSymbol(id)) = this
         id.idRange
 
+module Symbol =
+    let concat sep (syms: SynSymbol seq) =
+        let rr = syms |> Seq.map _.Range |> Seq.reduce Range.unionRanges
+        let text = syms |> Seq.map _.Text |> String.concat sep
+        SynSymbol(Ident(text, rr))
+
 type SynKeyword = SynKeyword of ident: Ident
 
 type SynKeyword with
@@ -696,6 +702,8 @@ module Syntax =
     let mkSynSymbol s range = (SynSymbol(Ident(s, range)))
     let mkSynExprSymbol s range = SynExpr.Symbol(mkSynSymbol s range)
     let mkSynSymbolExpr s range = SynExpr.Symbol(mkSynSymbol s range)
+
+    let mkSynTypeIdent s range = (SynType.Ident(Ident(s, range)))
 
     let mkInferredName n range =
         SynName.Inferred(mkSynSymbol n range, range)
