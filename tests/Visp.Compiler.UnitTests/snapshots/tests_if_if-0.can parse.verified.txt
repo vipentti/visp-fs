@@ -21,7 +21,7 @@ let alt () =
 let visp_result_todo =
   // line 12 @"if-0.visp"
   if CoreMethods.isTruthy(
-    condition ())
+    (condition ()))
     then
       // line 13 @"if-0.visp"
       _then ()

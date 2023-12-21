@@ -11,19 +11,19 @@ let ``macro_my-cond`` = "__MACRO_INIT__"
 let visp_result_todo =
   // line 17 @"cond-macro-0.visp"
   if CoreMethods.isTruthy(
-    CoreMethods.``gt``(0, 0))
+    (0 > 0))
     then
       1
     else
       // line 17 @"cond-macro-0.visp"
       if CoreMethods.isTruthy(
-        CoreMethods.``lt``(0, 0))
+        (0 < 0))
         then
           2
         else
           // line 17 @"cond-macro-0.visp"
           if CoreMethods.isTruthy(
-            Value.keyword(":else"))
+            (Value.keyword(":else")))
             then
               3
             else

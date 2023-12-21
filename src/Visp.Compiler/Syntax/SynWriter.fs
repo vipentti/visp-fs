@@ -9,7 +9,6 @@ open Visp.Compiler.Writer
 open Visp.Common
 open Visp.Compiler.Syntax
 open Visp.Compiler.Text
-open System.Globalization
 open System.Collections.Generic
 
 open Visp.Runtime.Library.CompileHelpers
@@ -655,7 +654,7 @@ module Write =
                     match cond with
                     | Some(cond) ->
                         string w "when CoreMethods.isTruthy("
-                        writeExpr w WriteState.Arg cond
+                        writeExprInParens w WriteState.Arg cond
                         string w ") "
                     | None -> ()
 
@@ -790,7 +789,7 @@ module Write =
             string w "if CoreMethods.isTruthy("
             use _ = withIndent w false
             newlineIndent w
-            writeExpr w WriteState.Inline cond
+            writeExprInParens w WriteState.Inline cond
             string w ")"
             newlineIndent w
             string w "then"
@@ -922,7 +921,7 @@ module Write =
                                 writeExpr w WriteState.Arg expr
                                 string w ")"
                             else
-                                writeExpr w WriteState.Arg expr
+                                writeExprInParens w WriteState.Arg expr
 
                             ()
 
@@ -1656,6 +1655,8 @@ module Write =
                 writeExpr w WriteState.Inline rhs
                 string w ")"
             | _ -> writeInlineSeparated w ($" {op} ") writeExprInParens args
+
+        | "!=" -> writeOp w st (SynOp.Infix(SynSymbol(Ident("<>", op.Range)), args, r))
 
         | op -> writeInlineSeparated w ($" {op} ") writeExprInParens args
 

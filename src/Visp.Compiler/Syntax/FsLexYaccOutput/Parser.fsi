@@ -96,6 +96,13 @@ type token =
   | OP_GREATER
   | OP_LESS
   | COLON_QMARK
+  | EQUALS
+  | AMP_AMP
+  | BAR_BAR
+  | GREATER_EQUALS
+  | LESS_EQUALS
+  | GREATER_GREATER
+  | BANG_EQUALS
   | TRUE
   | FALSE
   | NIL
@@ -217,6 +224,13 @@ type tokenId =
     | TOKEN_OP_GREATER
     | TOKEN_OP_LESS
     | TOKEN_COLON_QMARK
+    | TOKEN_EQUALS
+    | TOKEN_AMP_AMP
+    | TOKEN_BAR_BAR
+    | TOKEN_GREATER_EQUALS
+    | TOKEN_LESS_EQUALS
+    | TOKEN_GREATER_GREATER
+    | TOKEN_BANG_EQUALS
     | TOKEN_TRUE
     | TOKEN_FALSE
     | TOKEN_NIL
@@ -269,6 +283,7 @@ type nonTerminalId =
     | NONTERM_rev_expr_list
     | NONTERM_expr_list_or_empty
     | NONTERM_recover
+    | NONTERM_symbol_with_ops
     | NONTERM_expr
     | NONTERM_brace_bar
     | NONTERM_bracket_bar
@@ -332,6 +347,11 @@ type nonTerminalId =
     | NONTERM_let
     | NONTERM_mut
     | NONTERM_letstar
+    | NONTERM_type_name_text
+    | NONTERM_syn_type_name
+    | NONTERM_type_name
+    | NONTERM_symbol_comma_list
+    | NONTERM_rev_symbol_comma_list
     | NONTERM_type_expr
     | NONTERM_tuple_arg_pats
     | NONTERM_list_arg_pats
@@ -392,6 +412,10 @@ type nonTerminalId =
     | NONTERM_syn_comma
     | NONTERM_raw_syntype_ident_text
     | NONTERM_syntype_ident
+    | NONTERM_syntype_comma_list
+    | NONTERM_rev_syntype_comma_list
+    | NONTERM_syntype_ident_list
+    | NONTERM_rev_syntype_ident_list
     | NONTERM_syn_type
     | NONTERM_syn_type_generic_list
     | NONTERM_rev_syn_type_generic_list
@@ -399,11 +423,10 @@ type nonTerminalId =
     | NONTERM_arrayTypeSuffix
     | NONTERM_syn_type_tuple_list
     | NONTERM_rev_syn_type_tuple_list
-    | NONTERM_syntype_comma_list
-    | NONTERM_rev_syntype_comma_list
     | NONTERM_constant
     | NONTERM_rawConstant
     | NONTERM_function_def
+    | NONTERM_function_def_name
     | NONTERM_function_def_args
     | NONTERM_invalid_function_def
     | NONTERM_function_call

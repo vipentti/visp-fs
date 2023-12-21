@@ -32,7 +32,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token LBRACKET RBRACKET
 %token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE PAREN_BAR BAR_PAREN BRACKET_BAR BAR_BRACKET
 %token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR COLON_GREATER
-%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS COLON_QMARK
+%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS COLON_QMARK EQUALS AMP_AMP BAR_BAR GREATER_EQUALS LESS_EQUALS GREATER_GREATER BANG_EQUALS
 %token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
 %token AT
@@ -94,6 +94,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc OPEN MODULE
 %nonassoc prec_constant
 
+%nonassoc prec_vector
 %nonassoc prec_at_expr
 %nonassoc prec_expr
 %nonassoc prec_new_exprs
@@ -254,9 +255,15 @@ recover:
    | error %prec prec_error { true }
    | EOF { false }
 
+symbol_with_ops:
+    | SYMBOL { Syntax.mkSynSymbol $1 (rhs parseState 1) }
+    | SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}>" (rhs2 parseState 1 2) }
+    | SYMBOL OP_GREATER SYMBOL { Syntax.mkSynSymbol $"{$1}>{$3}" (rhs2 parseState 1 3) }
+    | SYMBOL OP_LESS SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}<{$3}>" (rhs2 parseState 1 4) }
+
 expr:
     | constant %prec prec_constant { SynExpr.Const(fst $1, snd $1) }
-    | symbol { SynExpr.Symbol($1) }
+    | symbol_with_ops { SynExpr.Symbol($1) }
     | keyword { SynExpr.Keyword($1) }
     | AT expr %prec prec_at_expr { SynExpr.Deref(true, $2, lhs parseState) }
     | QUOTE_SYM quoted_expr %prec prec_at_expr
@@ -265,7 +272,7 @@ expr:
     | HASH_BRACE expr_list_or_empty RBRACE { CollExpr.mkHashSet $2 (lhs parseState)}
     | HASH_PAREN lambda_short_expr_list RPAREN
         { SynExpr.LambdaShort($2, lhs parseState)}
-    | vector_start
+    | vector_start %prec prec_expr
         { $1 }
 
     | brace_bar { $1 }
@@ -291,8 +298,8 @@ lambda_short_expr_list:
     | parens_expr { $1 }
 
 vector_start:
-    | LBRACKET RBRACKET { CollExpr.mkVector [] (lhs parseState) }
-    | LBRACKET expr_list RBRACKET { CollExpr.mkVector $2 (lhs parseState) }
+    | LBRACKET RBRACKET %prec prec_vector { CollExpr.mkVector [] (lhs parseState) }
+    | LBRACKET expr_list RBRACKET %prec prec_vector { CollExpr.mkVector $2 (lhs parseState) }
 
 inside_parens:
     | LPAREN RPAREN { SynExpr.Const (SynConst.Unit, lhs parseState) }
@@ -533,9 +540,9 @@ concat_expr:
         { SynExpr.Concat(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)}
 
 new_expr:
-    | NEW syntype_ident
+    | NEW syn_type_name
         { SynExpr.New($2, [], lhs parseState) }
-    | NEW syntype_ident expr_list
+    | NEW syn_type_name expr_list
         { SynExpr.New($2, $3, lhs parseState) }
     | NEW
         { SynExpr.New(Syntax.parserRecoveryType (lhs parseState), [], lhs parseState) }
@@ -716,6 +723,13 @@ op_sym:
     | OP_GREATER    { Syntax.mkSynSymbol ">" (rhs parseState 1) }
     | OP_LESS       { Syntax.mkSynSymbol "<" (rhs parseState 1) }
     | COLON_GREATER { Syntax.mkSynSymbol ":>" (rhs parseState 1) }
+    | EQUALS        { Syntax.mkSynSymbol "=" (rhs parseState 1) }
+    | AMP_AMP       { Syntax.mkSynSymbol "&&" (rhs parseState 1) }
+    | BAR_BAR       { Syntax.mkSynSymbol "||" (rhs parseState 1) }
+    | OP_GREATER OP_GREATER { Syntax.mkSynSymbol ">>" (rhs2 parseState 1 2) }
+    | GREATER_EQUALS   { Syntax.mkSynSymbol ">=" (rhs parseState 1) }
+    | LESS_EQUALS      { Syntax.mkSynSymbol "<=" (rhs parseState 1) }
+    | BANG_EQUALS      { Syntax.mkSynSymbol "!=" (rhs parseState 1) }
 
 operators_not_in_parens:
     | op_sym { SynOp.Infix($1, [], lhs parseState) }
@@ -785,14 +799,51 @@ letstar:
     | LETSTAR binding_list_start expr_list
         { SynExpr.LetStar($2, $3, lhs parseState) }
 
+type_name_text:
+    | SYMBOL { ($1, (rhs parseState 1)) }
+    | SYMBOL OP_LESS SYMBOL OP_GREATER
+        { ($"{$1}<{$3}>", rhs2 parseState 1 4) }
+    | SYMBOL OP_LESS SYMBOL COMMA symbol_comma_list OP_GREATER
+        {
+          let lst = $3 :: $5
+          let args = String.concat "," lst
+          ($"{$1}<{args}>", rhs2 parseState 1 6) }
+
+syn_type_name:
+    | type_name_text
+        {
+            let (text, range) = $1
+            Syntax.mkSynTypeIdent text range
+        }
+
+type_name:
+    | type_name_text
+        {
+            let (text, range) = $1
+            Syntax.mkSynSymbol text range
+        }
+    // | SYMBOL { (Syntax.mkSynSymbol $1 (rhs parseState 1)) }
+    // | SYMBOL OP_LESS SYMBOL OP_GREATER
+    //     { Syntax.mkSynSymbol ($"{$1}<{$3}>") (rhs2 parseState 1 4) }
+    // | SYMBOL OP_LESS SYMBOL COMMA symbol_comma_list OP_GREATER
+    //     {
+    //       let lst = $3 :: $5
+    //       let args = String.concat "," lst
+    //       Syntax.mkSynSymbol ($"{$1}<{args}>") (rhs2 parseState 1 6) }
+
+symbol_comma_list: rev_symbol_comma_list { List.rev $1 }
+rev_symbol_comma_list:
+    | SYMBOL { [$1] }
+    | rev_symbol_comma_list COMMA SYMBOL { $3 :: $1 }
+
 type_expr:
-    | TYPEALIAS syn_symbol syn_type
+    | TYPEALIAS type_name syn_type
         { SynExpr.TypeAlias($2, $3, lhs parseState) }
-    | TYPE syn_symbol tuple_arg_pats %prec prec_type_expr
+    | TYPE type_name tuple_arg_pats %prec prec_type_expr
         { SynExpr.Type($2, $3, [], [], lhs parseState) }
-    | TYPE syn_symbol tuple_arg_pats member_list_start
+    | TYPE type_name tuple_arg_pats member_list_start
         { SynExpr.Type($2, $3, $4, [], lhs parseState) }
-    | attribute_list TYPE syn_symbol tuple_arg_pats member_list_start
+    | attribute_list TYPE type_name tuple_arg_pats member_list_start
         { SynExpr.Type($3, $4, $5, $1, lhs parseState) }
 
 tuple_arg_pats:
@@ -827,12 +878,12 @@ list_arg_pats:
         }
 
 union_expr:
-    | UNION symbol union_labels_or_members
+    | UNION type_name union_labels_or_members
         {
             let labels, members = Syntax.partitionChoices $3
             SynExpr.Union($2, labels, members, [] , lhs parseState)
         }
-    | attribute_list UNION symbol union_labels_or_members
+    | attribute_list UNION type_name union_labels_or_members
         {
             let labels, members = Syntax.partitionChoices $4
             SynExpr.Union($3, labels, members, $1 , lhs parseState)
@@ -868,12 +919,12 @@ union_field:
         { UnionField.Named($2, $4, lhs parseState) }
 
 record_expr:
-    | RECORD symbol record_labels_or_members
+    | RECORD type_name record_labels_or_members
         {
             let members, labels = Syntax.partitionChoices $3
             SynExpr.Record($2, labels, members, [] , lhs parseState)
         }
-    | attribute_list RECORD symbol record_labels_or_members
+    | attribute_list RECORD type_name record_labels_or_members
         {
             let members, labels = Syntax.partitionChoices $4
             SynExpr.Record($3, labels, members, $1 , lhs parseState)
@@ -998,9 +1049,9 @@ member_in_parens:
         { SynTypeMember.OverrideMember($2, $3, lhs parseState) }
     | OVERRIDE FN syn_symbol list_arg_pats expr_list
         { SynTypeMember.OverrideFn($3, $4, $5, (lhs parseState)) }
-    | INTERFACE syn_symbol
+    | INTERFACE symbol_with_ops
         { SynTypeMember.Interface($2, [], lhs parseState)}
-    | INTERFACE syn_symbol member_list
+    | INTERFACE symbol_with_ops member_list
         { SynTypeMember.Interface($2, $3, lhs parseState)}
 
 tok_lparen:
@@ -1088,24 +1139,26 @@ syntype_ident:
         { let text = $2
           SynType.Ident(Ident("'" + text, lhs parseState))
         }
-    | raw_syntype_ident_text COMMA syntype_comma_list
-        {
-            let text = $1
-            let rest = $3
-            SynType.Ident(Ident(text + "," + (String.concat "," rest), lhs parseState))
-        }
+    //| raw_syntype_ident_text COMMA syntype_comma_list
+    //    {
+    //        let text = $1
+    //        let rest = $3
+    //        SynType.Ident(Ident(text + "," + (String.concat "," rest), lhs parseState))
+    //    }
+    | syntype_ident OP_LESS syntype_ident OP_GREATER
+        { SynType.Generic($1, [$3], lhs parseState) }
+    | syntype_ident OP_LESS syntype_ident COMMA syntype_ident_list OP_GREATER
+        { SynType.Generic($1, $3 :: $5, lhs parseState) }
 
-// syn_type_paren_open:
-//     | LPAREN %prec prec_syn_type_paren_op { () }
-//     | LBRACKET %prec prec_syn_type_paren_op { () }
-//
-// syn_type_paren_close:
-//     | RPAREN %prec prec_syn_type_paren { () }
-//     | RBRACKET %prec prec_syn_type_paren { () }
-//
-// syn_type_paren:
-//     | syn_type_paren_open syn_type syn_type_paren_close { SynType.Paren($2, lhs parseState) }
-//     // | LBRACKET syn_type RBRACKET { SynType.Paren($2, lhs parseState) }
+syntype_comma_list: rev_syntype_comma_list { List.rev $1 }
+rev_syntype_comma_list:
+    | raw_syntype_ident_text %prec prec_syn_type { [$1] }
+    | rev_syntype_comma_list COMMA SYMBOL %prec prec_syn_comma { $3 :: $1 }
+
+syntype_ident_list: rev_syntype_ident_list { List.rev $1 }
+rev_syntype_ident_list:
+    | syntype_ident %prec prec_syn_type { [$1] }
+    | rev_syntype_ident_list COMMA syntype_ident %prec prec_syn_comma { $3 :: $1 }
 
 syn_type:
     // | syn_type_paren %prec prec_syn_type_paren { $1 }
@@ -1149,11 +1202,6 @@ syn_type_tuple_list: rev_syn_type_tuple_list %prec prec_syn_type_mult { List.rev
 rev_syn_type_tuple_list:
     | syn_type %prec prec_syn_type_mult { [SynTypeTupleSegment.Type($1)] }
     | rev_syn_type_tuple_list OP_MULT syn_type %prec prec_syn_type_mult { SynTypeTupleSegment.Type($3) :: SynTypeTupleSegment.Star(rhs parseState 2) :: $1 }
-
-syntype_comma_list: rev_syntype_comma_list { List.rev $1 }
-rev_syntype_comma_list:
-    | raw_syntype_ident_text %prec prec_syn_type { [$1] }
-    | rev_syntype_comma_list COMMA SYMBOL %prec prec_syn_comma { $3 :: $1 }
 
 constant:
     | rawConstant { ($1, (rhs parseState 1))}
@@ -1214,19 +1262,23 @@ rawConstant:
           SynConst.Char(parseChar text) }
 
 function_def:
-    | FN symbol function_def_args expr_list %prec prec_fn
+    | FN function_def_name function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($2, FunctionFlags.None, $3, $4, (lhs parseState)) }
-    | FN INLINE symbol function_def_args expr_list %prec prec_fn
+    | FN INLINE function_def_name function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, $5, (lhs parseState)) }
-    | FN REC INLINE symbol function_def_args expr_list %prec prec_fn
+    | FN REC INLINE function_def_name function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($4, FunctionFlags.Recursive ||| FunctionFlags.Inline, $5, $6, (lhs parseState)) }
-    | FN REC symbol function_def_args expr_list %prec prec_fn
+    | FN REC function_def_name function_def_args expr_list %prec prec_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Recursive, $4, $5, (lhs parseState)) }
     | FN function_def_args expr_list %prec prec_lambda_def
         { SynExpr.LambdaDef(SynLambda($2, $3, (lhs parseState))) }
     | FNSTAR function_def_args expr_list
         { SynExpr.LambdaDef(SynLambda($2, $3, (lhs parseState))) }
     | invalid_function_def %prec prec_invalid_fn { $1 }
+
+function_def_name:
+    | symbol { $1 }
+    | symbol OP_GREATER symbol { Symbol.concat ">" [$1; $3] }
 
 function_def_args: list_arg_pats { $1 }
 
@@ -1235,15 +1287,15 @@ invalid_function_def:
     | FN %prec prec_invalid_fn
         { SynExpr.LambdaDef(SynLambda(mkRecoveryPat parseState, [], (lhs parseState))) }
     // TODO: Report
-    | FN symbol %prec prec_invalid_fn
+    | FN function_def_name %prec prec_invalid_fn
         { SynExpr.FunctionDef($2, FunctionFlags.None, mkRecoveryPat parseState, [], lhs parseState) }
     // TODO: Report
     | FN function_def_args %prec prec_invalid_fn
         { SynExpr.LambdaDef(SynLambda(mkRecoveryPat parseState, [], (lhs parseState))) }
     // TODO: Report
-    | FN symbol function_def_args %prec prec_invalid_fn
+    | FN function_def_name function_def_args %prec prec_invalid_fn
         { SynExpr.FunctionDef($2, FunctionFlags.None, $3, [], (lhs parseState)) }
-    | FN INLINE symbol function_def_args %prec prec_invalid_fn
+    | FN INLINE function_def_name function_def_args %prec prec_invalid_fn
         { SynExpr.FunctionDef($3, FunctionFlags.Inline, $4, [], (lhs parseState)) }
 
 function_call:

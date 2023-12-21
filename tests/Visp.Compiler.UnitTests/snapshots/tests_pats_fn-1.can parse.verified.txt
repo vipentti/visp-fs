@@ -13,11 +13,11 @@ let WithPred (pred: ('T -> bool)) t =
 // line 11 @"fn-1.visp"
 printfn "WithPred: %A" (WithPred ((fun arg1 ->
   // line 11 @"fn-1.visp"
-  CoreMethods.``eq?``(arg1, 1))) 1)
+  arg1 = 1)) 1)
 // line 12 @"fn-1.visp"
 printfn "WithPred: %A" (WithPred ((fun arg1 ->
   // line 12 @"fn-1.visp"
-  CoreMethods.``eq?``(arg1, 1))) 0)
+  arg1 = 1)) 0)
 // line 14 @"fn-1.visp"
 let visp_result_todo = ()
 // line 14 @"fn-1.visp"
