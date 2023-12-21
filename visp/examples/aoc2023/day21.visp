@@ -1,0 +1,259 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require FSharpx.Collections "3.1.0")
+
+(open System)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open FSharpx.Collections)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day21")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(union Dir
+  Up
+  Left
+  Down
+  Right)
+
+(typedef Pos int * int)
+(typedef Grid char[,])
+
+(fn inline LeftOf ([(x, y): Pos]) ((dec x), y))
+(fn inline RightOf ([(x, y): Pos]) ((inc x), y))
+(fn inline UpOf ([(x, y): Pos]) (x, (dec y)))
+(fn inline DownOf ([(x, y): Pos]) (x, (inc y)))
+
+(let G_DIRS [| Dir.Up Dir.Left Dir.Down Dir.Right |])
+
+(fn inline GetDirFun ([d: Dir])
+  (match d
+    [Up UpOf]
+    [Down DownOf]
+    [Left LeftOf]
+    [Right RightOf]
+  ))
+
+(fn inline Around ([p: Pos])
+  (->> G_DIRS
+    (Array.map #(->> p (GetDirFun %1)))))
+
+(fn inline Width ([g: Grid]) (Array2D.length2 g))
+(fn inline Height ([g: Grid]) (Array2D.length1 g))
+
+(fn inline AroundGrid ([g: Grid] [p: Pos])
+  (->> p
+    (Around)
+    (Array.filter #(begin
+      (let (x, y) %1)
+      (cond_
+        [(&&
+           (&& (>= x 0) (< x (Width g)))
+           (&& (>= y 0) (< y (Height g))))
+          (match (.[y, x] g)
+            [#\S true]
+            [#\O true]
+            [#\. true]
+            [_ false]
+          )]
+        [_ false]
+      )))))
+
+(fn inline AroundGridSeq ([g: Grid] [p: Pos])
+  (seq->
+    (let w (Width g))
+    (let h (Height g))
+    (for/in [dir G_DIRS]
+      (let nextp (->> p (GetDirFun dir)))
+      (let (x, y) nextp)
+      (cond_
+        [(&&
+           (&& (>= x 0) (< x w))
+           (&& (>= y 0) (< y h)))
+          (match (.[y, x] g)
+            [#\# ()]
+            [_ (yield nextp)]
+          )]
+        [_ ()]
+      ))))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (mut yi 0)
+
+  (let res (!vec))
+  (mut start (0, 0))
+
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+
+    (unless (+IsEmpty line)
+      (mut xi 0)
+      (for/in [ch line]
+        (match ch
+          [#\S (set! start (xi, yi)) ]
+          [_ ()])
+        (up! xi inc))
+      (.Add res (.ToArray line))
+      (up! yi inc)
+    ))
+
+  ((array2D (.ToArray res)) . start))
+
+(let (map, start) (ParseFile fileText))
+
+(typedef PosStep Pos * int)
+
+(fn Fill ([map: Grid] [start: Pos] [maxSteps: int])
+  (fn rec Recurse ([map: Grid] [steps: int] results)
+    (cond_
+      [(= steps 0) results]
+      [_
+        (Recurse map (dec steps) (->> results
+          (Seq.map (AroundGridSeq map))
+          (Seq.concat)
+          (Set.ofSeq)))
+      ])
+  )
+  (Recurse map maxSteps (Set.singleton start)))
+
+(fn CountPoints ([map: Grid] [start: Pos] [maxSteps: int])
+  (mut ans (!set))
+  (mut seen (Set.singleton start))
+  (mut que (->> Queue.empty<_> (Queue.conj (start . maxSteps))))
+  (mut looping true)
+
+  (while looping
+    (match (Queue.tryUncons que)
+      [None (set! looping false)]
+      [(Some ((pos, steps), nq))
+        (set! que nq)
+
+        (when_ (= (rem steps 2) 0)
+          (set! ans (Set.add pos ans)))
+
+        (cond_
+          [(= steps 0) ()]
+          [_
+            (for/in [nbr (AroundGridSeq map pos)]
+              (unless (Set.contains nbr seen)
+                (set! que (Queue.conj (nbr . (dec steps)) que))
+                (set! seen (Set.add nbr seen))
+              ))
+          ])
+      ]))
+
+  (Set.count ans))
+
+(fn Part1 ([map: Grid] [start: Pos] [maxSteps: int])
+  ;; (mut results (Set.singleton start))
+  ;; (for/to [_ (1 to maxSteps)]
+  ;;   (set! results (->> results
+  ;;     (Seq.map (AroundGridSeq map))
+  ;;     (Seq.concat)
+  ;;     (Set.ofSeq))))
+
+  (id (CountPoints map start maxSteps)))
+
+(fn Part2 ([map: Grid] [start: Pos])
+  (fn inline wrap (a b)
+    (if (< a 0)
+      (erem a b)
+      (rem a b)
+    ))
+
+  (let steps 26501365L)
+  (let size (int64 (max (Width map) (Height map))))
+  (let sizei (int size))
+
+  (let grid_width (dec (/ steps size)))
+  (printfn "%A" size)
+  (printfn "%A" grid_width)
+
+  (let odd_grids (pown (inc (* (/ grid_width 2L) 2L)) 2))
+  (let even_grids (pown (* (/ (inc grid_width) 2L) 2L) 2))
+
+  (printfn "%A" (odd_grids, even_grids))
+
+  ;; (let odd_points (->> (Fill map start (inc (* sizei 2))) Set.count int64))
+  ;; (let even_points (->> (Fill map start (id (* sizei 2))) Set.count int64))
+
+  ;; (printfn "%A" (odd_points, even_points))
+
+  (let (sx, sy) start)
+
+  (let last_size (dec sizei))
+  (let half_w_1 (dec (/ sizei 2)))
+  (let size_3 (dec (/ (* sizei 3) 2)))
+
+  (fn Mapper ((pos, size)) (->> (CountPoints map pos size) bigint))
+
+  (let mains (->> [|
+    (start . (inc (* sizei 2)))
+    (start . (id (* sizei 2)))
+  |] (Array.map Mapper)))
+
+  (printfn "%A" mains)
+
+  (let corners (->> [|
+      ((sx, last_size) . last_size)
+      ((0, sy) . last_size)
+      ((sx, 0) . last_size)
+      ((last_size, sy) . last_size)
+    |] (Array.map Mapper) (Array.reduce add)))
+
+  (let smalls (->> [|
+    ((0, last_size) . half_w_1)
+    ((last_size, last_size) . half_w_1)
+    ((0, 0) . half_w_1)
+    ((last_size, 0) . half_w_1)
+  |] (Array.map Mapper) (Array.reduce add)))
+
+  (let bigs (->> [|
+    ((0, last_size) . size_3)
+    ((last_size, last_size) . size_3)
+    ((0, 0) . size_3)
+    ((last_size, 0) . size_3)
+  |] (Array.map Mapper) (Array.reduce add)))
+
+  (let big_width (bigint grid_width))
+
+  (+
+    (* (bigint odd_grids) (.[0] mains))
+    (* (bigint even_grids) (.[1] mains))
+    corners
+    (* (inc big_width) smalls)
+    (* big_width bigs)
+  ))
+
+(let part1 (Part1 map start (if example 6 64)))
+
+(WriteResult "part1" part1 (if example 16 3682))
+
+(let part2 (Part2 map start))
+
+(WriteResult "part2" part2 (if example (bigint 470149860542205L) (bigint 609012263058042L)))
+
+()
