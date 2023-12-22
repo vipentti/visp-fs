@@ -515,17 +515,6 @@ and SynLambda =
         let (SynLambda(_, _, rng)) = this
         rng
 
-and [<RequireQualifiedAccess>] SynArg =
-    // Argument with explicit type
-    | TypedArg of name: SynSymbol * argtype: SynType * range: range
-    // Argument with inferred type
-    | InferredArg of name: SynSymbol * range: range
-
-    member d.NameText =
-        match d with
-        | TypedArg(name = name)
-        | InferredArg(name = name) -> name.Text
-
 module Coll =
     let mkList its r =
         (SynCollection(CollectionKind.Paren, its, r))
@@ -669,16 +658,6 @@ module Syntax =
         | SynName.Inferred(it, _) -> rangeOfSymbol it
         | SynName.Typed(it, _, _) -> rangeOfSymbol it
 
-    let textOfArg =
-        function
-        | SynArg.InferredArg(it, _) -> textOfSymbol it
-        | SynArg.TypedArg(it, _, _) -> textOfSymbol it
-
-    let rangeOfArg =
-        function
-        | SynArg.InferredArg(it, _) -> rangeOfSymbol it
-        | SynArg.TypedArg(it, _, _) -> rangeOfSymbol it
-
     let mkFunctionCall sym ex range = SynExpr.FunctionCall(sym, ex, range)
 
     let mkCons lhs rhs range = SynExpr.Cons(lhs, rhs, range)
@@ -708,9 +687,6 @@ module Syntax =
 
     let mkUnwrapList v r =
         mkFunctionCall (mkSynSymbolExpr "unwrapList" r) [ v ] r
-
-    let mkInferredArg s range =
-        SynArg.InferredArg(mkSynSymbol s range, range)
 
     let mkFunctionCallOrCexpr ex args r =
         match ex with

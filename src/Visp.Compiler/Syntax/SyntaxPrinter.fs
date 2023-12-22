@@ -179,12 +179,6 @@ let patToDoc =
     | SynPat.Named(it, _) -> text it.Text
     | it -> failwithf "todo pat: %A" it
 
-let argToDoc =
-    function
-    | SynArg.InferredArg(it, _) -> text it.Text
-    | SynArg.TypedArg(name, typ, _) ->
-        brackets <| (cat [ text name.Text; colon; space; text "todo types" ])
-
 let lambdaToDoc (SynLambda(args, body, _)) =
     //let args = List.map argToDoc args |> hsep |> parens
     let args = patToDoc args
