@@ -1338,39 +1338,6 @@ match:
     | syn_pat LPAREN WHEN expr RPAREN expr_list
         { SynMatch.SynMatch($1, Some($4), $6, lhs parseState) }
 
-match_tuple_list: rev_match_tuple_list %prec prec_match_tuple_list { List.rev $1 }
-rev_match_tuple_list:
-    | match_pattern %prec prec_match_pattern { [$1] }
-    | rev_match_tuple_list COMMA match_pattern %prec prec_match_tuple_list
-        { $3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.Comma, (rhs parseState 2))) :: $1 }
-    | rev_match_tuple_list DOT match_pattern %prec prec_match_tuple_list
-        { $3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.Dot, (rhs parseState 2))) :: $1 }
-    | rev_match_tuple_list COLON_COLON match_pattern %prec prec_match_tuple_list
-        { $3 :: (SynMatchPattern.Trivia(SynPatternTriviaKind.ColonColon, (rhs parseState 2))) :: $1 }
-    | rev_match_tuple_list match_pattern %prec prec_match_tuple_list
-        { $2 :: $1 }
-
-match_pattern:
-    | constant %prec prec_match_pattern_const { SynMatchPattern.Const(fst $1, snd $1) }
-    | symbol {
-        let text = $1
-        if ((Syntax.textOfSymbol text) = "_") then
-            SynMatchPattern.Discard (lhs parseState)
-        else
-            SynMatchPattern.Symbol (text, lhs parseState) }
-    | LBRACKET RBRACKET
-        { SynMatchPattern.Trivia(SynPatternTriviaKind.Brackets, (lhs parseState)) }
-    | LPAREN LBRACKET RBRACKET RPAREN
-        { SynMatchPattern.Trivia(SynPatternTriviaKind.Brackets, (lhs parseState)) }
-    | LPAREN BANG_TUPLE match_tuple_list RPAREN
-        { SynMatchPattern.Tuple ($3, lhs parseState) }
-    | LPAREN match_tuple_list RPAREN
-        { SynMatchPattern.List($2, lhs parseState) }
-
-syn_pat_list: rev_syn_pat_list { List.rev $1 }
-rev_syn_pat_list:
-    | syn_pat %prec prec_match_pattern { [$1] }
-
 syn_trivia_kind:
     | COMMA { SynPatternTriviaKind.Comma }
     | DOT { SynPatternTriviaKind.Dot }

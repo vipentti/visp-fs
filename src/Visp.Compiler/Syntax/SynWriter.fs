@@ -619,35 +619,8 @@ module Write =
                 w
                 WriteState.Body
                 newlineIndent
-                (fun w st (SynMatch.SynMatch(pat, cond, body, _)) ->
-                    let rec writeMatchPattern w _ pat =
-                        match pat with
-                        // | SynMatchPattern.CommaOrDot _ -> failwith "not supported"
-                        | SynMatchPattern.Trivia(kind, _) ->
-                            match kind with
-                            | SynPatternTriviaKind.Brackets -> string w "[]"
-                            | SynPatternTriviaKind.ColonColon -> string w "::"
-                            | SynPatternTriviaKind.Comma
-                            | SynPatternTriviaKind.Dot -> string w ","
-
-                            ()
-                        | SynMatchPattern.Const(cnst, _) ->
-                            writeConst w false cnst
-                            ()
-                        | SynMatchPattern.Discard _ -> string w "_"
-                        | SynMatchPattern.Symbol(sym, _) -> symbol w sym true
-                        | SynMatchPattern.Tuple(pats, _) ->
-                            string w "("
-                            writeInlineCommaSeparated w writeMatchPattern pats
-                            string w ")"
-                        | SynMatchPattern.List(pats, _) ->
-                            string w "("
-                            writeInlineSpaceSeparated w writeMatchPattern pats
-                            string w ")"
-
-
+                (fun w _ (SynMatch.SynMatch(pat, cond, body, _)) ->
                     string w "| "
-                    //writeMatchPattern w st pat
                     synPat w pat
                     string w " "
 
