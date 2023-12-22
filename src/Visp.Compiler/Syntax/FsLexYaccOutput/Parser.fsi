@@ -438,11 +438,6 @@ type nonTerminalId =
     | NONTERM_rev_match_list
     | NONTERM_match_start
     | NONTERM_match
-    | NONTERM_match_tuple_list
-    | NONTERM_rev_match_tuple_list
-    | NONTERM_match_pattern
-    | NONTERM_syn_pat_list
-    | NONTERM_rev_syn_pat_list
     | NONTERM_syn_trivia_kind
     | NONTERM_syn_pat_trivia
     | NONTERM_syn_pat_trivia_list

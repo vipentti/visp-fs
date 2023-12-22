@@ -462,14 +462,6 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
     | IsInst of pat: SynType * range: range
     | As of lhsPat: SynPat * rhsPat: SynPat * range: range
 
-and [<RequireQualifiedAccess>] SynMatchPattern =
-    | Const of value: SynConst * range: range
-    | Tuple of pats: SynMatchPattern list * range: range
-    | List of pats: SynMatchPattern list * range: range
-    | Symbol of name: SynSymbol * range: range
-    | Discard of range: range
-    | Trivia of kind: SynPatternTriviaKind * range: range
-
 and SynMemberGet =
     | SynMemberGet of args: SynPat * exprs: SynExpr list * range: range
 
