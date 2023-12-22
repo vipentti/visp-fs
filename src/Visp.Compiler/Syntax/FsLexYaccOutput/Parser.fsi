@@ -399,13 +399,6 @@ type nonTerminalId =
     | NONTERM_binding_list
     | NONTERM_rev_binding_list
     | NONTERM_binding
-    | NONTERM_name
-    | NONTERM_name_in_parens_or_brackets_start
-    | NONTERM_name_in_parens_or_brackets
-    | NONTERM_empty_name_list
-    | NONTERM_name_list_start
-    | NONTERM_name_list
-    | NONTERM_rev_name_list
     | NONTERM_macro_name
     | NONTERM_dot_method
     | NONTERM_apply_method

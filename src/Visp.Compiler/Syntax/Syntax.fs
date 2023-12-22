@@ -143,14 +143,6 @@ type RecordLabel =
     | RecordLabel of kind: RecordLabelKind * name: SynSymbol * argtype: SynType * range: range
 
 [<NoEquality; NoComparison; RequireQualifiedAccess>]
-type SynName =
-    // Argument with explicit type
-    | Typed of name: SynSymbol * argtype: SynType * range: range
-    // Argument with inferred type
-    | Inferred of name: SynSymbol * range: range
-//[<NoEquality; NoComparison; RequireQualifiedAccess>]
-
-[<NoEquality; NoComparison; RequireQualifiedAccess>]
 type SynOpenDeclTarget =
     | ModuleOrNamespace of longId: SynLongIdent * range: range
     | Type of typeName: SynType * range: range
@@ -625,9 +617,6 @@ module Syntax =
 
     let parserRecoverySymbol r = SynSymbol(Ident(parserRecovery, r))
 
-    let parserRecoveryName r =
-        SynName.Inferred(parserRecoverySymbol r, r)
-
     let parserRecoveryPat r = SynPat.Named(parserRecoverySymbol r, r)
 
     let parserRecoveryType r = SynType.Ident(Ident(parserRecovery, r))
@@ -648,16 +637,6 @@ module Syntax =
         let (SynKeyword s) = id
         textOfIdent s
 
-    let textOfName =
-        function
-        | SynName.Inferred(it, _) -> textOfSymbol it
-        | SynName.Typed(it, _, _) -> textOfSymbol it
-
-    let rangeOfName =
-        function
-        | SynName.Inferred(it, _) -> rangeOfSymbol it
-        | SynName.Typed(it, _, _) -> rangeOfSymbol it
-
     let mkFunctionCall sym ex range = SynExpr.FunctionCall(sym, ex, range)
 
     let mkCons lhs rhs range = SynExpr.Cons(lhs, rhs, range)
@@ -675,9 +654,6 @@ module Syntax =
     let mkSynSymbolExpr s range = SynExpr.Symbol(mkSynSymbol s range)
 
     let mkSynTypeIdent s range = (SynType.Ident(Ident(s, range)))
-
-    let mkInferredName n range =
-        SynName.Inferred(mkSynSymbol n range, range)
 
     let mkInferredNamePat n range =
         SynPat.Named(mkSynSymbol n range, range)
