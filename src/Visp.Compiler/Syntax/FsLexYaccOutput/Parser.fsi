@@ -393,7 +393,6 @@ type nonTerminalId =
     | NONTERM_member_set
     | NONTERM_member_member_in_parens
     | NONTERM_member_in_parens
-    | NONTERM_tok_lparen
     | NONTERM_empty_bindings
     | NONTERM_binding_list_start
     | NONTERM_binding_list
@@ -403,13 +402,6 @@ type nonTerminalId =
     | NONTERM_dot_method
     | NONTERM_apply_method
     | NONTERM_keyword
-    | NONTERM_syn_comma
-    | NONTERM_raw_syntype_ident_text
-    | NONTERM_syntype_ident
-    | NONTERM_syntype_comma_list
-    | NONTERM_rev_syntype_comma_list
-    | NONTERM_syntype_ident_list
-    | NONTERM_rev_syntype_ident_list
     | NONTERM_syn_type
     | NONTERM_syn_type_generic_list
     | NONTERM_rev_syn_type_generic_list
