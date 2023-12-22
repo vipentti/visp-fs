@@ -715,21 +715,24 @@ splice_unquote:
 operators:
     | LPAREN operators_not_in_parens RPAREN { $2 }
 
+op_text:
+    | OP_PLUS               {  ("+",  (rhs parseState 1) )}
+    | OP_DIV                {  ("/",  (rhs parseState 1) )}
+    | OP_MULT               {  ("*",  (rhs parseState 1) )}
+    | OP_MINUS              {  ("-",  (rhs parseState 1) )}
+    | OP_GREATER            {  (">",  (rhs parseState 1) )}
+    | OP_LESS               {  ("<",  (rhs parseState 1) )}
+    | COLON_GREATER         {  (":>", (rhs parseState 1) )}
+    | EQUALS                {  ("=",  (rhs parseState 1) )}
+    | AMP_AMP               {  ("&&", (rhs parseState 1) )}
+    | BAR_BAR               {  ("||", (rhs parseState 1) )}
+    | OP_GREATER OP_GREATER {  (">>", (rhs2 parseState 1 2)) }
+    | GREATER_EQUALS        {  (">=", (rhs parseState 1) )}
+    | LESS_EQUALS           {  ("<=", (rhs parseState 1) )}
+    | BANG_EQUALS           {  ("!=", (rhs parseState 1) )}
+
 op_sym:
-    | OP_PLUS       { Syntax.mkSynSymbol "+" (rhs parseState 1) }
-    | OP_DIV        { Syntax.mkSynSymbol "/" (rhs parseState 1) }
-    | OP_MULT       { Syntax.mkSynSymbol "*" (rhs parseState 1) }
-    | OP_MINUS      { Syntax.mkSynSymbol "-" (rhs parseState 1) }
-    | OP_GREATER    { Syntax.mkSynSymbol ">" (rhs parseState 1) }
-    | OP_LESS       { Syntax.mkSynSymbol "<" (rhs parseState 1) }
-    | COLON_GREATER { Syntax.mkSynSymbol ":>" (rhs parseState 1) }
-    | EQUALS        { Syntax.mkSynSymbol "=" (rhs parseState 1) }
-    | AMP_AMP       { Syntax.mkSynSymbol "&&" (rhs parseState 1) }
-    | BAR_BAR       { Syntax.mkSynSymbol "||" (rhs parseState 1) }
-    | OP_GREATER OP_GREATER { Syntax.mkSynSymbol ">>" (rhs2 parseState 1 2) }
-    | GREATER_EQUALS   { Syntax.mkSynSymbol ">=" (rhs parseState 1) }
-    | LESS_EQUALS      { Syntax.mkSynSymbol "<=" (rhs parseState 1) }
-    | BANG_EQUALS      { Syntax.mkSynSymbol "!=" (rhs parseState 1) }
+    | op_text { Syntax.mkSynSymbol (fst $1) (snd $1) }
 
 operators_not_in_parens:
     | op_sym { SynOp.Infix($1, [], lhs parseState) }
@@ -822,14 +825,6 @@ type_name:
             let (text, range) = $1
             Syntax.mkSynSymbol text range
         }
-    // | SYMBOL { (Syntax.mkSynSymbol $1 (rhs parseState 1)) }
-    // | SYMBOL OP_LESS SYMBOL OP_GREATER
-    //     { Syntax.mkSynSymbol ($"{$1}<{$3}>") (rhs2 parseState 1 4) }
-    // | SYMBOL OP_LESS SYMBOL COMMA symbol_comma_list OP_GREATER
-    //     {
-    //       let lst = $3 :: $5
-    //       let args = String.concat "," lst
-    //       Syntax.mkSynSymbol ($"{$1}<{args}>") (rhs2 parseState 1 6) }
 
 symbol_comma_list: rev_symbol_comma_list { List.rev $1 }
 rev_symbol_comma_list:
@@ -912,10 +907,10 @@ rev_union_fields:
     | rev_union_fields union_field { $2 :: $1 }
 
 union_field:
-    | syntype_ident { UnionField.Type($1, lhs parseState) }
-    | LPAREN symbol COLON syntype_ident RPAREN
+    | syn_type_name { UnionField.Type($1, lhs parseState) }
+    | LPAREN symbol COLON syn_type_name RPAREN
         { UnionField.Named($2, $4, lhs parseState) }
-    | LBRACKET symbol COLON syntype_ident RBRACKET
+    | LBRACKET symbol COLON syn_type_name RBRACKET
         { UnionField.Named($2, $4, lhs parseState) }
 
 record_expr:
