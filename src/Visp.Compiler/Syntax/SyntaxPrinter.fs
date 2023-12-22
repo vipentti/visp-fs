@@ -168,12 +168,6 @@ type SynMacroBody with
         Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
         sb.ToStringAndReturn()
 
-let nameToDoc =
-    function
-    | SynName.Inferred(it, _) -> text it.Text
-    | SynName.Typed(name, typ, _) ->
-        brackets <| (cat [ text name.Text; colon; space; text "todo types" ])
-
 let patToDoc =
     function
     | SynPat.Named(it, _) -> text it.Text

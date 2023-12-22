@@ -521,17 +521,6 @@ module Write =
 
     and writeTypeHelp w _ = writeType w
 
-
-    let synName (w: SynWriter) (n: SynName) =
-        match n with
-        | SynName.Inferred(n, _) -> symbol w n true
-        | SynName.Typed(nm, typ, _) ->
-            char w '('
-            symbol w nm true
-            string w ": "
-            writeType w typ
-            char w ')'
-
     let rec synPat (w: SynWriter) (n: SynPat) =
         match n with
         | SynPat.Const(cnst, _) ->
@@ -1514,53 +1503,6 @@ module Write =
             writeExpr w WriteState.Inline body
 
         w.LeaveLet()
-        ()
-
-    and private writeLetFull (w: SynWriter) (st: WriteState) mut (name: SynName) (body: SynExpr) =
-        w.EnterLet()
-
-        let isLiteral =
-            not mut
-            && match body with
-               | SynExpr.Literal _ -> true
-               | _ -> false
-
-        if isLiteral then
-            string w "[<Literal>]"
-            newline w
-            indent w
-
-        string w "let "
-
-        if mut then
-            string w "mutable "
-
-        synName w name
-        string w " ="
-
-        let should_indent =
-            match body with
-            | SynExpr.Const _
-            | SynExpr.Literal _
-            | SynExpr.Keyword _
-            | SynExpr.Symbol _ -> false
-            | _ -> true
-
-        if should_indent then
-            use _ = withIndent w false
-            newline w
-            writeExpr w WriteState.Body body
-        else
-            space w
-            writeExpr w WriteState.Inline body
-
-        w.LeaveLet()
-
-        ()
-
-
-    and private writeLet w (st: WriteState) (name: SynName) (body: SynExpr) =
-        writeLetFull w st false name body
         ()
 
     and private writeExprInParens w (st: WriteState) ex =
