@@ -1654,22 +1654,6 @@ module Write =
                 writeExpr w WriteState.InlineNoParens arg
             | _ -> writeSeqLeading w WriteState.Inline space writeExprInParens args
 
-    and writeArgsOrEmpty w (args: SynArg list) =
-        let writeArgs w args =
-            writeSeq w WriteState.Inline space writeArg args
-
-        if args.IsEmpty then string w "()" else writeArgs w args
-
-    and private writeArg w _ (arg: SynArg) =
-        match arg with
-        | SynArg.TypedArg(name, typ, _) ->
-            char w '('
-            symbol w name true
-            string w ": "
-            writeType w typ
-            char w ')'
-        | SynArg.InferredArg(name, _) -> symbol w name true
-
     and private writeExprToValue w st (expr: SynExpr) =
         match expr with
         | SynExpr.Const(cnst, range) ->
@@ -1683,7 +1667,6 @@ module Write =
             string w "Value.from("
             writeExpr w WriteState.Inline others
             char w ')'
-
 
     and private writeQuotedInParens w (st: WriteState) ex =
         let needsParens =
