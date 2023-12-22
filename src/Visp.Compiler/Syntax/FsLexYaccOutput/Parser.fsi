@@ -341,6 +341,7 @@ type nonTerminalId =
     | NONTERM_unquote
     | NONTERM_splice_unquote
     | NONTERM_operators
+    | NONTERM_op_text
     | NONTERM_op_sym
     | NONTERM_operators_not_in_parens
     | NONTERM_set
