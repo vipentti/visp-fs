@@ -22,8 +22,7 @@
             (Symbol (SynSymbol printfn),
              [Const (String ("string is '%s'", Regular, (12,9--12,25)), (12,9--12,25));
               Const
-                (String
-                   ("interpolated: {value} {{ value }} {{ value.Length }}", InterpolatedTripleQuote 2, (12,26--12,86)),
+                (String ("interpolated: {value} {{ value }} {{ value.Length }}", InterpolatedTripleQuote 2, (12,26--12,86)),
                  (12,26--12,86))], (12,1--12,86)), (12,0--12,87));
        Expr
          (LetOrUse
@@ -32,9 +31,8 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("string is '%s'", Regular, (13,9--13,25)), (13,9--13,25));
                  Const
-                   (String
-                      ("interpolated: {value} {{ value }} {{{ value }}} {{{ value.Length }}}", InterpolatedTripleQuote 3,
-                       (13,26--13,103)), (13,26--13,103))], (13,1--13,103)), None, (13,0--13,104)), (13,0--13,104));
+                   (String ("interpolated: {value} {{ value }} {{{ value }}} {{{ value.Length }}}", InterpolatedTripleQuote 3, (13,26--13,103)),
+                    (13,26--13,103))], (13,1--13,103)), None, (13,0--13,104)), (13,0--13,104));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -4,21 +4,13 @@
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("string is: '%s'", Regular, (9,9--9,26)), (9,9--9,26));
-              Const (String ("
-  this is
-  a multiline
-  string
-", Regular, (9,27--13,1)), (9,27--13,1))], (9,1--13,1)),
-          (9,0--13,2));
+              Const (String ("\n  this is\n  a multiline\n  string\n", Regular, (9,27--13,1)), (9,27--13,1))],
+             (9,1--13,1)), (9,0--13,2));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("string is: '%s'", Regular, (15,9--15,26)), (15,9--15,26));
-              Const (String ("
-  this is
-  a multiline
-  string
-", TripleQuote, (15,27--19,3)), (15,27--19,3))],
+              Const (String ("\n  this is\n  a multiline\n  string\n", TripleQuote, (15,27--19,3)), (15,27--19,3))],
              (15,1--19,3)), (15,0--19,4));
        Expr
          (FunctionDef
@@ -28,14 +20,9 @@
                  FunctionCall
                    (Symbol (SynSymbol sprintf),
                     [Const
-                       (String
-                          ("
-let ``can parse %s`` =
-  TestUtils.runTest %s
-  |> Async.AwaitTask
-  ", TripleQuote,
-                           (22,25--26,5)), (22,25--26,5)); Symbol (SynSymbol path); Symbol (SynSymbol path)],
-                    (22,17--26,15)), None, (22,3--26,16)); Symbol (SynSymbol template)], (21,1--28,10)), (21,0--28,11));
+                       (String ("\nlet ``can parse %s`` =\n  TestUtils.runTest %s\n  |> Async.AwaitTask\n  ", TripleQuote, (22,25--26,5)),
+                        (22,25--26,5)); Symbol (SynSymbol path); Symbol (SynSymbol path)], (22,17--26,15)), None,
+                 (22,3--26,16)); Symbol (SynSymbol template)], (21,1--28,10)), (21,0--28,11));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (30,0--30,49)),
