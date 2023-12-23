@@ -1,0 +1,14 @@
+﻿non macro: []
+non macro: [[]; []]
+non macro: true
+non macro: [1; 2]
+non macro: [true; false]
+in macro: []
+non macro: [[]; []]
+in macro: true
+in macro: [1; 2]
+in macro: [true; false]
+OK
+()
+
+ExitCode: 0

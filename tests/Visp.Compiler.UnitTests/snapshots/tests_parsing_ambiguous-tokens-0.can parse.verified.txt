@@ -1,0 +1,46 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"ambiguous-tokens-0.visp"
+let macro_NoopMacroExample = "__MACRO_INIT__"
+// line 12 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" ([])
+// line 13 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" ([([]);([])])
+// line 14 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" (true || false)
+// line 15 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" ([1;2])
+// line 16 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" ([(true || true);(false || false)])
+// line 18 @"ambiguous-tokens-0.visp"
+
+// line 18 @"ambiguous-tokens-0.visp"
+printfn "in macro: %A" ([])
+// line 19 @"ambiguous-tokens-0.visp"
+
+// line 19 @"ambiguous-tokens-0.visp"
+printfn "non macro: %A" ([([]);([])])
+// line 20 @"ambiguous-tokens-0.visp"
+
+// line 20 @"ambiguous-tokens-0.visp"
+printfn "in macro: %A" (true || false)
+// line 21 @"ambiguous-tokens-0.visp"
+
+// line 21 @"ambiguous-tokens-0.visp"
+printfn "in macro: %A" ([1;2])
+// line 22 @"ambiguous-tokens-0.visp"
+
+// line 22 @"ambiguous-tokens-0.visp"
+printfn "in macro: %A" ([(true || true);(false || false)])
+// line 24 @"ambiguous-tokens-0.visp"
+let visp_result_todo =
+  // line 24 @"ambiguous-tokens-0.visp"
+  printfn "OK"
+// line 24 @"ambiguous-tokens-0.visp"
+printfn "%A" visp_result_todo
+

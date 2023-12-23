@@ -151,6 +151,11 @@ module ``tests_parsing_strings-interpolation-1`` =
     let ``can parse`` () = TestUtils.runTest "tests/parsing/strings-interpolation-1.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_ambiguous-tokens-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/ambiguous-tokens-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_props`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/props.visp"

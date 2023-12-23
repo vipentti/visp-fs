@@ -11,12 +11,12 @@ open Visp.Compiler.LexHelpers
 open Visp.Compiler.Syntax.Macros
 
 let mkTokenizerWithArgs args =
-    let tokens args buf =
-        let next =
-            match args.mode with
-            | LexMode.Default -> Lexer.token args false buf
-            | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
+    let inline read_next args buf =
+        match args.mode with
+        | LexMode.Default -> Lexer.token args false buf
+        | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
 
+    let inline handle_next args next =
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
         | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
@@ -83,9 +83,31 @@ let mkTokenizerWithArgs args =
 
         next
 
-    // eprintfn ""
+    let next_token = read_next args
+    let handle_token = handle_next args
 
-    tokens args
+    let mutable token_list = []
+
+    // Nested TOKENLISTS are not supported.
+    let tokenizer buf =
+        let token =
+            match token_list with
+            | [] ->
+                match next_token buf with
+                | TOKENLIST toks ->
+                    match toks with
+                    | tok :: rest ->
+                        token_list <- rest
+                        tok
+                    | [] -> (failwith "empty TOKENLIST is not supported")
+                | it -> it
+            | tok :: rest ->
+                token_list <- rest
+                tok
+
+        handle_token token
+
+    tokenizer
 
 let mkTokenizer () =
     mkTokenizerWithArgs <| mkDefaultLextArgs ()
@@ -100,3 +122,20 @@ let parseStringToExpr fileName str =
     with :? ParseHelpers.SyntaxError as syn ->
         outputSyntaxError syn
         reraise ()
+
+let debugTokenOutput args (lexbuf: LexBuffer<_>) =
+    seq {
+        let tokenizer = mkTokenizerWithArgs args
+
+        while not lexbuf.IsPastEndOfStream do
+            let next = tokenizer lexbuf
+
+            yield
+                sprintf
+                    "%A %A %i %i %A"
+                    next
+                    args.mode
+                    args.depth
+                    args.ContextCount
+                    args.CurrentContext
+    }

@@ -19,6 +19,7 @@ type token =
   | UINT32 of (uint32)
   | UINT16 of (uint16)
   | UINT8 of (byte)
+  | TOKENLIST of (token list)
   | NATIVEINT of (int64 * bool)
   | INT64 of (int64 * bool)
   | INT32 of (int32 * bool)
@@ -147,6 +148,7 @@ type tokenId =
     | TOKEN_UINT32
     | TOKEN_UINT16
     | TOKEN_UINT8
+    | TOKEN_TOKENLIST
     | TOKEN_NATIVEINT
     | TOKEN_INT64
     | TOKEN_INT32
