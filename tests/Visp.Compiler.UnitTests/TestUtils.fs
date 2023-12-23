@@ -54,6 +54,8 @@ let runStructuredOutputTest (name: string) =
 
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
+            Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings <- true
+
             let output = (sprintf "%120A" parsed).Replace("\\r\\n", "\\n").Replace("\r\n", "\n")
 
             return! verify output "parsing-snapshots" nameParam
