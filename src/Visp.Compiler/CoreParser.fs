@@ -101,7 +101,7 @@ let state = { Todo = () }
 
             if returnLast then
                 res <- Transforms.LastExpressionUpdater.update res
-            // printfn "%O" res
+            // eprintfn "%A" res
 
             // use outputStream = new StringWriter()
             // writeToStreamNew res outputStream filePath

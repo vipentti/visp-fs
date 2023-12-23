@@ -1,0 +1,18 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(open System)
+
+(fn Test ([text: string])
+  (let span1 (.AsSpan text))
+  (span->int32 span1)
+)
+
+(printfn "%A" (Test "99"))
+(printfn "%A" (Test "0"))
+(printfn "%A" (Test "1"))
+

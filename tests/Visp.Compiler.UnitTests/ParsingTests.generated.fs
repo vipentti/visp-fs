@@ -141,6 +141,11 @@ module ``tests_parsing_call-tuple-args-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/parsing/call-tuple-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_span-to-int32-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/span-to-int32-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_let-values`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/let-values.visp"
@@ -149,6 +154,11 @@ module ``tests_parsing_let-values`` =
 module ``tests_parsing_match-1`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/match-1.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_parsing_seq-as-generic-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/seq-as-generic-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_arrays_array2d-0`` =

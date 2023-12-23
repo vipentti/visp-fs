@@ -1,0 +1,30 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"span-to-int32-0.visp"
+open System
+
+// line 10 @"span-to-int32-0.visp"
+let Test (text: string) =
+  // line 11 @"span-to-int32-0.visp"
+  let span1 =
+    // line 11 @"span-to-int32-0.visp"
+    text.AsSpan()
+  // line 12 @"span-to-int32-0.visp"
+  ``span->int32`` span1
+
+// line 15 @"span-to-int32-0.visp"
+printfn "%A" (Test "99")
+// line 16 @"span-to-int32-0.visp"
+printfn "%A" (Test "0")
+// line 17 @"span-to-int32-0.visp"
+let visp_result_todo =
+  // line 17 @"span-to-int32-0.visp"
+  printfn "%A" (Test "1")
+// line 17 @"span-to-int32-0.visp"
+printfn "%A" visp_result_todo
+

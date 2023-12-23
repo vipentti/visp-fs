@@ -205,10 +205,14 @@ let SymbolicExtra = [ '.' '\'' '/']
 // https://github.com/dotnet/fsharp/blob/ade794633b4bb495da85c92ee780068b9c6f7344/src/Compiler/lex.fsl#L300
 let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b' | 'r'))
 
+let ident_letter_chars = letter (letter | digit)*
+
 let ident_start_char = letter | SymbolicStartCharacters
 let ident_char = ( ident_start_char | digit | SymbolicExtra )
 let ident = ident_start_char ident_char*
 // let ident_array = letter (letter | digit)* '[' (',')* ']'
+
+let ident_arrow = ident_letter_chars "->" ident_letter_chars?
 
 let anyspace = [' ' '\t' '\r' '\n']
 let whitespace = [' ' '\t']+
@@ -429,6 +433,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "||" { BAR_BAR }
   | "!=" { BANG_EQUALS }
   | '=' { EQUALS }
+
+  | ident_arrow { SYMBOL (lexeme lexbuf) }
 
   | "->>" { THREAD_LAST }
   | "->" { THREAD_FIRST }
