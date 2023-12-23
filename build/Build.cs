@@ -19,7 +19,7 @@ using static Vipentti.Nuke.Components.StandardNames;
 
 [ExtendedGitHubActions(
     "pull-request",
-    GitHubActionsImage.WindowsLatest,
+    GitHubActionsImage.WindowsServer2019,
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest,
     OnPullRequestBranches = [ MainBranch, DevelopBranch ],
