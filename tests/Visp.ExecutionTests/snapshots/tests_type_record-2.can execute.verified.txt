@@ -1,0 +1,12 @@
+﻿initial is { src = 3L
+  dest = 5L
+  range = 8L }
+updated1 is { src = 5L
+  dest = 5L
+  range = 8L }
+updated2 is { src = 99L
+  dest = 12L
+  range = 8L }
+()
+
+ExitCode: 0

@@ -824,6 +824,12 @@ module Write =
                     string w "HashMap.find"
                     writeCallArgs w [ kw; one ]
                 | _ -> failwithf "unsupported call %O %A" expr args
+            | Patterns.SymbolWith "with" ->
+                match args with
+                | [ expr; SynExpr.RecordInit(inits, _) ] -> writeRecordInit w st (Some expr) inits
+                | _ ->
+                    writeExpr w WriteState.Inline expr
+                    writeCallArgs w args
             | SynExpr.Symbol name ->
                 match w.knownMethods.TryFind(Syntax.textOfSymbol name) with
                 | Some method ->
@@ -1185,19 +1191,30 @@ module Write =
 
         | SynExpr.RecordInit(inits, range) ->
             startExpr w st range
-            string w "{"
+            writeRecordInit w st None inits
 
-            writeBody
-                w
-                (fun w st (SynInit(name, expr, range)) ->
-                    startExpr w st range
-                    symbol w name true
-                    string w " = "
-                    writeExpr w WriteState.Inline expr)
-                inits
+    and private writeRecordInit w _ (withExpr: SynExpr option) (inits: SynInit list) =
 
-            newlineIndent w
-            string w "}"
+        string w "{"
+
+        match withExpr with
+        | Some(withExpr) ->
+            writeExprInParens w WriteState.Inline withExpr
+            string w " with"
+        | None -> ()
+
+        writeBody
+            w
+            (fun w st (SynInit(name, expr, range)) ->
+                startExpr w st range
+                symbol w name true
+                string w " = "
+                writeExpr w WriteState.Inline expr)
+            inits
+
+        newlineIndent w
+        string w "}"
+        ()
 
     and private writeCollection w st (writers: CollectionWriters<'a>) (cl: SynCollection<'a>) =
         let (SynCollection(kind, items, range)) = cl

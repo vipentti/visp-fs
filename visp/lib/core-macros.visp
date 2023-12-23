@@ -98,6 +98,18 @@
   ]
 )
 
+(syntax-macro while-some
+  [(_ (b1 expr) body ...)
+    (while (match expr
+      [(Some b1)
+        (begin
+          body ...
+          true
+        )]
+      [None false])
+      ())
+  ])
+
 (syntax-macro struct
   [(_ typ ((arg1 : argtyp1) (argrest : argresttyp) ...) body ...)
     (begin
