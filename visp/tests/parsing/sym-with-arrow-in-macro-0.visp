@@ -1,0 +1,19 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(open System)
+
+(syntax-macro noop-macro-1
+  [(_ ids ...) (begin ids ...)])
+
+(fn inline something->nothing (i) i)
+
+(fn inline Test (i)
+  (noop-macro-1 (something->nothing i)))
+
+(printfn "%A" (Test 1))
+(printfn "%A" (Test "hello"))
