@@ -1,0 +1,211 @@
+﻿LPAREN Default 0 1 LParen
+UNION Default 0 1 Type
+SYMBOL "Dir" Default 0 1 Type
+SYMBOL "Up" Default 0 1 Type
+SYMBOL "Left" Default 0 1 Type
+SYMBOL "Down" Default 0 1 Type
+SYMBOL "Right" Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "Pos" Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "Node" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "pos" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "Pos" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "dir" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "Dir" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "steps" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "int" Default 0 1 Type
+RBRACKET Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "LeftOf" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Pos" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dec" Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "RightOf" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Pos" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "inc" Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "UpOf" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Pos" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+COMMA Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dec" Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "DownOf" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Pos" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+COMMA Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "inc" Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "GetDirFun" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "d" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Dir" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MATCH Default 0 2 Match
+SYMBOL "d" Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "Up" Default 0 2 Match
+SYMBOL "UpOf" Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "Down" Default 0 2 Match
+SYMBOL "DownOf" Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "Left" Default 0 2 Match
+SYMBOL "LeftOf" Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "Right" Default 0 2 Match
+SYMBOL "RightOf" Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "MoveNode" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "v" Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+SYMBOL "pos" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+THREAD_LAST Default 0 2 LParen
+LPAREN Default 0 3 LParen
+PROP_PLUS "+pos" Default 0 3 LParen
+SYMBOL "v" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "GetDirFun" Default 0 3 LParen
+SYMBOL "dir" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+SYMBOL "steps" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+IF_KW Default 0 2 LParen
+LPAREN Default 0 3 LParen
+EQUALS Default 0 3 LParen
+SYMBOL "dir" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+PROP_PLUS "+dir" Default 0 4 LParen
+SYMBOL "v" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "inc" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+PROP_PLUS "+steps" Default 0 4 LParen
+SYMBOL "v" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OK", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

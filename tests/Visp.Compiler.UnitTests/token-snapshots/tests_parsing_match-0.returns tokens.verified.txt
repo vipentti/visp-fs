@@ -1,0 +1,211 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("26", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+MATCH Default 0 1 Match
+STRING ("hello", Regular, Token []) Default 0 1 Match
+LBRACKET Default 0 1 Match
+STRING ("hello", Regular, Token []) Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("was hello", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+SYMBOL "_" Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("default", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MATCH Default 0 1 Match
+LPAREN Default 0 2 Match
+BANG_TUPLE Default 0 2 Match
+INT32 (1, false) Default 0 2 Match
+INT32 (2, false) Default 0 2 Match
+RPAREN Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+BANG_TUPLE Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+INT32 (2, false) Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+WHEN Default 0 2 Match
+LPAREN Default 0 3 Match
+GREATER_EQUALS Default 0 3 Match
+SYMBOL "a" Default 0 3 Match
+INT32 (0, false) Default 0 3 Match
+RPAREN Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("a is %A", Regular, Token []) Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+SYMBOL "_" Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("default", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MATCH Default 0 1 Match
+LPAREN Default 0 2 Match
+BANG_TUPLE Default 0 2 Match
+INT32 (1, false) Default 0 2 Match
+INT32 (2, false) Default 0 2 Match
+RPAREN Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+COMMA Default 0 2 Match
+INT32 (2, false) Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+WHEN Default 0 2 Match
+LPAREN Default 0 3 Match
+GREATER_EQUALS Default 0 3 Match
+SYMBOL "a" Default 0 3 Match
+INT32 (0, false) Default 0 3 Match
+RPAREN Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("a is %A", Regular, Token []) Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+SYMBOL "_" Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("default", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MATCH Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "Some" Default 0 2 Match
+INT32 (1, false) Default 0 2 Match
+RPAREN Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "Some" Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+WHEN Default 0 2 Match
+LPAREN Default 0 3 Match
+GREATER_EQUALS Default 0 3 Match
+SYMBOL "a" Default 0 3 Match
+INT32 (0, false) Default 0 3 Match
+RPAREN Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("a is %A", Regular, Token []) Default 0 2 Match
+SYMBOL "a" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "Some" Default 0 2 Match
+SYMBOL "_" Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("some other", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+SYMBOL "_" Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("default", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MATCH Default 0 1 Match
+LPAREN Default 0 2 Match
+INT32 (1, false) Default 0 2 Match
+COLON_COLON Default 0 2 Match
+INT32 (2, false) Default 0 2 Match
+COLON_COLON Default 0 2 Match
+INT32 (3, false) Default 0 2 Match
+COLON_COLON Default 0 2 Match
+INT32 (4, false) Default 0 2 Match
+COLON_COLON Default 0 2 Match
+LPAREN Default 0 3 Match
+RPAREN Default 0 2 Match
+RPAREN Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+COLON_COLON Default 0 2 Match
+SYMBOL "y" Default 0 2 Match
+COLON_COLON Default 0 2 Match
+SYMBOL "rest" Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("x is %A y is %A rest is %A", Regular, Token []) Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+SYMBOL "y" Default 0 2 Match
+SYMBOL "rest" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+COLON_COLON Default 0 2 Match
+SYMBOL "rest" Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("x is %A rest is %A", Regular, Token []) Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+SYMBOL "rest" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+COLON_COLON Default 0 2 Match
+LBRACKET Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("x is %A rest is empty", Regular, Token []) Default 0 2 Match
+SYMBOL "x" Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+LBRACKET Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("empty", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+LBRACKET Default 0 1 Match
+RBRACKET Default 0 1 Match
+LPAREN Default 0 2 Match
+SYMBOL "printfn" Default 0 2 Match
+STRING ("empty", Regular, Token []) Default 0 2 Match
+RPAREN Default 0 1 Match
+RBRACKET Default 0 1 Match
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

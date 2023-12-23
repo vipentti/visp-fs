@@ -1,0 +1,21 @@
+﻿LPAREN Default 0 1 LParen
+MUT Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+STRING ("initial", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("value is %s", Regular, Token []) Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+STRING ("updated", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("value is %s", Regular, Token []) Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

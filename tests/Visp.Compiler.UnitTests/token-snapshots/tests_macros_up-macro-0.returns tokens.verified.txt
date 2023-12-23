@@ -1,0 +1,41 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "DoingThings" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MUT Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_SET Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_TO Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "i" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (0, false) Default 0 3 LParen
+SYMBOL "to" Default 0 3 LParen
+INT32 (5, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "up!" TokenStream Macro 1 3 LParen
+SYMBOL "items" TokenStream Macro 1 3 LParen
+LPAREN TokenStream Macro 2 4 LParen
+SYMBOL "Set.add" TokenStream Macro 2 4 LParen
+SYMBOL "i" TokenStream Macro 2 4 LParen
+RPAREN TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+SYMBOL "items" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "DoingThings" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

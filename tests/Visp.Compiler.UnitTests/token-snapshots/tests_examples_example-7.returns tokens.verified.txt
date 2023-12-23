@@ -1,0 +1,31 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("20", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "values" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+INT32 (2, false) Default 0 1 LParen
+STRING ("foo", Regular, Token []) Default 0 1 LParen
+STRING ("bar", Regular, Token []) Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("values are %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "values" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "vector-push!" Default 0 1 LParen
+SYMBOL "values" Default 0 1 LParen
+INT32 (4, false) Default 0 1 LParen
+INT32 (5, false) Default 0 1 LParen
+INT32 (6, false) Default 0 1 LParen
+INT32 (7, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("values after update are %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "values" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

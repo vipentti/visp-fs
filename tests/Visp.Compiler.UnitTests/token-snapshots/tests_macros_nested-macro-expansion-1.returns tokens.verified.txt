@@ -1,0 +1,293 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "Something" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "work" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "ResizeArray" Default 0 3 LParen
+OP_LESS Default 0 3 LParen
+SYMBOL "int*int*int64" Default 0 3 LParen
+OP_GREATER Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "conditions" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_ARRAY Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "broken" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_ARRAY Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "possibleOffsets" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_ARRAY Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+SYMBOL "PopWork" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+LET Default 0 3 LParen
+SYMBOL "r" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+DOT_BRACKET Default 0 4 LParen
+INT32 (0, false) Default 0 4 LParen
+RBRACKET Default 0 4 LParen
+SYMBOL "work" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_METHOD ".RemoveAt" Default 0 3 LParen
+SYMBOL "work" Default 0 3 LParen
+INT32 (0, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+SYMBOL "r" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+SYMBOL "EnqueueWork" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "bi" Default 0 3 LParen
+SYMBOL "offsetEnd" Default 0 3 LParen
+SYMBOL "nextPos" Default 0 3 LParen
+SYMBOL "count" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MUT Default 0 2 LParen
+SYMBOL "result" Default 0 2 LParen
+INT64 (0L, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+WHILE Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_GREATER Default 0 3 LParen
+LPAREN Default 0 4 LParen
+PROP_PLUS "+Count" Default 0 4 LParen
+SYMBOL "work" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+INT32 (0, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+LPAREN Default 0 4 Match
+SYMBOL "PopWork" Default 0 4 Match
+RPAREN Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+SYMBOL "bi" Default 0 4 Match
+DOT Default 0 4 Match
+SYMBOL "off" Default 0 4 Match
+DOT Default 0 4 Match
+SYMBOL "count" Default 0 4 Match
+RPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+SYMBOL "printfn" Default 0 4 Match
+STRING ("(%A,%A,%A)", Regular, Token []) Default 0 4 Match
+SYMBOL "bi" Default 0 4 Match
+SYMBOL "off" Default 0 4 Match
+SYMBOL "count" Default 0 4 Match
+RPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+LET Default 0 4 Match
+SYMBOL "brokenLength" Default 0 4 Match
+LPAREN Default 0 5 Match
+DOT_BRACKET Default 0 5 Match
+SYMBOL "bi" Default 0 5 Match
+RBRACKET Default 0 5 Match
+SYMBOL "broken" Default 0 5 Match
+RPAREN Default 0 4 Match
+RPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+LET Default 0 4 Match
+SYMBOL "offsetEnd" Default 0 4 Match
+LPAREN Default 0 5 Match
+OP_PLUS Default 0 5 Match
+SYMBOL "off" Default 0 5 Match
+SYMBOL "brokenLength" Default 0 5 Match
+RPAREN Default 0 4 Match
+RPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+MACRO_NAME "cond_" TokenStream Macro 1 4 Match
+LBRACKET TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "not" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "and" TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "or" TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL "=" TokenStream Macro 6 8 Match
+SYMBOL "off" TokenStream Macro 6 8 Match
+INT32 (0, false) TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL "!=" TokenStream Macro 6 8 Match
+LPAREN TokenStream Macro 7 9 Match
+DOT_BRACKET TokenStream Macro 8 9 Match
+LPAREN TokenStream Macro 9 10 Match
+SYMBOL "dec" TokenStream Macro 9 10 Match
+SYMBOL "off" TokenStream Macro 9 10 Match
+RPAREN TokenStream Macro 8 9 Match
+RBRACKET TokenStream Macro 7 9 Match
+SYMBOL "conditions" TokenStream Macro 7 9 Match
+RPAREN TokenStream Macro 6 8 Match
+CHAR "#\#" TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "or" TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL "=" TokenStream Macro 6 8 Match
+SYMBOL "offsetEnd" TokenStream Macro 6 8 Match
+LPAREN TokenStream Macro 7 9 Match
+SYMBOL "+Length" TokenStream Macro 7 9 Match
+SYMBOL "conditions" TokenStream Macro 7 9 Match
+RPAREN TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL "and" TokenStream Macro 6 8 Match
+LPAREN TokenStream Macro 7 9 Match
+SYMBOL "<" TokenStream Macro 7 9 Match
+SYMBOL "offsetEnd" TokenStream Macro 7 9 Match
+LPAREN TokenStream Macro 8 10 Match
+SYMBOL "+Length" TokenStream Macro 8 10 Match
+SYMBOL "conditions" TokenStream Macro 8 10 Match
+RPAREN TokenStream Macro 7 9 Match
+RPAREN TokenStream Macro 6 8 Match
+LPAREN TokenStream Macro 7 9 Match
+SYMBOL "!=" TokenStream Macro 7 9 Match
+LPAREN TokenStream Macro 8 10 Match
+DOT_BRACKET TokenStream Macro 9 10 Match
+SYMBOL "offsetEnd" TokenStream Macro 9 10 Match
+RBRACKET TokenStream Macro 8 10 Match
+SYMBOL "conditions" TokenStream Macro 8 10 Match
+RPAREN TokenStream Macro 7 9 Match
+CHAR "#\#" TokenStream Macro 7 9 Match
+RPAREN TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "not" TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL ".Contains" TokenStream Macro 6 8 Match
+LPAREN TokenStream Macro 7 9 Match
+SYMBOL ".AsSpan" TokenStream Macro 7 9 Match
+SYMBOL "conditions" TokenStream Macro 7 9 Match
+SYMBOL "off" TokenStream Macro 7 9 Match
+SYMBOL "brokenLength" TokenStream Macro 7 9 Match
+RPAREN TokenStream Macro 6 8 Match
+CHAR "#\." TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+UNIT TokenStream Macro 2 4 Match
+RBRACKET TokenStream Macro 1 4 Match
+LBRACKET TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "=" TokenStream Macro 3 5 Match
+SYMBOL "bi" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "dec" TokenStream Macro 4 6 Match
+SYMBOL "brokenLength" TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "unless" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL ".Contains" TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL ".AsSpan" TokenStream Macro 5 7 Match
+SYMBOL "conditions" TokenStream Macro 5 7 Match
+SYMBOL "offsetEnd" TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+CHAR "#\#" TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "set!" TokenStream Macro 4 6 Match
+SYMBOL "result" TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "+" TokenStream Macro 5 7 Match
+SYMBOL "result" TokenStream Macro 5 7 Match
+SYMBOL "count" TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+RBRACKET TokenStream Macro 1 4 Match
+LBRACKET TokenStream Macro 2 4 Match
+KEYWORD ":else" TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "mut" TokenStream Macro 3 5 Match
+SYMBOL "nextPossibleIndex" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "System.Array.BinarySearch" TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "possibleOffsets" TokenStream Macro 5 7 Match
+DOT TokenStream Macro 5 7 Match
+LPAREN TokenStream Macro 6 8 Match
+SYMBOL "inc" TokenStream Macro 6 8 Match
+SYMBOL "offsetEnd" TokenStream Macro 6 8 Match
+RPAREN TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "when" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "<" TokenStream Macro 4 6 Match
+SYMBOL "nextPossibleIndex" TokenStream Macro 4 6 Match
+INT32 (0, false) TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "set!" TokenStream Macro 4 6 Match
+SYMBOL "nextPossibleIndex" TokenStream Macro 4 6 Match
+LPAREN TokenStream Macro 5 7 Match
+SYMBOL "bcompl" TokenStream Macro 5 7 Match
+SYMBOL "nextPossibleIndex" TokenStream Macro 5 7 Match
+RPAREN TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+LPAREN TokenStream Macro 3 5 Match
+SYMBOL "EnqueueWork" TokenStream Macro 3 5 Match
+LPAREN TokenStream Macro 4 6 Match
+SYMBOL "inc" TokenStream Macro 4 6 Match
+SYMBOL "bi" TokenStream Macro 4 6 Match
+RPAREN TokenStream Macro 3 5 Match
+SYMBOL "offsetEnd" TokenStream Macro 3 5 Match
+SYMBOL "nextPossibleIndex" TokenStream Macro 3 5 Match
+SYMBOL "count" TokenStream Macro 3 5 Match
+RPAREN TokenStream Macro 2 4 Match
+RBRACKET TokenStream Macro 1 4 Match
+RPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+RPAREN Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OK", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,59 @@
+﻿LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "StructuredFormatDisplay" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+STRING ("{Structuredtext}", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "TestRec" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "value" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "int" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LPAREN Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "t.Structuredtext" Default 0 2 Member
+LPAREN Default 0 3 Member
+DOT_METHOD ".ToString" Default 0 3 Member
+SYMBOL "t" Default 0 3 Member
+RPAREN Default 0 2 Member
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.ToString" Default 0 2 Type
+LPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "sprintf" Default 0 3 Type
+STRING ("TestRec(%i)", Regular, Token []) Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+value" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

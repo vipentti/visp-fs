@@ -1,0 +1,247 @@
+﻿LPAREN Default 0 1 LParen
+MACRO_NAME "struct" TokenStream Macro 1 1 LParen
+SYMBOL "Range" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+LBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "start" TokenStream Macro 3 2 LParen
+COLON TokenStream Macro 3 2 LParen
+SYMBOL "int64" TokenStream Macro 3 2 LParen
+RBRACKET TokenStream Macro 2 2 LParen
+LBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "len" TokenStream Macro 3 2 LParen
+COLON TokenStream Macro 3 2 LParen
+SYMBOL "int64" TokenStream Macro 3 2 LParen
+RBRACKET TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.Start" TokenStream Macro 2 2 LParen
+SYMBOL "start" TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.Len" TokenStream Macro 2 2 LParen
+SYMBOL "len" TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.End" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "+" TokenStream Macro 3 3 LParen
+SYMBOL "start" TokenStream Macro 3 3 LParen
+SYMBOL "len" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "d.Offset" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "v" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "-" TokenStream Macro 3 3 LParen
+SYMBOL "v" TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Start" TokenStream Macro 4 4 LParen
+SYMBOL "d" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "d.Contains" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "v" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "and" TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL ">=" TokenStream Macro 4 4 LParen
+SYMBOL "v" TokenStream Macro 4 4 LParen
+LPAREN TokenStream Macro 5 5 LParen
+SYMBOL "+Start" TokenStream Macro 5 5 LParen
+SYMBOL "d" TokenStream Macro 5 5 LParen
+RPAREN TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "<" TokenStream Macro 4 4 LParen
+SYMBOL "v" TokenStream Macro 4 4 LParen
+LPAREN TokenStream Macro 5 5 LParen
+SYMBOL "+End" TokenStream Macro 5 5 LParen
+SYMBOL "d" TokenStream Macro 5 5 LParen
+RPAREN TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "override" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "t.ToString" TokenStream Macro 2 2 LParen
+UNIT TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "sprintf" TokenStream Macro 3 3 LParen
+STRING ("Range(%i, %i)", Regular, Token []) TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Start" TokenStream Macro 4 4 LParen
+SYMBOL "t" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Len" TokenStream Macro 4 4 LParen
+SYMBOL "t" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Range is: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "Range" Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Range end is: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+THREAD_LAST Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "Range" Default 0 3 LParen
+INT32 (0, false) Default 0 3 LParen
+INT32 (5, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+PROP_PLUS "+End" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "struct" TokenStream Macro 1 1 LParen
+SYMBOL "SourceDestMap" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+LBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "dest" TokenStream Macro 3 2 LParen
+COLON TokenStream Macro 3 2 LParen
+SYMBOL "int64" TokenStream Macro 3 2 LParen
+RBRACKET TokenStream Macro 2 2 LParen
+LBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "src" TokenStream Macro 3 2 LParen
+COLON TokenStream Macro 3 2 LParen
+SYMBOL "int64" TokenStream Macro 3 2 LParen
+RBRACKET TokenStream Macro 2 2 LParen
+LBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "len" TokenStream Macro 3 2 LParen
+COLON TokenStream Macro 3 2 LParen
+SYMBOL "int64" TokenStream Macro 3 2 LParen
+RBRACKET TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.Dest" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "new" TokenStream Macro 3 3 LParen
+SYMBOL "Range" TokenStream Macro 3 3 LParen
+SYMBOL "dest" TokenStream Macro 3 3 LParen
+SYMBOL "len" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.Src" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "new" TokenStream Macro 3 3 LParen
+SYMBOL "Range" TokenStream Macro 3 3 LParen
+SYMBOL "src" TokenStream Macro 3 3 LParen
+SYMBOL "len" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "_.Len" TokenStream Macro 2 2 LParen
+SYMBOL "len" TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "d.Contains" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "v" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "->>" TokenStream Macro 3 3 LParen
+SYMBOL "d" TokenStream Macro 3 3 LParen
+SYMBOL "+Src" TokenStream Macro 3 3 LParen
+HASH_PAREN TokenStream Macro 4 4 LParen
+SYMBOL "-Contains" TokenStream Macro 4 4 LParen
+SYMBOL "%1" TokenStream Macro 4 4 LParen
+SYMBOL "v" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "member" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "d.Get" TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "src" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "cond" TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "-Contains" TokenStream Macro 4 4 LParen
+LPAREN TokenStream Macro 5 5 LParen
+SYMBOL "+Src" TokenStream Macro 5 5 LParen
+SYMBOL "d" TokenStream Macro 5 5 LParen
+RPAREN TokenStream Macro 4 4 LParen
+SYMBOL "src" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+" TokenStream Macro 4 4 LParen
+LPAREN TokenStream Macro 5 5 LParen
+SYMBOL "->>" TokenStream Macro 5 5 LParen
+SYMBOL "d" TokenStream Macro 5 5 LParen
+SYMBOL "+Dest" TokenStream Macro 5 5 LParen
+SYMBOL "+Start" TokenStream Macro 5 5 LParen
+RPAREN TokenStream Macro 4 4 LParen
+LPAREN TokenStream Macro 5 5 LParen
+SYMBOL "-Offset" TokenStream Macro 5 5 LParen
+LPAREN TokenStream Macro 6 6 LParen
+SYMBOL "+Src" TokenStream Macro 6 6 LParen
+SYMBOL "d" TokenStream Macro 6 6 LParen
+RPAREN TokenStream Macro 5 5 LParen
+SYMBOL "src" TokenStream Macro 5 5 LParen
+RPAREN TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+KEYWORD ":else" TokenStream Macro 3 3 LParen
+SYMBOL "src" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "override" TokenStream Macro 2 2 LParen
+SYMBOL "fn" TokenStream Macro 2 2 LParen
+SYMBOL "t.ToString" TokenStream Macro 2 2 LParen
+UNIT TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "sprintf" TokenStream Macro 3 3 LParen
+STRING ("(%A, %A, %i)", Regular, Token []) TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Dest" TokenStream Macro 4 4 LParen
+SYMBOL "t" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Src" TokenStream Macro 4 4 LParen
+SYMBOL "t" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+LPAREN TokenStream Macro 4 4 LParen
+SYMBOL "+Len" TokenStream Macro 4 4 LParen
+SYMBOL "t" TokenStream Macro 4 4 LParen
+RPAREN TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,46 @@
+﻿LPAREN Default 0 1 LParen
+MUT Default 0 1 LParen
+SYMBOL "vec" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+INT32 (2, false) Default 0 1 LParen
+INT32 (3, false) Default 0 1 LParen
+INT32 (4, false) Default 0 1 LParen
+INT32 (5, false) Default 0 1 LParen
+INT32 (6, false) Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "empty" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "vec" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Value.int" Default 0 2 LParen
+INT32 (-1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT_METHOD ".Add" Default 0 1 LParen
+SYMBOL "empty" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Value.int" Default 0 2 LParen
+INT32 (99, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%O", Regular, Token []) Default 0 1 LParen
+SYMBOL "empty" Default 0 1 LParen
+RPAREN Default 0 0 Default
+SYMBOL "vec" Default 0 0 Default
+EOF Default 0 0 Default

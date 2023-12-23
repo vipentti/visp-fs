@@ -1,0 +1,50 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("20", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "inc" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "v" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Value" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Value.from" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_PLUS Default 0 3 LParen
+INT64 (1L, false) Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "unwrapInt" Default 0 4 LParen
+SYMBOL "v" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "count" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+ATOM_KW Default 0 2 LParen
+INT64 (0L, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("count is %O", Regular, Token []) Default 0 1 LParen
+AT Default 0 1 LParen
+SYMBOL "count" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "swap!" Default 0 1 LParen
+SYMBOL "count" Default 0 1 LParen
+SYMBOL "inc" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("count is %O", Regular, Token []) Default 0 1 LParen
+AT Default 0 1 LParen
+SYMBOL "count" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

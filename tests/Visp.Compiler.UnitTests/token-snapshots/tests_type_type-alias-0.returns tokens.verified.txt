@@ -1,0 +1,44 @@
+﻿LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "range" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "int64" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int64" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "things" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "r" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "range" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_PLUS Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "fst" Default 0 3 LParen
+SYMBOL "r" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "snd" Default 0 3 LParen
+SYMBOL "r" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Result is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "things" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+DOT Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

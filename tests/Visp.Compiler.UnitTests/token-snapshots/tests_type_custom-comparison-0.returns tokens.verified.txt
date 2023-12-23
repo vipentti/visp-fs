@@ -1,0 +1,297 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "CustomEquality" Default 0 1 LParen
+BAR Default 0 1 LParen
+SYMBOL "CustomComparison" Default 0 1 LParen
+BAR Default 0 1 LParen
+SYMBOL "RequireQualifiedAccess" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+UNION Default 0 1 Type
+SYMBOL "MyCustomValue" Default 0 1 Type
+SYMBOL "Nil" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "String" Default 0 1 Type
+SYMBOL "string" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.GetHashCode" Default 0 2 Type
+LPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+MATCH Default 0 3 Type
+SYMBOL "t" Default 0 3 Type
+LBRACKET Default 0 3 Type
+SYMBOL "Nil" Default 0 3 Type
+INT32 (919321, false) Default 0 3 Type
+RBRACKET Default 0 3 Type
+LBRACKET Default 0 3 Type
+LPAREN Default 0 4 Type
+SYMBOL "String" Default 0 4 Type
+SYMBOL "s" Default 0 4 Type
+RPAREN Default 0 3 Type
+LPAREN Default 0 4 Type
+SYMBOL "System.HashCode.Combine" Default 0 4 Type
+LPAREN Default 0 5 Type
+STRING ("string", Regular, Token []) Default 0 5 Type
+COMMA Default 0 5 Type
+SYMBOL "s" Default 0 5 Type
+RPAREN Default 0 4 Type
+RPAREN Default 0 3 Type
+RBRACKET Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.Equals" Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "other" Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+MATCH Default 0 3 Type
+SYMBOL "other" Default 0 3 Type
+LBRACKET Default 0 3 Type
+LPAREN Default 0 4 Type
+COLON_QMARK Default 0 4 Type
+SYMBOL "MyCustomValue" Default 0 4 Type
+SYMBOL "v" Default 0 4 Type
+RPAREN Default 0 3 Type
+LPAREN Default 0 4 Type
+DOT_METHOD ".Equals" Default 0 4 Type
+LPAREN Default 0 5 Type
+COLON_GREATER Default 0 5 Type
+SYMBOL "t" Default 0 5 Type
+SYMBOL "IEquatable" Default 0 5 Type
+OP_LESS Default 0 5 Type
+SYMBOL "_" Default 0 5 Type
+OP_GREATER Default 0 5 Type
+RPAREN Default 0 4 Type
+SYMBOL "v" Default 0 4 Type
+RPAREN Default 0 3 Type
+RBRACKET Default 0 3 Type
+LBRACKET Default 0 3 Type
+SYMBOL "_" Default 0 3 Type
+FALSE Default 0 3 Type
+RBRACKET Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+INTERFACE Default 0 2 Type
+SYMBOL "IEquatable" Default 0 2 Type
+OP_LESS Default 0 2 Type
+SYMBOL "MyCustomValue" Default 0 2 Type
+OP_GREATER Default 0 2 Type
+LPAREN Default 0 3 Type
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "t.Equals" Default 0 3 Member
+LPAREN Default 0 4 Member
+SYMBOL "other" Default 0 4 Member
+RPAREN Default 0 3 Member
+LPAREN Default 0 4 Member
+MATCH Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "t" Default 0 5 Member
+COMMA Default 0 5 Member
+SYMBOL "other" Default 0 5 Member
+RPAREN Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+DOT Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+RPAREN Default 0 4 Member
+TRUE Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "lhs" Default 0 6 Member
+RPAREN Default 0 5 Member
+DOT Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "rhs" Default 0 6 Member
+RPAREN Default 0 5 Member
+RPAREN Default 0 4 Member
+LPAREN Default 0 5 Member
+EQUALS Default 0 5 Member
+SYMBOL "lhs" Default 0 5 Member
+SYMBOL "rhs" Default 0 5 Member
+RPAREN Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "_" Default 0 5 Member
+DOT Default 0 5 Member
+SYMBOL "_" Default 0 5 Member
+RPAREN Default 0 4 Member
+FALSE Default 0 4 Member
+RBRACKET Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+INTERFACE Default 0 2 Type
+SYMBOL "IComparable" Default 0 2 Type
+LPAREN Default 0 3 Type
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "t.CompareTo" Default 0 3 Member
+LPAREN Default 0 4 Member
+SYMBOL "other" Default 0 4 Member
+RPAREN Default 0 3 Member
+LPAREN Default 0 4 Member
+MATCH Default 0 4 Member
+SYMBOL "other" Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+COLON_QMARK Default 0 5 Member
+SYMBOL "MyCustomValue" Default 0 5 Member
+SYMBOL "v" Default 0 5 Member
+RPAREN Default 0 4 Member
+LPAREN Default 0 5 Member
+DOT_METHOD ".CompareTo" Default 0 5 Member
+LPAREN Default 0 6 Member
+COLON_GREATER Default 0 6 Member
+SYMBOL "t" Default 0 6 Member
+SYMBOL "IComparable" Default 0 6 Member
+OP_LESS Default 0 6 Member
+SYMBOL "_" Default 0 6 Member
+OP_GREATER Default 0 6 Member
+RPAREN Default 0 5 Member
+SYMBOL "v" Default 0 5 Member
+RPAREN Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+SYMBOL "null" Default 0 4 Member
+INT32 (1, false) Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+SYMBOL "_" Default 0 4 Member
+INT32 (-1, false) Default 0 4 Member
+RBRACKET Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+INTERFACE Default 0 2 Type
+SYMBOL "IComparable" Default 0 2 Type
+OP_LESS Default 0 2 Type
+SYMBOL "MyCustomValue" Default 0 2 Type
+OP_GREATER Default 0 2 Type
+LPAREN Default 0 3 Type
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "t.CompareTo" Default 0 3 Member
+LPAREN Default 0 4 Member
+SYMBOL "other" Default 0 4 Member
+RPAREN Default 0 3 Member
+LPAREN Default 0 4 Member
+MATCH Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "t" Default 0 5 Member
+COMMA Default 0 5 Member
+SYMBOL "other" Default 0 5 Member
+RPAREN Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+COMMA Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+RPAREN Default 0 4 Member
+INT32 (0, false) Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+COMMA Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "_" Default 0 6 Member
+RPAREN Default 0 5 Member
+RPAREN Default 0 4 Member
+INT32 (-1, false) Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "_" Default 0 6 Member
+RPAREN Default 0 5 Member
+COMMA Default 0 5 Member
+SYMBOL "Nil" Default 0 5 Member
+RPAREN Default 0 4 Member
+INT32 (1, false) Default 0 4 Member
+RBRACKET Default 0 4 Member
+LBRACKET Default 0 4 Member
+LPAREN Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "lhs" Default 0 6 Member
+RPAREN Default 0 5 Member
+COMMA Default 0 5 Member
+LPAREN Default 0 6 Member
+SYMBOL "String" Default 0 6 Member
+SYMBOL "rhs" Default 0 6 Member
+RPAREN Default 0 5 Member
+RPAREN Default 0 4 Member
+LPAREN Default 0 5 Member
+DOT_METHOD ".CompareTo" Default 0 5 Member
+SYMBOL "lhs" Default 0 5 Member
+SYMBOL "rhs" Default 0 5 Member
+RPAREN Default 0 4 Member
+RBRACKET Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Nil < String %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "MyCustomValue.Nil" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "MyCustomValue.String" Default 0 3 LParen
+STRING ("hello", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Nil > String %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+SYMBOL "MyCustomValue.Nil" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "MyCustomValue.String" Default 0 3 LParen
+STRING ("hello", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("String = String %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+EQUALS Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "MyCustomValue.String" Default 0 3 LParen
+STRING ("hello", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "MyCustomValue.String" Default 0 3 LParen
+STRING ("hello", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

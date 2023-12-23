@@ -1,0 +1,116 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("0026", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "custom-match-fn" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "c" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+SYMBOL "rest" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "fn" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "match" TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+LBRACKET TokenStream Macro 5 3 LParen
+SYMBOL "c" TokenStream Macro 5 3 LParen
+SYMBOL "..." TokenStream Macro 5 3 LParen
+RBRACKET TokenStream Macro 4 3 LParen
+SYMBOL "rest" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "sym" TokenStream Macro 3 2 LParen
+SYMBOL "m" TokenStream Macro 3 2 LParen
+SYMBOL "rest" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "fn" TokenStream Macro 3 2 LParen
+SYMBOL "sym" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "match" TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+SYMBOL "m" TokenStream Macro 4 3 LParen
+SYMBOL "rest" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "lambda" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "custom-match-fn" TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "a" TokenStream Macro 3 3 LParen
+DOT TokenStream Macro 3 3 LParen
+SYMBOL "b" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "+" TokenStream Macro 3 3 LParen
+SYMBOL "a" TokenStream Macro 3 3 LParen
+SYMBOL "b" TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "custom-match-fn" TokenStream Macro 1 1 LParen
+SYMBOL "named" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "a" TokenStream Macro 3 2 LParen
+DOT TokenStream Macro 3 2 LParen
+SYMBOL "b" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "+" TokenStream Macro 3 2 LParen
+SYMBOL "a" TokenStream Macro 3 2 LParen
+SYMBOL "b" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("lambda: %i", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "lambda" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+DOT Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("named: %i", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "named" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+DOT Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,16 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("int32 is %A", Regular, Token []) Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("int32 is %A", Regular, Token []) Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("int64 is %A", Regular, Token []) Default 0 1 LParen
+INT64 (99L, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

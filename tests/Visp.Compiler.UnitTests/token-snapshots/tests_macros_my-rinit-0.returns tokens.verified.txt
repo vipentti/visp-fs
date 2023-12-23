@@ -1,0 +1,92 @@
+﻿LPAREN Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "Mapping" Default 0 1 Type
+LPAREN Default 0 2 Type
+SYMBOL "src" Default 0 2 Type
+COLON Default 0 2 Type
+SYMBOL "int64" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+SYMBOL "dest" Default 0 2 Type
+COLON Default 0 2 Type
+SYMBOL "int64" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+SYMBOL "range" Default 0 2 Type
+COLON Default 0 2 Type
+SYMBOL "int64" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+MEMBER Default 0 2 Member
+FN Default 0 2 Member
+SYMBOL "this.Stuff" Default 0 2 Member
+LPAREN Default 0 3 Member
+RPAREN Default 0 2 Member
+LPAREN Default 0 3 Member
+SYMBOL "printfn" Default 0 3 Member
+STRING ("doing stuff %A", Regular, Token []) Default 0 3 Member
+LPAREN Default 0 4 Member
+PROP_PLUS "+src" Default 0 4 Member
+SYMBOL "this" Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 Member
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyRinit" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "sym" TokenStream Macro 4 3 LParen
+SYMBOL "val" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "s" TokenStream Macro 4 3 LParen
+SYMBOL "v" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+BRACE_BAR TokenStream Macro 3 1 LParen
+SYMBOL "sym" TokenStream Macro 3 1 LParen
+SYMBOL "val" TokenStream Macro 3 1 LParen
+LPAREN TokenStream Macro 4 2 LParen
+SYMBOL "m-alternate" TokenStream Macro 4 2 LParen
+SYMBOL "s" TokenStream Macro 4 2 LParen
+SYMBOL "v" TokenStream Macro 4 2 LParen
+RPAREN TokenStream Macro 3 1 LParen
+BAR_BRACE TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "temp" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "MyRinit" TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+SYMBOL "src" TokenStream Macro 2 2 LParen
+INT32 (1, false) TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+SYMBOL "Mapping.dest" TokenStream Macro 2 2 LParen
+INT32 (2, false) TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+SYMBOL "range" TokenStream Macro 2 2 LParen
+INT32 (3, false) TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Record is %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "temp" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT_METHOD ".Stuff" Default 0 1 LParen
+SYMBOL "temp" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

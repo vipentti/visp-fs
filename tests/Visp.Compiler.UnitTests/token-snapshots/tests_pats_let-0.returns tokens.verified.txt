@@ -1,0 +1,107 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "n" Default 0 1 LParen
+COLON Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("n is: %s", Regular, Token []) Default 0 1 LParen
+SYMBOL "n" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+COLON Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("x is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "x" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("y is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "y" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x2" Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "y2" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("x2 is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "x2" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("y2 is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "y2" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x3" Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (6, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("x3 is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "x3" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "x4" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+COMMA Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (7, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (8, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("x4 is: %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "x4" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

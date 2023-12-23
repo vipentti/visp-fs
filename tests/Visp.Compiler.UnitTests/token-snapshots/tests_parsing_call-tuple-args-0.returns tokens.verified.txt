@@ -1,0 +1,30 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("result is is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+APPLY_METHOD "-Concat" Default 0 2 LParen
+SYMBOL "System.String" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+STRING ("first", Regular, Token []) Default 0 3 LParen
+COMMA Default 0 3 LParen
+STRING ("second", Regular, Token []) Default 0 3 LParen
+COMMA Default 0 3 LParen
+STRING ("third", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("result is is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "System.String.Concat" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+STRING ("first", Regular, Token []) Default 0 3 LParen
+COMMA Default 0 3 LParen
+STRING ("second", Regular, Token []) Default 0 3 LParen
+COMMA Default 0 3 LParen
+STRING ("third", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

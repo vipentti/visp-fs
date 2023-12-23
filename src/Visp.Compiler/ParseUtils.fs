@@ -124,6 +124,12 @@ let parseStringToExpr fileName str =
         reraise ()
 
 let debugTokenOutput args (lexbuf: LexBuffer<_>) =
+    let debugToken =
+        function
+        | STRING(text, kind, cont) ->
+            Syntax.StringWriterUtils.writeDebugStringType "STRING" text kind cont
+        | it -> sprintf "%A" it
+
     seq {
         let tokenizer = mkTokenizerWithArgs args
 
@@ -132,8 +138,8 @@ let debugTokenOutput args (lexbuf: LexBuffer<_>) =
 
             yield
                 sprintf
-                    "%A %A %i %i %A"
-                    next
+                    "%s %A %i %i %A"
+                    (debugToken next)
                     args.mode
                     args.depth
                     args.ContextCount

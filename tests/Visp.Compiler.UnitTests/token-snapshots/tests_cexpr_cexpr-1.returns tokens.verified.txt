@@ -1,0 +1,47 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.Threading" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "SomeTaskCode" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "cancellationToken" Default 0 3 LParen
+COLON Default 0 3 LParen
+SYMBOL "CancellationToken" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "task->" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_METHOD ".ThrowIfCancellationRequested" Default 0 3 LParen
+SYMBOL "cancellationToken" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("continuing...", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+RETURN false Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+THREAD_LAST Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SomeTaskCode" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+PROP_PLUS "+None" Default 0 3 LParen
+SYMBOL "CancellationToken" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Async.AwaitTask" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Async.RunSynchronously" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

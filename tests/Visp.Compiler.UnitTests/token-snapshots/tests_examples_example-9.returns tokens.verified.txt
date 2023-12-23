@@ -1,0 +1,75 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "decimals" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "ResizeArray" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT Default 0 1 LParen
+SYMBOL "decimals" Default 0 1 LParen
+SYMBOL "Add" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "decimal" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("number of decimals: %i", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT Default 0 2 LParen
+SYMBOL "decimals" Default 0 2 LParen
+PROP_PLUS "+Count" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT Default 0 1 LParen
+SYMBOL "decimals" Default 0 1 LParen
+SYMBOL "Add" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "decimal" Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("number of decimals: %i", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT Default 0 2 LParen
+SYMBOL "decimals" Default 0 2 LParen
+PROP_PLUS "+Count" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("decimals 0 is %f", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT Default 0 2 LParen
+SYMBOL "decimals" Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "index" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("decimals 1 is %f", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT Default 0 2 LParen
+SYMBOL "decimals" Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+SYMBOL "index" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

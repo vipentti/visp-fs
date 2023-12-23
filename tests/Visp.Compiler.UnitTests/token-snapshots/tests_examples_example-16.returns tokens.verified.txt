@@ -1,0 +1,53 @@
+﻿LPAREN Default 0 1 LParen
+LETSTAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "captured_variable" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+SYMBOL "first_fun" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FNSTAR Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+LETSTAR Default 0 3 LParen
+LBRACKET Default 0 3 LParen
+SYMBOL "second_fun" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+FNSTAR Default 0 4 LParen
+LBRACKET Default 0 4 LParen
+RBRACKET Default 0 4 LParen
+LPAREN Default 0 5 LParen
+LETSTAR Default 0 5 LParen
+LBRACKET Default 0 5 LParen
+SYMBOL "third_fun" Default 0 5 LParen
+LPAREN Default 0 6 LParen
+FNSTAR Default 0 6 LParen
+LBRACKET Default 0 6 LParen
+RBRACKET Default 0 6 LParen
+LPAREN Default 0 7 LParen
+OP_PLUS Default 0 7 LParen
+SYMBOL "captured_variable" Default 0 7 LParen
+INT32 (1, false) Default 0 7 LParen
+RPAREN Default 0 6 LParen
+RPAREN Default 0 5 LParen
+RBRACKET Default 0 5 LParen
+LPAREN Default 0 6 LParen
+SYMBOL "third_fun" Default 0 6 LParen
+RPAREN Default 0 5 LParen
+RPAREN Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RBRACKET Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "second_fun" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "str" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "first_fun" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

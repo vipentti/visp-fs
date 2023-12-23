@@ -1,0 +1,43 @@
+﻿LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "Struct" Default 0 1 LParen
+BAR Default 0 1 LParen
+SYMBOL "NoEquality" Default 0 1 LParen
+BAR Default 0 1 LParen
+SYMBOL "NoComparison" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "TestStruct" Default 0 1 Type
+LPAREN Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "value" Default 0 2 Type
+COLON Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RBRACKET Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "_.Value" Default 0 2 Member
+SYMBOL "value" Default 0 2 Member
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "xx" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "TestStruct" Default 0 2 LParen
+INT32 (99, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Value is %i", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+Value" Default 0 2 LParen
+SYMBOL "xx" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

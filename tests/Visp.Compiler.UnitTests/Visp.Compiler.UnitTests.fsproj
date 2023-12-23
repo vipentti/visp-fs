@@ -9,6 +9,7 @@
     <Compile Include="WriterTest.fs" />
     <Compile Include="ParsingTests.generated.fs" />
     <Compile Include="StructuredOutputTests.generated.fs" />
+    <Compile Include="TokenOutputTests.generated.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

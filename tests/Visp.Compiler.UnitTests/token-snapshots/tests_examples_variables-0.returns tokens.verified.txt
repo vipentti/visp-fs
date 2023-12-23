@@ -1,0 +1,35 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("value is %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MUT Default 0 1 LParen
+SYMBOL "valuemut" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("valuemut is %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "valuemut" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+SYMBOL "valuemut" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_PLUS Default 0 2 LParen
+SYMBOL "valuemut" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("valuemut is %i", Regular, Token []) Default 0 1 LParen
+SYMBOL "valuemut" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,99 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "OrTest" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "a" Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BAR_BAR Default 0 2 LParen
+SYMBOL "a" Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "AndTest" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "a" Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+AMP_AMP Default 0 2 LParen
+SYMBOL "a" Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OrTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "OrTest" Default 0 2 LParen
+FALSE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OrTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "OrTest" Default 0 2 LParen
+FALSE Default 0 2 LParen
+TRUE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OrTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "OrTest" Default 0 2 LParen
+TRUE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OrTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "OrTest" Default 0 2 LParen
+TRUE Default 0 2 LParen
+TRUE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AndTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AndTest" Default 0 2 LParen
+FALSE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AndTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AndTest" Default 0 2 LParen
+FALSE Default 0 2 LParen
+TRUE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AndTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AndTest" Default 0 2 LParen
+TRUE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AndTest %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AndTest" Default 0 2 LParen
+TRUE Default 0 2 LParen
+TRUE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

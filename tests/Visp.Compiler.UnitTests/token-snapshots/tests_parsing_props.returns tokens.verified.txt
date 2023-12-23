@@ -1,0 +1,10 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "hello" Default 0 1 LParen
+STRING ("world", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+PROP_PLUS "+Length" Default 0 1 LParen
+SYMBOL "hello" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

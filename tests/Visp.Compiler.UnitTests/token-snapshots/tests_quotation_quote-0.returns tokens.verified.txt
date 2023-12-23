@@ -1,0 +1,101 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "items" Default 0 1 LParen
+QUOTE_SYM TokenStream QuoteSym 0 1 LParen
+LPAREN TokenStream QuoteSym 1 2 LParen
+INT32 (1, false) TokenStream QuoteSym 1 2 LParen
+INT32 (2, false) TokenStream QuoteSym 1 2 LParen
+INT32 (3, false) TokenStream QuoteSym 1 2 LParen
+INT32 (4, false) TokenStream QuoteSym 1 2 LParen
+INT32 (5, false) TokenStream QuoteSym 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "sym" Default 0 1 LParen
+QUOTE_SYM TokenStream QuoteSym 0 1 LParen
+SYMBOL "symbol" TokenStream QuoteSym 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "something" Default 0 1 LParen
+QUOTE_SYM TokenStream QuoteSym 0 1 LParen
+LPAREN TokenStream QuoteSym 1 2 LParen
+SYMBOL "fn" TokenStream QuoteSym 1 2 LParen
+LBRACKET TokenStream QuoteSym 2 2 LParen
+SYMBOL "a" TokenStream QuoteSym 2 2 LParen
+RBRACKET TokenStream QuoteSym 1 2 LParen
+LPAREN TokenStream QuoteSym 2 3 LParen
+SYMBOL "+" TokenStream QuoteSym 2 3 LParen
+SYMBOL "a" TokenStream QuoteSym 2 3 LParen
+SYMBOL "b" TokenStream QuoteSym 2 3 LParen
+INT32 (1, false) TokenStream QuoteSym 2 3 LParen
+LPAREN TokenStream QuoteSym 3 4 LParen
+SYMBOL "call" TokenStream QuoteSym 3 4 LParen
+SYMBOL "+" TokenStream QuoteSym 3 4 LParen
+INT32 (1, false) TokenStream QuoteSym 3 4 LParen
+INT32 (2, false) TokenStream QuoteSym 3 4 LParen
+RPAREN TokenStream QuoteSym 2 3 LParen
+RPAREN TokenStream QuoteSym 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("items: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "items" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("sym: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "sym" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("something: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "something" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("nested: %O", Regular, Token []) Default 0 1 LParen
+QUOTE_SYM TokenStream QuoteSym 0 1 LParen
+LPAREN TokenStream QuoteSym 1 2 LParen
+SYMBOL "nested1" TokenStream QuoteSym 1 2 LParen
+LPAREN TokenStream QuoteSym 2 3 LParen
+SYMBOL "nested2" TokenStream QuoteSym 2 3 LParen
+LPAREN TokenStream QuoteSym 3 4 LParen
+SYMBOL "nested3" TokenStream QuoteSym 3 4 LParen
+LPAREN TokenStream QuoteSym 4 5 LParen
+SYMBOL "nested4" TokenStream QuoteSym 4 5 LParen
+SYMBOL "and" TokenStream QuoteSym 4 5 LParen
+SYMBOL "on" TokenStream QuoteSym 4 5 LParen
+SYMBOL "and" TokenStream QuoteSym 4 5 LParen
+SYMBOL "on" TokenStream QuoteSym 4 5 LParen
+KEYWORD ":keyword" TokenStream QuoteSym 4 5 LParen
+RPAREN TokenStream QuoteSym 3 4 LParen
+RPAREN TokenStream QuoteSym 2 3 LParen
+RPAREN TokenStream QuoteSym 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("nested vec: %O", Regular, Token []) Default 0 1 LParen
+QUOTE_SYM TokenStream QuoteSym 0 1 LParen
+LBRACKET TokenStream QuoteSym 1 1 LParen
+SYMBOL "nested1" TokenStream QuoteSym 1 1 LParen
+LPAREN TokenStream QuoteSym 2 2 LParen
+SYMBOL "nested2" TokenStream QuoteSym 2 2 LParen
+LBRACKET TokenStream QuoteSym 3 2 LParen
+SYMBOL "nested3" TokenStream QuoteSym 3 2 LParen
+LPAREN TokenStream QuoteSym 4 3 LParen
+SYMBOL "nested4" TokenStream QuoteSym 4 3 LParen
+SYMBOL "and" TokenStream QuoteSym 4 3 LParen
+SYMBOL "on" TokenStream QuoteSym 4 3 LParen
+SYMBOL "and" TokenStream QuoteSym 4 3 LParen
+SYMBOL "on" TokenStream QuoteSym 4 3 LParen
+KEYWORD ":keyword" TokenStream QuoteSym 4 3 LParen
+RPAREN TokenStream QuoteSym 3 2 LParen
+RBRACKET TokenStream QuoteSym 2 2 LParen
+RPAREN TokenStream QuoteSym 1 1 LParen
+RBRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default
