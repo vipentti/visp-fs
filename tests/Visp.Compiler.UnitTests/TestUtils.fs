@@ -44,6 +44,21 @@ let inline private verify (out: string) dir (param: string) =
         return! (task |> Async.AwaitTask)
     }
 
+let runTokenTest (name: string) =
+    async {
+        parseCoreLibs ()
+        let path = getVispFilePath name
+
+        try
+            let parsed = CoreParser.debugLexFile path
+            let nameParam = name.Replace('/', '_').Replace('\\', '_')
+            Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings <- true
+            let output = parsed |> String.concat "\n"
+            return! verify output "token-snapshots" nameParam
+        with :? ParseHelpers.SyntaxError as syn ->
+            return raise <| (LexHelpers.syntaxErrorToParseError syn)
+    }
+
 let runStructuredOutputTest (name: string) =
     async {
         parseCoreLibs ()

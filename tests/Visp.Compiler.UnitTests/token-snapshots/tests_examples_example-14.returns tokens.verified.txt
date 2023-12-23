@@ -1,0 +1,80 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "result" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUASIQUOTE_KW TokenStream Quasiquote 1 2 LParen
+LPAREN TokenStream Quasiquote 2 3 LParen
+UNQUOTE_KW TokenStream Quasiquote 2 3 LParen
+SYMBOL "value" TokenStream Quasiquote 2 3 LParen
+RPAREN TokenStream Quasiquote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("value is %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "result" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "items" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUOTE_KW TokenStream Quote 1 2 LParen
+LPAREN TokenStream Quote 2 3 LParen
+INT32 (1, false) TokenStream Quote 2 3 LParen
+INT32 (2, false) TokenStream Quote 2 3 LParen
+INT32 (3, false) TokenStream Quote 2 3 LParen
+INT32 (4, false) TokenStream Quote 2 3 LParen
+INT32 (5, false) TokenStream Quote 2 3 LParen
+RPAREN TokenStream Quote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "result2" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUASIQUOTE_KW TokenStream Quasiquote 1 2 LParen
+LPAREN TokenStream Quasiquote 2 3 LParen
+INT32 (1, false) TokenStream Quasiquote 2 3 LParen
+INT32 (2, false) TokenStream Quasiquote 2 3 LParen
+LPAREN TokenStream Quasiquote 3 4 LParen
+UNQUOTE_KW TokenStream Quasiquote 3 4 LParen
+LPAREN TokenStream Quasiquote 4 5 LParen
+SYMBOL "+" TokenStream Quasiquote 4 5 LParen
+INT32 (3, false) TokenStream Quasiquote 4 5 LParen
+INT32 (4, false) TokenStream Quasiquote 4 5 LParen
+RPAREN TokenStream Quasiquote 3 4 LParen
+RPAREN TokenStream Quasiquote 2 3 LParen
+RPAREN TokenStream Quasiquote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("result2 is %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "result2" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "result3" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUASIQUOTE_KW TokenStream Quasiquote 1 2 LParen
+LPAREN TokenStream Quasiquote 2 3 LParen
+INT32 (0, false) TokenStream Quasiquote 2 3 LParen
+LPAREN TokenStream Quasiquote 3 4 LParen
+SPLICE_UNQUOTE_KW TokenStream Quasiquote 3 4 LParen
+SYMBOL "items" TokenStream Quasiquote 3 4 LParen
+RPAREN TokenStream Quasiquote 2 3 LParen
+INT32 (6, false) TokenStream Quasiquote 2 3 LParen
+RPAREN TokenStream Quasiquote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("result3 is %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "result3" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

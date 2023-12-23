@@ -1,0 +1,15 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "temp" Default 0 1 LParen
+HASH_PAREN Default 0 2 LParen
+OP_PLUS Default 0 2 LParen
+SYMBOL "%1" Default 0 2 LParen
+SYMBOL "%2" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "temp" Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+INT32 (2, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

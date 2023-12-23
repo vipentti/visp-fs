@@ -1,0 +1,191 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "no-type" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("no-type %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "no-type" Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "with-type" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "string" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-type %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "with-type" Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "with-type-multiple" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "string" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-type-multiple %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "s" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-type-multiple %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "b" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "with-type-multiple" Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "with-tuple" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-tuple %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+DOT Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "with-tuple" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+DOT Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "with-tuple-type" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-tuple-type %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+DOT Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "with-tuple-type" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+DOT Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "with-tuple-multiple" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x2" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "y2" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-tuple-multiple %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x" Default 0 3 LParen
+DOT Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("with-tuple-multiple %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "x2" Default 0 3 LParen
+DOT Default 0 3 LParen
+SYMBOL "y2" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "with-tuple-multiple" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+DOT Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+DOT Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

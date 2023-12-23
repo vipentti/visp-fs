@@ -1,0 +1,12 @@
+﻿LPAREN Default 0 1 LParen
+THREAD_FIRST Default 0 1 LParen
+STRING ("return me", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "arg" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arg" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

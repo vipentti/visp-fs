@@ -1,0 +1,78 @@
+﻿LPAREN Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "TestRec" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "value" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "int" Default 0 1 Type
+RBRACKET Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "SomeFun" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "r" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "TestRec" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MUT Default 0 2 LParen
+SYMBOL "counter" Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MUT Default 0 2 LParen
+SYMBOL "value" Default 0 2 LParen
+SYMBOL "r" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+WHILE Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_LESS Default 0 3 LParen
+SYMBOL "counter" Default 0 3 LParen
+INT32 (10, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SET Default 0 3 LParen
+SYMBOL "value" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "with" Default 0 4 LParen
+SYMBOL "value" Default 0 4 LParen
+BRACE_BAR Default 0 4 LParen
+LBRACKET Default 0 4 LParen
+SYMBOL "value" Default 0 4 LParen
+LPAREN Default 0 5 LParen
+SYMBOL "inc" Default 0 5 LParen
+LPAREN Default 0 6 LParen
+PROP_PLUS "+value" Default 0 6 LParen
+SYMBOL "value" Default 0 6 LParen
+RPAREN Default 0 5 LParen
+RPAREN Default 0 4 LParen
+RBRACKET Default 0 4 LParen
+BAR_BRACE Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "up!" TokenStream Macro 1 3 LParen
+SYMBOL "counter" TokenStream Macro 1 3 LParen
+SYMBOL "inc" TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SomeFun" Default 0 2 LParen
+BRACE_BAR Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "value" Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+BAR_BRACE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

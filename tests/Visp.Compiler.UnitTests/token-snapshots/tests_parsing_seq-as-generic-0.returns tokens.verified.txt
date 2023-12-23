@@ -1,0 +1,109 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "SeqAsArg" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+COLON Default 0 2 LParen
+SEQ Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "^T" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Seq.length" Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+PAREN_BAR Default 0 2 LParen
+BAR_PAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+PAREN_BAR Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+BAR_PAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+PAREN_BAR Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+BAR_PAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+BRACKET_BAR Default 0 2 LParen
+BAR_BRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+BRACKET_BAR Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+BAR_BRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+BRACKET_BAR Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+BAR_BRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "seq->" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SeqAsArg" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "seq->" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+YIELD false Default 0 4 LParen
+INT32 (1, false) Default 0 4 LParen
+RPAREN Default 0 3 LParen
+LPAREN Default 0 4 LParen
+YIELD false Default 0 4 LParen
+INT32 (2, false) Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

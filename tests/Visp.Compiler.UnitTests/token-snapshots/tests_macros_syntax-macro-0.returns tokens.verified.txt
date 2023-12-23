@@ -1,0 +1,97 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("0026", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "matchfnexample" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "sym" TokenStream Macro 3 2 LParen
+SYMBOL "m" TokenStream Macro 3 2 LParen
+SYMBOL "rest" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "fn" TokenStream Macro 3 2 LParen
+SYMBOL "sym" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "match" TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+SYMBOL "m" TokenStream Macro 4 3 LParen
+SYMBOL "rest" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "matchfnexample" TokenStream Macro 1 1 LParen
+SYMBOL "name" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "!tuple" TokenStream Macro 3 2 LParen
+SYMBOL "a" TokenStream Macro 3 2 LParen
+SYMBOL "b" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "+" TokenStream Macro 3 2 LParen
+SYMBOL "a" TokenStream Macro 3 2 LParen
+SYMBOL "b" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+SYMBOL "_" TokenStream Macro 2 1 LParen
+INT32 (0, false) TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "name2" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "tup" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MATCH Default 0 2 Match
+SYMBOL "tup" Default 0 2 Match
+LBRACKET Default 0 2 Match
+LPAREN Default 0 3 Match
+BANG_TUPLE Default 0 3 Match
+SYMBOL "a" Default 0 3 Match
+SYMBOL "b" Default 0 3 Match
+RPAREN Default 0 2 Match
+LPAREN Default 0 3 Match
+OP_PLUS Default 0 3 Match
+SYMBOL "a" Default 0 3 Match
+SYMBOL "b" Default 0 3 Match
+RPAREN Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "_" Default 0 2 Match
+INT32 (0, false) Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A & %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_TUPLE Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "name2" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+BANG_TUPLE Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

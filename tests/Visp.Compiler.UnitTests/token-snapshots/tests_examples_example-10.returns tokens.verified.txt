@@ -1,0 +1,36 @@
+﻿HASH_IDENT "nowarn" Default 0 0 Default
+STRING ("20", Regular, Token []) Default 0 0 Default
+LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.Text" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "sb" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "StringBuilder" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT Default 0 1 LParen
+SYMBOL "sb" Default 0 1 LParen
+SYMBOL "Append" Default 0 1 LParen
+STRING ("hello", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+DOT Default 0 1 LParen
+SYMBOL "sb" Default 0 1 LParen
+SYMBOL "Append" Default 0 1 LParen
+STRING ("world", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("sb contains: %s", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT Default 0 2 LParen
+SYMBOL "sb" Default 0 2 LParen
+SYMBOL "ToString" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

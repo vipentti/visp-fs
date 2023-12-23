@@ -1,0 +1,134 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "func1" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_TO Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "var" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+SYMBOL "to" Default 0 3 LParen
+INT32 (10, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printf" Default 0 3 LParen
+STRING ("%d ", Regular, Token []) Default 0 3 LParen
+SYMBOL "var" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "func2" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_TO Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "var" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+INT32 (10, false) Default 0 3 LParen
+SYMBOL "downto" Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printf" Default 0 3 LParen
+STRING ("%d ", Regular, Token []) Default 0 3 LParen
+SYMBOL "var" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "func1" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "func2" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "start" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_MINUS Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_MULT Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "end" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_PLUS Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_MULT Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "func3" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_TO Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "var" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "start" Default 0 4 LParen
+SYMBOL "x" Default 0 4 LParen
+SYMBOL "y" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+SYMBOL "to" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "end" Default 0 4 LParen
+SYMBOL "x" Default 0 4 LParen
+SYMBOL "y" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printf" Default 0 3 LParen
+STRING ("%d ", Regular, Token []) Default 0 3 LParen
+SYMBOL "var" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "func3" Default 0 1 LParen
+INT32 (10, false) Default 0 1 LParen
+INT32 (4, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

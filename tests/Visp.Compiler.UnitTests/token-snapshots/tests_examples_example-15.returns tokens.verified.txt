@@ -1,0 +1,33 @@
+﻿LPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FNSTAR Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "captured_arg" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+LETSTAR Default 0 3 LParen
+LBRACKET Default 0 3 LParen
+SYMBOL "second_capture" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+OP_PLUS Default 0 4 LParen
+SYMBOL "captured_arg" Default 0 4 LParen
+INT32 (1, false) Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RBRACKET Default 0 3 LParen
+LPAREN Default 0 4 LParen
+LPAREN Default 0 5 LParen
+FNSTAR Default 0 5 LParen
+LBRACKET Default 0 5 LParen
+RBRACKET Default 0 5 LParen
+LPAREN Default 0 6 LParen
+OP_PLUS Default 0 6 LParen
+SYMBOL "captured_arg" Default 0 6 LParen
+SYMBOL "second_capture" Default 0 6 LParen
+RPAREN Default 0 5 LParen
+RPAREN Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

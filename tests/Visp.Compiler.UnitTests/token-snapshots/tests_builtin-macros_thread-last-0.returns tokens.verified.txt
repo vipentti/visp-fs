@@ -1,0 +1,67 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.Text.RegularExpressions" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "rx" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "Regex" Default 0 2 LParen
+STRING ("Game (\d+):", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_PLUS Default 0 3 LParen
+SYMBOL "Compiled" Default 0 3 LParen
+SYMBOL "RegexOptions" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "ms" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".Match" Default 0 2 LParen
+SYMBOL "rx" Default 0 2 LParen
+STRING ("Game 1:", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Groups %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+Groups" Default 0 2 LParen
+SYMBOL "ms" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "gamePrefix" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_PLUS Default 0 3 LParen
+SYMBOL "Groups" Default 0 3 LParen
+SYMBOL "ms" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Game Prefix %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "gamePrefix" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Game Prefix %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+THREAD_LAST Default 0 2 LParen
+SYMBOL "ms" Default 0 2 LParen
+PROP_PLUS "+Groups" Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

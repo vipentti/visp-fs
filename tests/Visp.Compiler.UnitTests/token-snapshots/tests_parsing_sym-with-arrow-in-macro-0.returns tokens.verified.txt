@@ -1,0 +1,61 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "noop-macro-1" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "ids" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "begin" TokenStream Macro 3 2 LParen
+SYMBOL "ids" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "something->nothing" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "i" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+SYMBOL "i" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+INLINE Default 0 1 LParen
+SYMBOL "Test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "i" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "noop-macro-1" TokenStream Macro 1 2 LParen
+LPAREN TokenStream Macro 2 3 LParen
+SYMBOL "something->nothing" TokenStream Macro 2 3 LParen
+SYMBOL "i" TokenStream Macro 2 3 LParen
+RPAREN TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Test" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Test" Default 0 2 LParen
+STRING ("hello", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

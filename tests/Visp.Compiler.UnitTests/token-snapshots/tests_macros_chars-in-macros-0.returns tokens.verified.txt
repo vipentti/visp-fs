@@ -1,0 +1,57 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "PrintChars" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "printfn" TokenStream Macro 3 2 LParen
+STRING ("Values: %A", Regular, Token []) TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "!list" TokenStream Macro 4 3 LParen
+SYMBOL "body" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "PrintChars" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+CHAR "#\a" TokenStream Macro 2 2 LParen
+DOT TokenStream Macro 2 2 LParen
+CHAR "#\=" TokenStream Macro 2 2 LParen
+DOT TokenStream Macro 2 2 LParen
+CHAR "#\B" TokenStream Macro 2 2 LParen
+DOT TokenStream Macro 2 2 LParen
+CHAR "#\newline" TokenStream Macro 2 2 LParen
+DOT TokenStream Macro 2 2 LParen
+CHAR "#\space" TokenStream Macro 2 2 LParen
+DOT TokenStream Macro 2 2 LParen
+CHAR "#\tab" TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+CHAR "#\a" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+CHAR "#\newline" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+CHAR "#\space" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+CHAR "#\tab" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

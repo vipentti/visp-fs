@@ -1,0 +1,137 @@
+﻿LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "Grid" Default 0 1 LParen
+SYMBOL "char" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+COMMA Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "arr" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Array2D.create" Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+CHAR "#\." Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "y" Default 0 1 LParen
+INT32 (4, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("arr[0,0]=%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("arr[1,2]=%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("arr[3,3]=%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Array2D.get" Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+CHAR "#\#" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+CHAR "#\#" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+CHAR "#\#" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("arr[3,4]=%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+THREAD_LAST Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_MINUS Default 0 3 LParen
+SYMBOL "y" Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+COMMA Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_PLUS Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("arr[4,4]=%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+THREAD_LAST Default 0 2 LParen
+SYMBOL "arr" Default 0 2 LParen
+DOT_BRACKET Default 0 2 LParen
+SYMBOL "y" Default 0 2 LParen
+COMMA Default 0 2 LParen
+LPAREN Default 0 3 LParen
+OP_PLUS Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+SYMBOL "arr" Default 0 0 Default
+EOF Default 0 0 Default

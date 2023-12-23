@@ -1,0 +1,27 @@
+﻿LPAREN Default 0 1 LParen
+FOR_IN Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "x" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "seq->" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+YIELD false Default 0 3 LParen
+INT32 (1, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+YIELD false Default 0 3 LParen
+INT32 (2, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+YIELD false Default 0 3 LParen
+INT32 (3, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("x is %i", Regular, Token []) Default 0 2 LParen
+SYMBOL "x" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

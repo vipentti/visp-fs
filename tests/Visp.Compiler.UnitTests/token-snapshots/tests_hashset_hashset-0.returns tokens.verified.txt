@@ -1,0 +1,18 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "set" Default 0 1 LParen
+HASH_BRACE Default 0 1 LParen
+KEYWORD ":this-is-a-key" Default 0 1 LParen
+STRING ("value", Regular, Token []) Default 0 1 LParen
+STRING ("string as key", Regular, Token []) Default 0 1 LParen
+STRING ("string value", Regular, Token []) Default 0 1 LParen
+INT32 (0, false) Default 0 1 LParen
+STRING ("int as key", Regular, Token []) Default 0 1 LParen
+RBRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%O", Regular, Token []) Default 0 1 LParen
+SYMBOL "set" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

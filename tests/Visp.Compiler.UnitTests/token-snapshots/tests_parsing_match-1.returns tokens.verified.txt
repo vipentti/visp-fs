@@ -1,0 +1,127 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "IsString" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "lhs" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "obj" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MATCH Default 0 2 Match
+SYMBOL "lhs" Default 0 2 Match
+LBRACKET Default 0 2 Match
+LPAREN Default 0 3 Match
+COLON_QMARK Default 0 3 Match
+SYMBOL "string" Default 0 3 Match
+RPAREN Default 0 2 Match
+TRUE Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "_" Default 0 2 Match
+FALSE Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "AreEqualStrings" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "lhs" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "obj" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "rhs" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "obj" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MATCH Default 0 2 Match
+LPAREN Default 0 3 Match
+SYMBOL "lhs" Default 0 3 Match
+COMMA Default 0 3 Match
+SYMBOL "rhs" Default 0 3 Match
+RPAREN Default 0 2 Match
+LBRACKET Default 0 2 Match
+LPAREN Default 0 3 Match
+LPAREN Default 0 4 Match
+COLON_QMARK Default 0 4 Match
+SYMBOL "string" Default 0 4 Match
+SYMBOL "lhss" Default 0 4 Match
+RPAREN Default 0 3 Match
+DOT Default 0 3 Match
+LPAREN Default 0 4 Match
+COLON_QMARK Default 0 4 Match
+SYMBOL "string" Default 0 4 Match
+SYMBOL "rhss" Default 0 4 Match
+RPAREN Default 0 3 Match
+RPAREN Default 0 2 Match
+LPAREN Default 0 3 Match
+EQUALS Default 0 3 Match
+SYMBOL "lhss" Default 0 3 Match
+SYMBOL "rhss" Default 0 3 Match
+RPAREN Default 0 2 Match
+RBRACKET Default 0 2 Match
+LBRACKET Default 0 2 Match
+SYMBOL "_" Default 0 2 Match
+FALSE Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("IsString: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "IsString" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("IsString: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "IsString" Default 0 2 LParen
+STRING ("foo", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AreEqualStrings: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AreEqualStrings" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AreEqualStrings: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AreEqualStrings" Default 0 2 LParen
+STRING ("foo", Regular, Token []) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AreEqualStrings: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AreEqualStrings" Default 0 2 LParen
+STRING ("foo", Regular, Token []) Default 0 2 LParen
+STRING ("foo", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("AreEqualStrings: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "AreEqualStrings" Default 0 2 LParen
+STRING ("foo", Regular, Token []) Default 0 2 LParen
+STRING ("bar", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

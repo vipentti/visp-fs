@@ -1,0 +1,61 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "CountExprsExampleTest1" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+INT32 (0, false) TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+INT32 (1, false) TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "head" TokenStream Macro 3 2 LParen
+SYMBOL "tail" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "+" TokenStream Macro 3 2 LParen
+INT32 (1, false) TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "CountExprsExampleTest1" TokenStream Macro 4 3 LParen
+SYMBOL "tail" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "exprCount" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "CountExprsExampleTest1" TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+LBRACKET TokenStream Macro 2 2 LParen
+RBRACKET TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("exprs: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "exprCount" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

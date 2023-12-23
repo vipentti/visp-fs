@@ -1,0 +1,70 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyWhen1" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "test" TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "if" TokenStream Macro 3 2 LParen
+SYMBOL "test" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "begin" TokenStream Macro 4 3 LParen
+SYMBOL "body" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyUnless1" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "test" TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "if" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "not" TokenStream Macro 4 3 LParen
+SYMBOL "test" TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "begin" TokenStream Macro 4 3 LParen
+SYMBOL "body" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "MyWhen1" TokenStream Macro 1 1 LParen
+TRUE TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("inside when 1", Regular, Token []) TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("inside when 2", Regular, Token []) TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "MyUnless1" TokenStream Macro 1 1 LParen
+FALSE TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("inside unless 3", Regular, Token []) TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("inside unless 4", Regular, Token []) TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

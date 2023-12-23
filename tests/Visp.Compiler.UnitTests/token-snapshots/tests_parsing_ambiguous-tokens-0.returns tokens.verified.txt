@@ -1,0 +1,134 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "NoopMacroExample" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "begin" TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BAR_BAR Default 0 2 LParen
+TRUE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+INT32 (1, false) Default 0 1 LParen
+INT32 (2, false) Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BAR_BAR Default 0 2 LParen
+TRUE Default 0 2 LParen
+TRUE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BAR_BAR Default 0 2 LParen
+FALSE Default 0 2 LParen
+FALSE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "NoopMacroExample" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("in macro: %A", Regular, Token []) TokenStream Macro 2 2 LParen
+PAREN_BAR TokenStream Macro 3 2 LParen
+BAR_PAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "NoopMacroExample" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("non macro: %A", Regular, Token []) TokenStream Macro 2 2 LParen
+PAREN_BAR TokenStream Macro 3 2 LParen
+PAREN_BAR TokenStream Macro 4 2 LParen
+BAR_PAREN TokenStream Macro 3 2 LParen
+PAREN_BAR TokenStream Macro 4 2 LParen
+BAR_PAREN TokenStream Macro 3 2 LParen
+BAR_PAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "NoopMacroExample" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("in macro: %A", Regular, Token []) TokenStream Macro 2 2 LParen
+LPAREN TokenStream Macro 3 3 LParen
+SYMBOL "||" TokenStream Macro 3 3 LParen
+TRUE TokenStream Macro 3 3 LParen
+FALSE TokenStream Macro 3 3 LParen
+RPAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "NoopMacroExample" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("in macro: %A", Regular, Token []) TokenStream Macro 2 2 LParen
+PAREN_BAR TokenStream Macro 3 2 LParen
+INT32 (1, false) TokenStream Macro 3 2 LParen
+INT32 (2, false) TokenStream Macro 3 2 LParen
+BAR_PAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "NoopMacroExample" TokenStream Macro 1 1 LParen
+LPAREN TokenStream Macro 2 2 LParen
+SYMBOL "printfn" TokenStream Macro 2 2 LParen
+STRING ("in macro: %A", Regular, Token []) TokenStream Macro 2 2 LParen
+PAREN_BAR TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "||" TokenStream Macro 4 3 LParen
+TRUE TokenStream Macro 4 3 LParen
+TRUE TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "||" TokenStream Macro 4 3 LParen
+FALSE TokenStream Macro 4 3 LParen
+FALSE TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+BAR_PAREN TokenStream Macro 2 2 LParen
+RPAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OK", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,42 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "quasiquoted" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUASIQUOTE_KW TokenStream Quasiquote 1 2 LParen
+LPAREN TokenStream Quasiquote 2 3 LParen
+SYMBOL "hello" TokenStream Quasiquote 2 3 LParen
+SYMBOL "world" TokenStream Quasiquote 2 3 LParen
+SYMBOL "in" TokenStream Quasiquote 2 3 LParen
+SYMBOL "quotes" TokenStream Quasiquote 2 3 LParen
+RPAREN TokenStream Quasiquote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("quasiquoted is: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "quasiquoted" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "next_quasiquoted" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUASIQUOTE_KW TokenStream Quasiquote 1 2 LParen
+LPAREN TokenStream Quasiquote 2 3 LParen
+STRING ("constants", Regular, Token []) TokenStream Quasiquote 2 3 LParen
+KEYWORD ":keywords-work" TokenStream Quasiquote 2 3 LParen
+TRUE TokenStream Quasiquote 2 3 LParen
+INT32 (1, false) TokenStream Quasiquote 2 3 LParen
+IEEE64 1.5 TokenStream Quasiquote 2 3 LParen
+FALSE TokenStream Quasiquote 2 3 LParen
+SYMBOL "also" TokenStream Quasiquote 2 3 LParen
+STRING ("work", Regular, Token []) TokenStream Quasiquote 2 3 LParen
+NIL TokenStream Quasiquote 2 3 LParen
+RPAREN TokenStream Quasiquote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("next_quasiquoted is: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "next_quasiquoted" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

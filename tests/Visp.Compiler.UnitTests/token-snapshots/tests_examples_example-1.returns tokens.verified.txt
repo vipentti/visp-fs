@@ -1,0 +1,90 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "hello" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "name" Default 0 3 LParen
+COLON Default 0 3 LParen
+SYMBOL "string" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("hello %s", Regular, Token []) Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "hello-no-types" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("hello %s", Regular, Token []) Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "hello-with-vector" Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "name" Default 0 1 LParen
+COLON Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("hello %s", Regular, Token []) Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "anon" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "name" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("hello %s", Regular, Token []) Default 0 3 LParen
+SYMBOL "name" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "hello" Default 0 1 LParen
+STRING ("test", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "hello-no-types" Default 0 1 LParen
+STRING ("no types", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "hello-with-vector" Default 0 1 LParen
+STRING ("vector", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "anon" Default 0 1 LParen
+STRING ("anon", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "name" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("hello %s", Regular, Token []) Default 0 3 LParen
+SYMBOL "name" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+STRING ("lambda", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

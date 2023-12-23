@@ -1,0 +1,14 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Chars are %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+CHAR "#\=" Default 0 2 LParen
+COMMA Default 0 2 LParen
+CHAR "#\|" Default 0 2 LParen
+COMMA Default 0 2 LParen
+CHAR "#\<" Default 0 2 LParen
+COMMA Default 0 2 LParen
+CHAR "#\>" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

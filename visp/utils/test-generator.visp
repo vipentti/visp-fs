@@ -208,6 +208,18 @@ let ``%s %s`` () = TestUtils.runTest "%s"
     vispRoot
     files
   )
+
+  (WriteTests
+    {|
+      [project "Visp.Compiler.UnitTests"]
+      [header "TokenOutputTests"]
+      [prefix "returns tokens"]
+      [method "TestUtils.runTokenTest"]
+    |}
+    projectRoot
+    vispRoot
+    files
+  )
 )
 
 (fn WriteExecutionTests (projectRoot vispRoot files)

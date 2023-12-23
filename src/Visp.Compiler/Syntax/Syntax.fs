@@ -119,6 +119,28 @@ type SyntaxWriteUtilThreadStatics =
         with get () = SyntaxWriteUtilThreadStatics.normalizeLineEndings
         and set v = SyntaxWriteUtilThreadStatics.normalizeLineEndings <- v
 
+module StringWriterUtils =
+    let inline writeDebugStringType (name: string) (text: string) kind range =
+        let sb = PooledStringBuilder.Get()
+        // Reserve capacity for the text + all the extra data being written
+        sb.EnsureCapacity(text.Length + 60) |> ignore
+        sb.Append name |> ignore
+        sb.Append " (\"" |> ignore
+
+        for ch in text do
+            match ch with
+            | '\r' when SyntaxWriteUtilThreadStatics.NormalizeLineEndings -> ()
+            | it -> ignore (sb.Append it)
+
+        sb.Append "\", " |> ignore
+        sb.Append(sprintf "%A" kind) |> ignore
+        sb.Append(", ") |> ignore
+        sb.Append(sprintf "%A" range) |> ignore
+
+        sb.Append ")" |> ignore
+
+        sb.ToStringAndReturn()
+
 [<NoEquality; NoComparison; RequireQualifiedAccess; StructuredFormatDisplay("{StructuredText}")>]
 type SynConst =
     | Unit
@@ -159,25 +181,7 @@ type SynConst =
         | Int32 it -> sprintf "Int32 %A" it
         | Char it -> sprintf "Char %A" it
         | Decimal it -> sprintf "Decimal %A" it
-        | String(text, k, r) ->
-            let sb = PooledStringBuilder.Get()
-            // Reserve capacity for the text + all the extra data being written
-            sb.EnsureCapacity(text.Length + 60) |> ignore
-            sb.Append "String (\"" |> ignore
-
-            for ch in text do
-                match ch with
-                | '\r' when SyntaxWriteUtilThreadStatics.NormalizeLineEndings -> ()
-                | it -> ignore (sb.Append it)
-
-            sb.Append "\", " |> ignore
-            sb.Append(sprintf "%A" k) |> ignore
-            sb.Append(", ") |> ignore
-            sb.Append(sprintf "%A" r) |> ignore
-
-            sb.Append ")" |> ignore
-
-            sb.ToStringAndReturn()
+        | String(text, k, r) -> StringWriterUtils.writeDebugStringType "String" text k r
 
 type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range
 

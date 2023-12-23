@@ -1,0 +1,31 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\h" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\u0061" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\U0061" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\:" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\(" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Char is %O", Regular, Token []) Default 0 1 LParen
+CHAR "#\)" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

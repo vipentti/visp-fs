@@ -113,6 +113,13 @@ let state = { Todo = () }
 
             reraise ()
 
+    let debugLexFile filePath =
+        let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
+        use _ = stream
+        use _ = reader
+        let args = mkDefaultLextArgs ()
+        ParseUtils.debugTokenOutput args lexbuf |> List.ofSeq
+
     let getTokens str fileName =
         let lexbuf = LexBuffer<_>.FromString str
         lexbuf.EndPos <- Position.FirstLine fileName

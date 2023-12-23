@@ -1,0 +1,11 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "value" Default 0 1 LParen
+STRING ("hello world", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("string is '%s'", Regular, Token []) Default 0 1 LParen
+STRING ("interpolated: {value} {value} {value}", Interpolated 1, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -1,0 +1,20 @@
+﻿LPAREN Default 0 1 LParen
+FOR_IN Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "var" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BANG_RANGE Default 0 2 LParen
+INT32 (0, false) Default 0 2 LParen
+DOTDOT Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+DOTDOT Default 0 2 LParen
+INT32 (10, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("var is: %O", Regular, Token []) Default 0 2 LParen
+SYMBOL "var" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

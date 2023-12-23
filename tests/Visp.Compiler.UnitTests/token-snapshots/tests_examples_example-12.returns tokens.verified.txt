@@ -1,0 +1,42 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "quoted" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUOTE_KW TokenStream Quote 1 2 LParen
+LPAREN TokenStream Quote 2 3 LParen
+SYMBOL "hello" TokenStream Quote 2 3 LParen
+SYMBOL "world" TokenStream Quote 2 3 LParen
+SYMBOL "in" TokenStream Quote 2 3 LParen
+SYMBOL "quotes" TokenStream Quote 2 3 LParen
+RPAREN TokenStream Quote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("quoted is: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "quoted" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "next_quoted" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+QUOTE_KW TokenStream Quote 1 2 LParen
+LPAREN TokenStream Quote 2 3 LParen
+STRING ("constants", Regular, Token []) TokenStream Quote 2 3 LParen
+KEYWORD ":keywords-work" TokenStream Quote 2 3 LParen
+TRUE TokenStream Quote 2 3 LParen
+INT32 (1, false) TokenStream Quote 2 3 LParen
+IEEE64 1.5 TokenStream Quote 2 3 LParen
+FALSE TokenStream Quote 2 3 LParen
+SYMBOL "also" TokenStream Quote 2 3 LParen
+STRING ("work", Regular, Token []) TokenStream Quote 2 3 LParen
+NIL TokenStream Quote 2 3 LParen
+RPAREN TokenStream Quote 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("next_quoted is: %O", Regular, Token []) Default 0 1 LParen
+SYMBOL "next_quoted" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

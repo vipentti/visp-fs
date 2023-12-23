@@ -1,0 +1,25 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyBegin" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "exprs" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "begin" TokenStream Macro 3 2 LParen
+SYMBOL "exprs" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "MyBegin" TokenStream Macro 1 1 LParen
+PAREN_BAR TokenStream Macro 2 1 LParen
+INT32 (1, false) TokenStream Macro 2 1 LParen
+INT32 (2, false) TokenStream Macro 2 1 LParen
+INT32 (3, false) TokenStream Macro 2 1 LParen
+BAR_PAREN TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default
