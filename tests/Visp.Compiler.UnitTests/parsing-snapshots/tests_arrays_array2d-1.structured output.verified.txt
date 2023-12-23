@@ -1,0 +1,43 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (TypeAlias
+            (SynSymbol Grid, Array (2, Ident char, (8,14--8,21)), (8,1--8,21)),
+          (8,0--8,22));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol arr, (10,5--10,8)),
+             FunctionCall
+               (Symbol (SynSymbol Array2D.create),
+                [Const (Int32 5, (10,25--10,26));
+                 Const (Int32 5, (10,27--10,28));
+                 Const (Char '.', (10,29--10,32))], (10,10--10,32)), None,
+             (10,1--10,33)), (10,0--10,34));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[*,0]=%A", Regular, (12,9--12,22)), (12,9--12,22));
+              DotIndex
+                (Symbol (SynSymbol arr),
+                 [Symbol (SynSymbol *); Const (Int32 0, (12,28--12,29))],
+                 (12,24--12,34))], (12,1--12,35)), (12,0--12,36));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[0,*]=%A", Regular, (13,9--13,22)), (13,9--13,22));
+              DotIndex
+                (Symbol (SynSymbol arr),
+                 [Const (Int32 0, (13,26--13,27)); Symbol (SynSymbol *)],
+                 (13,24--13,34))], (13,1--13,35)), (13,0--13,36));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (15,0--15,3)),
+             Symbol (SynSymbol arr), None, (15,0--15,3)), (15,0--15,3));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (15,0--15,3)), (15,0--15,3));
+              Symbol (SynSymbol visp_result_todo)], (15,0--15,3)), (15,0--15,3))],
+      (8,0--15,3))]

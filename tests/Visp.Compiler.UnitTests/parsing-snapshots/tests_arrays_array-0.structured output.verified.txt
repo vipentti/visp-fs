@@ -1,0 +1,38 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol arr, (8,5--8,8)),
+             Collection
+               (SynCollection
+                  (FsArray,
+                   [Const (Int32 1, (8,12--8,13)); Const (Int32 2, (8,14--8,15));
+                    Const (Int32 3, (8,16--8,17)); Const (Int32 4, (8,18--8,19));
+                    Const (Int32 5, (8,20--8,21))], (8,9--8,24))), None,
+             (8,1--8,24)), (8,0--8,25));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[0] %A", Regular, (10,9--10,20)), (10,9--10,20));
+              DotIndex
+                (Symbol (SynSymbol arr), [Const (Int32 0, (10,24--10,25))],
+                 (10,22--10,30))], (10,1--10,31)), (10,0--10,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[1] %A", Regular, (11,9--11,20)), (11,9--11,20));
+              DotIndex
+                (Symbol (SynSymbol arr), [Const (Int32 1, (11,24--11,25))],
+                 (11,22--11,30))], (11,1--11,31)), (11,0--11,32));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (13,0--13,3)),
+             Symbol (SynSymbol arr), None, (13,0--13,3)), (13,0--13,3));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (13,0--13,3)), (13,0--13,3));
+              Symbol (SynSymbol visp_result_todo)], (13,0--13,3)), (13,0--13,3))],
+      (8,0--13,3))]

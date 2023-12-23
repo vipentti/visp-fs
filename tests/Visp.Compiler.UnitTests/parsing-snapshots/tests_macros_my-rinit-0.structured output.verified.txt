@@ -1,0 +1,81 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Record
+            (SynSymbol Mapping,
+             [RecordLabel (Default, SynSymbol src, Ident int64, (9,3--9,14));
+              RecordLabel (Default, SynSymbol dest, Ident int64, (10,3--10,15));
+              RecordLabel (Default, SynSymbol range, Ident int64, (11,3--11,16))],
+             [MemberFn
+                (SynSymbol this.Stuff, Args (List [], (13,23--13,25)),
+                 [FunctionCall
+                    (Symbol (SynSymbol printfn),
+                     [Const
+                        (String ("doing stuff %A", Regular, (14,13--14,29)),
+                         (14,13--14,29));
+                      DotProperty
+                        (Symbol (SynSymbol this), SynSymbol src, (14,31--14,40))],
+                     (14,5--14,41))], (13,3--14,42))], [], (8,1--14,43)),
+          (8,0--15,1));
+       Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol MyRinit,
+                [SynMacroCase
+                   ([Discard (18,4--18,5);
+                     List
+                       ([Symbol (SynSymbol sym, (18,7--18,10));
+                         Symbol (SynSymbol val, (18,11--18,14))], (18,6--18,15));
+                     List
+                       ([Symbol (SynSymbol s, (18,17--18,18));
+                         Symbol (SynSymbol v, (18,19--18,20))], (18,16--18,21));
+                     Ellipsis (18,22--18,25)],
+                    List
+                      (BraceBar,
+                       [Symbol (SynSymbol sym); Symbol (SynSymbol val);
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol m-alternate); Symbol (SynSymbol s);
+                            Symbol (SynSymbol v)], (19,15--19,32))],
+                       (19,4--19,35)), (18,2--20,3))], (17,1--20,3))),
+          (17,0--20,4));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol temp, (22,5--22,9)),
+             SyntaxMacroCall
+               (SynMacroCall
+                  (SynSymbol MyRinit,
+                   [Symbol (SynSymbol MyRinit);
+                    List
+                      (Bracket,
+                       [Symbol (SynSymbol src); Const (Int32 1, (22,24--22,25))],
+                       (22,19--22,26));
+                    List
+                      (Bracket,
+                       [Symbol (SynSymbol Mapping.dest);
+                        Const (Int32 2, (22,41--22,42))], (22,27--22,43));
+                    List
+                      (Bracket,
+                       [Symbol (SynSymbol range);
+                        Const (Int32 3, (22,51--22,52))], (22,44--22,53))],
+                   (22,11--22,53))), None, (22,1--22,54)), (22,0--22,55));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Record is %A", Regular, (23,9--23,23)), (23,9--23,23));
+              Symbol (SynSymbol temp)], (23,1--23,28)), (23,0--23,29));
+       Expr
+         (DotMethod
+            (Symbol (SynSymbol temp), SynSymbol Stuff, [], Tuple, (24,1--24,12)),
+          (24,0--24,13));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (26,0--26,2)),
+             Const (Unit, (26,0--26,2)), None, (26,0--26,2)), (26,0--26,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (26,0--26,2)), (26,0--26,2));
+              Symbol (SynSymbol visp_result_todo)], (26,0--26,2)), (26,0--26,2))],
+      (8,0--26,2))]

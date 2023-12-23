@@ -1,0 +1,56 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol value, (9,5--9,10)),
+             Const (String ("initial", Regular, (9,11--9,20)), (9,11--9,20)),
+             Mutable, (9,1--9,20)), (9,0--9,21));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("value is %s", Regular, (10,9--10,22)), (10,9--10,22));
+              Symbol (SynSymbol value)], (10,1--10,28)), (10,0--10,29));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol foo, (12,5--12,8)),
+             LambdaDef
+               (SynLambda
+                  (Args
+                     (List [Named (SynSymbol arg, (12,14--12,17))],
+                      (12,13--12,18)),
+                   [Set
+                      (Symbol (SynSymbol value), Symbol (SynSymbol arg),
+                       (12,20--12,34))], (12,10--12,35))), None, (12,1--12,36)),
+          (12,0--12,37));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol foo),
+             [Const (String ("hello", Regular, (14,5--14,12)), (14,5--14,12))],
+             (14,1--14,12)), (14,0--14,13));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("value is %s", Regular, (15,9--15,22)), (15,9--15,22));
+              Symbol (SynSymbol value)], (15,1--15,28)), (15,0--15,29));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol foo),
+             [Const (String ("world", Regular, (17,5--17,12)), (17,5--17,12))],
+             (17,1--17,12)), (17,0--17,13));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (18,0--18,29)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("value is %s", Regular, (18,9--18,22)),
+                    (18,9--18,22)); Symbol (SynSymbol value)], (18,1--18,28)),
+             None, (18,0--18,29)), (18,0--18,29));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (18,0--18,29)), (18,0--18,29));
+              Symbol (SynSymbol visp_result_todo)], (18,0--18,29)),
+          (18,0--18,29))], (9,0--18,29))]

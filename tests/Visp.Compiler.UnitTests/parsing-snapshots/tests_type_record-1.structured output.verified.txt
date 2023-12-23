@@ -1,0 +1,176 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Union
+            (SynSymbol Dir,
+             [UnionCase (SynSymbol Up, [], (9,2--9,4));
+              UnionCase (SynSymbol Left, [], (10,2--10,6));
+              UnionCase (SynSymbol Down, [], (11,2--11,6));
+              UnionCase (SynSymbol Right, [], (12,2--12,7))], [], [],
+             (8,1--12,7)), (8,0--12,8));
+       Expr
+         (TypeAlias
+            (SynSymbol Pos,
+             Tuple
+               (false, [Type (Ident int); Star (14,17--14,18); Type (Ident int)],
+                (14,13--14,22)), (14,1--14,22)), (14,0--14,23));
+       Expr
+         (Record
+            (SynSymbol Node,
+             [RecordLabel (Default, SynSymbol pos, Ident Pos, (17,3--17,11));
+              RecordLabel (Default, SynSymbol dir, Ident Dir, (18,3--18,11));
+              RecordLabel (Default, SynSymbol steps, Ident int, (19,3--19,13))],
+             [], [], (16,1--19,14)), (16,0--19,15));
+       Expr
+         (FunctionDef
+            (SynSymbol LeftOf, Inline,
+             Args
+               (List
+                  [Typed
+                     (Collection
+                        (SynCollection
+                           (Paren,
+                            [Named (SynSymbol x, (21,21--21,22));
+                             Trivia (Comma, (21,22--21,23));
+                             Named (SynSymbol y, (21,24--21,25))],
+                            (21,20--21,26))), Ident Pos, (21,19--21,32))],
+                (21,18--21,33)),
+             [Tuple
+                ([FunctionCall
+                    (Symbol (SynSymbol dec), [Symbol (SynSymbol x)],
+                     (21,36--21,41)); Symbol (SynSymbol y)], (21,35--21,45))],
+             (21,1--21,46)), (21,0--21,47));
+       Expr
+         (FunctionDef
+            (SynSymbol RightOf, Inline,
+             Args
+               (List
+                  [Typed
+                     (Collection
+                        (SynCollection
+                           (Paren,
+                            [Named (SynSymbol x, (22,22--22,23));
+                             Trivia (Comma, (22,23--22,24));
+                             Named (SynSymbol y, (22,25--22,26))],
+                            (22,21--22,27))), Ident Pos, (22,20--22,33))],
+                (22,19--22,34)),
+             [Tuple
+                ([FunctionCall
+                    (Symbol (SynSymbol inc), [Symbol (SynSymbol x)],
+                     (22,37--22,42)); Symbol (SynSymbol y)], (22,36--22,46))],
+             (22,1--22,47)), (22,0--22,48));
+       Expr
+         (FunctionDef
+            (SynSymbol UpOf, Inline,
+             Args
+               (List
+                  [Typed
+                     (Collection
+                        (SynCollection
+                           (Paren,
+                            [Named (SynSymbol x, (23,19--23,20));
+                             Trivia (Comma, (23,20--23,21));
+                             Named (SynSymbol y, (23,22--23,23))],
+                            (23,18--23,24))), Ident Pos, (23,17--23,30))],
+                (23,16--23,31)),
+             [Tuple
+                ([Symbol (SynSymbol x);
+                  FunctionCall
+                    (Symbol (SynSymbol dec), [Symbol (SynSymbol y)],
+                     (23,37--23,42))], (23,33--23,43))], (23,1--23,44)),
+          (23,0--23,45));
+       Expr
+         (FunctionDef
+            (SynSymbol DownOf, Inline,
+             Args
+               (List
+                  [Typed
+                     (Collection
+                        (SynCollection
+                           (Paren,
+                            [Named (SynSymbol x, (24,21--24,22));
+                             Trivia (Comma, (24,22--24,23));
+                             Named (SynSymbol y, (24,24--24,25))],
+                            (24,20--24,26))), Ident Pos, (24,19--24,32))],
+                (24,18--24,33)),
+             [Tuple
+                ([Symbol (SynSymbol x);
+                  FunctionCall
+                    (Symbol (SynSymbol inc), [Symbol (SynSymbol y)],
+                     (24,39--24,44))], (24,35--24,45))], (24,1--24,46)),
+          (24,0--24,47));
+       Expr
+         (FunctionDef
+            (SynSymbol GetDirFun, Inline,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol d, (26,23--26,24)), Ident Dir,
+                      (26,22--26,30))], (26,21--26,31)),
+             [Match
+                (Symbol (SynSymbol d),
+                 [SynMatch
+                    (Named (SynSymbol Up, (28,5--28,7)), None,
+                     [Symbol (SynSymbol UpOf)], (28,5--28,12));
+                  SynMatch
+                    (Named (SynSymbol Down, (29,5--29,9)), None,
+                     [Symbol (SynSymbol DownOf)], (29,5--29,16));
+                  SynMatch
+                    (Named (SynSymbol Left, (30,5--30,9)), None,
+                     [Symbol (SynSymbol LeftOf)], (30,5--30,16));
+                  SynMatch
+                    (Named (SynSymbol Right, (31,5--31,10)), None,
+                     [Symbol (SynSymbol RightOf)], (31,5--31,18))],
+                 (27,3--31,19))], (26,1--32,3)), (26,0--32,4));
+       Expr
+         (FunctionDef
+            (SynSymbol MoveNode, None,
+             Args
+               (List
+                  [Named (SynSymbol v, (34,14--34,15));
+                   Named (SynSymbol dir, (34,16--34,19))], (34,13--34,20)),
+             [RecordInit
+                ([SynInit (SynSymbol dir, Symbol (SynSymbol dir), (36,4--36,11));
+                  SynInit
+                    (SynSymbol pos,
+                     ThreadLast
+                       ([Expr
+                           (DotProperty
+                              (Symbol (SynSymbol v), SynSymbol pos,
+                               (37,14--37,20)), (37,13--37,21));
+                         Expr
+                           (FunctionCall
+                              (Symbol (SynSymbol GetDirFun),
+                               [Symbol (SynSymbol dir)], (37,23--37,36)),
+                            (37,22--37,37))], (37,9--37,37)), (37,4--37,38));
+                  SynInit
+                    (SynSymbol steps,
+                     If
+                       (Op
+                          (Infix
+                             (SynSymbol =,
+                              [Symbol (SynSymbol dir);
+                               DotProperty
+                                 (Symbol (SynSymbol v), SynSymbol dir,
+                                  (38,22--38,28))], (38,15--38,29))),
+                        FunctionCall
+                          (Symbol (SynSymbol inc),
+                           [DotProperty
+                              (Symbol (SynSymbol v), SynSymbol steps,
+                               (38,37--38,45))], (38,32--38,46)),
+                        Some (Const (Int32 1, (38,48--38,49))), (38,11--38,49)),
+                     (38,4--38,50))], (35,2--39,4))], (34,1--39,4)),
+          (34,0--40,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (42,0--42,14)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("OK", Regular, (42,9--42,13)), (42,9--42,13))],
+                (42,1--42,13)), None, (42,0--42,14)), (42,0--42,14));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (42,0--42,14)), (42,0--42,14));
+              Symbol (SynSymbol visp_result_todo)], (42,0--42,14)),
+          (42,0--42,14))], (8,0--42,14))]

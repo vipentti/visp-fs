@@ -1,0 +1,232 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol struct,
+                [Symbol (SynSymbol struct); Symbol (SynSymbol Range);
+                 List
+                   (Paren,
+                    [List
+                       (Bracket,
+                        [Symbol (SynSymbol start); Trivia (Colon, (8,21--8,23));
+                         Symbol (SynSymbol int64)], (8,15--8,29));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol len); Trivia (Colon, (8,34--8,36));
+                         Symbol (SynSymbol int64)], (8,30--8,42))], (8,14--8,43));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Start);
+                     Symbol (SynSymbol start)], (9,2--9,24));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Len);
+                     Symbol (SynSymbol len)], (10,2--10,20));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.End);
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol +); Symbol (SynSymbol start);
+                         Symbol (SynSymbol len)], (11,16--11,29))],
+                    (11,2--11,30));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Offset);
+                     List (Paren, [Symbol (SynSymbol v)], (13,22--13,25));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol -); Symbol (SynSymbol v);
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Start); Symbol (SynSymbol d)],
+                            (14,9--14,19))], (14,4--14,20))], (13,2--14,21));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Contains);
+                     List (Paren, [Symbol (SynSymbol v)], (16,24--16,27));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol and);
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol >=); Symbol (SynSymbol v);
+                             List
+                               (Paren,
+                                [Symbol (SynSymbol +Start); Symbol (SynSymbol d)],
+                                (18,12--18,22))], (18,6--18,23));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol <); Symbol (SynSymbol v);
+                             List
+                               (Paren,
+                                [Symbol (SynSymbol +End); Symbol (SynSymbol d)],
+                                (19,11--19,19))], (19,6--19,20))], (17,4--19,21))],
+                    (16,2--20,3));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol override); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol t.ToString); Const (Unit, (22,26--22,28));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol sprintf);
+                         Const
+                           (String ("Range(%i, %i)", Regular, (23,13--23,28)),
+                            (23,13--23,28));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Start); Symbol (SynSymbol t)],
+                            (23,29--23,39));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Len); Symbol (SynSymbol t)],
+                            (23,40--23,48))], (23,4--23,49))], (22,2--23,50))],
+                (8,1--23,50))), (8,0--24,1));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Range is: %A", Regular, (26,9--26,23)), (26,9--26,23));
+              New
+                (Ident Range,
+                 [Const (Int32 0, (26,35--26,36));
+                  Const (Int32 5, (26,37--26,38))], (26,25--26,38))],
+             (26,1--26,39)), (26,0--26,40));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Range end is: %A", Regular, (27,9--27,27)),
+                 (27,9--27,27));
+              ThreadLast
+                ([Expr
+                    (New
+                       (Ident Range,
+                        [Const (Int32 0, (27,44--27,45));
+                         Const (Int32 5, (27,46--27,47))], (27,34--27,47)),
+                     (27,33--27,48)); Property (SynSymbol End, (27,49--27,53))],
+                 (27,29--27,53))], (27,1--27,54)), (27,0--27,55));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol struct,
+                [Symbol (SynSymbol struct); Symbol (SynSymbol SourceDestMap);
+                 List
+                   (Paren,
+                    [List
+                       (Bracket,
+                        [Symbol (SynSymbol dest); Trivia (Colon, (29,28--29,30));
+                         Symbol (SynSymbol int64)], (29,23--29,36));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol src); Trivia (Colon, (29,41--29,43));
+                         Symbol (SynSymbol int64)], (29,37--29,49));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol len); Trivia (Colon, (29,54--29,56));
+                         Symbol (SynSymbol int64)], (29,50--29,62))],
+                    (29,22--29,63));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Dest);
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol new); Symbol (SynSymbol Range);
+                         Symbol (SynSymbol dest); Symbol (SynSymbol len)],
+                        (30,17--30,37))], (30,2--30,38));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Src);
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol new); Symbol (SynSymbol Range);
+                         Symbol (SynSymbol src); Symbol (SynSymbol len)],
+                        (31,16--31,35))], (31,2--31,36));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Len);
+                     Symbol (SynSymbol len)], (32,2--32,20));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Contains);
+                     List (Paren, [Symbol (SynSymbol v)], (34,24--34,27));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol ->>); Symbol (SynSymbol d);
+                         Symbol (SynSymbol +Src);
+                         List
+                           (HashParen,
+                            [Symbol (SynSymbol -Contains); Symbol (SynSymbol %1);
+                             Symbol (SynSymbol v)], (36,6--36,23))],
+                        (35,4--37,5))], (34,2--37,6));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Get);
+                     List (Paren, [Symbol (SynSymbol src)], (39,19--39,24));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol cond);
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol -Contains);
+                             List
+                               (Paren,
+                                [Symbol (SynSymbol +Src); Symbol (SynSymbol d)],
+                                (41,17--41,25)); Symbol (SynSymbol src)],
+                            (41,6--41,30));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +);
+                             List
+                               (Paren,
+                                [Symbol (SynSymbol ->>); Symbol (SynSymbol d);
+                                 Symbol (SynSymbol +Dest);
+                                 Symbol (SynSymbol +Start)], (42,11--42,31));
+                             List
+                               (Paren,
+                                [Symbol (SynSymbol -Offset);
+                                 List
+                                   (Paren,
+                                    [Symbol (SynSymbol +Src);
+                                     Symbol (SynSymbol d)], (42,41--42,49));
+                                 Symbol (SynSymbol src)], (42,32--42,54))],
+                            (42,8--42,55)); Keyword (SynKeyword :else);
+                         Symbol (SynSymbol src)], (40,4--45,5))], (39,2--45,6));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol override); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol t.ToString); Const (Unit, (47,26--47,28));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol sprintf);
+                         Const
+                           (String ("(%A, %A, %i)", Regular, (48,13--48,27)),
+                            (48,13--48,27));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Dest); Symbol (SynSymbol t)],
+                            (48,28--48,37));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Src); Symbol (SynSymbol t)],
+                            (48,38--48,46));
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol +Len); Symbol (SynSymbol t)],
+                            (48,47--48,55))], (48,4--48,56))], (47,2--48,57))],
+                (29,1--48,57))), (29,0--49,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (51,0--51,2)),
+             Const (Unit, (51,0--51,2)), None, (51,0--51,2)), (51,0--51,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (51,0--51,2)), (51,0--51,2));
+              Symbol (SynSymbol visp_result_todo)], (51,0--51,2)), (51,0--51,2))],
+      (8,0--51,2))]

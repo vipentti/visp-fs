@@ -1,0 +1,37 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol DoingThings, None, Args (List [], (8,16--8,18)),
+             [LetOrUse
+                (Named (SynSymbol items, (9,7--9,12)),
+                 Collection (SynCollection (FsSet, [], (9,14--9,18))), Mutable,
+                 (9,3--9,19));
+              ForTo
+                (SynSymbol i, Const (Int32 0, (11,14--11,15)),
+                 Const (Int32 5, (11,19--11,20)),
+                 [SyntaxMacroCall
+                    (SynMacroCall
+                       (SynSymbol up!,
+                        [Symbol (SynSymbol up!); Symbol (SynSymbol items);
+                         List
+                           (Paren,
+                            [Symbol (SynSymbol Set.add); Symbol (SynSymbol i)],
+                            (12,15--12,26))], (12,5--12,26)))], false,
+                 (11,3--12,27)); Symbol (SynSymbol items)], (8,1--14,7)),
+          (8,0--14,8));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (17,0--17,28)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%A", Regular, (17,9--17,13)), (17,9--17,13));
+                 FunctionCall
+                   (Symbol (SynSymbol DoingThings), [], (17,15--17,26))],
+                (17,1--17,27)), None, (17,0--17,28)), (17,0--17,28));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (17,0--17,28)), (17,0--17,28));
+              Symbol (SynSymbol visp_result_todo)], (17,0--17,28)),
+          (17,0--17,28))], (8,0--17,28))]

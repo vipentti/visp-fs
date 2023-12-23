@@ -1,0 +1,27 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (8,0--14,6)),
+             SyntaxMacroCall
+               (SynMacroCall
+                  (SynSymbol cond,
+                   [Symbol (SynSymbol cond);
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol >); Const (Int32 0, (9,5--9,6));
+                        Const (Int32 0, (9,7--9,8))], (9,2--9,9));
+                    Const (Int32 1, (10,4--10,5));
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol <); Const (Int32 0, (11,5--11,6));
+                        Const (Int32 0, (11,7--11,8))], (11,2--11,9));
+                    Const (Int32 2, (12,4--12,5)); Keyword (SynKeyword :else);
+                    Const (Int32 3, (14,4--14,5))], (8,1--14,5))), None,
+             (8,0--14,6)), (8,0--14,6));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (8,0--14,6)), (8,0--14,6));
+              Symbol (SynSymbol visp_result_todo)], (8,0--14,6)), (8,0--14,6))],
+      (8,0--14,6))]

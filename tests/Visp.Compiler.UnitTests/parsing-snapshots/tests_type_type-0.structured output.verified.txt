@@ -1,0 +1,46 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Type
+            (SynSymbol MyType,
+             Args
+               (Tuple
+                  [Typed
+                     (Named (SynSymbol value, (8,15--8,20)), Ident int32,
+                      (8,14--8,28))], (8,13--8,29)),
+             [Let
+                (Named (SynSymbol field, (9,7--9,12)), Symbol (SynSymbol value),
+                 (9,3--9,18));
+              Member
+                (SynSymbol this.Foo, Symbol (SynSymbol value), (10,3--10,24));
+              MemberFn
+                (SynSymbol this.Thing, Args (List [], (11,23--11,25)),
+                 [Const
+                    (String ("hello", Regular, (11,26--11,33)), (11,26--11,33))],
+                 (11,3--11,33))], [], (8,1--11,34)), (8,0--12,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol myObject, (14,5--14,13)),
+             New
+               (Ident MyType, [Const (Int32 99, (14,26--14,28))], (14,15--14,28)),
+             None, (14,1--14,29)), (14,0--14,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%O", Regular, (16,9--16,13)), (16,9--16,13));
+              Symbol (SynSymbol myObject)], (16,1--16,22)), (16,0--16,23));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (17,0--17,31)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%O", Regular, (17,9--17,13)), (17,9--17,13));
+                 DotProperty
+                   (Symbol (SynSymbol myObject), SynSymbol Foo, (17,15--17,29))],
+                (17,1--17,30)), None, (17,0--17,31)), (17,0--17,31));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (17,0--17,31)), (17,0--17,31));
+              Symbol (SynSymbol visp_result_todo)], (17,0--17,31)),
+          (17,0--17,31))], (8,0--17,31))]

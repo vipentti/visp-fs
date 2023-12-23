@@ -1,0 +1,58 @@
+﻿ParsedFile
+  [AnonModule
+     ([Open (SynSymbol System, (8,1--8,12));
+       Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol noop-macro-1,
+                [SynMacroCase
+                   ([Discard (11,4--11,5); Symbol (SynSymbol ids, (11,6--11,9));
+                     Ellipsis (11,10--11,13)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol begin); Symbol (SynSymbol ids);
+                        Ellipsis (11,26--11,29)], (11,15--11,30)), (11,2--11,31))],
+                (10,1--11,31))), (10,0--11,32));
+       Expr
+         (FunctionDef
+            (SynSymbol something->nothing, Inline,
+             Args (List [Named (SynSymbol i, (13,31--13,32))], (13,30--13,33)),
+             [Symbol (SynSymbol i)], (13,1--13,35)), (13,0--13,36));
+       Expr
+         (FunctionDef
+            (SynSymbol Test, Inline,
+             Args (List [Named (SynSymbol i, (15,17--15,18))], (15,16--15,19)),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol noop-macro-1,
+                    [Symbol (SynSymbol noop-macro-1);
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol something->nothing);
+                         Symbol (SynSymbol i)], (16,16--16,38))], (16,3--16,38)))],
+             (15,1--16,39)), (15,0--16,40));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (18,9--18,13)), (18,9--18,13));
+              FunctionCall
+                (Symbol (SynSymbol Test), [Const (Int32 1, (18,20--18,21))],
+                 (18,15--18,21))], (18,1--18,22)), (18,0--18,23));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (19,0--19,29)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%A", Regular, (19,9--19,13)), (19,9--19,13));
+                 FunctionCall
+                   (Symbol (SynSymbol Test),
+                    [Const
+                       (String ("hello", Regular, (19,20--19,27)),
+                        (19,20--19,27))], (19,15--19,27))], (19,1--19,28)), None,
+             (19,0--19,29)), (19,0--19,29));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,0--19,29)), (19,0--19,29));
+              Symbol (SynSymbol visp_result_todo)], (19,0--19,29)),
+          (19,0--19,29))], (8,0--19,29))]

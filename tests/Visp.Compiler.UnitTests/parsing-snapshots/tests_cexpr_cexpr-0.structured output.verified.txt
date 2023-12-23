@@ -1,0 +1,27 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (8,0--13,1)),
+             ForIn
+               (Named (SynSymbol x, (8,9--8,10)),
+                Computation
+                  (SynSymbol seq,
+                   [FsYield (Const (Int32 1, (9,11--9,12)), false, (9,5--9,12));
+                    FsYield
+                      (Const (Int32 2, (10,11--10,12)), false, (10,5--10,12));
+                    FsYield
+                      (Const (Int32 3, (11,11--11,12)), false, (11,5--11,12))],
+                   (8,12--11,13)),
+                [FunctionCall
+                   (Symbol (SynSymbol printfn),
+                    [Const
+                       (String ("x is %i", Regular, (12,11--12,20)),
+                        (12,11--12,20)); Symbol (SynSymbol x)], (12,3--12,22))],
+                (8,1--12,23)), None, (8,0--13,1)), (8,0--13,1));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (8,0--13,1)), (8,0--13,1));
+              Symbol (SynSymbol visp_result_todo)], (8,0--13,1)), (8,0--13,1))],
+      (8,0--13,1))]

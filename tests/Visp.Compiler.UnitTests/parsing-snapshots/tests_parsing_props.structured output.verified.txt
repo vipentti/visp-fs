@@ -1,0 +1,19 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol hello, (8,5--8,10)),
+             Const (String ("world", Regular, (8,11--8,18)), (8,11--8,18)), None,
+             (8,1--8,18)), (8,0--8,19));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (9,0--9,15)),
+             DotProperty
+               (Symbol (SynSymbol hello), SynSymbol Length, (9,1--9,14)), None,
+             (9,0--9,15)), (9,0--9,15));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (9,0--9,15)), (9,0--9,15));
+              Symbol (SynSymbol visp_result_todo)], (9,0--9,15)), (9,0--9,15))],
+      (8,0--9,15))]

@@ -1,0 +1,57 @@
+﻿ParsedFile
+  [AnonModule
+     ([HashDirective
+         (ParsedHashDirective
+            ("nowarn", [String ("20", Regular, (9,8--9,12))], (9,0--9,12)),
+          (9,0--9,12));
+       Expr
+         (FunctionDef
+            (SynSymbol inc, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol v, (11,10--11,11)), Ident Value,
+                      (11,9--11,19))], (11,8--11,20)),
+             [FunctionCall
+                (Symbol (SynSymbol Value.from),
+                 [Op
+                    (Infix
+                       (SynSymbol +,
+                        [Const (Int64 1L, (12,19--12,21));
+                         FunctionCall
+                           (Symbol (SynSymbol unwrapInt), [Symbol (SynSymbol v)],
+                            (12,23--12,34))], (12,17--12,35)))], (12,5--12,36))],
+             (11,1--12,37)), (11,0--12,38));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol count, (13,5--13,10)),
+             Atom (Const (Int64 0L, (13,17--13,19)), (13,12--13,19)), None,
+             (13,1--13,20)), (13,0--13,21));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("count is %O", Regular, (15,9--15,22)), (15,9--15,22));
+              Deref (true, Symbol (SynSymbol count), (15,23--15,29))],
+             (15,1--15,29)), (15,0--15,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol swap!),
+             [Symbol (SynSymbol count); Symbol (SynSymbol inc)], (17,1--17,16)),
+          (17,0--17,17));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (19,0--19,30)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("count is %O", Regular, (19,9--19,22)),
+                    (19,9--19,22));
+                 Deref (true, Symbol (SynSymbol count), (19,23--19,29))],
+                (19,1--19,29)), None, (19,0--19,30)), (19,0--19,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,0--19,30)), (19,0--19,30));
+              Symbol (SynSymbol visp_result_todo)], (19,0--19,30)),
+          (19,0--19,30))], (9,0--19,30))]

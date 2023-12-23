@@ -1,0 +1,172 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol MyStruct2,
+                [SynMacroCase
+                   ([Discard (9,4--9,5); Symbol (SynSymbol typ, (9,6--9,9));
+                     List
+                       ([List
+                           ([Symbol (SynSymbol arg1, (9,12--9,16));
+                             Trivia (Colon, (9,17--9,19));
+                             Symbol (SynSymbol argtyp1, (9,19--9,26))],
+                            (9,11--9,27));
+                         List
+                           ([Symbol (SynSymbol argrest, (9,29--9,36));
+                             Trivia (Colon, (9,37--9,39));
+                             Symbol (SynSymbol argresttyp, (9,39--9,49))],
+                            (9,28--9,50)); Ellipsis (9,51--9,54)], (9,10--9,55));
+                     Symbol (SynSymbol body, (9,56--9,60));
+                     Ellipsis (9,61--9,64)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol begin);
+                        List
+                          (Paren,
+                           [List
+                              (HashBracket, [Symbol (SynSymbol Struct)],
+                               (11,7--11,16)); Symbol (SynSymbol type);
+                            Symbol (SynSymbol typ);
+                            List
+                              (Paren,
+                               [List
+                                  (Paren,
+                                   [Symbol (SynSymbol arg1);
+                                    Trivia (Colon, (12,24--12,26));
+                                    Symbol (SynSymbol argtyp1)], (12,18--12,34));
+                                List
+                                  (Paren,
+                                   [Symbol (SynSymbol argrest);
+                                    Trivia (Colon, (12,44--12,46));
+                                    Symbol (SynSymbol argresttyp)],
+                                   (12,35--12,57)); Ellipsis (12,58--12,61)],
+                               (12,17--12,62)); Symbol (SynSymbol body);
+                            Ellipsis (13,13--13,16)], (11,6--14,7));
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol fn);
+                            List
+                              (Paren,
+                               [Symbol (SynSymbol m-concat-id);
+                                Symbol (SynSymbol mk); Symbol (SynSymbol typ)],
+                               (16,10--16,30));
+                            List
+                              (Paren,
+                               [Symbol (SynSymbol arg1);
+                                Symbol (SynSymbol argrest);
+                                Ellipsis (17,22--17,25)], (17,8--17,26));
+                            List
+                              (Paren,
+                               [Symbol (SynSymbol new); Symbol (SynSymbol typ);
+                                Symbol (SynSymbol arg1);
+                                Symbol (SynSymbol argrest);
+                                Ellipsis (18,30--18,33)], (18,8--18,34))],
+                           (16,6--19,7))], (10,4--20,5)), (9,2--21,3))],
+                (8,1--21,3))), (8,0--21,4));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol MyStruct2,
+                [Symbol (SynSymbol MyStruct2); Symbol (SynSymbol Example);
+                 List
+                   (Paren,
+                    [List
+                       (Bracket,
+                        [Symbol (SynSymbol x); Trivia (Colon, (23,22--23,24));
+                         Symbol (SynSymbol int)], (23,20--23,28));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol y); Trivia (Colon, (23,31--23,33));
+                         Symbol (SynSymbol int)], (23,29--23,37));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol z); Trivia (Colon, (23,40--23,42));
+                         Symbol (SynSymbol int)], (23,38--23,46));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol w); Trivia (Colon, (23,49--23,51));
+                         Symbol (SynSymbol int)], (23,47--23,55))],
+                    (23,19--23,56));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.X);
+                     Symbol (SynSymbol x)], (24,2--24,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Y);
+                     Symbol (SynSymbol y)], (25,2--25,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Z);
+                     Symbol (SynSymbol z)], (26,2--26,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.W);
+                     Symbol (SynSymbol w)], (27,2--27,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Sum); Const (Unit, (29,19--29,21));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol +);
+                         List
+                           (Paren, [Symbol (SynSymbol +X); Symbol (SynSymbol d)],
+                            (29,25--29,31));
+                         List
+                           (Paren, [Symbol (SynSymbol +Y); Symbol (SynSymbol d)],
+                            (29,32--29,38));
+                         List
+                           (Paren, [Symbol (SynSymbol +Z); Symbol (SynSymbol d)],
+                            (29,39--29,45));
+                         List
+                           (Paren, [Symbol (SynSymbol +W); Symbol (SynSymbol d)],
+                            (29,46--29,52))], (29,22--29,53))], (29,2--29,54))],
+                (23,1--29,54))), (23,0--29,55));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol instance, (31,5--31,13)),
+             FunctionCall
+               (Symbol (SynSymbol mkExample),
+                [Const (Int32 1, (31,25--31,26));
+                 Const (Int32 2, (31,27--31,28));
+                 Const (Int32 3, (31,29--31,30));
+                 Const (Int32 4, (31,31--31,32))], (31,15--31,32)), None,
+             (31,1--31,33)), (31,0--31,34));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Example Struct is %A", Regular, (33,9--33,31)),
+                 (33,9--33,31)); Symbol (SynSymbol instance)], (33,1--33,40)),
+          (33,0--33,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Example IsValueType %A", Regular, (34,9--34,33)),
+                 (34,9--34,33));
+              ThreadLast
+                ([Expr (Symbol (SynSymbol instance), (34,39--34,47));
+                  Method (SynSymbol GetType, Tuple, (34,48--34,56));
+                  Property (SynSymbol IsValueType, (34,57--34,69))],
+                 (34,35--34,69))], (34,1--34,70)), (34,0--34,71));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (35,0--35,48)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("Example Result is %i", Regular, (35,9--35,31)),
+                    (35,9--35,31));
+                 DotMethod
+                   (Symbol (SynSymbol instance), SynSymbol Sum, [], Tuple,
+                    (35,33--35,46))], (35,1--35,47)), None, (35,0--35,48)),
+          (35,0--35,48));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (35,0--35,48)), (35,0--35,48));
+              Symbol (SynSymbol visp_result_todo)], (35,0--35,48)),
+          (35,0--35,48))], (8,0--35,48))]

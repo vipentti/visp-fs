@@ -1,0 +1,35 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (8,0--12,45)),
+             LetStar
+               ([SynBinding
+                   (Named (SynSymbol hello, (8,7--8,12)),
+                    Const
+                      (String ("hello", Regular, (8,13--8,20)), (8,13--8,20)),
+                    (8,7--8,20));
+                 SynBinding
+                   (Named (SynSymbol world, (9,7--9,12)),
+                    Const
+                      (String ("world", Regular, (9,13--9,20)), (9,13--9,20)),
+                    (9,7--9,20));
+                 SynBinding
+                   (Named (SynSymbol banaani, (10,7--10,14)),
+                    Const
+                      (String ("banaani", Regular, (10,15--10,24)),
+                       (10,15--10,24)), (10,7--10,24))],
+                [FunctionCall
+                   (Symbol (SynSymbol sprintf),
+                    [Const
+                       (String ("%s %s %s", Regular, (12,13--12,23)),
+                        (12,13--12,23)); Symbol (SynSymbol hello);
+                     Symbol (SynSymbol world); Symbol (SynSymbol banaani)],
+                    (12,5--12,43))], (8,1--12,44)), None, (8,0--12,45)),
+          (8,0--12,45));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (8,0--12,45)), (8,0--12,45));
+              Symbol (SynSymbol visp_result_todo)], (8,0--12,45)), (8,0--12,45))],
+      (8,0--12,45))]

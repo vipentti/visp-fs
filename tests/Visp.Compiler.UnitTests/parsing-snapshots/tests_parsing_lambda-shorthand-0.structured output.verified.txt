@@ -1,0 +1,25 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol temp, (8,5--8,9)),
+             LambdaShort
+               (Op
+                  (Infix
+                     (SynSymbol +,
+                      [Symbol (SynSymbol %1); Symbol (SynSymbol %2)],
+                      (8,12--8,19))), (8,10--8,20)), None, (8,1--8,20)),
+          (8,0--8,21));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (9,0--9,10)),
+             FunctionCall
+               (Symbol (SynSymbol temp),
+                [Const (Int32 1, (9,6--9,7)); Const (Int32 2, (9,8--9,9))],
+                (9,1--9,9)), None, (9,0--9,10)), (9,0--9,10));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (9,0--9,10)), (9,0--9,10));
+              Symbol (SynSymbol visp_result_todo)], (9,0--9,10)), (9,0--9,10))],
+      (8,0--9,10))]

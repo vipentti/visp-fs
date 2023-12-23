@@ -1,0 +1,39 @@
+﻿ParsedFile
+  [AnonModule
+     ([HashDirective
+         (ParsedHashDirective
+            ("nowarn", [String ("20", Regular, (9,8--9,12))], (9,0--9,12)),
+          (9,0--9,12)); Open (SynSymbol System.Text, (11,1--11,17));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol sb, (13,5--13,7)),
+             New (Ident StringBuilder, [], (13,9--13,26)), None, (13,1--13,27)),
+          (13,0--13,28));
+       Expr
+         (DotMethod
+            (Symbol (SynSymbol sb), SynSymbol Append,
+             [Const (String ("hello", Regular, (15,13--15,20)), (15,13--15,20))],
+             Tuple, (15,1--15,20)), (15,0--15,21));
+       Expr
+         (DotMethod
+            (Symbol (SynSymbol sb), SynSymbol Append,
+             [Const (String ("world", Regular, (16,13--16,20)), (16,13--16,20))],
+             Tuple, (16,1--16,20)), (16,0--16,21));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (18,0--19,20)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("sb contains: %s", Regular, (18,9--18,26)),
+                    (18,9--18,26));
+                 DotMethod
+                   (Symbol (SynSymbol sb), SynSymbol ToString, [], Tuple,
+                    (19,5--19,18))], (18,1--19,19)), None, (18,0--19,20)),
+          (18,0--19,20));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (18,0--19,20)), (18,0--19,20));
+              Symbol (SynSymbol visp_result_todo)], (18,0--19,20)),
+          (18,0--19,20))], (9,0--19,20))]

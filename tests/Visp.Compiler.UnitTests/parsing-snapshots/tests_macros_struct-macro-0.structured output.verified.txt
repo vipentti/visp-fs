@@ -1,0 +1,108 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol MyStruct,
+                [SynMacroCase
+                   ([Discard (9,4--9,5); Symbol (SynSymbol typ, (9,6--9,9));
+                     List
+                       ([Symbol (SynSymbol arg, (9,11--9,14));
+                         Symbol (SynSymbol ctor, (9,15--9,19));
+                         Ellipsis (9,20--9,23)], (9,10--9,24));
+                     Symbol (SynSymbol body, (9,25--9,29));
+                     Ellipsis (9,30--9,33)],
+                    List
+                      (Paren,
+                       [List
+                          (HashBracket, [Symbol (SynSymbol Struct)],
+                           (10,5--10,14)); Symbol (SynSymbol type);
+                        Symbol (SynSymbol typ);
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol arg); Symbol (SynSymbol ctor);
+                            Ellipsis (11,25--11,28)], (11,15--11,29));
+                        Symbol (SynSymbol body); Ellipsis (12,11--12,14)],
+                       (10,4--13,5)), (9,2--14,3))], (8,1--14,3))), (8,0--14,4));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol MyStruct,
+                [Symbol (SynSymbol MyStruct); Symbol (SynSymbol Example);
+                 List
+                   (Paren,
+                    [List
+                       (Bracket,
+                        [Symbol (SynSymbol x); Trivia (Colon, (16,21--16,23));
+                         Symbol (SynSymbol int)], (16,19--16,27));
+                     List
+                       (Bracket,
+                        [Symbol (SynSymbol y); Trivia (Colon, (16,30--16,32));
+                         Symbol (SynSymbol int)], (16,28--16,36))],
+                    (16,18--16,37));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.X);
+                     Symbol (SynSymbol x)], (17,2--17,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Y);
+                     Symbol (SynSymbol y)], (18,2--18,16));
+                 List
+                   (Paren,
+                    [Symbol (SynSymbol member); Symbol (SynSymbol fn);
+                     Symbol (SynSymbol d.Sum); Const (Unit, (20,19--20,21));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol +);
+                         List
+                           (Paren, [Symbol (SynSymbol +X); Symbol (SynSymbol d)],
+                            (20,25--20,31));
+                         List
+                           (Paren, [Symbol (SynSymbol +Y); Symbol (SynSymbol d)],
+                            (20,32--20,38))], (20,22--20,39))], (20,2--20,40))],
+                (16,1--20,40))), (16,0--20,41));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol instance, (22,5--22,13)),
+             New
+               (Ident Example,
+                [Const (Int32 1, (22,27--22,28));
+                 Const (Int32 2, (22,29--22,30))], (22,15--22,30)), None,
+             (22,1--22,31)), (22,0--22,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Example Struct is %A", Regular, (24,9--24,31)),
+                 (24,9--24,31)); Symbol (SynSymbol instance)], (24,1--24,40)),
+          (24,0--24,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Example IsValueType %A", Regular, (25,9--25,33)),
+                 (25,9--25,33));
+              ThreadLast
+                ([Expr (Symbol (SynSymbol instance), (25,39--25,47));
+                  Method (SynSymbol GetType, Tuple, (25,48--25,56));
+                  Property (SynSymbol IsValueType, (25,57--25,69))],
+                 (25,35--25,69))], (25,1--25,70)), (25,0--25,71));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (26,0--26,48)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("Example Result is %i", Regular, (26,9--26,31)),
+                    (26,9--26,31));
+                 DotMethod
+                   (Symbol (SynSymbol instance), SynSymbol Sum, [], Tuple,
+                    (26,33--26,46))], (26,1--26,47)), None, (26,0--26,48)),
+          (26,0--26,48));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (26,0--26,48)), (26,0--26,48));
+              Symbol (SynSymbol visp_result_todo)], (26,0--26,48)),
+          (26,0--26,48))], (8,0--26,48))]

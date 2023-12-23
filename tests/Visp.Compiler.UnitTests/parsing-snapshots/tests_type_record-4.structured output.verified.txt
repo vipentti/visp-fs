@@ -1,0 +1,55 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Record
+            (SynSymbol TestRec,
+             [RecordLabel (Default, SynSymbol value, Ident int, (10,3--10,13))],
+             [Member
+                (SynSymbol t.Structuredtext,
+                 DotMethod
+                   (Symbol (SynSymbol t), SynSymbol ToString, [], Tuple,
+                    (12,28--12,39)), (12,3--12,40));
+              OverrideFn
+                (SynSymbol t.ToString, Args (List [], (14,25--14,27)),
+                 [FunctionCall
+                    (Symbol (SynSymbol sprintf),
+                     [Const
+                        (String ("TestRec(%i)", Regular, (14,37--14,50)),
+                         (14,37--14,50));
+                      DotProperty
+                        (Symbol (SynSymbol t), SynSymbol value, (14,52--14,60))],
+                     (14,29--14,61))], (14,3--14,62))],
+             [{ Attributes =
+                 [{ TypeName = Ident StructuredFormatDisplay
+                    ArgExpr =
+                     Const
+                       (String ("{Structuredtext}", Regular, (8,27--8,45)),
+                        (8,27--8,45))
+                    Range = (8,3--8,46) }]
+                Range = (8,1--8,47) }], (8,1--14,63)), (8,0--15,1));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,9--19,13)), (19,9--19,13));
+              RecordInit
+                ([SynInit
+                    (SynSymbol value, Const (Int32 99, (19,24--19,26)),
+                     (19,17--19,27))], (19,14--19,30))], (19,1--19,30)),
+          (19,0--19,31));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (20,0--20,30)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%A", Regular, (20,9--20,13)), (20,9--20,13));
+                 RecordInit
+                   ([SynInit
+                       (SynSymbol value, Const (Int32 1, (20,24--20,25)),
+                        (20,17--20,26))], (20,14--20,29))], (20,1--20,29)), None,
+             (20,0--20,30)), (20,0--20,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (20,0--20,30)), (20,0--20,30));
+              Symbol (SynSymbol visp_result_todo)], (20,0--20,30)),
+          (20,0--20,30))], (8,0--20,30))]

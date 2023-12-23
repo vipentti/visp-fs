@@ -1,0 +1,56 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol quoted, (9,5--9,11)),
+             Quote
+               (false,
+                Collection
+                  (SynCollection
+                     (Paren,
+                      [Symbol (SynSymbol hello); Symbol (SynSymbol world);
+                       Symbol (SynSymbol in); Symbol (SynSymbol quotes)],
+                      (9,19--9,42))), (9,13--9,42)), None, (9,1--9,43)),
+          (9,0--9,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("quoted is: %O", Regular, (11,9--11,24)), (11,9--11,24));
+              Symbol (SynSymbol quoted)], (11,1--11,31)), (11,0--11,32));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol next_quoted, (13,5--13,16)),
+             Quote
+               (false,
+                Collection
+                  (SynCollection
+                     (Paren,
+                      [Const
+                         (String ("constants", Regular, (14,5--14,16)),
+                          (14,5--14,16)); Keyword (SynKeyword :keywords-work);
+                       Const (Bool true, (14,32--14,36));
+                       Const (Int32 1, (14,37--14,38));
+                       Const (Double 1.5, (14,39--14,42));
+                       Const (Bool false, (14,43--14,48));
+                       Symbol (SynSymbol also);
+                       Const
+                         (String ("work", Regular, (14,54--14,60)),
+                          (14,54--14,60)); Const (Nil, (14,61--14,64))],
+                      (14,4--14,65))), (13,18--14,65)), None, (13,1--14,66)),
+          (13,0--14,67));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (16,0--16,42)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("next_quoted is: %O", Regular, (16,9--16,29)),
+                    (16,9--16,29)); Symbol (SynSymbol next_quoted)],
+                (16,1--16,41)), None, (16,0--16,42)), (16,0--16,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (16,0--16,42)), (16,0--16,42));
+              Symbol (SynSymbol visp_result_todo)], (16,0--16,42)),
+          (16,0--16,42))], (9,0--16,42))]

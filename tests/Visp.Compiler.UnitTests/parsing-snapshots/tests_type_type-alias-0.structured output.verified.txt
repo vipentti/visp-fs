@@ -1,0 +1,49 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (TypeAlias
+            (SynSymbol range,
+             Paren
+               (Tuple
+                  (false,
+                   [Type (Ident int64); Star (8,22--8,23); Type (Ident int64)],
+                   (8,16--8,29)), (8,15--8,30)), (8,1--8,30)), (8,0--8,31));
+       Expr
+         (FunctionDef
+            (SynSymbol things, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol r, (10,13--10,14)), Ident range,
+                      (10,12--10,23))], (10,11--10,24)),
+             [Op
+                (Infix
+                   (SynSymbol +,
+                    [FunctionCall
+                       (Symbol (SynSymbol fst), [Symbol (SynSymbol r)],
+                        (11,6--11,11));
+                     FunctionCall
+                       (Symbol (SynSymbol snd), [Symbol (SynSymbol r)],
+                        (11,14--11,19))], (11,3--11,20)))], (10,1--11,21)),
+          (10,0--11,22));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (13,0--13,41)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("Result is %A", Regular, (13,9--13,23)),
+                    (13,9--13,23));
+                 FunctionCall
+                   (Symbol (SynSymbol things),
+                    [Tuple
+                       ([Const (Int32 1, (13,33--13,34));
+                         Const (Int32 2, (13,37--13,38))], (13,33--13,38))],
+                    (13,25--13,39))], (13,1--13,40)), None, (13,0--13,41)),
+          (13,0--13,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (13,0--13,41)), (13,0--13,41));
+              Symbol (SynSymbol visp_result_todo)], (13,0--13,41)),
+          (13,0--13,41))], (8,0--13,41))]

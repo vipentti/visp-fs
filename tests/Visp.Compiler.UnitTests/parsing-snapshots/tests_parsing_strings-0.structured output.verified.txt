@@ -1,0 +1,69 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("string is: '%s'", Regular, (9,9--9,26)), (9,9--9,26));
+              Const
+                (String
+                   ("
+  this is
+  a multiline
+  string
+", Regular, (9,27--13,1)),
+                 (9,27--13,1))], (9,1--13,1)), (9,0--13,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("string is: '%s'", Regular, (15,9--15,26)),
+                 (15,9--15,26));
+              Const
+                (String
+                   ("
+  this is
+  a multiline
+  string
+", TripleQuote,
+                    (15,27--19,3)), (15,27--19,3))], (15,1--19,3)), (15,0--19,4));
+       Expr
+         (FunctionDef
+            (SynSymbol generate-test, None,
+             Args
+               (List [Named (SynSymbol path, (21,19--21,23))], (21,18--21,24)),
+             [LetOrUse
+                (Named (SynSymbol template, (22,7--22,15)),
+                 FunctionCall
+                   (Symbol (SynSymbol sprintf),
+                    [Const
+                       (String
+                          ("
+let ``can parse %s`` =
+  TestUtils.runTest %s
+  |> Async.AwaitTask
+  ",
+                           TripleQuote, (22,25--26,5)), (22,25--26,5));
+                     Symbol (SynSymbol path); Symbol (SynSymbol path)],
+                    (22,17--26,15)), None, (22,3--26,16));
+              Symbol (SynSymbol template)], (21,1--28,10)), (21,0--28,11));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (30,0--30,49)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("test is: '%s'", Regular, (30,9--30,24)),
+                    (30,9--30,24));
+                 FunctionCall
+                   (Symbol (SynSymbol generate-test),
+                    [Const
+                       (String ("hello", Regular, (30,40--30,47)),
+                        (30,40--30,47))], (30,26--30,47))], (30,1--30,48)), None,
+             (30,0--30,49)), (30,0--30,49));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (30,0--30,49)), (30,0--30,49));
+              Symbol (SynSymbol visp_result_todo)], (30,0--30,49)),
+          (30,0--30,49))], (9,0--30,49))]
