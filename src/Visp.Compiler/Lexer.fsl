@@ -251,13 +251,15 @@ rule token (args: LexArgs) (skip: bool) = parse
   | eof        { EOF }
 
   // punct
+  | "||"          { BAR_BAR }
+  | "-||"          { BAR_BAR }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
   | '}'           { RBRACE }
   | '['           { LBRACKET }
   | ']'           { RBRACKET }
-  | "::"           { COLON_COLON }
+  | "::"          { COLON_COLON }
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '|'           { BAR }
@@ -276,8 +278,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "|}" { BAR_BRACE }
   | "[|" { BRACKET_BAR }
   | "|]" { BAR_BRACKET }
-  | "(|"          { PAREN_BAR }
-  | "|)"          { BAR_PAREN }
+  | "(|" { PAREN_BAR }
+  | "|)" { BAR_PAREN }
   | ".." { DOTDOT }
   | "'" { QUOTE_SYM }
   | ".[" { DOT_BRACKET }
@@ -430,7 +432,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ">=" { GREATER_EQUALS }
   | "<=" { LESS_EQUALS }
   | "&&" { AMP_AMP }
-  | "||" { BAR_BAR }
   | "!=" { BANG_EQUALS }
   | '=' { EQUALS }
 
@@ -512,6 +513,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "::" anyspace+ { COLON_COLON }
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
+  | "||"          { SYMBOL (lexeme lexbuf) }
+  | "-||"          { SYMBOL (lexeme lexbuf) }
   | '|'           { BAR }
   | '.' anyspace+ { DOT }
   | "#("          { HASH_PAREN }

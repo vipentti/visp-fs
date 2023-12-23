@@ -1,0 +1,38 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"operators-0.visp"
+let OrTest a b =
+  // line 8 @"operators-0.visp"
+  a || b
+
+// line 9 @"operators-0.visp"
+let AndTest a b =
+  // line 9 @"operators-0.visp"
+  a && b
+
+// line 11 @"operators-0.visp"
+printfn "OrTest %A" (OrTest false false)
+// line 12 @"operators-0.visp"
+printfn "OrTest %A" (OrTest false true)
+// line 13 @"operators-0.visp"
+printfn "OrTest %A" (OrTest true false)
+// line 14 @"operators-0.visp"
+printfn "OrTest %A" (OrTest true true)
+// line 16 @"operators-0.visp"
+printfn "AndTest %A" (AndTest false false)
+// line 17 @"operators-0.visp"
+printfn "AndTest %A" (AndTest false true)
+// line 18 @"operators-0.visp"
+printfn "AndTest %A" (AndTest true false)
+// line 19 @"operators-0.visp"
+let visp_result_todo =
+  // line 19 @"operators-0.visp"
+  printfn "AndTest %A" (AndTest true true)
+// line 19 @"operators-0.visp"
+printfn "%A" visp_result_todo
+

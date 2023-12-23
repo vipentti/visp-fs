@@ -1,0 +1,20 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(#[StructuredFormatDisplay("{Structuredtext}")]
+  record TestRec
+  [value: int]
+
+  (member t.Structuredtext (.ToString t))
+
+  (override fn t.ToString() (sprintf "TestRec(%i)" (+value t)))
+)
+
+
+
+(printfn "%A" {| [value 99] |})
+(printfn "%A" {| [value 1] |})

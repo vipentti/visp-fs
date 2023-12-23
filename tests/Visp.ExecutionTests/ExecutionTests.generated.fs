@@ -96,6 +96,11 @@ module ``tests_type_record-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/record-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-4`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/record-4.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_functions_apply-method-args-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/functions/apply-method-args-0.visp"
@@ -149,6 +154,11 @@ module ``tests_parsing_strings-interpolation-1`` =
 module ``tests_parsing_props`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/props.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_parsing_operators-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/operators-0.visp"
 
 [<VerifyXunit.UsesVerify>]
 module ``tests_parsing_call-tuple-args-0`` =

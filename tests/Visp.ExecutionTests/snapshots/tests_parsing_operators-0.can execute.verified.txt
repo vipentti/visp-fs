@@ -1,0 +1,11 @@
+﻿OrTest false
+OrTest true
+OrTest true
+OrTest true
+AndTest false
+AndTest false
+AndTest false
+AndTest true
+()
+
+ExitCode: 0
