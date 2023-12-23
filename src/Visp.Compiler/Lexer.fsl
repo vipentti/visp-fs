@@ -49,10 +49,10 @@ let lexemeTrimBoth  (lexbuf : LexBuffer<_>) (n:int) (m:int) =
     s.Slice(n, s.Length - (n+m)).ToString()
 
 /// Trim n chars from the right of lexbuf, return string
-let lexemeTrimRight  lexbuf n = lexemeTrimBoth lexbuf 0 n
+let lexemeTrimRight lexbuf n = lexemeTrimBoth lexbuf 0 n
 
 /// Trim n chars from the left of lexbuf, return string
-let lexemeTrimLeft   lexbuf n = lexemeTrimBoth lexbuf n 0
+let lexemeTrimLeft lexbuf n = lexemeTrimBoth lexbuf n 0
 
 /// Throw a lexing error with a message
 let fail (args: LexArgs) (lexbuf: LexBuffer<_>) msg dflt =
@@ -278,6 +278,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "|}" { BAR_BRACE }
   | "[|" { BRACKET_BAR }
   | "|]" { BAR_BRACKET }
+  | "(||)" { TOKENLIST [PAREN_BAR; BAR_PAREN] }
+  | "(||" { TOKENLIST [LPAREN; BAR_BAR] }
   | "(|" { PAREN_BAR }
   | "|)" { BAR_PAREN }
   | ".." { DOTDOT }
@@ -525,6 +527,9 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "|}"          { BAR_BRACE }
   | "[|"          { BRACKET_BAR }
   | "|]"          { BAR_BRACKET }
+
+  | "(||)" { TOKENLIST [PAREN_BAR; BAR_PAREN] }
+  | "(||" { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(|"          { PAREN_BAR }
   | "|)"          { BAR_PAREN }
 

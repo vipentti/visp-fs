@@ -51,6 +51,9 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token <int64 * bool> INT64
 %token <int64 * bool> NATIVEINT
 
+// only during lexing
+%token <token list> TOKENLIST
+
 %token <byte> UINT8
 %token <uint16> UINT16
 %token <uint32> UINT32

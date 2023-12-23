@@ -1,0 +1,24 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(syntax-macro NoopMacroExample
+  [(_ body ...) (begin body ...)]
+)
+
+(printfn "non macro: %A" (||))
+(printfn "non macro: %A" (|(||)(||)|))
+(printfn "non macro: %A" (|| true false))
+(printfn "non macro: %A" (|1 2|))
+(printfn "non macro: %A" (|(|| true true) (|| false false)|))
+
+(NoopMacroExample (printfn "in macro: %A" (||)))
+(NoopMacroExample (printfn "non macro: %A" (|(||)(||)|)))
+(NoopMacroExample (printfn "in macro: %A" (|| true false)))
+(NoopMacroExample (printfn "in macro: %A" (|1 2|)))
+(NoopMacroExample (printfn "in macro: %A" (|(|| true true) (|| false false)|)))
+
+(printfn "OK")
