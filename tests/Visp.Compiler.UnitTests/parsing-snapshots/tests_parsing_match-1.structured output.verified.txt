@@ -3,35 +3,22 @@
      ([Expr
          (FunctionDef
             (SynSymbol IsString, None,
-             Args
-               (List
-                  [Typed
-                     (Named (SynSymbol lhs, (8,15--8,18)), Ident obj,
-                      (8,14--8,24))], (8,13--8,25)),
+             Args (List [Typed (Named (SynSymbol lhs, (8,15--8,18)), Ident obj, (8,14--8,24))], (8,13--8,25)),
              [Match
                 (Symbol (SynSymbol lhs),
                  [SynMatch
-                    (IsInst (Ident string, (10,5--10,16)), None,
-                     [Const (Bool true, (10,17--10,21))], (10,5--10,21));
-                  SynMatch
-                    (Discard (11,5--11,6), None,
-                     [Const (Bool false, (11,7--11,12))], (11,5--11,12))],
+                    (IsInst (Ident string, (10,5--10,16)), None, [Const (Bool true, (10,17--10,21))], (10,5--10,21));
+                  SynMatch (Discard (11,5--11,6), None, [Const (Bool false, (11,7--11,12))], (11,5--11,12))],
                  (9,3--11,13))], (8,1--12,3)), (8,0--12,4));
        Expr
          (FunctionDef
             (SynSymbol AreEqualStrings, None,
              Args
                (List
-                  [Typed
-                     (Named (SynSymbol lhs, (14,22--14,25)), Ident obj,
-                      (14,21--14,31));
-                   Typed
-                     (Named (SynSymbol rhs, (14,33--14,36)), Ident obj,
-                      (14,32--14,42))], (14,20--14,43)),
+                  [Typed (Named (SynSymbol lhs, (14,22--14,25)), Ident obj, (14,21--14,31));
+                   Typed (Named (SynSymbol rhs, (14,33--14,36)), Ident obj, (14,32--14,42))], (14,20--14,43)),
              [Match
-                (Tuple
-                   ([Symbol (SynSymbol lhs); Symbol (SynSymbol rhs)],
-                    (15,10--15,18)),
+                (Tuple ([Symbol (SynSymbol lhs); Symbol (SynSymbol rhs)], (15,10--15,18)),
                  [SynMatch
                     (Collection
                        (SynCollection
@@ -40,100 +27,68 @@
                               (SynCollection
                                  (Paren,
                                   [As
-                                     (IsInst (Ident string, (16,7--16,16)),
-                                      Named (SynSymbol lhss, (16,17--16,21)),
-                                      (16,6--16,22))], (16,6--16,22)));
-                            Trivia (Dot, (16,23--16,24));
+                                     (IsInst (Ident string, (16,7--16,16)), Named (SynSymbol lhss, (16,17--16,21)),
+                                      (16,6--16,22))], (16,6--16,22))); Trivia (Dot, (16,23--16,24));
                             Collection
                               (SynCollection
                                  (Paren,
                                   [As
-                                     (IsInst (Ident string, (16,26--16,35)),
-                                      Named (SynSymbol rhss, (16,36--16,40)),
-                                      (16,25--16,41))], (16,25--16,41)))],
-                           (16,5--16,42))), None,
-                     [Op
-                        (Infix
-                           (SynSymbol =,
-                            [Symbol (SynSymbol lhss); Symbol (SynSymbol rhss)],
-                            (17,7--17,18)))], (16,5--17,19));
-                  SynMatch
-                    (Discard (19,5--19,6), None,
-                     [Const (Bool false, (19,7--19,12))], (19,5--19,12))],
+                                     (IsInst (Ident string, (16,26--16,35)), Named (SynSymbol rhss, (16,36--16,40)),
+                                      (16,25--16,41))], (16,25--16,41)))], (16,5--16,42))), None,
+                     [Op (Infix (SynSymbol =, [Symbol (SynSymbol lhss); Symbol (SynSymbol rhss)], (17,7--17,18)))],
+                     (16,5--17,19));
+                  SynMatch (Discard (19,5--19,6), None, [Const (Bool false, (19,7--19,12))], (19,5--19,12))],
                  (15,3--19,13))], (14,1--20,3)), (14,0--21,1));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("IsString: %A", Regular, (23,9--23,23)), (23,9--23,23));
-              FunctionCall
-                (Symbol (SynSymbol IsString), [Const (Int32 1, (23,34--23,35))],
-                 (23,25--23,35))], (23,1--23,36)), (23,0--23,37));
+             [Const (String ("IsString: %A", Regular, (23,9--23,23)), (23,9--23,23));
+              FunctionCall (Symbol (SynSymbol IsString), [Const (Int32 1, (23,34--23,35))], (23,25--23,35))],
+             (23,1--23,36)), (23,0--23,37));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("IsString: %A", Regular, (24,9--24,23)), (24,9--24,23));
+             [Const (String ("IsString: %A", Regular, (24,9--24,23)), (24,9--24,23));
               FunctionCall
-                (Symbol (SynSymbol IsString),
-                 [Const
-                    (String ("foo", Regular, (24,34--24,39)), (24,34--24,39))],
+                (Symbol (SynSymbol IsString), [Const (String ("foo", Regular, (24,34--24,39)), (24,34--24,39))],
                  (24,25--24,39))], (24,1--24,40)), (24,0--24,41));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("AreEqualStrings: %A", Regular, (26,9--26,30)),
-                 (26,9--26,30));
+             [Const (String ("AreEqualStrings: %A", Regular, (26,9--26,30)), (26,9--26,30));
               FunctionCall
-                (Symbol (SynSymbol AreEqualStrings),
-                 [Const (Int32 1, (26,48--26,49));
-                  Const (Int32 2, (26,50--26,51))], (26,32--26,51))],
-             (26,1--26,52)), (26,0--26,53));
+                (Symbol (SynSymbol AreEqualStrings), [Const (Int32 1, (26,48--26,49)); Const (Int32 2, (26,50--26,51))],
+                 (26,32--26,51))], (26,1--26,52)), (26,0--26,53));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("AreEqualStrings: %A", Regular, (27,9--27,30)),
-                 (27,9--27,30));
+             [Const (String ("AreEqualStrings: %A", Regular, (27,9--27,30)), (27,9--27,30));
               FunctionCall
                 (Symbol (SynSymbol AreEqualStrings),
-                 [Const
-                    (String ("foo", Regular, (27,48--27,53)), (27,48--27,53));
-                  Const (Int32 2, (27,54--27,55))], (27,32--27,55))],
-             (27,1--27,56)), (27,0--27,57));
+                 [Const (String ("foo", Regular, (27,48--27,53)), (27,48--27,53)); Const (Int32 2, (27,54--27,55))],
+                 (27,32--27,55))], (27,1--27,56)), (27,0--27,57));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("AreEqualStrings: %A", Regular, (28,9--28,30)),
-                 (28,9--28,30));
+             [Const (String ("AreEqualStrings: %A", Regular, (28,9--28,30)), (28,9--28,30));
               FunctionCall
                 (Symbol (SynSymbol AreEqualStrings),
-                 [Const
-                    (String ("foo", Regular, (28,48--28,53)), (28,48--28,53));
-                  Const
-                    (String ("foo", Regular, (28,54--28,59)), (28,54--28,59))],
-                 (28,32--28,59))], (28,1--28,60)), (28,0--28,61));
+                 [Const (String ("foo", Regular, (28,48--28,53)), (28,48--28,53));
+                  Const (String ("foo", Regular, (28,54--28,59)), (28,54--28,59))], (28,32--28,59))], (28,1--28,60)),
+          (28,0--28,61));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (29,0--29,61)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("AreEqualStrings: %A", Regular, (29,9--29,30)),
-                    (29,9--29,30));
+                [Const (String ("AreEqualStrings: %A", Regular, (29,9--29,30)), (29,9--29,30));
                  FunctionCall
                    (Symbol (SynSymbol AreEqualStrings),
-                    [Const
-                       (String ("foo", Regular, (29,48--29,53)), (29,48--29,53));
-                     Const
-                       (String ("bar", Regular, (29,54--29,59)), (29,54--29,59))],
-                    (29,32--29,59))], (29,1--29,60)), None, (29,0--29,61)),
-          (29,0--29,61));
+                    [Const (String ("foo", Regular, (29,48--29,53)), (29,48--29,53));
+                     Const (String ("bar", Regular, (29,54--29,59)), (29,54--29,59))], (29,32--29,59))], (29,1--29,60)),
+             None, (29,0--29,61)), (29,0--29,61));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (29,0--29,61)), (29,0--29,61));
-              Symbol (SynSymbol visp_result_todo)], (29,0--29,61)),
-          (29,0--29,61))], (8,0--29,61))]
+             [Const (String ("%A", Regular, (29,0--29,61)), (29,0--29,61)); Symbol (SynSymbol visp_result_todo)],
+             (29,0--29,61)), (29,0--29,61))], (8,0--29,61))]

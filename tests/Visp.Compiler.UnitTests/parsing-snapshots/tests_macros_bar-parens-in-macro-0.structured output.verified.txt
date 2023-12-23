@@ -5,13 +5,10 @@
             (SynMacro
                (SynSymbol MyBegin,
                 [SynMacroCase
-                   ([Discard (9,4--9,5); Symbol (SynSymbol exprs, (9,6--9,11));
-                     Ellipsis (9,12--9,15)],
+                   ([Discard (9,4--9,5); Symbol (SynSymbol exprs, (9,6--9,11)); Ellipsis (9,12--9,15)],
                     List
-                      (Paren,
-                       [Symbol (SynSymbol begin); Symbol (SynSymbol exprs);
-                        Ellipsis (10,17--10,20)], (10,4--10,21)), (9,2--11,3))],
-                (8,1--11,3))), (8,0--11,4));
+                      (Paren, [Symbol (SynSymbol begin); Symbol (SynSymbol exprs); Ellipsis (10,17--10,20)],
+                       (10,4--10,21)), (9,2--11,3))], (8,1--11,3))), (8,0--11,4));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (13,0--13,21)),
@@ -21,13 +18,11 @@
                    [Symbol (SynSymbol MyBegin);
                     List
                       (ParenBar,
-                       [Const (Int32 1, (13,12--13,13));
-                        Const (Int32 2, (13,14--13,15));
-                        Const (Int32 3, (13,16--13,17))], (13,9--13,20))],
-                   (13,1--13,20))), None, (13,0--13,21)), (13,0--13,21));
+                       [Const (Int32 1, (13,12--13,13)); Const (Int32 2, (13,14--13,15));
+                        Const (Int32 3, (13,16--13,17))], (13,9--13,20))], (13,1--13,20))), None, (13,0--13,21)),
+          (13,0--13,21));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (13,0--13,21)), (13,0--13,21));
-              Symbol (SynSymbol visp_result_todo)], (13,0--13,21)),
-          (13,0--13,21))], (8,0--13,21))]
+             [Const (String ("%A", Regular, (13,0--13,21)), (13,0--13,21)); Symbol (SynSymbol visp_result_todo)],
+             (13,0--13,21)), (13,0--13,21))], (8,0--13,21))]

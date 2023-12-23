@@ -6,22 +6,14 @@
              Args
                (List
                   [Typed
-                     (Named (SynSymbol lhs, (8,23--8,26)),
-                      Generic (Ident array, [Ident ^T], (8,28--8,37)),
-                      (8,22--8,38));
+                     (Named (SynSymbol lhs, (8,23--8,26)), Generic (Ident array, [Ident ^T], (8,28--8,37)), (8,22--8,38));
                    Typed
-                     (Named (SynSymbol rhs, (8,40--8,43)),
-                      Generic (Ident array, [Ident ^T], (8,45--8,54)),
-                      (8,39--8,55))], (8,21--8,56)),
-             [LetOrUse
-                (Named (SynSymbol index, (9,7--9,12)),
-                 Const (Int32 0, (9,13--9,14)), Mutable, (9,3--9,14));
+                     (Named (SynSymbol rhs, (8,40--8,43)), Generic (Ident array, [Ident ^T], (8,45--8,54)), (8,39--8,55))],
+                (8,21--8,56)),
+             [LetOrUse (Named (SynSymbol index, (9,7--9,12)), Const (Int32 0, (9,13--9,14)), Mutable, (9,3--9,14));
               LetOrUse
-                (Named (SynSymbol loop, (10,7--10,11)),
-                 Const (Bool true, (10,12--10,16)), Mutable, (10,3--10,16));
-              LetOrUse
-                (Named (SynSymbol diff, (11,7--11,11)),
-                 Const (Int32 0, (11,12--11,13)), Mutable, (11,3--11,13));
+                (Named (SynSymbol loop, (10,7--10,11)), Const (Bool true, (10,12--10,16)), Mutable, (10,3--10,16));
+              LetOrUse (Named (SynSymbol diff, (11,7--11,11)), Const (Int32 0, (11,12--11,13)), Mutable, (11,3--11,13));
               While
                 (SyntaxMacroCall
                    (SynMacroCall
@@ -30,69 +22,51 @@
                         List
                           (Paren,
                            [Symbol (SynSymbol <); Symbol (SynSymbol index);
-                            List
-                              (Paren,
-                               [Symbol (SynSymbol +Length);
-                                Symbol (SynSymbol lhs)], (13,28--13,41))],
+                            List (Paren, [Symbol (SynSymbol +Length); Symbol (SynSymbol lhs)], (13,28--13,41))],
                            (13,19--13,42))], (13,10--13,42))),
                  [LetOrUse
                     (Named (SynSymbol lhs, (14,9--14,12)),
-                     DotIndex
-                       (Symbol (SynSymbol lhs), [Symbol (SynSymbol index)],
-                        (14,14--14,26)), None, (14,5--14,27));
+                     DotIndex (Symbol (SynSymbol lhs), [Symbol (SynSymbol index)], (14,14--14,26)), None, (14,5--14,27));
                   LetOrUse
                     (Named (SynSymbol rhs, (15,9--15,12)),
-                     DotIndex
-                       (Symbol (SynSymbol rhs), [Symbol (SynSymbol index)],
-                        (15,14--15,26)), None, (15,5--15,27));
+                     DotIndex (Symbol (SynSymbol rhs), [Symbol (SynSymbol index)], (15,14--15,26)), None, (15,5--15,27));
                   SyntaxMacroCall
                     (SynMacroCall
                        (SynSymbol unless,
                         [Symbol (SynSymbol unless);
                          List
-                           (Paren,
-                            [Symbol (SynSymbol =); Symbol (SynSymbol lhs);
-                             Symbol (SynSymbol rhs)], (17,12--17,23));
+                           (Paren, [Symbol (SynSymbol =); Symbol (SynSymbol lhs); Symbol (SynSymbol rhs)],
+                            (17,12--17,23));
                          List
                            (Paren,
                             [Symbol (SynSymbol set!); Symbol (SynSymbol diff);
-                             List
-                               (Paren,
-                                [Symbol (SynSymbol inc); Symbol (SynSymbol diff)],
-                                (18,17--18,27))], (18,6--18,28))], (17,5--18,28)));
+                             List (Paren, [Symbol (SynSymbol inc); Symbol (SynSymbol diff)], (18,17--18,27))],
+                            (18,6--18,28))], (17,5--18,28)));
                   SyntaxMacroCall
                     (SynMacroCall
                        (SynSymbol when,
                         [Symbol (SynSymbol when);
                          List
-                           (Paren,
-                            [Symbol (SynSymbol >); Symbol (SynSymbol diff);
-                             Const (Int32 1, (20,18--20,19))], (20,10--20,20));
+                           (Paren, [Symbol (SynSymbol >); Symbol (SynSymbol diff); Const (Int32 1, (20,18--20,19))],
+                            (20,10--20,20));
                          List
                            (Paren,
-                            [Symbol (SynSymbol set!); Symbol (SynSymbol loop);
-                             Const (Bool false, (21,17--21,22))], (21,6--21,23))],
-                        (20,5--21,23)));
+                            [Symbol (SynSymbol set!); Symbol (SynSymbol loop); Const (Bool false, (21,17--21,22))],
+                            (21,6--21,23))], (20,5--21,23)));
                   Set
                     (Symbol (SynSymbol index),
-                     FunctionCall
-                       (Symbol (SynSymbol inc), [Symbol (SynSymbol index)],
-                        (23,17--23,26)), (23,5--23,27))], (13,3--23,28));
-              Op
-                (Infix
-                   (SynSymbol =,
-                    [Symbol (SynSymbol diff); Const (Int32 1, (26,10--26,11))],
-                    (26,3--26,11)))], (8,1--26,12)), (8,0--26,13));
+                     FunctionCall (Symbol (SynSymbol inc), [Symbol (SynSymbol index)], (23,17--23,26)), (23,5--23,27))],
+                 (13,3--23,28));
+              Op (Infix (SynSymbol =, [Symbol (SynSymbol diff); Const (Int32 1, (26,10--26,11))], (26,3--26,11)))],
+             (8,1--26,12)), (8,0--26,13));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (29,0--29,14)),
              FunctionCall
-               (Symbol (SynSymbol printfn),
-                [Const (String ("OK", Regular, (29,9--29,13)), (29,9--29,13))],
+               (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (29,9--29,13)), (29,9--29,13))],
                 (29,1--29,13)), None, (29,0--29,14)), (29,0--29,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (29,0--29,14)), (29,0--29,14));
-              Symbol (SynSymbol visp_result_todo)], (29,0--29,14)),
-          (29,0--29,14))], (8,0--29,14))]
+             [Const (String ("%A", Regular, (29,0--29,14)), (29,0--29,14)); Symbol (SynSymbol visp_result_todo)],
+             (29,0--29,14)), (29,0--29,14))], (8,0--29,14))]

@@ -2,25 +2,19 @@
   [AnonModule
      ([Expr
          (LetOrUse
-            (Named (SynSymbol value, (8,5--8,10)),
-             Const (String ("hello world", Regular, (8,11--8,24)), (8,11--8,24)),
+            (Named (SynSymbol value, (8,5--8,10)), Const (String ("hello world", Regular, (8,11--8,24)), (8,11--8,24)),
              None, (8,1--8,24)), (8,0--8,25));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (10,0--10,67)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("string is '%s'", Regular, (10,9--10,25)),
-                    (10,9--10,25));
+                [Const (String ("string is '%s'", Regular, (10,9--10,25)), (10,9--10,25));
                  Const
-                   (String
-                      ("interpolated: {value} {value} {value}", Interpolated 1,
-                       (10,26--10,66)), (10,26--10,66))], (10,1--10,66)), None,
-             (10,0--10,67)), (10,0--10,67));
+                   (String ("interpolated: {value} {value} {value}", Interpolated 1, (10,26--10,66)), (10,26--10,66))],
+                (10,1--10,66)), None, (10,0--10,67)), (10,0--10,67));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (10,0--10,67)), (10,0--10,67));
-              Symbol (SynSymbol visp_result_todo)], (10,0--10,67)),
-          (10,0--10,67))], (8,0--10,67))]
+             [Const (String ("%A", Regular, (10,0--10,67)), (10,0--10,67)); Symbol (SynSymbol visp_result_todo)],
+             (10,0--10,67)), (10,0--10,67))], (8,0--10,67))]

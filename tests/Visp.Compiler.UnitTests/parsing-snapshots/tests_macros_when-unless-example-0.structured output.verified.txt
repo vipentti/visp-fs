@@ -5,39 +5,28 @@
             (SynMacro
                (SynSymbol MyWhen1,
                 [SynMacroCase
-                   ([Discard (9,4--9,5); Symbol (SynSymbol test, (9,6--9,10));
-                     Symbol (SynSymbol body, (9,11--9,15));
+                   ([Discard (9,4--9,5); Symbol (SynSymbol test, (9,6--9,10)); Symbol (SynSymbol body, (9,11--9,15));
                      Ellipsis (9,16--9,19)],
                     List
                       (Paren,
                        [Symbol (SynSymbol if); Symbol (SynSymbol test);
                         List
-                          (Paren,
-                           [Symbol (SynSymbol begin); Symbol (SynSymbol body);
-                            Ellipsis (11,18--11,21)], (11,6--11,22))],
-                       (10,4--11,23)), (9,2--12,3))], (8,1--12,3))), (8,0--12,4));
+                          (Paren, [Symbol (SynSymbol begin); Symbol (SynSymbol body); Ellipsis (11,18--11,21)],
+                           (11,6--11,22))], (10,4--11,23)), (9,2--12,3))], (8,1--12,3))), (8,0--12,4));
        Expr
          (SyntaxMacro
             (SynMacro
                (SynSymbol MyUnless1,
                 [SynMacroCase
-                   ([Discard (15,4--15,5);
-                     Symbol (SynSymbol test, (15,6--15,10));
-                     Symbol (SynSymbol body, (15,11--15,15));
-                     Ellipsis (15,16--15,19)],
+                   ([Discard (15,4--15,5); Symbol (SynSymbol test, (15,6--15,10));
+                     Symbol (SynSymbol body, (15,11--15,15)); Ellipsis (15,16--15,19)],
                     List
                       (Paren,
                        [Symbol (SynSymbol if);
+                        List (Paren, [Symbol (SynSymbol not); Symbol (SynSymbol test)], (16,8--16,18));
                         List
-                          (Paren,
-                           [Symbol (SynSymbol not); Symbol (SynSymbol test)],
-                           (16,8--16,18));
-                        List
-                          (Paren,
-                           [Symbol (SynSymbol begin); Symbol (SynSymbol body);
-                            Ellipsis (17,18--17,21)], (17,6--17,22))],
-                       (16,4--17,23)), (15,2--18,3))], (14,1--18,3))),
-          (14,0--18,4));
+                          (Paren, [Symbol (SynSymbol begin); Symbol (SynSymbol body); Ellipsis (17,18--17,21)],
+                           (17,6--17,22))], (16,4--17,23)), (15,2--18,3))], (14,1--18,3))), (14,0--18,4));
        Expr
          (SyntaxMacroCall
             (SynMacroCall
@@ -46,40 +35,30 @@
                  List
                    (Paren,
                     [Symbol (SynSymbol printfn);
-                     Const
-                       (String ("inside when 1", Regular, (21,11--21,26)),
-                        (21,11--21,26))], (21,2--21,27));
+                     Const (String ("inside when 1", Regular, (21,11--21,26)), (21,11--21,26))], (21,2--21,27));
                  List
                    (Paren,
                     [Symbol (SynSymbol printfn);
-                     Const
-                       (String ("inside when 2", Regular, (22,11--22,26)),
-                        (22,11--22,26))], (22,2--22,27))], (20,1--22,27))),
-          (20,0--23,1));
+                     Const (String ("inside when 2", Regular, (22,11--22,26)), (22,11--22,26))], (22,2--22,27))],
+                (20,1--22,27))), (20,0--23,1));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (25,0--27,30)),
              SyntaxMacroCall
                (SynMacroCall
                   (SynSymbol MyUnless1,
-                   [Symbol (SynSymbol MyUnless1);
-                    Const (Bool false, (25,11--25,16));
+                   [Symbol (SynSymbol MyUnless1); Const (Bool false, (25,11--25,16));
                     List
                       (Paren,
                        [Symbol (SynSymbol printfn);
-                        Const
-                          (String ("inside unless 3", Regular, (26,11--26,28)),
-                           (26,11--26,28))], (26,2--26,29));
+                        Const (String ("inside unless 3", Regular, (26,11--26,28)), (26,11--26,28))], (26,2--26,29));
                     List
                       (Paren,
                        [Symbol (SynSymbol printfn);
-                        Const
-                          (String ("inside unless 4", Regular, (27,11--27,28)),
-                           (27,11--27,28))], (27,2--27,29))], (25,1--27,29))),
-             None, (25,0--27,30)), (25,0--27,30));
+                        Const (String ("inside unless 4", Regular, (27,11--27,28)), (27,11--27,28))], (27,2--27,29))],
+                   (25,1--27,29))), None, (25,0--27,30)), (25,0--27,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (25,0--27,30)), (25,0--27,30));
-              Symbol (SynSymbol visp_result_todo)], (25,0--27,30)),
-          (25,0--27,30))], (8,0--27,30))]
+             [Const (String ("%A", Regular, (25,0--27,30)), (25,0--27,30)); Symbol (SynSymbol visp_result_todo)],
+             (25,0--27,30)), (25,0--27,30))], (8,0--27,30))]

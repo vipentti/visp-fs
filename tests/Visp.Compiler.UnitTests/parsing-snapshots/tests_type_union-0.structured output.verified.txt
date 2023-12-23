@@ -6,27 +6,22 @@
              [UnionCase (SynSymbol Empty, [], (9,2--9,7));
               UnionCase
                 (SynSymbol Cons,
-                 [Type (Ident ^a, (10,8--10,10));
-                  Named (SynSymbol tail, Ident MyList<^a>, (10,11--10,29))],
+                 [Type (Ident ^a, (10,8--10,10)); Named (SynSymbol tail, Ident MyList<^a>, (10,11--10,29))],
                  (10,3--10,29))],
              [Member
                 (SynSymbol t.TIsEmpty,
                  Match
                    (Symbol (SynSymbol t),
                     [SynMatch
-                       (Named (SynSymbol Empty, (14,7--14,12)), None,
-                        [Const (Bool true, (14,13--14,17))], (14,7--14,17));
-                     SynMatch
-                       (Discard (15,7--15,8), None,
-                        [Const (Bool false, (15,9--15,14))], (15,7--15,14))],
+                       (Named (SynSymbol Empty, (14,7--14,12)), None, [Const (Bool true, (14,13--14,17))], (14,7--14,17));
+                     SynMatch (Discard (15,7--15,8), None, [Const (Bool false, (15,9--15,14))], (15,7--15,14))],
                     (13,5--15,15)), (12,3--15,16));
               MemberFn
                 (SynSymbol t.Length, Args (List [], (17,22--17,24)),
                  [Match
                     (Symbol (SynSymbol t),
                      [SynMatch
-                        (Named (SynSymbol Empty, (19,7--19,12)), None,
-                         [Const (Int32 0, (19,13--19,14))], (19,7--19,14));
+                        (Named (SynSymbol Empty, (19,7--19,12)), None, [Const (Int32 0, (19,13--19,14))], (19,7--19,14));
                       SynMatch
                         (Collection
                            (SynCollection
@@ -35,19 +30,14 @@
                                 Collection
                                   (SynCollection
                                      (Paren,
-                                      [Discard (20,14--20,15);
-                                       Trivia (Comma, (20,15--20,16));
-                                       Named (SynSymbol rest, (20,17--20,21))],
-                                      (20,13--20,22)))], (20,7--20,23))), None,
+                                      [Discard (20,14--20,15); Trivia (Comma, (20,15--20,16));
+                                       Named (SynSymbol rest, (20,17--20,21))], (20,13--20,22)))], (20,7--20,23))), None,
                          [Op
                             (Infix
                                (SynSymbol +,
                                 [Const (Int32 1, (21,11--21,12));
-                                 FunctionCall
-                                   (Symbol (SynSymbol rest.Length), [],
-                                    (21,14--21,25))], (21,9--21,26)))],
-                         (20,7--21,27))], (18,5--22,7))], (17,3--23,5))], [],
-             (8,1--23,6)), (8,0--24,1));
+                                 FunctionCall (Symbol (SynSymbol rest.Length), [], (21,14--21,25))], (21,9--21,26)))],
+                         (20,7--21,27))], (18,5--22,7))], (17,3--23,5))], [], (8,1--23,6)), (8,0--24,1));
        Expr
          (LetOrUse
             (Named (SynSymbol linkedList, (26,5--26,15)),
@@ -61,74 +51,55 @@
                            ([Const (Int32 2, (26,33--26,34));
                              FunctionCall
                                (Symbol (SynSymbol Cons),
-                                [Tuple
-                                   ([Const (Int32 3, (26,43--26,44));
-                                     Symbol (SynSymbol Empty)], (26,43--26,51))],
-                                (26,37--26,52))], (26,33--26,53))],
-                        (26,27--26,54))], (26,23--26,55))], (26,17--26,56)),
+                                [Tuple ([Const (Int32 3, (26,43--26,44)); Symbol (SynSymbol Empty)], (26,43--26,51))],
+                                (26,37--26,52))], (26,33--26,53))], (26,27--26,54))], (26,23--26,55))], (26,17--26,56)),
              None, (26,1--26,57)), (26,0--26,58));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("List is %A", Regular, (28,9--28,21)), (28,9--28,21));
-              Symbol (SynSymbol linkedList)], (28,1--28,32)), (28,0--28,33));
+             [Const (String ("List is %A", Regular, (28,9--28,21)), (28,9--28,21)); Symbol (SynSymbol linkedList)],
+             (28,1--28,32)), (28,0--28,33));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("List length %A", Regular, (29,9--29,25)),
-                 (29,9--29,25));
-              FunctionCall
-                (Symbol (SynSymbol linkedList.Length), [], (29,27--29,44))],
-             (29,1--29,45)), (29,0--29,46));
+             [Const (String ("List length %A", Regular, (29,9--29,25)), (29,9--29,25));
+              FunctionCall (Symbol (SynSymbol linkedList.Length), [], (29,27--29,44))], (29,1--29,45)), (29,0--29,46));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("List isEmpty %A", Regular, (30,9--30,26)),
-                 (30,9--30,26)); Symbol (SynSymbol linkedList.TIsEmpty)],
-             (30,1--30,46)), (30,0--30,47));
+             [Const (String ("List isEmpty %A", Regular, (30,9--30,26)), (30,9--30,26));
+              Symbol (SynSymbol linkedList.TIsEmpty)], (30,1--30,46)), (30,0--30,47));
        Expr
          (Union
             (SynSymbol MyOption<^T>,
              [UnionCase (SynSymbol None, [], (35,2--35,6));
-              UnionCase
-                (SynSymbol Some, [Type (Ident ^T, (36,8--36,10))], (36,3--36,10))],
-             [], [{ Attributes = [{ TypeName = Ident RequireQualifiedAccess
-                                    ArgExpr = Const (Unit, (33,3--33,25))
-                                    Range = (33,3--33,25) }]
-                    Range = (33,1--33,26) }], (33,1--36,11)), (33,0--36,12));
+              UnionCase (SynSymbol Some, [Type (Ident ^T, (36,8--36,10))], (36,3--36,10))], [],
+             [{ Attributes = [{ TypeName = Ident RequireQualifiedAccess
+                                ArgExpr = Const (Unit, (33,3--33,25))
+                                Range = (33,3--33,25) }]
+                Range = (33,1--33,26) }], (33,1--36,11)), (33,0--36,12));
        Expr
-         (LetOrUse
-            (Named (SynSymbol myOptNone, (38,5--38,14)),
-             Symbol (SynSymbol MyOption.None), None, (38,1--38,28)),
+         (LetOrUse (Named (SynSymbol myOptNone, (38,5--38,14)), Symbol (SynSymbol MyOption.None), None, (38,1--38,28)),
           (38,0--38,29));
        Expr
          (LetOrUse
             (Named (SynSymbol myOptSome, (39,5--39,14)),
-             FunctionCall
-               (Symbol (SynSymbol MyOption.Some),
-                [Const (Int32 1, (39,30--39,31))], (39,16--39,31)), None,
+             FunctionCall (Symbol (SynSymbol MyOption.Some), [Const (Int32 1, (39,30--39,31))], (39,16--39,31)), None,
              (39,1--39,32)), (39,0--39,33));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("myOptNone %A", Regular, (41,9--41,23)), (41,9--41,23));
-              Symbol (SynSymbol myOptNone)], (41,1--41,33)), (41,0--41,34));
+             [Const (String ("myOptNone %A", Regular, (41,9--41,23)), (41,9--41,23)); Symbol (SynSymbol myOptNone)],
+             (41,1--41,33)), (41,0--41,34));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (42,0--42,34)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("myOptSome %A", Regular, (42,9--42,23)),
-                    (42,9--42,23)); Symbol (SynSymbol myOptSome)], (42,1--42,33)),
-             None, (42,0--42,34)), (42,0--42,34));
+                [Const (String ("myOptSome %A", Regular, (42,9--42,23)), (42,9--42,23)); Symbol (SynSymbol myOptSome)],
+                (42,1--42,33)), None, (42,0--42,34)), (42,0--42,34));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (42,0--42,34)), (42,0--42,34));
-              Symbol (SynSymbol visp_result_todo)], (42,0--42,34)),
-          (42,0--42,34))], (8,0--42,34))]
+             [Const (String ("%A", Regular, (42,0--42,34)), (42,0--42,34)); Symbol (SynSymbol visp_result_todo)],
+             (42,0--42,34)), (42,0--42,34))], (8,0--42,34))]

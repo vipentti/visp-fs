@@ -3,43 +3,29 @@
      ([Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("result is is %A", Regular, (8,9--8,26)), (8,9--8,26));
+             [Const (String ("result is is %A", Regular, (8,9--8,26)), (8,9--8,26));
               DotMethod
                 (Symbol (SynSymbol System.String), SynSymbol Concat,
                  [Tuple
-                    ([Const
-                        (String ("first", Regular, (8,51--8,58)), (8,51--8,58));
-                      Const
-                        (String ("second", Regular, (8,60--8,68)), (8,60--8,68));
-                      Const
-                        (String ("third", Regular, (8,70--8,77)), (8,70--8,77))],
-                     (8,51--8,77))], Apply, (8,28--8,78))], (8,1--8,79)),
-          (8,0--8,80));
+                    ([Const (String ("first", Regular, (8,51--8,58)), (8,51--8,58));
+                      Const (String ("second", Regular, (8,60--8,68)), (8,60--8,68));
+                      Const (String ("third", Regular, (8,70--8,77)), (8,70--8,77))], (8,51--8,77))], Apply,
+                 (8,28--8,78))], (8,1--8,79)), (8,0--8,80));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (9,0--9,79)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("result is is %A", Regular, (9,9--9,26)),
-                    (9,9--9,26));
+                [Const (String ("result is is %A", Regular, (9,9--9,26)), (9,9--9,26));
                  FunctionCall
                    (Symbol (SynSymbol System.String.Concat),
                     [Tuple
-                       ([Const
-                           (String ("first", Regular, (9,50--9,57)),
-                            (9,50--9,57));
-                         Const
-                           (String ("second", Regular, (9,59--9,67)),
-                            (9,59--9,67));
-                         Const
-                           (String ("third", Regular, (9,69--9,76)),
-                            (9,69--9,76))], (9,50--9,76))], (9,28--9,77))],
+                       ([Const (String ("first", Regular, (9,50--9,57)), (9,50--9,57));
+                         Const (String ("second", Regular, (9,59--9,67)), (9,59--9,67));
+                         Const (String ("third", Regular, (9,69--9,76)), (9,69--9,76))], (9,50--9,76))], (9,28--9,77))],
                 (9,1--9,78)), None, (9,0--9,79)), (9,0--9,79));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (9,0--9,79)), (9,0--9,79));
-              Symbol (SynSymbol visp_result_todo)], (9,0--9,79)), (9,0--9,79))],
-      (8,0--9,79))]
+             [Const (String ("%A", Regular, (9,0--9,79)), (9,0--9,79)); Symbol (SynSymbol visp_result_todo)],
+             (9,0--9,79)), (9,0--9,79))], (8,0--9,79))]

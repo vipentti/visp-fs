@@ -1,70 +1,52 @@
 ﻿ParsedFile
   [AnonModule
-     ([Expr
-         (LetOrUse
-            (Named (SynSymbol a, (8,5--8,6)), Const (Int32 5, (8,7--8,8)), None,
-             (8,1--8,8)), (8,0--8,9));
-       Expr
-         (LetOrUse
-            (Named (SynSymbol b, (9,5--9,6)), Const (Int32 4, (9,7--9,8)), None,
-             (9,1--9,8)), (9,0--9,9));
+     ([Expr (LetOrUse (Named (SynSymbol a, (8,5--8,6)), Const (Int32 5, (8,7--8,8)), None, (8,1--8,8)), (8,0--8,9));
+       Expr (LetOrUse (Named (SynSymbol b, (9,5--9,6)), Const (Int32 4, (9,7--9,8)), None, (9,1--9,8)), (9,0--9,9));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("+ is %i", Regular, (11,9--11,18)), (11,9--11,18));
               Op
                 (Infix
-                   (SynSymbol +,
-                    [Symbol (SynSymbol a); Symbol (SynSymbol b);
-                     Const (Int32 52, (11,26--11,28))], (11,20--11,28)))],
-             (11,1--11,29)), (11,0--11,30));
+                   (SynSymbol +, [Symbol (SynSymbol a); Symbol (SynSymbol b); Const (Int32 52, (11,26--11,28))],
+                    (11,20--11,28)))], (11,1--11,29)), (11,0--11,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("+ is %i", Regular, (12,9--12,18)), (12,9--12,18));
-              Op (Infix (SynSymbol +, [], (12,20--12,21)))], (12,1--12,22)),
-          (12,0--12,23));
+              Op (Infix (SynSymbol +, [], (12,20--12,21)))], (12,1--12,22)), (12,0--12,23));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("+ is %i", Regular, (13,9--13,18)), (13,9--13,18));
-              Op
-                (Infix
-                   (SynSymbol +, [Const (Int32 2, (13,22--13,23))],
-                    (13,20--13,23)))], (13,1--13,24)), (13,0--13,25));
+              Op (Infix (SynSymbol +, [Const (Int32 2, (13,22--13,23))], (13,20--13,23)))], (13,1--13,24)),
+          (13,0--13,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("* is %i", Regular, (15,9--15,18)), (15,9--15,18));
               Op
                 (Infix
-                   (SynSymbol *,
-                    [Symbol (SynSymbol a); Symbol (SynSymbol b);
-                     Const (Int32 52, (15,26--15,28))], (15,20--15,28)))],
-             (15,1--15,29)), (15,0--15,30));
+                   (SynSymbol *, [Symbol (SynSymbol a); Symbol (SynSymbol b); Const (Int32 52, (15,26--15,28))],
+                    (15,20--15,28)))], (15,1--15,29)), (15,0--15,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("* is %i", Regular, (16,9--16,18)), (16,9--16,18));
-              Op
-                (Infix
-                   (SynSymbol *, [Const (Int32 2, (16,22--16,23))],
-                    (16,20--16,23)))], (16,1--16,24)), (16,0--16,25));
+              Op (Infix (SynSymbol *, [Const (Int32 2, (16,22--16,23))], (16,20--16,23)))], (16,1--16,24)),
+          (16,0--16,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("* is %i", Regular, (17,9--17,18)), (17,9--17,18));
-              Op (Infix (SynSymbol *, [], (17,20--17,21)))], (17,1--17,22)),
-          (17,0--17,23));
+              Op (Infix (SynSymbol *, [], (17,20--17,21)))], (17,1--17,22)), (17,0--17,23));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("* is %A", Regular, (18,9--18,18)), (18,9--18,18));
               Op
                 (Infix
-                   (SynSymbol *,
-                    [Const (SByte 2y, (18,22--18,24));
-                     Const (SByte 1y, (18,25--18,27))], (18,20--18,27)))],
+                   (SynSymbol *, [Const (SByte 2y, (18,22--18,24)); Const (SByte 1y, (18,25--18,27))], (18,20--18,27)))],
              (18,1--18,28)), (18,0--18,29));
        Expr
          (FunctionCall
@@ -72,36 +54,28 @@
              [Const (String ("- is %i", Regular, (20,9--20,18)), (20,9--20,18));
               Op
                 (Infix
-                   (SynSymbol -,
-                    [Symbol (SynSymbol a); Symbol (SynSymbol b);
-                     Const (Int32 52, (20,26--20,28))], (20,20--20,28)))],
-             (20,1--20,29)), (20,0--20,30));
+                   (SynSymbol -, [Symbol (SynSymbol a); Symbol (SynSymbol b); Const (Int32 52, (20,26--20,28))],
+                    (20,20--20,28)))], (20,1--20,29)), (20,0--20,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("- is %i", Regular, (21,9--21,18)), (21,9--21,18));
-              Op
-                (Infix
-                   (SynSymbol -, [Const (Int32 2, (21,22--21,23))],
-                    (21,20--21,23)))], (21,1--21,24)), (21,0--21,25));
+              Op (Infix (SynSymbol -, [Const (Int32 2, (21,22--21,23))], (21,20--21,23)))], (21,1--21,24)),
+          (21,0--21,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("/ is %A", Regular, (23,9--23,18)), (23,9--23,18));
               Op
                 (Infix
-                   (SynSymbol /,
-                    [Symbol (SynSymbol a); Symbol (SynSymbol b);
-                     Const (Int32 52, (23,26--23,28))], (23,20--23,28)))],
-             (23,1--23,29)), (23,0--23,30));
+                   (SynSymbol /, [Symbol (SynSymbol a); Symbol (SynSymbol b); Const (Int32 52, (23,26--23,28))],
+                    (23,20--23,28)))], (23,1--23,29)), (23,0--23,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("/ is %A", Regular, (24,9--24,18)), (24,9--24,18));
-              Op
-                (Infix
-                   (SynSymbol /, [Const (Int64 2L, (24,22--24,24))],
-                    (24,20--24,24)))], (24,1--24,25)), (24,0--24,26));
+              Op (Infix (SynSymbol /, [Const (Int64 2L, (24,22--24,24))], (24,20--24,24)))], (24,1--24,25)),
+          (24,0--24,26));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -109,45 +83,31 @@
               Op
                 (Infix
                    (SynSymbol /,
-                    [FunctionCall
-                       (Symbol (SynSymbol decimal), [Symbol (SynSymbol a)],
-                        (26,23--26,32));
-                     FunctionCall
-                       (Symbol (SynSymbol decimal), [Symbol (SynSymbol b)],
-                        (26,35--26,44));
-                     FunctionCall
-                       (Symbol (SynSymbol decimal),
-                        [Const (Double 52.0, (26,55--26,59))], (26,47--26,59))],
+                    [FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol a)], (26,23--26,32));
+                     FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol b)], (26,35--26,44));
+                     FunctionCall (Symbol (SynSymbol decimal), [Const (Double 52.0, (26,55--26,59))], (26,47--26,59))],
                     (26,20--26,60)))], (26,1--26,61)), (26,0--26,62));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("/ is %A", Regular, (27,9--27,18)), (27,9--27,18));
-              Op
-                (Infix
-                   (SynSymbol /, [Const (Int32 2, (27,22--27,23))],
-                    (27,20--27,23)))], (27,1--27,24)), (27,0--27,25));
+              Op (Infix (SynSymbol /, [Const (Int32 2, (27,22--27,23))], (27,20--27,23)))], (27,1--27,24)),
+          (27,0--27,25));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (28,0--28,53)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("/ is %A", Regular, (28,9--28,18)), (28,9--28,18));
+                [Const (String ("/ is %A", Regular, (28,9--28,18)), (28,9--28,18));
                  Op
                    (Infix
                       (SynSymbol /,
-                       [FunctionCall
-                          (Symbol (SynSymbol decimal), [Symbol (SynSymbol a)],
-                           (28,23--28,32));
-                        FunctionCall
-                          (Symbol (SynSymbol decimal), [Symbol (SynSymbol b)],
-                           (28,35--28,44));
-                        Const (Decimal 52.0M, (28,46--28,51))], (28,20--28,51)))],
-                (28,1--28,52)), None, (28,0--28,53)), (28,0--28,53));
+                       [FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol a)], (28,23--28,32));
+                        FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol b)], (28,35--28,44));
+                        Const (Decimal 52.0M, (28,46--28,51))], (28,20--28,51)))], (28,1--28,52)), None, (28,0--28,53)),
+          (28,0--28,53));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (28,0--28,53)), (28,0--28,53));
-              Symbol (SynSymbol visp_result_todo)], (28,0--28,53)),
-          (28,0--28,53))], (8,0--28,53))]
+             [Const (String ("%A", Regular, (28,0--28,53)), (28,0--28,53)); Symbol (SynSymbol visp_result_todo)],
+             (28,0--28,53)), (28,0--28,53))], (8,0--28,53))]

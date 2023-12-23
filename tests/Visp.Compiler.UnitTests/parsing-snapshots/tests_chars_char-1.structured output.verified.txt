@@ -3,34 +3,25 @@
      ([Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("Char is '%03o'", Regular, (8,9--8,25)), (8,9--8,25));
-              FunctionCall
-                (Symbol (SynSymbol int), [Const (Char '\010', (8,31--8,35))],
-                 (8,27--8,35))], (8,1--8,36)), (8,0--8,37));
+             [Const (String ("Char is '%03o'", Regular, (8,9--8,25)), (8,9--8,25));
+              FunctionCall (Symbol (SynSymbol int), [Const (Char '\010', (8,31--8,35))], (8,27--8,35))], (8,1--8,36)),
+          (8,0--8,37));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("Char is '%03o'", Regular, (9,9--9,25)), (9,9--9,25));
-              FunctionCall
-                (Symbol (SynSymbol int), [Const (Char '\013', (9,31--9,35))],
-                 (9,27--9,35))], (9,1--9,36)), (9,0--9,37));
+             [Const (String ("Char is '%03o'", Regular, (9,9--9,25)), (9,9--9,25));
+              FunctionCall (Symbol (SynSymbol int), [Const (Char '\013', (9,31--9,35))], (9,27--9,35))], (9,1--9,36)),
+          (9,0--9,37));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (10,0--10,38)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("Char is '%03o'", Regular, (10,9--10,25)),
-                    (10,9--10,25));
-                 FunctionCall
-                   (Symbol (SynSymbol int),
-                    [Const (Char '\009', (10,31--10,36))], (10,27--10,36))],
+                [Const (String ("Char is '%03o'", Regular, (10,9--10,25)), (10,9--10,25));
+                 FunctionCall (Symbol (SynSymbol int), [Const (Char '\009', (10,31--10,36))], (10,27--10,36))],
                 (10,1--10,37)), None, (10,0--10,38)), (10,0--10,38));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (10,0--10,38)), (10,0--10,38));
-              Symbol (SynSymbol visp_result_todo)], (10,0--10,38)),
-          (10,0--10,38))], (8,0--10,38))]
+             [Const (String ("%A", Regular, (10,0--10,38)), (10,0--10,38)); Symbol (SynSymbol visp_result_todo)],
+             (10,0--10,38)), (10,0--10,38))], (8,0--10,38))]

@@ -4,42 +4,30 @@
          (SyntaxMacro
             (SynMacro
                (SynSymbol my-or,
-                [SynMacroCase
-                   ([Discard (9,4--9,5)], Const (Bool false, (9,7--9,12)),
-                    (9,2--9,13));
+                [SynMacroCase ([Discard (9,4--9,5)], Const (Bool false, (9,7--9,12)), (9,2--9,13));
                  SynMacroCase
-                   ([Discard (10,4--10,5); Symbol (SynSymbol one, (10,6--10,9))],
-                    Symbol (SynSymbol one), (10,2--10,15));
+                   ([Discard (10,4--10,5); Symbol (SynSymbol one, (10,6--10,9))], Symbol (SynSymbol one), (10,2--10,15));
                  SynMacroCase
-                   ([Discard (11,4--11,5);
-                     Symbol (SynSymbol test, (11,6--11,10));
-                     Symbol (SynSymbol exprs, (11,11--11,16));
-                     Ellipsis (11,17--11,20)],
+                   ([Discard (11,4--11,5); Symbol (SynSymbol test, (11,6--11,10));
+                     Symbol (SynSymbol exprs, (11,11--11,16)); Ellipsis (11,17--11,20)],
                     List
                       (Paren,
                        [Symbol (SynSymbol do);
                         List
-                          (Paren,
-                           [Symbol (SynSymbol let); Symbol (SynSymbol orTemp);
-                            Symbol (SynSymbol test)], (13,6--13,23));
+                          (Paren, [Symbol (SynSymbol let); Symbol (SynSymbol orTemp); Symbol (SynSymbol test)],
+                           (13,6--13,23));
                         List
                           (Paren,
-                           [Symbol (SynSymbol if); Symbol (SynSymbol orTemp);
-                            Symbol (SynSymbol orTemp);
+                           [Symbol (SynSymbol if); Symbol (SynSymbol orTemp); Symbol (SynSymbol orTemp);
                             List
-                              (Paren,
-                               [Symbol (SynSymbol my-or);
-                                Symbol (SynSymbol exprs);
-                                Ellipsis (16,21--16,24)], (16,8--16,25))],
-                           (14,6--17,7))], (12,4--17,8)), (11,2--18,3))],
-                (8,1--18,3))), (8,0--18,4));
+                              (Paren, [Symbol (SynSymbol my-or); Symbol (SynSymbol exprs); Ellipsis (16,21--16,24)],
+                               (16,8--16,25))], (14,6--17,7))], (12,4--17,8)), (11,2--18,3))], (8,1--18,3))),
+          (8,0--18,4));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("my-or %A", Regular, (20,9--20,19)), (20,9--20,19));
-              SyntaxMacroCall
-                (SynMacroCall
-                   (SynSymbol my-or, [Symbol (SynSymbol my-or)], (20,21--20,26)))],
+              SyntaxMacroCall (SynMacroCall (SynSymbol my-or, [Symbol (SynSymbol my-or)], (20,21--20,26)))],
              (20,1--20,27)), (20,0--20,28));
        Expr
          (FunctionCall
@@ -47,9 +35,7 @@
              [Const (String ("my-or %A", Regular, (21,9--21,19)), (21,9--21,19));
               SyntaxMacroCall
                 (SynMacroCall
-                   (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or);
-                     Const (Bool false, (21,27--21,32))], (21,21--21,32)))],
+                   (SynSymbol my-or, [Symbol (SynSymbol my-or); Const (Bool false, (21,27--21,32))], (21,21--21,32)))],
              (21,1--21,33)), (21,0--21,34));
        Expr
          (FunctionCall
@@ -57,9 +43,8 @@
              [Const (String ("my-or %A", Regular, (22,9--22,19)), (22,9--22,19));
               SyntaxMacroCall
                 (SynMacroCall
-                   (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or); Const (Bool true, (22,27--22,31))],
-                    (22,21--22,31)))], (22,1--22,32)), (22,0--22,33));
+                   (SynSymbol my-or, [Symbol (SynSymbol my-or); Const (Bool true, (22,27--22,31))], (22,21--22,31)))],
+             (22,1--22,32)), (22,0--22,33));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -67,9 +52,8 @@
               SyntaxMacroCall
                 (SynMacroCall
                    (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or); Const (Bool true, (23,27--23,31));
-                     Const (Bool false, (23,32--23,37))], (23,21--23,37)))],
-             (23,1--23,38)), (23,0--23,39));
+                    [Symbol (SynSymbol my-or); Const (Bool true, (23,27--23,31)); Const (Bool false, (23,32--23,37))],
+                    (23,21--23,37)))], (23,1--23,38)), (23,0--23,39));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -77,9 +61,8 @@
               SyntaxMacroCall
                 (SynMacroCall
                    (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or); Const (Bool true, (24,27--24,31));
-                     Const (Bool true, (24,32--24,36))], (24,21--24,36)))],
-             (24,1--24,37)), (24,0--24,38));
+                    [Symbol (SynSymbol my-or); Const (Bool true, (24,27--24,31)); Const (Bool true, (24,32--24,36))],
+                    (24,21--24,36)))], (24,1--24,37)), (24,0--24,38));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -87,10 +70,8 @@
               SyntaxMacroCall
                 (SynMacroCall
                    (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or); Const (Bool true, (25,27--25,31));
-                     Const (Bool true, (25,32--25,36));
-                     Const (Bool false, (25,37--25,42))], (25,21--25,42)))],
-             (25,1--25,43)), (25,0--25,44));
+                    [Symbol (SynSymbol my-or); Const (Bool true, (25,27--25,31)); Const (Bool true, (25,32--25,36));
+                     Const (Bool false, (25,37--25,42))], (25,21--25,42)))], (25,1--25,43)), (25,0--25,44));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -98,10 +79,8 @@
               SyntaxMacroCall
                 (SynMacroCall
                    (SynSymbol my-or,
-                    [Symbol (SynSymbol my-or); Const (Bool true, (26,27--26,31));
-                     Const (Bool true, (26,32--26,36));
-                     Const (Bool true, (26,37--26,41))], (26,21--26,41)))],
-             (26,1--26,42)), (26,0--26,43));
+                    [Symbol (SynSymbol my-or); Const (Bool true, (26,27--26,31)); Const (Bool true, (26,32--26,36));
+                     Const (Bool true, (26,37--26,41))], (26,21--26,41)))], (26,1--26,42)), (26,0--26,43));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -110,10 +89,7 @@
                 (SynMacroCall
                    (SynSymbol my-or,
                     [Symbol (SynSymbol my-or);
-                     List
-                       (Paren,
-                        [Symbol (SynSymbol Value.bool);
-                         Const (Bool false, (28,39--28,44))], (28,27--28,45))],
+                     List (Paren, [Symbol (SynSymbol Value.bool); Const (Bool false, (28,39--28,44))], (28,27--28,45))],
                     (28,21--28,45)))], (28,1--28,46)), (28,0--28,47));
        Expr
          (FunctionCall
@@ -123,48 +99,33 @@
                 (SynMacroCall
                    (SynSymbol my-or,
                     [Symbol (SynSymbol my-or);
-                     List
-                       (Paren,
-                        [Symbol (SynSymbol Value.bool);
-                         Const (Bool false, (29,39--29,44))], (29,27--29,45));
+                     List (Paren, [Symbol (SynSymbol Value.bool); Const (Bool false, (29,39--29,44))], (29,27--29,45));
                      List
                        (Paren,
                         [Symbol (SynSymbol Value.string);
-                         Const
-                           (String ("this works, yay", Regular, (29,60--29,77)),
-                            (29,60--29,77))], (29,46--29,78))], (29,21--29,78)))],
-             (29,1--29,79)), (29,0--29,80));
+                         Const (String ("this works, yay", Regular, (29,60--29,77)), (29,60--29,77))], (29,46--29,78))],
+                    (29,21--29,78)))], (29,1--29,79)), (29,0--29,80));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (30,0--30,99)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("my-or %A", Regular, (30,9--30,19)), (30,9--30,19));
+                [Const (String ("my-or %A", Regular, (30,9--30,19)), (30,9--30,19));
                  SyntaxMacroCall
                    (SynMacroCall
                       (SynSymbol my-or,
                        [Symbol (SynSymbol my-or);
                         List
-                          (Paren,
-                           [Symbol (SynSymbol Value.bool);
-                            Const (Bool false, (30,39--30,44))], (30,27--30,45));
+                          (Paren, [Symbol (SynSymbol Value.bool); Const (Bool false, (30,39--30,44))], (30,27--30,45));
                         List
-                          (Paren,
-                           [Symbol (SynSymbol Value.bool);
-                            Const (Bool false, (30,58--30,63))], (30,46--30,64));
+                          (Paren, [Symbol (SynSymbol Value.bool); Const (Bool false, (30,58--30,63))], (30,46--30,64));
                         List
                           (Paren,
                            [Symbol (SynSymbol Value.string);
-                            Const
-                              (String
-                                 ("this works, yay", Regular, (30,79--30,96)),
-                               (30,79--30,96))], (30,65--30,97))],
-                       (30,21--30,97)))], (30,1--30,98)), None, (30,0--30,99)),
-          (30,0--30,99));
+                            Const (String ("this works, yay", Regular, (30,79--30,96)), (30,79--30,96))], (30,65--30,97))],
+                       (30,21--30,97)))], (30,1--30,98)), None, (30,0--30,99)), (30,0--30,99));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (30,0--30,99)), (30,0--30,99));
-              Symbol (SynSymbol visp_result_todo)], (30,0--30,99)),
-          (30,0--30,99))], (8,0--30,99))]
+             [Const (String ("%A", Regular, (30,0--30,99)), (30,0--30,99)); Symbol (SynSymbol visp_result_todo)],
+             (30,0--30,99)), (30,0--30,99))], (8,0--30,99))]
