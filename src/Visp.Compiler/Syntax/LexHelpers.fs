@@ -95,6 +95,7 @@ type LexMode =
 type LexArgs =
     { diagnosticsLogger: DiagnosticsLogger.DiagnosticsLogger
       contextStack: LexContextStack
+      mutable debugTokens: bool
       mutable mode: LexMode
       mutable stringNest: LexerInterpolatedStringNesting
       mutable interpolationDelimiterLength: int
@@ -134,6 +135,7 @@ type LexArgs =
 let mkDefaultLextArgs () =
     { diagnosticsLogger = DiagnosticsLogger.DiagnosticsThreadStatics.DiagnosticsLogger
       contextStack = new LexContextStack()
+      debugTokens = false
       mode = LexMode.Default
       depth = 0
       interpolationDelimiterLength = 0

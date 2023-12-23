@@ -1,0 +1,32 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"sym-with-arrow-in-macro-0.visp"
+open System
+
+// line 10 @"sym-with-arrow-in-macro-0.visp"
+let ``macro_noop-macro-1`` = "__MACRO_INIT__"
+// line 13 @"sym-with-arrow-in-macro-0.visp"
+let inline ``something->nothing`` i =
+  i
+
+// line 15 @"sym-with-arrow-in-macro-0.visp"
+let inline Test i =
+  // line 16 @"sym-with-arrow-in-macro-0.visp"
+  
+  // line 16 @"sym-with-arrow-in-macro-0.visp"
+  ``something->nothing`` i
+
+// line 18 @"sym-with-arrow-in-macro-0.visp"
+printfn "%A" (Test 1)
+// line 19 @"sym-with-arrow-in-macro-0.visp"
+let visp_result_todo =
+  // line 19 @"sym-with-arrow-in-macro-0.visp"
+  printfn "%A" (Test "hello")
+// line 19 @"sym-with-arrow-in-macro-0.visp"
+printfn "%A" visp_result_todo
+

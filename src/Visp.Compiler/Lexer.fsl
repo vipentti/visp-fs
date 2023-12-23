@@ -533,6 +533,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | '+' anyspace+   { SYMBOL "+" }
   | '/' anyspace+   { SYMBOL "/" }
 
+  | ident_arrow { SYMBOL (lexeme lexbuf) }
+
   | "->>" { SYMBOL (lexeme lexbuf) }
   | "->" { SYMBOL (lexeme lexbuf) }
   | ">=" { SYMBOL (lexeme lexbuf) }
