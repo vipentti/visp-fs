@@ -76,6 +76,11 @@ module ``tests_type_union-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/type/union-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-3`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/type/record-3.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_type-alias-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/type/type-alias-0.visp"
