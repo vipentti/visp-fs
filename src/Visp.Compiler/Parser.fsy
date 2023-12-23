@@ -993,8 +993,10 @@ rev_attributes:
     | rev_attributes DOT attribute { $3 :: $1 }
 
 attribute:
-    | syn_type_name expr
-        { { TypeName = $1; ArgExpr = $2; Range = lhs parseState } }
+    | syn_type_name LPAREN expr RPAREN
+        { { TypeName = $1; ArgExpr = $3; Range = lhs parseState } }
+    | syn_type_name LBRACKET expr RBRACKET
+        { { TypeName = $1; ArgExpr = $3; Range = lhs parseState } }
     | syn_type_name
         { { TypeName = $1; ArgExpr = Syntax.UnitExpr <| lhs parseState; Range = lhs parseState } }
 

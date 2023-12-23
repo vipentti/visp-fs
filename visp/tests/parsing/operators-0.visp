@@ -1,0 +1,19 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn OrTest (a b) (-|| a b))
+(fn AndTest (a b) (&& a b))
+
+(printfn "OrTest %A" (OrTest false false))
+(printfn "OrTest %A" (OrTest false true))
+(printfn "OrTest %A" (OrTest true false))
+(printfn "OrTest %A" (OrTest true true))
+
+(printfn "AndTest %A" (AndTest false false))
+(printfn "AndTest %A" (AndTest false true))
+(printfn "AndTest %A" (AndTest true false))
+(printfn "AndTest %A" (AndTest true true))

@@ -1,0 +1,35 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+[<StructuredFormatDisplay"{Structuredtext}">]
+// line 8 @"record-4.visp"
+type TestRec =
+  { value: int }
+    // line 12 @"record-4.visp"
+    member t.Structuredtext =
+            // line 12 @"record-4.visp"
+      t.ToString()
+    // line 14 @"record-4.visp"
+    override t.ToString () =
+      // line 14 @"record-4.visp"
+      sprintf "TestRec(%i)" ((t.value))
+
+// line 19 @"record-4.visp"
+printfn "%A" ({
+  // line 19 @"record-4.visp"
+  value = 99
+})
+// line 20 @"record-4.visp"
+let visp_result_todo =
+  // line 20 @"record-4.visp"
+  printfn "%A" ({
+    // line 20 @"record-4.visp"
+    value = 1
+  })
+// line 20 @"record-4.visp"
+printfn "%A" visp_result_todo
+

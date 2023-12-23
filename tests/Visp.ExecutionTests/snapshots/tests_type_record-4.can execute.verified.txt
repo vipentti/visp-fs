@@ -1,0 +1,5 @@
+﻿TestRec(99)
+TestRec(1)
+()
+
+ExitCode: 0
