@@ -1,0 +1,17 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn SeqAsArg ([items: seq<^T>]) (Seq.length items))
+
+(printfn "%A" (SeqAsArg (||)))
+(printfn "%A" (SeqAsArg (|1|)))
+(printfn "%A" (SeqAsArg (|1 2|)))
+(printfn "%A" (SeqAsArg [||]))
+(printfn "%A" (SeqAsArg [|1|]))
+(printfn "%A" (SeqAsArg [|1 2|]))
+(printfn "%A" (SeqAsArg (seq-> ())))
+(printfn "%A" (SeqAsArg (seq-> (yield 1) (yield 2))))
