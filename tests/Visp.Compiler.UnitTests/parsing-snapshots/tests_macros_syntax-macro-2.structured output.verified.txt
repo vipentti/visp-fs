@@ -1,0 +1,112 @@
+﻿ParsedFile
+  [AnonModule
+     ([HashDirective
+         (ParsedHashDirective
+            ("nowarn", [String ("0026", Regular, (9,8--9,14))], (9,0--9,14)),
+          (9,0--9,14));
+       Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol custom-match-fn,
+                [SynMacroCase
+                   ([Discard (12,4--12,5);
+                     List
+                       ([Symbol (SynSymbol c, (12,7--12,8));
+                         Ellipsis (12,9--12,12)], (12,6--12,13));
+                     Symbol (SynSymbol rest, (12,14--12,18));
+                     Ellipsis (12,19--12,22)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol fn);
+                        List (Paren, [Symbol (SynSymbol arg)], (13,8--13,13));
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol match); Symbol (SynSymbol arg);
+                            List
+                              (Bracket,
+                               [Symbol (SynSymbol c); Ellipsis (15,11--15,14)],
+                               (15,8--15,15)); Symbol (SynSymbol rest);
+                            Ellipsis (16,13--16,16)], (14,6--17,7))],
+                       (13,4--17,8)), (12,2--18,3));
+                 SynMacroCase
+                   ([Discard (19,4--19,5); Symbol (SynSymbol sym, (19,6--19,9));
+                     Symbol (SynSymbol m, (19,10--19,11));
+                     Symbol (SynSymbol rest, (19,12--19,16));
+                     Ellipsis (19,17--19,20)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol fn); Symbol (SynSymbol sym);
+                        List (Paren, [Symbol (SynSymbol arg)], (20,12--20,17));
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol match); Symbol (SynSymbol arg);
+                            Symbol (SynSymbol m); Symbol (SynSymbol rest);
+                            Ellipsis (23,13--23,16)], (21,6--24,7))],
+                       (20,4--24,8)), (19,2--25,3))], (11,1--25,3))),
+          (11,0--26,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol lambda, (28,5--28,11)),
+             SyntaxMacroCall
+               (SynMacroCall
+                  (SynSymbol custom-match-fn,
+                   [Symbol (SynSymbol custom-match-fn);
+                    List
+                      (Bracket,
+                       [List
+                          (Paren,
+                           [Symbol (SynSymbol a); Trivia (Dot, (28,33--28,35));
+                            Symbol (SynSymbol b)], (28,30--28,37));
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol +); Symbol (SynSymbol a);
+                            Symbol (SynSymbol b)], (28,38--28,45))],
+                       (28,29--28,46))], (28,13--28,46))), None, (28,1--28,47)),
+          (28,0--28,48));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol custom-match-fn,
+                [Symbol (SynSymbol custom-match-fn); Symbol (SynSymbol named);
+                 List
+                   (Bracket,
+                    [List
+                       (Paren,
+                        [Symbol (SynSymbol a); Trivia (Dot, (30,6--30,8));
+                         Symbol (SynSymbol b)], (30,3--30,10));
+                     List
+                       (Paren,
+                        [Symbol (SynSymbol +); Symbol (SynSymbol a);
+                         Symbol (SynSymbol b)], (30,11--30,18))], (30,2--30,19))],
+                (29,1--30,19))), (29,0--30,20));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("lambda: %i", Regular, (32,9--32,21)), (32,9--32,21));
+              FunctionCall
+                (Symbol (SynSymbol lambda),
+                 [Tuple
+                    ([Const (Int32 1, (32,31--32,32));
+                      Const (Int32 2, (32,35--32,36))], (32,31--32,36))],
+                 (32,23--32,37))], (32,1--32,38)), (32,0--32,39));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (33,0--33,37)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("named: %i", Regular, (33,9--33,20)), (33,9--33,20));
+                 FunctionCall
+                   (Symbol (SynSymbol named),
+                    [Tuple
+                       ([Const (Int32 1, (33,29--33,30));
+                         Const (Int32 2, (33,33--33,34))], (33,29--33,34))],
+                    (33,22--33,35))], (33,1--33,36)), None, (33,0--33,37)),
+          (33,0--33,37));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (33,0--33,37)), (33,0--33,37));
+              Symbol (SynSymbol visp_result_todo)], (33,0--33,37)),
+          (33,0--33,37))], (9,0--33,37))]

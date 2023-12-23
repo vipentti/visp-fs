@@ -1,0 +1,35 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol set, (9,5--9,8)),
+             Collection
+               (SynCollection
+                  (HashBrace,
+                   [Keyword (SynKeyword :this-is-a-key);
+                    Const
+                      (String ("value", Regular, (9,26--9,33)), (9,26--9,33));
+                    Const
+                      (String ("string as key", Regular, (10,10--10,25)),
+                       (10,10--10,25));
+                    Const
+                      (String ("string value", Regular, (10,26--10,40)),
+                       (10,26--10,40)); Const (Int32 0, (11,10--11,11));
+                    Const
+                      (String ("int as key", Regular, (11,12--11,24)),
+                       (11,12--11,24))], (9,9--11,25))), None, (9,1--11,25)),
+          (9,0--11,26));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (13,0--13,18)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%O", Regular, (13,9--13,13)), (13,9--13,13));
+                 Symbol (SynSymbol set)], (13,1--13,17)), None, (13,0--13,18)),
+          (13,0--13,18));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (13,0--13,18)), (13,0--13,18));
+              Symbol (SynSymbol visp_result_todo)], (13,0--13,18)),
+          (13,0--13,18))], (9,0--13,18))]

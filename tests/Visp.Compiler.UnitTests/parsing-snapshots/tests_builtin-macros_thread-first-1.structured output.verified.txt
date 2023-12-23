@@ -1,0 +1,38 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol identity, None,
+             Args (List [Named (SynSymbol arg, (9,14--9,17))], (9,13--9,18)),
+             [Symbol (SynSymbol arg)], (9,1--9,22)), (9,0--9,23));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (11,0--17,6)),
+             ThreadFirst
+               ([Const
+                   (String ("return me", Regular, (11,4--11,15)), (11,4--11,15));
+                 FunctionCall (Symbol (SynSymbol identity), [], (12,5--12,13));
+                 LambdaDef
+                   (SynLambda
+                      (Args
+                         (List [Named (SynSymbol arg, (13,9--13,12))],
+                          (13,8--13,13)), [Symbol (SynSymbol arg)],
+                       (13,5--13,17)));
+                 LambdaDef
+                   (SynLambda
+                      (Args
+                         (List [Named (SynSymbol arg, (14,9--14,12))],
+                          (14,8--14,13)),
+                       [FunctionCall
+                          (Symbol (SynSymbol printfn),
+                           [Const
+                              (String ("arg is %O", Regular, (15,15--15,26)),
+                               (15,15--15,26)); Symbol (SynSymbol arg)],
+                           (15,7--15,30)); Symbol (SynSymbol arg)], (14,5--16,9)))],
+                (11,1--17,5)), None, (11,0--17,6)), (11,0--17,6));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (11,0--17,6)), (11,0--17,6));
+              Symbol (SynSymbol visp_result_todo)], (11,0--17,6)), (11,0--17,6))],
+      (9,0--17,6))]

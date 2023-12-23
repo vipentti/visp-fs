@@ -89,7 +89,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
     ]
   ))
 
-(fn GenerateTestModulePerFile (parent prefix file)
+(fn GenerateTestModulePerFile (parent method prefix file)
   (let writer (new System.IO.StringWriter))
 
   (let write (write writer))
@@ -105,7 +105,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (write "    ")
   (writeln "[<Fact>]")
   (write "    ")
-  (writeln (->> (sprintf #r"""let ``%s`` () = TestUtils.runTest "%s" """ prefix file) .Trim))
+  (writeln (->> (sprintf #r"""let ``%s`` () = %s "%s" """ prefix method file) .Trim))
   ()
 
   (.ToString writer)
@@ -159,48 +159,69 @@ let ``%s %s`` () = TestUtils.runTest "%s"
 
   cur)
 
-(fn WriteParserTests (projectRoot vispRoot files)
-  (let parserTargetDir (.Combine Path projectRoot "tests" "Visp.Compiler.UnitTests"))
-  (let parserTargetFile (.Combine Path parserTargetDir "ParsingTests.generated.fs"))
+(record TestGen
+  [project: string]
+  [header: string]
+  [prefix: string]
+  [method: string]
+)
 
-  (let header (genTestHeader "ParsingTests"))
+(fn WriteTests (gen projectRoot vispRoot files)
+  (let targetDir (.Combine Path projectRoot "tests" (+project gen)))
+  (let targetFile (.Combine Path targetDir $"{(+header gen)}.generated.fs"))
+
+  (let header (genTestHeader (+header gen)))
   (let sep (+ (+NewLine System.Environment) (+NewLine System.Environment)))
 
   (let output (+ header
     sep
     (String.concat (+NewLine System.Environment)
-      (List.map #(GenerateTestModulePerFile vispRoot "can parse" %1) files)
-      ;(List.map #(GenerateTestGroup "can parse" %1) files)
+      (List.map #(GenerateTestModulePerFile vispRoot (+method gen) (+prefix gen) %1) files)
     )
     (+NewLine System.Environment)))
 
-  (printfn "target %s" parserTargetDir)
-  ;; (let output (genParserTests vispRoot files))
-  (.WriteAllText System.IO.File parserTargetFile output)
+  (printfn "generating %s" targetFile)
+  (.WriteAllText System.IO.File targetFile output)
+)
+
+(fn WriteParserTests (projectRoot vispRoot files)
+  (WriteTests
+    {|
+      [project "Visp.Compiler.UnitTests"]
+      [header "ParsingTests"]
+      [prefix "can parse"]
+      [method "TestUtils.runTest"]
+    |}
+    projectRoot
+    vispRoot
+    files
+  )
+
+  (WriteTests
+    {|
+      [project "Visp.Compiler.UnitTests"]
+      [header "StructuredOutputTests"]
+      [prefix "structured output"]
+      [method "TestUtils.runStructuredOutputTest"]
+    |}
+    projectRoot
+    vispRoot
+    files
+  )
 )
 
 (fn WriteExecutionTests (projectRoot vispRoot files)
-  (let targetDir (.Combine Path projectRoot "tests" "Visp.ExecutionTests"))
-  (let targetfile (.Combine Path targetDir "ExecutionTests.generated.fs"))
-
-  (let header (genTestHeader "ExecutionTests"))
-  (let sep (+ (+NewLine System.Environment) (+NewLine System.Environment)))
-
-  (let output (+ header
-    sep
-    (String.concat (+NewLine System.Environment)
-      (List.map #(GenerateTestModulePerFile vispRoot "can execute" %1) files)
-      ;(List.map #(GenerateTestGroup "can parse" %1) files)
-    )
-    ;; (String.concat (+NewLine System.Environment) (List.map #(GenerateTestGroup "can execute" %1) files))
-    (+NewLine System.Environment)))
-
-  (printfn "target %s" targetDir)
-  ;; (let output (genParserTests vispRoot files))
-  (.WriteAllText System.IO.File targetfile output)
-  ;; (printfn "target %s" targetDir)
-  ;; (let output (genExecutionTests vispRoot files))
-  ;; (.WriteAllText System.IO.File targetfile output)
+  (WriteTests
+    {|
+      [project "Visp.ExecutionTests"]
+      [header "ExecutionTests"]
+      [prefix "can execute"]
+      [method "TestUtils.runTest"]
+    |}
+    projectRoot
+    vispRoot
+    files
+  )
 )
 
 (fn run ()
@@ -213,21 +234,10 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (let groups
     (->> files
       (List.filter #(not (IsIgnoredFile %1)))
-      ;; (List.groupBy #(GetTestCategory vispRoot %1))
-      ;; (List.map (fn [grp]
-      ;;   (match grp
-      ;;     [(cat, items)
-      ;;       (cat, (List.map #(GetTestFilePath vispRoot %1) items))
-      ;;     ])))
   ))
 
-  ;; (printfn "groups %A" groups)
-
-  ;; (let result )
   (WriteParserTests projectRoot vispRoot groups)
   (WriteExecutionTests projectRoot vispRoot groups)
-
-  ;; (printfn "results %A" result)
 
   ())
 

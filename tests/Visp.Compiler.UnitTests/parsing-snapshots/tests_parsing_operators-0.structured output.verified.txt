@@ -1,0 +1,112 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol OrTest, None,
+             Args
+               (List
+                  [Named (SynSymbol a, (8,12--8,13));
+                   Named (SynSymbol b, (8,14--8,15))], (8,11--8,16)),
+             [Op
+                (Infix
+                   (SynSymbol ||, [Symbol (SynSymbol a); Symbol (SynSymbol b)],
+                    (8,18--8,25)))], (8,1--8,26)), (8,0--8,27));
+       Expr
+         (FunctionDef
+            (SynSymbol AndTest, None,
+             Args
+               (List
+                  [Named (SynSymbol a, (9,13--9,14));
+                   Named (SynSymbol b, (9,15--9,16))], (9,12--9,17)),
+             [Op
+                (Infix
+                   (SynSymbol &&, [Symbol (SynSymbol a); Symbol (SynSymbol b)],
+                    (9,19--9,25)))], (9,1--9,26)), (9,0--9,27));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("OrTest %A", Regular, (11,9--11,20)), (11,9--11,20));
+              FunctionCall
+                (Symbol (SynSymbol OrTest),
+                 [Const (Bool false, (11,29--11,34));
+                  Const (Bool false, (11,35--11,40))], (11,22--11,40))],
+             (11,1--11,41)), (11,0--11,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("OrTest %A", Regular, (12,9--12,20)), (12,9--12,20));
+              FunctionCall
+                (Symbol (SynSymbol OrTest),
+                 [Const (Bool false, (12,29--12,34));
+                  Const (Bool true, (12,35--12,39))], (12,22--12,39))],
+             (12,1--12,40)), (12,0--12,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("OrTest %A", Regular, (13,9--13,20)), (13,9--13,20));
+              FunctionCall
+                (Symbol (SynSymbol OrTest),
+                 [Const (Bool true, (13,29--13,33));
+                  Const (Bool false, (13,34--13,39))], (13,22--13,39))],
+             (13,1--13,40)), (13,0--13,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("OrTest %A", Regular, (14,9--14,20)), (14,9--14,20));
+              FunctionCall
+                (Symbol (SynSymbol OrTest),
+                 [Const (Bool true, (14,29--14,33));
+                  Const (Bool true, (14,34--14,38))], (14,22--14,38))],
+             (14,1--14,39)), (14,0--14,40));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("AndTest %A", Regular, (16,9--16,21)), (16,9--16,21));
+              FunctionCall
+                (Symbol (SynSymbol AndTest),
+                 [Const (Bool false, (16,31--16,36));
+                  Const (Bool false, (16,37--16,42))], (16,23--16,42))],
+             (16,1--16,43)), (16,0--16,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("AndTest %A", Regular, (17,9--17,21)), (17,9--17,21));
+              FunctionCall
+                (Symbol (SynSymbol AndTest),
+                 [Const (Bool false, (17,31--17,36));
+                  Const (Bool true, (17,37--17,41))], (17,23--17,41))],
+             (17,1--17,42)), (17,0--17,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("AndTest %A", Regular, (18,9--18,21)), (18,9--18,21));
+              FunctionCall
+                (Symbol (SynSymbol AndTest),
+                 [Const (Bool true, (18,31--18,35));
+                  Const (Bool false, (18,36--18,41))], (18,23--18,41))],
+             (18,1--18,42)), (18,0--18,43));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (19,0--19,42)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("AndTest %A", Regular, (19,9--19,21)), (19,9--19,21));
+                 FunctionCall
+                   (Symbol (SynSymbol AndTest),
+                    [Const (Bool true, (19,31--19,35));
+                     Const (Bool true, (19,36--19,40))], (19,23--19,40))],
+                (19,1--19,41)), None, (19,0--19,42)), (19,0--19,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,0--19,42)), (19,0--19,42));
+              Symbol (SynSymbol visp_result_todo)], (19,0--19,42)),
+          (19,0--19,42))], (8,0--19,42))]

@@ -1,0 +1,65 @@
+﻿ParsedFile
+  [AnonModule
+     ([Open (SynSymbol System.Text.RegularExpressions, (8,1--8,36));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol rx, (9,5--9,7)),
+             New
+               (Ident Regex,
+                [Const
+                   (String ("Game (\d+):", Regular, (9,19--9,32)), (9,19--9,32));
+                 DotProperty
+                   (Symbol (SynSymbol RegexOptions), SynSymbol Compiled,
+                    (9,34--9,57))], (9,9--9,58)), None, (9,1--9,59)),
+          (9,0--9,60));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol ms, (11,5--11,7)),
+             DotMethod
+               (Symbol (SynSymbol rx), SynSymbol Match,
+                [Const
+                   (String ("Game 1:", Regular, (11,19--11,28)), (11,19--11,28))],
+                Tuple, (11,9--11,28)), None, (11,1--11,29)), (11,0--11,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Groups %A", Regular, (13,9--13,20)), (13,9--13,20));
+              DotProperty
+                (Symbol (SynSymbol ms), SynSymbol Groups, (13,22--13,32))],
+             (13,1--13,33)), (13,0--13,34));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol gamePrefix, (15,5--15,15)),
+             DotIndex
+               (DotProperty
+                  (Symbol (SynSymbol ms), SynSymbol Groups, (15,23--15,34)),
+                [Const (Int32 0, (15,19--15,20))], (15,17--15,35)), None,
+             (15,1--15,36)), (15,0--15,37));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Game Prefix %A", Regular, (17,9--17,25)),
+                 (17,9--17,25)); Symbol (SynSymbol gamePrefix)], (17,1--17,36)),
+          (17,0--17,37));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (19,0--19,48)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("Game Prefix %A", Regular, (19,9--19,25)),
+                    (19,9--19,25));
+                 ThreadLast
+                   ([Expr (Symbol (SynSymbol ms), (19,31--19,33));
+                     Property (SynSymbol Groups, (19,34--19,41));
+                     Index ([Const (Int32 0, (19,44--19,45))], (19,42--19,46))],
+                    (19,27--19,46))], (19,1--19,47)), None, (19,0--19,48)),
+          (19,0--19,48));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,0--19,48)), (19,0--19,48));
+              Symbol (SynSymbol visp_result_todo)], (19,0--19,48)),
+          (19,0--19,48))], (8,0--19,48))]

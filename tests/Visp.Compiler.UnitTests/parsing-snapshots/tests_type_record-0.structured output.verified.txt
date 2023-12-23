@@ -1,0 +1,77 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Record
+            (SynSymbol Mapping,
+             [RecordLabel (Default, SynSymbol src, Ident int64, (9,3--9,14));
+              RecordLabel (Default, SynSymbol dest, Ident int64, (10,3--10,15));
+              RecordLabel (Default, SynSymbol range, Ident int64, (11,3--11,16))],
+             [MemberFn
+                (SynSymbol this.Stuff, Args (List [], (13,23--13,25)),
+                 [FunctionCall
+                    (Symbol (SynSymbol printfn),
+                     [Const
+                        (String ("doing stuff %A", Regular, (14,13--14,29)),
+                         (14,13--14,29));
+                      DotProperty
+                        (Symbol (SynSymbol this), SynSymbol src, (14,31--14,40))],
+                     (14,5--14,41))], (13,3--14,42))], [], (8,1--14,43)),
+          (8,0--15,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol temp, (17,5--17,9)),
+             RecordInit
+               ([SynInit
+                   (SynSymbol src, Const (Int32 1, (17,22--17,23)),
+                    (17,17--17,24));
+                 SynInit
+                   (SynSymbol Mapping.dest, Const (Int32 2, (17,39--17,40)),
+                    (17,25--17,41));
+                 SynInit
+                   (SynSymbol range, Const (Int32 3, (17,49--17,50)),
+                    (17,42--17,51))], (17,11--17,51)), None, (17,1--17,52)),
+          (17,0--17,53));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Record is %A", Regular, (18,9--18,23)), (18,9--18,23));
+              Symbol (SynSymbol temp)], (18,1--18,28)), (18,0--18,29));
+       Expr
+         (DotMethod
+            (Symbol (SynSymbol temp), SynSymbol Stuff, [], Tuple, (19,1--19,12)),
+          (19,0--19,13));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol temp2, (21,5--21,10)),
+             RecordInit
+               ([SynInit
+                   (SynSymbol src, Const (Int32 3, (21,18--21,19)),
+                    (21,14--21,19));
+                 SynInit
+                   (SynSymbol Mapping.dest, Const (Int32 5, (21,33--21,34)),
+                    (21,20--21,34));
+                 SynInit
+                   (SynSymbol range, Const (Int32 8, (21,41--21,42)),
+                    (21,35--21,42))], (21,11--21,45)), None, (21,1--21,45)),
+          (21,0--21,46));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Record is %A", Regular, (23,9--23,23)), (23,9--23,23));
+              Symbol (SynSymbol temp2)], (23,1--23,29)), (23,0--23,30));
+       Expr
+         (DotMethod
+            (Symbol (SynSymbol temp2), SynSymbol Stuff, [], Tuple, (24,1--24,13)),
+          (24,0--24,14));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (27,0--27,2)),
+             Const (Unit, (27,0--27,2)), None, (27,0--27,2)), (27,0--27,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (27,0--27,2)), (27,0--27,2));
+              Symbol (SynSymbol visp_result_todo)], (27,0--27,2)), (27,0--27,2))],
+      (8,0--27,2))]

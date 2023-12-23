@@ -1,0 +1,68 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Record
+            (SynSymbol TestRec,
+             [RecordLabel (Default, SynSymbol value, Ident int, (9,3--9,13))],
+             [], [], (8,1--9,14)), (8,0--9,15));
+       Expr
+         (FunctionDef
+            (SynSymbol SomeFun, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol r, (11,14--11,15)), Ident TestRec,
+                      (11,13--11,25))], (11,12--11,26)),
+             [LetOrUse
+                (Named (SynSymbol counter, (12,7--12,14)),
+                 Const (Int32 0, (12,15--12,16)), Mutable, (12,3--12,16));
+              LetOrUse
+                (Named (SynSymbol value, (14,7--14,12)), Symbol (SynSymbol r),
+                 Mutable, (14,3--14,14));
+              While
+                (Op
+                   (Infix
+                      (SynSymbol <,
+                       [Symbol (SynSymbol counter);
+                        Const (Int32 10, (16,20--16,22))], (16,10--16,22))),
+                 [Set
+                    (Symbol (SynSymbol value),
+                     FunctionCall
+                       (Symbol (SynSymbol with),
+                        [Symbol (SynSymbol value);
+                         RecordInit
+                           ([SynInit
+                               (SynSymbol value,
+                                FunctionCall
+                                  (Symbol (SynSymbol inc),
+                                   [DotProperty
+                                      (Symbol (SynSymbol value), SynSymbol value,
+                                       (17,44--17,56))], (17,39--17,57)),
+                                (17,31--17,59))], (17,28--17,62))],
+                        (17,17--17,62)), (17,5--17,63));
+                  SyntaxMacroCall
+                    (SynMacroCall
+                       (SynSymbol up!,
+                        [Symbol (SynSymbol up!); Symbol (SynSymbol counter);
+                         Symbol (SynSymbol inc)], (18,5--18,20)))],
+                 (16,3--18,21)); Symbol (SynSymbol value)], (11,1--21,7)),
+          (11,0--22,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (24,0--24,40)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("%A", Regular, (24,9--24,13)), (24,9--24,13));
+                 FunctionCall
+                   (Symbol (SynSymbol SomeFun),
+                    [RecordInit
+                       ([SynInit
+                           (SynSymbol value, Const (Int32 0, (24,33--24,34)),
+                            (24,26--24,35))], (24,23--24,38))], (24,15--24,38))],
+                (24,1--24,39)), None, (24,0--24,40)), (24,0--24,40));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (24,0--24,40)), (24,0--24,40));
+              Symbol (SynSymbol visp_result_todo)], (24,0--24,40)),
+          (24,0--24,40))], (8,0--24,40))]

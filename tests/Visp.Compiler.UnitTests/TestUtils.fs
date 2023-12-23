@@ -30,33 +30,63 @@ let parseCoreLibs () =
     with :? ParseHelpers.SyntaxError as syn ->
         raise (LexHelpers.syntaxErrorToParseError syn)
 
-let runTest (name: string) =
-    parseCoreLibs ()
 
-    let path = getVispFilePath name
-    let fileName = Path.GetFileName path
+let inline private verify (out: string) dir (param: string) =
+    async {
+        let task =
+            Verifier
+                .Verify(out)
+                .UseDirectory(dir)
+                .DisableDiff()
+                .UseParameters(param)
+                .ToTask()
 
-    let filePathToReplace =
-        Path.GetDirectoryName path |> Path.TrimEndingDirectorySeparator
+        return! (task |> Async.AwaitTask)
+    }
 
-    try
-        let parsed = CoreParser.parseFile path true
+let runStructuredOutputTest (name: string) =
+    async {
+        parseCoreLibs ()
+        let path = getVispFilePath name
 
-        use stream = new StringWriter()
-        CoreParser.writeToStreamNew parsed stream fileName
+        try
+            let parsed = CoreParser.parseFile path true
 
-        let output =
-            stream
-                .ToString()
-                .Replace(filePathToReplace + "/", "")
-                .Replace(filePathToReplace + "\\", "")
+            let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
-        Verifier
-            .Verify(output)
-            .UseDirectory("snapshots")
-            .DisableDiff()
-            .UseParameters(name.Replace('/', '_').Replace('\\', '_'))
-            .ToTask()
-        |> Async.AwaitTask
-    with :? ParseHelpers.SyntaxError as syn ->
-        raise (LexHelpers.syntaxErrorToParseError syn)
+            return! verify (sprintf "%A" parsed) "parsing-snapshots" nameParam
+        with :? ParseHelpers.SyntaxError as syn ->
+            return raise <| (LexHelpers.syntaxErrorToParseError syn)
+    }
+
+let runWriteTest (name: string) =
+    async {
+        parseCoreLibs ()
+
+        let path = getVispFilePath name
+        let fileName = Path.GetFileName path
+
+        let filePathToReplace =
+            Path.GetDirectoryName path |> Path.TrimEndingDirectorySeparator
+
+        try
+            let parsed = CoreParser.parseFile path true
+
+            use stream = new StringWriter()
+            CoreParser.writeToStreamNew parsed stream fileName
+
+            let output =
+                stream
+                    .ToString()
+                    .Replace(filePathToReplace + "/", "")
+                    .Replace(filePathToReplace + "\\", "")
+
+            let nameParam = name.Replace('/', '_').Replace('\\', '_')
+
+            return! verify output "snapshots" nameParam
+
+        with :? ParseHelpers.SyntaxError as syn ->
+            return raise <| (LexHelpers.syntaxErrorToParseError syn)
+    }
+
+let runTest (name: string) = runWriteTest name

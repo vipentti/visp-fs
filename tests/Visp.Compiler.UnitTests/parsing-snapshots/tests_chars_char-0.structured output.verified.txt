@@ -1,0 +1,45 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("Char is %O", Regular, (8,9--8,21)), (8,9--8,21));
+              Const (Char 'h', (8,22--8,25))], (8,1--8,25)), (8,0--8,26));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("Char is %O", Regular, (9,9--9,21)), (9,9--9,21));
+              Const (Char 'a', (9,22--9,29))], (9,1--9,29)), (9,0--9,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Char is %O", Regular, (10,9--10,21)), (10,9--10,21));
+              Const (Char 'a', (10,22--10,29))], (10,1--10,29)), (10,0--10,30));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Char is %O", Regular, (12,9--12,21)), (12,9--12,21));
+              Const (Char ':', (12,22--12,25))], (12,1--12,25)), (12,0--12,26));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("Char is %O", Regular, (13,9--13,21)), (13,9--13,21));
+              Const (Char '(', (13,22--13,25))], (13,1--13,25)), (13,0--13,27));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (14,0--14,27)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String ("Char is %O", Regular, (14,9--14,21)), (14,9--14,21));
+                 Const (Char ')', (14,22--14,25))], (14,1--14,25)), None,
+             (14,0--14,27)), (14,0--14,27));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (14,0--14,27)), (14,0--14,27));
+              Symbol (SynSymbol visp_result_todo)], (14,0--14,27)),
+          (14,0--14,27))], (8,0--14,27))]

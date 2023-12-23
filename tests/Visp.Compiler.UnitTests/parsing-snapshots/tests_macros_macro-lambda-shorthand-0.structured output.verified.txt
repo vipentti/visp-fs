@@ -1,0 +1,64 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (8,0--18,1)),
+             ThreadLast
+               ([Expr
+                   (Collection
+                      (SynCollection
+                         (FsList,
+                          [Const (Int32 1, (8,8--8,9));
+                           Const (Int32 2, (8,10--8,11));
+                           Const (Int32 3, (8,12--8,13));
+                           Const (Int32 4, (8,14--8,15));
+                           Const (Int32 5, (8,16--8,17));
+                           Const (Int32 6, (8,18--8,19));
+                           Const (Int32 7, (8,20--8,21));
+                           Const (Int32 8, (8,22--8,23));
+                           Const (Int32 9, (8,24--8,25));
+                           Const (Int32 10, (8,26--8,28))], (8,5--8,31))),
+                    (8,5--8,31));
+                 Expr
+                   (LambdaShort
+                      (Begin
+                         ([LetOrUse
+                             (Named (SynSymbol lst, (10,9--10,12)),
+                              Symbol (SynSymbol %1), None, (10,5--10,15));
+                           SyntaxMacroCall
+                             (SynMacroCall
+                                (SynSymbol cond_,
+                                 [Symbol (SynSymbol cond_);
+                                  List
+                                    (Bracket,
+                                     [Discard (12,7--12,8);
+                                      List
+                                        (Paren,
+                                         [Symbol (SynSymbol List.filter);
+                                          List
+                                            (HashParen,
+                                             [Symbol (SynSymbol and);
+                                              List
+                                                (Paren,
+                                                 [Symbol (SynSymbol >);
+                                                  Symbol (SynSymbol %1);
+                                                  Const
+                                                    (Int32 1, (14,16--14,17))],
+                                                 (14,10--14,18));
+                                              List
+                                                (Paren,
+                                                 [Symbol (SynSymbol <);
+                                                  Symbol (SynSymbol %1);
+                                                  Const
+                                                    (Int32 10, (15,16--15,18))],
+                                                 (15,10--15,19))], (13,21--16,9));
+                                          Symbol (SynSymbol lst)], (13,8--16,14))],
+                                     (12,6--17,7))], (11,5--17,7)))], Begin,
+                          (9,4--17,8)), (9,2--17,9)), (9,2--17,9))], (8,1--17,9)),
+             None, (8,0--18,1)), (8,0--18,1));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (8,0--18,1)), (8,0--18,1));
+              Symbol (SynSymbol visp_result_todo)], (8,0--18,1)), (8,0--18,1))],
+      (8,0--18,1))]

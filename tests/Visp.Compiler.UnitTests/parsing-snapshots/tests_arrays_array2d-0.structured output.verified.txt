@@ -1,0 +1,120 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (TypeAlias
+            (SynSymbol Grid, Array (2, Ident char, (8,14--8,21)), (8,1--8,21)),
+          (8,0--8,22));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol arr, (10,5--10,8)),
+             FunctionCall
+               (Symbol (SynSymbol Array2D.create),
+                [Const (Int32 5, (10,25--10,26));
+                 Const (Int32 5, (10,27--10,28));
+                 Const (Char '.', (10,29--10,32))], (10,10--10,32)), None,
+             (10,1--10,33)), (10,0--10,34));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol y, (12,5--12,6)), Const (Int32 4, (12,7--12,8)),
+             None, (12,1--12,8)), (12,0--12,9));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[0,0]=%A", Regular, (14,9--14,22)), (14,9--14,22));
+              DotIndex
+                (Symbol (SynSymbol arr),
+                 [Const (Int32 0, (14,26--14,27));
+                  Const (Int32 0, (14,28--14,29))], (14,24--14,34))],
+             (14,1--14,35)), (14,0--14,36));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[1,2]=%A", Regular, (15,9--15,22)), (15,9--15,22));
+              DotIndex
+                (Symbol (SynSymbol arr),
+                 [Const (Int32 1, (15,26--15,27));
+                  Const (Int32 1, (15,29--15,30))], (15,24--15,35))],
+             (15,1--15,36)), (15,0--15,37));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[3,3]=%A", Regular, (16,9--16,22)), (16,9--16,22));
+              FunctionCall
+                (Symbol (SynSymbol Array2D.get),
+                 [Symbol (SynSymbol arr); Const (Int32 3, (16,40--16,41));
+                  Const (Int32 3, (16,42--16,43))], (16,24--16,43))],
+             (16,1--16,44)), (16,0--16,45));
+       Expr
+         (Set
+            (DotIndex
+               (Symbol (SynSymbol arr),
+                [Const (Int32 2, (18,9--18,10)); Const (Int32 2, (18,12--18,13))],
+                (18,7--18,18)), Const (Char '#', (18,20--18,23)), (18,1--18,23)),
+          (18,0--18,24));
+       Expr
+         (Set
+            (DotIndex
+               (Symbol (SynSymbol arr),
+                [Const (Int32 3, (19,9--19,10)); Const (Int32 4, (19,12--19,13))],
+                (19,7--19,18)), Const (Char '#', (19,20--19,23)), (19,1--19,23)),
+          (19,0--19,24));
+       Expr
+         (Set
+            (DotIndex
+               (Symbol (SynSymbol arr),
+                [Const (Int32 4, (20,9--20,10)); Const (Int32 4, (20,12--20,13))],
+                (20,7--20,18)), Const (Char '#', (20,20--20,23)), (20,1--20,23)),
+          (20,0--20,24));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[3,4]=%A", Regular, (21,9--21,22)), (21,9--21,22));
+              ThreadLast
+                ([Expr (Symbol (SynSymbol arr), (21,28--21,31));
+                  Index
+                    ([Op
+                        (Infix
+                           (SynSymbol -,
+                            [Symbol (SynSymbol y);
+                             Const (Int32 1, (21,39--21,40))], (21,35--21,40)));
+                      Op
+                        (Infix
+                           (SynSymbol +,
+                            [Const (Int32 1, (21,46--21,47));
+                             Const (Int32 1, (21,48--21,49));
+                             Const (Int32 1, (21,50--21,51));
+                             Const (Int32 1, (21,52--21,53))], (21,44--21,53)))],
+                     (21,32--21,55))], (21,24--21,55))], (21,1--21,56)),
+          (21,0--21,57));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("arr[4,4]=%A", Regular, (22,9--22,22)), (22,9--22,22));
+              ThreadLast
+                ([Expr (Symbol (SynSymbol arr), (22,28--22,31));
+                  Index
+                    ([Symbol (SynSymbol y);
+                      Op
+                        (Infix
+                           (SynSymbol +,
+                            [Const (Int32 1, (22,40--22,41));
+                             Const (Int32 1, (22,42--22,43));
+                             Const (Int32 1, (22,44--22,45));
+                             Const (Int32 1, (22,46--22,47))], (22,38--22,47)))],
+                     (22,32--22,49))], (22,24--22,49))], (22,1--22,50)),
+          (22,0--22,51));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (25,0--25,3)),
+             Symbol (SynSymbol arr), None, (25,0--25,3)), (25,0--25,3));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (25,0--25,3)), (25,0--25,3));
+              Symbol (SynSymbol visp_result_todo)], (25,0--25,3)), (25,0--25,3))],
+      (8,0--25,3))]

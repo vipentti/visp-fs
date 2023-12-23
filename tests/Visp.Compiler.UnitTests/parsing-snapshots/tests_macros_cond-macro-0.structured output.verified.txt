@@ -1,0 +1,57 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol my-cond,
+                [SynMacroCase
+                   ([Discard (9,4--9,5)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol failwith);
+                        Const
+                          (String ("unreachable cond", Regular, (9,17--9,35)),
+                           (9,17--9,35))], (9,7--9,36)), (9,2--9,37));
+                 SynMacroCase
+                   ([Discard (10,4--10,5); Symbol (SynSymbol one, (10,6--10,9))],
+                    Symbol (SynSymbol one), (10,2--10,15));
+                 SynMacroCase
+                   ([Discard (11,4--11,5); Symbol (SynSymbol var, (11,6--11,9));
+                     Symbol (SynSymbol body, (11,10--11,14));
+                     Symbol (SynSymbol exprs, (11,15--11,20));
+                     Ellipsis (11,21--11,24)],
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol if); Symbol (SynSymbol var);
+                        Symbol (SynSymbol body);
+                        List
+                          (Paren,
+                           [Symbol (SynSymbol my-cond); Symbol (SynSymbol exprs);
+                            Ellipsis (14,21--14,24)], (14,6--14,25))],
+                       (12,4--14,26)), (11,2--15,3))], (8,1--15,3))),
+          (8,0--15,4));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (17,0--23,6)),
+             SyntaxMacroCall
+               (SynMacroCall
+                  (SynSymbol my-cond,
+                   [Symbol (SynSymbol my-cond);
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol >); Const (Int32 0, (18,5--18,6));
+                        Const (Int32 0, (18,7--18,8))], (18,2--18,9));
+                    Const (Int32 1, (19,4--19,5));
+                    List
+                      (Paren,
+                       [Symbol (SynSymbol <); Const (Int32 0, (20,5--20,6));
+                        Const (Int32 0, (20,7--20,8))], (20,2--20,9));
+                    Const (Int32 2, (21,4--21,5)); Keyword (SynKeyword :else);
+                    Const (Int32 3, (23,4--23,5))], (17,1--23,5))), None,
+             (17,0--23,6)), (17,0--23,6));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (17,0--23,6)), (17,0--23,6));
+              Symbol (SynSymbol visp_result_todo)], (17,0--23,6)), (17,0--23,6))],
+      (8,0--23,6))]

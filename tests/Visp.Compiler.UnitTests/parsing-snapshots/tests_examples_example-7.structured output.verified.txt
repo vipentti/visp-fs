@@ -1,0 +1,46 @@
+﻿ParsedFile
+  [AnonModule
+     ([HashDirective
+         (ParsedHashDirective
+            ("nowarn", [String ("20", Regular, (9,8--9,12))], (9,0--9,12)),
+          (9,0--9,12));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol values, (11,5--11,11)),
+             Collection
+               (SynCollection
+                  (Bracket,
+                   [Const (Int32 1, (12,5--12,6)); Const (Int32 2, (12,7--12,8));
+                    Const
+                      (String ("foo", Regular, (12,9--12,14)), (12,9--12,14));
+                    Const
+                      (String ("bar", Regular, (12,15--12,20)), (12,15--12,20))],
+                   (12,4--12,21))), None, (11,1--12,21)), (11,0--12,22));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const
+                (String ("values are %O", Regular, (14,9--14,24)), (14,9--14,24));
+              Symbol (SynSymbol values)], (14,1--14,31)), (14,0--14,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol vector-push!),
+             [Symbol (SynSymbol values); Const (Int32 4, (15,21--15,22));
+              Const (Int32 5, (15,23--15,24)); Const (Int32 6, (15,25--15,26));
+              Const (Int32 7, (15,27--15,28))], (15,1--15,28)), (15,0--15,29));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (16,0--16,45)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const
+                   (String
+                      ("values after update are %O", Regular, (16,9--16,37)),
+                    (16,9--16,37)); Symbol (SynSymbol values)], (16,1--16,44)),
+             None, (16,0--16,45)), (16,0--16,45));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (16,0--16,45)), (16,0--16,45));
+              Symbol (SynSymbol visp_result_todo)], (16,0--16,45)),
+          (16,0--16,45))], (9,0--16,45))]
