@@ -7,6 +7,7 @@ namespace rec Visp.Compiler.Syntax
 open Visp.Compiler.Writer
 open Visp.Compiler.Text
 open System.Diagnostics
+open Visp.Common
 
 [<Struct; NoEquality; NoComparison; DebuggerDisplay("{idText}({idRange})")>]
 type Ident(text: string, range: range) =
@@ -111,7 +112,7 @@ type SynStringKind =
     | Interpolated of plain: int
     | InterpolatedTripleQuote of triple: int
 
-[<NoEquality; NoComparison; RequireQualifiedAccess>]
+[<NoEquality; NoComparison; RequireQualifiedAccess; StructuredFormatDisplay("{StructuredText}")>]
 type SynConst =
     | Unit
     | Nil
@@ -131,6 +132,44 @@ type SynConst =
     | Char of char
     | Decimal of System.Decimal
     | String of text: string * synStringKind: SynStringKind * range: range
+
+    member t.StructuredText =
+        match t with
+        | Unit -> "Unit"
+        | Nil -> "Nil"
+        | Bool it -> sprintf "Bool %A" it
+        | SByte it -> sprintf "SByte %A" it
+        | Byte it -> sprintf "Byte %A" it
+        | Int16 it -> sprintf "Int16 %A" it
+        | UInt16 it -> sprintf "UInt16 %A" it
+        | UInt32 it -> sprintf "UInt32 %A" it
+        | UInt64 it -> sprintf "UInt64 %A" it
+        | IntPtr it -> sprintf "IntPtr %A" it
+        | UIntPtr it -> sprintf "UIntPtr %A" it
+        | Single it -> sprintf "Single %A" it
+        | Double it -> sprintf "Double %A" it
+        | Int64 it -> sprintf "Int64 %A" it
+        | Int32 it -> sprintf "Int32 %A" it
+        | Char it -> sprintf "Char %A" it
+        | Decimal it -> sprintf "Decimal %A" it
+        | String(text, k, r) ->
+            let sb = PooledStringBuilder.Get()
+            sb.Append "String (\"" |> ignore
+
+            for ch in text do
+                match ch with
+                | '\r' -> ignore (sb.Append "\\r")
+                | '\n' -> ignore (sb.Append "\\n")
+                | it -> ignore (sb.Append it)
+
+            sb.Append "\", " |> ignore
+            sb.Append(sprintf "%A" k) |> ignore
+            sb.Append(", ") |> ignore
+            sb.Append(sprintf "%A" r) |> ignore
+
+            sb.Append ")" |> ignore
+
+            sb.ToStringAndReturn()
 
 type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range
 

@@ -54,7 +54,7 @@ let runStructuredOutputTest (name: string) =
 
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
-            let output = (sprintf "%120A" parsed).Replace("\r\n", "\n")
+            let output = (sprintf "%120A" parsed).Replace("\\r\\n", "\\n").Replace("\r\n", "\n")
 
             return! verify output "parsing-snapshots" nameParam
         with :? ParseHelpers.SyntaxError as syn ->
