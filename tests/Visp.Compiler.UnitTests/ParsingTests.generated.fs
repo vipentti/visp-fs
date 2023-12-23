@@ -311,6 +311,11 @@ module ``tests_builtin-macros_cond-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/builtin-macros/cond-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_up-macro-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/macros/up-macro-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_nested-macro-expansion-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/macros/nested-macro-expansion-0.visp"

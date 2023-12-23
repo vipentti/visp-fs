@@ -1,0 +1,17 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn DoingThings ()
+  (mut items (!set))
+
+  (for/to [i (0 to 5)]
+    (up! items (Set.add i)))
+
+  items)
+
+
+(printfn "%A" (DoingThings))
