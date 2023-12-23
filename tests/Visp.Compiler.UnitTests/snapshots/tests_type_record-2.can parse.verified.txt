@@ -1,0 +1,48 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"record-2.visp"
+type Mapping =
+  { src: int64; dest: int64; range: int64 }
+// line 14 @"record-2.visp"
+let initial =
+  // line 14 @"record-2.visp"
+  {
+    // line 14 @"record-2.visp"
+    src = 3
+    // line 14 @"record-2.visp"
+    Mapping.dest = 5
+    // line 14 @"record-2.visp"
+    range = 8
+  }
+// line 16 @"record-2.visp"
+printfn "initial is %A" initial
+// line 18 @"record-2.visp"
+let updated1 =
+  // line 18 @"record-2.visp"
+  {initial with
+    // line 18 @"record-2.visp"
+    src = 5
+  }
+// line 20 @"record-2.visp"
+printfn "updated1 is %A" updated1
+// line 22 @"record-2.visp"
+let updated2 =
+  // line 22 @"record-2.visp"
+  {initial with
+    // line 22 @"record-2.visp"
+    src = 99
+    // line 22 @"record-2.visp"
+    Mapping.dest = 12
+  }
+// line 24 @"record-2.visp"
+printfn "updated2 is %A" updated2
+// line 26 @"record-2.visp"
+let visp_result_todo = ()
+// line 26 @"record-2.visp"
+printfn "%A" visp_result_todo
+

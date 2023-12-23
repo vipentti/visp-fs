@@ -61,6 +61,11 @@ module ``tests_type_custom-comparison-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/type/custom-comparison-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-2`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/type/record-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_member-fn-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/type/member-fn-0.visp"

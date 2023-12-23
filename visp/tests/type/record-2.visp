@@ -1,0 +1,26 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(record Mapping
+  (src : int64)
+  (dest : int64)
+  (range : int64)
+)
+
+(let initial {| [ src 3 ] [Mapping.dest 5] [ range 8 ] |})
+
+(printfn "initial is %A" initial)
+
+(let updated1 (with initial {| [src 5] |}))
+
+(printfn "updated1 is %A" updated1)
+
+(let updated2 (with initial {| [src 99] [Mapping.dest 12] |}))
+
+(printfn "updated2 is %A" updated2)
+
+()
