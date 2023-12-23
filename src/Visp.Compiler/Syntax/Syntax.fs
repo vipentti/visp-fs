@@ -161,6 +161,8 @@ type SynConst =
         | Decimal it -> sprintf "Decimal %A" it
         | String(text, k, r) ->
             let sb = PooledStringBuilder.Get()
+            // Reserve capacity for the text + all the extra data being written
+            sb.EnsureCapacity(text.Length + 60) |> ignore
             sb.Append "String (\"" |> ignore
 
             for ch in text do
