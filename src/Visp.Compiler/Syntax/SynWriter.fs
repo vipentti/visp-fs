@@ -31,6 +31,10 @@ type SynWriter(writer: CustomFileWriter) =
 
     member d.IndentLevel = d.writer.IndentLevel
 
+    member d.IncreaseIndent() = d.writer.IncreaseIndent()
+
+    member d.DecreaseIndent() = d.writer.DecreaseIndent()
+
     member this.Write(text: string) = this.writer.Write(text)
 
     member this.Write(text: char) = this.writer.Write(text)
@@ -1199,6 +1203,8 @@ module Write =
 
         match withExpr with
         | Some(withExpr) ->
+            w.IncreaseIndent()
+            newlineIndent w
             writeExprInParens w WriteState.Inline withExpr
             string w " with"
         | None -> ()
@@ -1214,6 +1220,10 @@ module Write =
 
         newlineIndent w
         string w "}"
+
+        if withExpr.IsSome then
+            w.DecreaseIndent()
+
         ()
 
     and private writeCollection w st (writers: CollectionWriters<'a>) (cl: SynCollection<'a>) =

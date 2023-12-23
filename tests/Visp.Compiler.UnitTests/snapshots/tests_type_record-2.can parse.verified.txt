@@ -24,21 +24,23 @@ printfn "initial is %A" initial
 // line 18 @"record-2.visp"
 let updated1 =
   // line 18 @"record-2.visp"
-  {initial with
-    // line 18 @"record-2.visp"
-    src = 5
-  }
+  {
+    initial with
+      // line 18 @"record-2.visp"
+      src = 5
+    }
 // line 20 @"record-2.visp"
 printfn "updated1 is %A" updated1
 // line 22 @"record-2.visp"
 let updated2 =
   // line 22 @"record-2.visp"
-  {initial with
-    // line 22 @"record-2.visp"
-    src = 99
-    // line 22 @"record-2.visp"
-    Mapping.dest = 12
-  }
+  {
+    initial with
+      // line 22 @"record-2.visp"
+      src = 99
+      // line 22 @"record-2.visp"
+      Mapping.dest = 12
+    }
 // line 24 @"record-2.visp"
 printfn "updated2 is %A" updated2
 // line 26 @"record-2.visp"

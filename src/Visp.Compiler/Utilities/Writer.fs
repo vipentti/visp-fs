@@ -50,6 +50,10 @@ module Writer =
         //member this.WriteFormat (fmt: Printf.TextWriterFormat<'T>) (args: 'T) =
         //    fprintf streamWriter fmt args
 
+        member _.IncreaseIndent() = indentation <- indentation + 1
+
+        member _.DecreaseIndent() = indentation <- indentation - 1
+
         member this.Indent() =
             indentation <- indentation + 1
 

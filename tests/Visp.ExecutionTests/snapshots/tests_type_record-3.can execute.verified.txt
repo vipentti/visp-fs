@@ -1,0 +1,4 @@
+﻿{ value = 10 }
+()
+
+ExitCode: 0

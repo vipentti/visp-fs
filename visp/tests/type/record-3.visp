@@ -1,0 +1,24 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(record TestRec
+  [value: int])
+
+(fn SomeFun ([r: TestRec])
+  (mut counter 0)
+
+  (mut value r)
+
+  (while (< counter 10)
+    (set! value (with value {| [value (inc (+value value))] |}))
+    (up! counter inc)
+  )
+
+  value
+)
+
+(printfn "%A" (SomeFun {| [value 0] |}))
