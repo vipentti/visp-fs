@@ -1,0 +1,337 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require FSharpx.Collections "3.1.0")
+
+(open System)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open FSharpx.Collections)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day22")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(syntax-macro ReadNext
+  [(_ id)
+    (do
+      (ignore (.MoveNext id))
+      (+Current id))
+  ]
+)
+
+(typedef XYZ (int * int * int))
+
+(fn inline DiffXYZ ((x0, y0, z0) (x1, y1, z1))
+  ((id (- x1 x0))
+    , (id (- y1 y0))
+    , (id (- z1 z0))
+  ))
+
+(fn inline AddXYZ ((x0, y0, z0) (x1, y1, z1))
+  ((+ x0 x1), (+ y0 y1), (+ z0 z1)))
+
+(fn inline X ((x, _, _)) x)
+(fn inline Y ((_, y, _)) y)
+(fn inline Z ((_, _, z)) z)
+
+(#[StructuredFormatDisplay("{DisplayText}")]
+  record Brick
+  [corner: XYZ]
+  [size: XYZ]
+  [offset: XYZ]
+
+  (override fn t.ToString()
+    (let (x0, y0, z0) (+corner t))
+    (let (x1, y1, z1) (AddXYZ (+corner t) (+size t)))
+    (sprintf "%i,%i,%i~%i,%i,%i" x0 y0 z0 x1 y1 z1)
+  )
+
+  (member t.Original ((+corner t), (AddXYZ (+corner t) (+size t))))
+
+  (member this.DisplayText (.ToString this))
+
+  (member t.Start (+corner t))
+  (member t.End (AddXYZ (+corner t) (+size t)))
+
+  ;; cubes start 0, 0, 1
+  ;; which is bottom left in XY and 1 up
+  (member t.BottomZ
+    (begin
+      (let (_, _, z0) (+MinCorner t))
+      z0))
+
+  ;; cubes start 0, 0, 1
+  ;; which is bottom left in XY and 1 up
+  (member t.EndZ
+    (begin
+      (let (_, _, z0) (+End t))
+      z0))
+
+  (member t.StartZ
+    (begin
+      (let (_, _, z0) (+Start t))
+      z0))
+
+  (member t.OnGround (= (+BottomZ t) 0))
+
+  (member t.MinCorner (AddXYZ (+corner t) (0, 0, -1)))
+  (member t.MaxCorner (->> (AddXYZ (+corner t) (+size t)) (AddXYZ (+offset t))))
+
+  (member t.Corners ((+MinCorner t), (+MaxCorner t)))
+
+  (member fn t.ZPositions ()
+    (seq->
+      (match (+size t)
+        ;; y-axis
+        [(0, ys, 0)
+          (let (ox, oy, oz) (+corner t))
+          (for/to [y (oy to (+ oy ys))]
+            (yield (ox, y, oz)))
+        ]
+        ;; x-axis
+        [(xs, 0, 0)
+          (let (ox, oy, oz) (+corner t))
+          (for/to [x (ox to (+ ox xs))]
+            (yield (x, ox, oz)))
+        ]
+        ;;
+        [(0, 0, _)
+          (yield (+corner t))
+        ]
+        [it (failwithf "unsupported size %A" it)]
+      )
+    ))
+
+  (member fn t.BelowPositions ()
+    (->> (.ZPositions t) (Seq.map #(AddXYZ %1 (0, 0, -1)))))
+
+  (member fn t.Fall ()
+    (with t {| [corner (AddXYZ (+corner t) (0, 0, -1))] |} ))
+
+  (member fn t.Cubes ()
+    (seq->
+      (let (x0, y0, z0) (+corner t))
+      (let (x1, y1, z1) (+size t))
+      ()
+    )))
+
+(typedef BrickSeq array<Brick>)
+
+(fn Intersects ([lhs: Brick] [rhs: Brick])
+  (let (lhs_min, lhs_max) (+Corners lhs))
+  (let (rhs_min, rhs_max) (+Corners rhs))
+
+  (let c1 (< (X lhs_max) (X rhs_min)))
+  (let c2 (< (X rhs_max) (X lhs_min)))
+
+  (let c3 (< (Z lhs_max) (Z rhs_min)))
+  (let c4 (< (Z rhs_max) (Z lhs_min)))
+
+  (let c5 (< (Y lhs_max) (Y rhs_min)))
+  (let c6 (< (Y rhs_max) (Y lhs_min)))
+
+  (not (-|| c1 c2 c3 c4 c5 c6)))
+
+(fn inline IntersectsXY ([lhs: Brick] [rhs: Brick])
+  (let (lhs_min, lhs_max) (+Original lhs))
+  (let (rhs_min, rhs_max) (+Original rhs))
+
+  (&&
+    (<= (X lhs_min) (X rhs_max))
+    (>= (X lhs_max) (X rhs_min))
+    (<= (Y lhs_min) (Y rhs_max))
+    (>= (Y lhs_max) (Y rhs_min))
+  )
+)
+
+(fn IsBelow ([lhs: Brick] [rhs: Brick])
+  (let (lhs_min, lhs_max) (+Original lhs))
+  (let (rhs_min, rhs_max) (+Original rhs))
+
+  false
+)
+
+(module Seq
+  (fn inline maxOrDefault (def [source: seq<_>])
+    (use e (.GetEnumerator source))
+    (if (not (.MoveNext e))
+      def
+      (begin
+        (mut acc (+Current e))
+        (while (.MoveNext e)
+          (let curr (+Current e))
+          (if (> curr acc)
+            (set! acc curr)))
+        acc)))
+)
+
+(fn HighestZ ([self: Brick] [others: seq<Brick>])
+  (->> others
+    (Seq.filter #(&& (!= self %1) (IntersectsXY self %1)))
+    (Seq.map #(+EndZ %1))
+    (Seq.maxOrDefault 0)))
+
+(fn Above ([self: Brick] [others: array<Brick>])
+  (->> others
+    (Array.filter #(&& (!= self %1) (IntersectsXY self %1) (= (+StartZ %1) (inc (+EndZ self)))))
+  ))
+
+(fn Below ([self: Brick] [others: array<Brick>])
+  (->> others
+    (Array.filter #(&& (!= self %1) (IntersectsXY self %1) (= (+EndZ %1) (dec (+StartZ self)))))
+  ))
+
+(fn ExceptSelf ([self: Brick] [others: array<Brick>])
+  (->> others (Array.filter #(!= self %1))))
+
+(fn inline IsEmpty ([ls: array<^T>]) (= (+Length ls) 0))
+
+(fn IsSafeToRemove ([self: Brick] [others: array<Brick>])
+  (fn rec Inner ([self: Brick] [to_check: array<Brick>] [above: list<Brick>])
+    (match above
+      [[] true]
+      [[one]
+        (let below (Below one to_check))
+        (not (IsEmpty below))
+      ]
+      [(lhs :: rest)
+        (let below (Below lhs to_check))
+        (if (IsEmpty below)
+          false
+          (Inner self to_check rest)
+        )
+      ]))
+
+  (Inner self (ExceptSelf self others) (->> (Above self others) List.ofArray))
+)
+
+(fn ContainsPositions ([lhs: Brick] [pos: Set<XYZ>])
+  (->> (.ZPositions lhs)
+    (Seq.exists #(Set.contains %1 pos))))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (let bricks (!vec))
+  (while (.MoveNext lines)
+    (let line (+Current lines))
+    (unless (+IsEmpty line)
+      (mut coords (SpanSplitChars [| #\~ |] line))
+      (let lhs (ReadNext coords))
+      (mut lhs_coords (SpanSplitChars [| #\, |] lhs))
+      (let lhs_x (span->int32 (ReadNext lhs_coords)))
+      (let lhs_y (span->int32 (ReadNext lhs_coords)))
+      (let lhs_z (span->int32 (ReadNext lhs_coords)))
+      (let lhs_pos (lhs_x, lhs_y, lhs_z))
+      ;;(let lhs_pos ((ReadNext lhs_coords) . (ReadNext lhs_coords) . (ReadNext lhs_coords)))
+
+      (let rhs (ReadNext coords))
+      (mut rhs_coords (SpanSplitChars [| #\, |] rhs))
+      (let rhs_x (span->int32 (ReadNext rhs_coords)))
+      (let rhs_y (span->int32 (ReadNext rhs_coords)))
+      (let rhs_z (span->int32 (ReadNext rhs_coords)))
+      (let rhs_pos (rhs_x, rhs_y, rhs_z))
+
+      ;; (printfn "%A %A" (.ToString lhs) (.ToString rhs))
+
+      (let size (DiffXYZ lhs_pos rhs_pos))
+
+      (let corner_offset (match size
+        [(0, _, 0) (1, 0 ,0)]
+        [(_, 0, 0) (0, 1 ,0)]
+        [(0, 0, _) (1, 1 ,0)]
+        [_ (0, 0, 0)]
+      ))
+
+      ;; (printfn "%A %A %A %A" lhs_pos size (AddXYZ lhs_pos size) corner_offset)
+
+      (.Add bricks {| [corner lhs_pos] [size size] [offset corner_offset] |})
+    )
+  )
+  ;(.ToArray bricks)
+  (->> bricks
+    (Seq.sortBy #(+BottomZ %1))
+    (Array.ofSeq)
+  )
+)
+
+(fn FallBricks ([bricks: array<Brick>])
+  (let dropped (new ResizeArray<_>))
+
+  (for/in [brick bricks]
+    (let lowest (HighestZ brick dropped))
+    (let (x, y, _) (+corner brick))
+    (.Add dropped (with brick {| [corner (x, y, (inc lowest)) ] |})))
+
+  (.ToArray dropped))
+
+(fn Part1 ([bricks: array<Brick>])
+  (let new_bricks (FallBricks bricks))
+
+  (->> new_bricks
+    (Seq.filter #(IsSafeToRemove %1 new_bricks))
+    (Seq.length)
+  )
+)
+
+(fn CountFallen ([self: Brick] [others: BrickSeq])
+  (mut fallen (!set))
+  (mut que (->> Queue.empty<_> (Queue.conj self)))
+
+  (mut remaining (Array.copy others))
+
+  (while-some [(brick, nq) (Queue.tryUncons que)]
+    (set! que nq)
+    (cond_
+      [(Set.contains brick fallen) ()]
+      [_
+        (up! fallen (Set.add brick))
+        (up! remaining (Array.filter #(!= brick %1)))
+
+        (set! que (->>
+          (Above brick remaining)
+          (Array.filter #(IsEmpty (Below %1 remaining)))
+          (Array.fold #(Queue.conj %2 %1) que)
+        ))
+      ]))
+
+  (dec (Set.count fallen))
+)
+
+(fn Part2 ([bricks: BrickSeq])
+  (let new_bricks (FallBricks bricks))
+
+  (->> new_bricks
+    (Array.rev)
+    (Array.map #(CountFallen %1 new_bricks))
+    (Array.reduce add)))
+
+(let parsed (ParseFile fileText))
+
+(let part1 (Part1 parsed))
+(WriteResult "part1" part1 (if example 5 522))
+
+(let part2 (Part2 parsed))
+(WriteResult "part2" part2 (if example 7 83519))
+
+()
