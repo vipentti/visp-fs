@@ -25,8 +25,10 @@
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("string is '%s'", Regular, (13,9--13,25)), (13,9--13,25));
-              Const (String ("\n  multiple lines are okay?\n", TripleQuote, (13,26--15,3)), (13,26--15,3))],
-             (13,1--15,3)), (13,0--15,4));
+              Const (String ("
+  multiple lines are okay?
+", TripleQuote, (13,26--15,3)), (13,26--15,3))], (13,1--15,3)),
+          (13,0--15,4));
        Expr
          (Begin
             ([Begin
@@ -35,7 +37,9 @@
                         (Symbol (SynSymbol printfn),
                          [Const (String ("string is '%s'", Regular, (19,15--19,31)), (19,15--19,31));
                           Const
-                            (String ("\n        multiple lines are okay?\n      ", TripleQuote, (19,32--21,9)),
+                            (String ("
+        multiple lines are okay?
+      ", TripleQuote, (19,32--21,9)),
                              (19,32--21,9))], (19,7--21,9))], Do, (18,5--21,10))], Do, (17,3--22,5))], Do, (16,1--22,6)),
           (16,0--22,7));
        Expr
@@ -46,7 +50,16 @@
                     (FunctionCall
                        (Symbol (SynSymbol sprintf),
                         [Const
-                           (String ("\n  // AUTO GENERATED\n  // DO NOT MODIFY BY HAND\n\n  namespace %s\n\n  open Xunit\n\n  module %s\n  ", TripleQuote, (25,16--34,5)),
+                           (String ("
+  // AUTO GENERATED
+  // DO NOT MODIFY BY HAND
+
+  namespace %s
+
+  open Xunit
+
+  module %s
+  ", TripleQuote, (25,16--34,5)),
                             (25,16--34,5)); Symbol (SynSymbol moduleName); Symbol (SynSymbol moduleName)], (25,8--34,27)),
                      (25,7--34,28))], (25,3--34,28))], (24,1--35,5)), (24,0--35,6));
        Expr
@@ -85,23 +98,35 @@
                          FunctionCall
                            (Symbol (SynSymbol sprintf),
                             [Const
-                               (String ("\n        [<Fact>]\n        let ``%s %s`` () = TestUtils.runTest "%s"\n      ", TripleQuote, (45,29--48,9)),
+                               (String ("
+        [<Fact>]
+        let ``%s %s`` () = TestUtils.runTest "%s"
+      ", TripleQuote, (45,29--48,9)),
                                 (45,29--48,9)); Symbol (SynSymbol prefix); Symbol (SynSymbol testname);
                              Symbol (SynSymbol path)], (45,21--48,30)), None, (45,7--48,31));
                       LetOrUse
                         (Named (SynSymbol template2, (49,11--49,20)),
                          Const
-                           (String ("\n        [<Fact>]\n        let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"\n      ", InterpolatedTripleQuote 1, (49,21--52,9)),
+                           (String ("
+        [<Fact>]
+        let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"
+      ", InterpolatedTripleQuote 1, (49,21--52,9)),
                             (49,21--52,9)), None, (49,7--52,9));
                       LetOrUse
                         (Named (SynSymbol template3, (53,11--53,20)),
                          Const
-                           (String ("\n        [<Fact>]\n        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"\n      ", InterpolatedTripleQuote 2, (53,21--56,9)),
+                           (String ("
+        [<Fact>]
+        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"
+      ", InterpolatedTripleQuote 2, (53,21--56,9)),
                             (53,21--56,9)), None, (53,7--56,9));
                       LetOrUse
                         (Named (SynSymbol template4, (57,11--57,20)),
                          Const
-                           (String ("\n        [<Fact>]\n        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{(+ 1 2 3)}} {{(+ 1 2 3)}} {(+ 1 2 3)}"\n      ", InterpolatedTripleQuote 2, (57,21--60,9)),
+                           (String ("
+        [<Fact>]
+        let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{(+ 1 2 3)}} {{(+ 1 2 3)}} {(+ 1 2 3)}"
+      ", InterpolatedTripleQuote 2, (57,21--60,9)),
                             (57,21--60,9)), None, (57,7--60,9));
                       Op
                         (Infix

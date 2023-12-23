@@ -4,7 +4,6 @@
 
 namespace rec Visp.Compiler.Syntax
 
-open Visp.Compiler.Writer
 open Visp.Compiler.Text
 open System.Diagnostics
 open Visp.Common
@@ -112,6 +111,14 @@ type SynStringKind =
     | Interpolated of plain: int
     | InterpolatedTripleQuote of triple: int
 
+type SyntaxWriteUtilThreadStatics =
+    [<System.ThreadStatic; DefaultValue>]
+    static val mutable private normalizeLineEndings: bool
+
+    static member NormalizeLineEndings
+        with get () = SyntaxWriteUtilThreadStatics.normalizeLineEndings
+        and set v = SyntaxWriteUtilThreadStatics.normalizeLineEndings <- v
+
 [<NoEquality; NoComparison; RequireQualifiedAccess; StructuredFormatDisplay("{StructuredText}")>]
 type SynConst =
     | Unit
@@ -158,8 +165,7 @@ type SynConst =
 
             for ch in text do
                 match ch with
-                | '\r' -> ignore (sb.Append "\\r")
-                | '\n' -> ignore (sb.Append "\\n")
+                | '\r' when SyntaxWriteUtilThreadStatics.NormalizeLineEndings -> ()
                 | it -> ignore (sb.Append it)
 
             sb.Append "\", " |> ignore
