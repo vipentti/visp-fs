@@ -1,0 +1,286 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require FSharpx.Collections "3.1.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open FSharpx.Collections)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(syntax-macro read-while-not-empty
+  ([_ (id enu) body ...]
+    (while (.MoveNext enu)
+      (let id (+Current enu))
+      (unless (+IsEmpty id)
+        (begin body ...)
+      ))))
+
+(typedef Pos (int * int))
+(fn inline Y ((y, _)) y)
+(fn inline X ((_, x)) x)
+
+(typedef Grid char[,])
+
+(fn inline Width ([g: Grid]) (Array2D.length2 g))
+(fn inline Height ([g: Grid]) (Array2D.length1 g))
+
+(fn inline InGrid ([g: Grid] [(y, x): Pos])
+  (&&
+    (&& (>= x 0) (< x (Width g)))
+    (&& (>= y 0) (< y (Height g)))))
+
+(fn inline Get ([g: Grid] [(y, x): Pos])
+  (.[y, x] g))
+
+(fn inline TryGet ([g: Grid] [(y, x): Pos] )
+  (cond_
+    [(InGrid g (y, x)) (Some (.[y, x] g))]
+    [_ None]
+  ))
+
+(let G_OFFSETS (| (-1, 0) (1, 0) (0, -1) (0, 1) |))
+
+(fn Visitable ([grid: Grid] (y, x))
+  (seq->
+    (let BoundGet (TryGet grid))
+
+    (match (BoundGet (y, x))
+      [None ()]
+      [(Some current)
+        (let offsets
+          (match current
+            [#\> (|(0, 1)|)]
+            [#\< (|(0, -1)|)]
+            [#\^ (|(-1, 0)|)]
+            [#\v (|(1, 0)|)]
+            [#\. G_OFFSETS]
+            [#\# (||)]
+            [_ (failwith "unsupported")]
+          ))
+
+        (for/in [(oy, ox) offsets]
+          (let next ((+ y oy), (+ x ox)))
+          (match (BoundGet next)
+            [(Some #\#) ()]
+            [(Some _) (yield next)]
+            [None ()]
+          )
+        )
+      ])))
+
+(fn VisitablePart2 ([grid: Grid] (y, x))
+  (seq->
+    (let BoundGet (TryGet grid))
+
+    (match (BoundGet (y, x))
+      [None ()]
+      [(Some current)
+        (let offsets
+          (match current
+            [#\# (||)]
+            [_ G_OFFSETS]
+          ))
+
+        (for/in [(oy, ox) offsets]
+          (let next ((+ y oy), (+ x ox)))
+          (match (BoundGet next)
+            [(Some #\#) ()]
+            [(Some _) (yield next)]
+            [None ()]
+          )
+        )
+      ])))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day23")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+  (let res (!vec))
+
+  (read-while-not-empty [line lines]
+    (.Add res (.ToArray line)))
+
+  (array2D (.ToArray res))
+)
+
+(fn FindLongestPathInGraph ([grid: Grid] visitor)
+  (let START (0, 1))
+  (let TARGET ((dec (Height grid)), (->> (Width grid) dec dec)))
+  (let LAST_INTERSECTION (if example (19, 19) (137, 133)))
+
+  (let nodes (!vec))
+  (mut nodes_set Set.empty)
+  ;;(mut grid_to_node_index (->> Map.empty (Map.add START 0) (Map.add TARGET 1)))
+  (mut grid_to_node_index Map.empty)
+
+  (let BoundVisitable (visitor grid))
+
+  (for/to [y (0 to (dec (Height grid)))]
+    (for/to [x (0 to (dec (Width grid)))]
+      (match (.[y, x] grid)
+        [#\# ()]
+        [_
+          (let pos (y, x))
+          (let nbr_count (Seq.length (BoundVisitable pos)))
+          (when_ (&& (> nbr_count 2) (not (Set.contains pos nodes_set)))
+            ;(set! nodes (cons pos nodes))
+            (up! grid_to_node_index (Map.add pos (+Count nodes)))
+            (up! nodes_set (Set.add pos))
+            (.Add nodes pos)
+          )
+        ]
+      )
+    ))
+
+  (.Add nodes START)
+  (let START_NODE_INDEX (dec (+Count nodes)))
+  (up! nodes_set (Set.add START))
+  (up! grid_to_node_index (Map.add START START_NODE_INDEX))
+
+  (.Add nodes TARGET)
+  (let END_NODE_INDEX (dec (+Count nodes)))
+  (up! nodes_set (Set.add TARGET))
+  (up! grid_to_node_index (Map.add TARGET END_NODE_INDEX))
+
+  ;; (printfn "%A" nodes)
+
+  (mut graph Map.empty)
+  (mut visited Set.empty)
+
+  (fn inline AddOrUpdate (key newv upd [m: Map<_,_>])
+    (match (Map.tryFind key m)
+      [(Some val)
+        (Map.add key (upd val) m)
+      ]
+      [None
+        (Map.add key (upd newv) m)
+      ]))
+
+  (for/to [node_index (0 to (dec (+Count nodes)))]
+    (let node (.[node_index] nodes))
+
+    (mut que (->> Queue.empty<_> (Queue.conj (node . 0))))
+
+    (while-some [((pos . dist), nq) (Queue.tryUncons que)]
+      (set! que nq)
+
+      (mut added_graph false)
+
+      (when_ (Set.contains pos nodes_set)
+        (let found_ind (Map.find pos grid_to_node_index))
+
+        (when_ (!= node_index found_ind)
+          (up! graph (AddOrUpdate node_index (||) #(cons (found_ind . dist) %1) ))
+          (up! graph (AddOrUpdate found_ind (||) #(cons (node_index . dist) %1) ))
+          (set! added_graph true)
+        ))
+
+      (when_ (&& (not added_graph) (not (Set.contains pos visited)))
+        (up! visited (Set.add pos))
+        (for/in [nbr (BoundVisitable pos)]
+          ;; (printfn "new nbr %A -> %A" pos nbr)
+          (up! que (Queue.conj (nbr . (inc dist))))
+        ))
+    )
+    ()
+  )
+
+  ;; (printfn "grid:\n%A" grid_to_node_index)
+  ;; (printfn "graph:\n%A" graph)
+  (mut maxPathLength 0)
+
+  (mut que (->> Queue.empty<_> (Queue.conj (START_NODE_INDEX . 0 . Set.empty))))
+
+  (while-some [((node_index . dist_so_far . visited), nq) (Queue.tryUncons que)]
+    (set! que nq)
+    ;; (printfn "visited: %A %A %A" node_index END_NODE_INDEX visited)
+    (cond_
+      [(= node_index END_NODE_INDEX)
+        (up! maxPathLength (max dist_so_far))
+      ]
+      [_
+        (unless (Set.contains node_index visited)
+          (let visited (Set.add node_index visited))
+          (for/in [(next_node, next_dist) (List.rev (Map.find node_index graph))]
+            (up! que (Queue.conj (next_node . (+ dist_so_far next_dist) . visited)))
+          )
+        )
+      ]
+    )
+  )
+
+  maxPathLength
+)
+
+(fn FindLongestPath ([grid: Grid] visitor)
+  (let START (0, 1))
+  (let TARGET ((dec (Height grid)), (->> (Width grid) dec dec)))
+  (let LAST_INTERSECTION (if example (19, 19) (137, 133)))
+  (mut que (->> Queue.empty<_> (Queue.conj (START . PersistentHashMap.empty))))
+
+  ;; (printfn "START: %A" START)
+  ;; (printfn "TARGET: %A" TARGET)
+  ;; (printfn "LAST: %A" LAST_INTERSECTION)
+
+  (let BoundVisitable (visitor grid))
+
+  (mut maxPathLength 0)
+
+  (while-some [((pos, vis), nq) (Queue.tryUncons que)]
+    (set! que nq)
+
+    (let vis (PersistentHashMap.add pos 0 vis))
+
+    (cond_
+      [(= pos TARGET)
+        (set! maxPathLength (max maxPathLength (PersistentHashMap.count vis)))
+      ]
+      [(= pos LAST_INTERSECTION)
+        (let next ((inc (Y pos)), (X pos)))
+        (unless (PersistentHashMap.containsKey next vis)
+          (set! que (Queue.conj (next . vis) que))
+        )
+      ]
+      [_
+        (for/in [nbr (BoundVisitable pos)]
+          (unless (PersistentHashMap.containsKey nbr vis)
+            (set! que (Queue.conj (nbr . vis) que))
+          )
+        )
+      ]))
+
+  (dec maxPathLength)
+)
+
+(let parsed (ParseFile fileText))
+
+(let part1 (FindLongestPath parsed Visitable))
+(WriteResult "part1" part1 (if example 94 2166))
+
+(let part2 (FindLongestPathInGraph parsed VisitablePart2))
+(WriteResult "part2" part2 (if example 154 6378))
+
+()
