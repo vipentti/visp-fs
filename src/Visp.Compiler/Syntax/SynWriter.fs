@@ -910,7 +910,9 @@ module Write =
                 writeExpr w st ex
                 writeCallArgs w args
 
-            | _ -> failwithf "not callable %O" expr
+            | it ->
+                writeExpr w WriteState.Inline it
+                writeCallArgs w args
 
 
         | SynExpr.Symbol sym ->

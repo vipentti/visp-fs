@@ -1,0 +1,28 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"up-macro-0.visp"
+let DoingThings () =
+  // line 9 @"up-macro-0.visp"
+  let mutable items =
+    // line 9 @"up-macro-0.visp"
+    [] |> Set.ofList
+  // line 11 @"up-macro-0.visp"
+  for i = 0 to 5 do
+    // line 12 @"up-macro-0.visp"
+    
+    // line 12 @"up-macro-0.visp"
+    items <- Set.add i items
+  items
+
+// line 17 @"up-macro-0.visp"
+let visp_result_todo =
+  // line 17 @"up-macro-0.visp"
+  printfn "%A" (DoingThings ())
+// line 17 @"up-macro-0.visp"
+printfn "%A" visp_result_todo
+
