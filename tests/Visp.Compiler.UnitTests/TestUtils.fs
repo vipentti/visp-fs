@@ -54,7 +54,9 @@ let runStructuredOutputTest (name: string) =
 
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
-            return! verify (sprintf "%A" parsed) "parsing-snapshots" nameParam
+            let output = (sprintf "%A" parsed).Replace("\r\n", "\n")
+
+            return! verify output "parsing-snapshots" nameParam
         with :? ParseHelpers.SyntaxError as syn ->
             return raise <| (LexHelpers.syntaxErrorToParseError syn)
     }
