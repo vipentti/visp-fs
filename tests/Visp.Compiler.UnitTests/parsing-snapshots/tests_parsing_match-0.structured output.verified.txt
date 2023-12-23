@@ -1,217 +1,140 @@
 ﻿ParsedFile
   [AnonModule
-     ([HashDirective
-         (ParsedHashDirective
-            ("nowarn", [String ("26", Regular, (9,8--9,12))], (9,0--9,12)),
-          (9,0--9,12));
+     ([HashDirective (ParsedHashDirective ("nowarn", [String ("26", Regular, (9,8--9,12))], (9,0--9,12)), (9,0--9,12));
        Expr
          (Match
             (Const (String ("hello", Regular, (11,7--11,14)), (11,7--11,14)),
              [SynMatch
-                (Const (String ("hello", Regular, (12,3--12,10)), (12,3--12,10)),
-                 None,
+                (Const (String ("hello", Regular, (12,3--12,10)), (12,3--12,10)), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("was hello", Regular, (13,13--13,24)),
-                         (13,13--13,24))], (13,5--13,24))], (12,3--13,25));
+                    (Symbol (SynSymbol printfn), [Const (String ("was hello", Regular, (13,13--13,24)), (13,13--13,24))],
+                     (13,5--13,24))], (12,3--13,25));
               SynMatch
                 (Discard (15,3--15,4), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("default", Regular, (16,13--16,22)),
-                         (16,13--16,22))], (16,5--16,22))], (15,3--16,23))],
-             (11,1--17,3)), (11,0--17,4));
+                    (Symbol (SynSymbol printfn), [Const (String ("default", Regular, (16,13--16,22)), (16,13--16,22))],
+                     (16,5--16,22))], (15,3--16,23))], (11,1--17,3)), (11,0--17,4));
        Expr
          (Match
-            (Tuple
-               ([Const (Int32 1, (19,15--19,16));
-                 Const (Int32 2, (19,17--19,18))], (19,8--19,18)),
+            (Tuple ([Const (Int32 1, (19,15--19,16)); Const (Int32 2, (19,17--19,18))], (19,8--19,18)),
              [SynMatch
                 (Collection
                    (SynCollection
                       (Paren,
-                       [Named (SynSymbol a, (20,12--20,13));
-                        Trivia (Comma, (20,4--20,5));
+                       [Named (SynSymbol a, (20,12--20,13)); Trivia (Comma, (20,4--20,5));
                         Const (Int32 2, (20,14--20,15))], (20,4--20,16))),
                  Some
-                   (Op
-                      (Infix
-                         (SynSymbol >=,
-                          [Symbol (SynSymbol a); Const (Int32 0, (21,16--21,17))],
-                          (21,11--21,17)))),
+                   (Op (Infix (SynSymbol >=, [Symbol (SynSymbol a); Const (Int32 0, (21,16--21,17))], (21,11--21,17)))),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("a is %A", Regular, (22,13--22,22)),
-                         (22,13--22,22)); Symbol (SynSymbol a)], (22,5--22,24))],
-                 (20,4--22,25));
+                     [Const (String ("a is %A", Regular, (22,13--22,22)), (22,13--22,22)); Symbol (SynSymbol a)],
+                     (22,5--22,24))], (20,4--22,25));
               SynMatch
                 (Discard (24,3--24,4), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("default", Regular, (25,13--25,22)),
-                         (25,13--25,22))], (25,5--25,22))], (24,3--25,23))],
-             (19,1--26,3)), (19,0--26,4));
+                    (Symbol (SynSymbol printfn), [Const (String ("default", Regular, (25,13--25,22)), (25,13--25,22))],
+                     (25,5--25,22))], (24,3--25,23))], (19,1--26,3)), (19,0--26,4));
        Expr
          (Match
-            (Tuple
-               ([Const (Int32 1, (28,15--28,16));
-                 Const (Int32 2, (28,17--28,18))], (28,8--28,18)),
+            (Tuple ([Const (Int32 1, (28,15--28,16)); Const (Int32 2, (28,17--28,18))], (28,8--28,18)),
              [SynMatch
                 (Collection
                    (SynCollection
                       (Paren,
-                       [Named (SynSymbol a, (29,5--29,6));
-                        Trivia (Comma, (29,6--29,7));
-                        Const (Int32 2, (29,8--29,9))], (29,4--29,10))),
+                       [Named (SynSymbol a, (29,5--29,6)); Trivia (Comma, (29,6--29,7)); Const (Int32 2, (29,8--29,9))],
+                       (29,4--29,10))),
                  Some
-                   (Op
-                      (Infix
-                         (SynSymbol >=,
-                          [Symbol (SynSymbol a); Const (Int32 0, (30,16--30,17))],
-                          (30,11--30,17)))),
+                   (Op (Infix (SynSymbol >=, [Symbol (SynSymbol a); Const (Int32 0, (30,16--30,17))], (30,11--30,17)))),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("a is %A", Regular, (31,13--31,22)),
-                         (31,13--31,22)); Symbol (SynSymbol a)], (31,5--31,24))],
-                 (29,4--31,25));
+                     [Const (String ("a is %A", Regular, (31,13--31,22)), (31,13--31,22)); Symbol (SynSymbol a)],
+                     (31,5--31,24))], (29,4--31,25));
               SynMatch
                 (Discard (33,3--33,4), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("default", Regular, (34,13--34,22)),
-                         (34,13--34,22))], (34,5--34,22))], (33,3--34,23))],
-             (28,1--35,3)), (28,0--35,4));
+                    (Symbol (SynSymbol printfn), [Const (String ("default", Regular, (34,13--34,22)), (34,13--34,22))],
+                     (34,5--34,22))], (33,3--34,23))], (28,1--35,3)), (28,0--35,4));
        Expr
          (Match
-            (FunctionCall
-               (Symbol (SynSymbol Some), [Const (Int32 1, (37,13--37,14))],
-                (37,8--37,14)),
+            (FunctionCall (Symbol (SynSymbol Some), [Const (Int32 1, (37,13--37,14))], (37,8--37,14)),
              [SynMatch
                 (Collection
                    (SynCollection
-                      (Paren,
-                       [Named (SynSymbol Some, (38,5--38,9));
-                        Named (SynSymbol a, (38,10--38,11))], (38,4--38,12))),
+                      (Paren, [Named (SynSymbol Some, (38,5--38,9)); Named (SynSymbol a, (38,10--38,11))], (38,4--38,12))),
                  Some
-                   (Op
-                      (Infix
-                         (SynSymbol >=,
-                          [Symbol (SynSymbol a); Const (Int32 0, (39,16--39,17))],
-                          (39,11--39,17)))),
+                   (Op (Infix (SynSymbol >=, [Symbol (SynSymbol a); Const (Int32 0, (39,16--39,17))], (39,11--39,17)))),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("a is %A", Regular, (40,13--40,22)),
-                         (40,13--40,22)); Symbol (SynSymbol a)], (40,5--40,24))],
-                 (38,4--40,25));
+                     [Const (String ("a is %A", Regular, (40,13--40,22)), (40,13--40,22)); Symbol (SynSymbol a)],
+                     (40,5--40,24))], (38,4--40,25));
               SynMatch
                 (Collection
-                   (SynCollection
-                      (Paren,
-                       [Named (SynSymbol Some, (42,5--42,9));
-                        Discard (42,10--42,11)], (42,4--42,12))), None,
+                   (SynCollection (Paren, [Named (SynSymbol Some, (42,5--42,9)); Discard (42,10--42,11)], (42,4--42,12))),
+                 None,
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("some other", Regular, (43,13--43,25)),
-                         (43,13--43,25))], (43,5--43,25))], (42,4--43,26));
+                     [Const (String ("some other", Regular, (43,13--43,25)), (43,13--43,25))], (43,5--43,25))],
+                 (42,4--43,26));
               SynMatch
                 (Discard (45,3--45,4), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("default", Regular, (46,13--46,22)),
-                         (46,13--46,22))], (46,5--46,22))], (45,3--46,23))],
-             (37,1--47,3)), (37,0--48,1));
+                    (Symbol (SynSymbol printfn), [Const (String ("default", Regular, (46,13--46,22)), (46,13--46,22))],
+                     (46,5--46,22))], (45,3--46,23))], (37,1--47,3)), (37,0--48,1));
        Expr
          (Match
             (Collection
                (SynCollection
                   (FsList,
-                   [Const (Int32 1, (50,8--50,9));
-                    Const (Int32 2, (50,13--50,14));
-                    Const (Int32 3, (50,18--50,19));
-                    Const (Int32 4, (50,23--50,24));
-                    Const (Unit, (50,28--50,30))], (50,8--50,30))),
+                   [Const (Int32 1, (50,8--50,9)); Const (Int32 2, (50,13--50,14)); Const (Int32 3, (50,18--50,19));
+                    Const (Int32 4, (50,23--50,24)); Const (Unit, (50,28--50,30))], (50,8--50,30))),
              [SynMatch
                 (Collection
                    (SynCollection
                       (Paren,
-                       [Named (SynSymbol x, (51,4--51,5));
-                        Trivia (ColonColon, (51,6--51,8));
-                        Named (SynSymbol y, (51,9--51,10));
-                        Trivia (ColonColon, (51,11--51,13));
-                        Named (SynSymbol rest, (51,14--51,18))], (51,3--51,19))),
-                 None,
+                       [Named (SynSymbol x, (51,4--51,5)); Trivia (ColonColon, (51,6--51,8));
+                        Named (SynSymbol y, (51,9--51,10)); Trivia (ColonColon, (51,11--51,13));
+                        Named (SynSymbol rest, (51,14--51,18))], (51,3--51,19))), None,
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String
-                           ("x is %A y is %A rest is %A", Regular,
-                            (52,13--52,41)), (52,13--52,41));
-                      Symbol (SynSymbol x); Symbol (SynSymbol y);
-                      Symbol (SynSymbol rest)], (52,5--52,50))], (51,3--52,51));
+                     [Const (String ("x is %A y is %A rest is %A", Regular, (52,13--52,41)), (52,13--52,41));
+                      Symbol (SynSymbol x); Symbol (SynSymbol y); Symbol (SynSymbol rest)], (52,5--52,50))],
+                 (51,3--52,51));
               SynMatch
                 (Collection
                    (SynCollection
                       (Paren,
-                       [Named (SynSymbol x, (54,4--54,5));
-                        Trivia (ColonColon, (54,6--54,8));
-                        Named (SynSymbol rest, (54,9--54,13))], (54,3--54,14))),
-                 None,
+                       [Named (SynSymbol x, (54,4--54,5)); Trivia (ColonColon, (54,6--54,8));
+                        Named (SynSymbol rest, (54,9--54,13))], (54,3--54,14))), None,
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("x is %A rest is %A", Regular, (55,13--55,33)),
-                         (55,13--55,33)); Symbol (SynSymbol x);
-                      Symbol (SynSymbol rest)], (55,5--55,40))], (54,3--55,41));
+                     [Const (String ("x is %A rest is %A", Regular, (55,13--55,33)), (55,13--55,33));
+                      Symbol (SynSymbol x); Symbol (SynSymbol rest)], (55,5--55,40))], (54,3--55,41));
               SynMatch
                 (Collection
                    (SynCollection
                       (Paren,
-                       [Named (SynSymbol x, (57,4--57,5));
-                        Trivia (ColonColon, (57,6--57,8));
-                        Collection (SynCollection (Bracket, [], (57,9--57,11)))],
-                       (57,3--57,12))), None,
+                       [Named (SynSymbol x, (57,4--57,5)); Trivia (ColonColon, (57,6--57,8));
+                        Collection (SynCollection (Bracket, [], (57,9--57,11)))], (57,3--57,12))), None,
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String
-                           ("x is %A rest is empty", Regular, (58,13--58,36)),
-                         (58,13--58,36)); Symbol (SynSymbol x)], (58,5--58,38))],
-                 (57,3--58,39));
+                     [Const (String ("x is %A rest is empty", Regular, (58,13--58,36)), (58,13--58,36));
+                      Symbol (SynSymbol x)], (58,5--58,38))], (57,3--58,39));
               SynMatch
                 (Collection
-                   (SynCollection
-                      (Paren,
-                       [Collection (SynCollection (Bracket, [], (60,4--60,6)))],
-                       (60,3--60,7))), None,
+                   (SynCollection (Paren, [Collection (SynCollection (Bracket, [], (60,4--60,6)))], (60,3--60,7))), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("empty", Regular, (60,17--60,24)),
-                         (60,17--60,24))], (60,9--60,24))], (60,3--60,25));
+                    (Symbol (SynSymbol printfn), [Const (String ("empty", Regular, (60,17--60,24)), (60,17--60,24))],
+                     (60,9--60,24))], (60,3--60,25));
               SynMatch
                 (Collection (SynCollection (Bracket, [], (61,3--61,5))), None,
                  [FunctionCall
-                    (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("empty", Regular, (61,15--61,22)),
-                         (61,15--61,22))], (61,7--61,22))], (61,3--61,23))],
-             (50,1--61,24)), (50,0--62,1));
+                    (Symbol (SynSymbol printfn), [Const (String ("empty", Regular, (61,15--61,22)), (61,15--61,22))],
+                     (61,7--61,22))], (61,3--61,23))], (50,1--61,24)), (50,0--62,1));
        Expr
-         (LetOrUse
-            (Named (SynSymbol visp_result_todo, (64,0--64,2)),
-             Const (Unit, (64,0--64,2)), None, (64,0--64,2)), (64,0--64,2));
+         (LetOrUse (Named (SynSymbol visp_result_todo, (64,0--64,2)), Const (Unit, (64,0--64,2)), None, (64,0--64,2)),
+          (64,0--64,2));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (64,0--64,2)), (64,0--64,2));
-              Symbol (SynSymbol visp_result_todo)], (64,0--64,2)), (64,0--64,2))],
-      (9,0--64,2))]
+             [Const (String ("%A", Regular, (64,0--64,2)), (64,0--64,2)); Symbol (SynSymbol visp_result_todo)],
+             (64,0--64,2)), (64,0--64,2))], (9,0--64,2))]

@@ -3,69 +3,48 @@
      ([Expr
          (LetOrUse
             (Named (SynSymbol value, (8,5--8,10)),
-             Const
-               (String ("r:\rt:\tn:\na:\a\"", Regular, (8,11--8,31)),
-                (8,11--8,31)), None, (8,1--8,31)), (8,0--8,32));
+             Const (String ("r:\rt:\tn:\na:\a\"", Regular, (8,11--8,31)), (8,11--8,31)), None, (8,1--8,31)), (8,0--8,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("string is '%s'", Regular, (10,9--10,25)),
-                 (10,9--10,25)); Symbol (SynSymbol value)], (10,1--10,31)),
-          (10,0--10,32));
+             [Const (String ("string is '%s'", Regular, (10,9--10,25)), (10,9--10,25)); Symbol (SynSymbol value)],
+             (10,1--10,31)), (10,0--10,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("string is '%s'", Regular, (11,9--11,25)),
-                 (11,9--11,25));
-              Const
-                (String ("r:\rt:\tn:\na:\a", TripleQuote, (11,26--11,48)),
-                 (11,26--11,48))], (11,1--11,48)), (11,0--11,49));
+             [Const (String ("string is '%s'", Regular, (11,9--11,25)), (11,9--11,25));
+              Const (String ("r:\rt:\tn:\na:\a", TripleQuote, (11,26--11,48)), (11,26--11,48))], (11,1--11,48)),
+          (11,0--11,49));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("string is '%s'", Regular, (12,9--12,25)),
-                 (12,9--12,25));
-              Const
-                (String ("r:\rt:\tn:\na:\a", TripleQuote, (12,26--12,50)),
-                 (12,26--12,50))], (12,1--12,50)), (12,0--12,51));
+             [Const (String ("string is '%s'", Regular, (12,9--12,25)), (12,9--12,25));
+              Const (String ("r:\rt:\tn:\na:\a", TripleQuote, (12,26--12,50)), (12,26--12,50))], (12,1--12,50)),
+          (12,0--12,51));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("string is '%s'", Regular, (13,9--13,25)),
-                 (13,9--13,25));
-              Const
-                (String
-                   ("
+             [Const (String ("string is '%s'", Regular, (13,9--13,25)), (13,9--13,25));
+              Const (String ("
   multiple lines are okay?
-", TripleQuote, (13,26--15,3)),
-                 (13,26--15,3))], (13,1--15,3)), (13,0--15,4));
+", TripleQuote, (13,26--15,3)), (13,26--15,3))], (13,1--15,3)),
+          (13,0--15,4));
        Expr
          (Begin
             ([Begin
                 ([Begin
                     ([FunctionCall
                         (Symbol (SynSymbol printfn),
-                         [Const
-                            (String ("string is '%s'", Regular, (19,15--19,31)),
-                             (19,15--19,31));
+                         [Const (String ("string is '%s'", Regular, (19,15--19,31)), (19,15--19,31));
                           Const
-                            (String
-                               ("
+                            (String ("
         multiple lines are okay?
-      ",
-                                TripleQuote, (19,32--21,9)), (19,32--21,9))],
-                         (19,7--21,9))], Do, (18,5--21,10))], Do, (17,3--22,5))],
-             Do, (16,1--22,6)), (16,0--22,7));
+      ", TripleQuote, (19,32--21,9)),
+                             (19,32--21,9))], (19,7--21,9))], Do, (18,5--21,10))], Do, (17,3--22,5))], Do, (16,1--22,6)),
+          (16,0--22,7));
        Expr
          (FunctionDef
-            (SynSymbol genTestHeader, None,
-             Args
-               (List [Named (SynSymbol moduleName, (24,19--24,29))],
-                (24,18--24,30)),
+            (SynSymbol genTestHeader, None, Args (List [Named (SynSymbol moduleName, (24,19--24,29))], (24,18--24,30)),
              [ThreadLast
                 ([Expr
                     (FunctionCall
@@ -82,36 +61,27 @@
 
   module %s
   ",
-                               TripleQuote, (25,16--34,5)), (25,16--34,5));
-                         Symbol (SynSymbol moduleName);
-                         Symbol (SynSymbol moduleName)], (25,8--34,27)),
-                     (25,7--34,28))], (25,3--34,28))], (24,1--35,5)),
+                               TripleQuote, (25,16--34,5)), (25,16--34,5)); Symbol (SynSymbol moduleName);
+                         Symbol (SynSymbol moduleName)], (25,8--34,27)), (25,7--34,28))], (25,3--34,28))], (24,1--35,5)),
           (24,0--35,6));
        Expr
          (LetOrUse
-            (Named (SynSymbol lf, (37,5--37,7)),
-             Symbol (SynSymbol System.Environment.NewLine), None, (37,1--37,34)),
+            (Named (SynSymbol lf, (37,5--37,7)), Symbol (SynSymbol System.Environment.NewLine), None, (37,1--37,34)),
           (37,0--37,35));
        Expr
          (FunctionDef
             (SynSymbol genTestTemplate, None,
              Args
                (List
-                  [Typed
-                     (Named (SynSymbol prefix, (39,22--39,28)), Ident string,
-                      (39,21--39,37));
-                   Typed
-                     (Named (SynSymbol path, (39,39--39,43)), Ident string,
-                      (39,38--39,52))], (39,20--39,53)),
+                  [Typed (Named (SynSymbol prefix, (39,22--39,28)), Ident string, (39,21--39,37));
+                   Typed (Named (SynSymbol path, (39,39--39,43)), Ident string, (39,38--39,52))], (39,20--39,53)),
              [LetOrUse
                 (Named (SynSymbol path, (40,7--40,11)),
                  DotMethod
                    (Symbol (SynSymbol path), SynSymbol Replace,
-                    [Const
-                       (String ("\\", Regular, (40,27--40,31)), (40,27--40,31));
-                     Const
-                       (String ("/", Regular, (40,32--40,35)), (40,32--40,35))],
-                    Tuple, (40,13--40,35)), None, (40,3--40,36));
+                    [Const (String ("\\", Regular, (40,27--40,31)), (40,27--40,31));
+                     Const (String ("/", Regular, (40,32--40,35)), (40,32--40,35))], Tuple, (40,13--40,35)), None,
+                 (40,3--40,36));
               LetOrUse
                 (Named (SynSymbol testname, (41,7--41,15)),
                  ThreadLast
@@ -120,14 +90,9 @@
                        (LambdaShort
                           (DotMethod
                              (Symbol (SynSymbol %1), SynSymbol Replace,
-                              [Const
-                                 (String ("/", Regular, (41,40--41,43)),
-                                  (41,40--41,43));
-                               Const
-                                 (String ("_", Regular, (41,44--41,47)),
-                                  (41,44--41,47))], Tuple, (41,28--41,47)),
-                           (41,26--41,48)), (41,26--41,48))], (41,17--41,48)),
-                 None, (41,3--41,49));
+                              [Const (String ("/", Regular, (41,40--41,43)), (41,40--41,43));
+                               Const (String ("_", Regular, (41,44--41,47)), (41,44--41,47))], Tuple, (41,28--41,47)),
+                           (41,26--41,48)), (41,26--41,48))], (41,17--41,48)), None, (41,3--41,49));
               Begin
                 ([Begin
                     ([LetOrUse
@@ -140,11 +105,8 @@
         [<Fact>]
         let ``%s %s`` () = TestUtils.runTest "%s"
       ",
-                                   TripleQuote, (45,29--48,9)), (45,29--48,9));
-                             Symbol (SynSymbol prefix);
-                             Symbol (SynSymbol testname);
-                             Symbol (SynSymbol path)], (45,21--48,30)), None,
-                         (45,7--48,31));
+                                   TripleQuote, (45,29--48,9)), (45,29--48,9)); Symbol (SynSymbol prefix);
+                             Symbol (SynSymbol testname); Symbol (SynSymbol path)], (45,21--48,30)), None, (45,7--48,31));
                       LetOrUse
                         (Named (SynSymbol template2, (49,11--49,20)),
                          Const
@@ -153,8 +115,7 @@
         [<Fact>]
         let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"
       ",
-                               InterpolatedTripleQuote 1, (49,21--52,9)),
-                            (49,21--52,9)), None, (49,7--52,9));
+                               InterpolatedTripleQuote 1, (49,21--52,9)), (49,21--52,9)), None, (49,7--52,9));
                       LetOrUse
                         (Named (SynSymbol template3, (53,11--53,20)),
                          Const
@@ -163,8 +124,7 @@
         [<Fact>]
         let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"
       ",
-                               InterpolatedTripleQuote 2, (53,21--56,9)),
-                            (53,21--56,9)), None, (53,7--56,9));
+                               InterpolatedTripleQuote 2, (53,21--56,9)), (53,21--56,9)), None, (53,7--56,9));
                       LetOrUse
                         (Named (SynSymbol template4, (57,11--57,20)),
                          Const
@@ -173,17 +133,14 @@
         [<Fact>]
         let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{(+ 1 2 3)}} {{(+ 1 2 3)}} {(+ 1 2 3)}"
       ",
-                               InterpolatedTripleQuote 2, (57,21--60,9)),
-                            (57,21--60,9)), None, (57,7--60,9));
+                               InterpolatedTripleQuote 2, (57,21--60,9)), (57,21--60,9)), None, (57,7--60,9));
                       Op
                         (Infix
                            (SynSymbol +,
-                            [Symbol (SynSymbol template); Symbol (SynSymbol lf);
-                             Symbol (SynSymbol template2); Symbol (SynSymbol lf);
-                             Symbol (SynSymbol template3); Symbol (SynSymbol lf);
-                             Symbol (SynSymbol template4); Symbol (SynSymbol lf)],
-                            (61,7--61,59)))], Do, (44,5--61,60))], Do,
-                 (43,3--62,5))], (39,1--62,6)), (39,0--63,1));
+                            [Symbol (SynSymbol template); Symbol (SynSymbol lf); Symbol (SynSymbol template2);
+                             Symbol (SynSymbol lf); Symbol (SynSymbol template3); Symbol (SynSymbol lf);
+                             Symbol (SynSymbol template4); Symbol (SynSymbol lf)], (61,7--61,59)))], Do, (44,5--61,60))],
+                 Do, (43,3--62,5))], (39,1--62,6)), (39,0--63,1));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (65,0--65,91)),
@@ -192,22 +149,15 @@
                   (SynSymbol +,
                    [FunctionCall
                       (Symbol (SynSymbol genTestHeader),
-                       [Const
-                          (String ("Temp", Regular, (65,18--65,24)),
-                           (65,18--65,24))], (65,4--65,24));
+                       [Const (String ("Temp", Regular, (65,18--65,24)), (65,18--65,24))], (65,4--65,24));
                     Symbol (SynSymbol System.Environment.NewLine);
                     FunctionCall
                       (Symbol (SynSymbol genTestTemplate),
-                       [Const
-                          (String ("example", Regular, (65,70--65,79)),
-                           (65,70--65,79));
-                        Const
-                          (String ("example", Regular, (65,80--65,89)),
-                           (65,80--65,89))], (65,54--65,89))], (65,1--65,90))),
-             None, (65,0--65,91)), (65,0--65,91));
+                       [Const (String ("example", Regular, (65,70--65,79)), (65,70--65,79));
+                        Const (String ("example", Regular, (65,80--65,89)), (65,80--65,89))], (65,54--65,89))],
+                   (65,1--65,90))), None, (65,0--65,91)), (65,0--65,91));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (65,0--65,91)), (65,0--65,91));
-              Symbol (SynSymbol visp_result_todo)], (65,0--65,91)),
-          (65,0--65,91))], (8,0--65,91))]
+             [Const (String ("%A", Regular, (65,0--65,91)), (65,0--65,91)); Symbol (SynSymbol visp_result_todo)],
+             (65,0--65,91)), (65,0--65,91))], (8,0--65,91))]

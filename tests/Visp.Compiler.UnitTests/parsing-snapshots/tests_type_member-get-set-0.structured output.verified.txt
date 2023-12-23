@@ -6,161 +6,117 @@
              Args
                (Tuple
                   [Typed
-                     (Named (SynSymbol items, (8,20--8,25)),
-                      Generic (Ident array, [Ident ^T], (8,27--8,36)),
+                     (Named (SynSymbol items, (8,20--8,25)), Generic (Ident array, [Ident ^T], (8,27--8,36)),
                       (8,19--8,37))], (8,18--8,38)),
-             [Let
-                (Named (SynSymbol items, (9,7--9,12)), Symbol (SynSymbol items),
-                 (9,3--9,18));
+             [Let (Named (SynSymbol items, (9,7--9,12)), Symbol (SynSymbol items), (9,3--9,18));
               GetSet
                 (SynSymbol _.Item,
                  Some
                    (SynMemberGet
                       (Args
-                         (Tuple
-                            [Typed
-                               (Named (SynSymbol i, (11,11--11,12)), Ident int,
-                                (11,10--11,18))], (11,9--11,19)),
-                       [DotIndex
-                          (Symbol (SynSymbol items), [Symbol (SynSymbol i)],
-                           (12,7--12,17))], (11,4--12,19))), None, (10,3--12,19))],
-             [], (8,1--12,20)), (8,0--12,21));
+                         (Tuple [Typed (Named (SynSymbol i, (11,11--11,12)), Ident int, (11,10--11,18))], (11,9--11,19)),
+                       [DotIndex (Symbol (SynSymbol items), [Symbol (SynSymbol i)], (12,7--12,17))], (11,4--12,19))),
+                 None, (10,3--12,19))], [], (8,1--12,20)), (8,0--12,21));
        Expr
          (Type
             (SynSymbol SetOnly<^T>,
              Args
                (Tuple
                   [Typed
-                     (Named (SynSymbol items, (14,20--14,25)),
-                      Generic (Ident array, [Ident ^T], (14,27--14,36)),
+                     (Named (SynSymbol items, (14,20--14,25)), Generic (Ident array, [Ident ^T], (14,27--14,36)),
                       (14,19--14,37))], (14,18--14,38)),
-             [Let
-                (Named (SynSymbol items, (15,7--15,12)),
-                 Symbol (SynSymbol items), (15,3--15,18));
+             [Let (Named (SynSymbol items, (15,7--15,12)), Symbol (SynSymbol items), (15,3--15,18));
               GetSet
                 (SynSymbol _.Item, None,
                  Some
                    (SynMemberSet
                       (Args
-                         (Tuple
-                            [Typed
-                               (Named (SynSymbol i, (17,11--17,12)), Ident int,
-                                (17,10--17,18))], (17,9--17,19)),
+                         (Tuple [Typed (Named (SynSymbol i, (17,11--17,12)), Ident int, (17,10--17,18))], (17,9--17,19)),
                        Named (SynSymbol v, (17,20--17,21)),
                        [Set
-                          (DotIndex
-                             (Symbol (SynSymbol items), [Symbol (SynSymbol i)],
-                              (18,13--18,23)), Symbol (SynSymbol v),
-                           (18,7--18,26))], (17,4--18,28))), (16,3--18,28))], [],
-             (14,1--18,29)), (14,0--18,30));
+                          (DotIndex (Symbol (SynSymbol items), [Symbol (SynSymbol i)], (18,13--18,23)),
+                           Symbol (SynSymbol v), (18,7--18,26))], (17,4--18,28))), (16,3--18,28))], [], (14,1--18,29)),
+          (14,0--18,30));
        Expr
          (Type
             (SynSymbol GetAndSet<^T>,
              Args
                (Tuple
                   [Typed
-                     (Named (SynSymbol items, (20,22--20,27)),
-                      Generic (Ident array, [Ident ^T], (20,29--20,38)),
+                     (Named (SynSymbol items, (20,22--20,27)), Generic (Ident array, [Ident ^T], (20,29--20,38)),
                       (20,21--20,39))], (20,20--20,40)),
-             [Let
-                (Named (SynSymbol items, (21,7--21,12)),
-                 Symbol (SynSymbol items), (21,3--21,18));
+             [Let (Named (SynSymbol items, (21,7--21,12)), Symbol (SynSymbol items), (21,3--21,18));
               GetSet
                 (SynSymbol _.Item,
                  Some
                    (SynMemberGet
                       (Args
-                         (Tuple
-                            [Typed
-                               (Named (SynSymbol i, (23,11--23,12)), Ident int,
-                                (23,10--23,18))], (23,9--23,19)),
-                       [DotIndex
-                          (Symbol (SynSymbol items), [Symbol (SynSymbol i)],
-                           (24,7--24,17))], (23,4--24,19))),
+                         (Tuple [Typed (Named (SynSymbol i, (23,11--23,12)), Ident int, (23,10--23,18))], (23,9--23,19)),
+                       [DotIndex (Symbol (SynSymbol items), [Symbol (SynSymbol i)], (24,7--24,17))], (23,4--24,19))),
                  Some
                    (SynMemberSet
                       (Args
-                         (Tuple
-                            [Typed
-                               (Named (SynSymbol i, (25,11--25,12)), Ident int,
-                                (25,10--25,18))], (25,9--25,19)),
+                         (Tuple [Typed (Named (SynSymbol i, (25,11--25,12)), Ident int, (25,10--25,18))], (25,9--25,19)),
                        Named (SynSymbol v, (25,20--25,21)),
                        [Set
-                          (DotIndex
-                             (Symbol (SynSymbol items), [Symbol (SynSymbol i)],
-                              (26,13--26,23)), Symbol (SynSymbol v),
-                           (26,7--26,26))], (25,4--26,28))), (22,3--26,28))], [],
-             (20,1--26,29)), (20,0--27,3));
+                          (DotIndex (Symbol (SynSymbol items), [Symbol (SynSymbol i)], (26,13--26,23)),
+                           Symbol (SynSymbol v), (26,7--26,26))], (25,4--26,28))), (22,3--26,28))], [], (20,1--26,29)),
+          (20,0--27,3));
        Expr
          (LetOrUse
             (Named (SynSymbol array, (29,5--29,10)),
              Collection
                (SynCollection
                   (FsArray,
-                   [Const (Int32 1, (29,19--29,20));
-                    Const (Int32 2, (29,21--29,22));
-                    Const (Int32 3, (29,23--29,24));
-                    Const (Int32 4, (29,25--29,26));
-                    Const (Int32 5, (29,27--29,28))], (29,12--29,28))), None,
+                   [Const (Int32 1, (29,19--29,20)); Const (Int32 2, (29,21--29,22)); Const (Int32 3, (29,23--29,24));
+                    Const (Int32 4, (29,25--29,26)); Const (Int32 5, (29,27--29,28))], (29,12--29,28))), None,
              (29,1--29,29)), (29,0--29,30));
        Expr
          (LetOrUse
             (Named (SynSymbol getOnly, (31,5--31,12)),
-             New (Ident GetOnly<_>, [Symbol (SynSymbol array)], (31,14--31,34)),
-             None, (31,1--31,35)), (31,0--31,36));
+             New (Ident GetOnly<_>, [Symbol (SynSymbol array)], (31,14--31,34)), None, (31,1--31,35)), (31,0--31,36));
        Expr
          (LetOrUse
             (Named (SynSymbol setOnly, (32,5--32,12)),
-             New (Ident SetOnly<_>, [Symbol (SynSymbol array)], (32,14--32,34)),
-             None, (32,1--32,35)), (32,0--32,36));
+             New (Ident SetOnly<_>, [Symbol (SynSymbol array)], (32,14--32,34)), None, (32,1--32,35)), (32,0--32,36));
        Expr
          (LetOrUse
             (Named (SynSymbol getAndSet, (33,5--33,14)),
-             New
-               (Ident GetAndSet<_>, [Symbol (SynSymbol array)], (33,16--33,38)),
-             None, (33,1--33,39)), (33,0--33,40));
+             New (Ident GetAndSet<_>, [Symbol (SynSymbol array)], (33,16--33,38)), None, (33,1--33,39)), (33,0--33,40));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("%A", Regular, (35,9--35,13)), (35,9--35,13));
-              DotIndex
-                (Symbol (SynSymbol getOnly), [Const (Int32 0, (35,17--35,18))],
-                 (35,15--35,27))], (35,1--35,28)), (35,0--35,29));
+              DotIndex (Symbol (SynSymbol getOnly), [Const (Int32 0, (35,17--35,18))], (35,15--35,27))], (35,1--35,28)),
+          (35,0--35,29));
        Expr
          (Set
-            (DotIndex
-               (Symbol (SynSymbol setOnly), [Const (Int32 0, (37,9--37,10))],
-                (37,7--37,19)), Const (Int32 99, (37,21--37,23)), (37,1--37,23)),
-          (37,0--37,24));
+            (DotIndex (Symbol (SynSymbol setOnly), [Const (Int32 0, (37,9--37,10))], (37,7--37,19)),
+             Const (Int32 99, (37,21--37,23)), (37,1--37,23)), (37,0--37,24));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (39,9--39,13)), (39,9--39,13));
-              Symbol (SynSymbol array)], (39,1--39,19)), (39,0--39,20));
+             [Const (String ("%A", Regular, (39,9--39,13)), (39,9--39,13)); Symbol (SynSymbol array)], (39,1--39,19)),
+          (39,0--39,20));
        Expr
          (Set
-            (DotIndex
-               (Symbol (SynSymbol getAndSet), [Const (Int32 1, (41,9--41,10))],
-                (41,7--41,21)), Const (Int32 99, (41,23--41,25)), (41,1--41,25)),
-          (41,0--41,26));
+            (DotIndex (Symbol (SynSymbol getAndSet), [Const (Int32 1, (41,9--41,10))], (41,7--41,21)),
+             Const (Int32 99, (41,23--41,25)), (41,1--41,25)), (41,0--41,26));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("%A", Regular, (43,9--43,13)), (43,9--43,13));
-              DotIndex
-                (Symbol (SynSymbol getAndSet), [Const (Int32 1, (43,17--43,18))],
-                 (43,15--43,29))], (43,1--43,30)), (43,0--43,31));
+              DotIndex (Symbol (SynSymbol getAndSet), [Const (Int32 1, (43,17--43,18))], (43,15--43,29))], (43,1--43,30)),
+          (43,0--43,31));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (45,0--45,20)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const (String ("%A", Regular, (45,9--45,13)), (45,9--45,13));
-                 Symbol (SynSymbol array)], (45,1--45,19)), None, (45,0--45,20)),
-          (45,0--45,20));
+                [Const (String ("%A", Regular, (45,9--45,13)), (45,9--45,13)); Symbol (SynSymbol array)], (45,1--45,19)),
+             None, (45,0--45,20)), (45,0--45,20));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (45,0--45,20)), (45,0--45,20));
-              Symbol (SynSymbol visp_result_todo)], (45,0--45,20)),
-          (45,0--45,20))], (8,0--45,20))]
+             [Const (String ("%A", Regular, (45,0--45,20)), (45,0--45,20)); Symbol (SynSymbol visp_result_todo)],
+             (45,0--45,20)), (45,0--45,20))], (8,0--45,20))]

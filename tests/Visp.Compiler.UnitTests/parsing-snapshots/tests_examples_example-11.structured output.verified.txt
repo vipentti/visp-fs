@@ -3,44 +3,32 @@
      ([Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String
-                   ("this is in the default top-level module", Regular,
-                    (8,9--8,50)), (8,9--8,50))], (8,1--8,50)), (8,0--8,51));
+             [Const (String ("this is in the default top-level module", Regular, (8,9--8,50)), (8,9--8,50))],
+             (8,1--8,50)), (8,0--8,51));
        NestedModule
          (SynSymbol MyCustomModule,
           [Expr
              (FunctionCall
                 (Symbol (SynSymbol printfn),
-                 [Const
-                    (String
-                       ("this is inside MyCustomModule", Regular, (11,13--11,44)),
-                     (11,13--11,44))], (11,5--11,44)), (11,4--11,45));
+                 [Const (String ("this is inside MyCustomModule", Regular, (11,13--11,44)), (11,13--11,44))],
+                 (11,5--11,44)), (11,4--11,45));
            Expr
              (FunctionDef
                 (SynSymbol hello, None, Args (List [], (12,14--12,16)),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const
-                        (String ("hello world", Regular, (13,17--13,30)),
-                         (13,17--13,30))], (13,9--13,30))], (12,5--13,31)),
-              (12,4--13,32));
-           Expr
-             (FunctionCall (Symbol (SynSymbol hello), [], (15,5--15,10)),
-              (15,4--15,11))], (10,1--15,11));
+                     [Const (String ("hello world", Regular, (13,17--13,30)), (13,17--13,30))], (13,9--13,30))],
+                 (12,5--13,31)), (12,4--13,32));
+           Expr (FunctionCall (Symbol (SynSymbol hello), [], (15,5--15,10)), (15,4--15,11))], (10,1--15,11));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (18,0--18,48)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String
-                      ("this is back in the top-level-module", Regular,
-                       (18,9--18,47)), (18,9--18,47))], (18,1--18,47)), None,
-             (18,0--18,48)), (18,0--18,48));
+                [Const (String ("this is back in the top-level-module", Regular, (18,9--18,47)), (18,9--18,47))],
+                (18,1--18,47)), None, (18,0--18,48)), (18,0--18,48));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (18,0--18,48)), (18,0--18,48));
-              Symbol (SynSymbol visp_result_todo)], (18,0--18,48)),
-          (18,0--18,48))], (8,0--18,48))]
+             [Const (String ("%A", Regular, (18,0--18,48)), (18,0--18,48)); Symbol (SynSymbol visp_result_todo)],
+             (18,0--18,48)), (18,0--18,48))], (8,0--18,48))]

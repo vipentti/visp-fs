@@ -5,33 +5,25 @@
             (Named (SynSymbol lst, (8,5--8,8)),
              Collection
                (SynCollection
-                  (FsList,
-                   [Const (Int32 1, (8,12--8,13)); Const (Int32 2, (8,14--8,15));
-                    Const (Int32 3, (8,16--8,17))], (8,9--8,20))), None,
-             (8,1--8,20)), (8,0--8,21));
+                  (FsList, [Const (Int32 1, (8,12--8,13)); Const (Int32 2, (8,14--8,15)); Const (Int32 3, (8,16--8,17))],
+                   (8,9--8,20))), None, (8,1--8,20)), (8,0--8,21));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("List.head: %A", Regular, (10,9--10,24)), (10,9--10,24));
-              FunctionCall
-                (Symbol (SynSymbol List.head), [Symbol (SynSymbol lst)],
-                 (10,26--10,39))], (10,1--10,40)), (10,0--10,41));
+             [Const (String ("List.head: %A", Regular, (10,9--10,24)), (10,9--10,24));
+              FunctionCall (Symbol (SynSymbol List.head), [Symbol (SynSymbol lst)], (10,26--10,39))], (10,1--10,40)),
+          (10,0--10,41));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("List.tail: %A", Regular, (11,9--11,24)), (11,9--11,24));
-              FunctionCall
-                (Symbol (SynSymbol List.tail), [Symbol (SynSymbol lst)],
-                 (11,26--11,39))], (11,1--11,40)), (11,0--11,41));
+             [Const (String ("List.tail: %A", Regular, (11,9--11,24)), (11,9--11,24));
+              FunctionCall (Symbol (SynSymbol List.tail), [Symbol (SynSymbol lst)], (11,26--11,39))], (11,1--11,40)),
+          (11,0--11,41));
        Expr
-         (LetOrUse
-            (Named (SynSymbol visp_result_todo, (13,0--13,3)),
-             Symbol (SynSymbol lst), None, (13,0--13,3)), (13,0--13,3));
+         (LetOrUse (Named (SynSymbol visp_result_todo, (13,0--13,3)), Symbol (SynSymbol lst), None, (13,0--13,3)),
+          (13,0--13,3));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (13,0--13,3)), (13,0--13,3));
-              Symbol (SynSymbol visp_result_todo)], (13,0--13,3)), (13,0--13,3))],
-      (8,0--13,3))]
+             [Const (String ("%A", Regular, (13,0--13,3)), (13,0--13,3)); Symbol (SynSymbol visp_result_todo)],
+             (13,0--13,3)), (13,0--13,3))], (8,0--13,3))]

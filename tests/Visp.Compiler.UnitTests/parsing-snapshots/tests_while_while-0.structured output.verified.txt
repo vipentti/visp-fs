@@ -1,31 +1,21 @@
 ﻿ParsedFile
   [AnonModule
-     ([HashDirective
-         (ParsedHashDirective
-            ("nowarn", [String ("20", Regular, (9,8--9,12))], (9,0--9,12)),
-          (9,0--9,12));
+     ([HashDirective (ParsedHashDirective ("nowarn", [String ("20", Regular, (9,8--9,12))], (9,0--9,12)), (9,0--9,12));
        Expr
          (FunctionDef
             (SynSymbol inc, None,
-             Args
-               (List
-                  [Typed
-                     (Named (SynSymbol v, (11,10--11,11)), Ident Value,
-                      (11,9--11,19))], (11,8--11,20)),
+             Args (List [Typed (Named (SynSymbol v, (11,10--11,11)), Ident Value, (11,9--11,19))], (11,8--11,20)),
              [FunctionCall
                 (Symbol (SynSymbol Value.from),
                  [Op
                     (Infix
                        (SynSymbol +,
                         [Const (Int64 1L, (12,19--12,21));
-                         FunctionCall
-                           (Symbol (SynSymbol unwrapInt), [Symbol (SynSymbol v)],
-                            (12,23--12,34))], (12,17--12,35)))], (12,5--12,36))],
-             (11,1--12,37)), (11,0--12,38));
+                         FunctionCall (Symbol (SynSymbol unwrapInt), [Symbol (SynSymbol v)], (12,23--12,34))],
+                        (12,17--12,35)))], (12,5--12,36))], (11,1--12,37)), (11,0--12,38));
        Expr
          (LetOrUse
-            (Named (SynSymbol count, (14,5--14,10)),
-             Atom (Const (Int64 0L, (14,17--14,19)), (14,12--14,19)), None,
+            (Named (SynSymbol count, (14,5--14,10)), Atom (Const (Int64 0L, (14,17--14,19)), (14,12--14,19)), None,
              (14,1--14,20)), (14,0--14,21));
        Expr
          (LetOrUse
@@ -35,26 +25,17 @@
                   (Infix
                      (SynSymbol <,
                       [FunctionCall
-                         (Symbol (SynSymbol unwrapInt),
-                          [Deref
-                             (true, Symbol (SynSymbol count), (15,21--15,27))],
-                          (15,11--15,27)); Const (Int64 5L, (15,29--15,31))],
-                      (15,8--15,31))),
+                         (Symbol (SynSymbol unwrapInt), [Deref (true, Symbol (SynSymbol count), (15,21--15,27))],
+                          (15,11--15,27)); Const (Int64 5L, (15,29--15,31))], (15,8--15,31))),
                 [FunctionCall
                    (Symbol (SynSymbol printfn),
-                    [Const
-                       (String ("in loop %O", Regular, (16,13--16,25)),
-                        (16,13--16,25));
-                     Deref (true, Symbol (SynSymbol count), (16,26--16,32))],
-                    (16,5--16,32));
+                    [Const (String ("in loop %O", Regular, (16,13--16,25)), (16,13--16,25));
+                     Deref (true, Symbol (SynSymbol count), (16,26--16,32))], (16,5--16,32));
                  FunctionCall
-                   (Symbol (SynSymbol swap!),
-                    [Symbol (SynSymbol count); Symbol (SynSymbol inc)],
-                    (17,5--17,20))], (15,1--17,21)), None, (15,0--17,22)),
-          (15,0--17,22));
+                   (Symbol (SynSymbol swap!), [Symbol (SynSymbol count); Symbol (SynSymbol inc)], (17,5--17,20))],
+                (15,1--17,21)), None, (15,0--17,22)), (15,0--17,22));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (15,0--17,22)), (15,0--17,22));
-              Symbol (SynSymbol visp_result_todo)], (15,0--17,22)),
-          (15,0--17,22))], (9,0--17,22))]
+             [Const (String ("%A", Regular, (15,0--17,22)), (15,0--17,22)); Symbol (SynSymbol visp_result_todo)],
+             (15,0--17,22)), (15,0--17,22))], (9,0--17,22))]

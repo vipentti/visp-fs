@@ -5,10 +5,8 @@
             (Symbol (SynSymbol printfn),
              [Const (String ("%i", Regular, (13,9--13,13)), (13,9--13,13));
               FunctionCall
-                (Symbol (SynSymbol add),
-                 [Const (Int32 1, (13,19--13,20));
-                  Const (Int32 2, (13,21--13,22))], (13,15--13,22))],
-             (13,1--13,23)), (13,0--13,24));
+                (Symbol (SynSymbol add), [Const (Int32 1, (13,19--13,20)); Const (Int32 2, (13,21--13,22))],
+                 (13,15--13,22))], (13,1--13,23)), (13,0--13,24));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -19,21 +17,17 @@
                   Collection
                     (SynCollection
                        (FsList,
-                        [Const (Int32 1, (14,38--14,39));
-                         Const (Int32 2, (14,40--14,41));
-                         Const (Int32 3, (14,42--14,43));
-                         Const (Int32 4, (14,44--14,45));
-                         Const (Int32 5, (14,46--14,47))], (14,32--14,47)))],
-                 (14,15--14,48))], (14,1--14,49)), (14,0--14,50));
+                        [Const (Int32 1, (14,38--14,39)); Const (Int32 2, (14,40--14,41));
+                         Const (Int32 3, (14,42--14,43)); Const (Int32 4, (14,44--14,45));
+                         Const (Int32 5, (14,46--14,47))], (14,32--14,47)))], (14,15--14,48))], (14,1--14,49)),
+          (14,0--14,50));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (16,0--16,20)),
-             Const
-               (String ("let-value support?", Regular, (16,0--16,20)),
-                (16,0--16,20)), None, (16,0--16,20)), (16,0--16,20));
+             Const (String ("let-value support?", Regular, (16,0--16,20)), (16,0--16,20)), None, (16,0--16,20)),
+          (16,0--16,20));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (16,0--16,20)), (16,0--16,20));
-              Symbol (SynSymbol visp_result_todo)], (16,0--16,20)),
-          (16,0--16,20))], (13,0--16,20))]
+             [Const (String ("%A", Regular, (16,0--16,20)), (16,0--16,20)); Symbol (SynSymbol visp_result_todo)],
+             (16,0--16,20)), (16,0--16,20))], (13,0--16,20))]

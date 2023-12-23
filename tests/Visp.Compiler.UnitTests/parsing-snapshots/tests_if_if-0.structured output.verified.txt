@@ -2,29 +2,26 @@
   [AnonModule
      ([Expr
          (FunctionDef
-            (SynSymbol condition, None, Args (List [], (8,14--8,16)),
-             [Const (Bool false, (8,17--8,22))], (8,1--8,22)), (8,0--8,23));
+            (SynSymbol condition, None, Args (List [], (8,14--8,16)), [Const (Bool false, (8,17--8,22))], (8,1--8,22)),
+          (8,0--8,23));
        Expr
          (FunctionDef
             (SynSymbol then, None, Args (List [], (9,9--9,11)),
-             [Const (String ("then", Regular, (9,12--9,18)), (9,12--9,18))],
-             (9,1--9,18)), (9,0--9,19));
+             [Const (String ("then", Regular, (9,12--9,18)), (9,12--9,18))], (9,1--9,18)), (9,0--9,19));
        Expr
          (FunctionDef
             (SynSymbol alt, None, Args (List [], (10,8--10,10)),
-             [Const (String ("alt", Regular, (10,11--10,16)), (10,11--10,16))],
-             (10,1--10,16)), (10,0--10,17));
+             [Const (String ("alt", Regular, (10,11--10,16)), (10,11--10,16))], (10,1--10,16)), (10,0--10,17));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (12,0--14,10)),
              If
                (FunctionCall (Symbol (SynSymbol condition), [], (12,5--12,14)),
                 FunctionCall (Symbol (SynSymbol then), [], (13,5--13,9)),
-                Some (FunctionCall (Symbol (SynSymbol alt), [], (14,5--14,8))),
-                (12,1--14,9)), None, (12,0--14,10)), (12,0--14,10));
+                Some (FunctionCall (Symbol (SynSymbol alt), [], (14,5--14,8))), (12,1--14,9)), None, (12,0--14,10)),
+          (12,0--14,10));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (12,0--14,10)), (12,0--14,10));
-              Symbol (SynSymbol visp_result_todo)], (12,0--14,10)),
-          (12,0--14,10))], (8,0--14,10))]
+             [Const (String ("%A", Regular, (12,0--14,10)), (12,0--14,10)); Symbol (SynSymbol visp_result_todo)],
+             (12,0--14,10)), (12,0--14,10))], (8,0--14,10))]

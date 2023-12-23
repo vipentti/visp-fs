@@ -1,29 +1,23 @@
 ﻿ParsedFile
   [AnonModule
      ([HashDirective
-         (ParsedHashDirective
-            ("nowarn", [String ("0026", Regular, (10,8--10,14))], (10,0--10,14)),
-          (10,0--10,14));
+         (ParsedHashDirective ("nowarn", [String ("0026", Regular, (10,8--10,14))], (10,0--10,14)), (10,0--10,14));
        Expr
          (SyntaxMacro
             (SynMacro
                (SynSymbol matchfnexample,
                 [SynMacroCase
-                   ([Discard (13,4--13,5); Symbol (SynSymbol sym, (13,6--13,9));
-                     Symbol (SynSymbol m, (13,10--13,11));
-                     Symbol (SynSymbol rest, (13,12--13,16));
-                     Ellipsis (13,17--13,20)],
+                   ([Discard (13,4--13,5); Symbol (SynSymbol sym, (13,6--13,9)); Symbol (SynSymbol m, (13,10--13,11));
+                     Symbol (SynSymbol rest, (13,12--13,16)); Ellipsis (13,17--13,20)],
                     List
                       (Paren,
                        [Symbol (SynSymbol fn); Symbol (SynSymbol sym);
                         List (Paren, [Symbol (SynSymbol arg)], (14,12--14,17));
                         List
                           (Paren,
-                           [Symbol (SynSymbol match); Symbol (SynSymbol arg);
-                            Symbol (SynSymbol m); Symbol (SynSymbol rest);
-                            Ellipsis (17,13--17,16)], (15,6--18,7))],
-                       (14,4--18,8)), (13,2--19,3))], (12,1--19,3))),
-          (12,0--19,4));
+                           [Symbol (SynSymbol match); Symbol (SynSymbol arg); Symbol (SynSymbol m);
+                            Symbol (SynSymbol rest); Ellipsis (17,13--17,16)], (15,6--18,7))], (14,4--18,8)),
+                    (13,2--19,3))], (12,1--19,3))), (12,0--19,4));
        Expr
          (SyntaxMacroCall
             (SynMacroCall
@@ -32,63 +26,41 @@
                  List
                    (Bracket,
                     [List
-                       (Paren,
-                        [Symbol (SynSymbol !tuple); Symbol (SynSymbol a);
-                         Symbol (SynSymbol b)], (22,3--22,15));
-                     List
-                       (Paren,
-                        [Symbol (SynSymbol +); Symbol (SynSymbol a);
-                         Symbol (SynSymbol b)], (23,4--23,11))], (22,2--23,12));
-                 List
-                   (Bracket,
-                    [Discard (24,3--24,4); Const (Int32 0, (24,5--24,6))],
-                    (24,2--24,7))], (21,1--24,7))), (21,0--24,8));
+                       (Paren, [Symbol (SynSymbol !tuple); Symbol (SynSymbol a); Symbol (SynSymbol b)], (22,3--22,15));
+                     List (Paren, [Symbol (SynSymbol +); Symbol (SynSymbol a); Symbol (SynSymbol b)], (23,4--23,11))],
+                    (22,2--23,12)); List (Bracket, [Discard (24,3--24,4); Const (Int32 0, (24,5--24,6))], (24,2--24,7))],
+                (21,1--24,7))), (21,0--24,8));
        Expr
          (FunctionDef
-            (SynSymbol name2, None,
-             Args (List [Named (SynSymbol tup, (26,11--26,14))], (26,10--26,15)),
+            (SynSymbol name2, None, Args (List [Named (SynSymbol tup, (26,11--26,14))], (26,10--26,15)),
              [Match
                 (Symbol (SynSymbol tup),
                  [SynMatch
                     (Collection
                        (SynCollection
                           (Paren,
-                           [Named (SynSymbol a, (28,13--28,14));
-                            Trivia (Comma, (28,5--28,6));
-                            Named (SynSymbol b, (28,15--28,16))], (28,5--28,17))),
-                     None,
-                     [Op
-                        (Infix
-                           (SynSymbol +,
-                            [Symbol (SynSymbol a); Symbol (SynSymbol b)],
-                            (28,19--28,24)))], (28,5--28,25));
-                  SynMatch
-                    (Discard (29,5--29,6), None, [Const (Int32 0, (29,7--29,8))],
-                     (29,5--29,8))], (27,3--29,9))], (26,1--29,10)),
-          (26,0--29,11));
+                           [Named (SynSymbol a, (28,13--28,14)); Trivia (Comma, (28,5--28,6));
+                            Named (SynSymbol b, (28,15--28,16))], (28,5--28,17))), None,
+                     [Op (Infix (SynSymbol +, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (28,19--28,24)))],
+                     (28,5--28,25));
+                  SynMatch (Discard (29,5--29,6), None, [Const (Int32 0, (29,7--29,8))], (29,5--29,8))], (27,3--29,9))],
+             (26,1--29,10)), (26,0--29,11));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (31,0--33,23)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("%A & %A", Regular, (31,9--31,18)), (31,9--31,18));
+                [Const (String ("%A & %A", Regular, (31,9--31,18)), (31,9--31,18));
                  FunctionCall
                    (Symbol (SynSymbol name),
-                    [Tuple
-                       ([Const (Int32 1, (32,16--32,17));
-                         Const (Int32 2, (32,18--32,19))], (32,9--32,19))],
+                    [Tuple ([Const (Int32 1, (32,16--32,17)); Const (Int32 2, (32,18--32,19))], (32,9--32,19))],
                     (32,3--32,20));
                  FunctionCall
                    (Symbol (SynSymbol name2),
-                    [Tuple
-                       ([Const (Int32 1, (33,17--33,18));
-                         Const (Int32 2, (33,19--33,20))], (33,10--33,20))],
-                    (33,3--33,21))], (31,1--33,22)), None, (31,0--33,23)),
-          (31,0--33,23));
+                    [Tuple ([Const (Int32 1, (33,17--33,18)); Const (Int32 2, (33,19--33,20))], (33,10--33,20))],
+                    (33,3--33,21))], (31,1--33,22)), None, (31,0--33,23)), (31,0--33,23));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (31,0--33,23)), (31,0--33,23));
-              Symbol (SynSymbol visp_result_todo)], (31,0--33,23)),
-          (31,0--33,23))], (10,0--33,23))]
+             [Const (String ("%A", Regular, (31,0--33,23)), (31,0--33,23)); Symbol (SynSymbol visp_result_todo)],
+             (31,0--33,23)), (31,0--33,23))], (10,0--33,23))]

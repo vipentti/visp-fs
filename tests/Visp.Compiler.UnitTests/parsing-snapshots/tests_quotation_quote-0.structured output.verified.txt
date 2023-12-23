@@ -8,16 +8,12 @@
                 Collection
                   (SynCollection
                      (Paren,
-                      [Const (Int32 1, (9,13--9,14));
-                       Const (Int32 2, (9,15--9,16));
-                       Const (Int32 3, (9,17--9,18));
-                       Const (Int32 4, (9,19--9,20));
-                       Const (Int32 5, (9,21--9,22))], (9,12--9,23))),
-                (9,11--9,23)), None, (9,1--9,23)), (9,0--9,24));
+                      [Const (Int32 1, (9,13--9,14)); Const (Int32 2, (9,15--9,16)); Const (Int32 3, (9,17--9,18));
+                       Const (Int32 4, (9,19--9,20)); Const (Int32 5, (9,21--9,22))], (9,12--9,23))), (9,11--9,23)),
+             None, (9,1--9,23)), (9,0--9,24));
        Expr
          (LetOrUse
-            (Named (SynSymbol sym, (10,5--10,8)),
-             Quote (true, Symbol (SynSymbol symbol), (10,9--10,16)), None,
+            (Named (SynSymbol sym, (10,5--10,8)), Quote (true, Symbol (SynSymbol symbol), (10,9--10,16)), None,
              (10,1--10,16)), (10,0--10,17));
        Expr
          (LetOrUse
@@ -28,47 +24,37 @@
                   (SynCollection
                      (Paren,
                       [Symbol (SynSymbol fn);
-                       Collection
-                         (SynCollection
-                            (Bracket, [Symbol (SynSymbol a)], (11,20--11,23)));
+                       Collection (SynCollection (Bracket, [Symbol (SynSymbol a)], (11,20--11,23)));
                        Collection
                          (SynCollection
                             (Paren,
-                             [Symbol (SynSymbol +); Symbol (SynSymbol a);
-                              Symbol (SynSymbol b);
+                             [Symbol (SynSymbol +); Symbol (SynSymbol a); Symbol (SynSymbol b);
                               Const (Int32 1, (11,31--11,32));
                               Collection
                                 (SynCollection
                                    (Paren,
-                                    [Symbol (SynSymbol call);
-                                     Symbol (SynSymbol +);
-                                     Const (Int32 1, (11,41--11,42));
-                                     Const (Int32 2, (11,43--11,44))],
-                                    (11,33--11,45)))], (11,24--11,46)))],
-                      (11,16--11,47))), (11,15--11,47)), None, (11,1--11,47)),
-          (11,0--11,48));
+                                    [Symbol (SynSymbol call); Symbol (SynSymbol +); Const (Int32 1, (11,41--11,42));
+                                     Const (Int32 2, (11,43--11,44))], (11,33--11,45)))], (11,24--11,46)))],
+                      (11,16--11,47))), (11,15--11,47)), None, (11,1--11,47)), (11,0--11,48));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("items: %O", Regular, (13,9--13,20)), (13,9--13,20));
-              Symbol (SynSymbol items)], (13,1--13,26)), (13,0--13,27));
+             [Const (String ("items: %O", Regular, (13,9--13,20)), (13,9--13,20)); Symbol (SynSymbol items)],
+             (13,1--13,26)), (13,0--13,27));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("sym: %O", Regular, (14,9--14,18)), (14,9--14,18));
-              Symbol (SynSymbol sym)], (14,1--14,22)), (14,0--14,23));
+             [Const (String ("sym: %O", Regular, (14,9--14,18)), (14,9--14,18)); Symbol (SynSymbol sym)], (14,1--14,22)),
+          (14,0--14,23));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("something: %O", Regular, (15,9--15,24)), (15,9--15,24));
-              Symbol (SynSymbol something)], (15,1--15,34)), (15,0--15,35));
+             [Const (String ("something: %O", Regular, (15,9--15,24)), (15,9--15,24)); Symbol (SynSymbol something)],
+             (15,1--15,34)), (15,0--15,35));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("nested: %O", Regular, (16,9--16,21)), (16,9--16,21));
+             [Const (String ("nested: %O", Regular, (16,9--16,21)), (16,9--16,21));
               Quote
                 (true,
                  Collection
@@ -86,23 +72,16 @@
                                       Collection
                                         (SynCollection
                                            (Paren,
-                                            [Symbol (SynSymbol nested4);
-                                             Symbol (SynSymbol and);
-                                             Symbol (SynSymbol on);
-                                             Symbol (SynSymbol and);
-                                             Symbol (SynSymbol on);
-                                             Keyword (SynKeyword :keyword)],
-                                            (16,50--16,82)))], (16,41--16,83)))],
-                              (16,32--16,84)))], (16,23--16,85))),
-                 (16,22--16,85))], (16,1--16,85)), (16,0--16,86));
+                                            [Symbol (SynSymbol nested4); Symbol (SynSymbol and); Symbol (SynSymbol on);
+                                             Symbol (SynSymbol and); Symbol (SynSymbol on);
+                                             Keyword (SynKeyword :keyword)], (16,50--16,82)))], (16,41--16,83)))],
+                              (16,32--16,84)))], (16,23--16,85))), (16,22--16,85))], (16,1--16,85)), (16,0--16,86));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (17,0--17,90)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("nested vec: %O", Regular, (17,9--17,25)),
-                    (17,9--17,25));
+                [Const (String ("nested vec: %O", Regular, (17,9--17,25)), (17,9--17,25));
                  Quote
                    (true,
                     Collection
@@ -120,19 +99,13 @@
                                          Collection
                                            (SynCollection
                                               (Paren,
-                                               [Symbol (SynSymbol nested4);
-                                                Symbol (SynSymbol and);
-                                                Symbol (SynSymbol on);
-                                                Symbol (SynSymbol and);
-                                                Symbol (SynSymbol on);
-                                                Keyword (SynKeyword :keyword)],
-                                               (17,54--17,86)))], (17,45--17,87)))],
-                                 (17,36--17,88)))], (17,27--17,89))),
-                    (17,26--17,89))], (17,1--17,89)), None, (17,0--17,90)),
-          (17,0--17,90));
+                                               [Symbol (SynSymbol nested4); Symbol (SynSymbol and);
+                                                Symbol (SynSymbol on); Symbol (SynSymbol and); Symbol (SynSymbol on);
+                                                Keyword (SynKeyword :keyword)], (17,54--17,86)))], (17,45--17,87)))],
+                                 (17,36--17,88)))], (17,27--17,89))), (17,26--17,89))], (17,1--17,89)), None,
+             (17,0--17,90)), (17,0--17,90));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (17,0--17,90)), (17,0--17,90));
-              Symbol (SynSymbol visp_result_todo)], (17,0--17,90)),
-          (17,0--17,90))], (9,0--17,90))]
+             [Const (String ("%A", Regular, (17,0--17,90)), (17,0--17,90)); Symbol (SynSymbol visp_result_todo)],
+             (17,0--17,90)), (17,0--17,90))], (9,0--17,90))]

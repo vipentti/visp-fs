@@ -2,31 +2,26 @@
   [AnonModule
      ([Expr
          (LetOrUse
-            (Named (SynSymbol value, (8,5--8,10)),
-             Const (String ("initial", Regular, (8,11--8,20)), (8,11--8,20)),
+            (Named (SynSymbol value, (8,5--8,10)), Const (String ("initial", Regular, (8,11--8,20)), (8,11--8,20)),
              Mutable, (8,1--8,20)), (8,0--8,21));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("value is %s", Regular, (9,9--9,22)), (9,9--9,22));
-              Symbol (SynSymbol value)], (9,1--9,28)), (9,0--9,29));
+             [Const (String ("value is %s", Regular, (9,9--9,22)), (9,9--9,22)); Symbol (SynSymbol value)], (9,1--9,28)),
+          (9,0--9,29));
        Expr
          (Set
-            (Symbol (SynSymbol value),
-             Const (String ("updated", Regular, (10,12--10,21)), (10,12--10,21)),
+            (Symbol (SynSymbol value), Const (String ("updated", Regular, (10,12--10,21)), (10,12--10,21)),
              (10,1--10,21)), (10,0--10,22));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (11,0--11,29)),
              FunctionCall
                (Symbol (SynSymbol printfn),
-                [Const
-                   (String ("value is %s", Regular, (11,9--11,22)),
-                    (11,9--11,22)); Symbol (SynSymbol value)], (11,1--11,28)),
-             None, (11,0--11,29)), (11,0--11,29));
+                [Const (String ("value is %s", Regular, (11,9--11,22)), (11,9--11,22)); Symbol (SynSymbol value)],
+                (11,1--11,28)), None, (11,0--11,29)), (11,0--11,29));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (11,0--11,29)), (11,0--11,29));
-              Symbol (SynSymbol visp_result_todo)], (11,0--11,29)),
-          (11,0--11,29))], (8,0--11,29))]
+             [Const (String ("%A", Regular, (11,0--11,29)), (11,0--11,29)); Symbol (SynSymbol visp_result_todo)],
+             (11,0--11,29)), (11,0--11,29))], (8,0--11,29))]

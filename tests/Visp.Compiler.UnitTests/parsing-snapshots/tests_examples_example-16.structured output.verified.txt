@@ -5,8 +5,7 @@
             (Named (SynSymbol visp_result_todo, (8,0--21,22)),
              LetStar
                ([SynBinding
-                   (Named (SynSymbol captured_variable, (9,4--9,21)),
-                    Const (Int32 1, (9,22--9,23)), (9,4--9,23));
+                   (Named (SynSymbol captured_variable, (9,4--9,21)), Const (Int32 1, (9,22--9,23)), (9,4--9,23));
                  SynBinding
                    (Named (SynSymbol first_fun, (10,4--10,13)),
                     LambdaDef
@@ -20,42 +19,25 @@
                                        (Args (List [], (13,23--13,25)),
                                         [LetStar
                                            ([SynBinding
-                                               (Named
-                                                  (SynSymbol third_fun,
-                                                   (14,27--14,36)),
+                                               (Named (SynSymbol third_fun, (14,27--14,36)),
                                                 LambdaDef
                                                   (SynLambda
-                                                     (Args
-                                                        (List [], (15,29--15,31)),
+                                                     (Args (List [], (15,29--15,31)),
                                                       [Op
                                                          (Infix
                                                             (SynSymbol +,
-                                                             [Symbol
-                                                                (SynSymbol
-                                                                   captured_variable);
-                                                              Const
-                                                                (Int32 1,
-                                                                 (15,53--15,54))],
-                                                             (15,33--15,54)))],
-                                                      (15,25--15,55))),
-                                                (14,27--15,56))],
-                                            [FunctionCall
-                                               (Symbol (SynSymbol third_fun), [],
-                                                (16,23--16,32))], (14,21--16,33))],
-                                        (13,19--16,34))), (12,17--17,23))],
-                              [FunctionCall
-                                 (Symbol (SynSymbol second_fun), [],
-                                  (18,13--18,23))], (12,11--18,24))],
+                                                             [Symbol (SynSymbol captured_variable);
+                                                              Const (Int32 1, (15,53--15,54))], (15,33--15,54)))],
+                                                      (15,25--15,55))), (14,27--15,56))],
+                                            [FunctionCall (Symbol (SynSymbol third_fun), [], (16,23--16,32))],
+                                            (14,21--16,33))], (13,19--16,34))), (12,17--17,23))],
+                              [FunctionCall (Symbol (SynSymbol second_fun), [], (18,13--18,23))], (12,11--18,24))],
                           (11,7--18,25))), (10,4--19,7))],
                 [FunctionCall
-                   (Symbol (SynSymbol str),
-                    [FunctionCall
-                       (Symbol (SynSymbol first_fun), [], (21,10--21,19))],
-                    (21,5--21,20))], (8,1--21,21)), None, (8,0--21,22)),
-          (8,0--21,22));
+                   (Symbol (SynSymbol str), [FunctionCall (Symbol (SynSymbol first_fun), [], (21,10--21,19))],
+                    (21,5--21,20))], (8,1--21,21)), None, (8,0--21,22)), (8,0--21,22));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (8,0--21,22)), (8,0--21,22));
-              Symbol (SynSymbol visp_result_todo)], (8,0--21,22)), (8,0--21,22))],
-      (8,0--21,22))]
+             [Const (String ("%A", Regular, (8,0--21,22)), (8,0--21,22)); Symbol (SynSymbol visp_result_todo)],
+             (8,0--21,22)), (8,0--21,22))], (8,0--21,22))]

@@ -6,17 +6,13 @@
              FunctionCall
                (LambdaDef
                   (SynLambda
-                     (Args
-                        (List [Named (SynSymbol captured_arg, (8,7--8,19))],
-                         (8,6--8,20)),
+                     (Args (List [Named (SynSymbol captured_arg, (8,7--8,19))], (8,6--8,20)),
                       [LetStar
                          ([SynBinding
                              (Named (SynSymbol second_capture, (9,9--9,23)),
                               Op
                                 (Infix
-                                   (SynSymbol +,
-                                    [Symbol (SynSymbol captured_arg);
-                                     Const (Int32 1, (9,40--9,41))],
+                                   (SynSymbol +, [Symbol (SynSymbol captured_arg); Const (Int32 1, (9,40--9,41))],
                                     (9,25--9,41))), (9,9--9,42))],
                           [FunctionCall
                              (LambdaDef
@@ -25,15 +21,11 @@
                                     [Op
                                        (Infix
                                           (SynSymbol +,
-                                           [Symbol (SynSymbol captured_arg);
-                                            Symbol (SynSymbol second_capture)],
-                                           (10,14--10,43)))], (10,6--10,44))),
-                              [], (10,5--10,45))], (9,3--10,46))], (8,2--10,47))),
-                [Const (Int32 99, (11,2--11,4))], (8,1--11,4)), None,
-             (8,0--11,5)), (8,0--11,5));
+                                           [Symbol (SynSymbol captured_arg); Symbol (SynSymbol second_capture)],
+                                           (10,14--10,43)))], (10,6--10,44))), [], (10,5--10,45))], (9,3--10,46))],
+                      (8,2--10,47))), [Const (Int32 99, (11,2--11,4))], (8,1--11,4)), None, (8,0--11,5)), (8,0--11,5));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (8,0--11,5)), (8,0--11,5));
-              Symbol (SynSymbol visp_result_todo)], (8,0--11,5)), (8,0--11,5))],
-      (8,0--11,5))]
+             [Const (String ("%A", Regular, (8,0--11,5)), (8,0--11,5)); Symbol (SynSymbol visp_result_todo)],
+             (8,0--11,5)), (8,0--11,5))], (8,0--11,5))]

@@ -2,10 +2,8 @@
   [AnonModule
      ([Expr
          (TypeAlias
-            (SynSymbol Grid,
-             Generic
-               (Ident array, [Generic (Ident array, [Ident char], (8,20--8,31))],
-                (8,14--8,32)), (8,1--8,32)), (8,0--8,33));
+            (SynSymbol Grid, Generic (Ident array, [Generic (Ident array, [Ident char], (8,20--8,31))], (8,14--8,32)),
+             (8,1--8,32)), (8,0--8,33));
        Expr
          (SyntaxMacroCall
             (SynMacroCall
@@ -14,81 +12,53 @@
                  List
                    (Paren,
                     [List
-                       (Bracket,
-                        [Symbol (SynSymbol x); Trivia (Colon, (10,15--10,17));
-                         Symbol (SynSymbol int32)], (10,13--10,23));
+                       (Bracket, [Symbol (SynSymbol x); Trivia (Colon, (10,15--10,17)); Symbol (SynSymbol int32)],
+                        (10,13--10,23));
                      List
-                       (Bracket,
-                        [Symbol (SynSymbol y); Trivia (Colon, (10,26--10,28));
-                         Symbol (SynSymbol int32)], (10,24--10,34))],
-                    (10,12--10,35));
+                       (Bracket, [Symbol (SynSymbol y); Trivia (Colon, (10,26--10,28)); Symbol (SynSymbol int32)],
+                        (10,24--10,34))], (10,12--10,35));
+                 List (Paren, [Symbol (SynSymbol member); Symbol (SynSymbol _.X); Symbol (SynSymbol x)], (11,2--11,16));
+                 List (Paren, [Symbol (SynSymbol member); Symbol (SynSymbol _.Y); Symbol (SynSymbol y)], (12,2--12,16));
                  List
                    (Paren,
-                    [Symbol (SynSymbol member); Symbol (SynSymbol _.X);
-                     Symbol (SynSymbol x)], (11,2--11,16));
-                 List
-                   (Paren,
-                    [Symbol (SynSymbol member); Symbol (SynSymbol _.Y);
-                     Symbol (SynSymbol y)], (12,2--12,16));
-                 List
-                   (Paren,
-                    [Symbol (SynSymbol override); Symbol (SynSymbol fn);
-                     Symbol (SynSymbol _.ToString); Const (Unit, (14,26--14,28));
+                    [Symbol (SynSymbol override); Symbol (SynSymbol fn); Symbol (SynSymbol _.ToString);
+                     Const (Unit, (14,26--14,28));
                      List
                        (Paren,
                         [Symbol (SynSymbol sprintf);
-                         Const
-                           (String
-                              ("Pos(x: %A, y: %A)", Regular, (15,13--15,32)),
-                            (15,13--15,32)); Symbol (SynSymbol x);
-                         Symbol (SynSymbol y)], (15,4--15,37))], (14,2--16,3))],
-                (10,1--16,3))), (10,0--17,1));
+                         Const (String ("Pos(x: %A, y: %A)", Regular, (15,13--15,32)), (15,13--15,32));
+                         Symbol (SynSymbol x); Symbol (SynSymbol y)], (15,4--15,37))], (14,2--16,3))], (10,1--16,3))),
+          (10,0--17,1));
        Expr
          (Type
             (SynSymbol TileMap,
              Args
                (Tuple
-                  [Typed
-                     (Named (SynSymbol grid, (19,16--19,20)), Ident Grid,
-                      (19,15--19,27)); Trivia (Comma, (19,14--19,15));
-                   Typed
-                     (Named (SynSymbol start, (19,29--19,34)), Ident Pos,
-                      (19,28--19,40))], (19,14--19,41)),
-             [Let
-                (Named (SynSymbol grid, (20,7--20,11)), Symbol (SynSymbol grid),
-                 (20,3--20,16));
-              Let
-                (Named (SynSymbol start, (21,7--21,12)),
-                 Symbol (SynSymbol start), (21,3--21,18));
+                  [Typed (Named (SynSymbol grid, (19,16--19,20)), Ident Grid, (19,15--19,27));
+                   Trivia (Comma, (19,14--19,15));
+                   Typed (Named (SynSymbol start, (19,29--19,34)), Ident Pos, (19,28--19,40))], (19,14--19,41)),
+             [Let (Named (SynSymbol grid, (20,7--20,11)), Symbol (SynSymbol grid), (20,3--20,16));
+              Let (Named (SynSymbol start, (21,7--21,12)), Symbol (SynSymbol start), (21,3--21,18));
               OverrideFn
                 (SynSymbol _.ToString, Args (List [], (22,25--22,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
-                     [Const
-                        (String ("TileMap(%A)\n%A", Regular, (23,13--23,30)),
-                         (23,13--23,30)); Symbol (SynSymbol start);
-                      Symbol (SynSymbol grid)], (23,5--23,41))], (22,3--23,42));
-              Member
-                (SynSymbol _.Start, Symbol (SynSymbol start), (26,3--26,23));
+                     [Const (String ("TileMap(%A)\n%A", Regular, (23,13--23,30)), (23,13--23,30));
+                      Symbol (SynSymbol start); Symbol (SynSymbol grid)], (23,5--23,41))], (22,3--23,42));
+              Member (SynSymbol _.Start, Symbol (SynSymbol start), (26,3--26,23));
               GetSet
                 (SynSymbol _.Item,
                  Some
                    (SynMemberGet
                       (Args
-                         (Tuple
-                            [Typed
-                               (Named (SynSymbol pos, (29,11--29,14)), Ident Pos,
-                                (29,10--29,20))], (29,9--29,21)),
+                         (Tuple [Typed (Named (SynSymbol pos, (29,11--29,14)), Ident Pos, (29,10--29,20))],
+                          (29,9--29,21)),
                        [LetOrUse
                           (Named (SynSymbol y, (30,11--30,12)),
-                           DotProperty
-                             (Symbol (SynSymbol pos), SynSymbol Y,
-                              (30,14--30,20)), None, (30,7--30,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (30,14--30,20)), None, (30,7--30,21));
                         LetOrUse
                           (Named (SynSymbol x, (31,11--31,12)),
-                           DotProperty
-                             (Symbol (SynSymbol pos), SynSymbol X,
-                              (31,14--31,20)), None, (31,7--31,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (31,14--31,20)), None, (31,7--31,21));
                         SyntaxMacroCall
                           (SynMacroCall
                              (SynSymbol cond_,
@@ -103,87 +73,57 @@
                                           [Symbol (SynSymbol and);
                                            List
                                              (Paren,
-                                              [Symbol (SynSymbol >=);
-                                               Symbol (SynSymbol y);
-                                               Const (Int32 0, (34,25--34,26))],
-                                              (34,19--34,27));
+                                              [Symbol (SynSymbol >=); Symbol (SynSymbol y);
+                                               Const (Int32 0, (34,25--34,26))], (34,19--34,27));
                                            List
                                              (Paren,
-                                              [Symbol (SynSymbol <);
-                                               Symbol (SynSymbol y);
+                                              [Symbol (SynSymbol <); Symbol (SynSymbol y);
                                                List
-                                                 (Paren,
-                                                  [Symbol (SynSymbol +Length);
-                                                   Symbol (SynSymbol grid)],
-                                                  (34,33--34,47))],
-                                              (34,28--34,48))], (34,14--34,49));
+                                                 (Paren, [Symbol (SynSymbol +Length); Symbol (SynSymbol grid)],
+                                                  (34,33--34,47))], (34,28--34,48))], (34,14--34,49));
                                        List
                                          (Paren,
                                           [Symbol (SynSymbol and);
                                            List
                                              (Paren,
-                                              [Symbol (SynSymbol >=);
-                                               Symbol (SynSymbol x);
-                                               Const (Int32 0, (35,25--35,26))],
-                                              (35,19--35,27));
+                                              [Symbol (SynSymbol >=); Symbol (SynSymbol x);
+                                               Const (Int32 0, (35,25--35,26))], (35,19--35,27));
                                            List
                                              (Paren,
-                                              [Symbol (SynSymbol <);
-                                               Symbol (SynSymbol x);
+                                              [Symbol (SynSymbol <); Symbol (SynSymbol x);
                                                List
                                                  (Paren,
                                                   [Symbol (SynSymbol +Length);
                                                    List
                                                      (Paren,
                                                       [List
-                                                         (DotBracket,
-                                                          [Const
-                                                             (Int32 0,
-                                                              (35,45--35,46))],
-                                                          (35,43--35,47));
-                                                       Symbol (SynSymbol grid)],
-                                                      (35,42--35,53))],
-                                                  (35,33--35,54))],
-                                              (35,28--35,55))], (35,14--35,56))],
-                                      (34,9--35,57));
+                                                         (DotBracket, [Const (Int32 0, (35,45--35,46))], (35,43--35,47));
+                                                       Symbol (SynSymbol grid)], (35,42--35,53))], (35,33--35,54))],
+                                              (35,28--35,55))], (35,14--35,56))], (34,9--35,57));
                                    List
                                      (Paren,
-                                      [Symbol (SynSymbol let);
-                                       Symbol (SynSymbol row);
+                                      [Symbol (SynSymbol let); Symbol (SynSymbol row);
                                        List
                                          (Paren,
-                                          [List
-                                             (DotBracket, [Symbol (SynSymbol y)],
-                                              (37,20--37,24));
-                                           Symbol (SynSymbol grid)],
-                                          (37,19--37,30))], (37,10--37,31));
+                                          [List (DotBracket, [Symbol (SynSymbol y)], (37,20--37,24));
+                                           Symbol (SynSymbol grid)], (37,19--37,30))], (37,10--37,31));
                                    List
                                      (Paren,
                                       [Symbol (SynSymbol Some);
                                        List
                                          (Paren,
-                                          [List
-                                             (DotBracket, [Symbol (SynSymbol x)],
-                                              (38,17--38,21));
-                                           Symbol (SynSymbol row)],
-                                          (38,16--38,26))], (38,10--38,27))],
-                                  (34,8--39,9));
-                               List
-                                 (Bracket,
-                                  [Discard (40,9--40,10);
-                                   Symbol (SynSymbol None)], (40,8--40,16))],
-                              (33,7--40,16)))], (29,4--40,18))), None,
-                 (28,3--40,18))], [], (19,1--41,3)), (19,0--41,4));
+                                          [List (DotBracket, [Symbol (SynSymbol x)], (38,17--38,21));
+                                           Symbol (SynSymbol row)], (38,16--38,26))], (38,10--38,27))], (34,8--39,9));
+                               List (Bracket, [Discard (40,9--40,10); Symbol (SynSymbol None)], (40,8--40,16))],
+                              (33,7--40,16)))], (29,4--40,18))), None, (28,3--40,18))], [], (19,1--41,3)), (19,0--41,4));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (43,0--43,14)),
              FunctionCall
-               (Symbol (SynSymbol printfn),
-                [Const (String ("OK", Regular, (43,9--43,13)), (43,9--43,13))],
+               (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (43,9--43,13)), (43,9--43,13))],
                 (43,1--43,13)), None, (43,0--43,14)), (43,0--43,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (43,0--43,14)), (43,0--43,14));
-              Symbol (SynSymbol visp_result_todo)], (43,0--43,14)),
-          (43,0--43,14))], (8,0--43,14))]
+             [Const (String ("%A", Regular, (43,0--43,14)), (43,0--43,14)); Symbol (SynSymbol visp_result_todo)],
+             (43,0--43,14)), (43,0--43,14))], (8,0--43,14))]

@@ -5,86 +5,63 @@
          (FunctionDef
             (SynSymbol Something, None, Args (List [], (9,14--9,16)),
              [LetOrUse
-                (Named (SynSymbol work, (10,7--10,11)),
-                 New (Ident ResizeArray<int*int*int64>, [], (10,13--10,43)),
-                 None, (10,3--10,44));
+                (Named (SynSymbol work, (10,7--10,11)), New (Ident ResizeArray<int*int*int64>, [], (10,13--10,43)), None,
+                 (10,3--10,44));
               LetOrUse
-                (Named (SynSymbol conditions, (12,7--12,17)),
-                 Collection (SynCollection (FsArray, [], (12,19--12,25))), None,
-                 (12,3--12,26));
+                (Named (SynSymbol conditions, (12,7--12,17)), Collection (SynCollection (FsArray, [], (12,19--12,25))),
+                 None, (12,3--12,26));
               LetOrUse
-                (Named (SynSymbol broken, (13,7--13,13)),
-                 Collection (SynCollection (FsArray, [], (13,15--13,21))), None,
+                (Named (SynSymbol broken, (13,7--13,13)), Collection (SynCollection (FsArray, [], (13,15--13,21))), None,
                  (13,3--13,22));
               LetOrUse
                 (Named (SynSymbol possibleOffsets, (14,7--14,22)),
-                 Collection (SynCollection (FsArray, [], (14,24--14,30))), None,
-                 (14,3--14,31));
+                 Collection (SynCollection (FsArray, [], (14,24--14,30))), None, (14,3--14,31));
               FunctionDef
                 (SynSymbol PopWork, None, Args (List [], (16,14--16,16)),
                  [LetOrUse
                     (Named (SynSymbol r, (17,9--17,10)),
-                     DotIndex
-                       (Symbol (SynSymbol work),
-                        [Const (Int32 0, (17,14--17,15))], (17,12--17,21)), None,
+                     DotIndex (Symbol (SynSymbol work), [Const (Int32 0, (17,14--17,15))], (17,12--17,21)), None,
                      (17,5--17,22));
                   DotMethod
-                    (Symbol (SynSymbol work), SynSymbol RemoveAt,
-                     [Const (Int32 0, (18,20--18,21))], Tuple, (18,5--18,21));
-                  Symbol (SynSymbol r)], (16,3--19,5));
+                    (Symbol (SynSymbol work), SynSymbol RemoveAt, [Const (Int32 0, (18,20--18,21))], Tuple,
+                     (18,5--18,21)); Symbol (SynSymbol r)], (16,3--19,5));
               FunctionDef
                 (SynSymbol EnqueueWork, None,
                  Args
                    (List
-                      [Named (SynSymbol bi, (21,19--21,21));
-                       Named (SynSymbol offsetEnd, (21,22--21,31));
-                       Named (SynSymbol nextPos, (21,32--21,39));
-                       Named (SynSymbol count, (21,40--21,45))], (21,18--21,46)),
-                 [Const (Unit, (22,4--22,6))], (21,3--22,6));
+                      [Named (SynSymbol bi, (21,19--21,21)); Named (SynSymbol offsetEnd, (21,22--21,31));
+                       Named (SynSymbol nextPos, (21,32--21,39)); Named (SynSymbol count, (21,40--21,45))],
+                    (21,18--21,46)), [Const (Unit, (22,4--22,6))], (21,3--22,6));
               LetOrUse
-                (Named (SynSymbol result, (24,7--24,13)),
-                 Const (Int64 0L, (24,14--24,16)), Mutable, (24,3--24,16));
+                (Named (SynSymbol result, (24,7--24,13)), Const (Int64 0L, (24,14--24,16)), Mutable, (24,3--24,16));
               While
                 (Op
                    (Infix
                       (SynSymbol >,
-                       [DotProperty
-                          (Symbol (SynSymbol work), SynSymbol Count,
-                           (26,13--26,24)); Const (Int32 0, (26,26--26,27))],
-                       (26,10--26,27))),
+                       [DotProperty (Symbol (SynSymbol work), SynSymbol Count, (26,13--26,24));
+                        Const (Int32 0, (26,26--26,27))], (26,10--26,27))),
                  [Match
-                    (FunctionCall
-                       (Symbol (SynSymbol PopWork), [], (27,12--27,19)),
+                    (FunctionCall (Symbol (SynSymbol PopWork), [], (27,12--27,19)),
                      [SynMatch
                         (Collection
                            (SynCollection
                               (Paren,
-                               [Named (SynSymbol bi, (28,8--28,10));
-                                Trivia (Dot, (28,11--28,12));
-                                Named (SynSymbol off, (28,13--28,16));
-                                Trivia (Dot, (28,17--28,18));
-                                Named (SynSymbol count, (28,19--28,24))],
-                               (28,7--28,25))), None,
+                               [Named (SynSymbol bi, (28,8--28,10)); Trivia (Dot, (28,11--28,12));
+                                Named (SynSymbol off, (28,13--28,16)); Trivia (Dot, (28,17--28,18));
+                                Named (SynSymbol count, (28,19--28,24))], (28,7--28,25))), None,
                          [FunctionCall
                             (Symbol (SynSymbol printfn),
-                             [Const
-                                (String ("(%A,%A,%A)", Regular, (29,17--29,29)),
-                                 (29,17--29,29)); Symbol (SynSymbol bi);
-                              Symbol (SynSymbol off); Symbol (SynSymbol count)],
-                             (29,9--29,42));
+                             [Const (String ("(%A,%A,%A)", Regular, (29,17--29,29)), (29,17--29,29));
+                              Symbol (SynSymbol bi); Symbol (SynSymbol off); Symbol (SynSymbol count)], (29,9--29,42));
                           LetOrUse
                             (Named (SynSymbol brokenLength, (30,13--30,25)),
-                             DotIndex
-                               (Symbol (SynSymbol broken),
-                                [Symbol (SynSymbol bi)], (30,27--30,39)), None,
+                             DotIndex (Symbol (SynSymbol broken), [Symbol (SynSymbol bi)], (30,27--30,39)), None,
                              (30,9--30,40));
                           LetOrUse
                             (Named (SynSymbol offsetEnd, (31,13--31,22)),
                              Op
                                (Infix
-                                  (SynSymbol +,
-                                   [Symbol (SynSymbol off);
-                                    Symbol (SynSymbol brokenLength)],
+                                  (SynSymbol +, [Symbol (SynSymbol off); Symbol (SynSymbol brokenLength)],
                                    (31,24--31,42))), None, (31,9--31,43));
                           SyntaxMacroCall
                             (SynMacroCall
@@ -103,11 +80,8 @@
                                                 [Symbol (SynSymbol or);
                                                  List
                                                    (Paren,
-                                                    [Symbol (SynSymbol =);
-                                                     Symbol (SynSymbol off);
-                                                     Const
-                                                       (Int32 0, (41,27--41,28))],
-                                                    (41,20--41,29));
+                                                    [Symbol (SynSymbol =); Symbol (SynSymbol off);
+                                                     Const (Int32 0, (41,27--41,28))], (41,20--41,29));
                                                  List
                                                    (Paren,
                                                     [Symbol (SynSymbol !=);
@@ -116,112 +90,60 @@
                                                         [List
                                                            (DotBracket,
                                                             [List
-                                                               (Paren,
-                                                                [Symbol
-                                                                   (SynSymbol
-                                                                      dec);
-                                                                 Symbol
-                                                                   (SynSymbol
-                                                                      off)],
-                                                                (41,37--41,46))],
-                                                            (41,35--41,47));
-                                                         Symbol
-                                                           (SynSymbol conditions)],
-                                                        (41,34--41,59));
-                                                     Const
-                                                       (Char '#', (41,60--41,63))],
-                                                    (41,30--41,64))],
-                                                (41,16--41,65));
+                                                               (Paren, [Symbol (SynSymbol dec); Symbol (SynSymbol off)],
+                                                                (41,37--41,46))], (41,35--41,47));
+                                                         Symbol (SynSymbol conditions)], (41,34--41,59));
+                                                     Const (Char '#', (41,60--41,63))], (41,30--41,64))], (41,16--41,65));
                                              List
                                                (Paren,
                                                 [Symbol (SynSymbol or);
                                                  List
                                                    (Paren,
-                                                    [Symbol (SynSymbol =);
-                                                     Symbol
-                                                       (SynSymbol offsetEnd);
+                                                    [Symbol (SynSymbol =); Symbol (SynSymbol offsetEnd);
                                                      List
                                                        (Paren,
-                                                        [Symbol
-                                                           (SynSymbol +Length);
-                                                         Symbol
-                                                           (SynSymbol conditions)],
-                                                        (42,33--42,53))],
-                                                    (42,20--42,54));
+                                                        [Symbol (SynSymbol +Length); Symbol (SynSymbol conditions)],
+                                                        (42,33--42,53))], (42,20--42,54));
                                                  List
                                                    (Paren,
                                                     [Symbol (SynSymbol and);
                                                      List
                                                        (Paren,
-                                                        [Symbol (SynSymbol <);
-                                                         Symbol
-                                                           (SynSymbol offsetEnd);
+                                                        [Symbol (SynSymbol <); Symbol (SynSymbol offsetEnd);
                                                          List
                                                            (Paren,
-                                                            [Symbol
-                                                               (SynSymbol
-                                                                  +Length);
-                                                             Symbol
-                                                               (SynSymbol
-                                                                  conditions)],
-                                                            (43,38--43,58))],
-                                                        (43,25--43,59));
+                                                            [Symbol (SynSymbol +Length); Symbol (SynSymbol conditions)],
+                                                            (43,38--43,58))], (43,25--43,59));
                                                      List
                                                        (Paren,
                                                         [Symbol (SynSymbol !=);
                                                          List
                                                            (Paren,
                                                             [List
-                                                               (DotBracket,
-                                                                [Symbol
-                                                                   (SynSymbol
-                                                                      offsetEnd)],
-                                                                (44,29--44,41));
-                                                             Symbol
-                                                               (SynSymbol
-                                                                  conditions)],
-                                                            (44,28--44,53));
-                                                         Const
-                                                           (Char '#',
-                                                            (44,54--44,57))],
-                                                        (44,24--44,58))],
-                                                    (43,20--44,59))],
-                                                (42,16--44,60));
+                                                               (DotBracket, [Symbol (SynSymbol offsetEnd)],
+                                                                (44,29--44,41)); Symbol (SynSymbol conditions)],
+                                                            (44,28--44,53)); Const (Char '#', (44,54--44,57))],
+                                                        (44,24--44,58))], (43,20--44,59))], (42,16--44,60));
                                              List
                                                (Paren,
                                                 [Symbol (SynSymbol not);
                                                  List
                                                    (Paren,
-                                                    [Symbol
-                                                       (SynSymbol .Contains);
+                                                    [Symbol (SynSymbol .Contains);
                                                      List
                                                        (Paren,
-                                                        [Symbol
-                                                           (SynSymbol .AsSpan);
-                                                         Symbol
-                                                           (SynSymbol conditions);
-                                                         Symbol (SynSymbol off);
-                                                         Symbol
-                                                           (SynSymbol
-                                                              brokenLength)],
-                                                        (45,32--45,69));
-                                                     Const
-                                                       (Char '.', (45,70--45,73))],
-                                                    (45,21--45,74))],
-                                                (45,16--45,75))], (40,14--46,15))],
-                                        (39,11--46,16));
-                                     Const (Unit, (47,12--47,14))],
-                                    (39,10--48,11));
+                                                        [Symbol (SynSymbol .AsSpan); Symbol (SynSymbol conditions);
+                                                         Symbol (SynSymbol off); Symbol (SynSymbol brokenLength)],
+                                                        (45,32--45,69)); Const (Char '.', (45,70--45,73))],
+                                                    (45,21--45,74))], (45,16--45,75))], (40,14--46,15))], (39,11--46,16));
+                                     Const (Unit, (47,12--47,14))], (39,10--48,11));
                                  List
                                    (Bracket,
                                     [List
                                        (Paren,
-                                        [Symbol (SynSymbol =);
-                                         Symbol (SynSymbol bi);
+                                        [Symbol (SynSymbol =); Symbol (SynSymbol bi);
                                          List
-                                           (Paren,
-                                            [Symbol (SynSymbol dec);
-                                             Symbol (SynSymbol brokenLength)],
+                                           (Paren, [Symbol (SynSymbol dec); Symbol (SynSymbol brokenLength)],
                                             (50,17--50,35))], (50,11--50,36));
                                      List
                                        (Paren,
@@ -231,95 +153,61 @@
                                             [Symbol (SynSymbol .Contains);
                                              List
                                                (Paren,
-                                                [Symbol (SynSymbol .AsSpan);
-                                                 Symbol (SynSymbol conditions);
-                                                 Symbol (SynSymbol offsetEnd)],
-                                                (51,31--51,61));
-                                             Const (Char '#', (51,62--51,65))],
-                                            (51,20--51,66));
+                                                [Symbol (SynSymbol .AsSpan); Symbol (SynSymbol conditions);
+                                                 Symbol (SynSymbol offsetEnd)], (51,31--51,61));
+                                             Const (Char '#', (51,62--51,65))], (51,20--51,66));
                                          List
                                            (Paren,
-                                            [Symbol (SynSymbol set!);
-                                             Symbol (SynSymbol result);
+                                            [Symbol (SynSymbol set!); Symbol (SynSymbol result);
                                              List
                                                (Paren,
-                                                [Symbol (SynSymbol +);
-                                                 Symbol (SynSymbol result);
-                                                 Symbol (SynSymbol count)],
-                                                (52,27--52,43))], (52,14--52,44))],
+                                                [Symbol (SynSymbol +); Symbol (SynSymbol result);
+                                                 Symbol (SynSymbol count)], (52,27--52,43))], (52,14--52,44))],
                                         (51,12--52,45))], (50,10--53,11));
                                  List
                                    (Bracket,
                                     [Keyword (SynKeyword :else);
                                      List
                                        (Paren,
-                                        [Symbol (SynSymbol mut);
-                                         Symbol (SynSymbol nextPossibleIndex);
+                                        [Symbol (SynSymbol mut); Symbol (SynSymbol nextPossibleIndex);
                                          List
                                            (Paren,
-                                            [Symbol
-                                               (SynSymbol
-                                                  System.Array.BinarySearch);
+                                            [Symbol (SynSymbol System.Array.BinarySearch);
                                              List
                                                (Paren,
-                                                [Symbol
-                                                   (SynSymbol possibleOffsets);
-                                                 Trivia (Dot, (55,79--55,81));
+                                                [Symbol (SynSymbol possibleOffsets); Trivia (Dot, (55,79--55,81));
                                                  List
-                                                   (Paren,
-                                                    [Symbol (SynSymbol inc);
-                                                     Symbol
-                                                       (SynSymbol offsetEnd)],
-                                                    (55,81--55,96))],
-                                                (55,62--55,97))], (55,35--55,98))],
-                                        (55,12--55,99));
+                                                   (Paren, [Symbol (SynSymbol inc); Symbol (SynSymbol offsetEnd)],
+                                                    (55,81--55,96))], (55,62--55,97))], (55,35--55,98))], (55,12--55,99));
                                      List
                                        (Paren,
                                         [Symbol (SynSymbol when);
                                          List
                                            (Paren,
-                                            [Symbol (SynSymbol <);
-                                             Symbol
-                                               (SynSymbol nextPossibleIndex);
-                                             Const (Int32 0, (57,39--57,40))],
-                                            (57,18--57,41));
+                                            [Symbol (SynSymbol <); Symbol (SynSymbol nextPossibleIndex);
+                                             Const (Int32 0, (57,39--57,40))], (57,18--57,41));
                                          List
                                            (Paren,
-                                            [Symbol (SynSymbol set!);
-                                             Symbol
-                                               (SynSymbol nextPossibleIndex);
+                                            [Symbol (SynSymbol set!); Symbol (SynSymbol nextPossibleIndex);
                                              List
-                                               (Paren,
-                                                [Symbol (SynSymbol bcompl);
-                                                 Symbol
-                                                   (SynSymbol nextPossibleIndex)],
-                                                (58,38--58,64))], (58,14--58,65))],
-                                        (57,12--58,66));
+                                               (Paren, [Symbol (SynSymbol bcompl); Symbol (SynSymbol nextPossibleIndex)],
+                                                (58,38--58,64))], (58,14--58,65))], (57,12--58,66));
                                      List
                                        (Paren,
                                         [Symbol (SynSymbol EnqueueWork);
-                                         List
-                                           (Paren,
-                                            [Symbol (SynSymbol inc);
-                                             Symbol (SynSymbol bi)],
-                                            (59,25--59,33));
-                                         Symbol (SynSymbol offsetEnd);
-                                         Symbol (SynSymbol nextPossibleIndex);
-                                         Symbol (SynSymbol count)],
-                                        (59,12--59,68))], (54,10--60,11))],
-                                (38,9--60,11))); Const (Unit, (62,8--62,10))],
-                         (28,7--62,10))], (27,5--63,7))], (26,3--63,8))],
-             (9,1--64,5)), (9,0--65,1));
+                                         List (Paren, [Symbol (SynSymbol inc); Symbol (SynSymbol bi)], (59,25--59,33));
+                                         Symbol (SynSymbol offsetEnd); Symbol (SynSymbol nextPossibleIndex);
+                                         Symbol (SynSymbol count)], (59,12--59,68))], (54,10--60,11))], (38,9--60,11)));
+                          Const (Unit, (62,8--62,10))], (28,7--62,10))], (27,5--63,7))], (26,3--63,8))], (9,1--64,5)),
+          (9,0--65,1));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (67,0--67,14)),
              FunctionCall
-               (Symbol (SynSymbol printfn),
-                [Const (String ("OK", Regular, (67,9--67,13)), (67,9--67,13))],
+               (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (67,9--67,13)), (67,9--67,13))],
                 (67,1--67,13)), None, (67,0--67,14)), (67,0--67,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (67,0--67,14)), (67,0--67,14));
-              Symbol (SynSymbol visp_result_todo)], (67,0--67,14)),
-          (67,0--67,14))], (7,0--67,14))]
+             [Const (String ("%A", Regular, (67,0--67,14)), (67,0--67,14)); Symbol (SynSymbol visp_result_todo)],
+             (67,0--67,14)), (67,0--67,14))], (7,0--67,14))]

@@ -8,21 +8,15 @@
                 Collection
                   (SynCollection
                      (FsList,
-                      [Const (Int32 1, (8,20--8,21));
-                       Const (Int32 2, (8,22--8,23));
-                       Const (Int32 3, (8,24--8,25));
-                       Const (Int32 4, (8,26--8,27));
-                       Const (Int32 5, (8,28--8,29));
-                       Const (Int32 6, (8,30--8,31))], (8,14--8,31))),
+                      [Const (Int32 1, (8,20--8,21)); Const (Int32 2, (8,22--8,23)); Const (Int32 3, (8,24--8,25));
+                       Const (Int32 4, (8,26--8,27)); Const (Int32 5, (8,28--8,29)); Const (Int32 6, (8,30--8,31))],
+                      (8,14--8,31))),
                 [FunctionCall
                    (Symbol (SynSymbol printfn),
-                    [Const
-                       (String ("var is: %O", Regular, (9,11--9,23)),
-                        (9,11--9,23)); Symbol (SynSymbol var)], (9,3--9,27))],
-                (8,1--9,28)), None, (8,0--9,29)), (8,0--9,29));
+                    [Const (String ("var is: %O", Regular, (9,11--9,23)), (9,11--9,23)); Symbol (SynSymbol var)],
+                    (9,3--9,27))], (8,1--9,28)), None, (8,0--9,29)), (8,0--9,29));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (8,0--9,29)), (8,0--9,29));
-              Symbol (SynSymbol visp_result_todo)], (8,0--9,29)), (8,0--9,29))],
-      (8,0--9,29))]
+             [Const (String ("%A", Regular, (8,0--9,29)), (8,0--9,29)); Symbol (SynSymbol visp_result_todo)],
+             (8,0--9,29)), (8,0--9,29))], (8,0--9,29))]

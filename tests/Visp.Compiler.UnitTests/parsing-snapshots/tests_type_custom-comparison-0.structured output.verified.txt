@@ -5,36 +5,27 @@
          (Union
             (SynSymbol MyCustomValue,
              [UnionCase (SynSymbol Nil, [], (12,2--12,5));
-              UnionCase
-                (SynSymbol String, [Type (Ident string, (13,10--13,16))],
-                 (13,3--13,16))],
+              UnionCase (SynSymbol String, [Type (Ident string, (13,10--13,16))], (13,3--13,16))],
              [OverrideFn
                 (SynSymbol t.GetHashCode, Args (List [], (15,29--15,31)),
                  [Match
                     (Symbol (SynSymbol t),
                      [SynMatch
-                        (Named (SynSymbol Nil, (17,7--17,10)), None,
-                         [Const (Int32 919321, (17,11--17,17))], (17,7--17,17));
+                        (Named (SynSymbol Nil, (17,7--17,10)), None, [Const (Int32 919321, (17,11--17,17))],
+                         (17,7--17,17));
                       SynMatch
                         (Collection
                            (SynCollection
-                              (Paren,
-                               [Named (SynSymbol String, (18,8--18,14));
-                                Named (SynSymbol s, (18,15--18,16))],
+                              (Paren, [Named (SynSymbol String, (18,8--18,14)); Named (SynSymbol s, (18,15--18,16))],
                                (18,7--18,17))), None,
                          [FunctionCall
                             (Symbol (SynSymbol System.HashCode.Combine),
                              [Tuple
-                                ([Const
-                                    (String ("string", Regular, (18,44--18,52)),
-                                     (18,44--18,52)); Symbol (SynSymbol s)],
-                                 (18,44--18,55))], (18,19--18,56))],
-                         (18,7--18,57))], (16,5--18,58))], (15,3--19,5));
+                                ([Const (String ("string", Regular, (18,44--18,52)), (18,44--18,52));
+                                  Symbol (SynSymbol s)], (18,44--18,55))], (18,19--18,56))], (18,7--18,57))],
+                     (16,5--18,58))], (15,3--19,5));
               OverrideFn
-                (SynSymbol t.Equals,
-                 Args
-                   (List [Named (SynSymbol other, (21,25--21,30))],
-                    (21,24--21,31)),
+                (SynSymbol t.Equals, Args (List [Named (SynSymbol other, (21,25--21,30))], (21,24--21,31)),
                  [Match
                     (Symbol (SynSymbol other),
                      [SynMatch
@@ -42,41 +33,28 @@
                            (SynCollection
                               (Paren,
                                [As
-                                  (IsInst (Ident MyCustomValue, (23,8--23,24)),
-                                   Named (SynSymbol v, (23,25--23,26)),
+                                  (IsInst (Ident MyCustomValue, (23,8--23,24)), Named (SynSymbol v, (23,25--23,26)),
                                    (23,7--23,27))], (23,7--23,27))), None,
                          [DotMethod
                             (Op
                                (Infix
-                                  (SynSymbol :>,
-                                   [Symbol (SynSymbol t);
-                                    Symbol (SynSymbol IEquatable<_>)],
-                                   (24,18--24,36))), SynSymbol Equals,
-                             [Symbol (SynSymbol v)], Tuple, (24,9--24,39))],
+                                  (SynSymbol :>, [Symbol (SynSymbol t); Symbol (SynSymbol IEquatable<_>)],
+                                   (24,18--24,36))), SynSymbol Equals, [Symbol (SynSymbol v)], Tuple, (24,9--24,39))],
                          (23,7--24,40));
-                      SynMatch
-                        (Discard (26,7--26,8), None,
-                         [Const (Bool false, (26,9--26,14))], (26,7--26,14))],
+                      SynMatch (Discard (26,7--26,8), None, [Const (Bool false, (26,9--26,14))], (26,7--26,14))],
                      (22,5--26,15))], (21,3--27,5));
               Interface
                 (SynSymbol IEquatable<MyCustomValue>,
                  [MemberFn
-                    (SynSymbol t.Equals,
-                     Args
-                       (List [Named (SynSymbol other, (30,25--30,30))],
-                        (30,24--30,31)),
+                    (SynSymbol t.Equals, Args (List [Named (SynSymbol other, (30,25--30,30))], (30,24--30,31)),
                      [Match
-                        (Tuple
-                           ([Symbol (SynSymbol t); Symbol (SynSymbol other)],
-                            (31,14--31,22)),
+                        (Tuple ([Symbol (SynSymbol t); Symbol (SynSymbol other)], (31,14--31,22)),
                          [SynMatch
                             (Collection
                                (SynCollection
                                   (Paren,
-                                   [Named (SynSymbol Nil, (32,10--32,13));
-                                    Trivia (Dot, (32,14--32,15));
-                                    Named (SynSymbol Nil, (32,16--32,19))],
-                                   (32,9--32,20))), None,
+                                   [Named (SynSymbol Nil, (32,10--32,13)); Trivia (Dot, (32,14--32,15));
+                                    Named (SynSymbol Nil, (32,16--32,19))], (32,9--32,20))), None,
                              [Const (Bool true, (32,21--32,25))], (32,9--32,25));
                           SynMatch
                             (Collection
@@ -85,42 +63,27 @@
                                    [Collection
                                       (SynCollection
                                          (Paren,
-                                          [Named
-                                             (SynSymbol String, (33,11--33,17));
-                                           Named (SynSymbol lhs, (33,18--33,21))],
-                                          (33,10--33,22)));
+                                          [Named (SynSymbol String, (33,11--33,17));
+                                           Named (SynSymbol lhs, (33,18--33,21))], (33,10--33,22)));
                                     Trivia (Dot, (33,23--33,24));
                                     Collection
                                       (SynCollection
                                          (Paren,
-                                          [Named
-                                             (SynSymbol String, (33,26--33,32));
-                                           Named (SynSymbol rhs, (33,33--33,36))],
-                                          (33,25--33,37)))], (33,9--33,38))),
+                                          [Named (SynSymbol String, (33,26--33,32));
+                                           Named (SynSymbol rhs, (33,33--33,36))], (33,25--33,37)))], (33,9--33,38))),
                              None,
-                             [Op
-                                (Infix
-                                   (SynSymbol =,
-                                    [Symbol (SynSymbol lhs);
-                                     Symbol (SynSymbol rhs)], (33,40--33,49)))],
+                             [Op (Infix (SynSymbol =, [Symbol (SynSymbol lhs); Symbol (SynSymbol rhs)], (33,40--33,49)))],
                              (33,9--33,50));
                           SynMatch
                             (Collection
                                (SynCollection
-                                  (Paren,
-                                   [Discard (34,10--34,11);
-                                    Trivia (Dot, (34,12--34,13));
-                                    Discard (34,14--34,15)], (34,9--34,16))),
-                             None, [Const (Bool false, (34,17--34,22))],
-                             (34,9--34,22))], (31,7--34,23))], (30,5--35,7))],
-                 (29,3--36,5));
+                                  (Paren, [Discard (34,10--34,11); Trivia (Dot, (34,12--34,13)); Discard (34,14--34,15)],
+                                   (34,9--34,16))), None, [Const (Bool false, (34,17--34,22))], (34,9--34,22))],
+                         (31,7--34,23))], (30,5--35,7))], (29,3--36,5));
               Interface
                 (SynSymbol IComparable,
                  [MemberFn
-                    (SynSymbol t.CompareTo,
-                     Args
-                       (List [Named (SynSymbol other, (39,28--39,33))],
-                        (39,27--39,34)),
+                    (SynSymbol t.CompareTo, Args (List [Named (SynSymbol other, (39,28--39,33))], (39,27--39,34)),
                      [Match
                         (Symbol (SynSymbol other),
                          [SynMatch
@@ -128,60 +91,41 @@
                                (SynCollection
                                   (Paren,
                                    [As
-                                      (IsInst
-                                         (Ident MyCustomValue, (41,10--41,26)),
-                                       Named (SynSymbol v, (41,27--41,28)),
+                                      (IsInst (Ident MyCustomValue, (41,10--41,26)), Named (SynSymbol v, (41,27--41,28)),
                                        (41,9--41,29))], (41,9--41,29))), None,
                              [DotMethod
                                 (Op
                                    (Infix
-                                      (SynSymbol :>,
-                                       [Symbol (SynSymbol t);
-                                        Symbol (SynSymbol IComparable<_>)],
-                                       (42,23--42,42))), SynSymbol CompareTo,
-                                 [Symbol (SynSymbol v)], Tuple, (42,11--42,45))],
-                             (41,9--42,46));
+                                      (SynSymbol :>, [Symbol (SynSymbol t); Symbol (SynSymbol IComparable<_>)],
+                                       (42,23--42,42))), SynSymbol CompareTo, [Symbol (SynSymbol v)], Tuple,
+                                 (42,11--42,45))], (41,9--42,46));
                           SynMatch
-                            (Named (SynSymbol null, (44,9--44,13)), None,
-                             [Const (Int32 1, (44,14--44,15))], (44,9--44,15));
-                          SynMatch
-                            (Discard (45,9--45,10), None,
-                             [Const (Int32 -1, (45,11--45,13))], (45,9--45,13))],
+                            (Named (SynSymbol null, (44,9--44,13)), None, [Const (Int32 1, (44,14--44,15))],
+                             (44,9--44,15));
+                          SynMatch (Discard (45,9--45,10), None, [Const (Int32 -1, (45,11--45,13))], (45,9--45,13))],
                          (40,7--45,14))], (39,5--46,7))], (38,3--46,8));
               Interface
                 (SynSymbol IComparable<MyCustomValue>,
                  [MemberFn
-                    (SynSymbol t.CompareTo,
-                     Args
-                       (List [Named (SynSymbol other, (49,28--49,33))],
-                        (49,27--49,34)),
+                    (SynSymbol t.CompareTo, Args (List [Named (SynSymbol other, (49,28--49,33))], (49,27--49,34)),
                      [Match
-                        (Tuple
-                           ([Symbol (SynSymbol t); Symbol (SynSymbol other)],
-                            (50,14--50,22)),
+                        (Tuple ([Symbol (SynSymbol t); Symbol (SynSymbol other)], (50,14--50,22)),
                          [SynMatch
                             (Collection
                                (SynCollection
                                   (Paren,
-                                   [Named (SynSymbol Nil, (51,10--51,13));
-                                    Trivia (Comma, (51,13--51,14));
-                                    Named (SynSymbol Nil, (51,15--51,18))],
-                                   (51,9--51,19))), None,
+                                   [Named (SynSymbol Nil, (51,10--51,13)); Trivia (Comma, (51,13--51,14));
+                                    Named (SynSymbol Nil, (51,15--51,18))], (51,9--51,19))), None,
                              [Const (Int32 0, (51,20--51,21))], (51,9--51,21));
                           SynMatch
                             (Collection
                                (SynCollection
                                   (Paren,
-                                   [Named (SynSymbol Nil, (52,10--52,13));
-                                    Trivia (Comma, (52,13--52,14));
+                                   [Named (SynSymbol Nil, (52,10--52,13)); Trivia (Comma, (52,13--52,14));
                                     Collection
                                       (SynCollection
-                                         (Paren,
-                                          [Named
-                                             (SynSymbol String, (52,16--52,22));
-                                           Discard (52,23--52,24)],
-                                          (52,15--52,25)))], (52,9--52,26))),
-                             None, [Const (Int32 -1, (52,27--52,29))],
+                                         (Paren, [Named (SynSymbol String, (52,16--52,22)); Discard (52,23--52,24)],
+                                          (52,15--52,25)))], (52,9--52,26))), None, [Const (Int32 -1, (52,27--52,29))],
                              (52,9--52,29));
                           SynMatch
                             (Collection
@@ -189,14 +133,9 @@
                                   (Paren,
                                    [Collection
                                       (SynCollection
-                                         (Paren,
-                                          [Named
-                                             (SynSymbol String, (53,11--53,17));
-                                           Discard (53,18--53,19)],
-                                          (53,10--53,20)));
-                                    Trivia (Comma, (53,20--53,21));
-                                    Named (SynSymbol Nil, (53,22--53,25))],
-                                   (53,9--53,26))), None,
+                                         (Paren, [Named (SynSymbol String, (53,11--53,17)); Discard (53,18--53,19)],
+                                          (53,10--53,20))); Trivia (Comma, (53,20--53,21));
+                                    Named (SynSymbol Nil, (53,22--53,25))], (53,9--53,26))), None,
                              [Const (Int32 1, (53,27--53,28))], (53,9--53,28));
                           SynMatch
                             (Collection
@@ -205,94 +144,70 @@
                                    [Collection
                                       (SynCollection
                                          (Paren,
-                                          [Named
-                                             (SynSymbol String, (54,11--54,17));
-                                           Named (SynSymbol lhs, (54,18--54,21))],
-                                          (54,10--54,22)));
+                                          [Named (SynSymbol String, (54,11--54,17));
+                                           Named (SynSymbol lhs, (54,18--54,21))], (54,10--54,22)));
                                     Trivia (Comma, (54,22--54,23));
                                     Collection
                                       (SynCollection
                                          (Paren,
-                                          [Named
-                                             (SynSymbol String, (54,25--54,31));
-                                           Named (SynSymbol rhs, (54,32--54,35))],
-                                          (54,24--54,36)))], (54,9--54,37))),
+                                          [Named (SynSymbol String, (54,25--54,31));
+                                           Named (SynSymbol rhs, (54,32--54,35))], (54,24--54,36)))], (54,9--54,37))),
                              None,
                              [DotMethod
-                                (Symbol (SynSymbol lhs), SynSymbol CompareTo,
-                                 [Symbol (SynSymbol rhs)], Tuple, (54,39--54,57))],
-                             (54,9--54,58))], (50,7--54,59))], (49,5--55,7))],
-                 (48,3--55,8))],
+                                (Symbol (SynSymbol lhs), SynSymbol CompareTo, [Symbol (SynSymbol rhs)], Tuple,
+                                 (54,39--54,57))], (54,9--54,58))], (50,7--54,59))], (49,5--55,7))], (48,3--55,8))],
              [{ Attributes =
                  [{ TypeName = Ident CustomEquality
                     ArgExpr = Const (Unit, (10,3--10,17))
-                    Range = (10,3--10,17) };
-                  { TypeName = Ident CustomComparison
-                    ArgExpr = Const (Unit, (10,20--10,36))
-                    Range = (10,20--10,36) };
-                  { TypeName = Ident RequireQualifiedAccess
-                    ArgExpr = Const (Unit, (10,39--10,61))
-                    Range = (10,39--10,61) }]
+                    Range = (10,3--10,17) }; { TypeName = Ident CustomComparison
+                                               ArgExpr = Const (Unit, (10,20--10,36))
+                                               Range = (10,20--10,36) }; { TypeName = Ident RequireQualifiedAccess
+                                                                           ArgExpr = Const (Unit, (10,39--10,61))
+                                                                           Range = (10,39--10,61) }]
                 Range = (10,1--10,62) }], (10,1--55,9)), (10,0--56,1));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("Nil < String %A", Regular, (58,9--58,26)),
-                 (58,9--58,26));
+             [Const (String ("Nil < String %A", Regular, (58,9--58,26)), (58,9--58,26));
               Op
                 (Infix
                    (SynSymbol <,
                     [Symbol (SynSymbol MyCustomValue.Nil);
                      FunctionCall
                        (Symbol (SynSymbol MyCustomValue.String),
-                        [Const
-                           (String ("hello", Regular, (58,70--58,77)),
-                            (58,70--58,77))], (58,49--58,77))], (58,28--58,78)))],
-             (58,1--58,79)), (58,0--58,80));
+                        [Const (String ("hello", Regular, (58,70--58,77)), (58,70--58,77))], (58,49--58,77))],
+                    (58,28--58,78)))], (58,1--58,79)), (58,0--58,80));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("Nil > String %A", Regular, (59,9--59,26)),
-                 (59,9--59,26));
+             [Const (String ("Nil > String %A", Regular, (59,9--59,26)), (59,9--59,26));
               Op
                 (Infix
                    (SynSymbol >,
                     [Symbol (SynSymbol MyCustomValue.Nil);
                      FunctionCall
                        (Symbol (SynSymbol MyCustomValue.String),
-                        [Const
-                           (String ("hello", Regular, (59,70--59,77)),
-                            (59,70--59,77))], (59,49--59,77))], (59,28--59,78)))],
-             (59,1--59,79)), (59,0--59,80));
+                        [Const (String ("hello", Regular, (59,70--59,77)), (59,70--59,77))], (59,49--59,77))],
+                    (59,28--59,78)))], (59,1--59,79)), (59,0--59,80));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const
-                (String ("String = String %A", Regular, (60,9--60,29)),
-                 (60,9--60,29));
+             [Const (String ("String = String %A", Regular, (60,9--60,29)), (60,9--60,29));
               Op
                 (Infix
                    (SynSymbol =,
                     [FunctionCall
                        (Symbol (SynSymbol MyCustomValue.String),
-                        [Const
-                           (String ("hello", Regular, (60,55--60,62)),
-                            (60,55--60,62))], (60,34--60,62));
+                        [Const (String ("hello", Regular, (60,55--60,62)), (60,55--60,62))], (60,34--60,62));
                      FunctionCall
                        (Symbol (SynSymbol MyCustomValue.String),
-                        [Const
-                           (String ("hello", Regular, (60,86--60,93)),
-                            (60,86--60,93))], (60,65--60,93))], (60,31--60,94)))],
-             (60,1--60,95)), (60,0--60,96));
+                        [Const (String ("hello", Regular, (60,86--60,93)), (60,86--60,93))], (60,65--60,93))],
+                    (60,31--60,94)))], (60,1--60,95)), (60,0--60,96));
        Expr
-         (LetOrUse
-            (Named (SynSymbol visp_result_todo, (62,0--62,2)),
-             Const (Unit, (62,0--62,2)), None, (62,0--62,2)), (62,0--62,2));
+         (LetOrUse (Named (SynSymbol visp_result_todo, (62,0--62,2)), Const (Unit, (62,0--62,2)), None, (62,0--62,2)),
+          (62,0--62,2));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (62,0--62,2)), (62,0--62,2));
-              Symbol (SynSymbol visp_result_todo)], (62,0--62,2)), (62,0--62,2))],
-      (8,0--62,2))]
+             [Const (String ("%A", Regular, (62,0--62,2)), (62,0--62,2)); Symbol (SynSymbol visp_result_todo)],
+             (62,0--62,2)), (62,0--62,2))], (8,0--62,2))]

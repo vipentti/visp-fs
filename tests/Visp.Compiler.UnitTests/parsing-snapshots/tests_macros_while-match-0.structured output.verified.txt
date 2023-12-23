@@ -3,35 +3,24 @@
      ([Expr
          (Type
             (SynSymbol Counter, Args (Tuple [], (8,14--8,16)),
-             [Mut
-                (Named (SynSymbol count, (9,7--9,12)),
-                 Const (Int32 0, (9,13--9,14)), (9,3--9,14));
+             [Mut (Named (SynSymbol count, (9,7--9,12)), Const (Int32 0, (9,13--9,14)), (9,3--9,14));
               MemberFn
                 (SynSymbol _.DoStuff, Args (List [], (10,23--10,25)),
                  [If
                     (Op
-                       (Infix
-                          (SynSymbol >,
-                           [Symbol (SynSymbol count);
-                            Const (Int32 6, (11,17--11,18))], (11,9--11,18))),
+                       (Infix (SynSymbol >, [Symbol (SynSymbol count); Const (Int32 6, (11,17--11,18))], (11,9--11,18))),
                      Symbol (SynSymbol None),
                      Some
                        (Begin
                           ([Set
                               (Symbol (SynSymbol count),
-                               FunctionCall
-                                 (Symbol (SynSymbol inc),
-                                  [Symbol (SynSymbol count)], (14,21--14,30)),
+                               FunctionCall (Symbol (SynSymbol inc), [Symbol (SynSymbol count)], (14,21--14,30)),
                                (14,9--14,31));
-                            FunctionCall
-                              (Symbol (SynSymbol Some),
-                               [Symbol (SynSymbol count)], (15,9--15,19))], Do,
-                           (13,7--15,20))), (11,5--16,7))], (10,3--17,5))], [],
-             (8,1--17,6)), (8,0--17,7));
+                            FunctionCall (Symbol (SynSymbol Some), [Symbol (SynSymbol count)], (15,9--15,19))], Do,
+                           (13,7--15,20))), (11,5--16,7))], (10,3--17,5))], [], (8,1--17,6)), (8,0--17,7));
        Expr
          (LetOrUse
-            (Named (SynSymbol counter, (19,5--19,12)),
-             New (Ident Counter, [], (19,14--19,25)), None, (19,1--19,26)),
+            (Named (SynSymbol counter, (19,5--19,12)), New (Ident Counter, [], (19,14--19,25)), None, (19,1--19,26)),
           (19,0--19,27));
        Expr
          (LetOrUse
@@ -40,40 +29,24 @@
                (SynMacroCall
                   (SynSymbol while-match,
                    [Symbol (SynSymbol while-match);
-                    List
-                      (Paren,
-                       [Symbol (SynSymbol .DoStuff); Symbol (SynSymbol counter)],
-                       (21,13--21,31));
+                    List (Paren, [Symbol (SynSymbol .DoStuff); Symbol (SynSymbol counter)], (21,13--21,31));
+                    List (Bracket, [Symbol (SynSymbol None); Const (Bool false, (22,8--22,13))], (22,2--22,14));
                     List
                       (Bracket,
-                       [Symbol (SynSymbol None);
-                        Const (Bool false, (22,8--22,13))], (22,2--22,14));
-                    List
-                      (Bracket,
-                       [List
-                          (Paren,
-                           [Symbol (SynSymbol Some); Symbol (SynSymbol c)],
-                           (23,3--23,11));
+                       [List (Paren, [Symbol (SynSymbol Some); Symbol (SynSymbol c)], (23,3--23,11));
                         List
                           (Paren,
                            [Symbol (SynSymbol printfn);
-                            Const
-                              (String ("Count is: %i", Regular, (24,13--24,27)),
-                               (24,13--24,27)); Symbol (SynSymbol c)],
-                           (24,4--24,30));
+                            Const (String ("Count is: %i", Regular, (24,13--24,27)), (24,13--24,27));
+                            Symbol (SynSymbol c)], (24,4--24,30));
                         List
                           (Paren,
                            [Symbol (SynSymbol let); Discard (25,9--25,10);
-                            List
-                              (Paren,
-                               [Symbol (SynSymbol .DoStuff);
-                                Symbol (SynSymbol counter)], (25,11--25,29))],
-                           (25,4--25,30)); Const (Bool true, (26,4--26,8))],
-                       (23,2--26,9))], (21,1--26,9))), None, (21,0--26,10)),
-          (21,0--26,10));
+                            List (Paren, [Symbol (SynSymbol .DoStuff); Symbol (SynSymbol counter)], (25,11--25,29))],
+                           (25,4--25,30)); Const (Bool true, (26,4--26,8))], (23,2--26,9))], (21,1--26,9))), None,
+             (21,0--26,10)), (21,0--26,10));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (21,0--26,10)), (21,0--26,10));
-              Symbol (SynSymbol visp_result_todo)], (21,0--26,10)),
-          (21,0--26,10))], (8,0--26,10))]
+             [Const (String ("%A", Regular, (21,0--26,10)), (21,0--26,10)); Symbol (SynSymbol visp_result_todo)],
+             (21,0--26,10)), (21,0--26,10))], (8,0--26,10))]

@@ -6,42 +6,33 @@
              Collection
                (SynCollection
                   (Bracket,
-                   [Const (Int32 1, (8,10--8,11)); Const (Int32 2, (8,12--8,13));
-                    Const (Int32 3, (8,14--8,15)); Const (Int32 4, (8,16--8,17));
-                    Const (Int32 5, (8,18--8,19)); Const (Int32 6, (8,20--8,21))],
+                   [Const (Int32 1, (8,10--8,11)); Const (Int32 2, (8,12--8,13)); Const (Int32 3, (8,14--8,15));
+                    Const (Int32 4, (8,16--8,17)); Const (Int32 5, (8,18--8,19)); Const (Int32 6, (8,20--8,21))],
                    (8,9--8,22))), Mutable, (8,1--8,22)), (8,0--8,23));
        Expr
          (LetOrUse
-            (Named (SynSymbol empty, (9,5--9,10)),
-             Collection (SynCollection (Bracket, [], (9,11--9,13))), None,
+            (Named (SynSymbol empty, (9,5--9,10)), Collection (SynCollection (Bracket, [], (9,11--9,13))), None,
              (9,1--9,13)), (9,0--9,14));
        Expr
          (Set
-            (DotIndex
-               (Symbol (SynSymbol vec), [Const (Int32 1, (11,9--11,10))],
-                (11,7--11,15)),
-             FunctionCall
-               (Symbol (SynSymbol Value.int), [Const (Int32 -1, (11,28--11,30))],
-                (11,18--11,30)), (11,1--11,31)), (11,0--11,32));
+            (DotIndex (Symbol (SynSymbol vec), [Const (Int32 1, (11,9--11,10))], (11,7--11,15)),
+             FunctionCall (Symbol (SynSymbol Value.int), [Const (Int32 -1, (11,28--11,30))], (11,18--11,30)),
+             (11,1--11,31)), (11,0--11,32));
        Expr
          (DotMethod
             (Symbol (SynSymbol empty), SynSymbol Add,
-             [FunctionCall
-                (Symbol (SynSymbol Value.int),
-                 [Const (Int32 99, (13,23--13,25))], (13,13--13,25))], Tuple,
+             [FunctionCall (Symbol (SynSymbol Value.int), [Const (Int32 99, (13,23--13,25))], (13,13--13,25))], Tuple,
              (13,1--13,26)), (13,0--13,27));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%O", Regular, (15,9--15,13)), (15,9--15,13));
-              Symbol (SynSymbol empty)], (15,1--15,19)), (15,0--15,20));
+             [Const (String ("%O", Regular, (15,9--15,13)), (15,9--15,13)); Symbol (SynSymbol empty)], (15,1--15,19)),
+          (15,0--15,20));
        Expr
-         (LetOrUse
-            (Named (SynSymbol visp_result_todo, (17,0--17,3)),
-             Symbol (SynSymbol vec), None, (17,0--17,3)), (17,0--17,3));
+         (LetOrUse (Named (SynSymbol visp_result_todo, (17,0--17,3)), Symbol (SynSymbol vec), None, (17,0--17,3)),
+          (17,0--17,3));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (17,0--17,3)), (17,0--17,3));
-              Symbol (SynSymbol visp_result_todo)], (17,0--17,3)), (17,0--17,3))],
-      (8,0--17,3))]
+             [Const (String ("%A", Regular, (17,0--17,3)), (17,0--17,3)); Symbol (SynSymbol visp_result_todo)],
+             (17,0--17,3)), (17,0--17,3))], (8,0--17,3))]

@@ -8,25 +8,16 @@
                 Collection
                   (SynCollection
                      (FsMap,
-                      [Tuple
-                         ([Const (Int32 1, (9,20--9,21));
-                           Const (Int32 2, (9,24--9,25))], (9,20--9,25));
-                       Tuple
-                         ([Const (Int32 3, (9,28--9,29));
-                           Const (Int32 4, (9,32--9,33))], (9,28--9,33));
-                       Tuple
-                         ([Const (Int32 5, (9,36--9,37));
-                           Const (Int32 6, (9,40--9,41))], (9,36--9,41))],
+                      [Tuple ([Const (Int32 1, (9,20--9,21)); Const (Int32 2, (9,24--9,25))], (9,20--9,25));
+                       Tuple ([Const (Int32 3, (9,28--9,29)); Const (Int32 4, (9,32--9,33))], (9,28--9,33));
+                       Tuple ([Const (Int32 5, (9,36--9,37)); Const (Int32 6, (9,40--9,41))], (9,36--9,41))],
                       (9,14--9,42))),
                 [FunctionCall
                    (Symbol (SynSymbol printfn),
-                    [Const
-                       (String ("var is: %O", Regular, (10,11--10,23)),
-                        (10,11--10,23)); Symbol (SynSymbol var)], (10,3--10,27))],
-                (9,1--10,28)), None, (9,0--10,29)), (9,0--10,29));
+                    [Const (String ("var is: %O", Regular, (10,11--10,23)), (10,11--10,23)); Symbol (SynSymbol var)],
+                    (10,3--10,27))], (9,1--10,28)), None, (9,0--10,29)), (9,0--10,29));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (9,0--10,29)), (9,0--10,29));
-              Symbol (SynSymbol visp_result_todo)], (9,0--10,29)), (9,0--10,29))],
-      (9,0--10,29))]
+             [Const (String ("%A", Regular, (9,0--10,29)), (9,0--10,29)); Symbol (SynSymbol visp_result_todo)],
+             (9,0--10,29)), (9,0--10,29))], (9,0--10,29))]
