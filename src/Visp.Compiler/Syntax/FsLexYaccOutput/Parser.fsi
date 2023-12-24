@@ -57,6 +57,8 @@ type token =
   | FNSTAR
   | LET
   | USE
+  | VAL
+  | STATIC
   | LET_BANG
   | USE_BANG
   | DO_BANG
@@ -184,6 +186,8 @@ type tokenId =
     | TOKEN_FNSTAR
     | TOKEN_LET
     | TOKEN_USE
+    | TOKEN_VAL
+    | TOKEN_STATIC
     | TOKEN_LET_BANG
     | TOKEN_USE_BANG
     | TOKEN_DO_BANG
@@ -388,6 +392,8 @@ type nonTerminalId =
     | NONTERM_member_get
     | NONTERM_member_set
     | NONTERM_member_member_in_parens
+    | NONTERM_member_let_mut_kw
+    | NONTERM_member_val_kw
     | NONTERM_member_in_parens
     | NONTERM_empty_bindings
     | NONTERM_binding_list_start

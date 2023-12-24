@@ -1,0 +1,122 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Type
+            (SynSymbol TestStructType, Ignore (9,2--9,21),
+             [Val (Named (SynSymbol X, (11,7--11,8)), Ident int, None, [], (11,3--11,12));
+              Val (Named (SynSymbol Y, (12,7--12,8)), Ident int, None, [], (12,3--12,12));
+              Constructor
+                (Args
+                   (Tuple
+                      [Named (SynSymbol x, (14,8--14,9)); Trivia (Comma, (14,7--14,8));
+                       Named (SynSymbol y, (14,10--14,11))], (14,7--14,12)),
+                 [RecordInit
+                    ([SynInit (SynSymbol X, Symbol (SynSymbol x), (14,16--14,21));
+                      SynInit (SynSymbol Y, Symbol (SynSymbol y), (14,22--14,27))], (14,13--14,30))], (14,3--14,30));
+              OverrideFn
+                (SynSymbol t.ToString, Args (List [], (16,25--16,27)),
+                 [FunctionCall
+                    (Symbol (SynSymbol sprintf),
+                     [Const (String ("TestStructType(%i, %i)", Regular, (16,37--16,61)), (16,37--16,61));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol X, (16,63--16,67));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (16,70--16,74))], (16,29--16,75))], (16,3--16,76))],
+             [{ Attributes = [{ TypeName = Ident Struct
+                                ArgExpr = Const (Unit, (8,3--8,9))
+                                Range = (8,3--8,9) }; { TypeName = Ident System.Runtime.CompilerServices.IsReadOnly
+                                                        ArgExpr = Const (Unit, (8,12--8,54))
+                                                        Range = (8,12--8,54) }]
+                Range = (8,1--8,55) }], (8,1--16,77)), (8,0--17,1));
+       Expr
+         (Type
+            (SynSymbol TestClassType, Ignore (19,6--25,76),
+             [Val (Named (SynSymbol X, (20,7--20,8)), Ident int, None, [], (20,3--20,12));
+              Val (Named (SynSymbol Y, (21,7--21,8)), Ident int, None, [], (21,3--21,12));
+              Constructor
+                (Args
+                   (Tuple
+                      [Named (SynSymbol x, (23,8--23,9)); Trivia (Comma, (23,7--23,8));
+                       Named (SynSymbol y, (23,10--23,11))], (23,7--23,12)),
+                 [RecordInit
+                    ([SynInit (SynSymbol X, Symbol (SynSymbol x), (23,16--23,21));
+                      SynInit (SynSymbol Y, Symbol (SynSymbol y), (23,22--23,27))], (23,13--23,30))], (23,3--23,30));
+              OverrideFn
+                (SynSymbol t.ToString, Args (List [], (25,25--25,27)),
+                 [FunctionCall
+                    (Symbol (SynSymbol sprintf),
+                     [Const (String ("TestClassType(%i, %i)", Regular, (25,37--25,60)), (25,37--25,60));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol X, (25,62--25,66));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (25,69--25,73))], (25,29--25,74))], (25,3--25,75))],
+             [], (19,1--25,76)), (19,0--26,1));
+       Expr
+         (Type
+            (SynSymbol MutableStruct, Ignore (28,11--28,29),
+             [Val (Named (SynSymbol intval, (29,11--29,17)), Ident int, Mutable, [], (29,3--29,21));
+              Val (Named (SynSymbol strval, (30,11--30,17)), Ident string, Mutable, [], (30,3--30,24));
+              OverrideFn
+                (SynSymbol t.ToString, Args (List [], (31,25--31,27)),
+                 [FunctionCall
+                    (Symbol (SynSymbol sprintf),
+                     [Const (String ("MutableStruct(%i, %s)", Regular, (31,37--31,60)), (31,37--31,60));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol intval, (31,62--31,71));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol strval, (31,74--31,83))], (31,29--31,84))],
+                 (31,3--31,85))], [{ Attributes = [{ TypeName = Ident Struct
+                                                     ArgExpr = Const (Unit, (28,3--28,9))
+                                                     Range = (28,3--28,9) }]
+                                     Range = (28,1--28,10) }], (28,1--31,86)), (28,0--32,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol myTestStruct, (34,5--34,17)),
+             New
+               (Ident TestStructType, [Const (Int32 1, (34,38--34,39)); Const (Int32 2, (34,40--34,41))], (34,19--34,41)),
+             None, [], (34,1--34,42)), (34,0--34,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("TestStruct: %A", Regular, (36,9--36,25)), (36,9--36,25)); Symbol (SynSymbol myTestStruct)],
+             (36,1--36,38)), (36,0--36,39));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol myTestClass, (38,5--38,16)),
+             New
+               (Ident TestClassType, [Const (Int32 3, (38,36--38,37)); Const (Int32 4, (38,38--38,39))], (38,18--38,39)),
+             None, [], (38,1--38,40)), (38,0--38,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("TestClass: %A", Regular, (39,9--39,24)), (39,9--39,24)); Symbol (SynSymbol myTestClass)],
+             (39,1--39,36)), (39,0--39,37));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol myMutableStruct, (41,5--41,20)), New (Ident MutableStruct, [], (41,22--41,39)), Mutable,
+             [], (41,1--41,40)), (41,0--41,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("MutableStruct: %A", Regular, (42,9--42,28)), (42,9--42,28));
+              Symbol (SynSymbol myMutableStruct)], (42,1--42,44)), (42,0--42,45));
+       Expr
+         (Set
+            (DotProperty (Symbol (SynSymbol myMutableStruct), SynSymbol intval, (44,7--44,30)),
+             Const (Int32 99, (44,32--44,34)), (44,1--44,34)), (44,0--44,35));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("MutableStruct: %A", Regular, (45,9--45,28)), (45,9--45,28));
+              Symbol (SynSymbol myMutableStruct)], (45,1--45,44)), (45,0--45,45));
+       Expr
+         (Set
+            (DotProperty (Symbol (SynSymbol myMutableStruct), SynSymbol strval, (47,7--47,30)),
+             Const (String ("value has been set!", Regular, (47,32--47,53)), (47,32--47,53)), (47,1--47,53)),
+          (47,0--47,54));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (48,0--48,45)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("MutableStruct: %A", Regular, (48,9--48,28)), (48,9--48,28));
+                 Symbol (SynSymbol myMutableStruct)], (48,1--48,44)), None, [], (48,0--48,45)), (48,0--48,45));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (48,0--48,45)), (48,0--48,45)); Symbol (SynSymbol visp_result_todo)],
+             (48,0--48,45)), (48,0--48,45))], (8,0--48,45))]

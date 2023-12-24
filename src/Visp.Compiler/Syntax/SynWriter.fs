@@ -530,6 +530,7 @@ module Write =
         | SynPat.Const(cnst, _) ->
             writeConst w false cnst
             ()
+        | SynPat.Ignore _ -> ()
         | SynPat.Trivia(kind, _) ->
             match kind with
             | SynPatternTriviaKind.Brackets -> string w "[]"
@@ -1400,14 +1401,31 @@ module Write =
 
     and private writeMember w st (mem: SynTypeMember) =
         match mem with
-        | SynTypeMember.Let(name, expr, range) ->
+        | SynTypeMember.Let(name, expr, flags, attributes, range) ->
             startExpr w st range
-            writeLetFullNew w st name expr LetFlags.None []
+            writeLetFullNew w st name expr flags attributes
             ()
-        | SynTypeMember.Mut(name, expr, range) ->
+        | SynTypeMember.Constructor(args, exprs, range) ->
             startExpr w st range
-            writeLetFullNew w st name expr LetFlags.Mutable []
-            ()
+            string w "new"
+            synPat w args
+            string w " ="
+            writeBody w writeExpr exprs
+        | SynTypeMember.Val(name, typ, flags, attributes, range) ->
+            startExpr w st range
+
+            writeAttributesIfNotEmpty w st attributes
+
+            string w "val"
+
+            if flags.HasFlag(LetFlags.Mutable) then
+                string w " mutable"
+
+            space w
+            synPat w name
+            string w " : "
+            writeType w typ
+
         | SynTypeMember.GetSet(name, get, set, range) ->
             startExpr w st range
             fmtprintf w "member %s" (Syntax.textOfSymbol name)

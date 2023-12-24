@@ -1,0 +1,91 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+[<Struct(); System.Runtime.CompilerServices.IsReadOnly()>]
+// line 8 @"val-ctor-0.visp"
+type TestStructType  =
+  // line 11 @"val-ctor-0.visp"
+  val X : int
+  // line 12 @"val-ctor-0.visp"
+  val Y : int
+  // line 14 @"val-ctor-0.visp"
+  new(x , y) =
+    // line 14 @"val-ctor-0.visp"
+    {
+      // line 14 @"val-ctor-0.visp"
+      X = x
+      // line 14 @"val-ctor-0.visp"
+      Y = y
+    }
+  // line 16 @"val-ctor-0.visp"
+  override t.ToString () =
+    // line 16 @"val-ctor-0.visp"
+    sprintf "TestStructType(%i, %i)" ((t.X)) ((t.Y))
+
+// line 19 @"val-ctor-0.visp"
+type TestClassType  =
+  // line 20 @"val-ctor-0.visp"
+  val X : int
+  // line 21 @"val-ctor-0.visp"
+  val Y : int
+  // line 23 @"val-ctor-0.visp"
+  new(x , y) =
+    // line 23 @"val-ctor-0.visp"
+    {
+      // line 23 @"val-ctor-0.visp"
+      X = x
+      // line 23 @"val-ctor-0.visp"
+      Y = y
+    }
+  // line 25 @"val-ctor-0.visp"
+  override t.ToString () =
+    // line 25 @"val-ctor-0.visp"
+    sprintf "TestClassType(%i, %i)" ((t.X)) ((t.Y))
+
+[<Struct()>]
+// line 28 @"val-ctor-0.visp"
+type MutableStruct  =
+  // line 29 @"val-ctor-0.visp"
+  val mutable intval : int
+  // line 30 @"val-ctor-0.visp"
+  val mutable strval : string
+  // line 31 @"val-ctor-0.visp"
+  override t.ToString () =
+    // line 31 @"val-ctor-0.visp"
+    sprintf "MutableStruct(%i, %s)" ((t.intval)) ((t.strval))
+
+// line 34 @"val-ctor-0.visp"
+let myTestStruct =
+  // line 34 @"val-ctor-0.visp"
+  (new TestStructType(1, 2))
+// line 36 @"val-ctor-0.visp"
+printfn "TestStruct: %A" myTestStruct
+// line 38 @"val-ctor-0.visp"
+let myTestClass =
+  // line 38 @"val-ctor-0.visp"
+  (new TestClassType(3, 4))
+// line 39 @"val-ctor-0.visp"
+printfn "TestClass: %A" myTestClass
+// line 41 @"val-ctor-0.visp"
+let mutable myMutableStruct =
+  // line 41 @"val-ctor-0.visp"
+  (new MutableStruct())
+// line 42 @"val-ctor-0.visp"
+printfn "MutableStruct: %A" myMutableStruct
+// line 44 @"val-ctor-0.visp"
+myMutableStruct.intval <- 99
+// line 45 @"val-ctor-0.visp"
+printfn "MutableStruct: %A" myMutableStruct
+// line 47 @"val-ctor-0.visp"
+myMutableStruct.strval <- "value has been set!"
+// line 48 @"val-ctor-0.visp"
+let visp_result_todo =
+  // line 48 @"val-ctor-0.visp"
+  printfn "MutableStruct: %A" myMutableStruct
+// line 48 @"val-ctor-0.visp"
+printfn "%A" visp_result_todo
+

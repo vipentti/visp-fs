@@ -191,10 +191,18 @@ and private fixMembers bound_transform members =
 
     let rec tfmember =
         function
-        | SynTypeMember.Let(name, expr, range) ->
-            SynTypeMember.Let(name, bound_transform expr, range)
-        | SynTypeMember.Mut(name, expr, range) ->
-            SynTypeMember.Mut(name, bound_transform expr, range)
+        | SynTypeMember.Let(name, expr, flags, attributes, range) ->
+            SynTypeMember.Let(
+                name,
+                bound_transform expr,
+                flags,
+                fixAttributes bound_transform attributes,
+                range
+            )
+        | SynTypeMember.Constructor(args, expr, range) ->
+            SynTypeMember.Constructor(args, List.map bound_transform expr, range)
+        | SynTypeMember.Val(name, typ, flags, attributes, range) ->
+            SynTypeMember.Val(name, typ, flags, fixAttributes bound_transform attributes, range)
         | SynTypeMember.Member(name, expr, range) ->
             SynTypeMember.Member(name, bound_transform expr, range)
         | SynTypeMember.MemberFn(name, args, expr, range) ->

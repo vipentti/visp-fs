@@ -37,7 +37,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token DOTDOT
 %token AT
 %token OPEN MODULE
-%token FN FNSTAR LET USE LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
+%token FN FNSTAR LET USE VAL STATIC LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
@@ -799,8 +799,12 @@ type_expr:
         { SynExpr.Type($2, $3, [], [], lhs parseState) }
     | TYPE type_name tuple_arg_pats member_list_start
         { SynExpr.Type($2, $3, $4, [], lhs parseState) }
+    | TYPE type_name member_list_start
+        { SynExpr.Type($2, (SynPat.Ignore (rhs2 parseState 2 3)), $3, [], lhs parseState) }
     | attribute_list TYPE type_name tuple_arg_pats member_list_start
         { SynExpr.Type($3, $4, $5, $1, lhs parseState) }
+    | attribute_list TYPE type_name member_list_start
+        { SynExpr.Type($3, (SynPat.Ignore (rhs2 parseState 2 3)), $4, $1, lhs parseState) }
 
 tuple_arg_pats:
     | UNIT { SynPat.Args(SynArgPats.Tuple([]), lhs parseState) }
@@ -990,16 +994,41 @@ member_member_in_parens:
     | member_name member_set member_get { SynTypeMember.GetSet($1, Some($3), Some($2), lhs parseState) }
     | member_name expr { SynTypeMember.Member($1, $2, lhs parseState) }
 
+member_let_mut_kw:
+    | LET { LetFlags.None }
+    | MUT %prec prec_member { LetFlags.Mutable }
+    | STATIC LET { LetFlags.Static ||| LetFlags.None }
+    | STATIC MUT { LetFlags.Static ||| LetFlags.Mutable }
+
+member_val_kw:
+    | VAL { LetFlags.None }
+    | VAL MUT { LetFlags.Mutable }
+
 member_in_parens:
-    | LET syn_pat expr
-        { SynTypeMember.Let($2, $3, lhs parseState) }
-    | MUT syn_pat expr
-        { SynTypeMember.Mut($2, $3, lhs parseState) }
+    | member_let_mut_kw syn_pat expr { SynTypeMember.Let($2, $3, $1, [], lhs parseState) }
+    | member_let_mut_kw syn_pat
+        {   let r = lhs parseState
+            SynTypeMember.Let($2, Syntax.parserRecoveryExpr r, $1, [], r) }
+    | attribute_list member_let_mut_kw syn_pat expr { SynTypeMember.Let($3, $4, $2, $1, lhs parseState) }
+    | attribute_list member_let_mut_kw syn_pat
+        {   let r = lhs parseState
+            SynTypeMember.Let($3, Syntax.parserRecoveryExpr r, $2, $1, r) }
+    | member_val_kw syn_pat syn_type { SynTypeMember.Val($2, $3, $1, [], lhs parseState) }
+    | member_val_kw syn_pat
+        {   let r = lhs parseState
+            SynTypeMember.Val($2, Syntax.parserRecoveryType r, $1, [], r) }
+    | attribute_list member_val_kw syn_pat syn_type { SynTypeMember.Val($3, $4, $2, $1, lhs parseState) }
+    | attribute_list member_val_kw syn_pat
+        {   let r = lhs parseState
+            SynTypeMember.Val($3, Syntax.parserRecoveryType r, $2, $1, r) }
+
     | member_member_in_parens { $1 }
     | MEMBERFN syn_symbol list_arg_pats expr_list
         { SynTypeMember.MemberFn($2, $3, $4, (lhs parseState)) }
     | MEMBER FN syn_symbol list_arg_pats expr_list
         { SynTypeMember.MemberFn($3, $4, $5, (lhs parseState)) }
+    | NEW tuple_arg_pats expr_list
+        { SynTypeMember.Constructor($2, $3, (lhs parseState)) }
     | OVERRIDE syn_symbol expr
         { SynTypeMember.OverrideMember($2, $3, lhs parseState) }
     | OVERRIDE FN syn_symbol list_arg_pats expr_list

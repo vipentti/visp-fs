@@ -4,7 +4,7 @@
          (Type
             (SynSymbol MyType,
              Args (Tuple [Typed (Named (SynSymbol value, (8,15--8,20)), Ident int32, (8,14--8,28))], (8,13--8,29)),
-             [Let (Named (SynSymbol field, (9,7--9,12)), Symbol (SynSymbol value), (9,3--9,18));
+             [Let (Named (SynSymbol field, (9,7--9,12)), Symbol (SynSymbol value), None, [], (9,3--9,18));
               Member (SynSymbol this.Foo, Symbol (SynSymbol value), (10,3--10,24));
               MemberFn
                 (SynSymbol this.Thing, Args (List [], (11,23--11,25)),

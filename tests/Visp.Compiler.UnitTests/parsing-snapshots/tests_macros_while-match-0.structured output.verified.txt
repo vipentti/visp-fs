@@ -3,7 +3,7 @@
      ([Expr
          (Type
             (SynSymbol Counter, Args (Tuple [], (8,14--8,16)),
-             [Mut (Named (SynSymbol count, (9,7--9,12)), Const (Int32 0, (9,13--9,14)), (9,3--9,14));
+             [Let (Named (SynSymbol count, (9,7--9,12)), Const (Int32 0, (9,13--9,14)), Mutable, [], (9,3--9,14));
               MemberFn
                 (SynSymbol _.DoStuff, Args (List [], (10,23--10,25)),
                  [If

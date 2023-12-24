@@ -5,8 +5,8 @@
          (Type
             (SynSymbol Mapping, Args (Tuple [], (10,14--10,16)),
              [Let
-                (Named (SynSymbol src_to_dest, (11,7--11,18)), New (Ident Dictionary<int,int>, [], (11,20--11,43)),
-                 (11,3--11,44));
+                (Named (SynSymbol src_to_dest, (11,7--11,18)), New (Ident Dictionary<int,int>, [], (11,20--11,43)), None,
+                 [], (11,3--11,44));
               MemberFn
                 (SynSymbol _.AddRange,
                  Args

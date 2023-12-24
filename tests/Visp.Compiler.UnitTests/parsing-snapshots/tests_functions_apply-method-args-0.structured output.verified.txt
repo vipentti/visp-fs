@@ -46,14 +46,14 @@
                    Typed
                      (Named (SynSymbol rocks, (22,29--22,34)), Generic (Ident array, [Ident Pos], (22,36--22,46)),
                       (22,28--22,47))], (22,14--22,48)),
-             [Let (Named (SynSymbol grid, (23,7--23,11)), Symbol (SynSymbol grid), (23,3--23,16));
+             [Let (Named (SynSymbol grid, (23,7--23,11)), Symbol (SynSymbol grid), None, [], (23,3--23,16));
               Let
                 (Named (SynSymbol height, (24,7--24,13)),
-                 FunctionCall (Symbol (SynSymbol Array2D.length1), [Symbol (SynSymbol grid)], (24,15--24,35)),
+                 FunctionCall (Symbol (SynSymbol Array2D.length1), [Symbol (SynSymbol grid)], (24,15--24,35)), None, [],
                  (24,3--24,36));
               Let
                 (Named (SynSymbol width, (25,7--25,12)),
-                 FunctionCall (Symbol (SynSymbol Array2D.length2), [Symbol (SynSymbol grid)], (25,14--25,34)),
+                 FunctionCall (Symbol (SynSymbol Array2D.length2), [Symbol (SynSymbol grid)], (25,14--25,34)), None, [],
                  (25,3--25,35)); Member (SynSymbol _.Rocks, Symbol (SynSymbol rocks), (27,3--27,23));
               OverrideFn
                 (SynSymbol _.ToString, Args (List [], (29,25--29,27)),

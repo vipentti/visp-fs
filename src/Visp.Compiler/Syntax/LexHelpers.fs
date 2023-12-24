@@ -241,7 +241,7 @@ let keywordTokenList =
 
 let contextSpecificKeywords =
     [ (LexContext.Member, [ ("get", MEMBER_GET); ("set", MEMBER_SET); ("interface", INTERFACE) ])
-      (LexContext.Type, [ ("interface", INTERFACE) ])
+      (LexContext.Type, [ ("interface", INTERFACE); ("val", VAL); ("static", STATIC) ])
       (LexContext.Match, [ ("when", WHEN) ]) ]
 
 let contextSpecificKeywordsMap =

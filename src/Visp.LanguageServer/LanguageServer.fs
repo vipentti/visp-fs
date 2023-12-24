@@ -283,11 +283,13 @@ let rec textRangeOfPat =
 
 let memberToSymbolDetails _ memval var (mem: SynTypeMember) =
     match mem with
-    | SynTypeMember.Mut(name = name) ->
-        textRangeOfPat name |> List.map (fun (a, r) -> var (a, true, r))
-    | SynTypeMember.Let(name = name) ->
+    | SynTypeMember.Let(pat = name; flags = flags) ->
+        textRangeOfPat name
+        |> List.map (fun (a, r) -> var (a, flags.HasFlag(LetFlags.Mutable), r))
+    | SynTypeMember.Val(pat = name) ->
         textRangeOfPat name |> List.map (fun (a, r) -> var (a, false, r))
     | SynTypeMember.Interface _ -> []
+    | SynTypeMember.Constructor _ -> []
     | SynTypeMember.GetSet(name = name)
     | SynTypeMember.Member(name = name)
     | SynTypeMember.OverrideMember(name = name) ->
