@@ -10,11 +10,16 @@ open PrettyPrinter.Print
 open Visp.Compiler.Syntax
 open Visp.Common
 open System.IO
-open FSharp.Text.Parsing
 
 // type SynMacroBody with
 //     interface IToDoc with
 //         member this.ToDoc () =
+
+let inline docToStringPooled doc =
+    let sb = PooledStringBuilder.Get()
+    use sw = new StringWriter(sb)
+    Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+    sb.ToStringAndReturn()
 
 let charToParseable (ch: char) =
     match ch with
@@ -89,6 +94,12 @@ let macroTriviaToDoc =
     | SynMacroTriviaKind.Bar -> Print.char '|'
     | SynMacroTriviaKind.ColonColon -> Print.text "::"
 
+let macroCallToDoc (SynMacroCall(name, args, _)) =
+    let doc =
+        (Print.(<+>)) (Print.text name.Text) (args |> List.tail |> List.map macroBodyToDoc |> hsep)
+
+    parens doc
+
 let rec macroBodyToDoc =
     function
     | SynMacroBody.Const(it, _) -> constToDoc it
@@ -97,14 +108,7 @@ let rec macroBodyToDoc =
     | SynMacroBody.Trivia(it, _) -> macroTriviaToDoc it
     | SynMacroBody.Symbol it -> Print.text it.Text
     | SynMacroBody.Keyword it -> Print.text it.Text
-    | SynMacroBody.Call(SynMacroCall(name, args, _)) ->
-        let doc =
-            (Print.(<+>))
-                (Print.text name.Text)
-                (args |> List.tail |> List.map macroBodyToDoc |> Print.hsep)
-
-        Print.parens doc
-
+    | SynMacroBody.Call(call) -> macroCallToDoc call
     | SynMacroBody.List(kind, its, _) ->
         let body = its |> List.map macroBodyToDoc |> Print.hsep
 
@@ -122,6 +126,17 @@ let rec macroBodyToDoc =
             | SynListKind.HashBrace -> Print.enclose (Print.text "#{") (Print.text "}")
 
         surround body
+
+
+type SynMacroCall with
+
+    member this.Pretty() =
+        let doc = macroCallToDoc this
+        let sb = PooledStringBuilder.Get()
+        use sw = new StringWriter(sb)
+        Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+        sb.ToStringAndReturn()
+
 
 type SynMacroPat with
 

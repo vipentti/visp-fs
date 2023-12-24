@@ -7,6 +7,24 @@
 
 ;; core-macros
 
+(syntax-macro file!
+  [(_)
+    ;; compiler builtin
+    ()
+  ])
+
+(syntax-macro line!
+  [(_)
+    ;; compiler builtin
+    ()
+  ])
+
+(syntax-macro stringify!
+  [(_)
+    ;; compiler builtin
+    ()
+  ])
+
 (syntax-macro const
   [(_ pat bind) (#[Literal] let pat bind)])
 
