@@ -1,0 +1,40 @@
+﻿LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyConstTest" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "pat" TokenStream Macro 3 2 LParen
+SYMBOL "bind" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+HASH_BRACKET TokenStream Macro 4 2 LParen
+SYMBOL "Literal" TokenStream Macro 4 2 LParen
+RBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "let" TokenStream Macro 3 2 LParen
+SYMBOL "pat" TokenStream Macro 3 2 LParen
+SYMBOL "bind" TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "MyConstTest" TokenStream Macro 1 1 LParen
+SYMBOL "LITERAL_ZERO" TokenStream Macro 1 1 LParen
+INT32 (0, false) TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MACRO_NAME "MyConstTest" TokenStream Macro 1 1 LParen
+SYMBOL "LITERAL_STR" TokenStream Macro 1 1 LParen
+STRING ("hello world", Regular, Token []) TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("LITERAL_ZERO: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "LITERAL_ZERO" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("LITERAL_STR: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "LITERAL_STR" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default
