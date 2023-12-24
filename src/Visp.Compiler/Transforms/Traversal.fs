@@ -121,8 +121,13 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     | Some a -> yield! loop a
                     | None -> ()
 
-                | SynExpr.FunctionDef(_, _, _, args, _)
-                | SynExpr.FunctionCall(_, args, _) ->
+                | SynExpr.FunctionDef(_, _, _, args, _) ->
+                    for arg in args do
+                        yield! loop arg
+
+                | SynExpr.FunctionCall(ex, args, _) ->
+                    yield! loop ex
+
                     for arg in args do
                         yield! loop arg
 
