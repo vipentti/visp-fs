@@ -279,7 +279,18 @@ let rec textRangeOfPat =
         match args with
         | SynArgPats.List(pats)
         | SynArgPats.Tuple(pats) -> List.concat (List.map textRangeOfPat pats)
-    | _ -> []
+    | SynPat.As(lhs, rhs, _) -> (textRangeOfPat lhs) @ (textRangeOfPat rhs)
+    | SynPat.Collection(SynCollection(_, its, _)) -> its |> List.map textRangeOfPat |> List.concat
+    | SynPat.Record(fields, _) ->
+        fields
+        |> List.map (fun (name, pat) ->
+            [ (name.Text, name.Range |> textRangeToSyntaxRange) ] @ textRangeOfPat pat)
+        |> List.concat
+    | SynPat.Const _ -> []
+    | SynPat.IsInst _ -> []
+    | SynPat.Trivia _ -> []
+    | SynPat.Ignore _ -> []
+    | SynPat.Discard _ -> []
 
 let memberToSymbolDetails _ memval var (mem: SynTypeMember) =
     match mem with
