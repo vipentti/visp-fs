@@ -97,6 +97,7 @@ let state = { Todo = () }
         try
             let mutable res = start tokenizer lexbuf
 
+            // eprintfn "%A" res
             // eprintfn "%s" (res.Pretty())
 
             if returnLast then

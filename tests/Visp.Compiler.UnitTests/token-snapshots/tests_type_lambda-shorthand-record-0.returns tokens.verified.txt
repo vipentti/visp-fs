@@ -1,0 +1,51 @@
+﻿LPAREN Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "Example" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "lhs" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "int" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "rhs" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "int" Default 0 1 Type
+RBRACKET Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "RecordMaker" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "lhs" Default 0 2 LParen
+SYMBOL "rhs" Default 0 2 LParen
+SYMBOL "mkRecord" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "mkRecord" Default 0 2 LParen
+SYMBOL "lhs" Default 0 2 LParen
+SYMBOL "rhs" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Example: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "RecordMaker" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+HASH_PAREN Default 0 3 LParen
+BEGIN_KW Default 0 3 LParen
+BRACE_BAR Default 0 3 LParen
+LBRACKET Default 0 3 LParen
+SYMBOL "lhs" Default 0 3 LParen
+SYMBOL "%1" Default 0 3 LParen
+RBRACKET Default 0 3 LParen
+LBRACKET Default 0 3 LParen
+SYMBOL "rhs" Default 0 3 LParen
+SYMBOL "%2" Default 0 3 LParen
+RBRACKET Default 0 3 LParen
+BAR_BRACE Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

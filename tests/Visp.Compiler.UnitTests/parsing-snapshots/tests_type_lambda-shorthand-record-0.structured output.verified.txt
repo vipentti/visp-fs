@@ -1,0 +1,38 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Record
+            (SynSymbol Example,
+             [RecordLabel (Default, SynSymbol lhs, Ident int, (9,3--9,11));
+              RecordLabel (Default, SynSymbol rhs, Ident int, (10,3--10,11))], [], [], (8,1--10,12)), (8,0--10,13));
+       Expr
+         (FunctionDef
+            (SynSymbol RecordMaker, None,
+             Args
+               (List
+                  [Named (SynSymbol lhs, (12,17--12,20)); Named (SynSymbol rhs, (12,21--12,24));
+                   Named (SynSymbol mkRecord, (12,25--12,33))], (12,16--12,34)),
+             [FunctionCall
+                (Symbol (SynSymbol mkRecord), [Symbol (SynSymbol lhs); Symbol (SynSymbol rhs)], (13,3--13,19))],
+             (12,1--13,20)), (12,0--13,21));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (15,0--15,74)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("Example: %A", Regular, (15,9--15,22)), (15,9--15,22));
+                 FunctionCall
+                   (Symbol (SynSymbol RecordMaker),
+                    [Const (Int32 1, (15,36--15,37)); Const (Int32 2, (15,38--15,39));
+                     LambdaShort
+                       (Begin
+                          ([RecordInit
+                              ([SynInit (SynSymbol lhs, Symbol (SynSymbol %1), (15,51--15,59));
+                                SynInit (SynSymbol rhs, Symbol (SynSymbol %2), (15,60--15,68))], (15,48--15,71))], Begin,
+                           (15,42--15,71)), (15,40--15,72))], (15,24--15,72))], (15,1--15,73)), None, [], (15,0--15,74)),
+          (15,0--15,74));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (15,0--15,74)), (15,0--15,74)); Symbol (SynSymbol visp_result_todo)],
+             (15,0--15,74)), (15,0--15,74))], (8,0--15,74))]
