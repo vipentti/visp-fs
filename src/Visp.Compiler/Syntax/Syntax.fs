@@ -491,6 +491,7 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynArgPats =
         | Tuple pats -> pats
         | List pats -> pats
 
+
 and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
     | Const of constant: SynConst * range: range
     | Named of name: SynSymbol * range: range
@@ -507,6 +508,8 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
     | IsInst of pat: SynType * range: range
     | As of lhsPat: SynPat * rhsPat: SynPat * range: range
     | Ignore of range: range
+
+    | Record of (SynSymbol * SynPat) list * range: range
 
 and SynMemberGet =
     | SynMemberGet of args: SynPat * exprs: SynExpr list * range: range

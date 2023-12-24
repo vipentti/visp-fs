@@ -432,6 +432,12 @@ type nonTerminalId =
     | NONTERM_syn_pat_trivia_list
     | NONTERM_rev_syn_pat_trivia_list
     | NONTERM_pat_open_kind
+    | NONTERM_pat_record_open
+    | NONTERM_pat_record_close
+    | NONTERM_pat_record_init
+    | NONTERM_pat_record_init_list
+    | NONTERM_rev_pat_record_init_list
+    | NONTERM_pat_record
     | NONTERM_syn_pat_named
     | NONTERM_syn_pat
 /// This function maps tokens to integer indexes

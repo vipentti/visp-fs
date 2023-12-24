@@ -1315,6 +1315,28 @@ pat_open_kind:
     | BRACKET_BAR %prec prec_syn_pat_open { CollectionKind.FsArray }
     | PAREN_BAR %prec prec_syn_pat_open  { CollectionKind.FsList }
 
+pat_record_open:
+    | BRACE_BAR { () }
+    | LBRACE { () }
+
+pat_record_close:
+    | BAR_BRACE { () }
+    | RBRACE { () }
+
+pat_record_init:
+    | symbol syn_pat { ($1, $2) }
+    | LPAREN symbol syn_pat RPAREN { ($2, $3) }
+    | LBRACKET symbol syn_pat RBRACKET { ($2, $3) }
+
+pat_record_init_list: rev_pat_record_init_list { List.rev $1 }
+rev_pat_record_init_list:
+    | pat_record_init { [$1] }
+    | rev_pat_record_init_list pat_record_init { $2 :: $1 }
+
+pat_record:
+    | pat_record_open pat_record_close { SynPat.Record([], lhs parseState) }
+    | pat_record_open pat_record_init_list pat_record_close { SynPat.Record($2, lhs parseState) }
+
 syn_pat_named:
     | SYMBOL %prec prec_syn_pat {
         let text = $1
@@ -1344,6 +1366,9 @@ syn_pat:
 
     | pat_open_kind syn_pat_trivia_list collection_close_kind %prec prec_syn_pat
         { SynPat.Collection(SynCollection($1, $2, lhs parseState)) }
+
+    | pat_record { $1 }
+
     | LPAREN BANG_TUPLE syn_pat_trivia_list RPAREN
     { let lst = List.intersperse (SynPat.Trivia (SynPatternTriviaKind.Comma, rhs parseState 1)) $3
       SynPat.Collection(SynCollection(CollectionKind.Paren, lst, lhs parseState))

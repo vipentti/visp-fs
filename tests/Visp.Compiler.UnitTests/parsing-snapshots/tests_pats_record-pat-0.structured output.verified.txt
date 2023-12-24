@@ -1,0 +1,159 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (TypeAlias
+            (SynSymbol XYZ,
+             Paren
+               (Tuple
+                  (false,
+                   [Type (Ident double); Star (8,21--8,22);
+                    Type (Tuple (false, [Type (Ident double); Star (8,30--8,31); Type (Ident double)], (8,23--8,38)))],
+                   (8,14--8,38)), (8,13--8,39)), (8,1--8,39)), (8,0--8,40));
+       Expr
+         (Record
+            (SynSymbol Ray,
+             [RecordLabel (Default, SynSymbol pos, Ident XYZ, (11,3--11,11));
+              RecordLabel (Default, SynSymbol dir, Ident XYZ, (12,3--12,11))], [], [], (10,1--12,12)), (10,0--12,13));
+       Expr
+         (FunctionDef
+            (SynSymbol DoStuffWithRay, None,
+             Args
+               (List
+                  [Typed
+                     (Record
+                        ([(SynSymbol pos, Named (SynSymbol lhs_pos, (15,30--15,37)));
+                          (SynSymbol dir,
+                           Collection
+                             (SynCollection
+                                (Paren,
+                                 [Named (SynSymbol dx, (15,45--15,47)); Trivia (Comma, (15,47--15,48));
+                                  Named (SynSymbol dy, (15,49--15,51)); Trivia (Comma, (15,51--15,52));
+                                  Named (SynSymbol dz, (15,53--15,55))], (15,44--15,56))))], (15,22--15,60)), Ident Ray,
+                      (15,20--15,67))], (15,19--15,68)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("pos %A", Regular, (16,11--16,19)), (16,11--16,19)); Symbol (SynSymbol lhs_pos)],
+                 (16,3--16,27));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("dir %A", Regular, (17,11--17,19)), (17,11--17,19));
+                  Tuple ([Symbol (SynSymbol dx); Symbol (SynSymbol dy); Symbol (SynSymbol dz)], (17,21--17,31))],
+                 (17,3--17,32))], (15,1--17,33)), (15,0--18,1));
+       Expr
+         (FunctionDef
+            (SynSymbol DoStuffWithDirOnly, None,
+             Args
+               (List
+                  [Record
+                     ([(SynSymbol dir,
+                        Collection
+                          (SynCollection
+                             (Paren,
+                              [Named (SynSymbol dx, (20,32--20,34)); Trivia (Comma, (20,34--20,35));
+                               Named (SynSymbol dy, (20,36--20,38)); Trivia (Comma, (20,38--20,39));
+                               Named (SynSymbol dz, (20,40--20,42))], (20,31--20,43))))], (20,24--20,46))],
+                (20,23--20,47)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("dir %A", Regular, (21,11--21,19)), (21,11--21,19));
+                  Tuple ([Symbol (SynSymbol dx); Symbol (SynSymbol dy); Symbol (SynSymbol dz)], (21,21--21,31))],
+                 (21,3--21,32))], (20,1--21,33)), (20,0--22,1));
+       Expr
+         (FunctionDef
+            (SynSymbol MatchRecord, None, Args (List [Named (SynSymbol ray, (24,17--24,20))], (24,16--24,21)),
+             [Match
+                (Symbol (SynSymbol ray),
+                 [SynMatch
+                    (Record
+                       ([(SynSymbol dir,
+                          Collection
+                            (SynCollection
+                               (Paren,
+                                [Named (SynSymbol dx, (26,13--26,15)); Trivia (Comma, (26,15--26,16));
+                                 Named (SynSymbol dy, (26,17--26,19)); Trivia (Comma, (26,19--26,20));
+                                 Discard (26,21--26,22)], (26,12--26,23))))], (26,5--26,26)), None,
+                     [FunctionCall
+                        (Symbol (SynSymbol printfn),
+                         [Const (String ("dx %A", Regular, (27,15--27,22)), (27,15--27,22)); Symbol (SynSymbol dx)],
+                         (27,7--27,25));
+                      FunctionCall
+                        (Symbol (SynSymbol printfn),
+                         [Const (String ("dy %A", Regular, (28,15--28,22)), (28,15--28,22)); Symbol (SynSymbol dy)],
+                         (28,7--28,25))], (26,5--28,26))], (25,3--29,5))], (24,1--30,3)), (24,0--31,1));
+       Expr
+         (FunctionDef
+            (SynSymbol LetRecord, None, Args (List [Named (SynSymbol ray, (33,15--33,18))], (33,14--33,19)),
+             [LetOrUse
+                (Record ([(SynSymbol dir, Named (SynSymbol dd, (34,15--34,17)))], (34,7--34,21)), Symbol (SynSymbol ray),
+                 None, [], (34,3--34,25));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("dir is %A", Regular, (35,11--35,22)), (35,11--35,22)); Symbol (SynSymbol dd)],
+                 (35,3--35,25))], (33,1--35,26)), (33,0--35,27));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol DoStuffWithRay),
+             [RecordInit
+                ([SynInit
+                    (SynSymbol pos,
+                     Tuple
+                       ([Const (Int32 1, (37,25--37,26)); Const (Int32 2, (37,28--37,29));
+                         Const (Int32 3, (37,31--37,32))], (37,25--37,32)), (37,19--37,34));
+                  SynInit
+                    (SynSymbol dir,
+                     Tuple
+                       ([Const (Int32 4, (37,41--37,42)); Const (Int32 5, (37,44--37,45));
+                         Const (Int32 6, (37,47--37,48))], (37,41--37,48)), (37,35--37,50))], (37,16--37,53))],
+             (37,1--37,53)), (37,0--37,54));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol DoStuffWithDirOnly),
+             [RecordInit
+                ([SynInit
+                    (SynSymbol pos,
+                     Tuple
+                       ([Const (Int32 1, (38,29--38,30)); Const (Int32 2, (38,32--38,33));
+                         Const (Int32 3, (38,35--38,36))], (38,29--38,36)), (38,23--38,38));
+                  SynInit
+                    (SynSymbol dir,
+                     Tuple
+                       ([Const (Int32 4, (38,45--38,46)); Const (Int32 5, (38,48--38,49));
+                         Const (Int32 6, (38,51--38,52))], (38,45--38,52)), (38,39--38,54))], (38,20--38,57))],
+             (38,1--38,57)), (38,0--38,58));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol MatchRecord),
+             [RecordInit
+                ([SynInit
+                    (SynSymbol pos,
+                     Tuple
+                       ([Const (Int32 1, (39,22--39,23)); Const (Int32 2, (39,25--39,26));
+                         Const (Int32 3, (39,28--39,29))], (39,22--39,29)), (39,16--39,31));
+                  SynInit
+                    (SynSymbol dir,
+                     Tuple
+                       ([Const (Int32 4, (39,38--39,39)); Const (Int32 5, (39,41--39,42));
+                         Const (Int32 6, (39,44--39,45))], (39,38--39,45)), (39,32--39,47))], (39,13--39,50))],
+             (39,1--39,50)), (39,0--39,51));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (40,0--40,49)),
+             FunctionCall
+               (Symbol (SynSymbol LetRecord),
+                [RecordInit
+                   ([SynInit
+                       (SynSymbol pos,
+                        Tuple
+                          ([Const (Int32 1, (40,20--40,21)); Const (Int32 2, (40,23--40,24));
+                            Const (Int32 3, (40,26--40,27))], (40,20--40,27)), (40,14--40,29));
+                     SynInit
+                       (SynSymbol dir,
+                        Tuple
+                          ([Const (Int32 4, (40,36--40,37)); Const (Int32 5, (40,39--40,40));
+                            Const (Int32 6, (40,42--40,43))], (40,36--40,43)), (40,30--40,45))], (40,11--40,48))],
+                (40,1--40,48)), None, [], (40,0--40,49)), (40,0--40,49));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (40,0--40,49)), (40,0--40,49)); Symbol (SynSymbol visp_result_todo)],
+             (40,0--40,49)), (40,0--40,49))], (8,0--40,49))]

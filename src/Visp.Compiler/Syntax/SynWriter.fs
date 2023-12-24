@@ -550,6 +550,18 @@ module Write =
         | SynPat.IsInst(typ, _) ->
             string w ":? "
             writeType w typ
+        | SynPat.Record(fields, _) ->
+            string w "{"
+
+            writeInlineSemicolon
+                w
+                (fun w _ (name, pat) ->
+                    symbol w name false
+                    string w " = "
+                    synPat w pat)
+                fields
+
+            string w "}"
         | SynPat.Args(args, _) ->
             match args with
             | SynArgPats.Tuple pats ->

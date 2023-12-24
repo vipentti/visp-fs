@@ -31,6 +31,11 @@ module ``tests_dot_dot-shorthands`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/dot/dot-shorthands.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_pats_record-pat-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/pats/record-pat-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_pats_fn-1`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/pats/fn-1.visp"
