@@ -34,6 +34,12 @@ module Bitwise =
     let inline band (lhs: 'a) (rhs: 'a) = lhs &&& rhs
     let inline bcompl (lhs: 'a) = ~~~lhs
 
+[<AutoOpen>]
+module ListHelpers =
+    let inline cons a b = a :: b
+
+    let inline concat a b = a @ b
+
 
 type CoreMethods =
     static member ``vector-push!``(_: RuntimeState, [<ParamArray>] args: Value[]) =

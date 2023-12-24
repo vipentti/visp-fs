@@ -1,0 +1,82 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol CreateList, None, Args (List [], (8,15--8,17)),
+             [LetOrUse
+                (Named (SynSymbol lst, (9,7--9,10)), Collection (SynCollection (FsList, [], (9,11--9,15))), Mutable,
+                 (9,3--9,15));
+              ForTo
+                (SynSymbol i, Const (Int32 0, (11,14--11,15)), Const (Int32 5, (11,19--11,20)),
+                 [SyntaxMacroCall
+                    (SynMacroCall
+                       (SynSymbol up!,
+                        [Symbol (SynSymbol up!); Symbol (SynSymbol lst);
+                         List (Paren, [Symbol (SynSymbol cons); Symbol (SynSymbol i)], (12,13--12,21))], (12,5--12,21)))],
+                 false, (11,3--12,22)); Symbol (SynSymbol lst)], (8,1--14,5)), (8,0--14,6));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol concat123, (16,5--16,14)),
+             FunctionCall
+               (Symbol (SynSymbol concat),
+                [Collection
+                   (SynCollection
+                      (FsList,
+                       [Const (Int32 1, (16,26--16,27)); Const (Int32 2, (16,28--16,29));
+                        Const (Int32 3, (16,30--16,31))], (16,23--16,34)))], (16,16--16,34)), None, (16,1--16,35)),
+          (16,0--16,36));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("cons %A", Regular, (18,9--18,18)), (18,9--18,18));
+              FunctionCall
+                (Symbol (SynSymbol cons),
+                 [Const (Int32 1, (18,25--18,26));
+                  FunctionCall
+                    (Symbol (SynSymbol cons),
+                     [Const (Int32 2, (18,33--18,34));
+                      FunctionCall
+                        (Symbol (SynSymbol cons),
+                         [Const (Int32 3, (18,41--18,42)); Collection (SynCollection (FsList, [], (18,43--18,47)))],
+                         (18,36--18,47))], (18,28--18,48))], (18,20--18,49))], (18,1--18,50)), (18,0--18,51));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("concat: %A", Regular, (19,9--19,21)), (19,9--19,21));
+              FunctionCall
+                (Symbol (SynSymbol concat),
+                 [Collection
+                    (SynCollection
+                       (FsList,
+                        [Const (Int32 1, (19,32--19,33)); Const (Int32 2, (19,34--19,35));
+                         Const (Int32 3, (19,36--19,37))], (19,30--19,39)));
+                  Collection
+                    (SynCollection
+                       (FsList,
+                        [Const (Int32 4, (19,42--19,43)); Const (Int32 5, (19,44--19,45));
+                         Const (Int32 6, (19,46--19,47))], (19,40--19,49)))], (19,23--19,49))], (19,1--19,50)),
+          (19,0--19,51));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("list: %A", Regular, (20,9--20,19)), (20,9--20,19));
+              FunctionCall (Symbol (SynSymbol CreateList), [], (20,21--20,31))], (20,1--20,32)), (20,0--20,33));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (21,0--21,47)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("concat123: %A", Regular, (21,9--21,24)), (21,9--21,24));
+                 FunctionCall
+                   (Symbol (SynSymbol concat123),
+                    [Collection
+                       (SynCollection
+                          (FsList,
+                           [Const (Int32 4, (21,38--21,39)); Const (Int32 5, (21,40--21,41));
+                            Const (Int32 6, (21,42--21,43))], (21,36--21,45)))], (21,26--21,45))], (21,1--21,46)), None,
+             (21,0--21,47)), (21,0--21,47));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (21,0--21,47)), (21,0--21,47)); Symbol (SynSymbol visp_result_todo)],
+             (21,0--21,47)), (21,0--21,47))], (8,0--21,47))]

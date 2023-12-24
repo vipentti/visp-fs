@@ -1,0 +1,38 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"cons-concat-0.visp"
+let CreateList () =
+  // line 9 @"cons-concat-0.visp"
+  let mutable lst =
+    // line 9 @"cons-concat-0.visp"
+    []
+  // line 11 @"cons-concat-0.visp"
+  for i = 0 to 5 do
+    // line 12 @"cons-concat-0.visp"
+    
+    // line 12 @"cons-concat-0.visp"
+    lst <- cons i lst
+  lst
+
+// line 16 @"cons-concat-0.visp"
+let concat123 =
+  // line 16 @"cons-concat-0.visp"
+  concat ([1;2;3])
+// line 18 @"cons-concat-0.visp"
+printfn "cons %A" (1::(2::(3::([]))))
+// line 19 @"cons-concat-0.visp"
+printfn "concat: %A" (([1;2;3])@([4;5;6]))
+// line 20 @"cons-concat-0.visp"
+printfn "list: %A" (CreateList ())
+// line 21 @"cons-concat-0.visp"
+let visp_result_todo =
+  // line 21 @"cons-concat-0.visp"
+  printfn "concat123: %A" (concat123 ([4;5;6]))
+// line 21 @"cons-concat-0.visp"
+printfn "%A" visp_result_todo
+

@@ -1152,7 +1152,7 @@ let trans : uint16[] array =
     (* State 495 *)
      [| 65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;495us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;495us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;|];
     |] 
-let actions : uint16[] = [|65535us;2us;1us;1us;2us;1us;65535us;0us;65535us;0us;1us;1us;3us;3us;2us;1us;65535us;0us;1us;1us;2us;3us;89us;5us;6us;7us;8us;9us;10us;89us;13us;16us;88us;89us;88us;88us;89us;88us;88us;88us;88us;88us;43us;42us;88us;44us;88us;63us;63us;89us;78us;88us;89us;88us;65535us;81us;77us;65535us;65535us;65535us;80us;65535us;79us;57us;63us;65535us;65us;60us;64us;67us;65535us;69us;73us;65535us;72us;74us;73us;65535us;71us;73us;65535us;73us;73us;65535us;68us;59us;62us;66us;70us;65535us;65535us;65535us;63us;58us;63us;65535us;61us;64us;67us;76us;75us;63us;63us;65535us;63us;63us;65535us;45us;41us;39us;38us;40us;88us;88us;35us;35us;35us;88us;88us;49us;88us;88us;50us;88us;52us;88us;88us;88us;51us;34us;34us;33us;63us;86us;86us;57us;63us;86us;65us;60us;64us;67us;86us;69us;72us;74us;68us;59us;62us;66us;70us;33us;32us;32us;17us;21us;85us;85us;85us;30us;17us;65535us;31us;37us;63us;87us;87us;57us;63us;87us;65us;60us;64us;67us;87us;69us;72us;74us;68us;59us;62us;66us;70us;36us;31us;15us;14us;23us;25us;29us;65535us;12us;83us;84us;84us;83us;12us;11us;11us;24us;22us;28us;48us;27us;26us;65535us;18us;19us;20us;65535us;65535us;65535us;65535us;82us;56us;56us;56us;56us;56us;56us;56us;56us;56us;56us;65535us;65535us;65535us;55us;65535us;65535us;65535us;54us;65535us;65535us;65535us;53us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;53us;65535us;65535us;65535us;65535us;47us;65535us;65535us;4us;2us;1us;0us;65535us;0us;1us;1us;2us;3us;15us;64us;6us;7us;8us;9us;10us;11us;94us;14us;65us;94us;63us;33us;36us;49us;49us;75us;74us;93us;93us;70us;93us;93us;93us;93us;93us;83us;94us;89us;90us;93us;94us;93us;88us;65535us;65535us;65535us;86us;65535us;85us;65535us;87us;93us;93us;71us;71us;71us;93us;93us;79us;93us;93us;80us;93us;82us;93us;93us;93us;81us;69us;68us;67us;66us;43us;49us;65535us;51us;46us;50us;53us;65535us;55us;59us;65535us;58us;60us;59us;65535us;57us;59us;65535us;59us;59us;65535us;54us;45us;48us;52us;56us;65535us;65535us;65535us;49us;44us;49us;65535us;47us;50us;53us;62us;61us;49us;49us;65535us;49us;49us;65535us;20us;49us;43us;49us;93us;51us;46us;50us;53us;93us;55us;58us;60us;54us;45us;48us;52us;56us;20us;65535us;21us;22us;23us;65535us;65535us;65535us;65535us;84us;40us;40us;40us;40us;40us;40us;40us;40us;40us;40us;65535us;65535us;65535us;39us;65535us;65535us;65535us;38us;65535us;65535us;65535us;37us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;37us;65535us;65535us;65535us;65535us;78us;65535us;65535us;65535us;65535us;17us;32us;18us;34us;35us;18us;16us;12us;13us;76us;77us;91us;92us;92us;91us;13us;26us;24us;30us;29us;28us;65535us;19us;73us;72us;19us;5us;4us;25us;27us;31us;2us;1us;0us;|]
+let actions : uint16[] = [|65535us;2us;1us;1us;2us;1us;65535us;0us;65535us;0us;1us;1us;3us;3us;2us;1us;65535us;0us;1us;1us;2us;3us;89us;5us;6us;7us;8us;9us;10us;89us;13us;16us;88us;89us;88us;88us;89us;88us;88us;88us;88us;88us;43us;42us;88us;44us;88us;63us;63us;89us;78us;88us;89us;88us;65535us;81us;77us;65535us;65535us;65535us;80us;65535us;79us;57us;63us;65535us;65us;60us;64us;67us;65535us;69us;73us;65535us;72us;74us;73us;65535us;71us;73us;65535us;73us;73us;65535us;68us;59us;62us;66us;70us;65535us;65535us;65535us;63us;58us;63us;65535us;61us;64us;67us;76us;75us;63us;63us;65535us;63us;63us;65535us;45us;41us;39us;38us;40us;88us;88us;35us;35us;35us;88us;88us;49us;88us;88us;50us;88us;52us;88us;88us;88us;51us;34us;34us;33us;63us;86us;86us;57us;63us;86us;65us;60us;64us;67us;86us;69us;72us;74us;68us;59us;62us;66us;70us;33us;32us;32us;17us;21us;85us;85us;85us;30us;17us;65535us;31us;37us;63us;87us;87us;57us;63us;87us;65us;60us;64us;67us;87us;69us;72us;74us;68us;59us;62us;66us;70us;36us;31us;15us;14us;23us;25us;29us;65535us;12us;83us;84us;84us;83us;12us;11us;11us;24us;22us;28us;48us;27us;26us;65535us;18us;19us;20us;65535us;65535us;65535us;65535us;82us;56us;56us;56us;56us;56us;56us;56us;56us;56us;56us;65535us;65535us;65535us;55us;65535us;65535us;65535us;54us;65535us;65535us;65535us;53us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;53us;65535us;65535us;65535us;65535us;47us;65535us;65535us;4us;2us;1us;0us;65535us;0us;1us;1us;2us;3us;15us;62us;6us;7us;8us;9us;10us;11us;92us;14us;63us;92us;61us;33us;36us;47us;47us;73us;72us;91us;91us;68us;91us;91us;91us;91us;91us;81us;92us;87us;88us;91us;92us;91us;86us;65535us;65535us;65535us;84us;65535us;83us;65535us;85us;91us;91us;69us;69us;69us;91us;91us;77us;91us;91us;78us;91us;80us;91us;91us;91us;79us;67us;66us;65us;64us;41us;47us;65535us;49us;44us;48us;51us;65535us;53us;57us;65535us;56us;58us;57us;65535us;55us;57us;65535us;57us;57us;65535us;52us;43us;46us;50us;54us;65535us;65535us;65535us;47us;42us;47us;65535us;45us;48us;51us;60us;59us;47us;47us;65535us;47us;47us;65535us;20us;47us;41us;47us;91us;49us;44us;48us;51us;91us;53us;56us;58us;52us;43us;46us;50us;54us;20us;65535us;21us;22us;23us;65535us;65535us;65535us;65535us;82us;40us;40us;40us;40us;40us;40us;40us;40us;40us;40us;65535us;65535us;65535us;39us;65535us;65535us;65535us;38us;65535us;65535us;65535us;37us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;65535us;37us;65535us;65535us;65535us;65535us;76us;65535us;65535us;65535us;65535us;17us;32us;18us;34us;35us;18us;16us;12us;13us;74us;75us;89us;90us;90us;89us;13us;26us;24us;30us;29us;28us;65535us;19us;71us;70us;19us;5us;4us;25us;27us;31us;2us;1us;0us;|]
 let _fslex_tables = FSharp.Text.Lexing.UnicodeTables.Create(trans,actions)
 let rec _fslex_dummy () = _fslex_dummy() 
 // Rule token
@@ -1185,7 +1185,7 @@ and token (args: LexArgs) (skip: bool) lexbuf =
           )
   | 5 -> ( 
 # 255 "Lexer.fsl"
-                                    BAR_BAR 
+                                   BAR_BAR 
 # 1189 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 6 -> ( 
@@ -1265,37 +1265,37 @@ and token (args: LexArgs) (skip: bool) lexbuf =
           )
   | 21 -> ( 
 # 274 "Lexer.fsl"
-                          HASH_PAREN 
+                            HASH_PAREN 
 # 1269 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 22 -> ( 
 # 275 "Lexer.fsl"
-                          HASH_BRACKET 
+                            HASH_BRACKET 
 # 1274 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 23 -> ( 
 # 276 "Lexer.fsl"
-                          HASH_BRACE 
+                            HASH_BRACE 
 # 1279 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 24 -> ( 
 # 277 "Lexer.fsl"
-                          BRACE_BAR 
+                            BRACE_BAR 
 # 1284 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 25 -> ( 
 # 278 "Lexer.fsl"
-                          BAR_BRACE 
+                            BAR_BRACE 
 # 1289 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 26 -> ( 
 # 279 "Lexer.fsl"
-                          BRACKET_BAR 
+                            BRACKET_BAR 
 # 1294 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 27 -> ( 
 # 280 "Lexer.fsl"
-                          BAR_BRACKET 
+                            BAR_BRACKET 
 # 1299 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 28 -> ( 
@@ -1305,42 +1305,42 @@ and token (args: LexArgs) (skip: bool) lexbuf =
           )
   | 29 -> ( 
 # 282 "Lexer.fsl"
-                           TOKENLIST [LPAREN; BAR_BAR] 
+                            TOKENLIST [LPAREN; BAR_BAR] 
 # 1309 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 30 -> ( 
 # 283 "Lexer.fsl"
-                          PAREN_BAR 
+                            PAREN_BAR 
 # 1314 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 31 -> ( 
 # 284 "Lexer.fsl"
-                          BAR_PAREN 
+                            BAR_PAREN 
 # 1319 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 32 -> ( 
 # 285 "Lexer.fsl"
-                          DOTDOT 
+                            DOTDOT 
 # 1324 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 33 -> ( 
 # 286 "Lexer.fsl"
-                         QUOTE_SYM 
+                            QUOTE_SYM 
 # 1329 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 34 -> ( 
 # 287 "Lexer.fsl"
-                          DOT_BRACKET 
+                            DOT_BRACKET 
 # 1334 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 35 -> ( 
 # 288 "Lexer.fsl"
-                          DOT_PLUS 
+                            DOT_PLUS 
 # 1339 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 36 -> ( 
 # 289 "Lexer.fsl"
-                         AT 
+                            AT 
 # 1344 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 37 -> ( 
@@ -1364,63 +1364,53 @@ and token (args: LexArgs) (skip: bool) lexbuf =
 # 1364 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 41 -> ( 
-# 294 "Lexer.fsl"
-                                token args skip lexbuf 
-# 1369 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 42 -> ( 
-# 295 "Lexer.fsl"
-                                newline lexbuf; token args skip lexbuf 
-# 1374 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 43 -> ( 
-# 300 "Lexer.fsl"
+# 298 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt8BadMax n then INT8(SByte.MinValue, true (* 'true' = 'bad'*) )
                        else if n > int SByte.MaxValue || n < int SByte.MinValue then fail args lexbuf (SR.lexOutsideEightBitSigned()) (INT8(0y, false))
                        else INT8(sbyte n, false)  
-# 1383 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1373 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 44 -> ( 
-# 307 "Lexer.fsl"
+  | 42 -> ( 
+# 305 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        if n > int Byte.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideEightBitSignedHex()) (INT8(0y, false))
                        else INT8(sbyte(byte(n)), false) 
-# 1390 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1380 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 45 -> ( 
-# 312 "Lexer.fsl"
+  | 43 -> ( 
+# 310 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 2
                        if n > int Byte.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideEightBitUnsigned()) (UINT8(0uy))
                        else UINT8(byte n)  
-# 1397 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1387 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 46 -> ( 
-# 317 "Lexer.fsl"
+  | 44 -> ( 
+# 315 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt16BadMax n then INT16(Int16.MinValue, true (* 'true' = 'bad'*) )
                        else if n > int Int16.MaxValue || n < int Int16.MinValue then fail args lexbuf (SR.lexOutsideSixteenBitSigned()) (INT16(0s, false))
                        else INT16(int16 n, false)  
-# 1406 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1396 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 47 -> ( 
-# 324 "Lexer.fsl"
+  | 45 -> ( 
+# 322 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        if n > int UInt16.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideSixteenBitSigned()) (INT16(0s,false))
                        else INT16(int16(uint16(n)), false) 
-# 1413 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1403 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 48 -> ( 
-# 329 "Lexer.fsl"
+  | 46 -> ( 
+# 327 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 2
                        if n > int UInt16.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideSixteenBitUnsigned()) (UINT16(0us))
                        else UINT16(uint16 n) 
-# 1420 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1410 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 49 -> ( 
-# 334 "Lexer.fsl"
+  | 47 -> ( 
+# 332 "Lexer.fsl"
                        let s = removeUnderscores (lexeme lexbuf)
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt32BadMax s then INT32(Int32.MinValue, true (* 'true' = 'bad'*) ) else
@@ -1428,10 +1418,10 @@ and token (args: LexArgs) (skip: bool) lexbuf =
                            try int32 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitSigned()) 0
                        INT32(n, false)
                      
-# 1431 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1421 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 50 -> ( 
-# 344 "Lexer.fsl"
+  | 48 -> ( 
+# 342 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt32BadMax s then INT32(Int32.MinValue, true (* 'true' = 'bad'*) ) else
@@ -1439,30 +1429,30 @@ and token (args: LexArgs) (skip: bool) lexbuf =
                            try int32 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitSigned()) 0
                        INT32(n, false)
                      
-# 1442 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1432 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 51 -> ( 
-# 353 "Lexer.fsl"
+  | 49 -> ( 
+# 351 "Lexer.fsl"
                       
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
+                       let n =
+                           try int64 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) 0L
+                       if n > int64 UInt32.MaxValue || n < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) (UINT32(0u)) else
+                       UINT32(uint32 (uint64 n)) 
+# 1442 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 50 -> ( 
+# 359 "Lexer.fsl"
+                      
+                       let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        let n =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) 0L
                        if n > int64 UInt32.MaxValue || n < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) (UINT32(0u)) else
                        UINT32(uint32 (uint64 n)) 
 # 1452 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 52 -> ( 
-# 361 "Lexer.fsl"
-                      
-                       let s = removeUnderscores (lexemeTrimRight lexbuf 2)
-                       let n =
-                           try int64 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) 0L
-                       if n > int64 UInt32.MaxValue || n < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) (UINT32(0u)) else
-                       UINT32(uint32 (uint64 n)) 
-# 1462 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 53 -> ( 
-# 369 "Lexer.fsl"
+  | 51 -> ( 
+# 367 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_int+1> to parse as min_int.  Stupid but allowed because we parse '-' as an operator.
                        if Ranges.isInt64BadMax s then INT64(Int64.MinValue, true (* 'true' = 'bad'*) ) else
@@ -1470,18 +1460,18 @@ and token (args: LexArgs) (skip: bool) lexbuf =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideSixtyFourBitSigned()) 0L
                        INT64(n,false)
                      
-# 1473 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1463 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 54 -> ( 
-# 378 "Lexer.fsl"
+  | 52 -> ( 
+# 376 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        let n =
                          try uint64 s with _ -> fail args lexbuf (SR.lexOutsideSixtyFourBitUnsigned()) 0UL
                        UINT64(n) 
-# 1481 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1471 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 55 -> ( 
-# 384 "Lexer.fsl"
+  | 53 -> ( 
+# 382 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_nativeint+1> to parse as min_nativeint.  Stupid but allowed because we parse '-' as an operator.
                        if Ranges.isInt64BadMax s then NATIVEINT(Int64.MinValue, true) else
@@ -1489,32 +1479,32 @@ and token (args: LexArgs) (skip: bool) lexbuf =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideNativeSigned()) 0L
                        NATIVEINT(n,false)
                      
-# 1492 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1482 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 56 -> ( 
-# 393 "Lexer.fsl"
+  | 54 -> ( 
+# 391 "Lexer.fsl"
                        try
                            UNATIVEINT(uint64 (removeUnderscores (lexemeTrimRight lexbuf 2)))
                        with _ ->  fail args lexbuf (SR.lexOutsideNativeUnsigned())  (UNATIVEINT(0UL)) 
+# 1489 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 55 -> ( 
+# 396 "Lexer.fsl"
+                       IEEE32 (evalFloat args lexbuf) 
+# 1494 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 56 -> ( 
+# 399 "Lexer.fsl"
+                       IEEE32 (evalFloat args lexbuf) 
 # 1499 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 57 -> ( 
-# 398 "Lexer.fsl"
-                       IEEE32 (evalFloat args lexbuf) 
+# 402 "Lexer.fsl"
+                       IEEE64 (try float(lexeme lexbuf) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0.0) 
 # 1504 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 58 -> ( 
-# 401 "Lexer.fsl"
-                       IEEE32 (evalFloat args lexbuf) 
-# 1509 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 59 -> ( 
-# 404 "Lexer.fsl"
-                       IEEE64 (try float(lexeme lexbuf) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0.0) 
-# 1514 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 60 -> ( 
-# 407 "Lexer.fsl"
+# 405 "Lexer.fsl"
                        try
                           let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                           // This implements a range check for decimal literals
@@ -1523,545 +1513,545 @@ and token (args: LexArgs) (skip: bool) lexbuf =
                        with
                           e -> fail args lexbuf (SR.lexOutsideDecimal()) (DECIMAL (decimal 0))
                      
-# 1526 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1516 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 61 -> ( 
-# 417 "Lexer.fsl"
+  | 59 -> ( 
+# 415 "Lexer.fsl"
                       
                        let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        // Even though the intermediate step is an int64, display the "invalid float" message, since it will be less confusing to the user
                        let n64 = (try (int64 s) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
                        if n64 > 0xFFFFFFFFL || n64 < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitFloat()) (IEEE32 0.0f) else
                        IEEE32 (System.BitConverter.ToSingle(System.BitConverter.GetBytes(int32 (uint32 (uint64 n64))),0)) 
-# 1536 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1526 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 62 -> ( 
-# 425 "Lexer.fsl"
+  | 60 -> ( 
+# 423 "Lexer.fsl"
                       
                        let n64 = (try int64 (removeUnderscores (lexemeTrimRight lexbuf 2)) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
                        IEEE64 (System.BitConverter.Int64BitsToDouble(n64)) 
+# 1533 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 61 -> ( 
+# 429 "Lexer.fsl"
+                          OP_PLUS 
+# 1538 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 62 -> ( 
+# 430 "Lexer.fsl"
+                          OP_MINUS 
 # 1543 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 63 -> ( 
 # 431 "Lexer.fsl"
-                         OP_PLUS 
+                          DOT 
 # 1548 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 64 -> ( 
 # 432 "Lexer.fsl"
-                         OP_MINUS 
+                          GREATER_EQUALS 
 # 1553 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 65 -> ( 
 # 433 "Lexer.fsl"
-                         DOT 
+                          LESS_EQUALS 
 # 1558 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 66 -> ( 
 # 434 "Lexer.fsl"
-                          GREATER_EQUALS 
+                          AMP_AMP 
 # 1563 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 67 -> ( 
 # 435 "Lexer.fsl"
-                          LESS_EQUALS 
+                          BANG_EQUALS 
 # 1568 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 68 -> ( 
 # 436 "Lexer.fsl"
-                          AMP_AMP 
+                          EQUALS 
 # 1573 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 69 -> ( 
-# 437 "Lexer.fsl"
-                          BANG_EQUALS 
+# 438 "Lexer.fsl"
+                                 SYMBOL (lexeme lexbuf) 
 # 1578 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 70 -> ( 
-# 438 "Lexer.fsl"
-                         EQUALS 
+# 440 "Lexer.fsl"
+                           THREAD_LAST 
 # 1583 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 71 -> ( 
-# 440 "Lexer.fsl"
-                                 SYMBOL (lexeme lexbuf) 
+# 441 "Lexer.fsl"
+                           THREAD_FIRST 
 # 1588 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 72 -> ( 
 # 442 "Lexer.fsl"
-                           THREAD_LAST 
+                           OP_LESS 
 # 1593 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 73 -> ( 
 # 443 "Lexer.fsl"
-                          THREAD_FIRST 
+                           OP_GREATER 
 # 1598 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 74 -> ( 
 # 444 "Lexer.fsl"
-                         OP_LESS 
+                           COLON_GREATER 
 # 1603 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 75 -> ( 
 # 445 "Lexer.fsl"
-                         OP_GREATER 
+                           COLON_QMARK 
 # 1608 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 76 -> ( 
-# 446 "Lexer.fsl"
-                          COLON_GREATER 
+# 447 "Lexer.fsl"
+                                UNIT 
 # 1613 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 77 -> ( 
-# 447 "Lexer.fsl"
-                          COLON_QMARK 
+# 448 "Lexer.fsl"
+                                UNIT 
 # 1618 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 78 -> ( 
 # 449 "Lexer.fsl"
-                               UNIT 
+                                TRUE 
 # 1623 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 79 -> ( 
 # 450 "Lexer.fsl"
-                                UNIT 
+                                FALSE 
 # 1628 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 80 -> ( 
 # 451 "Lexer.fsl"
-                                TRUE 
+                                NIL 
 # 1633 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 81 -> ( 
-# 452 "Lexer.fsl"
-                                FALSE 
-# 1638 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 82 -> ( 
 # 453 "Lexer.fsl"
-                                NIL 
-# 1643 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 83 -> ( 
-# 455 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      singleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 1651 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1641 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 84 -> ( 
-# 460 "Lexer.fsl"
+  | 82 -> ( 
+# 458 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 1659 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1649 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 85 -> ( 
-# 465 "Lexer.fsl"
+  | 83 -> ( 
+# 463 "Lexer.fsl"
                      let buf, fin, m = startString 1 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
-# 1667 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1657 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 86 -> ( 
-# 471 "Lexer.fsl"
+  | 84 -> ( 
+# 469 "Lexer.fsl"
                     
                      let nest = lexeme lexbuf |> Seq.takeWhile (fun c -> c = '$') |> Seq.length
                      let buf, fin, m = startString nest lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
-# 1677 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1667 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 87 -> ( 
-# 479 "Lexer.fsl"
+  | 85 -> ( 
+# 477 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 1685 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1675 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 88 -> ( 
-# 485 "Lexer.fsl"
+  | 86 -> ( 
+# 483 "Lexer.fsl"
                      let buf, fin, m = startString 1 lexbuf
                      // TODO: validate
                      singleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
+# 1683 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 87 -> ( 
+# 488 "Lexer.fsl"
+                                OP_MULT 
+# 1688 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 88 -> ( 
+# 489 "Lexer.fsl"
+                                OP_DIV 
 # 1693 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 89 -> ( 
 # 490 "Lexer.fsl"
-                                OP_MULT 
+                                   KEYWORD (lexeme lexbuf) 
 # 1698 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 90 -> ( 
 # 491 "Lexer.fsl"
-                                OP_DIV 
+                                     SYMBOL (lexeme lexbuf) 
 # 1703 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 91 -> ( 
 # 492 "Lexer.fsl"
-                                   KEYWORD (lexeme lexbuf) 
-# 1708 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 92 -> ( 
-# 493 "Lexer.fsl"
-                                     SYMBOL (lexeme lexbuf) 
-# 1713 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 93 -> ( 
-# 494 "Lexer.fsl"
                                
                      let text = lexeme lexbuf
                      symbolOrKeyword args.CurrentContext text
                    
-# 1721 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1711 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 94 -> ( 
-# 498 "Lexer.fsl"
+  | 92 -> ( 
+# 496 "Lexer.fsl"
                        unexpected_char "token" lexbuf 
-# 1726 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1716 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "token"
 // Rule tokenStream
 and tokenStream (args: LexArgs) (skip: bool) lexbuf =
   match _fslex_tables.Interpret(16,lexbuf) with
   | 0 -> ( 
-# 501 "Lexer.fsl"
+# 499 "Lexer.fsl"
                                 tokenStream args skip lexbuf 
-# 1735 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1725 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 1 -> ( 
-# 502 "Lexer.fsl"
+# 500 "Lexer.fsl"
                                 newline lexbuf; tokenStream args skip lexbuf 
-# 1740 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1730 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 2 -> ( 
-# 503 "Lexer.fsl"
+# 501 "Lexer.fsl"
                                       tokenStream args skip lexbuf  
-# 1745 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1735 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 3 -> ( 
-# 504 "Lexer.fsl"
+# 502 "Lexer.fsl"
                                 EOF 
-# 1750 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1740 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 4 -> ( 
-# 506 "Lexer.fsl"
+# 504 "Lexer.fsl"
                              HASH_IDENT ((lexeme lexbuf).TrimStart('#'))
-# 1755 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1745 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 5 -> ( 
-# 509 "Lexer.fsl"
+# 507 "Lexer.fsl"
                                    LPAREN 
-# 1760 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1750 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 6 -> ( 
-# 510 "Lexer.fsl"
+# 508 "Lexer.fsl"
                                    RPAREN 
-# 1765 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1755 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 7 -> ( 
-# 511 "Lexer.fsl"
+# 509 "Lexer.fsl"
                                    LBRACE 
-# 1770 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1760 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 8 -> ( 
-# 512 "Lexer.fsl"
+# 510 "Lexer.fsl"
                                    RBRACE 
-# 1775 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1765 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 9 -> ( 
-# 513 "Lexer.fsl"
+# 511 "Lexer.fsl"
                                    LBRACKET 
-# 1780 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1770 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 10 -> ( 
-# 514 "Lexer.fsl"
+# 512 "Lexer.fsl"
                                    RBRACKET 
-# 1785 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1775 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 11 -> ( 
-# 515 "Lexer.fsl"
+# 513 "Lexer.fsl"
                                     COLON_COLON 
-# 1790 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1780 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 12 -> ( 
-# 516 "Lexer.fsl"
+# 514 "Lexer.fsl"
                                    COLON 
-# 1795 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1785 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 13 -> ( 
-# 517 "Lexer.fsl"
+# 515 "Lexer.fsl"
                                    COMMA 
-# 1800 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1790 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 14 -> ( 
-# 518 "Lexer.fsl"
+# 516 "Lexer.fsl"
                                    SYMBOL (lexeme lexbuf) 
-# 1805 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1795 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 15 -> ( 
-# 519 "Lexer.fsl"
+# 517 "Lexer.fsl"
                                     SYMBOL (lexeme lexbuf) 
-# 1810 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1800 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 16 -> ( 
-# 520 "Lexer.fsl"
+# 518 "Lexer.fsl"
                                    BAR 
-# 1815 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1805 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 17 -> ( 
-# 521 "Lexer.fsl"
+# 519 "Lexer.fsl"
                                    DOT 
-# 1820 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1810 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 18 -> ( 
-# 522 "Lexer.fsl"
+# 520 "Lexer.fsl"
                                    HASH_PAREN 
-# 1825 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1815 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 19 -> ( 
-# 523 "Lexer.fsl"
+# 521 "Lexer.fsl"
                                    HASH_BRACKET 
-# 1830 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1820 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 20 -> ( 
-# 524 "Lexer.fsl"
+# 522 "Lexer.fsl"
                                    HASH_BRACE 
-# 1835 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1825 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 21 -> ( 
-# 525 "Lexer.fsl"
+# 523 "Lexer.fsl"
                                    DOT_BRACKET 
-# 1840 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1830 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 22 -> ( 
-# 526 "Lexer.fsl"
+# 524 "Lexer.fsl"
                                    BRACE_BAR 
-# 1845 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1835 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 23 -> ( 
-# 527 "Lexer.fsl"
+# 525 "Lexer.fsl"
                                    BAR_BRACE 
-# 1850 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1840 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 24 -> ( 
-# 528 "Lexer.fsl"
+# 526 "Lexer.fsl"
                                    BRACKET_BAR 
-# 1855 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1845 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 25 -> ( 
-# 529 "Lexer.fsl"
+# 527 "Lexer.fsl"
                                    BAR_BRACKET 
-# 1860 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1850 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 26 -> ( 
-# 531 "Lexer.fsl"
-                            TOKENLIST [PAREN_BAR; BAR_PAREN] 
-# 1865 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 529 "Lexer.fsl"
+                                   TOKENLIST [PAREN_BAR; BAR_PAREN] 
+# 1855 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 27 -> ( 
-# 532 "Lexer.fsl"
-                           TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] 
-# 1870 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 530 "Lexer.fsl"
+                                   TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] 
+# 1860 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 28 -> ( 
-# 533 "Lexer.fsl"
+# 531 "Lexer.fsl"
                                    PAREN_BAR 
-# 1875 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1865 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 29 -> ( 
-# 534 "Lexer.fsl"
+# 532 "Lexer.fsl"
                                    BAR_PAREN 
-# 1880 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1870 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 30 -> ( 
-# 536 "Lexer.fsl"
+# 534 "Lexer.fsl"
                            SYMBOL (lexeme lexbuf) 
-# 1885 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1875 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 31 -> ( 
-# 539 "Lexer.fsl"
+# 537 "Lexer.fsl"
                                      SYMBOL "-" 
-# 1890 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1880 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 32 -> ( 
-# 540 "Lexer.fsl"
+# 538 "Lexer.fsl"
                                      SYMBOL "*" 
-# 1895 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1885 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 33 -> ( 
-# 541 "Lexer.fsl"
+# 539 "Lexer.fsl"
                                      SYMBOL "+" 
-# 1900 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1890 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 34 -> ( 
-# 542 "Lexer.fsl"
+# 540 "Lexer.fsl"
                                      SYMBOL "/" 
-# 1905 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1895 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 35 -> ( 
-# 544 "Lexer.fsl"
+# 542 "Lexer.fsl"
                                  SYMBOL (lexeme lexbuf) 
-# 1910 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 1900 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 36 -> ( 
+# 544 "Lexer.fsl"
+                           SYMBOL (lexeme lexbuf) 
+# 1905 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 37 -> ( 
+# 545 "Lexer.fsl"
+                           SYMBOL (lexeme lexbuf) 
+# 1910 "Syntax/FsLexYaccOutput/Lexer.fs"
+          )
+  | 38 -> ( 
 # 546 "Lexer.fsl"
                            SYMBOL (lexeme lexbuf) 
 # 1915 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 37 -> ( 
+  | 39 -> ( 
 # 547 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1920 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 38 -> ( 
+  | 40 -> ( 
 # 548 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1925 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 39 -> ( 
+  | 41 -> ( 
 # 549 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1930 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 40 -> ( 
+  | 42 -> ( 
 # 550 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1935 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 41 -> ( 
+  | 43 -> ( 
 # 551 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1940 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 42 -> ( 
+  | 44 -> ( 
 # 552 "Lexer.fsl"
-                         SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1945 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 43 -> ( 
+  | 45 -> ( 
 # 553 "Lexer.fsl"
-                         SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1950 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 44 -> ( 
+  | 46 -> ( 
 # 554 "Lexer.fsl"
-                         SYMBOL (lexeme lexbuf) 
+                           SYMBOL (lexeme lexbuf) 
 # 1955 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 45 -> ( 
-# 555 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+  | 47 -> ( 
+# 557 "Lexer.fsl"
+                                UNIT 
 # 1960 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 46 -> ( 
-# 556 "Lexer.fsl"
-                          SYMBOL (lexeme lexbuf) 
+  | 48 -> ( 
+# 558 "Lexer.fsl"
+                                UNIT 
 # 1965 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 47 -> ( 
+  | 49 -> ( 
 # 559 "Lexer.fsl"
                                 UNIT 
 # 1970 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 48 -> ( 
+  | 50 -> ( 
 # 560 "Lexer.fsl"
-                                UNIT 
+                                TRUE 
 # 1975 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 49 -> ( 
+  | 51 -> ( 
 # 561 "Lexer.fsl"
-                                UNIT 
+                                FALSE 
 # 1980 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 50 -> ( 
+  | 52 -> ( 
 # 562 "Lexer.fsl"
-                                TRUE 
+                                NIL 
 # 1985 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 51 -> ( 
+  | 53 -> ( 
 # 563 "Lexer.fsl"
-                                FALSE 
+                                     CHAR (lexeme lexbuf) 
 # 1990 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 52 -> ( 
+  | 54 -> ( 
 # 564 "Lexer.fsl"
-                                NIL 
+                                         CHAR (lexeme lexbuf) 
 # 1995 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 53 -> ( 
+  | 55 -> ( 
 # 565 "Lexer.fsl"
-                                     CHAR (lexeme lexbuf) 
+                                         CHAR (lexeme lexbuf) 
 # 2000 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 54 -> ( 
+  | 56 -> ( 
 # 566 "Lexer.fsl"
                                          CHAR (lexeme lexbuf) 
 # 2005 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
-  | 55 -> ( 
-# 567 "Lexer.fsl"
-                                         CHAR (lexeme lexbuf) 
-# 2010 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
-  | 56 -> ( 
-# 568 "Lexer.fsl"
-                                         CHAR (lexeme lexbuf) 
-# 2015 "Syntax/FsLexYaccOutput/Lexer.fs"
-          )
   | 57 -> ( 
-# 573 "Lexer.fsl"
+# 571 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt8BadMax n then INT8(SByte.MinValue, true (* 'true' = 'bad'*) )
                        else if n > int SByte.MaxValue || n < int SByte.MinValue then fail args lexbuf (SR.lexOutsideEightBitSigned()) (INT8(0y, false))
                        else INT8(sbyte n, false)  
-# 2024 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2014 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 58 -> ( 
-# 580 "Lexer.fsl"
+# 578 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        if n > int Byte.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideEightBitSignedHex()) (INT8(0y, false))
                        else INT8(sbyte(byte(n)), false) 
-# 2031 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2021 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 59 -> ( 
-# 585 "Lexer.fsl"
+# 583 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 2
                        if n > int Byte.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideEightBitUnsigned()) (UINT8(0uy))
                        else UINT8(byte n)  
-# 2038 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2028 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 60 -> ( 
-# 590 "Lexer.fsl"
+# 588 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt16BadMax n then INT16(Int16.MinValue, true (* 'true' = 'bad'*) )
                        else if n > int Int16.MaxValue || n < int Int16.MinValue then fail args lexbuf (SR.lexOutsideSixteenBitSigned()) (INT16(0s, false))
                        else INT16(int16 n, false)  
-# 2047 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2037 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 61 -> ( 
-# 597 "Lexer.fsl"
+# 595 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 1
                        if n > int UInt16.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideSixteenBitSigned()) (INT16(0s,false))
                        else INT16(int16(uint16(n)), false) 
-# 2054 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2044 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 62 -> ( 
-# 602 "Lexer.fsl"
+# 600 "Lexer.fsl"
                        let n = lexemeTrimRightToInt32 args lexbuf 2
                        if n > int UInt16.MaxValue || n < 0 then fail args lexbuf (SR.lexOutsideSixteenBitUnsigned()) (UINT16(0us))
                        else UINT16(uint16 n) 
-# 2061 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2051 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 63 -> ( 
-# 607 "Lexer.fsl"
+# 605 "Lexer.fsl"
                        let s = removeUnderscores (lexeme lexbuf)
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt32BadMax s then INT32(Int32.MinValue, true (* 'true' = 'bad'*) ) else
@@ -2069,10 +2059,10 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                            try int32 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitSigned()) 0
                        INT32(n, false)
                      
-# 2072 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2062 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 64 -> ( 
-# 617 "Lexer.fsl"
+# 615 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_int+1> to parse as min_int.  Allowed only because we parse '-' as an operator.
                        if Ranges.isInt32BadMax s then INT32(Int32.MinValue, true (* 'true' = 'bad'*) ) else
@@ -2080,30 +2070,30 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                            try int32 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitSigned()) 0
                        INT32(n, false)
                      
-# 2083 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2073 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 65 -> ( 
-# 626 "Lexer.fsl"
+# 624 "Lexer.fsl"
                       
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        let n =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) 0L
                        if n > int64 UInt32.MaxValue || n < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) (UINT32(0u)) else
                        UINT32(uint32 (uint64 n)) 
-# 2093 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2083 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 66 -> ( 
-# 634 "Lexer.fsl"
+# 632 "Lexer.fsl"
                       
                        let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        let n =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) 0L
                        if n > int64 UInt32.MaxValue || n < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitUnsigned()) (UINT32(0u)) else
                        UINT32(uint32 (uint64 n)) 
-# 2103 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2093 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 67 -> ( 
-# 642 "Lexer.fsl"
+# 640 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_int+1> to parse as min_int.  Stupid but allowed because we parse '-' as an operator.
                        if Ranges.isInt64BadMax s then INT64(Int64.MinValue, true (* 'true' = 'bad'*) ) else
@@ -2111,18 +2101,18 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideSixtyFourBitSigned()) 0L
                        INT64(n,false)
                      
-# 2114 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2104 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 68 -> ( 
-# 651 "Lexer.fsl"
+# 649 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        let n =
                          try uint64 s with _ -> fail args lexbuf (SR.lexOutsideSixtyFourBitUnsigned()) 0UL
                        UINT64(n) 
-# 2122 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2112 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 69 -> ( 
-# 657 "Lexer.fsl"
+# 655 "Lexer.fsl"
                        let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                        // Allow <max_nativeint+1> to parse as min_nativeint.  Stupid but allowed because we parse '-' as an operator.
                        if Ranges.isInt64BadMax s then NATIVEINT(Int64.MinValue, true) else
@@ -2130,32 +2120,32 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                            try int64 s with _ ->  fail args lexbuf (SR.lexOutsideNativeSigned()) 0L
                        NATIVEINT(n,false)
                      
-# 2133 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2123 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 70 -> ( 
-# 666 "Lexer.fsl"
+# 664 "Lexer.fsl"
                        try
                            UNATIVEINT(uint64 (removeUnderscores (lexemeTrimRight lexbuf 2)))
                        with _ ->  fail args lexbuf (SR.lexOutsideNativeUnsigned())  (UNATIVEINT(0UL)) 
-# 2140 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2130 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 71 -> ( 
-# 671 "Lexer.fsl"
+# 669 "Lexer.fsl"
                        IEEE32 (evalFloat args lexbuf) 
-# 2145 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2135 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 72 -> ( 
-# 674 "Lexer.fsl"
+# 672 "Lexer.fsl"
                        IEEE32 (evalFloat args lexbuf) 
-# 2150 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2140 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 73 -> ( 
-# 677 "Lexer.fsl"
+# 675 "Lexer.fsl"
                        IEEE64 (try float(lexeme lexbuf) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0.0) 
-# 2155 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2145 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 74 -> ( 
-# 680 "Lexer.fsl"
+# 678 "Lexer.fsl"
                        try
                           let s = removeUnderscores (lexemeTrimRight lexbuf 1)
                           // This implements a range check for decimal literals
@@ -2164,108 +2154,108 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                        with
                           e -> fail args lexbuf (SR.lexOutsideDecimal()) (DECIMAL (decimal 0))
                      
-# 2167 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2157 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 75 -> ( 
-# 690 "Lexer.fsl"
+# 688 "Lexer.fsl"
                       
                        let s = removeUnderscores (lexemeTrimRight lexbuf 2)
                        // Even though the intermediate step is an int64, display the "invalid float" message, since it will be less confusing to the user
                        let n64 = (try (int64 s) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
                        if n64 > 0xFFFFFFFFL || n64 < 0L then fail args lexbuf (SR.lexOutsideThirtyTwoBitFloat()) (IEEE32 0.0f) else
                        IEEE32 (System.BitConverter.ToSingle(System.BitConverter.GetBytes(int32 (uint32 (uint64 n64))),0)) 
-# 2177 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2167 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 76 -> ( 
-# 698 "Lexer.fsl"
+# 696 "Lexer.fsl"
                       
                        let n64 = (try int64 (removeUnderscores (lexemeTrimRight lexbuf 2)) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
                        IEEE64 (System.BitConverter.Int64BitsToDouble(n64)) 
-# 2184 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2174 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 77 -> ( 
-# 705 "Lexer.fsl"
+# 703 "Lexer.fsl"
                      let buf, fin, m = startString 1 lexbuf
                      // TODO: validate
                      singleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
-# 2192 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2182 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 78 -> ( 
-# 711 "Lexer.fsl"
+# 709 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      singleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 2200 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2190 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 79 -> ( 
-# 717 "Lexer.fsl"
+# 715 "Lexer.fsl"
                      let buf, fin, m = startString 1 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
-# 2208 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2198 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 80 -> ( 
-# 723 "Lexer.fsl"
+# 721 "Lexer.fsl"
                     
                      let nest = lexeme lexbuf |> Seq.takeWhile (fun c -> c = '$') |> Seq.length
                      let buf, fin, m = startString nest lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
                    
-# 2218 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2208 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 81 -> ( 
-# 731 "Lexer.fsl"
+# 729 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 2226 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2216 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 82 -> ( 
-# 737 "Lexer.fsl"
+# 735 "Lexer.fsl"
                      let buf, fin, m = startString 0 lexbuf
                      // TODO: validate
                      tripleQuoteString (buf, fin, m, LexerStringKind.String, args) skip lexbuf
                    
-# 2234 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2224 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 83 -> ( 
-# 743 "Lexer.fsl"
+# 741 "Lexer.fsl"
                                    KEYWORD (lexeme lexbuf) 
-# 2239 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2229 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 84 -> ( 
-# 744 "Lexer.fsl"
+# 742 "Lexer.fsl"
                                      SYMBOL (lexeme lexbuf) 
-# 2244 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2234 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 85 -> ( 
-# 745 "Lexer.fsl"
+# 743 "Lexer.fsl"
                                     
                      let text = lexeme lexbuf;
                      SYMBOL text 
-# 2251 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2241 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 86 -> ( 
-# 748 "Lexer.fsl"
+# 746 "Lexer.fsl"
                                     
                      let text = lexeme lexbuf;
                      SYMBOL text 
-# 2258 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2248 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 87 -> ( 
-# 751 "Lexer.fsl"
+# 749 "Lexer.fsl"
                                     
                      let text = lexeme lexbuf;
                      SYMBOL text 
-# 2265 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2255 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 88 -> ( 
-# 754 "Lexer.fsl"
+# 752 "Lexer.fsl"
                                
                    let text = lexeme lexbuf
                    if args.mode.IsQuasiquoteMode then
@@ -2277,77 +2267,77 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
                        SYMBOL text
                    else
                      SYMBOL text 
-# 2280 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2270 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 89 -> ( 
-# 765 "Lexer.fsl"
+# 763 "Lexer.fsl"
                        unexpected_char "tokenStream" lexbuf 
-# 2285 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2275 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "tokenStream"
 // Rule singleQuoteString
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) lexbuf =
   match _fslex_tables.Interpret(8,lexbuf) with
   | 0 -> ( 
-# 769 "Lexer.fsl"
+# 767 "Lexer.fsl"
                      let (buf, fin, _m, kind, args) = sargs
                      let cont = LexCont.Token(args.stringNest)
                      fin.Finish buf kind (LexerStringFinisherContext()) cont
                    
-# 2297 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2287 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 1 -> ( 
-# 774 "Lexer.fsl"
+# 772 "Lexer.fsl"
                    newline lexbuf;
                    let (buf, _fin, m, kind, args) = sargs
                    addUnicodeString buf (lexeme lexbuf)
                    singleQuoteString sargs skip lexbuf
                  
-# 2306 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2296 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 2 -> ( 
-# 780 "Lexer.fsl"
+# 778 "Lexer.fsl"
                    
                     let (buf, _fin, m, kind, args) = sargs
                     addUnicodeString buf (lexeme lexbuf)
                     singleQuoteString sargs skip lexbuf
                   
-# 2315 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2305 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 3 -> ( 
-# 786 "Lexer.fsl"
+# 784 "Lexer.fsl"
                      let (buf, _fin, m, kind, args) = sargs
                      addUnicodeString buf (lexeme lexbuf)
                      singleQuoteString sargs skip lexbuf 
-# 2322 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2312 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "singleQuoteString"
 // Rule tripleQuoteString
 and tripleQuoteString (sargs: LexerStringArgs) (skip: bool) lexbuf =
   match _fslex_tables.Interpret(0,lexbuf) with
   | 0 -> ( 
-# 792 "Lexer.fsl"
+# 790 "Lexer.fsl"
                      let (buf, fin, _m, kind, args) = sargs
                      let cont = LexCont.Token(args.stringNest)
                      fin.Finish buf kind (LexerStringFinisherContext.TripleQuote) cont
                    
-# 2334 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2324 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 1 -> ( 
-# 797 "Lexer.fsl"
+# 795 "Lexer.fsl"
                    newline lexbuf;
                    let (buf, _fin, m, kind, args) = sargs
                    addUnicodeString buf (lexeme lexbuf)
                    tripleQuoteString sargs skip lexbuf
                  
-# 2343 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2333 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 2 -> ( 
-# 809 "Lexer.fsl"
+# 807 "Lexer.fsl"
                      let (buf, _fin, m, kind, args) = sargs
                      addUnicodeString buf (lexeme lexbuf)
                      tripleQuoteString sargs skip lexbuf 
-# 2350 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2340 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "tripleQuoteString"
 

@@ -690,10 +690,6 @@ module Syntax =
 
     let mkFunctionCall sym ex range = SynExpr.FunctionCall(sym, ex, range)
 
-    let mkCons lhs rhs range = SynExpr.Cons(lhs, rhs, range)
-
-    let mkConcat lhs rhs range = SynExpr.Concat(lhs, rhs, range)
-
     let mkEmptyList range =
         SynExpr.Quote(false, SynQuoted.EmptyList range, range)
 
@@ -705,6 +701,12 @@ module Syntax =
     let mkSynSymbolExpr s range = SynExpr.Symbol(mkSynSymbol s range)
 
     let mkSynTypeIdent s range = (SynType.Ident(Ident(s, range)))
+
+    let mkCons lhs rhs range =
+        mkFunctionCall (mkSynSymbolExpr "cons" range) [ lhs; rhs ] range
+
+    let mkConcat lhs rhs range =
+        mkFunctionCall (mkSynSymbolExpr "concat" range) [ lhs; rhs ] range
 
     let mkInferredNamePat n range =
         SynPat.Named(mkSynSymbol n range, range)

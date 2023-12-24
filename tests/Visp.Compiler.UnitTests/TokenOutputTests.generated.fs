@@ -106,6 +106,11 @@ module ``tests_functions_apply-method-args-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/functions/apply-method-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_functions_cons-concat-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/functions/cons-concat-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_hashset_hashset-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/hashset/hashset-0.visp"
