@@ -834,6 +834,26 @@ module Write =
                 | _ ->
                     writeExpr w WriteState.Inline expr
                     writeCallArgs w args
+            | Patterns.SymbolWith "cons" ->
+                match args with
+                | [ lhs; rhs ] ->
+                    writeExprInParens w WriteState.Inline lhs
+                    string w "::"
+                    writeExprInParens w WriteState.Inline rhs
+                | _ ->
+                    writeExpr w WriteState.Inline expr
+                    writeCallArgs w args
+
+            | Patterns.SymbolWith "concat" ->
+                match args with
+                | [ lhs; rhs ] ->
+                    writeExprInParens w WriteState.Inline lhs
+                    string w "@"
+                    writeExprInParens w WriteState.Inline rhs
+                | _ ->
+                    writeExpr w WriteState.Inline expr
+                    writeCallArgs w args
+
             | SynExpr.Symbol name ->
                 match w.knownMethods.TryFind(Syntax.textOfSymbol name) with
                 | Some method ->

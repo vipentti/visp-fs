@@ -1,0 +1,21 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn CreateList ()
+  (mut lst (||))
+
+  (for/to [i (0 to 5)]
+    (up! lst (cons i)))
+
+  lst)
+
+(let concat123 (concat (| 1 2 3 |)))
+
+(printfn "cons %A" (cons 1 (cons 2 (cons 3 (||)))))
+(printfn "concat: %A" (concat (|1 2 3|) (|4 5 6|)))
+(printfn "list: %A" (CreateList))
+(printfn "concat123: %A" (concat123 (|4 5 6|)))

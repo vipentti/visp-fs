@@ -252,7 +252,7 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   // punct
   | "||"          { BAR_BAR }
-  | "-||"          { BAR_BAR }
+  | "-||"         { BAR_BAR }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
@@ -271,28 +271,26 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '.' propShort { DOT_METHOD (lexeme lexbuf) }
   | '-' propShort { APPLY_METHOD (lexeme lexbuf) }
   | '+' propShort { PROP_PLUS (lexeme lexbuf) }
-  | "#(" { HASH_PAREN }
-  | "#[" { HASH_BRACKET }
-  | "#{" { HASH_BRACE }
-  | "{|" { BRACE_BAR }
-  | "|}" { BAR_BRACE }
-  | "[|" { BRACKET_BAR }
-  | "|]" { BAR_BRACKET }
+  | "#("   { HASH_PAREN }
+  | "#["   { HASH_BRACKET }
+  | "#{"   { HASH_BRACE }
+  | "{|"   { BRACE_BAR }
+  | "|}"   { BAR_BRACE }
+  | "[|"   { BRACKET_BAR }
+  | "|]"   { BAR_BRACKET }
   | "(||)" { TOKENLIST [PAREN_BAR; BAR_PAREN] }
-  | "(||" { TOKENLIST [LPAREN; BAR_BAR] }
-  | "(|" { PAREN_BAR }
-  | "|)" { BAR_PAREN }
-  | ".." { DOTDOT }
-  | "'" { QUOTE_SYM }
-  | ".[" { DOT_BRACKET }
-  | ".+" { DOT_PLUS }
-  | '@' { AT }
+  | "(||"  { TOKENLIST [LPAREN; BAR_BAR] }
+  | "(|"   { PAREN_BAR }
+  | "|)"   { BAR_PAREN }
+  | ".."   { DOTDOT }
+  | "'"    { QUOTE_SYM }
+  | ".["   { DOT_BRACKET }
+  | ".+"   { DOT_PLUS }
+  | '@'    { AT }
   | "#\\" charWords { CHAR (lexeme lexbuf) }
   | "#\\u" unicodeChars { CHAR (lexeme lexbuf) }
   | "#\\U" unicodeChars { CHAR (lexeme lexbuf) }
   | "#\\" nonWhitespace { CHAR (lexeme lexbuf) }
-  | whitespace { token args skip lexbuf }
-  | newline    { newline lexbuf; token args skip lexbuf }
 
   // --- START OF NUMBERS ---
 
@@ -428,25 +426,25 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   // --- END OF NUMBERS ---
 
-  | '+' { OP_PLUS }
-  | '-' { OP_MINUS }
-  | '.' { DOT }
+  | '+'  { OP_PLUS }
+  | '-'  { OP_MINUS }
+  | '.'  { DOT }
   | ">=" { GREATER_EQUALS }
   | "<=" { LESS_EQUALS }
   | "&&" { AMP_AMP }
   | "!=" { BANG_EQUALS }
-  | '=' { EQUALS }
+  | '='  { EQUALS }
 
   | ident_arrow { SYMBOL (lexeme lexbuf) }
 
   | "->>" { THREAD_LAST }
-  | "->" { THREAD_FIRST }
-  | "<" { OP_LESS }
-  | ">" { OP_GREATER }
-  | ":>" { COLON_GREATER }
-  | ":?" { COLON_QMARK }
+  | "->"  { THREAD_FIRST }
+  | "<"   { OP_LESS }
+  | ">"   { OP_GREATER }
+  | ":>"  { COLON_GREATER }
+  | ":?"  { COLON_QMARK }
 
-  | "#()"     { UNIT }
+  | "#()"      { UNIT }
   | "unit"     { UNIT }
   | "true"     { TRUE }
   | "false"    { FALSE }
@@ -528,8 +526,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "[|"          { BRACKET_BAR }
   | "|]"          { BAR_BRACKET }
 
-  | "(||)" { TOKENLIST [PAREN_BAR; BAR_PAREN] }
-  | "(||" { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
+  | "(||)"        { TOKENLIST [PAREN_BAR; BAR_PAREN] }
+  | "(||"         { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(|"          { PAREN_BAR }
   | "|)"          { BAR_PAREN }
 
@@ -544,16 +542,16 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | ident_arrow { SYMBOL (lexeme lexbuf) }
 
   | "->>" { SYMBOL (lexeme lexbuf) }
-  | "->" { SYMBOL (lexeme lexbuf) }
-  | ">=" { SYMBOL (lexeme lexbuf) }
-  | "<=" { SYMBOL (lexeme lexbuf) }
-  | ">>" { SYMBOL (lexeme lexbuf) }
-  | "!=" { SYMBOL (lexeme lexbuf) }
-  | '<' { SYMBOL (lexeme lexbuf) }
-  | '>' { SYMBOL (lexeme lexbuf) }
-  | '=' { SYMBOL (lexeme lexbuf) }
-  | "&&" { SYMBOL (lexeme lexbuf) }
-  | "||" { SYMBOL (lexeme lexbuf) }
+  | "->"  { SYMBOL (lexeme lexbuf) }
+  | ">="  { SYMBOL (lexeme lexbuf) }
+  | "<="  { SYMBOL (lexeme lexbuf) }
+  | ">>"  { SYMBOL (lexeme lexbuf) }
+  | "!="  { SYMBOL (lexeme lexbuf) }
+  | '<'   { SYMBOL (lexeme lexbuf) }
+  | '>'   { SYMBOL (lexeme lexbuf) }
+  | '='   { SYMBOL (lexeme lexbuf) }
+  | "&&"  { SYMBOL (lexeme lexbuf) }
+  | "||"  { SYMBOL (lexeme lexbuf) }
 
   // Constants
   | "#()"      { UNIT }

@@ -106,6 +106,11 @@ module ``tests_functions_apply-method-args-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/functions/apply-method-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_functions_cons-concat-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/functions/cons-concat-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_hashset_hashset-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/hashset/hashset-0.visp"

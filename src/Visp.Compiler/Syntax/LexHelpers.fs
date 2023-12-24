@@ -192,8 +192,6 @@ let keywordTokenList =
       ("->>", THREAD_LAST)
       ("atom", ATOM_KW)
       ("begin", BEGIN_KW)
-      ("concat", CONCAT)
-      ("cons", CONS)
       ("deref", DEREF_KW)
       ("do!", DO_BANG)
       ("do", DO_KW)

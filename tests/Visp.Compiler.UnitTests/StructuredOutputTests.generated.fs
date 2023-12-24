@@ -106,6 +106,11 @@ module ``tests_functions_apply-method-args-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/functions/apply-method-args-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_functions_cons-concat-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/functions/cons-concat-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_hashset_hashset-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/hashset/hashset-0.visp"
