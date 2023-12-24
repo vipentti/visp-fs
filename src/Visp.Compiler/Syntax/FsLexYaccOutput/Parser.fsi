@@ -52,8 +52,6 @@ type token =
   | MACRO
   | MATCH
   | WHEN
-  | CONS
-  | CONCAT
   | REQUIRE
   | FN
   | FNSTAR
@@ -181,8 +179,6 @@ type tokenId =
     | TOKEN_MACRO
     | TOKEN_MATCH
     | TOKEN_WHEN
-    | TOKEN_CONS
-    | TOKEN_CONCAT
     | TOKEN_REQUIRE
     | TOKEN_FN
     | TOKEN_FNSTAR
@@ -316,8 +312,6 @@ type nonTerminalId =
     | NONTERM_macro_open_kind
     | NONTERM_collection_close_kind
     | NONTERM_macro_body
-    | NONTERM_cons_expr
-    | NONTERM_concat_expr
     | NONTERM_new_expr
     | NONTERM_threadable_list
     | NONTERM_rev_threadable_list

@@ -38,7 +38,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token AT
 %token OPEN MODULE
 %token FN FNSTAR LET USE LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
-%token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN CONS CONCAT REQUIRE
+%token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
 %token <bool> YIELD
@@ -354,8 +354,6 @@ parens_expr:
     | list_expr { $1 }
     | match_expr { $1 }
     | new_expr { $1 }
-    | cons_expr { $1 }
-    | concat_expr { $1 }
     | operators_not_in_parens { SynExpr.Op($1) }
     | syntax_macro_expr { $1 }
     | macro_call_expr { $1 }
@@ -525,22 +523,6 @@ macro_body:
             SynMacroBody.Ellipsis (lhs parseState)
         else
             SynMacroBody.Symbol (text) }
-
-cons_expr:
-    | CONS expr expr
-        { SynExpr.Cons($2, $3, lhs parseState)}
-    | CONS expr
-        { SynExpr.Cons($2, Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)}
-    | CONS
-        { SynExpr.Cons(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)}
-
-concat_expr:
-    | CONCAT expr expr
-        { SynExpr.Concat($2, $3, lhs parseState)}
-    | CONCAT expr
-        { SynExpr.Concat($2, Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)}
-    | CONCAT
-        { SynExpr.Concat(Syntax.parserRecoveryExpr (lhs parseState), Syntax.parserRecoveryExpr (lhs parseState), lhs parseState)}
 
 new_expr:
     | NEW syn_type_name
