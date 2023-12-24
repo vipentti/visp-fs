@@ -7,51 +7,51 @@ open Visp.Runtime.Library
 let state = { Todo = () }
 // line 8 @"stringify-0.visp"
 let macro_DbgMacroExample = "__MACRO_INIT__"
-// line 27 @"stringify-0.visp"
-eprintfn "[%s:%i]" "stringify-0.visp" 27
-// line 28 @"stringify-0.visp"
+// line 24 @"stringify-0.visp"
+eprintfn "[%s:%i]" "stringify-0.visp" 24
+// line 25 @"stringify-0.visp"
 ignore (
   match 1 +
   2 with
     | tmp ->
-      // line 28 @"stringify-0.visp"
-      eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 28 "(+ 1 2)" tmp
+      // line 25 @"stringify-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 25 "(+ 1 2)" tmp
       tmp)
-// line 29 @"stringify-0.visp"
+// line 26 @"stringify-0.visp"
 ignore (
   match [1;2;3] with
     | tmp ->
-      // line 29 @"stringify-0.visp"
-      eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 29 "(|1 2 3|)" tmp
+      // line 26 @"stringify-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 26 "(|1 2 3|)" tmp
       tmp)
-// line 30 @"stringify-0.visp"
+// line 27 @"stringify-0.visp"
 let visp_result_todo =
-  // line 30 @"stringify-0.visp"
+  // line 27 @"stringify-0.visp"
   (
     match 1 with
       | tmp ->
-        // line 30 @"stringify-0.visp"
-        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 30 "1" tmp
+        // line 27 @"stringify-0.visp"
+        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 27 "1" tmp
         tmp
   , 
     match 2 with
       | tmp ->
-        // line 30 @"stringify-0.visp"
-        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 30 "2" tmp
+        // line 27 @"stringify-0.visp"
+        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 27 "2" tmp
         tmp
   , 
     match 3 with
       | tmp ->
-        // line 30 @"stringify-0.visp"
-        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 30 "3" tmp
+        // line 27 @"stringify-0.visp"
+        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 27 "3" tmp
         tmp
   , 
     match [1;2;3] with
       | tmp ->
-        // line 30 @"stringify-0.visp"
-        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 30 "(|1 2 3|)" tmp
+        // line 27 @"stringify-0.visp"
+        eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 27 "(|1 2 3|)" tmp
         tmp
   )
-// line 30 @"stringify-0.visp"
+// line 27 @"stringify-0.visp"
 printfn "%A" visp_result_todo
 

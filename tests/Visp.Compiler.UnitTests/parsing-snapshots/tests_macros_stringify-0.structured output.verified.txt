@@ -8,11 +8,11 @@
                    ([Discard (9,4--9,5)],
                     List
                       (Paren,
-                       [Symbol (SynSymbol eprintfn); Const (String ("[%s:%i]", Regular, (10,14--10,23)), (10,14--10,23));
-                        List (Paren, [Symbol (SynSymbol file!)], (10,24--10,31));
-                        List (Paren, [Symbol (SynSymbol line!)], (10,32--10,39))], (10,4--10,40)), (9,2--11,3));
+                       [Symbol (SynSymbol eprintfn); Const (String ("[%s:%i]", Regular, (9,17--9,26)), (9,17--9,26));
+                        List (Paren, [Symbol (SynSymbol file!)], (9,27--9,34));
+                        List (Paren, [Symbol (SynSymbol line!)], (9,35--9,42))], (9,7--9,43)), (9,2--9,44));
                  SynMacroCase
-                   ([Discard (12,4--12,5); Symbol (SynSymbol ex, (12,6--12,8))],
+                   ([Discard (10,4--10,5); Symbol (SynSymbol ex, (10,6--10,8))],
                     List
                       (Paren,
                        [Symbol (SynSymbol match); Symbol (SynSymbol ex);
@@ -22,26 +22,26 @@
                             List
                               (Paren,
                                [Symbol (SynSymbol eprintfn);
-                                Const (String ("[%s:%i] %s = %A", Regular, (15,18--15,35)), (15,18--15,35));
-                                List (Paren, [Symbol (SynSymbol file!)], (15,36--15,43));
-                                List (Paren, [Symbol (SynSymbol line!)], (15,44--15,51));
-                                List (Paren, [Symbol (SynSymbol stringify!); Symbol (SynSymbol ex)], (15,52--15,67));
-                                Symbol (SynSymbol tmp)], (15,8--15,72)); Symbol (SynSymbol tmp)], (14,6--17,7))],
-                       (13,4--17,8)), (12,2--17,9));
+                                Const (String ("[%s:%i] %s = %A", Regular, (13,18--13,35)), (13,18--13,35));
+                                List (Paren, [Symbol (SynSymbol file!)], (13,36--13,43));
+                                List (Paren, [Symbol (SynSymbol line!)], (13,44--13,51));
+                                List (Paren, [Symbol (SynSymbol stringify!); Symbol (SynSymbol ex)], (13,52--13,67));
+                                Symbol (SynSymbol tmp)], (13,8--13,72)); Symbol (SynSymbol tmp)], (12,6--15,7))],
+                       (11,4--15,8)), (10,2--15,9));
                  SynMacroCase
-                   ([Discard (18,4--18,5); Symbol (SynSymbol ex1, (18,6--18,9)); Symbol (SynSymbol ex2, (18,10--18,13));
-                     Symbol (SynSymbol rest, (18,14--18,18)); Ellipsis (18,19--18,22)],
+                   ([Discard (16,4--16,5); Symbol (SynSymbol ex1, (16,6--16,9)); Symbol (SynSymbol ex2, (16,10--16,13));
+                     Symbol (SynSymbol rest, (16,14--16,18)); Ellipsis (16,19--16,22)],
                     List
                       (Paren,
                        [Symbol (SynSymbol tuple);
-                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol ex1)], (20,6--20,27));
-                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol ex2)], (21,6--21,27));
-                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol rest)], (22,6--22,28));
-                        Ellipsis (22,29--22,32)], (19,4--23,5)), (18,2--24,3))], (8,1--24,3))), (8,0--25,3));
+                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol ex1)], (18,6--18,27));
+                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol ex2)], (19,6--19,27));
+                        List (Paren, [Symbol (SynSymbol DbgMacroExample); Symbol (SynSymbol rest)], (20,6--20,28));
+                        Ellipsis (20,29--20,32)], (17,4--21,5)), (16,2--22,3))], (8,1--22,3))), (8,0--22,4));
        Expr
          (SyntaxMacroCall
-            (SynMacroCall (SynSymbol DbgMacroExample, [Symbol (SynSymbol DbgMacroExample)], (27,1--27,16))),
-          (27,0--27,17));
+            (SynMacroCall (SynSymbol DbgMacroExample, [Symbol (SynSymbol DbgMacroExample)], (24,1--24,16))),
+          (24,0--24,17));
        Expr
          (FunctionCall
             (Symbol (SynSymbol ignore),
@@ -50,8 +50,8 @@
                    (SynSymbol DbgMacroExample,
                     [Symbol (SynSymbol DbgMacroExample);
                      List
-                       (Paren, [Symbol (SynSymbol +); Const (Int32 1, (28,28--28,29)); Const (Int32 2, (28,30--28,31))],
-                        (28,25--28,32))], (28,9--28,32)))], (28,1--28,33)), (28,0--28,34));
+                       (Paren, [Symbol (SynSymbol +); Const (Int32 1, (25,28--25,29)); Const (Int32 2, (25,30--25,31))],
+                        (25,25--25,32))], (25,9--25,32)))], (25,1--25,33)), (25,0--25,34));
        Expr
          (FunctionCall
             (Symbol (SynSymbol ignore),
@@ -61,24 +61,24 @@
                     [Symbol (SynSymbol DbgMacroExample);
                      List
                        (ParenBar,
-                        [Const (Int32 1, (29,28--29,29)); Const (Int32 2, (29,30--29,31));
-                         Const (Int32 3, (29,32--29,33))], (29,25--29,36))], (29,9--29,36)))], (29,1--29,37)),
-          (29,0--29,38));
+                        [Const (Int32 1, (26,28--26,29)); Const (Int32 2, (26,30--26,31));
+                         Const (Int32 3, (26,32--26,33))], (26,25--26,36))], (26,9--26,36)))], (26,1--26,37)),
+          (26,0--26,38));
        Expr
          (LetOrUse
-            (Named (SynSymbol visp_result_todo, (30,0--30,33)),
+            (Named (SynSymbol visp_result_todo, (27,0--27,33)),
              SyntaxMacroCall
                (SynMacroCall
                   (SynSymbol DbgMacroExample,
-                   [Symbol (SynSymbol DbgMacroExample); Const (Int32 1, (30,17--30,18)); Const (Int32 2, (30,19--30,20));
-                    Const (Int32 3, (30,21--30,22));
+                   [Symbol (SynSymbol DbgMacroExample); Const (Int32 1, (27,17--27,18)); Const (Int32 2, (27,19--27,20));
+                    Const (Int32 3, (27,21--27,22));
                     List
                       (ParenBar,
-                       [Const (Int32 1, (30,25--30,26)); Const (Int32 2, (30,27--30,28));
-                        Const (Int32 3, (30,29--30,30))], (30,23--30,32))], (30,1--30,32))), None, [], (30,0--30,33)),
-          (30,0--30,33));
+                       [Const (Int32 1, (27,25--27,26)); Const (Int32 2, (27,27--27,28));
+                        Const (Int32 3, (27,29--27,30))], (27,23--27,32))], (27,1--27,32))), None, [], (27,0--27,33)),
+          (27,0--27,33));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
-             [Const (String ("%A", Regular, (30,0--30,33)), (30,0--30,33)); Symbol (SynSymbol visp_result_todo)],
-             (30,0--30,33)), (30,0--30,33))], (8,0--30,33))]
+             [Const (String ("%A", Regular, (27,0--27,33)), (27,0--27,33)); Symbol (SynSymbol visp_result_todo)],
+             (27,0--27,33)), (27,0--27,33))], (8,0--27,33))]

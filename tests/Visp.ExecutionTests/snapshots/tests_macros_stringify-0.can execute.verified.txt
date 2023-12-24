@@ -1,10 +1,10 @@
-﻿[{SolutionDirectory}visp/tests/macros/stringify-0.visp:27]
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:28] (+ 1 2) = 3
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:29] (|1 2 3|) = [1; 2; 3]
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:30] 1 = 1
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:30] 2 = 2
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:30] 3 = 3
-[{SolutionDirectory}visp/tests/macros/stringify-0.visp:30] (|1 2 3|) = [1; 2; 3]
+﻿[{SolutionDirectory}visp/tests/macros/stringify-0.visp:24]
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:25] (+ 1 2) = 3
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:26] (|1 2 3|) = [1; 2; 3]
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:27] 1 = 1
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:27] 2 = 2
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:27] 3 = 3
+[{SolutionDirectory}visp/tests/macros/stringify-0.visp:27] (|1 2 3|) = [1; 2; 3]
 (1, 2, 3, [1; 2; 3])
 
 ExitCode: 0

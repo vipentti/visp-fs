@@ -6,9 +6,7 @@
 ;; vim: set syntax=clojure:
 
 (syntax-macro DbgMacroExample
-  [(_)
-    (eprintfn "[%s:%i]" (file!) (line!))
-  ]
+  [(_) (eprintfn "[%s:%i]" (file!) (line!))]
   [(_ ex)
     (match ex
       [tmp
@@ -21,8 +19,7 @@
       (DbgMacroExample ex2)
       (DbgMacroExample rest) ...
     )
-  ]
-  )
+  ])
 
 (DbgMacroExample)
 (ignore (DbgMacroExample (+ 1 2)))

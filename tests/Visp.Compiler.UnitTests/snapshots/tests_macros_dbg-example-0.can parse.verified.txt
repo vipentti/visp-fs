@@ -1,0 +1,55 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"dbg-example-0.visp"
+eprintfn "[%s:%i]" "dbg-example-0.visp" 8
+// line 9 @"dbg-example-0.visp"
+ignore (
+  match 1 +
+  2 with
+    | tmp ->
+      // line 9 @"dbg-example-0.visp"
+      eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 9 "(+ 1 2)" tmp
+      tmp)
+// line 10 @"dbg-example-0.visp"
+ignore (
+  match [1;2;3] with
+    | tmp ->
+      // line 10 @"dbg-example-0.visp"
+      eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 10 "(|1 2 3|)" tmp
+      tmp)
+// line 11 @"dbg-example-0.visp"
+let visp_result_todo =
+  // line 11 @"dbg-example-0.visp"
+  (
+    match 1 with
+      | tmp ->
+        // line 11 @"dbg-example-0.visp"
+        eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 11 "1" tmp
+        tmp
+  , 
+    match 2 with
+      | tmp ->
+        // line 11 @"dbg-example-0.visp"
+        eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 11 "2" tmp
+        tmp
+  , 
+    match 3 with
+      | tmp ->
+        // line 11 @"dbg-example-0.visp"
+        eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 11 "3" tmp
+        tmp
+  , 
+    match [1;2;3] with
+      | tmp ->
+        // line 11 @"dbg-example-0.visp"
+        eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 11 "(|1 2 3|)" tmp
+        tmp
+  )
+// line 11 @"dbg-example-0.visp"
+printfn "%A" visp_result_todo
+

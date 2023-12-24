@@ -366,6 +366,11 @@ module ``tests_macros_count-exprs-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/count-exprs-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_dbg-example-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/dbg-example-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_syntax-macro-2`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/syntax-macro-2.visp"

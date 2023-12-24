@@ -1,0 +1,43 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr (SyntaxMacroCall (SynMacroCall (SynSymbol dbg!, [Symbol (SynSymbol dbg!)], (8,1--8,5))), (8,0--8,6));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!,
+                    [Symbol (SynSymbol dbg!);
+                     List
+                       (Paren, [Symbol (SynSymbol +); Const (Int32 1, (9,17--9,18)); Const (Int32 2, (9,19--9,20))],
+                        (9,14--9,21))], (9,9--9,21)))], (9,1--9,22)), (9,0--9,23));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!,
+                    [Symbol (SynSymbol dbg!);
+                     List
+                       (ParenBar,
+                        [Const (Int32 1, (10,17--10,18)); Const (Int32 2, (10,19--10,20));
+                         Const (Int32 3, (10,21--10,22))], (10,14--10,25))], (10,9--10,25)))], (10,1--10,26)),
+          (10,0--10,27));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (11,0--11,22)),
+             SyntaxMacroCall
+               (SynMacroCall
+                  (SynSymbol dbg!,
+                   [Symbol (SynSymbol dbg!); Const (Int32 1, (11,6--11,7)); Const (Int32 2, (11,8--11,9));
+                    Const (Int32 3, (11,10--11,11));
+                    List
+                      (ParenBar,
+                       [Const (Int32 1, (11,14--11,15)); Const (Int32 2, (11,16--11,17));
+                        Const (Int32 3, (11,18--11,19))], (11,12--11,21))], (11,1--11,21))), None, [], (11,0--11,22)),
+          (11,0--11,22));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (11,0--11,22)), (11,0--11,22)); Symbol (SynSymbol visp_result_todo)],
+             (11,0--11,22)), (11,0--11,22))], (8,0--11,22))]
