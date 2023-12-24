@@ -729,9 +729,9 @@ module Write =
             writeExpr w WriteState.Arg expr
             string w ")"
 
-        | SynExpr.LetOrUse(name, body, flags, range) ->
+        | SynExpr.LetOrUse(name, body, flags, attributes, range) ->
             startExpr w st range
-            writeLetFullNew w st name body flags
+            writeLetFullNew w st name body flags attributes
 
         | SynExpr.Keyword kw -> writeQuoted w st (SynQuoted.Keyword kw)
 
@@ -785,7 +785,7 @@ module Write =
                 let (SynBinding(name, body, _r)) = bind
                 newline w
                 startExpr w WriteState.Body _r
-                writeLetFullNew w st name body LetFlags.None
+                writeLetFullNew w st name body LetFlags.None []
                 ()
 
             writeSeqLeading w WriteState.Body newline writeExpr body
@@ -1093,9 +1093,7 @@ module Write =
             writeType w typ
 
         | SynExpr.Union(name, cases, members, attributes, range) ->
-            if not attributes.IsEmpty then
-                writeAttributes w st attributes
-                newline w
+            writeAttributesIfNotEmpty w st attributes
 
             startExpr w st range
             fmtprintf w "type %s =" (symbolText name)
@@ -1143,9 +1141,7 @@ module Write =
             ()
 
         | SynExpr.Type(name, args, members, attributes, range) ->
-            if not attributes.IsEmpty then
-                writeAttributes w st attributes
-                newline w
+            writeAttributesIfNotEmpty w st attributes
 
             startExpr w st range
             fmtprintf w "type %s" (symbolText name)
@@ -1164,9 +1160,7 @@ module Write =
             writeBody w writeMember members
 
         | SynExpr.Record(name, labels, members, attributes, range) ->
-            if not attributes.IsEmpty then
-                writeAttributes w st attributes
-                newline w
+            writeAttributesIfNotEmpty w st attributes
 
             startExpr w st range
             fmtprintf w "type %s =" (Syntax.textOfSymbol name)
@@ -1347,6 +1341,12 @@ module Write =
                 | _ -> true }
             c
 
+    and private writeAttributesIfNotEmpty w s (attributes: SynAttributes) =
+        if not attributes.IsEmpty then
+            writeAttributes w s attributes
+            newline w
+            indent w
+
     and private writeAttributes w _ (attributes: SynAttributes) =
         string w "[<"
 
@@ -1402,11 +1402,11 @@ module Write =
         match mem with
         | SynTypeMember.Let(name, expr, range) ->
             startExpr w st range
-            writeLetFullNew w st name expr LetFlags.None
+            writeLetFullNew w st name expr LetFlags.None []
             ()
         | SynTypeMember.Mut(name, expr, range) ->
             startExpr w st range
-            writeLetFullNew w st name expr LetFlags.Mutable
+            writeLetFullNew w st name expr LetFlags.Mutable []
             ()
         | SynTypeMember.GetSet(name, get, set, range) ->
             startExpr w st range
@@ -1482,10 +1482,11 @@ module Write =
 
     and private writeLetFullNew
         (w: SynWriter)
-        (_: WriteState)
+        (st: WriteState)
         (name: SynPat)
         (body: SynExpr)
         (flags: LetFlags)
+        (attributes: SynAttributes)
         =
         w.EnterLet()
 
@@ -1499,6 +1500,8 @@ module Write =
             string w "[<Literal>]"
             newline w
             indent w
+
+        writeAttributesIfNotEmpty w st attributes
 
         if flags.HasFlag(LetFlags.Use) then
             string w "use"

@@ -24,7 +24,7 @@
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (16,0--16,20)),
-             Const (String ("let-value support?", Regular, (16,0--16,20)), (16,0--16,20)), None, (16,0--16,20)),
+             Const (String ("let-value support?", Regular, (16,0--16,20)), (16,0--16,20)), None, [], (16,0--16,20)),
           (16,0--16,20));
        Expr
          (FunctionCall

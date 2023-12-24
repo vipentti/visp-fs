@@ -15,7 +15,7 @@
                         (12,17--12,35)))], (12,5--12,36))], (11,1--12,37)), (11,0--12,38));
        Expr
          (LetOrUse
-            (Named (SynSymbol count, (13,5--13,10)), Atom (Const (Int64 0L, (13,17--13,19)), (13,12--13,19)), None,
+            (Named (SynSymbol count, (13,5--13,10)), Atom (Const (Int64 0L, (13,17--13,19)), (13,12--13,19)), None, [],
              (13,1--13,20)), (13,0--13,21));
        Expr
          (FunctionCall
@@ -31,7 +31,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("count is %O", Regular, (19,9--19,22)), (19,9--19,22));
-                 Deref (true, Symbol (SynSymbol count), (19,23--19,29))], (19,1--19,29)), None, (19,0--19,30)),
+                 Deref (true, Symbol (SynSymbol count), (19,23--19,29))], (19,1--19,29)), None, [], (19,0--19,30)),
           (19,0--19,30));
        Expr
          (FunctionCall

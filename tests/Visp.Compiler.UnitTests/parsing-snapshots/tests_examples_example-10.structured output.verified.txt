@@ -4,7 +4,7 @@
        Open (SynSymbol System.Text, (11,1--11,17));
        Expr
          (LetOrUse
-            (Named (SynSymbol sb, (13,5--13,7)), New (Ident StringBuilder, [], (13,9--13,26)), None, (13,1--13,27)),
+            (Named (SynSymbol sb, (13,5--13,7)), New (Ident StringBuilder, [], (13,9--13,26)), None, [], (13,1--13,27)),
           (13,0--13,28));
        Expr
          (DotMethod
@@ -21,7 +21,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("sb contains: %s", Regular, (18,9--18,26)), (18,9--18,26));
                  DotMethod (Symbol (SynSymbol sb), SynSymbol ToString, [], Tuple, (19,5--19,18))], (18,1--19,19)), None,
-             (18,0--19,20)), (18,0--19,20));
+             [], (18,0--19,20)), (18,0--19,20));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

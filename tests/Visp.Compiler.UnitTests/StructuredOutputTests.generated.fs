@@ -286,6 +286,11 @@ module ``tests_for-in_for-in-3`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/for-in/for-in-3.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_attributes_let-attributes-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/attributes/let-attributes-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_attributes_attributes-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/attributes/attributes-0.visp"

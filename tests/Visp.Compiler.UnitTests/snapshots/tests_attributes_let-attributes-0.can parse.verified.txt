@@ -1,0 +1,22 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"let-attributes-0.visp"
+[<Literal()>]
+let LITERAL_ZERO = 0
+// line 9 @"let-attributes-0.visp"
+[<Literal()>]
+let LITERAL_STR = "hello world"
+// line 11 @"let-attributes-0.visp"
+printfn "LITERAL_ZERO: %A" LITERAL_ZERO
+// line 12 @"let-attributes-0.visp"
+let visp_result_todo =
+  // line 12 @"let-attributes-0.visp"
+  printfn "LITERAL_STR: %A" LITERAL_STR
+// line 12 @"let-attributes-0.visp"
+printfn "%A" visp_result_todo
+

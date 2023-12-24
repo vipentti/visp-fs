@@ -4,7 +4,7 @@
          (FunctionDef
             (SynSymbol CreateList, None, Args (List [], (8,15--8,17)),
              [LetOrUse
-                (Named (SynSymbol lst, (9,7--9,10)), Collection (SynCollection (FsList, [], (9,11--9,15))), Mutable,
+                (Named (SynSymbol lst, (9,7--9,10)), Collection (SynCollection (FsList, [], (9,11--9,15))), Mutable, [],
                  (9,3--9,15));
               ForTo
                 (SynSymbol i, Const (Int32 0, (11,14--11,15)), Const (Int32 5, (11,19--11,20)),
@@ -23,7 +23,7 @@
                    (SynCollection
                       (FsList,
                        [Const (Int32 1, (16,26--16,27)); Const (Int32 2, (16,28--16,29));
-                        Const (Int32 3, (16,30--16,31))], (16,23--16,34)))], (16,16--16,34)), None, (16,1--16,35)),
+                        Const (Int32 3, (16,30--16,31))], (16,23--16,34)))], (16,16--16,34)), None, [], (16,1--16,35)),
           (16,0--16,36));
        Expr
          (FunctionCall
@@ -74,7 +74,7 @@
                           (FsList,
                            [Const (Int32 4, (21,38--21,39)); Const (Int32 5, (21,40--21,41));
                             Const (Int32 6, (21,42--21,43))], (21,36--21,45)))], (21,26--21,45))], (21,1--21,46)), None,
-             (21,0--21,47)), (21,0--21,47));
+             [], (21,0--21,47)), (21,0--21,47));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

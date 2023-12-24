@@ -20,7 +20,7 @@
                            (13,7--15,20))), (11,5--16,7))], (10,3--17,5))], [], (8,1--17,6)), (8,0--17,7));
        Expr
          (LetOrUse
-            (Named (SynSymbol counter, (19,5--19,12)), New (Ident Counter, [], (19,14--19,25)), None, (19,1--19,26)),
+            (Named (SynSymbol counter, (19,5--19,12)), New (Ident Counter, [], (19,14--19,25)), None, [], (19,1--19,26)),
           (19,0--19,27));
        Expr
          (LetOrUse
@@ -43,7 +43,7 @@
                           (Paren,
                            [Symbol (SynSymbol let); Discard (25,9--25,10);
                             List (Paren, [Symbol (SynSymbol .DoStuff); Symbol (SynSymbol counter)], (25,11--25,29))],
-                           (25,4--25,30)); Const (Bool true, (26,4--26,8))], (23,2--26,9))], (21,1--26,9))), None,
+                           (25,4--25,30)); Const (Bool true, (26,4--26,8))], (23,2--26,9))], (21,1--26,9))), None, [],
              (21,0--26,10)), (21,0--26,10));
        Expr
          (FunctionCall

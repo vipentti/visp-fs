@@ -16,7 +16,7 @@
                 [FunctionCall
                    (Symbol (SynSymbol sprintf),
                     [Const (String ("%s %s %s", Regular, (12,13--12,23)), (12,13--12,23)); Symbol (SynSymbol hello);
-                     Symbol (SynSymbol world); Symbol (SynSymbol banaani)], (12,5--12,43))], (8,1--12,44)), None,
+                     Symbol (SynSymbol world); Symbol (SynSymbol banaani)], (12,5--12,43))], (8,1--12,44)), None, [],
              (8,0--12,45)), (8,0--12,45));
        Expr
          (FunctionCall

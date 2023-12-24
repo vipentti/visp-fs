@@ -339,9 +339,8 @@ parens_expr:
         { CollExpr.mkFsList ($1 :: $3) (lhs parseState)}
     | function_def %prec prec_fn { $1 }
     | function_call %prec prec_call { $1 }
-    | let { $1 }
+    | let_or_use { $1 }
     | letstar { $1 }
-    | mut { $1 }
     | set { $1 }
     | if_expr { $1 }
     | type_expr { $1 }
@@ -735,53 +734,30 @@ set:
         { let r = lhs parseState
           SynExpr.Set(Syntax.parserRecoveryExpr r, Syntax.parserRecoveryExpr r, r) }
 
-let:
-    | USE syn_pat expr
-        { SynExpr.LetOrUse($2, $3, LetFlags.Use, lhs parseState) }
-    | LET syn_pat expr
-        { SynExpr.LetOrUse($2, $3, LetFlags.None, lhs parseState) }
-    | LET_BANG syn_pat expr
-        { SynExpr.LetOrUse($2, $3, LetFlags.Bang, lhs parseState) }
-    | USE_BANG syn_pat expr
-        { SynExpr.LetOrUse($2, $3, LetFlags.Bang ||| LetFlags.Use, lhs parseState) }
-    // TODO: Report error
-    | LET syn_pat
-        { let r = lhs parseState
-          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
-    | USE syn_pat
-        { let r = lhs parseState
-          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
-    | LET_BANG syn_pat
-        { let r = lhs parseState
-          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
-    | USE_BANG syn_pat
-        { let r = lhs parseState
-          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Bang ||| LetFlags.Use, r) }
-    // TODO: Report error
-    | LET
-        { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.None, r) }
-    | LET_BANG
-        { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Bang, r) }
-    | USE
-        { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Use, r) }
-    | USE_BANG
-        { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Use ||| LetFlags.Bang, r) }
+let_use_mut_kw:
+    | LET      { LetFlags.None }
+    | LET_BANG { LetFlags.Bang }
+    | USE      { LetFlags.Use }
+    | USE_BANG { LetFlags.Bang ||| LetFlags.Use }
+    | MUT      { LetFlags.Mutable }
 
-mut:
-    | MUT syn_pat expr
-        { SynExpr.LetOrUse($2, $3, LetFlags.Mutable, lhs parseState) }
-    // TODO: Report error
-    | MUT syn_pat
+let_or_use:
+    | let_use_mut_kw syn_pat expr
+        { SynExpr.LetOrUse($2, $3, $1, [], lhs parseState) }
+    | let_use_mut_kw syn_pat
         { let r = lhs parseState
-          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
-    // TODO: Report error
-    | MUT
+          SynExpr.LetOrUse($2, Syntax.parserRecoveryExpr r, $1, [], r) }
+    | let_use_mut_kw
         { let r = lhs parseState
-          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, LetFlags.Mutable, r) }
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, $1, [], r) }
+    | attribute_list let_use_mut_kw syn_pat expr
+        { SynExpr.LetOrUse($3, $4, $2, $1, lhs parseState) }
+    | attribute_list let_use_mut_kw syn_pat
+        { let r = lhs parseState
+          SynExpr.LetOrUse($3, Syntax.parserRecoveryExpr r, $2, $1, r) }
+    | attribute_list let_use_mut_kw
+        { let r = lhs parseState
+          SynExpr.LetOrUse(Syntax.parserRecoveryPat r, Syntax.parserRecoveryExpr r, $2, $1, r) }
 
 letstar:
     | LETSTAR binding_list_start expr_list

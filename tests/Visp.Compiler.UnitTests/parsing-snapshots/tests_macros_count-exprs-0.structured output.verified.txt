@@ -26,7 +26,7 @@
                    [Symbol (SynSymbol CountExprsExampleTest1); List (Bracket, [], (15,39--15,41));
                     List (Bracket, [], (15,42--15,44)); List (Bracket, [], (15,45--15,47));
                     List (Bracket, [], (15,48--15,50)); List (Bracket, [], (15,51--15,53));
-                    List (Bracket, [], (15,54--15,56)); List (Bracket, [], (15,57--15,59))], (15,16--15,59))), None,
+                    List (Bracket, [], (15,54--15,56)); List (Bracket, [], (15,57--15,59))], (15,16--15,59))), None, [],
              (15,1--15,60)), (15,0--15,61));
        Expr
          (LetOrUse
@@ -34,7 +34,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("exprs: %A", Regular, (17,9--17,20)), (17,9--17,20)); Symbol (SynSymbol exprCount)],
-                (17,1--17,30)), None, (17,0--17,31)), (17,0--17,31));
+                (17,1--17,30)), None, [], (17,0--17,31)), (17,0--17,31));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

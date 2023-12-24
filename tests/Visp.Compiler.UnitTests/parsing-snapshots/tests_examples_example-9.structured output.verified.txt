@@ -2,8 +2,8 @@
   [AnonModule
      ([Expr
          (LetOrUse
-            (Named (SynSymbol decimals, (9,5--9,13)), New (Ident ResizeArray<_>, [], (9,15--9,33)), None, (9,1--9,34)),
-          (9,0--9,35));
+            (Named (SynSymbol decimals, (9,5--9,13)), New (Ident ResizeArray<_>, [], (9,15--9,33)), None, [],
+             (9,1--9,34)), (9,0--9,35));
        Expr
          (DotMethod
             (Symbol (SynSymbol decimals), SynSymbol Add,
@@ -31,7 +31,7 @@
               DotIndex (Symbol (SynSymbol decimals), [Const (Int32 0, (19,42--19,43))], (19,29--19,44))], (19,1--19,45)),
           (19,0--19,46));
        Expr
-         (LetOrUse (Named (SynSymbol index, (21,5--21,10)), Const (Int32 1, (21,11--21,12)), None, (21,1--21,12)),
+         (LetOrUse (Named (SynSymbol index, (21,5--21,10)), Const (Int32 1, (21,11--21,12)), None, [], (21,1--21,12)),
           (21,0--21,13));
        Expr
          (LetOrUse
@@ -40,7 +40,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("decimals 1 is %f", Regular, (23,9--23,27)), (23,9--23,27));
                  DotIndex (Symbol (SynSymbol decimals), [Symbol (SynSymbol index)], (23,29--23,48))], (23,1--23,49)),
-             None, (23,0--23,50)), (23,0--23,50));
+             None, [], (23,0--23,50)), (23,0--23,50));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

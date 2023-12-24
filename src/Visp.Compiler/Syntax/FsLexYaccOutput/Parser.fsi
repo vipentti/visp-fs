@@ -341,8 +341,8 @@ type nonTerminalId =
     | NONTERM_op_sym
     | NONTERM_operators_not_in_parens
     | NONTERM_set
-    | NONTERM_let
-    | NONTERM_mut
+    | NONTERM_let_use_mut_kw
+    | NONTERM_let_or_use
     | NONTERM_letstar
     | NONTERM_type_name_text
     | NONTERM_syn_type_name

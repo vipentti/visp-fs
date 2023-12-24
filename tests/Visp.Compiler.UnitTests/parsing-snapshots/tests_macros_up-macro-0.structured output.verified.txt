@@ -4,7 +4,7 @@
          (FunctionDef
             (SynSymbol DoingThings, None, Args (List [], (8,16--8,18)),
              [LetOrUse
-                (Named (SynSymbol items, (9,7--9,12)), Collection (SynCollection (FsSet, [], (9,14--9,18))), Mutable,
+                (Named (SynSymbol items, (9,7--9,12)), Collection (SynCollection (FsSet, [], (9,14--9,18))), Mutable, [],
                  (9,3--9,19));
               ForTo
                 (SynSymbol i, Const (Int32 0, (11,14--11,15)), Const (Int32 5, (11,19--11,20)),
@@ -20,8 +20,8 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("%A", Regular, (17,9--17,13)), (17,9--17,13));
-                 FunctionCall (Symbol (SynSymbol DoingThings), [], (17,15--17,26))], (17,1--17,27)), None, (17,0--17,28)),
-          (17,0--17,28));
+                 FunctionCall (Symbol (SynSymbol DoingThings), [], (17,15--17,26))], (17,1--17,27)), None, [],
+             (17,0--17,28)), (17,0--17,28));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

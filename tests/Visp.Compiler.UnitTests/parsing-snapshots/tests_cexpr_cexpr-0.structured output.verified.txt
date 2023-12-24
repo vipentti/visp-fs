@@ -13,7 +13,7 @@
                 [FunctionCall
                    (Symbol (SynSymbol printfn),
                     [Const (String ("x is %i", Regular, (12,11--12,20)), (12,11--12,20)); Symbol (SynSymbol x)],
-                    (12,3--12,22))], (8,1--12,23)), None, (8,0--13,1)), (8,0--13,1));
+                    (12,3--12,22))], (8,1--12,23)), None, [], (8,0--13,1)), (8,0--13,1));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

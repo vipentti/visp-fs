@@ -1,0 +1,27 @@
+﻿LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "Literal" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "LITERAL_ZERO" Default 0 1 LParen
+INT32 (0, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "Literal" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "LITERAL_STR" Default 0 1 LParen
+STRING ("hello world", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("LITERAL_ZERO: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "LITERAL_ZERO" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("LITERAL_STR: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "LITERAL_STR" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

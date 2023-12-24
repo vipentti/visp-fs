@@ -76,7 +76,7 @@
                    (SynMacroCall
                       (SynSymbol my-and,
                        [Symbol (SynSymbol my-and); Const (Bool true, (23,29--23,33)); Const (Bool true, (23,34--23,38));
-                        Const (Bool true, (23,39--23,43))], (23,22--23,43)))], (23,1--23,44)), None, (23,0--23,45)),
+                        Const (Bool true, (23,39--23,43))], (23,22--23,43)))], (23,1--23,44)), None, [], (23,0--23,45)),
           (23,0--23,45));
        Expr
          (FunctionCall

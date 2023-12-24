@@ -29,7 +29,7 @@
                        (17,6--17,44)), (17,5--17,45));
                  Expr (FunctionCall (Symbol (SynSymbol Async.AwaitTask), [], (18,3--18,18)), (18,2--18,19));
                  Expr (FunctionCall (Symbol (SynSymbol Async.RunSynchronously), [], (19,3--19,25)), (19,2--19,26))],
-                (17,1--19,26)), None, (17,0--19,27)), (17,0--19,27));
+                (17,1--19,26)), None, [], (17,0--19,27)), (17,0--19,27));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

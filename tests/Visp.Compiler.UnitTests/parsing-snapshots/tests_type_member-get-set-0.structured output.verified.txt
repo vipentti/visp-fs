@@ -69,20 +69,21 @@
                (SynCollection
                   (FsArray,
                    [Const (Int32 1, (29,19--29,20)); Const (Int32 2, (29,21--29,22)); Const (Int32 3, (29,23--29,24));
-                    Const (Int32 4, (29,25--29,26)); Const (Int32 5, (29,27--29,28))], (29,12--29,28))), None,
+                    Const (Int32 4, (29,25--29,26)); Const (Int32 5, (29,27--29,28))], (29,12--29,28))), None, [],
              (29,1--29,29)), (29,0--29,30));
        Expr
          (LetOrUse
             (Named (SynSymbol getOnly, (31,5--31,12)),
-             New (Ident GetOnly<_>, [Symbol (SynSymbol array)], (31,14--31,34)), None, (31,1--31,35)), (31,0--31,36));
+             New (Ident GetOnly<_>, [Symbol (SynSymbol array)], (31,14--31,34)), None, [], (31,1--31,35)), (31,0--31,36));
        Expr
          (LetOrUse
             (Named (SynSymbol setOnly, (32,5--32,12)),
-             New (Ident SetOnly<_>, [Symbol (SynSymbol array)], (32,14--32,34)), None, (32,1--32,35)), (32,0--32,36));
+             New (Ident SetOnly<_>, [Symbol (SynSymbol array)], (32,14--32,34)), None, [], (32,1--32,35)), (32,0--32,36));
        Expr
          (LetOrUse
             (Named (SynSymbol getAndSet, (33,5--33,14)),
-             New (Ident GetAndSet<_>, [Symbol (SynSymbol array)], (33,16--33,38)), None, (33,1--33,39)), (33,0--33,40));
+             New (Ident GetAndSet<_>, [Symbol (SynSymbol array)], (33,16--33,38)), None, [], (33,1--33,39)),
+          (33,0--33,40));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -114,7 +115,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("%A", Regular, (45,9--45,13)), (45,9--45,13)); Symbol (SynSymbol array)], (45,1--45,19)),
-             None, (45,0--45,20)), (45,0--45,20));
+             None, [], (45,0--45,20)), (45,0--45,20));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

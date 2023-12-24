@@ -7,7 +7,7 @@
                (SynCollection
                   (FsArray,
                    [Const (Int32 1, (8,12--8,13)); Const (Int32 2, (8,14--8,15)); Const (Int32 3, (8,16--8,17));
-                    Const (Int32 4, (8,18--8,19)); Const (Int32 5, (8,20--8,21))], (8,9--8,24))), None, (8,1--8,24)),
+                    Const (Int32 4, (8,18--8,19)); Const (Int32 5, (8,20--8,21))], (8,9--8,24))), None, [], (8,1--8,24)),
           (8,0--8,25));
        Expr
          (FunctionCall
@@ -22,7 +22,7 @@
               DotIndex (Symbol (SynSymbol arr), [Const (Int32 1, (11,24--11,25))], (11,22--11,30))], (11,1--11,31)),
           (11,0--11,32));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (13,0--13,3)), Symbol (SynSymbol arr), None, (13,0--13,3)),
+         (LetOrUse (Named (SynSymbol visp_result_todo, (13,0--13,3)), Symbol (SynSymbol arr), None, [], (13,0--13,3)),
           (13,0--13,3));
        Expr
          (FunctionCall

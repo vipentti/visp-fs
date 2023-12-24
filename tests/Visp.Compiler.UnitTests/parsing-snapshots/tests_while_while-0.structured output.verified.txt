@@ -15,7 +15,7 @@
                         (12,17--12,35)))], (12,5--12,36))], (11,1--12,37)), (11,0--12,38));
        Expr
          (LetOrUse
-            (Named (SynSymbol count, (14,5--14,10)), Atom (Const (Int64 0L, (14,17--14,19)), (14,12--14,19)), None,
+            (Named (SynSymbol count, (14,5--14,10)), Atom (Const (Int64 0L, (14,17--14,19)), (14,12--14,19)), None, [],
              (14,1--14,20)), (14,0--14,21));
        Expr
          (LetOrUse
@@ -33,7 +33,7 @@
                      Deref (true, Symbol (SynSymbol count), (16,26--16,32))], (16,5--16,32));
                  FunctionCall
                    (Symbol (SynSymbol swap!), [Symbol (SynSymbol count); Symbol (SynSymbol inc)], (17,5--17,20))],
-                (15,1--17,21)), None, (15,0--17,22)), (15,0--17,22));
+                (15,1--17,21)), None, [], (15,0--17,22)), (15,0--17,22));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

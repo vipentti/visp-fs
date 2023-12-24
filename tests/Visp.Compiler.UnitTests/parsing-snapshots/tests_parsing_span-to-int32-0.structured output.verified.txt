@@ -7,7 +7,8 @@
              Args (List [Typed (Named (SynSymbol text, (10,11--10,15)), Ident string, (10,10--10,24))], (10,9--10,25)),
              [LetOrUse
                 (Named (SynSymbol span1, (11,7--11,12)),
-                 DotMethod (Symbol (SynSymbol text), SynSymbol AsSpan, [], Tuple, (11,14--11,26)), None, (11,3--11,27));
+                 DotMethod (Symbol (SynSymbol text), SynSymbol AsSpan, [], Tuple, (11,14--11,26)), None, [],
+                 (11,3--11,27));
               FunctionCall (Symbol (SynSymbol span->int32), [Symbol (SynSymbol span1)], (12,3--12,20))], (10,1--12,21)),
           (10,0--13,1));
        Expr
@@ -32,7 +33,7 @@
                 [Const (String ("%A", Regular, (17,9--17,13)), (17,9--17,13));
                  FunctionCall
                    (Symbol (SynSymbol Test), [Const (String ("1", Regular, (17,20--17,23)), (17,20--17,23))],
-                    (17,15--17,23))], (17,1--17,24)), None, (17,0--17,25)), (17,0--17,25));
+                    (17,15--17,23))], (17,1--17,24)), None, [], (17,0--17,25)), (17,0--17,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -389,7 +389,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
             |> Seq.concat
         )
 
-    | SynExpr.LetOrUse(name, _, f, _) ->
+    | SynExpr.LetOrUse(name, _, f, _, _) ->
         syms.AddRange(
             textRangeOfPat name
             |> List.map (fun (a, b) -> SymbolDetails.Variable(a, f.HasFlag(LetFlags.Mutable), b))

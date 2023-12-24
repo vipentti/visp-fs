@@ -3,7 +3,7 @@
      ([Expr
          (LetOrUse
             (Typed (Named (SynSymbol n, (8,6--8,7)), Ident string, (8,5--8,16)),
-             Const (String ("hello", Regular, (8,17--8,24)), (8,17--8,24)), None, (8,1--8,24)), (8,0--8,25));
+             Const (String ("hello", Regular, (8,17--8,24)), (8,17--8,24)), None, [], (8,1--8,24)), (8,0--8,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -18,7 +18,7 @@
                       [Named (SynSymbol x, (12,7--12,8)); Trivia (Comma, (12,8--12,9));
                        Named (SynSymbol y, (12,10--12,11))], (12,6--12,12))),
                 Tuple (false, [Type (Ident int); Star (12,19--12,20); Type (Ident int)], (12,15--12,24)), (12,5--12,25)),
-             Tuple ([Const (Int32 1, (12,27--12,28)); Const (Int32 2, (12,30--12,31))], (12,27--12,31)), None,
+             Tuple ([Const (Int32 1, (12,27--12,28)); Const (Int32 2, (12,30--12,31))], (12,27--12,31)), None, [],
              (12,1--12,32)), (12,0--12,33));
        Expr
          (FunctionCall
@@ -37,7 +37,7 @@
                   (Paren,
                    [Named (SynSymbol x2, (16,6--16,8)); Trivia (Comma, (16,8--16,9));
                     Named (SynSymbol y2, (16,10--16,12))], (16,5--16,13))),
-             Tuple ([Const (Int32 3, (16,15--16,16)); Const (Int32 4, (16,18--16,19))], (16,15--16,19)), None,
+             Tuple ([Const (Int32 3, (16,15--16,16)); Const (Int32 4, (16,18--16,19))], (16,15--16,19)), None, [],
              (16,1--16,20)), (16,0--16,21));
        Expr
          (FunctionCall
@@ -55,7 +55,7 @@
                (SynCollection
                   (Paren, [Named (SynSymbol x3, (20,6--20,8)); Trivia (Comma, (20,8--20,9)); Discard (20,10--20,11)],
                    (20,5--20,12))),
-             Tuple ([Const (Int32 5, (20,14--20,15)); Const (Int32 6, (20,17--20,18))], (20,14--20,18)), None,
+             Tuple ([Const (Int32 5, (20,14--20,15)); Const (Int32 6, (20,17--20,18))], (20,14--20,18)), None, [],
              (20,1--20,19)), (20,0--20,20));
        Expr
          (FunctionCall
@@ -69,7 +69,7 @@
                   (Paren,
                    [Typed (Named (SynSymbol x4, (23,7--23,9)), Ident int, (23,6--23,15)); Trivia (Comma, (23,15--23,16));
                     Discard (23,17--23,18)], (23,5--23,19))),
-             Tuple ([Const (Int32 7, (23,21--23,22)); Const (Int32 8, (23,24--23,25))], (23,21--23,25)), None,
+             Tuple ([Const (Int32 7, (23,21--23,22)); Const (Int32 8, (23,24--23,25))], (23,21--23,25)), None, [],
              (23,1--23,26)), (23,0--23,27));
        Expr
          (LetOrUse
@@ -77,7 +77,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("x4 is: %i", Regular, (24,9--24,20)), (24,9--24,20)); Symbol (SynSymbol x4)],
-                (24,1--24,23)), None, (24,0--24,24)), (24,0--24,24));
+                (24,1--24,23)), None, [], (24,0--24,24)), (24,0--24,24));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

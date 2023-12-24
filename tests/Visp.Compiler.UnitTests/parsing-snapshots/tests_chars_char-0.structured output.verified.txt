@@ -31,7 +31,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("Char is %O", Regular, (14,9--14,21)), (14,9--14,21)); Const (Char ')', (14,22--14,25))],
-                (14,1--14,25)), None, (14,0--14,27)), (14,0--14,27));
+                (14,1--14,25)), None, [], (14,0--14,27)), (14,0--14,27));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

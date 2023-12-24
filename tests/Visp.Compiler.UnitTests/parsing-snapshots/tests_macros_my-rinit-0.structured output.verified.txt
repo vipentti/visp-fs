@@ -39,7 +39,7 @@
                     List (Bracket, [Symbol (SynSymbol src); Const (Int32 1, (22,24--22,25))], (22,19--22,26));
                     List (Bracket, [Symbol (SynSymbol Mapping.dest); Const (Int32 2, (22,41--22,42))], (22,27--22,43));
                     List (Bracket, [Symbol (SynSymbol range); Const (Int32 3, (22,51--22,52))], (22,44--22,53))],
-                   (22,11--22,53))), None, (22,1--22,54)), (22,0--22,55));
+                   (22,11--22,53))), None, [], (22,1--22,54)), (22,0--22,55));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -47,7 +47,8 @@
              (23,1--23,28)), (23,0--23,29));
        Expr (DotMethod (Symbol (SynSymbol temp), SynSymbol Stuff, [], Tuple, (24,1--24,12)), (24,0--24,13));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (26,0--26,2)), Const (Unit, (26,0--26,2)), None, (26,0--26,2)),
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (26,0--26,2)), Const (Unit, (26,0--26,2)), None, [], (26,0--26,2)),
           (26,0--26,2));
        Expr
          (FunctionCall

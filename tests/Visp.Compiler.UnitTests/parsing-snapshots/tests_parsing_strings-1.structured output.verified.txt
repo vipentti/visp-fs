@@ -3,7 +3,8 @@
      ([Expr
          (LetOrUse
             (Named (SynSymbol value, (8,5--8,10)),
-             Const (String ("r:\rt:\tn:\na:\a\"", Regular, (8,11--8,31)), (8,11--8,31)), None, (8,1--8,31)), (8,0--8,32));
+             Const (String ("r:\rt:\tn:\na:\a\"", Regular, (8,11--8,31)), (8,11--8,31)), None, [], (8,1--8,31)),
+          (8,0--8,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -64,7 +65,7 @@
                      (25,7--34,28))], (25,3--34,28))], (24,1--35,5)), (24,0--35,6));
        Expr
          (LetOrUse
-            (Named (SynSymbol lf, (37,5--37,7)), Symbol (SynSymbol System.Environment.NewLine), None, (37,1--37,34)),
+            (Named (SynSymbol lf, (37,5--37,7)), Symbol (SynSymbol System.Environment.NewLine), None, [], (37,1--37,34)),
           (37,0--37,35));
        Expr
          (FunctionDef
@@ -78,7 +79,7 @@
                  DotMethod
                    (Symbol (SynSymbol path), SynSymbol Replace,
                     [Const (String ("\\", Regular, (40,27--40,31)), (40,27--40,31));
-                     Const (String ("/", Regular, (40,32--40,35)), (40,32--40,35))], Tuple, (40,13--40,35)), None,
+                     Const (String ("/", Regular, (40,32--40,35)), (40,32--40,35))], Tuple, (40,13--40,35)), None, [],
                  (40,3--40,36));
               LetOrUse
                 (Named (SynSymbol testname, (41,7--41,15)),
@@ -90,7 +91,7 @@
                              (Symbol (SynSymbol %1), SynSymbol Replace,
                               [Const (String ("/", Regular, (41,40--41,43)), (41,40--41,43));
                                Const (String ("_", Regular, (41,44--41,47)), (41,44--41,47))], Tuple, (41,28--41,47)),
-                           (41,26--41,48)), (41,26--41,48))], (41,17--41,48)), None, (41,3--41,49));
+                           (41,26--41,48)), (41,26--41,48))], (41,17--41,48)), None, [], (41,3--41,49));
               Begin
                 ([Begin
                     ([LetOrUse
@@ -103,7 +104,7 @@
         let ``%s %s`` () = TestUtils.runTest "%s"
       ", TripleQuote, (45,29--48,9)),
                                 (45,29--48,9)); Symbol (SynSymbol prefix); Symbol (SynSymbol testname);
-                             Symbol (SynSymbol path)], (45,21--48,30)), None, (45,7--48,31));
+                             Symbol (SynSymbol path)], (45,21--48,30)), None, [], (45,7--48,31));
                       LetOrUse
                         (Named (SynSymbol template2, (49,11--49,20)),
                          Const
@@ -111,7 +112,7 @@
         [<Fact>]
         let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"
       ", InterpolatedTripleQuote 1, (49,21--52,9)),
-                            (49,21--52,9)), None, (49,7--52,9));
+                            (49,21--52,9)), None, [], (49,7--52,9));
                       LetOrUse
                         (Named (SynSymbol template3, (53,11--53,20)),
                          Const
@@ -119,7 +120,7 @@
         [<Fact>]
         let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"
       ", InterpolatedTripleQuote 2, (53,21--56,9)),
-                            (53,21--56,9)), None, (53,7--56,9));
+                            (53,21--56,9)), None, [], (53,7--56,9));
                       LetOrUse
                         (Named (SynSymbol template4, (57,11--57,20)),
                          Const
@@ -127,7 +128,7 @@
         [<Fact>]
         let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{(+ 1 2 3)}} {{(+ 1 2 3)}} {(+ 1 2 3)}"
       ", InterpolatedTripleQuote 2, (57,21--60,9)),
-                            (57,21--60,9)), None, (57,7--60,9));
+                            (57,21--60,9)), None, [], (57,7--60,9));
                       Op
                         (Infix
                            (SynSymbol +,
@@ -149,7 +150,7 @@
                       (Symbol (SynSymbol genTestTemplate),
                        [Const (String ("example", Regular, (65,70--65,79)), (65,70--65,79));
                         Const (String ("example", Regular, (65,80--65,89)), (65,80--65,89))], (65,54--65,89))],
-                   (65,1--65,90))), None, (65,0--65,91)), (65,0--65,91));
+                   (65,1--65,90))), None, [], (65,0--65,91)), (65,0--65,91));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

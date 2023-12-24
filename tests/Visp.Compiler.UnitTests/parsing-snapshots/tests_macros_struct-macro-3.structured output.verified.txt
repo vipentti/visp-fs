@@ -100,7 +100,7 @@
          (LetOrUse
             (Named (SynSymbol instance, (43,5--43,13)),
              New (Ident Range, [Const (Int32 1, (43,25--43,26)); Const (Int32 2, (43,27--43,28))], (43,15--43,28)), None,
-             (43,1--43,29)), (43,0--43,30));
+             [], (43,1--43,29)), (43,0--43,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -120,7 +120,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("Example Result is %A", Regular, (47,9--47,31)), (47,9--47,31));
                  DotMethod (Symbol (SynSymbol instance), SynSymbol ToString, [], Tuple, (47,33--47,51))], (47,1--47,52)),
-             None, (47,0--47,53)), (47,0--47,53));
+             None, [], (47,0--47,53)), (47,0--47,53));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

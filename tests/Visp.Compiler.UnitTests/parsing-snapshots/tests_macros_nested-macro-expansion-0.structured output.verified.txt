@@ -55,10 +55,10 @@
                           (29,9--29,21)),
                        [LetOrUse
                           (Named (SynSymbol y, (30,11--30,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (30,14--30,20)), None, (30,7--30,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (30,14--30,20)), None, [], (30,7--30,21));
                         LetOrUse
                           (Named (SynSymbol x, (31,11--31,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (31,14--31,20)), None, (31,7--31,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (31,14--31,20)), None, [], (31,7--31,21));
                         SyntaxMacroCall
                           (SynMacroCall
                              (SynSymbol cond_,
@@ -121,7 +121,7 @@
             (Named (SynSymbol visp_result_todo, (43,0--43,14)),
              FunctionCall
                (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (43,9--43,13)), (43,9--43,13))],
-                (43,1--43,13)), None, (43,0--43,14)), (43,0--43,14));
+                (43,1--43,13)), None, [], (43,0--43,14)), (43,0--43,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

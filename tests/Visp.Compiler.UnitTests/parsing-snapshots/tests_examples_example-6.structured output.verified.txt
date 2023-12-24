@@ -8,7 +8,7 @@
                   (Bracket,
                    [Const (Int32 1, (9,5--9,6)); Const (Int32 2, (9,7--9,8));
                     Const (String ("foo", Regular, (9,9--9,14)), (9,9--9,14));
-                    Const (String ("bar", Regular, (9,15--9,20)), (9,15--9,20))], (9,4--9,21))), None, (8,1--9,21)),
+                    Const (String ("bar", Regular, (9,15--9,20)), (9,15--9,20))], (9,4--9,21))), None, [], (8,1--9,21)),
           (8,0--9,22));
        Expr
          (LetOrUse
@@ -16,7 +16,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("values are %O", Regular, (10,9--10,24)), (10,9--10,24)); Symbol (SynSymbol values)],
-                (10,1--10,31)), None, (10,0--10,32)), (10,0--10,32));
+                (10,1--10,31)), None, [], (10,0--10,32)), (10,0--10,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

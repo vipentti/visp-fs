@@ -35,7 +35,7 @@
                     List
                       (Paren, [Symbol (SynSymbol <); Const (Int32 0, (20,5--20,6)); Const (Int32 0, (20,7--20,8))],
                        (20,2--20,9)); Const (Int32 2, (21,4--21,5)); Keyword (SynKeyword :else);
-                    Const (Int32 3, (23,4--23,5))], (17,1--23,5))), None, (17,0--23,6)), (17,0--23,6));
+                    Const (Int32 3, (23,4--23,5))], (17,1--23,5))), None, [], (17,0--23,6)), (17,0--23,6));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -86,7 +86,7 @@
                    (Symbol (SynSymbol AreEqualStrings),
                     [Const (String ("foo", Regular, (29,48--29,53)), (29,48--29,53));
                      Const (String ("bar", Regular, (29,54--29,59)), (29,54--29,59))], (29,32--29,59))], (29,1--29,60)),
-             None, (29,0--29,61)), (29,0--29,61));
+             None, [], (29,0--29,61)), (29,0--29,61));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

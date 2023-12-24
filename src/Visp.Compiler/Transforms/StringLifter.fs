@@ -47,6 +47,7 @@ let liftLiteralStrings (file: ParsedFile) =
                                     constRange
                                 ),
                                 LetFlags.None,
+                                [],
                                 constRange
                             )
 

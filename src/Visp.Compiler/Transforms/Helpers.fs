@@ -65,8 +65,14 @@ let rec transform (func: SynExpr -> SynExpr) expr =
         | SynExpr.Deref(short, expr, range) -> SynExpr.Deref(short, bound_transform expr, range)
         | SynExpr.Begin(exprs, k, range) -> SynExpr.Begin(List.map bound_transform exprs, k, range)
         | SynExpr.New(typ, args, range) -> SynExpr.New(typ, List.map bound_transform args, range)
-        | SynExpr.LetOrUse(name, value, flags, range) ->
-            SynExpr.LetOrUse(name, bound_transform value, flags, range)
+        | SynExpr.LetOrUse(name, value, flags, attributes, range) ->
+            SynExpr.LetOrUse(
+                name,
+                bound_transform value,
+                flags,
+                fixAttributes bound_transform attributes,
+                range
+            )
         | SynExpr.Set(name, value, range) ->
             SynExpr.Set(bound_transform name, bound_transform value, range)
         | SynExpr.Tuple(exprs, range) -> SynExpr.Tuple(List.map bound_transform exprs, range)
