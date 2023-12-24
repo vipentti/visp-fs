@@ -411,6 +411,11 @@ module ``tests_macros_struct-macro-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/struct-macro-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_my-const-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/my-const-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_and-example-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/and-example-0.visp"

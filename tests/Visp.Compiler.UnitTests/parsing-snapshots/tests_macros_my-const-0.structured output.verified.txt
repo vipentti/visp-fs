@@ -1,0 +1,43 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol MyConstTest,
+                [SynMacroCase
+                   ([Discard (9,4--9,5); Symbol (SynSymbol pat, (9,6--9,9)); Symbol (SynSymbol bind, (9,10--9,14))],
+                    List
+                      (Paren,
+                       [List (HashBracket, [Symbol (SynSymbol Literal)], (9,17--9,27)); Symbol (SynSymbol let);
+                        Symbol (SynSymbol pat); Symbol (SynSymbol bind)], (9,16--9,41)), (9,2--9,42))], (8,1--9,42))),
+          (8,0--9,43));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol MyConstTest,
+                [Symbol (SynSymbol MyConstTest); Symbol (SynSymbol LITERAL_ZERO); Const (Int32 0, (11,26--11,27))],
+                (11,1--11,27))), (11,0--11,28));
+       Expr
+         (SyntaxMacroCall
+            (SynMacroCall
+               (SynSymbol MyConstTest,
+                [Symbol (SynSymbol MyConstTest); Symbol (SynSymbol LITERAL_STR);
+                 Const (String ("hello world", Regular, (12,25--12,38)), (12,25--12,38))], (12,1--12,38))),
+          (12,0--12,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("LITERAL_ZERO: %A", Regular, (14,9--14,27)), (14,9--14,27));
+              Symbol (SynSymbol LITERAL_ZERO)], (14,1--14,40)), (14,0--14,41));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (15,0--15,39)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("LITERAL_STR: %A", Regular, (15,9--15,26)), (15,9--15,26));
+                 Symbol (SynSymbol LITERAL_STR)], (15,1--15,38)), None, [], (15,0--15,39)), (15,0--15,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (15,0--15,39)), (15,0--15,39)); Symbol (SynSymbol visp_result_todo)],
+             (15,0--15,39)), (15,0--15,39))], (8,0--15,39))]

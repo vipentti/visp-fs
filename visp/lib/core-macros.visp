@@ -7,6 +7,12 @@
 
 ;; core-macros
 
+(syntax-macro const
+  [(_ pat bind) (#[Literal] let pat bind)])
+
+(syntax-macro literal
+  [(_ pat bind) (#[Literal] let pat bind)])
+
 (syntax-macro when
   [(_ test body ...)
     (if test
