@@ -22,7 +22,6 @@ type Mapping () =
       // line 15 @"member-fn-0.visp"
       printfn "src %i" src_range
     ()
-
 // line 20 @"member-fn-0.visp"
 let mapping =
   // line 20 @"member-fn-0.visp"

@@ -6,7 +6,7 @@
             (SynSymbol MyCustomValue,
              [UnionCase (SynSymbol Nil, [], (12,2--12,5));
               UnionCase (SynSymbol String, [Type (Ident string, (13,10--13,16))], (13,3--13,16))],
-             [OverrideFn
+             [MemberFn
                 (SynSymbol t.GetHashCode, Args (List [], (15,29--15,31)),
                  [Match
                     (Symbol (SynSymbol t),
@@ -23,8 +23,8 @@
                              [Tuple
                                 ([Const (String ("string", Regular, (18,44--18,52)), (18,44--18,52));
                                   Symbol (SynSymbol s)], (18,44--18,55))], (18,19--18,56))], (18,7--18,57))],
-                     (16,5--18,58))], (15,3--19,5));
-              OverrideFn
+                     (16,5--18,58))], Override, [], (15,3--19,5));
+              MemberFn
                 (SynSymbol t.Equals, Args (List [Named (SynSymbol other, (21,25--21,30))], (21,24--21,31)),
                  [Match
                     (Symbol (SynSymbol other),
@@ -42,7 +42,7 @@
                                    (24,18--24,36))), SynSymbol Equals, [Symbol (SynSymbol v)], Tuple, (24,9--24,39))],
                          (23,7--24,40));
                       SynMatch (Discard (26,7--26,8), None, [Const (Bool false, (26,9--26,14))], (26,7--26,14))],
-                     (22,5--26,15))], (21,3--27,5));
+                     (22,5--26,15))], Override, [], (21,3--27,5));
               Interface
                 (SynSymbol IEquatable<MyCustomValue>,
                  [MemberFn
@@ -79,7 +79,7 @@
                                (SynCollection
                                   (Paren, [Discard (34,10--34,11); Trivia (Dot, (34,12--34,13)); Discard (34,14--34,15)],
                                    (34,9--34,16))), None, [Const (Bool false, (34,17--34,22))], (34,9--34,22))],
-                         (31,7--34,23))], (30,5--35,7))], (29,3--36,5));
+                         (31,7--34,23))], Default, [], (30,5--35,7))], (29,3--36,5));
               Interface
                 (SynSymbol IComparable,
                  [MemberFn
@@ -103,7 +103,7 @@
                             (Named (SynSymbol null, (44,9--44,13)), None, [Const (Int32 1, (44,14--44,15))],
                              (44,9--44,15));
                           SynMatch (Discard (45,9--45,10), None, [Const (Int32 -1, (45,11--45,13))], (45,9--45,13))],
-                         (40,7--45,14))], (39,5--46,7))], (38,3--46,8));
+                         (40,7--45,14))], Default, [], (39,5--46,7))], (38,3--46,8));
               Interface
                 (SynSymbol IComparable<MyCustomValue>,
                  [MemberFn
@@ -155,7 +155,8 @@
                              None,
                              [DotMethod
                                 (Symbol (SynSymbol lhs), SynSymbol CompareTo, [Symbol (SynSymbol rhs)], Tuple,
-                                 (54,39--54,57))], (54,9--54,58))], (50,7--54,59))], (49,5--55,7))], (48,3--55,8))],
+                                 (54,39--54,57))], (54,9--54,58))], (50,7--54,59))], Default, [], (49,5--55,7))],
+                 (48,3--55,8))],
              [{ Attributes =
                  [{ TypeName = Ident CustomEquality
                     ArgExpr = Const (Unit, (10,3--10,17))

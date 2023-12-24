@@ -12,7 +12,6 @@ type Mapping =
     member this.Stuff () =
       // line 14 @"record-0.visp"
       printfn "doing stuff %A" ((this.src))
-
 // line 17 @"record-0.visp"
 let temp =
   // line 17 @"record-0.visp"

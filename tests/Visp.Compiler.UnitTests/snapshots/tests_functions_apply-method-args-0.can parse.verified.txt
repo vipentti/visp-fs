@@ -14,15 +14,14 @@ type Grid = char[,]
 type Pos (x: int32 , y: int32) =
   // line 11 @"apply-method-args-0.visp"
   member _.X =
-        x
+    x
   // line 11 @"apply-method-args-0.visp"
   member _.Y =
-        y
+    y
   // line 11 @"apply-method-args-0.visp"
   override _.ToString () =
     // line 11 @"apply-method-args-0.visp"
     sprintf "(y: %A, x: %A)" y x
-
 // line 11 @"apply-method-args-0.visp"
 let mkPos x y =
   // line 11 @"apply-method-args-0.visp"
@@ -47,12 +46,11 @@ type TileMap (grid: Grid , rocks: array<Pos>) =
     Array2D.length2 grid
   // line 27 @"apply-method-args-0.visp"
   member _.Rocks =
-        rocks
+    rocks
   // line 29 @"apply-method-args-0.visp"
   override _.ToString () =
     // line 30 @"apply-method-args-0.visp"
     sprintf "TileMap\n%A" grid
-
   // line 32 @"apply-method-args-0.visp"
   member t.MoveRock (from: Pos) (_to: Pos) =
     // line 33 @"apply-method-args-0.visp"
@@ -70,7 +68,6 @@ type TileMap (grid: Grid , rocks: array<Pos>) =
             false
       | _ ->
         false
-
   // line 46 @"apply-method-args-0.visp"
   member _.Item
         // line 47 @"apply-method-args-0.visp"

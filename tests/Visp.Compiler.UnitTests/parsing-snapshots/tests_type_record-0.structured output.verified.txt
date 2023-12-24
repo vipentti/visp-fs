@@ -11,8 +11,8 @@
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
                      [Const (String ("doing stuff %A", Regular, (14,13--14,29)), (14,13--14,29));
-                      DotProperty (Symbol (SynSymbol this), SynSymbol src, (14,31--14,40))], (14,5--14,41))],
-                 (13,3--14,42))], [], (8,1--14,43)), (8,0--15,1));
+                      DotProperty (Symbol (SynSymbol this), SynSymbol src, (14,31--14,40))], (14,5--14,41))], Default,
+                 [], (13,3--14,42))], [], (8,1--14,43)), (8,0--15,1));
        Expr
          (LetOrUse
             (Named (SynSymbol temp, (17,5--17,9)),

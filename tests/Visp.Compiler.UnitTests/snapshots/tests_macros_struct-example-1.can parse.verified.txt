@@ -12,20 +12,19 @@ let state = { Todo = () }
 type Range (start: int64 , len: int64) =
   // line 8 @"struct-example-1.visp"
   member _.Start =
-        start
+    start
   // line 8 @"struct-example-1.visp"
   member _.Len =
-        len
+    len
   // line 8 @"struct-example-1.visp"
   member _.End =
-        // line 8 @"struct-example-1.visp"
+    // line 8 @"struct-example-1.visp"
     start +
     len
   // line 8 @"struct-example-1.visp"
   member d.Offset v =
     // line 8 @"struct-example-1.visp"
     v - (d.Start)
-
   // line 8 @"struct-example-1.visp"
   member d.Contains v =
     // line 8 @"struct-example-1.visp"
@@ -36,12 +35,10 @@ type Range (start: int64 , len: int64) =
         v < ((d.End))
       else
         false
-
   // line 8 @"struct-example-1.visp"
   override t.ToString () =
     // line 8 @"struct-example-1.visp"
     sprintf "Range(%i, %i)" ((t.Start)) ((t.Len))
-
 // line 8 @"struct-example-1.visp"
 let mkRange start len =
   // line 8 @"struct-example-1.visp"
@@ -61,15 +58,15 @@ printfn "Range end is: %A" ((new Range(0, 5))
 type SourceDestMap (dest: int64 , src: int64 , len: int64) =
   // line 29 @"struct-example-1.visp"
   member _.Dest =
-        // line 29 @"struct-example-1.visp"
+    // line 29 @"struct-example-1.visp"
     (new Range(dest, len))
   // line 29 @"struct-example-1.visp"
   member _.Src =
-        // line 29 @"struct-example-1.visp"
+    // line 29 @"struct-example-1.visp"
     (new Range(src, len))
   // line 29 @"struct-example-1.visp"
   member _.Len =
-        len
+    len
   // line 29 @"struct-example-1.visp"
   member d.Contains v =
     // line 29 @"struct-example-1.visp"
@@ -80,7 +77,6 @@ type SourceDestMap (dest: int64 , src: int64 , len: int64) =
       |> (fun arg1 ->
         // line 29 @"struct-example-1.visp"
         arg1.Contains v)
-
   // line 29 @"struct-example-1.visp"
   member d.Get src =
     // line 29 @"struct-example-1.visp"
@@ -105,12 +101,10 @@ type SourceDestMap (dest: int64 , src: int64 , len: int64) =
           else
             // line 29 @"struct-example-1.visp"
             failwith "unreachable cond"
-
   // line 29 @"struct-example-1.visp"
   override t.ToString () =
     // line 29 @"struct-example-1.visp"
     sprintf "(%A, %A, %i)" ((t.Dest)) ((t.Src)) ((t.Len))
-
 // line 29 @"struct-example-1.visp"
 let mkSourceDestMap dest src len =
   // line 29 @"struct-example-1.visp"

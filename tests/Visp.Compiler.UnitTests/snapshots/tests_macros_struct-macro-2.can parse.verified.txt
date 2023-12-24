@@ -14,16 +14,16 @@ let macro_MyStruct2 = "__MACRO_INIT__"
 type Example (x: int , y: int , z: int , w: int) =
   // line 23 @"struct-macro-2.visp"
   member _.X =
-        x
+    x
   // line 23 @"struct-macro-2.visp"
   member _.Y =
-        y
+    y
   // line 23 @"struct-macro-2.visp"
   member _.Z =
-        z
+    z
   // line 23 @"struct-macro-2.visp"
   member _.W =
-        w
+    w
   // line 23 @"struct-macro-2.visp"
   member d.Sum () =
     // line 23 @"struct-macro-2.visp"
@@ -31,7 +31,6 @@ type Example (x: int , y: int , z: int , w: int) =
     ((d.Y)) +
     ((d.Z)) +
     ((d.W))
-
 // line 23 @"struct-macro-2.visp"
 let mkExample x y z w =
   // line 23 @"struct-macro-2.visp"

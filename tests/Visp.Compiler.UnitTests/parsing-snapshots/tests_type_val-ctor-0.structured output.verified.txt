@@ -13,13 +13,14 @@
                  [RecordInit
                     ([SynInit (SynSymbol X, Symbol (SynSymbol x), (14,16--14,21));
                       SynInit (SynSymbol Y, Symbol (SynSymbol y), (14,22--14,27))], (14,13--14,30))], (14,3--14,30));
-              OverrideFn
+              MemberFn
                 (SynSymbol t.ToString, Args (List [], (16,25--16,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("TestStructType(%i, %i)", Regular, (16,37--16,61)), (16,37--16,61));
                       DotProperty (Symbol (SynSymbol t), SynSymbol X, (16,63--16,67));
-                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (16,70--16,74))], (16,29--16,75))], (16,3--16,76))],
+                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (16,70--16,74))], (16,29--16,75))], Override, [],
+                 (16,3--16,76))],
              [{ Attributes = [{ TypeName = Ident Struct
                                 ArgExpr = Const (Unit, (8,3--8,9))
                                 Range = (8,3--8,9) }; { TypeName = Ident System.Runtime.CompilerServices.IsReadOnly
@@ -39,30 +40,30 @@
                  [RecordInit
                     ([SynInit (SynSymbol X, Symbol (SynSymbol x), (23,16--23,21));
                       SynInit (SynSymbol Y, Symbol (SynSymbol y), (23,22--23,27))], (23,13--23,30))], (23,3--23,30));
-              OverrideFn
+              MemberFn
                 (SynSymbol t.ToString, Args (List [], (25,25--25,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("TestClassType(%i, %i)", Regular, (25,37--25,60)), (25,37--25,60));
                       DotProperty (Symbol (SynSymbol t), SynSymbol X, (25,62--25,66));
-                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (25,69--25,73))], (25,29--25,74))], (25,3--25,75))],
-             [], (19,1--25,76)), (19,0--26,1));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol Y, (25,69--25,73))], (25,29--25,74))], Override, [],
+                 (25,3--25,75))], [], (19,1--25,76)), (19,0--26,1));
        Expr
          (Type
             (SynSymbol MutableStruct, Ignore (28,11--28,29),
              [Val (Named (SynSymbol intval, (29,11--29,17)), Ident int, Mutable, [], (29,3--29,21));
               Val (Named (SynSymbol strval, (30,11--30,17)), Ident string, Mutable, [], (30,3--30,24));
-              OverrideFn
+              MemberFn
                 (SynSymbol t.ToString, Args (List [], (31,25--31,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("MutableStruct(%i, %s)", Regular, (31,37--31,60)), (31,37--31,60));
                       DotProperty (Symbol (SynSymbol t), SynSymbol intval, (31,62--31,71));
-                      DotProperty (Symbol (SynSymbol t), SynSymbol strval, (31,74--31,83))], (31,29--31,84))],
-                 (31,3--31,85))], [{ Attributes = [{ TypeName = Ident Struct
-                                                     ArgExpr = Const (Unit, (28,3--28,9))
-                                                     Range = (28,3--28,9) }]
-                                     Range = (28,1--28,10) }], (28,1--31,86)), (28,0--32,1));
+                      DotProperty (Symbol (SynSymbol t), SynSymbol strval, (31,74--31,83))], (31,29--31,84))], Override,
+                 [], (31,3--31,85))], [{ Attributes = [{ TypeName = Ident Struct
+                                                         ArgExpr = Const (Unit, (28,3--28,9))
+                                                         Range = (28,3--28,9) }]
+                                         Range = (28,1--28,10) }], (28,1--31,86)), (28,0--32,1));
        Expr
          (LetOrUse
             (Named (SynSymbol myTestStruct, (34,5--34,17)),

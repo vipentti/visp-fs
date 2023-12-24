@@ -394,6 +394,8 @@ type nonTerminalId =
     | NONTERM_member_member_in_parens
     | NONTERM_member_let_mut_kw
     | NONTERM_member_val_kw
+    | NONTERM_member_fn_kw
+    | NONTERM_member_fn
     | NONTERM_member_in_parens
     | NONTERM_empty_bindings
     | NONTERM_binding_list_start
@@ -430,6 +432,7 @@ type nonTerminalId =
     | NONTERM_syn_pat_trivia_list
     | NONTERM_rev_syn_pat_trivia_list
     | NONTERM_pat_open_kind
+    | NONTERM_syn_pat_named
     | NONTERM_syn_pat
 /// This function maps tokens to integer indexes
 val tagOfToken: token -> int

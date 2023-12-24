@@ -25,7 +25,6 @@ type TestStructType  =
   override t.ToString () =
     // line 16 @"val-ctor-0.visp"
     sprintf "TestStructType(%i, %i)" ((t.X)) ((t.Y))
-
 // line 19 @"val-ctor-0.visp"
 type TestClassType  =
   // line 20 @"val-ctor-0.visp"
@@ -45,7 +44,6 @@ type TestClassType  =
   override t.ToString () =
     // line 25 @"val-ctor-0.visp"
     sprintf "TestClassType(%i, %i)" ((t.X)) ((t.Y))
-
 [<Struct()>]
 // line 28 @"val-ctor-0.visp"
 type MutableStruct  =
@@ -57,7 +55,6 @@ type MutableStruct  =
   override t.ToString () =
     // line 31 @"val-ctor-0.visp"
     sprintf "MutableStruct(%i, %s)" ((t.intval)) ((t.strval))
-
 // line 34 @"val-ctor-0.visp"
 let myTestStruct =
   // line 34 @"val-ctor-0.visp"

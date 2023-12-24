@@ -1,0 +1,56 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"static-members-0.visp"
+type MyTypeWithStatics  =
+  // line 9 @"static-members-0.visp"
+  static let static_field = 0
+  // line 10 @"static-members-0.visp"
+  static let mutable mutable_static_field = 0
+  // line 12 @"static-members-0.visp"
+  static member Increment () =
+    // line 13 @"static-members-0.visp"
+    
+    // line 13 @"static-members-0.visp"
+    mutable_static_field <- inc mutable_static_field
+    mutable_static_field
+  // line 17 @"static-members-0.visp"
+  static member GetMutableValue =
+    mutable_static_field
+  // line 19 @"static-members-0.visp"
+  static member MutableGetSet
+        // line 20 @"static-members-0.visp"
+    with get () =
+      mutable_static_field
+        // line 21 @"static-members-0.visp"
+    and set  v =
+      // line 21 @"static-members-0.visp"
+      mutable_static_field <- v
+  // line 24 @"static-members-0.visp"
+  static member GetOnly
+        // line 25 @"static-members-0.visp"
+    with get () =
+      static_field
+// line 29 @"static-members-0.visp"
+printfn "GetMutableValue: %A" ((MyTypeWithStatics.GetMutableValue))
+// line 30 @"static-members-0.visp"
+printfn "Increment: %A" ((MyTypeWithStatics.Increment()))
+// line 31 @"static-members-0.visp"
+printfn "GetMutableValue: %A" ((MyTypeWithStatics.GetMutableValue))
+// line 32 @"static-members-0.visp"
+printfn "GetOnly: %A" ((MyTypeWithStatics.GetOnly))
+// line 34 @"static-members-0.visp"
+printfn "MutableGetSet: %A" ((MyTypeWithStatics.MutableGetSet))
+// line 35 @"static-members-0.visp"
+MyTypeWithStatics.MutableGetSet <- 99
+// line 36 @"static-members-0.visp"
+let visp_result_todo =
+  // line 36 @"static-members-0.visp"
+  printfn "MutableGetSet: %A" ((MyTypeWithStatics.MutableGetSet))
+// line 36 @"static-members-0.visp"
+printfn "%A" visp_result_todo
+

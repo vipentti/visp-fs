@@ -1426,9 +1426,22 @@ module Write =
             string w " : "
             writeType w typ
 
-        | SynTypeMember.GetSet(name, get, set, range) ->
+        | SynTypeMember.GetSet(name, get, set, flags, attributes, range) ->
             startExpr w st range
-            fmtprintf w "member %s" (Syntax.textOfSymbol name)
+            // fmtprintf w "member %s" (Syntax.textOfSymbol name)
+            writeAttributesIfNotEmpty w st attributes
+
+            if flags.HasFlag(MemberFlags.Static) then
+                string w "static "
+
+            if flags.HasFlag(MemberFlags.Override) then
+                string w "override"
+            else
+                string w "member"
+
+            space w
+            symbol w name false
+
             use _ = withIndent w false
             newlineIndent w
 
@@ -1453,50 +1466,48 @@ module Write =
                 writeMemSet w set
             | (None, None) -> failwith "missing both getter and setter."
 
-        | SynTypeMember.Member(name, expr, range) ->
+        | SynTypeMember.Member(name, exprs, flags, attributes, range) ->
             startExpr w st range
-            fmtprintf w "member %s =" (Syntax.textOfSymbol name)
-            use _ = withIndent w false
-            newlineIndent w
-            writeExpr w WriteState.Body expr
-            ()
-        | SynTypeMember.OverrideMember(name, expr, range) ->
+
+            writeAttributesIfNotEmpty w st attributes
+
+            if flags.HasFlag(MemberFlags.Static) then
+                string w "static "
+
+            if flags.HasFlag(MemberFlags.Override) then
+                string w "override"
+            else
+                string w "member"
+
+            space w
+            symbol w name false
+            string w " ="
+            writeBody w writeExpr exprs
+
+        | SynTypeMember.MemberFn(name, args, body, flags, attributes, range) ->
             startExpr w st range
-            fmtprintf w "override %s =" (Syntax.textOfSymbol name)
-            use _ = withIndent w false
-            newlineIndent w
-            writeExpr w WriteState.Body expr
-            ()
-        | SynTypeMember.OverrideFn(name, args, body, range) ->
-            startExpr w st range
-            fmtprintf w "override %s" (Syntax.textOfSymbol name)
+            writeAttributesIfNotEmpty w st attributes
+
+
+            if flags.HasFlag(MemberFlags.Static) then
+                string w "static "
+
+            if flags.HasFlag(MemberFlags.Override) then
+                string w "override"
+            else
+                string w "member"
+
+            space w
+            symbol w name false
             space w
             synPat w args
             string w " ="
-            use _ = withIndent w false
-            newline w
-
-            for expr in body do
-                writeExpr w WriteState.Body expr
-                newline w
-        | SynTypeMember.MemberFn(name, args, body, range) ->
-            startExpr w st range
-            fmtprintf w "member %s" (Syntax.textOfSymbol name)
-            space w
-            synPat w args
-            string w " ="
-            use _ = withIndent w false
-            newline w
-
-            for expr in body do
-                writeExpr w WriteState.Body expr
-                newline w
+            writeBody w writeExpr body
 
         | SynTypeMember.Interface(name, mems, range) ->
             startExpr w st range
             fmtprintf w "interface %s with" name.Text
             writeBody w writeMember mems
-
 
     and private writeLetFullNew
         (w: SynWriter)
@@ -1520,6 +1531,9 @@ module Write =
             indent w
 
         writeAttributesIfNotEmpty w st attributes
+
+        if flags.HasFlag(LetFlags.Static) then
+            string w "static "
 
         if flags.HasFlag(LetFlags.Use) then
             string w "use"

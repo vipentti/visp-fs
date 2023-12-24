@@ -14,15 +14,14 @@ type Grid = array<array<char>>
 type Pos (x: int32 , y: int32) =
   // line 10 @"nested-macro-expansion-0.visp"
   member _.X =
-        x
+    x
   // line 10 @"nested-macro-expansion-0.visp"
   member _.Y =
-        y
+    y
   // line 10 @"nested-macro-expansion-0.visp"
   override _.ToString () =
     // line 10 @"nested-macro-expansion-0.visp"
     sprintf "Pos(x: %A, y: %A)" x y
-
 // line 10 @"nested-macro-expansion-0.visp"
 let mkPos x y =
   // line 10 @"nested-macro-expansion-0.visp"
@@ -38,10 +37,9 @@ type TileMap (grid: Grid , start: Pos) =
   override _.ToString () =
     // line 23 @"nested-macro-expansion-0.visp"
     sprintf "TileMap(%A)\n%A" start grid
-
   // line 26 @"nested-macro-expansion-0.visp"
   member _.Start =
-        start
+    start
   // line 28 @"nested-macro-expansion-0.visp"
   member _.Item
         // line 29 @"nested-macro-expansion-0.visp"

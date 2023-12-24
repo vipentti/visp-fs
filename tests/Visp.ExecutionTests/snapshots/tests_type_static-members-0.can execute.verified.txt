@@ -1,0 +1,9 @@
+﻿GetMutableValue: 0
+Increment: 1
+GetMutableValue: 1
+GetOnly: 0
+MutableGetSet: 1
+MutableGetSet: 99
+()
+
+ExitCode: 0

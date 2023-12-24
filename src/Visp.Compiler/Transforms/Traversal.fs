@@ -223,7 +223,11 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     let rec loop_members (pred: SynExpr -> bool) (mem: SynTypeMember) =
                         seq {
                             match mem with
-                            | SynTypeMember.GetSet(_, get, set, _) ->
+                            | SynTypeMember.GetSet(_, get, set, _, attributes, _) ->
+                                for attrlist in attributes do
+                                    for attr in attrlist.Attributes do
+                                        yield! loop attr.ArgExpr
+
                                 match get with
                                 | None -> ()
                                 | Some(SynMemberGet(_, exprs, _)) ->
@@ -248,12 +252,16 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
 
                                 yield! loop e
 
-                            | SynTypeMember.Member(_, e, _)
-                            | SynTypeMember.OverrideMember(_, e, _) -> yield! loop e
+                            | SynTypeMember.Constructor(_, body, _) ->
+                                for e in body do
+                                    yield! loop e
 
-                            | SynTypeMember.Constructor(_, body, _)
-                            | SynTypeMember.MemberFn(_, _, body, _)
-                            | SynTypeMember.OverrideFn(_, _, body, _) ->
+                            | SynTypeMember.Member(_, body, _, attributes, _)
+                            | SynTypeMember.MemberFn(_, _, body, _, attributes, _) ->
+                                for attrlist in attributes do
+                                    for attr in attrlist.Attributes do
+                                        yield! loop attr.ArgExpr
+
                                 for e in body do
                                     yield! loop e
 

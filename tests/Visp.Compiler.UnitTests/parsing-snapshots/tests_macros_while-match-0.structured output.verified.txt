@@ -17,7 +17,7 @@
                                FunctionCall (Symbol (SynSymbol inc), [Symbol (SynSymbol count)], (14,21--14,30)),
                                (14,9--14,31));
                             FunctionCall (Symbol (SynSymbol Some), [Symbol (SynSymbol count)], (15,9--15,19))], Do,
-                           (13,7--15,20))), (11,5--16,7))], (10,3--17,5))], [], (8,1--17,6)), (8,0--17,7));
+                           (13,7--15,20))), (11,5--16,7))], Default, [], (10,3--17,5))], [], (8,1--17,6)), (8,0--17,7));
        Expr
          (LetOrUse
             (Named (SynSymbol counter, (19,5--19,12)), New (Ident Counter, [], (19,14--19,25)), None, [], (19,1--19,26)),

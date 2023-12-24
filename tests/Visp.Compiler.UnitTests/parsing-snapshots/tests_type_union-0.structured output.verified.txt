@@ -10,12 +10,13 @@
                  (10,3--10,29))],
              [Member
                 (SynSymbol t.TIsEmpty,
-                 Match
-                   (Symbol (SynSymbol t),
-                    [SynMatch
-                       (Named (SynSymbol Empty, (14,7--14,12)), None, [Const (Bool true, (14,13--14,17))], (14,7--14,17));
-                     SynMatch (Discard (15,7--15,8), None, [Const (Bool false, (15,9--15,14))], (15,7--15,14))],
-                    (13,5--15,15)), (12,3--15,16));
+                 [Match
+                    (Symbol (SynSymbol t),
+                     [SynMatch
+                        (Named (SynSymbol Empty, (14,7--14,12)), None, [Const (Bool true, (14,13--14,17))],
+                         (14,7--14,17));
+                      SynMatch (Discard (15,7--15,8), None, [Const (Bool false, (15,9--15,14))], (15,7--15,14))],
+                     (13,5--15,15))], Default, [], (12,3--15,16));
               MemberFn
                 (SynSymbol t.Length, Args (List [], (17,22--17,24)),
                  [Match
@@ -37,7 +38,7 @@
                                (SynSymbol +,
                                 [Const (Int32 1, (21,11--21,12));
                                  FunctionCall (Symbol (SynSymbol rest.Length), [], (21,14--21,25))], (21,9--21,26)))],
-                         (20,7--21,27))], (18,5--22,7))], (17,3--23,5))], [], (8,1--23,6)), (8,0--24,1));
+                         (20,7--21,27))], (18,5--22,7))], Default, [], (17,3--23,5))], [], (8,1--23,6)), (8,0--24,1));
        Expr
          (LetOrUse
             (Named (SynSymbol linkedList, (26,5--26,15)),

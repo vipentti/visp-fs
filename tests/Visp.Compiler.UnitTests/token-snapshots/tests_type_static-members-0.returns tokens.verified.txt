@@ -1,0 +1,124 @@
+﻿LPAREN Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "MyTypeWithStatics" Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+LET Default 0 2 Type
+SYMBOL "static_field" Default 0 2 Type
+INT32 (0, false) Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+MUT Default 0 2 Type
+SYMBOL "mutable_static_field" Default 0 2 Type
+INT32 (0, false) Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+MEMBER Default 0 2 Member
+FN Default 0 2 Member
+SYMBOL "Increment" Default 0 2 Member
+LPAREN Default 0 3 Member
+RPAREN Default 0 2 Member
+LPAREN Default 0 3 Member
+MACRO_NAME "up!" TokenStream Macro 1 3 Member
+SYMBOL "mutable_static_field" TokenStream Macro 1 3 Member
+SYMBOL "inc" TokenStream Macro 1 3 Member
+RPAREN Default 0 2 Member
+SYMBOL "mutable_static_field" Default 0 2 Member
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "GetMutableValue" Default 0 2 Member
+SYMBOL "mutable_static_field" Default 0 2 Member
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "MutableGetSet" Default 0 2 Member
+LPAREN Default 0 3 Member
+MEMBER_GET Default 0 3 Member
+LPAREN Default 0 4 Member
+RPAREN Default 0 3 Member
+SYMBOL "mutable_static_field" Default 0 3 Member
+RPAREN Default 0 2 Member
+LPAREN Default 0 3 Member
+MEMBER_SET Default 0 3 Member
+SYMBOL "v" Default 0 3 Member
+LPAREN Default 0 4 Member
+SET Default 0 4 Member
+SYMBOL "mutable_static_field" Default 0 4 Member
+SYMBOL "v" Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 Member
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+STATIC Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "GetOnly" Default 0 2 Member
+LPAREN Default 0 3 Member
+MEMBER_GET Default 0 3 Member
+LPAREN Default 0 4 Member
+RPAREN Default 0 3 Member
+SYMBOL "static_field" Default 0 3 Member
+RPAREN Default 0 2 Member
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("GetMutableValue: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+GetMutableValue" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("Increment: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".Increment" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("GetMutableValue: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+GetMutableValue" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("GetOnly: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+GetOnly" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("MutableGetSet: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+MutableGetSet" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+MutableGetSet" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("MutableGetSet: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+MutableGetSet" Default 0 2 LParen
+SYMBOL "MyTypeWithStatics" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

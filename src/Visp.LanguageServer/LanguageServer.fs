@@ -291,8 +291,7 @@ let memberToSymbolDetails _ memval var (mem: SynTypeMember) =
     | SynTypeMember.Interface _ -> []
     | SynTypeMember.Constructor _ -> []
     | SynTypeMember.GetSet(name = name)
-    | SynTypeMember.Member(name = name)
-    | SynTypeMember.OverrideMember(name = name) ->
+    | SynTypeMember.Member(name = name) ->
         [ (memval (
               Syntax.textOfSymbol name,
               false,
@@ -304,8 +303,7 @@ let memberToSymbolDetails _ memval var (mem: SynTypeMember) =
               Syntax.rangeOfSymbol name |> textRangeToSyntaxRange
           )) ]
 
-    | SynTypeMember.MemberFn(name = name)
-    | SynTypeMember.OverrideFn(name = name) ->
+    | SynTypeMember.MemberFn(name = name) ->
         [ (memval (
               Syntax.textOfSymbol name,
               true,
