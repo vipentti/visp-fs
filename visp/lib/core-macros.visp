@@ -98,10 +98,7 @@
 (syntax-macro cond_
   [(_) (failwith "unbalanced cond")]
   [(_ ((?discard) body ...))
-    (if true
-      (begin body ...)
-      (failwith "unreachable"))
-  ]
+    (begin body ...)]
   [(_ (test body ...) rest ...)
     (if test
       (begin body ...)

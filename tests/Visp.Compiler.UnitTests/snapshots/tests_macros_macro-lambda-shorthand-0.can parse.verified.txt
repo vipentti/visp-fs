@@ -15,24 +15,17 @@ let visp_result_todo =
       // line 10 @"macro-lambda-shorthand-0.visp"
       let lst = arg1
       // line 11 @"macro-lambda-shorthand-0.visp"
-      if CoreMethods.isTruthy(
-        true)
-        then
-          // line 11 @"macro-lambda-shorthand-0.visp"
-          
-          // line 11 @"macro-lambda-shorthand-0.visp"
-          List.filter ((fun arg1 ->
+      
+      // line 11 @"macro-lambda-shorthand-0.visp"
+      List.filter ((fun arg1 ->
+        // line 11 @"macro-lambda-shorthand-0.visp"
+        if CoreMethods.isTruthy(
+          (arg1 > 1))
+          then
             // line 11 @"macro-lambda-shorthand-0.visp"
-            if CoreMethods.isTruthy(
-              (arg1 > 1))
-              then
-                // line 11 @"macro-lambda-shorthand-0.visp"
-                arg1 < 10
-              else
-                false)) lst
-        else
-          // line 11 @"macro-lambda-shorthand-0.visp"
-          failwith "unreachable")
+            arg1 < 10
+          else
+            false)) lst)
 // line 8 @"macro-lambda-shorthand-0.visp"
 printfn "%A" visp_result_todo
 
