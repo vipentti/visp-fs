@@ -1,0 +1,10 @@
+﻿[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:8]
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:9] (+ 1 2) = 3
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:10] (|1 2 3|) = [1; 2; 3]
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:11] 1 = 1
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:11] 2 = 2
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:11] 3 = 3
+[{SolutionDirectory}visp/tests/macros/dbg-example-0.visp:11] (|1 2 3|) = [1; 2; 3]
+(1, 2, 3, [1; 2; 3])
+
+ExitCode: 0

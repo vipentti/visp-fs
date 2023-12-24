@@ -25,6 +25,22 @@
     ()
   ])
 
+(syntax-macro dbg!
+  [(_) (eprintfn "[%s:%i]" (file!) (line!))]
+  [(_ ex)
+    (match ex
+      [tmp
+        (eprintfn "[%s:%i] %s = %A" (file!) (line!) (stringify! ex) tmp)
+        tmp
+      ])]
+  [(_ ex1 ex2 rest ...)
+    (tuple
+      (dbg! ex1)
+      (dbg! ex2)
+      (dbg! rest) ...
+    )
+  ])
+
 (syntax-macro const
   [(_ pat bind) (#[Literal] let pat bind)])
 
