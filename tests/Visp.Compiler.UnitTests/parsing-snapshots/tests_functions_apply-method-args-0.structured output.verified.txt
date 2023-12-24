@@ -102,10 +102,10 @@
                           (47,9--47,21)),
                        [LetOrUse
                           (Named (SynSymbol y, (48,11--48,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (48,14--48,20)), None, (48,7--48,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (48,14--48,20)), None, [], (48,7--48,21));
                         LetOrUse
                           (Named (SynSymbol x, (49,11--49,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (49,14--49,20)), None, (49,7--49,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (49,14--49,20)), None, [], (49,7--49,21));
                         SyntaxMacroCall
                           (SynMacroCall
                              (SynSymbol cond_,
@@ -156,10 +156,10 @@
                           (58,9--58,21)), Named (SynSymbol ch, (58,22--58,24)),
                        [LetOrUse
                           (Named (SynSymbol y, (59,11--59,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (59,14--59,20)), None, (59,7--59,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol Y, (59,14--59,20)), None, [], (59,7--59,21));
                         LetOrUse
                           (Named (SynSymbol x, (60,11--60,12)),
-                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (60,14--60,20)), None, (60,7--60,21));
+                           DotProperty (Symbol (SynSymbol pos), SynSymbol X, (60,14--60,20)), None, [], (60,7--60,21));
                         SyntaxMacroCall
                           (SynMacroCall
                              (SynSymbol cond_,
@@ -209,7 +209,7 @@
              Args (List [Typed (Named (SynSymbol tm, (72,16--72,18)), Ident TileMap, (72,15--72,28))], (72,14--72,29)),
              [LetOrUse
                 (Named (SynSymbol rocks, (73,7--73,12)),
-                 DotProperty (Symbol (SynSymbol tm), SynSymbol Rocks, (73,14--73,23)), None, (73,3--73,24));
+                 DotProperty (Symbol (SynSymbol tm), SynSymbol Rocks, (73,14--73,23)), None, [], (73,3--73,24));
               LetOrUse
                 (Named (SynSymbol rocksToMove, (74,7--74,18)),
                  ThreadLast
@@ -223,14 +223,14 @@
                                     (SynSymbol >,
                                      [DotProperty (Symbol (SynSymbol %1), SynSymbol Y, (74,49--74,54));
                                       Const (Int32 0, (74,56--74,57))], (74,46--74,57))), (74,44--74,58))],
-                           (74,31--74,58)), (74,30--74,59))], (74,20--74,59)), None, (74,3--74,60));
+                           (74,31--74,58)), (74,30--74,59))], (74,20--74,59)), None, [], (74,3--74,60));
               ForIn
                 (Named (SynSymbol rock, (77,11--77,15)), Symbol (SynSymbol rocksToMove),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
                      [Const (String ("%A", Regular, (78,13--78,17)), (78,13--78,17)); Symbol (SynSymbol rock)],
                      (78,5--78,22));
-                  LetOrUse (Named (SynSymbol pos, (79,9--79,12)), Symbol (SynSymbol rock), Mutable, (79,5--79,17));
+                  LetOrUse (Named (SynSymbol pos, (79,9--79,12)), Symbol (SynSymbol rock), Mutable, [], (79,5--79,17));
                   While
                     (DotMethod
                        (Symbol (SynSymbol tm), SynSymbol MoveRock,
@@ -250,7 +250,7 @@
             (Named (SynSymbol visp_result_todo, (88,0--88,14)),
              FunctionCall
                (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (88,9--88,13)), (88,9--88,13))],
-                (88,1--88,13)), None, (88,0--88,14)), (88,0--88,14));
+                (88,1--88,13)), None, [], (88,0--88,14)), (88,0--88,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

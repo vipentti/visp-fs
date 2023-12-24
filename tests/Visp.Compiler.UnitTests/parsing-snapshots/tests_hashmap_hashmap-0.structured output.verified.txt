@@ -10,7 +10,7 @@
                     Const (String ("string as key", Regular, (9,10--9,25)), (9,10--9,25));
                     Const (String ("string value", Regular, (9,26--9,40)), (9,26--9,40));
                     Const (Int32 0, (10,10--10,11));
-                    Const (String ("int as key", Regular, (10,12--10,24)), (10,12--10,24))], (8,9--10,25))), None,
+                    Const (String ("int as key", Regular, (10,12--10,24)), (10,12--10,24))], (8,9--10,25))), None, [],
              (8,1--10,25)), (8,0--10,26));
        Expr
          (FunctionCall
@@ -34,7 +34,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("%O", Regular, (16,9--16,13)), (16,9--16,13));
                  FunctionCall (Keyword (SynKeyword :this-is-a-key), [Symbol (SynSymbol map)], (16,15--16,33))],
-                (16,1--16,34)), None, (16,0--16,35)), (16,0--16,35));
+                (16,1--16,34)), None, [], (16,0--16,35)), (16,0--16,35));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

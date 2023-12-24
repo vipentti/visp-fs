@@ -10,10 +10,10 @@
                      (Paren,
                       [Const (Int32 1, (9,13--9,14)); Const (Int32 2, (9,15--9,16)); Const (Int32 3, (9,17--9,18));
                        Const (Int32 4, (9,19--9,20)); Const (Int32 5, (9,21--9,22))], (9,12--9,23))), (9,11--9,23)),
-             None, (9,1--9,23)), (9,0--9,24));
+             None, [], (9,1--9,23)), (9,0--9,24));
        Expr
          (LetOrUse
-            (Named (SynSymbol sym, (10,5--10,8)), Quote (true, Symbol (SynSymbol symbol), (10,9--10,16)), None,
+            (Named (SynSymbol sym, (10,5--10,8)), Quote (true, Symbol (SynSymbol symbol), (10,9--10,16)), None, [],
              (10,1--10,16)), (10,0--10,17));
        Expr
          (LetOrUse
@@ -35,7 +35,7 @@
                                    (Paren,
                                     [Symbol (SynSymbol call); Symbol (SynSymbol +); Const (Int32 1, (11,41--11,42));
                                      Const (Int32 2, (11,43--11,44))], (11,33--11,45)))], (11,24--11,46)))],
-                      (11,16--11,47))), (11,15--11,47)), None, (11,1--11,47)), (11,0--11,48));
+                      (11,16--11,47))), (11,15--11,47)), None, [], (11,1--11,47)), (11,0--11,48));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -102,7 +102,7 @@
                                                [Symbol (SynSymbol nested4); Symbol (SynSymbol and);
                                                 Symbol (SynSymbol on); Symbol (SynSymbol and); Symbol (SynSymbol on);
                                                 Keyword (SynKeyword :keyword)], (17,54--17,86)))], (17,45--17,87)))],
-                                 (17,36--17,88)))], (17,27--17,89))), (17,26--17,89))], (17,1--17,89)), None,
+                                 (17,36--17,88)))], (17,27--17,89))), (17,26--17,89))], (17,1--17,89)), None, [],
              (17,0--17,90)), (17,0--17,90));
        Expr
          (FunctionCall

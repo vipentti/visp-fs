@@ -276,7 +276,12 @@ type SynExpr =
     | Quasiquote of shorthand: bool * expr: SynQuasiquote * range: range
     | Begin of exprs: SynExpr list * kind: BeginKind * range: range
     | New of typ: SynType * args: SynExpr list * range: range
-    | LetOrUse of pat: SynPat * value: SynExpr * flags: LetFlags * range: range
+    | LetOrUse of
+        pat: SynPat *
+        value: SynExpr *
+        flags: LetFlags *
+        attributes: SynAttributes *
+        range: range
     | LetStar of bindings: SynBinding list * body: SynExpr list * range: range
     | Set of name: SynExpr * value: SynExpr * range: range
     | If of cond: SynExpr * main: SynExpr * alt: SynExpr option * range: range

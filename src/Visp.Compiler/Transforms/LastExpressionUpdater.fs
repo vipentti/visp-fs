@@ -36,6 +36,7 @@ module LastExpressionUpdater =
                       Syntax.mkInferredNamePat "visp_result_todo" range,
                       expr,
                       LetFlags.None,
+                      [],
                       range
                   ),
                   range

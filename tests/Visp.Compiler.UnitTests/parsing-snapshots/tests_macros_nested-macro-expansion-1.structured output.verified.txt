@@ -6,21 +6,21 @@
             (SynSymbol Something, None, Args (List [], (9,14--9,16)),
              [LetOrUse
                 (Named (SynSymbol work, (10,7--10,11)), New (Ident ResizeArray<int*int*int64>, [], (10,13--10,43)), None,
-                 (10,3--10,44));
+                 [], (10,3--10,44));
               LetOrUse
                 (Named (SynSymbol conditions, (12,7--12,17)), Collection (SynCollection (FsArray, [], (12,19--12,25))),
-                 None, (12,3--12,26));
+                 None, [], (12,3--12,26));
               LetOrUse
                 (Named (SynSymbol broken, (13,7--13,13)), Collection (SynCollection (FsArray, [], (13,15--13,21))), None,
-                 (13,3--13,22));
+                 [], (13,3--13,22));
               LetOrUse
                 (Named (SynSymbol possibleOffsets, (14,7--14,22)),
-                 Collection (SynCollection (FsArray, [], (14,24--14,30))), None, (14,3--14,31));
+                 Collection (SynCollection (FsArray, [], (14,24--14,30))), None, [], (14,3--14,31));
               FunctionDef
                 (SynSymbol PopWork, None, Args (List [], (16,14--16,16)),
                  [LetOrUse
                     (Named (SynSymbol r, (17,9--17,10)),
-                     DotIndex (Symbol (SynSymbol work), [Const (Int32 0, (17,14--17,15))], (17,12--17,21)), None,
+                     DotIndex (Symbol (SynSymbol work), [Const (Int32 0, (17,14--17,15))], (17,12--17,21)), None, [],
                      (17,5--17,22));
                   DotMethod
                     (Symbol (SynSymbol work), SynSymbol RemoveAt, [Const (Int32 0, (18,20--18,21))], Tuple,
@@ -33,7 +33,7 @@
                        Named (SynSymbol nextPos, (21,32--21,39)); Named (SynSymbol count, (21,40--21,45))],
                     (21,18--21,46)), [Const (Unit, (22,4--22,6))], (21,3--22,6));
               LetOrUse
-                (Named (SynSymbol result, (24,7--24,13)), Const (Int64 0L, (24,14--24,16)), Mutable, (24,3--24,16));
+                (Named (SynSymbol result, (24,7--24,13)), Const (Int64 0L, (24,14--24,16)), Mutable, [], (24,3--24,16));
               While
                 (Op
                    (Infix
@@ -55,14 +55,14 @@
                               Symbol (SynSymbol bi); Symbol (SynSymbol off); Symbol (SynSymbol count)], (29,9--29,42));
                           LetOrUse
                             (Named (SynSymbol brokenLength, (30,13--30,25)),
-                             DotIndex (Symbol (SynSymbol broken), [Symbol (SynSymbol bi)], (30,27--30,39)), None,
+                             DotIndex (Symbol (SynSymbol broken), [Symbol (SynSymbol bi)], (30,27--30,39)), None, [],
                              (30,9--30,40));
                           LetOrUse
                             (Named (SynSymbol offsetEnd, (31,13--31,22)),
                              Op
                                (Infix
                                   (SynSymbol +, [Symbol (SynSymbol off); Symbol (SynSymbol brokenLength)],
-                                   (31,24--31,42))), None, (31,9--31,43));
+                                   (31,24--31,42))), None, [], (31,9--31,43));
                           SyntaxMacroCall
                             (SynMacroCall
                                (SynSymbol cond_,
@@ -205,7 +205,7 @@
             (Named (SynSymbol visp_result_todo, (67,0--67,14)),
              FunctionCall
                (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (67,9--67,13)), (67,9--67,13))],
-                (67,1--67,13)), None, (67,0--67,14)), (67,0--67,14));
+                (67,1--67,13)), None, [], (67,0--67,14)), (67,0--67,14));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

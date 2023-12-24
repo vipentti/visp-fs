@@ -16,7 +16,7 @@
        Expr
          (LetOrUse
             (Named (SynSymbol xx, (13,5--13,7)),
-             New (Ident TestStruct, [Const (Int32 99, (13,24--13,26))], (13,9--13,26)), None, (13,1--13,27)),
+             New (Ident TestStruct, [Const (Int32 99, (13,24--13,26))], (13,9--13,26)), None, [], (13,1--13,27)),
           (13,0--13,28));
        Expr
          (FunctionCall
@@ -24,7 +24,8 @@
              [Const (String ("Value is %i", Regular, (15,9--15,22)), (15,9--15,22));
               DotProperty (Symbol (SynSymbol xx), SynSymbol Value, (15,24--15,33))], (15,1--15,34)), (15,0--15,35));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (17,0--17,2)), Const (Unit, (17,0--17,2)), None, (17,0--17,2)),
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (17,0--17,2)), Const (Unit, (17,0--17,2)), None, [], (17,0--17,2)),
           (17,0--17,2));
        Expr
          (FunctionCall

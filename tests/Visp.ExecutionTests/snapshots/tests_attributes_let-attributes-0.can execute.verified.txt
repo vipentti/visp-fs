@@ -1,0 +1,5 @@
+﻿LITERAL_ZERO: 0
+LITERAL_STR: "hello world"
+()
+
+ExitCode: 0

@@ -15,7 +15,7 @@
                 [FunctionCall
                    (Symbol (SynSymbol printfn),
                     [Const (String ("var is: %O", Regular, (10,11--10,23)), (10,11--10,23)); Symbol (SynSymbol var)],
-                    (10,3--10,27))], (9,1--10,28)), None, (9,0--10,29)), (9,0--10,29));
+                    (10,3--10,27))], (9,1--10,28)), None, [], (9,0--10,29)), (9,0--10,29));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -286,6 +286,11 @@ module ``tests_for-in_for-in-3`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/for-in/for-in-3.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_attributes_let-attributes-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/attributes/let-attributes-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_attributes_attributes-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/attributes/attributes-0.visp"

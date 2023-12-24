@@ -4,7 +4,7 @@
          (LetOrUse
             (Typed
                (Named (SynSymbol ints, (9,6--9,10)), Generic (Ident ResizeArray, [Ident int32], (9,13--9,31)),
-                (9,5--9,32)), New (Ident ResizeArray<_>, [], (10,5--10,23)), None, (9,1--10,24)), (9,0--10,25));
+                (9,5--9,32)), New (Ident ResizeArray<_>, [], (10,5--10,23)), None, [], (9,1--10,24)), (9,0--10,25));
        Expr
          (DotMethod (Symbol (SynSymbol ints), SynSymbol Add, [Const (Int32 1, (12,12--12,13))], Tuple, (12,1--12,13)),
           (12,0--12,14));
@@ -22,7 +22,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("number of ints: %i", Regular, (18,9--18,29)), (18,9--18,29));
-                 DotProperty (Symbol (SynSymbol ints), SynSymbol Count, (18,31--18,44))], (18,1--18,45)), None,
+                 DotProperty (Symbol (SynSymbol ints), SynSymbol Count, (18,31--18,44))], (18,1--18,45)), None, [],
              (18,0--18,46)), (18,0--18,46));
        Expr
          (FunctionCall

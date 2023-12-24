@@ -3,7 +3,7 @@
      ([Expr
          (LetOrUse
             (Named (SynSymbol value, (8,5--8,10)), Const (String ("hello world", Regular, (8,11--8,24)), (8,11--8,24)),
-             None, (8,1--8,24)), (8,0--8,25));
+             None, [], (8,1--8,24)), (8,0--8,25));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -32,7 +32,7 @@
                 [Const (String ("string is '%s'", Regular, (13,9--13,25)), (13,9--13,25));
                  Const
                    (String ("interpolated: {value} {{ value }} {{{ value }}} {{{ value.Length }}}", InterpolatedTripleQuote 3, (13,26--13,103)),
-                    (13,26--13,103))], (13,1--13,103)), None, (13,0--13,104)), (13,0--13,104));
+                    (13,26--13,103))], (13,1--13,103)), None, [], (13,0--13,104)), (13,0--13,104));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

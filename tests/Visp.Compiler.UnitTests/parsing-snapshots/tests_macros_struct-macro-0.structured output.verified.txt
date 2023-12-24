@@ -47,7 +47,7 @@
          (LetOrUse
             (Named (SynSymbol instance, (22,5--22,13)),
              New (Ident Example, [Const (Int32 1, (22,27--22,28)); Const (Int32 2, (22,29--22,30))], (22,15--22,30)),
-             None, (22,1--22,31)), (22,0--22,32));
+             None, [], (22,1--22,31)), (22,0--22,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -67,7 +67,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("Example Result is %i", Regular, (26,9--26,31)), (26,9--26,31));
                  DotMethod (Symbol (SynSymbol instance), SynSymbol Sum, [], Tuple, (26,33--26,46))], (26,1--26,47)),
-             None, (26,0--26,48)), (26,0--26,48));
+             None, [], (26,0--26,48)), (26,0--26,48));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

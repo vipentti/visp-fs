@@ -13,7 +13,8 @@
        Expr
          (LetOrUse
             (Named (SynSymbol myObject, (14,5--14,13)),
-             New (Ident MyType, [Const (Int32 99, (14,26--14,28))], (14,15--14,28)), None, (14,1--14,29)), (14,0--14,30));
+             New (Ident MyType, [Const (Int32 99, (14,26--14,28))], (14,15--14,28)), None, [], (14,1--14,29)),
+          (14,0--14,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -25,7 +26,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("%O", Regular, (17,9--17,13)), (17,9--17,13));
-                 DotProperty (Symbol (SynSymbol myObject), SynSymbol Foo, (17,15--17,29))], (17,1--17,30)), None,
+                 DotProperty (Symbol (SynSymbol myObject), SynSymbol Foo, (17,15--17,29))], (17,1--17,30)), None, [],
              (17,0--17,31)), (17,0--17,31));
        Expr
          (FunctionCall

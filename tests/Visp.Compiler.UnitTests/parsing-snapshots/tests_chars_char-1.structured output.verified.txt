@@ -19,7 +19,7 @@
                (Symbol (SynSymbol printfn),
                 [Const (String ("Char is '%03o'", Regular, (10,9--10,25)), (10,9--10,25));
                  FunctionCall (Symbol (SynSymbol int), [Const (Char '\009', (10,31--10,36))], (10,27--10,36))],
-                (10,1--10,37)), None, (10,0--10,38)), (10,0--10,38));
+                (10,1--10,37)), None, [], (10,0--10,38)), (10,0--10,38));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

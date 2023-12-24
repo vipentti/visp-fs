@@ -18,7 +18,7 @@
              If
                (FunctionCall (Symbol (SynSymbol condition), [], (12,5--12,14)),
                 FunctionCall (Symbol (SynSymbol then), [], (13,5--13,9)),
-                Some (FunctionCall (Symbol (SynSymbol alt), [], (14,5--14,8))), (12,1--14,9)), None, (12,0--14,10)),
+                Some (FunctionCall (Symbol (SynSymbol alt), [], (14,5--14,8))), (12,1--14,9)), None, [], (12,0--14,10)),
           (12,0--14,10));
        Expr
          (FunctionCall

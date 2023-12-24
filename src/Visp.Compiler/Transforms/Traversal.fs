@@ -130,7 +130,6 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for arg in args do
                         yield! loop arg
 
-                | SynExpr.LetOrUse(_, expr, _, _)
                 | SynExpr.Atom(expr, _)
                 | SynExpr.Deref(_, expr, _) -> yield! loop expr
 
@@ -206,6 +205,13 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                 | SynExpr.RecordInit(inits, _) ->
                     for SynInit(expr = e) in inits do
                         yield! loop e
+
+                | SynExpr.LetOrUse(_, expr, _, attributes, _) ->
+                    for attrlist in attributes do
+                        for attr in attrlist.Attributes do
+                            yield! loop attr.ArgExpr
+
+                    yield! loop expr
 
                 | SynExpr.Union(_, _, members, attributes, _)
                 | SynExpr.Record(_, _, members, attributes, _)

@@ -644,6 +644,7 @@ let expand (expr: SynExpr) =
                 Syntax.mkInferredNamePat ("macro_" + text) r,
                 Syntax.mkSynString "__MACRO_INIT__" r,
                 LetFlags.None,
+                [],
                 r
             )
         | it -> it

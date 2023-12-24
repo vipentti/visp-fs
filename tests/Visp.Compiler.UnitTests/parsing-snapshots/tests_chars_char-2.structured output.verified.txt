@@ -8,7 +8,7 @@
                 [Const (String ("Chars are %A", Regular, (9,9--9,23)), (9,9--9,23));
                  Tuple
                    ([Const (Char '=', (9,25--9,28)); Const (Char '|', (9,30--9,33)); Const (Char '<', (9,35--9,38));
-                     Const (Char '>', (9,40--9,43))], (9,25--9,43))], (9,1--9,44)), None, (9,0--9,46)), (9,0--9,46));
+                     Const (Char '>', (9,40--9,43))], (9,25--9,43))], (9,1--9,44)), None, [], (9,0--9,46)), (9,0--9,46));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

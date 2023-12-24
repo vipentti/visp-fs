@@ -8,7 +8,7 @@
                  LambdaDef
                    (SynLambda
                       (Args (List [Named (SynSymbol arg, (7,21--7,24))], (7,20--7,25)), [Symbol (SynSymbol arg)],
-                       (7,17--7,29)))], (7,1--7,30)), None, (7,0--7,31)), (7,0--7,31));
+                       (7,17--7,29)))], (7,1--7,30)), None, [], (7,0--7,31)), (7,0--7,31));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

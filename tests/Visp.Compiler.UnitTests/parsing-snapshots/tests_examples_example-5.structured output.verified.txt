@@ -1,7 +1,7 @@
 ﻿ParsedFile
   [AnonModule
-     ([Expr (LetOrUse (Named (SynSymbol a, (8,5--8,6)), Const (Int32 5, (8,7--8,8)), None, (8,1--8,8)), (8,0--8,9));
-       Expr (LetOrUse (Named (SynSymbol b, (9,5--9,6)), Const (Int32 4, (9,7--9,8)), None, (9,1--9,8)), (9,0--9,9));
+     ([Expr (LetOrUse (Named (SynSymbol a, (8,5--8,6)), Const (Int32 5, (8,7--8,8)), None, [], (8,1--8,8)), (8,0--8,9));
+       Expr (LetOrUse (Named (SynSymbol b, (9,5--9,6)), Const (Int32 4, (9,7--9,8)), None, [], (9,1--9,8)), (9,0--9,9));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -104,8 +104,8 @@
                       (SynSymbol /,
                        [FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol a)], (28,23--28,32));
                         FunctionCall (Symbol (SynSymbol decimal), [Symbol (SynSymbol b)], (28,35--28,44));
-                        Const (Decimal 52.0M, (28,46--28,51))], (28,20--28,51)))], (28,1--28,52)), None, (28,0--28,53)),
-          (28,0--28,53));
+                        Const (Decimal 52.0M, (28,46--28,51))], (28,20--28,51)))], (28,1--28,52)), None, [],
+             (28,0--28,53)), (28,0--28,53));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -248,10 +248,11 @@ let rec exprToDoc =
 
         parens <| cat [ text "set!"; space; binding; space; body ]
 
-    | SynExpr.LetOrUse(name, value, flags, _) ->
+    | SynExpr.LetOrUse(name, value, flags, attributes, _) ->
         let binding = patToDoc name
 
         let body = exprToDoc value
+        // TODO: attributes
 
         parens
         <| hcat

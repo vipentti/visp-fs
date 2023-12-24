@@ -53,7 +53,7 @@
                                (Symbol (SynSymbol Cons),
                                 [Tuple ([Const (Int32 3, (26,43--26,44)); Symbol (SynSymbol Empty)], (26,43--26,51))],
                                 (26,37--26,52))], (26,33--26,53))], (26,27--26,54))], (26,23--26,55))], (26,17--26,56)),
-             None, (26,1--26,57)), (26,0--26,58));
+             None, [], (26,1--26,57)), (26,0--26,58));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -79,13 +79,14 @@
                                 Range = (33,3--33,25) }]
                 Range = (33,1--33,26) }], (33,1--36,11)), (33,0--36,12));
        Expr
-         (LetOrUse (Named (SynSymbol myOptNone, (38,5--38,14)), Symbol (SynSymbol MyOption.None), None, (38,1--38,28)),
+         (LetOrUse
+            (Named (SynSymbol myOptNone, (38,5--38,14)), Symbol (SynSymbol MyOption.None), None, [], (38,1--38,28)),
           (38,0--38,29));
        Expr
          (LetOrUse
             (Named (SynSymbol myOptSome, (39,5--39,14)),
              FunctionCall (Symbol (SynSymbol MyOption.Some), [Const (Int32 1, (39,30--39,31))], (39,16--39,31)), None,
-             (39,1--39,32)), (39,0--39,33));
+             [], (39,1--39,32)), (39,0--39,33));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -97,7 +98,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("myOptSome %A", Regular, (42,9--42,23)), (42,9--42,23)); Symbol (SynSymbol myOptSome)],
-                (42,1--42,33)), None, (42,0--42,34)), (42,0--42,34));
+                (42,1--42,33)), None, [], (42,0--42,34)), (42,0--42,34));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

@@ -26,7 +26,7 @@
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("this is back in the top-level-module", Regular, (18,9--18,47)), (18,9--18,47))],
-                (18,1--18,47)), None, (18,0--18,48)), (18,0--18,48));
+                (18,1--18,47)), None, [], (18,0--18,48)), (18,0--18,48));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

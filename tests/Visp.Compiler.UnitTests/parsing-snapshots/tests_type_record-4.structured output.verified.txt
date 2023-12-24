@@ -31,7 +31,7 @@
                 [Const (String ("%A", Regular, (20,9--20,13)), (20,9--20,13));
                  RecordInit
                    ([SynInit (SynSymbol value, Const (Int32 1, (20,24--20,25)), (20,17--20,26))], (20,14--20,29))],
-                (20,1--20,29)), None, (20,0--20,30)), (20,0--20,30));
+                (20,1--20,29)), None, [], (20,0--20,30)), (20,0--20,30));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

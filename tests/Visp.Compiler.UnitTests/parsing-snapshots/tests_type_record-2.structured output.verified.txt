@@ -12,7 +12,7 @@
              RecordInit
                ([SynInit (SynSymbol src, Const (Int32 3, (14,22--14,23)), (14,16--14,25));
                  SynInit (SynSymbol Mapping.dest, Const (Int32 5, (14,40--14,41)), (14,26--14,42));
-                 SynInit (SynSymbol range, Const (Int32 8, (14,51--14,52)), (14,43--14,54))], (14,13--14,57)), None,
+                 SynInit (SynSymbol range, Const (Int32 8, (14,51--14,52)), (14,43--14,54))], (14,13--14,57)), None, [],
              (14,1--14,57)), (14,0--14,58));
        Expr
          (FunctionCall
@@ -26,7 +26,7 @@
                (Symbol (SynSymbol with),
                 [Symbol (SynSymbol initial);
                  RecordInit ([SynInit (SynSymbol src, Const (Int32 5, (18,36--18,37)), (18,31--18,38))], (18,28--18,41))],
-                (18,15--18,41)), None, (18,1--18,42)), (18,0--18,43));
+                (18,15--18,41)), None, [], (18,1--18,42)), (18,0--18,43));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -41,14 +41,15 @@
                  RecordInit
                    ([SynInit (SynSymbol src, Const (Int32 99, (22,36--22,38)), (22,31--22,39));
                      SynInit (SynSymbol Mapping.dest, Const (Int32 12, (22,54--22,56)), (22,40--22,57))], (22,28--22,60))],
-                (22,15--22,60)), None, (22,1--22,61)), (22,0--22,62));
+                (22,15--22,60)), None, [], (22,1--22,61)), (22,0--22,62));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
              [Const (String ("updated2 is %A", Regular, (24,9--24,25)), (24,9--24,25)); Symbol (SynSymbol updated2)],
              (24,1--24,34)), (24,0--24,35));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (26,0--26,2)), Const (Unit, (26,0--26,2)), None, (26,0--26,2)),
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (26,0--26,2)), Const (Unit, (26,0--26,2)), None, [], (26,0--26,2)),
           (26,0--26,2));
        Expr
          (FunctionCall

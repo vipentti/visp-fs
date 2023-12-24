@@ -9,7 +9,7 @@
                   (SynCollection
                      (Paren,
                       [Symbol (SynSymbol hello); Symbol (SynSymbol world); Symbol (SynSymbol in);
-                       Symbol (SynSymbol quotes)], (9,29--9,52))), (9,18--9,52)), None, (9,1--9,53)), (9,0--9,54));
+                       Symbol (SynSymbol quotes)], (9,29--9,52))), (9,18--9,52)), None, [], (9,1--9,53)), (9,0--9,54));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),
@@ -28,14 +28,14 @@
                        Const (Int32 1, (14,37--14,38)); Const (Double 1.5, (14,39--14,42));
                        Const (Bool false, (14,43--14,48)); Symbol (SynSymbol also);
                        Const (String ("work", Regular, (14,54--14,60)), (14,54--14,60)); Const (Nil, (14,61--14,64))],
-                      (14,4--14,65))), (13,23--14,65)), None, (13,1--14,66)), (13,0--14,67));
+                      (14,4--14,65))), (13,23--14,65)), None, [], (13,1--14,66)), (13,0--14,67));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (16,0--16,52)),
              FunctionCall
                (Symbol (SynSymbol printfn),
                 [Const (String ("next_quasiquoted is: %O", Regular, (16,9--16,34)), (16,9--16,34));
-                 Symbol (SynSymbol next_quasiquoted)], (16,1--16,51)), None, (16,0--16,52)), (16,0--16,52));
+                 Symbol (SynSymbol next_quasiquoted)], (16,1--16,51)), None, [], (16,0--16,52)), (16,0--16,52));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

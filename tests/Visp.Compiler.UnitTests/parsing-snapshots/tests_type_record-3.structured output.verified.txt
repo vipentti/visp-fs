@@ -9,8 +9,8 @@
             (SynSymbol SomeFun, None,
              Args (List [Typed (Named (SynSymbol r, (11,14--11,15)), Ident TestRec, (11,13--11,25))], (11,12--11,26)),
              [LetOrUse
-                (Named (SynSymbol counter, (12,7--12,14)), Const (Int32 0, (12,15--12,16)), Mutable, (12,3--12,16));
-              LetOrUse (Named (SynSymbol value, (14,7--14,12)), Symbol (SynSymbol r), Mutable, (14,3--14,14));
+                (Named (SynSymbol counter, (12,7--12,14)), Const (Int32 0, (12,15--12,16)), Mutable, [], (12,3--12,16));
+              LetOrUse (Named (SynSymbol value, (14,7--14,12)), Symbol (SynSymbol r), Mutable, [], (14,3--14,14));
               While
                 (Op
                    (Infix (SynSymbol <, [Symbol (SynSymbol counter); Const (Int32 10, (16,20--16,22))], (16,10--16,22))),
@@ -40,7 +40,7 @@
                    (Symbol (SynSymbol SomeFun),
                     [RecordInit
                        ([SynInit (SynSymbol value, Const (Int32 0, (24,33--24,34)), (24,26--24,35))], (24,23--24,38))],
-                    (24,15--24,38))], (24,1--24,39)), None, (24,0--24,40)), (24,0--24,40));
+                    (24,15--24,38))], (24,1--24,39)), None, [], (24,0--24,40)), (24,0--24,40));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

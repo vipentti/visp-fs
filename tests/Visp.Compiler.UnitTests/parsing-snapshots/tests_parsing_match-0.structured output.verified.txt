@@ -131,7 +131,8 @@
                     (Symbol (SynSymbol printfn), [Const (String ("empty", Regular, (61,15--61,22)), (61,15--61,22))],
                      (61,7--61,22))], (61,3--61,23))], (50,1--61,24)), (50,0--62,1));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (64,0--64,2)), Const (Unit, (64,0--64,2)), None, (64,0--64,2)),
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (64,0--64,2)), Const (Unit, (64,0--64,2)), None, [], (64,0--64,2)),
           (64,0--64,2));
        Expr
          (FunctionCall

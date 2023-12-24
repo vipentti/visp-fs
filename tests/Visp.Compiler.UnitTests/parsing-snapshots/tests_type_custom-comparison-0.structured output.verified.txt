@@ -204,7 +204,8 @@
                         [Const (String ("hello", Regular, (60,86--60,93)), (60,86--60,93))], (60,65--60,93))],
                     (60,31--60,94)))], (60,1--60,95)), (60,0--60,96));
        Expr
-         (LetOrUse (Named (SynSymbol visp_result_todo, (62,0--62,2)), Const (Unit, (62,0--62,2)), None, (62,0--62,2)),
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (62,0--62,2)), Const (Unit, (62,0--62,2)), None, [], (62,0--62,2)),
           (62,0--62,2));
        Expr
          (FunctionCall
