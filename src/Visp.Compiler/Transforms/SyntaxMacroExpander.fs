@@ -4,6 +4,7 @@
 
 module rec Visp.Compiler.Transforms.SyntaxMacros
 
+open System.Runtime.CompilerServices
 open Visp.Compiler.SyntaxPrinter
 open PrettyPrinter
 open Visp.Common
@@ -16,6 +17,7 @@ open FSharp.Text.Lexing
 open Visp.Compiler.Syntax.Macros
 open System.Collections.Generic
 open Visp.Compiler.LexHelpers
+open System.IO
 
 
 let (|MatchingText|) str (pat: SynMacroPat) =
@@ -249,6 +251,18 @@ type EvaluatedBody =
 
     member d.StructuredDisplay = evaluatedBodyToDoc d |> docToString
 
+    member d.Pretty() = evaluatedBodyToDoc d |> docToString
+
+[<Extension>]
+type Extensions =
+    [<Extension>]
+    static member inline Pretty(xs: list<EvaluatedBody>) =
+        let doc = (List.map evaluatedBodyToDoc xs |> Print.hsep)
+        let sb = PooledStringBuilder.Get()
+        use sw = new StringWriter(sb)
+        Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
+        sb.ToStringAndReturn()
+
 let rec evaluatedBodyToDoc =
     function
     | EvaluatedBody.Item it -> Print.parens <| Print.hsep [ Print.text "item"; macroBodyToDoc it ]
@@ -337,16 +351,8 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
             | _ -> failwithf "args: %A" args
 
 
-        | SynMacroBody.List(kind, args, _) ->
-            // let items = args |> List.map bound_evaluate
-            // eprintfn "orig:%s\neval:\n%A" (args.Pretty()) items
+        | SynMacroBody.List(kind, args, _) -> evaluateList pats kind args []
 
-            // EvaluatedBody.List(kind, items)
-            // EvaluatedBody.List(kind,
-            evaluateList pats kind args []
-        //)
-        //EvaluatedBody.L
-        // evaluateList pats kind args
         | SynMacroBody.Call it -> evaluateMacroCall it
         | SynMacroBody.Trivia _
         | SynMacroBody.Symbol _
@@ -356,11 +362,6 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
         | SynMacroBody.Discard _ -> EvaluatedBody.Item currentBody
 
 and private evaluateList pats kind (args: SynMacroBody list) accum =
-    // let rec loop pats kind args =
-    //     match args with
-    // |
-    // | _ -> failwith "todo"
-
     match args with
     | (SynMacroBody.List(_, lst, _) :: SynMacroBody.Ellipsis _ :: rest) ->
         let evaled = lst |> List.map (evaluateBody pats)
@@ -391,7 +392,12 @@ and private evaluateList pats kind (args: SynMacroBody list) accum =
                         |> List.map (fun (x, y) -> (EvaluatedBody.List(kind, [ x; y ])))
 
                     EvaluatedBody.Splice(items)
-                | _ -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
+                | (EvaluatedBody.Item _ as item), (EvaluatedItems rhs) ->
+                    let items = rhs |> List.map (fun it -> (EvaluatedBody.List(kind, [ item; it ])))
+                    EvaluatedBody.Splice(items)
+
+                | _ -> failwithf "Unsupported ellipsis items list %s %A" (lst.Pretty()) evaled
+            //| (SynMacroBody.Symbol _) :: (SynMAcro)
             | lst -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
 
         (evaluateList pats kind rest (splicable :: accum))
@@ -399,21 +405,15 @@ and private evaluateList pats kind (args: SynMacroBody list) accum =
 
         let item = evaluateBody pats a
         evaluateList pats kind rest (item :: accum)
-    // item :: (evaluateList pats kind rest accum)
     | [] -> (EvaluatedBody.List(kind, List.rev accum))
 
-
-// | _ ->
-//     let items = args |> List.map (evaluateBody pats)
-// EvaluatedBody.List(kind, items)
-// | SynMacroBody.List _ -> failwith "todo"
-
-
-
 and private evaluateMacroCall (SynMacroCall(name = name) as call) =
-    match macroTable.TryGetMacro(name.Text) with
-    | Some(syn) -> evaluateMacroToEvaluatedBody syn call
-    | None -> failwithf "macro: %A not found" name
+    match tryEvaluateBuiltinMacro call with
+    | Some(it) -> it
+    | None ->
+        match macroTable.TryGetMacro(name.Text) with
+        | Some(syn) -> evaluateMacroToEvaluatedBody syn call
+        | None -> failwithf "macro: %A not found" name
 
 and private evaluateMacroToEvaluatedBody
     (SynMacro(_, cases, _) as _)
@@ -428,6 +428,16 @@ and private evaluateMacroToEvaluatedBody
         bindPatterns patterns args pats
         evaluateBody patterns body
     | None -> failwith "no matching pattern"
+
+let private tryEvaluateBuiltinMacro (SynMacroCall(name = name) as call) =
+    match macroTable.TryGetBuiltinMacro(name.Text) with
+    | Some(fn) -> fn call |> EvaluatedBody.Item |> Some
+    | None -> None
+
+let private evaluateBuiltinMacro call =
+    match tryEvaluateBuiltinMacro call with
+    | Some(it) -> it
+    | None -> failwithf "failed to expand builtin macro %s" (call.Pretty())
 
 let rec private tokenizeEvaluated
     (res: ResizeArray<token>)
@@ -602,8 +612,7 @@ let evaluatedBodyToExpr range evaluated =
     // printfn ""
     tokensToExpr res range
 
-let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, args, range) as call) =
-    // printfn "todo %A -> %A" macro call
+let private expandFully evaluator (SynMacroCall(_, _, range) as call) =
     let hasInteralMacroCalls bod =
         bod
         |> Traversal.depthFirstMacroBodyPred Traversal.alwaysTrue
@@ -613,9 +622,7 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
 
     let evalBody = evaluateBody (new BoundPats())
 
-
-    let mutable evaluated =
-        evaluateMacroToEvaluatedBody macro call |> evaluatedBodyToMacroBody range
+    let mutable evaluated = evaluator call |> evaluatedBodyToMacroBody range
 
     while hasInteralMacroCalls evaluated do
         // printfn "%s" (evaluated.Pretty())
@@ -624,6 +631,21 @@ let private expandSynMacro (SynMacro(_, cases, _) as macro) (SynMacroCall(_, arg
     // printfn "%s" (evaluated.Pretty())
 
     evaluatedBodyToExpr range <| EvaluatedBody.Item evaluated
+
+
+let private expandSynMacro (SynMacro(_, _, _) as macro) (SynMacroCall(_, _, _) as call) =
+    expandFully (evaluateMacroToEvaluatedBody macro) call
+
+let private expandBuiltinMacro fn (SynMacroCall(_, _, _) as call) =
+    expandFully (fn >> EvaluatedBody.Item) call
+
+let private tryExpandMacroCall (SynMacroCall(name = name) as call) =
+    match macroTable.TryGetBuiltinMacro name.Text with
+    | Some(fn) -> expandBuiltinMacro fn call |> Some
+    | None ->
+        match macroTable.TryGetMacro name.Text with
+        | Some(syn) -> expandSynMacro syn call |> Some
+        | None -> None
 
 let private hasMacroCall (expr: SynExpr) =
     expr
@@ -651,9 +673,9 @@ let expand (expr: SynExpr) =
 
     let expandMacros =
         function
-        | SynExpr.SyntaxMacroCall(SynMacroCall(name = name) as call) as it ->
-            match macroTable.TryGetMacro(Syntax.textOfSymbol name) with
-            | Some(syn) -> expandSynMacro syn call
+        | SynExpr.SyntaxMacroCall(SynMacroCall(name = name) as call) ->
+            match tryExpandMacroCall call with
+            | Some(ex) -> ex
             | None -> failwithf "macro: %A not found" name
         | it -> it
 

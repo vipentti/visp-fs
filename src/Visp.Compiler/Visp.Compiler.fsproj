@@ -10,11 +10,11 @@
     <Compile Include="DiagnosticsLogger.fs" />
     <Compile Include="StringResources.fs" />
     <Compile Include="Syntax\Syntax.fs" />
+    <Compile Include="Syntax\SyntaxPrinter.fs" />
     <Compile Include="Syntax\Macros.fs" />
     <Compile Include="Transforms\Traversal.fs" />
     <Compile Include="Transforms\Helpers.fs" />
     <Compile Include="Transforms\Common.fs" />
-    <Compile Include="Syntax\SyntaxPrinter.fs" />
     <Compile Include="Transforms\LastExpressionUpdater.fs" />
     <Compile Include="Transforms\QuasiquoteExpander.fs" />
     <Compile Include="Transforms\BuiltinMacroExpander.fs" />

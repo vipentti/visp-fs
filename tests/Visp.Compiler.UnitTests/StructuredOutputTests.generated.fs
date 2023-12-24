@@ -336,6 +336,11 @@ module ``tests_builtin-macros_cond-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/builtin-macros/cond-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_stringify-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/stringify-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_up-macro-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/macros/up-macro-0.visp"

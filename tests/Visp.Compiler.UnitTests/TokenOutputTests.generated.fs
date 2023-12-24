@@ -336,6 +336,11 @@ module ``tests_builtin-macros_cond-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/builtin-macros/cond-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_macros_stringify-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/macros/stringify-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_macros_up-macro-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/macros/up-macro-0.visp"

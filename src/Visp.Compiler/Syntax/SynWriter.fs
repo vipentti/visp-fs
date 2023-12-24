@@ -593,6 +593,15 @@ module Write =
 
     and writeSynPat (w: SynWriter) (_: WriteState) = synPat w
 
+    let requiresNewline =
+        function
+        | SynExpr.If _
+        | SynExpr.ForTo _
+        | SynExpr.ForIn _
+        | SynExpr.Match _ -> true
+        | _ -> false
+
+
     let rec writeExpr (w: SynWriter) (st: WriteState) (expr: SynExpr) =
 
         match expr with
@@ -804,7 +813,7 @@ module Write =
         | SynExpr.Tuple(exprs, range) ->
             startExpr w st range
             string w "("
-            writeInlineCommaSeparated w writeExpr exprs
+            writeInlineCommaSeparated w writeExprWithNewlineAfter exprs
             string w ")"
 
         | SynExpr.Const(cnst, _) ->
@@ -845,6 +854,11 @@ module Write =
                 | _ ->
                     writeExpr w WriteState.Inline expr
                     writeCallArgs w args
+
+            | Patterns.SymbolWith "tuple" ->
+                string w "("
+                writeInlineCommaSeparated w writeExprWithNewlineAfter args
+                string w ")"
 
             | Patterns.SymbolWith "concat" ->
                 match args with
@@ -1194,6 +1208,12 @@ module Write =
         | SynExpr.RecordInit(inits, range) ->
             startExpr w st range
             writeRecordInit w st None inits
+
+    and private writeExprWithNewlineAfter (w: SynWriter) (st: WriteState) (expr: SynExpr) =
+        writeExpr w st expr
+
+        if requiresNewline expr then
+            newlineIndent w
 
     and private writeRecordInit w _ (withExpr: SynExpr option) (inits: SynInit list) =
 
