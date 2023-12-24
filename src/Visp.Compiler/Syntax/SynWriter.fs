@@ -614,6 +614,12 @@ module Write =
         | SynExpr.ForTo _
         | SynExpr.ForIn _
         | SynExpr.Match _ -> true
+
+        | SynExpr.Collection(SynCollection(kind = k)) ->
+            match k with
+            | CollectionKind.Bracket
+            | CollectionKind.FsVec -> true
+            | _ -> false
         | _ -> false
 
 
@@ -1290,7 +1296,7 @@ module Write =
 
         | CollectionKind.Bracket
         | CollectionKind.FsVec ->
-            startExpr w st range
+            use _ = startNewlineExpr w st range
 
             fmtprintf
                 w

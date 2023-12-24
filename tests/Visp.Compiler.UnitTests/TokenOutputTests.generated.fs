@@ -221,6 +221,11 @@ module ``tests_parsing_seq-as-generic-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/seq-as-generic-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_tupled-special-forms-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/tupled-special-forms-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_arrays_array2d-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/arrays/array2d-0.visp"

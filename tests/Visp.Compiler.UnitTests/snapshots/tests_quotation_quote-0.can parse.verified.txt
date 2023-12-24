@@ -19,9 +19,10 @@ let something =
   // line 11 @"quote-0.visp"
   Value.from(
     [Value.symbol("fn");(Value.from(
-      let temp = Vector(1)
-      temp.Add(Value.from(Value.symbol("a")))
-      temp));(Value.from(
+      
+        let temp = Vector(1)
+        temp.Add(Value.from(Value.symbol("a")))
+        temp));(Value.from(
       [Value.symbol("+");Value.symbol("a");Value.symbol("b");Value.from(1);(Value.from(
         [Value.symbol("call");Value.symbol("+");Value.from(1);Value.from(2)]))]))])
 // line 13 @"quote-0.visp"
@@ -40,16 +41,18 @@ printfn "nested: %O" (Value.from(
 let visp_result_todo =
   // line 17 @"quote-0.visp"
   printfn "nested vec: %O" (Value.from(
-    let temp = Vector(2)
-    temp.Add(Value.from(Value.symbol("nested1")))
-    temp.Add(Value.from(Value.from(
-      [Value.symbol("nested2");(Value.from(
-        let temp = Vector(2)
-        temp.Add(Value.from(Value.symbol("nested3")))
-        temp.Add(Value.from(Value.from(
-          [Value.symbol("nested4");Value.symbol("and");Value.symbol("on");Value.symbol("and");Value.symbol("on");(Value.keyword(":keyword"))])))
-        temp))])))
-    temp))
+    
+      let temp = Vector(2)
+      temp.Add(Value.from(Value.symbol("nested1")))
+      temp.Add(Value.from(Value.from(
+        [Value.symbol("nested2");(Value.from(
+          
+            let temp = Vector(2)
+            temp.Add(Value.from(Value.symbol("nested3")))
+            temp.Add(Value.from(Value.from(
+              [Value.symbol("nested4");Value.symbol("and");Value.symbol("on");Value.symbol("and");Value.symbol("on");(Value.keyword(":keyword"))])))
+            temp))])))
+      temp))
 // line 17 @"quote-0.visp"
 printfn "%A" visp_result_todo
 

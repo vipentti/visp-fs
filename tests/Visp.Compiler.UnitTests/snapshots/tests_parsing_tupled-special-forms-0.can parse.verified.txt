@@ -1,0 +1,26 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"tupled-special-forms-0.visp"
+let visp_result_todo =
+  // line 8 @"tupled-special-forms-0.visp"
+  printfn "%A" (
+    let temp = ResizeArray<_>(3)
+    temp.Add(0)
+    temp.Add(1)
+    temp.Add(2)
+    temp
+  , 
+    let temp = ResizeArray<_>(3)
+    temp.Add(1)
+    temp.Add(2)
+    temp.Add(3)
+    temp
+  )
+// line 8 @"tupled-special-forms-0.visp"
+printfn "%A" visp_result_todo
+
