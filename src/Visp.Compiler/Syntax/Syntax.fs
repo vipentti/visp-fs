@@ -270,8 +270,6 @@ type SynExpr =
     | LambdaDef of SynLambda
     | Symbol of SynSymbol
     | Keyword of SynKeyword
-    | Cons of lhs: SynExpr * rhs: SynExpr * range: range
-    | Concat of lhs: SynExpr * rhs: SynExpr * range: range
     | Const of constant: SynConst * range: range
     | Literal of constant: SynConst * range: range
     | Quote of shorthand: bool * expr: SynQuoted * range: range
@@ -349,8 +347,6 @@ type SynExpr =
         | Symbol(SynSymbol(id)) -> id.idRange
         | Keyword(SynKeyword(id)) -> id.idRange
 
-        | Cons(range = r)
-        | Concat(range = r)
         | Match(range = r)
         | Literal(range = r)
         | Tuple(range = r)

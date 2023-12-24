@@ -61,10 +61,6 @@ let rec transform (func: SynExpr -> SynExpr) expr =
             | SynOp.Infix(o, args, range) -> SynOp.Infix(o, List.map bound_transform args, range)
             |> SynExpr.Op
 
-        | SynExpr.Cons(lhs, rhs, range) ->
-            SynExpr.Cons(bound_transform lhs, bound_transform rhs, range)
-        | SynExpr.Concat(lhs, rhs, range) ->
-            SynExpr.Concat(bound_transform lhs, bound_transform rhs, range)
         | SynExpr.Atom(expr, range) -> SynExpr.Atom(bound_transform expr, range)
         | SynExpr.Deref(short, expr, range) -> SynExpr.Deref(short, bound_transform expr, range)
         | SynExpr.Begin(exprs, k, range) -> SynExpr.Begin(List.map bound_transform exprs, k, range)

@@ -795,7 +795,6 @@ module Write =
         | SynExpr.Set(name, body, range) ->
             startExpr w st range
 
-            // symbol w name true
             writeExpr w WriteState.InlineNoParens name
             string w " <- "
             writeExpr w WriteState.Inline body
@@ -828,12 +827,14 @@ module Write =
                     string w "HashMap.find"
                     writeCallArgs w [ kw; one ]
                 | _ -> failwithf "unsupported call %O %A" expr args
+
             | Patterns.SymbolWith "with" ->
                 match args with
                 | [ expr; SynExpr.RecordInit(inits, _) ] -> writeRecordInit w st (Some expr) inits
                 | _ ->
                     writeExpr w WriteState.Inline expr
                     writeCallArgs w args
+
             | Patterns.SymbolWith "cons" ->
                 match args with
                 | [ lhs; rhs ] ->
@@ -939,10 +940,6 @@ module Write =
             indentIf w st
             symbol w sym true
 
-        // | SynExpr.LambdaCall(lam, args, range) ->
-        //     startExpr w st range
-        //     writeSynLambda w st lam
-        //     writeCallArgs w args
         | SynExpr.LambdaDef lam -> writeSynLambda w st lam
 
         | SynExpr.Op op -> writeOp w st op
@@ -1033,22 +1030,6 @@ module Write =
         | SynExpr.Quote(_, expr, range) ->
             startExpr w st range
             writeQuoted w WriteState.Inline expr
-
-        | SynExpr.Concat(lhs, rhs, range) ->
-            startExpr w st range
-            char w '('
-            writeExpr w WriteState.Inline lhs
-            string w ")@("
-            writeExpr w WriteState.Inline rhs
-            char w ')'
-
-        | SynExpr.Cons(lhs, rhs, range) ->
-            startExpr w st range
-            char w '('
-            writeExpr w WriteState.Inline lhs
-            string w ")::("
-            writeExpr w WriteState.Inline rhs
-            char w ')'
 
         | SynExpr.Quasiquote _ -> failwithf "unsupported expr %O" expr
         // | SynExpr.ThreadLast _ -> failwithf "unsupported expr %O" expr

@@ -208,8 +208,6 @@ let rec exprToDoc =
     | SynExpr.Symbol it -> text it.Text
     | SynExpr.Keyword it -> text it.Text
     | SynExpr.Op it -> opToDoc it
-    | SynExpr.Cons(lhs, rhs, _) -> parens <| text "cons" <+> (exprToDoc lhs) <+> (exprToDoc rhs)
-    | SynExpr.Concat(lhs, rhs, _) -> parens <| text "concat" <+> (exprToDoc lhs) <+> (exprToDoc rhs)
 
     | SynExpr.FunctionCall(func, args, _) ->
         parens
