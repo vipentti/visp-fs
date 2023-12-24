@@ -39,9 +39,11 @@
 (fn inline add [(lhs: ^a) (rhs: ^a)] (+ lhs rhs))
 (fn inline sub [(lhs: ^a) (rhs: ^a)] (- lhs rhs))
 (fn inline mul [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
-(fn inline div [(lhs: ^a) (rhs: ^a)] (* lhs rhs))
+(fn inline div [(lhs: ^a) (rhs: ^a)] (/ lhs rhs))
 (fn inline rem [(lhs: ^a) (rhs: ^a)] (CoreMethods.rem_impl lhs rhs))
 (fn inline erem [(lhs: ^a) (rhs: ^a)] (CoreMethods.euc_rem_impl lhs rhs))
+(fn inline divrem [(lhs: ^a) (rhs: ^a)]
+  ((/ lhs rhs) . (rem lhs rhs)))
 (fn inline sub1 [a] (- a LanguagePrimitives.GenericOne))
 (fn inline dec [a] (- a LanguagePrimitives.GenericOne))
 (fn inline add1 [a] (+ a LanguagePrimitives.GenericOne))
@@ -55,12 +57,41 @@
 (fn inline span->int64 [(sp: System.ReadOnlySpan<char>)]
   (System.Int64.Parse sp))
 
+(fn inline span->double [(sp: System.ReadOnlySpan<char>)]
+  (System.Double.Parse sp))
+
+(fn inline span->bigint [(sp: System.ReadOnlySpan<char>)]
+  (System.Numerics.BigInteger.Parse sp))
+
+(fn inline string->double [(sp: string)]
+  (System.Double.Parse sp))
+
+(fn inline string->bigint [(sp: string)]
+  (System.Numerics.BigInteger.Parse sp))
+
 (fn inline try-string->int32 [(s: string)]
   (match (System.Int32.TryParse s)
     [(false . _) None]
     [(true . v ) (Some v)]
   ))
 
+(fn inline gcd [a b]
+  (cond_
+    [(= b LanguagePrimitives.GenericZero) a]
+    [(= a LanguagePrimitives.GenericZero) b]
+    [_
+      (mut a a)
+      (mut b b)
+      (while (!= b LanguagePrimitives.GenericZero)
+        (let temp b)
+        (set! b (rem a b))
+        (set! a temp)
+      )
+      a
+    ]))
+
+(fn inline lcm (a b)
+  (/ (* a b) (gcd a b)))
 
 (fn rec gcd64 [a b]
   (match (a . b)
@@ -71,7 +102,6 @@
 
 (fn inline lcm64 (a b)
   (/ (* a b) (gcd64 a b)))
-
 
 (fn GetCurrentDirectory () (System.IO.Directory.GetCurrentDirectory))
 
