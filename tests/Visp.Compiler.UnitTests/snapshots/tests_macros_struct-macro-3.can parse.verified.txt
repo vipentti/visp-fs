@@ -14,20 +14,19 @@ let ``macro_my-and-3`` = "__MACRO_INIT__"
 type Range (start: int64 , len: int64) =
   // line 25 @"struct-macro-3.visp"
   member _.Start =
-        start
+    start
   // line 25 @"struct-macro-3.visp"
   member _.Len =
-        len
+    len
   // line 25 @"struct-macro-3.visp"
   member _.End =
-        // line 25 @"struct-macro-3.visp"
+    // line 25 @"struct-macro-3.visp"
     start +
     len
   // line 25 @"struct-macro-3.visp"
   member d.Offset v =
     // line 25 @"struct-macro-3.visp"
     v - (d.Start)
-
   // line 25 @"struct-macro-3.visp"
   member d.Contains v =
     // line 25 @"struct-macro-3.visp"
@@ -38,12 +37,10 @@ type Range (start: int64 , len: int64) =
         v < ((d.End))
       else
         false
-
   // line 25 @"struct-macro-3.visp"
   override t.ToString () =
     // line 25 @"struct-macro-3.visp"
     sprintf "Range(%i, %i)" ((t.Start)) ((t.Len))
-
 // line 43 @"struct-macro-3.visp"
 let instance =
   // line 43 @"struct-macro-3.visp"

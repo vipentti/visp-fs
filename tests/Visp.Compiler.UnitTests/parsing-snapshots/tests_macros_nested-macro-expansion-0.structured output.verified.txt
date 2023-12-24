@@ -39,13 +39,13 @@
                    Typed (Named (SynSymbol start, (19,29--19,34)), Ident Pos, (19,28--19,40))], (19,14--19,41)),
              [Let (Named (SynSymbol grid, (20,7--20,11)), Symbol (SynSymbol grid), None, [], (20,3--20,16));
               Let (Named (SynSymbol start, (21,7--21,12)), Symbol (SynSymbol start), None, [], (21,3--21,18));
-              OverrideFn
+              MemberFn
                 (SynSymbol _.ToString, Args (List [], (22,25--22,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("TileMap(%A)\n%A", Regular, (23,13--23,30)), (23,13--23,30));
-                      Symbol (SynSymbol start); Symbol (SynSymbol grid)], (23,5--23,41))], (22,3--23,42));
-              Member (SynSymbol _.Start, Symbol (SynSymbol start), (26,3--26,23));
+                      Symbol (SynSymbol start); Symbol (SynSymbol grid)], (23,5--23,41))], Override, [], (22,3--23,42));
+              Member (SynSymbol _.Start, [Symbol (SynSymbol start)], Default, [], (26,3--26,23));
               GetSet
                 (SynSymbol _.Item,
                  Some
@@ -115,7 +115,8 @@
                                           [List (DotBracket, [Symbol (SynSymbol x)], (38,17--38,21));
                                            Symbol (SynSymbol row)], (38,16--38,26))], (38,10--38,27))], (34,8--39,9));
                                List (Bracket, [Discard (40,9--40,10); Symbol (SynSymbol None)], (40,8--40,16))],
-                              (33,7--40,16)))], (29,4--40,18))), None, (28,3--40,18))], [], (19,1--41,3)), (19,0--41,4));
+                              (33,7--40,16)))], (29,4--40,18))), None, Default, [], (28,3--40,18))], [], (19,1--41,3)),
+          (19,0--41,4));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (43,0--43,14)),

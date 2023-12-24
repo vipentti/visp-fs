@@ -10,7 +10,7 @@ let state = { Todo = () }
 type TestStruct (value: int) =
   // line 10 @"attributes-0.visp"
   member _.Value =
-        value
+    value
 // line 13 @"attributes-0.visp"
 let xx =
   // line 13 @"attributes-0.visp"

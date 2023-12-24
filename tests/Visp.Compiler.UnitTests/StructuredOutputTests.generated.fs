@@ -61,6 +61,11 @@ module ``tests_type_custom-comparison-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/custom-comparison-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_static-members-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/static-members-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_record-2`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/record-2.visp"

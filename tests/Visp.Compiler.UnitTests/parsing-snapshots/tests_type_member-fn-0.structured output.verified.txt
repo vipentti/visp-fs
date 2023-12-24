@@ -27,7 +27,7 @@
                         (Symbol (SynSymbol printfn),
                          [Const (String ("src %i", Regular, (15,15--15,23)), (15,15--15,23));
                           Symbol (SynSymbol src_range)], (15,7--15,33))], (14,5--15,34)); Const (Unit, (17,4--17,6))],
-                 (13,3--17,6))], [], (10,1--18,5)), (10,0--18,6));
+                 Default, [], (13,3--17,6))], [], (10,1--18,5)), (10,0--18,6));
        Expr
          (LetOrUse
             (Named (SynSymbol mapping, (20,5--20,12)), New (Ident Mapping, [], (20,14--20,25)), None, [], (20,1--20,26)),

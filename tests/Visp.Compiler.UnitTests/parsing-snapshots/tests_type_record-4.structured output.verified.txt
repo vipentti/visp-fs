@@ -5,14 +5,15 @@
             (SynSymbol TestRec, [RecordLabel (Default, SynSymbol value, Ident int, (10,3--10,13))],
              [Member
                 (SynSymbol t.Structuredtext,
-                 DotMethod (Symbol (SynSymbol t), SynSymbol ToString, [], Tuple, (12,28--12,39)), (12,3--12,40));
-              OverrideFn
+                 [DotMethod (Symbol (SynSymbol t), SynSymbol ToString, [], Tuple, (12,28--12,39))], Default, [],
+                 (12,3--12,40));
+              MemberFn
                 (SynSymbol t.ToString, Args (List [], (14,25--14,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("TestRec(%i)", Regular, (14,37--14,50)), (14,37--14,50));
-                      DotProperty (Symbol (SynSymbol t), SynSymbol value, (14,52--14,60))], (14,29--14,61))],
-                 (14,3--14,62))],
+                      DotProperty (Symbol (SynSymbol t), SynSymbol value, (14,52--14,60))], (14,29--14,61))], Override,
+                 [], (14,3--14,62))],
              [{ Attributes = [{ TypeName = Ident StructuredFormatDisplay
                                 ArgExpr = Const (String ("{Structuredtext}", Regular, (8,27--8,45)), (8,27--8,45))
                                 Range = (8,3--8,46) }]

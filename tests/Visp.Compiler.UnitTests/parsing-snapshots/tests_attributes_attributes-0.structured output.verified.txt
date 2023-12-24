@@ -4,7 +4,7 @@
          (Type
             (SynSymbol TestStruct,
              Args (Tuple [Typed (Named (SynSymbol value, (9,20--9,25)), Ident int, (9,19--9,31))], (9,18--9,32)),
-             [Member (SynSymbol _.Value, Symbol (SynSymbol value), (10,5--10,25))],
+             [Member (SynSymbol _.Value, [Symbol (SynSymbol value)], Default, [], (10,5--10,25))],
              [{ Attributes = [{ TypeName = Ident Struct
                                 ArgExpr = Const (Unit, (8,3--8,9))
                                 Range = (8,3--8,9) }; { TypeName = Ident NoEquality

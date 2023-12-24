@@ -12,7 +12,6 @@ type Mapping =
     member this.Stuff () =
       // line 14 @"my-rinit-0.visp"
       printfn "doing stuff %A" ((this.src))
-
 // line 17 @"my-rinit-0.visp"
 let macro_MyRinit = "__MACRO_INIT__"
 // line 22 @"my-rinit-0.visp"

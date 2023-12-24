@@ -11,11 +11,10 @@ type MyType (value: int32) =
   let field = value
   // line 10 @"type-0.visp"
   member this.Foo =
-        value
+    value
   // line 11 @"type-0.visp"
   member this.Thing () =
     "hello"
-
 // line 14 @"type-0.visp"
 let myObject =
   // line 14 @"type-0.visp"

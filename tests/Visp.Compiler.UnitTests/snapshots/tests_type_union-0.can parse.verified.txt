@@ -14,7 +14,7 @@ type MyList<'a> =
 
   // line 12 @"union-0.visp"
   member t.TIsEmpty =
-        // line 13 @"union-0.visp"
+    // line 13 @"union-0.visp"
     match t with
       | Empty ->
         true
@@ -30,7 +30,6 @@ type MyList<'a> =
         // line 21 @"union-0.visp"
         1 +
         (rest.Length ())
-
 // line 26 @"union-0.visp"
 let linkedList =
   // line 26 @"union-0.visp"

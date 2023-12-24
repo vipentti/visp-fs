@@ -23,7 +23,6 @@ type Counter () =
           count <- inc count
           // line 15 @"while-match-0.visp"
           Some count)
-
 // line 19 @"while-match-0.visp"
 let counter =
   // line 19 @"while-match-0.visp"

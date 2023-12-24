@@ -54,13 +54,13 @@
               Let
                 (Named (SynSymbol width, (25,7--25,12)),
                  FunctionCall (Symbol (SynSymbol Array2D.length2), [Symbol (SynSymbol grid)], (25,14--25,34)), None, [],
-                 (25,3--25,35)); Member (SynSymbol _.Rocks, Symbol (SynSymbol rocks), (27,3--27,23));
-              OverrideFn
+                 (25,3--25,35)); Member (SynSymbol _.Rocks, [Symbol (SynSymbol rocks)], Default, [], (27,3--27,23));
+              MemberFn
                 (SynSymbol _.ToString, Args (List [], (29,25--29,27)),
                  [FunctionCall
                     (Symbol (SynSymbol sprintf),
                      [Const (String ("TileMap\n%A", Regular, (30,13--30,26)), (30,13--30,26)); Symbol (SynSymbol grid)],
-                     (30,5--30,31))], (29,3--30,32));
+                     (30,5--30,31))], Override, [], (29,3--30,32));
               MemberFn
                 (SynSymbol t.MoveRock,
                  Args
@@ -92,7 +92,7 @@
                                 (Discard (41,11--41,12), None, [Const (Bool false, (41,13--41,18))], (41,11--41,18))],
                              (35,9--41,19))], (34,7--42,9));
                       SynMatch (Discard (43,7--43,8), None, [Const (Bool false, (43,9--43,14))], (43,7--43,14))],
-                     (33,5--43,15))], (32,3--44,5));
+                     (33,5--43,15))], Default, [], (32,3--44,5));
               GetSet
                 (SynSymbol _.Item,
                  Some
@@ -202,7 +202,8 @@
                                                Symbol (SynSymbol x)], (65,17--65,24)); Symbol (SynSymbol grid)],
                                           (65,16--65,30)); Symbol (SynSymbol ch)], (65,10--65,34))], (62,8--66,9));
                                List (Bracket, [Discard (67,9--67,10); Const (Unit, (67,11--67,13))], (67,8--67,14))],
-                              (61,7--67,14)))], (58,4--68,5))), (46,3--68,5))], [], (22,1--69,3)), (22,0--70,1));
+                              (61,7--67,14)))], (58,4--68,5))), Default, [], (46,3--68,5))], [], (22,1--69,3)),
+          (22,0--70,1));
        Expr
          (FunctionDef
             (SynSymbol TiltNorth, None,

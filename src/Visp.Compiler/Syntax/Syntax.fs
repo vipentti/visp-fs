@@ -518,6 +518,11 @@ and SynMemberSet =
 
     member t.Range = let (SynMemberSet(range = r)) = t in r
 
+and [<System.FlagsAttribute; RequireQualifiedAccess>] MemberFlags =
+    | Default = 0
+    | Static = 1
+    | Override = 2
+
 and [<RequireQualifiedAccess>] SynTypeMember =
     | Let of
         pat: SynPat *
@@ -526,12 +531,31 @@ and [<RequireQualifiedAccess>] SynTypeMember =
         attributes: SynAttributes *
         range: range
     | Val of pat: SynPat * typ: SynType * flags: LetFlags * attributes: SynAttributes * range: range
-    | Member of name: SynSymbol * value: SynExpr * range: range
-    | GetSet of name: SynSymbol * get: SynMemberGet option * set: SynMemberSet option * range: range
     | Constructor of args: SynPat * body: SynExpr list * range: range
-    | MemberFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
-    | OverrideMember of name: SynSymbol * value: SynExpr * range: range
-    | OverrideFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
+
+    | GetSet of
+        name: SynSymbol *
+        get: SynMemberGet option *
+        set: SynMemberSet option *
+        flags: MemberFlags *
+        attributes: SynAttributes *
+        range: range
+
+    | Member of
+        name: SynSymbol *
+        body: SynExpr list *
+        flags: MemberFlags *
+        attributes: SynAttributes *
+        range: range
+
+    | MemberFn of
+        name: SynSymbol *
+        args: SynPat *
+        body: SynExpr list *
+        flags: MemberFlags *
+        attributes: SynAttributes *
+        range: range
+
     | Interface of name: SynSymbol * members: SynTypeMember list * range: range
 
 and [<RequireQualifiedAccess>] SynDirective = Open of path: SynSymbol * range: range

@@ -25,7 +25,6 @@ type MyCustomValue =
       | (String s) ->
         // line 18 @"custom-comparison-0.visp"
         System.HashCode.Combine ("string", s)
-
   // line 21 @"custom-comparison-0.visp"
   override t.Equals other =
     // line 22 @"custom-comparison-0.visp"
@@ -35,7 +34,6 @@ type MyCustomValue =
         (t :> IEquatable<_>).Equals(v)
       | _ ->
         false
-
   // line 29 @"custom-comparison-0.visp"
   interface IEquatable<MyCustomValue> with
     // line 30 @"custom-comparison-0.visp"
@@ -49,7 +47,6 @@ type MyCustomValue =
           lhs = rhs
         | (_ , _) ->
           false
-
   // line 38 @"custom-comparison-0.visp"
   interface IComparable with
     // line 39 @"custom-comparison-0.visp"
@@ -63,7 +60,6 @@ type MyCustomValue =
           1
         | _ ->
           -1
-
   // line 48 @"custom-comparison-0.visp"
   interface IComparable<MyCustomValue> with
     // line 49 @"custom-comparison-0.visp"
@@ -79,7 +75,6 @@ type MyCustomValue =
         | ((String lhs) , (String rhs)) ->
           // line 54 @"custom-comparison-0.visp"
           lhs.CompareTo(rhs)
-
 // line 58 @"custom-comparison-0.visp"
 printfn "Nil < String %A" (MyCustomValue.Nil < (MyCustomValue.String "hello"))
 // line 59 @"custom-comparison-0.visp"

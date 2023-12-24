@@ -189,30 +189,42 @@ and private fixMembers bound_transform members =
     let tfSet (SynMemberSet(args, k, exprs, range)) =
         SynMemberSet(args, k, List.map bound_transform exprs, range)
 
+    let fixAttrs = fixAttributes bound_transform
+
     let rec tfmember =
         function
         | SynTypeMember.Let(name, expr, flags, attributes, range) ->
-            SynTypeMember.Let(
-                name,
-                bound_transform expr,
-                flags,
-                fixAttributes bound_transform attributes,
-                range
-            )
+            SynTypeMember.Let(name, bound_transform expr, flags, fixAttrs attributes, range)
         | SynTypeMember.Constructor(args, expr, range) ->
             SynTypeMember.Constructor(args, List.map bound_transform expr, range)
         | SynTypeMember.Val(name, typ, flags, attributes, range) ->
-            SynTypeMember.Val(name, typ, flags, fixAttributes bound_transform attributes, range)
-        | SynTypeMember.Member(name, expr, range) ->
-            SynTypeMember.Member(name, bound_transform expr, range)
-        | SynTypeMember.MemberFn(name, args, expr, range) ->
-            SynTypeMember.MemberFn(name, args, List.map bound_transform expr, range)
-        | SynTypeMember.OverrideMember(name, expr, range) ->
-            SynTypeMember.OverrideMember(name, bound_transform expr, range)
-        | SynTypeMember.OverrideFn(name, args, expr, range) ->
-            SynTypeMember.OverrideFn(name, args, List.map bound_transform expr, range)
-        | SynTypeMember.GetSet(name, get, set, range) ->
-            SynTypeMember.GetSet(name, Option.map tfGet get, Option.map tfSet set, range)
+            SynTypeMember.Val(name, typ, flags, fixAttrs attributes, range)
+        | SynTypeMember.Member(name, expr, flags, attributes, range) ->
+            SynTypeMember.Member(
+                name,
+                List.map bound_transform expr,
+                flags,
+                fixAttrs attributes,
+                range
+            )
+        | SynTypeMember.MemberFn(name, args, expr, flags, attributes, range) ->
+            SynTypeMember.MemberFn(
+                name,
+                args,
+                List.map bound_transform expr,
+                flags,
+                fixAttrs attributes,
+                range
+            )
+        | SynTypeMember.GetSet(name, get, set, flags, attributes, range) ->
+            SynTypeMember.GetSet(
+                name,
+                Option.map tfGet get,
+                Option.map tfSet set,
+                flags,
+                fixAttrs attributes,
+                range
+            )
         | SynTypeMember.Interface(name, mems, r) ->
             SynTypeMember.Interface(name, List.map tfmember mems, r)
 

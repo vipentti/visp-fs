@@ -11,13 +11,12 @@ type TestRec =
   { value: int }
     // line 12 @"record-4.visp"
     member t.Structuredtext =
-            // line 12 @"record-4.visp"
+      // line 12 @"record-4.visp"
       t.ToString()
     // line 14 @"record-4.visp"
     override t.ToString () =
       // line 14 @"record-4.visp"
       sprintf "TestRec(%i)" ((t.value))
-
 // line 19 @"record-4.visp"
 printfn "%A" ({
   // line 19 @"record-4.visp"

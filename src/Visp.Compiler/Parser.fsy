@@ -977,7 +977,10 @@ member:
     | LPAREN member_in_parens RPAREN { $2 }
 
 member_name:
-    | MEMBER symbol { $2 }
+    | MEMBER symbol { (MemberFlags.Default, $2) }
+    | OVERRIDE symbol { (MemberFlags.Override, $2) }
+    | STATIC MEMBER symbol { (MemberFlags.Static, $3) }
+    | STATIC OVERRIDE symbol { (MemberFlags.Static ||| MemberFlags.Override, $3) }
 
 member_get:
     | LPAREN MEMBER_GET tuple_arg_pats expr_list_or_empty RPAREN
@@ -987,12 +990,23 @@ member_set:
     | LPAREN MEMBER_SET tuple_arg_pats syn_pat expr_list_or_empty RPAREN
         { SynMemberSet($3, $4, $5, lhs parseState) }
 
+    | LPAREN MEMBER_SET syn_pat_named expr_list_or_empty RPAREN
+        { SynMemberSet(SynPat.Ignore(rhs parseState 2), $3, $4, lhs parseState) }
+
 member_member_in_parens:
-    | member_name member_get { SynTypeMember.GetSet($1, Some($2), None, lhs parseState) }
-    | member_name member_set { SynTypeMember.GetSet($1, None, Some($2), lhs parseState) }
-    | member_name member_get member_set { SynTypeMember.GetSet($1, Some($2), Some($3), lhs parseState) }
-    | member_name member_set member_get { SynTypeMember.GetSet($1, Some($3), Some($2), lhs parseState) }
-    | member_name expr { SynTypeMember.Member($1, $2, lhs parseState) }
+    | member_name member_get { SynTypeMember.GetSet(snd $1, Some($2), None, fst $1, [], lhs parseState) }
+    | member_name member_set { SynTypeMember.GetSet(snd $1, None, Some($2), fst $1, [], lhs parseState) }
+    | member_name member_get member_set { SynTypeMember.GetSet(snd $1, Some($2), Some($3), fst $1, [], lhs parseState) }
+    | member_name member_set member_get { SynTypeMember.GetSet(snd $1, Some($3), Some($2), fst $1, [], lhs parseState) }
+    | member_name expr_list { SynTypeMember.Member(snd $1, $2, fst $1, [], lhs parseState) }
+    | member_name { SynTypeMember.Member(snd $1, [], fst $1, [], lhs parseState) }
+
+    | attribute_list member_name member_get { SynTypeMember.GetSet(snd $2, Some($3), None, fst $2, $1, lhs parseState) }
+    | attribute_list member_name member_set { SynTypeMember.GetSet(snd $2, None, Some($3), fst $2, $1, lhs parseState) }
+    | attribute_list member_name member_get member_set { SynTypeMember.GetSet(snd $2, Some($3), Some($4), fst $2, $1, lhs parseState) }
+    | attribute_list member_name member_set member_get { SynTypeMember.GetSet(snd $2, Some($4), Some($3), fst $2, $1, lhs parseState) }
+    | attribute_list member_name expr_list { SynTypeMember.Member(snd $2, $3, fst $2, $1, lhs parseState) }
+    | attribute_list member_name { SynTypeMember.Member(snd $2, [], fst $2, $1, lhs parseState) }
 
 member_let_mut_kw:
     | LET { LetFlags.None }
@@ -1003,6 +1017,31 @@ member_let_mut_kw:
 member_val_kw:
     | VAL { LetFlags.None }
     | VAL MUT { LetFlags.Mutable }
+
+member_fn_kw:
+    | MEMBERFN { MemberFlags.Default }
+    | MEMBER FN { MemberFlags.Default }
+    | OVERRIDE FN { MemberFlags.Override }
+    | STATIC MEMBERFN { MemberFlags.Static }
+    | STATIC MEMBER FN { MemberFlags.Static }
+    | STATIC OVERRIDE FN { MemberFlags.Static ||| MemberFlags.Override }
+
+member_fn:
+    | member_fn_kw syn_symbol list_arg_pats expr_list
+        { SynTypeMember.MemberFn($2, $3, $4, $1, [], lhs parseState) }
+    | member_fn_kw syn_symbol list_arg_pats
+        { SynTypeMember.MemberFn($2, $3, [], $1, [], lhs parseState) }
+    | member_fn_kw syn_symbol
+        { SynTypeMember.MemberFn($2, SynPat.Ignore(lhs parseState), [], $1, [], lhs parseState) }
+
+    | attribute_list member_fn_kw syn_symbol list_arg_pats expr_list
+        { SynTypeMember.MemberFn($3, $4, $5, $2, $1, lhs parseState) }
+
+    | attribute_list member_fn_kw syn_symbol list_arg_pats
+        { SynTypeMember.MemberFn($3, $4, [], $2, $1, lhs parseState) }
+
+    | attribute_list member_fn_kw syn_symbol
+        { SynTypeMember.MemberFn($3, SynPat.Ignore(lhs parseState), [], $2, $1, lhs parseState) }
 
 member_in_parens:
     | member_let_mut_kw syn_pat expr { SynTypeMember.Let($2, $3, $1, [], lhs parseState) }
@@ -1023,16 +1062,9 @@ member_in_parens:
             SynTypeMember.Val($3, Syntax.parserRecoveryType r, $2, $1, r) }
 
     | member_member_in_parens { $1 }
-    | MEMBERFN syn_symbol list_arg_pats expr_list
-        { SynTypeMember.MemberFn($2, $3, $4, (lhs parseState)) }
-    | MEMBER FN syn_symbol list_arg_pats expr_list
-        { SynTypeMember.MemberFn($3, $4, $5, (lhs parseState)) }
+    | member_fn { $1 }
     | NEW tuple_arg_pats expr_list
         { SynTypeMember.Constructor($2, $3, (lhs parseState)) }
-    | OVERRIDE syn_symbol expr
-        { SynTypeMember.OverrideMember($2, $3, lhs parseState) }
-    | OVERRIDE FN syn_symbol list_arg_pats expr_list
-        { SynTypeMember.OverrideFn($3, $4, $5, (lhs parseState)) }
     | INTERFACE symbol_with_ops
         { SynTypeMember.Interface($2, [], lhs parseState)}
     | INTERFACE symbol_with_ops member_list
@@ -1282,6 +1314,14 @@ pat_open_kind:
     | LBRACKET %prec prec_syn_pat_open { CollectionKind.Bracket }
     | BRACKET_BAR %prec prec_syn_pat_open { CollectionKind.FsArray }
     | PAREN_BAR %prec prec_syn_pat_open  { CollectionKind.FsList }
+
+syn_pat_named:
+    | SYMBOL %prec prec_syn_pat {
+        let text = $1
+        if (text = "_") then
+            SynPat.Discard (lhs parseState)
+        else
+            SynPat.Named (Syntax.mkSynSymbol text (rhs parseState 1), (rhs parseState 1)) }
 
 syn_pat:
     | constant %prec prec_match_pattern_const { SynPat.Const(fst $1, snd $1) }

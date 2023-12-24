@@ -1,0 +1,36 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type MyTypeWithStatics
+  (static let static_field 0)
+  (static mut mutable_static_field 0)
+
+  (static member fn Increment ()
+    (up! mutable_static_field inc)
+    mutable_static_field
+  )
+
+  (static member GetMutableValue mutable_static_field)
+
+  (static member MutableGetSet
+    (get () mutable_static_field)
+    (set v (set! mutable_static_field v))
+  )
+
+  (static member GetOnly
+    (get () static_field)
+  )
+)
+
+(printfn "GetMutableValue: %A" (+GetMutableValue MyTypeWithStatics))
+(printfn "Increment: %A" (.Increment MyTypeWithStatics))
+(printfn "GetMutableValue: %A" (+GetMutableValue MyTypeWithStatics))
+(printfn "GetOnly: %A" (+GetOnly MyTypeWithStatics))
+
+(printfn "MutableGetSet: %A" (+MutableGetSet MyTypeWithStatics))
+(set! (+MutableGetSet MyTypeWithStatics) 99)
+(printfn "MutableGetSet: %A" (+MutableGetSet MyTypeWithStatics))
