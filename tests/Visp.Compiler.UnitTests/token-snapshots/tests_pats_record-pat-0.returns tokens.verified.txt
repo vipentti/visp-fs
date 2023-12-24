@@ -1,0 +1,250 @@
+﻿LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "XYZ" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "double" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "double" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "double" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RECORD Default 0 1 Type
+SYMBOL "Ray" Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "pos" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "XYZ" Default 0 1 Type
+RBRACKET Default 0 1 Type
+LBRACKET Default 0 1 Type
+SYMBOL "dir" Default 0 1 Type
+COLON Default 0 1 Type
+SYMBOL "XYZ" Default 0 1 Type
+RBRACKET Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "DoStuffWithRay" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+BRACE_BAR Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "pos" Default 0 2 LParen
+SYMBOL "lhs_pos" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "dir" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dx" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dy" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dz" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+BAR_BRACE Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "Ray" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("pos %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "lhs_pos" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("dir %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dx" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dy" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dz" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "DoStuffWithDirOnly" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+BRACE_BAR Default 0 2 LParen
+SYMBOL "dir" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dx" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dy" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dz" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+BAR_BRACE Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("dir %A", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "dx" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dy" Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "dz" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "MatchRecord" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "ray" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MATCH Default 0 2 Match
+SYMBOL "ray" Default 0 2 Match
+LBRACKET Default 0 2 Match
+BRACE_BAR Default 0 2 Match
+SYMBOL "dir" Default 0 2 Match
+LPAREN Default 0 3 Match
+SYMBOL "dx" Default 0 3 Match
+COMMA Default 0 3 Match
+SYMBOL "dy" Default 0 3 Match
+COMMA Default 0 3 Match
+SYMBOL "_" Default 0 3 Match
+RPAREN Default 0 2 Match
+BAR_BRACE Default 0 2 Match
+LPAREN Default 0 3 Match
+SYMBOL "printfn" Default 0 3 Match
+STRING ("dx %A", Regular, Token []) Default 0 3 Match
+SYMBOL "dx" Default 0 3 Match
+RPAREN Default 0 2 Match
+LPAREN Default 0 3 Match
+SYMBOL "printfn" Default 0 3 Match
+STRING ("dy %A", Regular, Token []) Default 0 3 Match
+SYMBOL "dy" Default 0 3 Match
+RPAREN Default 0 2 Match
+RBRACKET Default 0 2 Match
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "LetRecord" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "ray" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+BRACE_BAR Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "dir" Default 0 2 LParen
+SYMBOL "dd" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+BAR_BRACE Default 0 2 LParen
+SYMBOL "ray" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("dir is %A", Regular, Token []) Default 0 2 LParen
+SYMBOL "dd" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "DoStuffWithRay" Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "pos" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (6, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "DoStuffWithDirOnly" Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "pos" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (6, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "MatchRecord" Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "pos" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (6, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "LetRecord" Default 0 1 LParen
+BRACE_BAR Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "pos" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+LBRACKET Default 0 1 LParen
+SYMBOL "dir" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (5, false) Default 0 2 LParen
+COMMA Default 0 2 LParen
+INT32 (6, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+BAR_BRACE Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

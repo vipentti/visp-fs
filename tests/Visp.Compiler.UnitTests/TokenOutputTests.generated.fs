@@ -31,6 +31,11 @@ module ``tests_dot_dot-shorthands`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/dot/dot-shorthands.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_pats_record-pat-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/pats/record-pat-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_pats_fn-1`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/pats/fn-1.visp"

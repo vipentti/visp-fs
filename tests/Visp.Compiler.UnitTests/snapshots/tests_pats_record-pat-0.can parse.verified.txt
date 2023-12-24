@@ -1,0 +1,74 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"record-pat-0.visp"
+type XYZ = (double * double * double)
+// line 10 @"record-pat-0.visp"
+type Ray =
+  { pos: XYZ; dir: XYZ }
+// line 15 @"record-pat-0.visp"
+let DoStuffWithRay ({pos = lhs_pos;dir = (dx , dy , dz)}: Ray) =
+  // line 16 @"record-pat-0.visp"
+  printfn "pos %A" lhs_pos
+  // line 17 @"record-pat-0.visp"
+  printfn "dir %A" (dx, dy, dz)
+
+// line 20 @"record-pat-0.visp"
+let DoStuffWithDirOnly {dir = (dx , dy , dz)} =
+  // line 21 @"record-pat-0.visp"
+  printfn "dir %A" (dx, dy, dz)
+
+// line 24 @"record-pat-0.visp"
+let MatchRecord ray =
+  // line 25 @"record-pat-0.visp"
+  match ray with
+    | {dir = (dx , dy , _)} ->
+      // line 27 @"record-pat-0.visp"
+      printfn "dx %A" dx
+      // line 28 @"record-pat-0.visp"
+      printfn "dy %A" dy
+
+// line 33 @"record-pat-0.visp"
+let LetRecord ray =
+  // line 34 @"record-pat-0.visp"
+  let {dir = dd} = ray
+  // line 35 @"record-pat-0.visp"
+  printfn "dir is %A" dd
+
+// line 37 @"record-pat-0.visp"
+DoStuffWithRay ({
+  // line 37 @"record-pat-0.visp"
+  pos = (1, 2, 3)
+  // line 37 @"record-pat-0.visp"
+  dir = (4, 5, 6)
+})
+// line 38 @"record-pat-0.visp"
+DoStuffWithDirOnly ({
+  // line 38 @"record-pat-0.visp"
+  pos = (1, 2, 3)
+  // line 38 @"record-pat-0.visp"
+  dir = (4, 5, 6)
+})
+// line 39 @"record-pat-0.visp"
+MatchRecord ({
+  // line 39 @"record-pat-0.visp"
+  pos = (1, 2, 3)
+  // line 39 @"record-pat-0.visp"
+  dir = (4, 5, 6)
+})
+// line 40 @"record-pat-0.visp"
+let visp_result_todo =
+  // line 40 @"record-pat-0.visp"
+  LetRecord ({
+    // line 40 @"record-pat-0.visp"
+    pos = (1, 2, 3)
+    // line 40 @"record-pat-0.visp"
+    dir = (4, 5, 6)
+  })
+// line 40 @"record-pat-0.visp"
+printfn "%A" visp_result_todo
+

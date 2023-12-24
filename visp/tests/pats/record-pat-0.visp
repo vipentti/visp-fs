@@ -1,0 +1,40 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(typedef XYZ (double * double * double))
+
+(record Ray
+  [pos: XYZ]
+  [dir: XYZ])
+
+
+(fn DoStuffWithRay ([ {| [pos lhs_pos] [dir (dx, dy, dz)] |} : Ray])
+  (printfn "pos %A" lhs_pos)
+  (printfn "dir %A" (dx, dy, dz))
+)
+
+(fn DoStuffWithDirOnly ({| dir (dx, dy, dz) |})
+  (printfn "dir %A" (dx, dy, dz))
+)
+
+(fn MatchRecord (ray)
+  (match ray
+    [{| dir (dx, dy, _) |}
+      (printfn "dx %A" dx)
+      (printfn "dy %A" dy)
+    ]
+  )
+)
+
+(fn LetRecord (ray)
+  (let {| [dir dd] |} ray)
+  (printfn "dir is %A" dd))
+
+(DoStuffWithRay {| [pos (1, 2, 3)] [dir (4, 5, 6)] |})
+(DoStuffWithDirOnly {| [pos (1, 2, 3)] [dir (4, 5, 6)] |})
+(MatchRecord {| [pos (1, 2, 3)] [dir (4, 5, 6)] |})
+(LetRecord {| [pos (1, 2, 3)] [dir (4, 5, 6)] |})
