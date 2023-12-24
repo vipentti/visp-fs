@@ -8,7 +8,7 @@
                   [Typed
                      (Named (SynSymbol items, (8,20--8,25)), Generic (Ident array, [Ident ^T], (8,27--8,36)),
                       (8,19--8,37))], (8,18--8,38)),
-             [Let (Named (SynSymbol items, (9,7--9,12)), Symbol (SynSymbol items), (9,3--9,18));
+             [Let (Named (SynSymbol items, (9,7--9,12)), Symbol (SynSymbol items), None, [], (9,3--9,18));
               GetSet
                 (SynSymbol _.Item,
                  Some
@@ -25,7 +25,7 @@
                   [Typed
                      (Named (SynSymbol items, (14,20--14,25)), Generic (Ident array, [Ident ^T], (14,27--14,36)),
                       (14,19--14,37))], (14,18--14,38)),
-             [Let (Named (SynSymbol items, (15,7--15,12)), Symbol (SynSymbol items), (15,3--15,18));
+             [Let (Named (SynSymbol items, (15,7--15,12)), Symbol (SynSymbol items), None, [], (15,3--15,18));
               GetSet
                 (SynSymbol _.Item, None,
                  Some
@@ -45,7 +45,7 @@
                   [Typed
                      (Named (SynSymbol items, (20,22--20,27)), Generic (Ident array, [Ident ^T], (20,29--20,38)),
                       (20,21--20,39))], (20,20--20,40)),
-             [Let (Named (SynSymbol items, (21,7--21,12)), Symbol (SynSymbol items), (21,3--21,18));
+             [Let (Named (SynSymbol items, (21,7--21,12)), Symbol (SynSymbol items), None, [], (21,3--21,18));
               GetSet
                 (SynSymbol _.Item,
                  Some

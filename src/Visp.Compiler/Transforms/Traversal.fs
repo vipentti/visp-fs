@@ -236,10 +236,22 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                                     for e in exprs do
                                         yield! loop e
 
-                            | SynTypeMember.Let(_, e, _)
-                            | SynTypeMember.Mut(_, e, _)
+                            | SynTypeMember.Val(attributes = attributes) ->
+                                for attrlist in attributes do
+                                    for attr in attrlist.Attributes do
+                                        yield! loop attr.ArgExpr
+
+                            | SynTypeMember.Let(_, e, _, attributes, _) ->
+                                for attrlist in attributes do
+                                    for attr in attrlist.Attributes do
+                                        yield! loop attr.ArgExpr
+
+                                yield! loop e
+
                             | SynTypeMember.Member(_, e, _)
                             | SynTypeMember.OverrideMember(_, e, _) -> yield! loop e
+
+                            | SynTypeMember.Constructor(_, body, _)
                             | SynTypeMember.MemberFn(_, _, body, _)
                             | SynTypeMember.OverrideFn(_, _, body, _) ->
                                 for e in body do

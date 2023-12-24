@@ -1,0 +1,48 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(#[Struct | System.Runtime.CompilerServices.IsReadOnly]
+  type TestStructType
+
+  (val X int)
+  (val Y int)
+
+  (new (x y) {| [X x] [Y y] |})
+
+  (override fn t.ToString() (sprintf "TestStructType(%i, %i)" (+X t) (+Y t)))
+)
+
+(type TestClassType
+  (val X int)
+  (val Y int)
+
+  (new (x y) {| [X x] [Y y] |})
+
+  (override fn t.ToString() (sprintf "TestClassType(%i, %i)" (+X t) (+Y t)))
+)
+
+(#[Struct] type MutableStruct
+  (val mut intval int)
+  (val mut strval string)
+  (override fn t.ToString() (sprintf "MutableStruct(%i, %s)" (+intval t) (+strval t)))
+)
+
+(let myTestStruct (new TestStructType 1 2))
+
+(printfn "TestStruct: %A" myTestStruct)
+
+(let myTestClass (new TestClassType 3 4))
+(printfn "TestClass: %A" myTestClass)
+
+(mut myMutableStruct (new MutableStruct))
+(printfn "MutableStruct: %A" myMutableStruct)
+
+(set! (+intval myMutableStruct) 99)
+(printfn "MutableStruct: %A" myMutableStruct)
+
+(set! (+strval myMutableStruct) "value has been set!")
+(printfn "MutableStruct: %A" myMutableStruct)

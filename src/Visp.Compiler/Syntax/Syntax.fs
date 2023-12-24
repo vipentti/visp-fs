@@ -216,6 +216,7 @@ type LetFlags =
     | Mutable = 2
     | Bang = 4
     | And = 8
+    | Static = 16
 
 [<RequireQualifiedAccess>]
 type DotMethodKind =
@@ -505,6 +506,7 @@ and [<NoEquality; NoComparison; RequireQualifiedAccess>] SynPat =
     /// :?
     | IsInst of pat: SynType * range: range
     | As of lhsPat: SynPat * rhsPat: SynPat * range: range
+    | Ignore of range: range
 
 and SynMemberGet =
     | SynMemberGet of args: SynPat * exprs: SynExpr list * range: range
@@ -517,10 +519,16 @@ and SynMemberSet =
     member t.Range = let (SynMemberSet(range = r)) = t in r
 
 and [<RequireQualifiedAccess>] SynTypeMember =
-    | Let of name: SynPat * value: SynExpr * range: range
-    | Mut of name: SynPat * value: SynExpr * range: range
+    | Let of
+        pat: SynPat *
+        value: SynExpr *
+        flags: LetFlags *
+        attributes: SynAttributes *
+        range: range
+    | Val of pat: SynPat * typ: SynType * flags: LetFlags * attributes: SynAttributes * range: range
     | Member of name: SynSymbol * value: SynExpr * range: range
     | GetSet of name: SynSymbol * get: SynMemberGet option * set: SynMemberSet option * range: range
+    | Constructor of args: SynPat * body: SynExpr list * range: range
     | MemberFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
     | OverrideMember of name: SynSymbol * value: SynExpr * range: range
     | OverrideFn of name: SynSymbol * args: SynPat * body: SynExpr list * range: range
@@ -653,7 +661,6 @@ module SynPat =
         SynPat.Collection(SynCollection(CollectionKind.Paren, ls, r))
 
     let mkInParens ls r = mkParenCollection [ ls ] r
-
 
 module Syntax =
     let UnitExpr r = SynExpr.Const(SynConst.Unit, r)

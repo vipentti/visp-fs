@@ -86,6 +86,11 @@ module ``tests_type_type-alias-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/type-alias-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_val-ctor-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/val-ctor-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_record-1`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/type/record-1.visp"

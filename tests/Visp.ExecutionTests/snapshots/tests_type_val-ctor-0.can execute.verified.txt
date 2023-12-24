@@ -1,0 +1,8 @@
+﻿TestStruct: TestStructType(1, 2)
+TestClass: TestClassType(3, 4)
+MutableStruct: MutableStruct(0, )
+MutableStruct: MutableStruct(99, )
+MutableStruct: MutableStruct(99, value has been set!)
+()
+
+ExitCode: 0

@@ -1,0 +1,213 @@
+﻿LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "Struct" Default 0 1 LParen
+BAR Default 0 1 LParen
+SYMBOL "System.Runtime.CompilerServices.IsReadOnly" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "TestStructType" Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+SYMBOL "X" Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+SYMBOL "Y" Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+NEW Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "x" Default 0 3 Type
+SYMBOL "y" Default 0 3 Type
+RPAREN Default 0 2 Type
+BRACE_BAR Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "X" Default 0 2 Type
+SYMBOL "x" Default 0 2 Type
+RBRACKET Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "Y" Default 0 2 Type
+SYMBOL "y" Default 0 2 Type
+RBRACKET Default 0 2 Type
+BAR_BRACE Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.ToString" Default 0 2 Type
+LPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "sprintf" Default 0 3 Type
+STRING ("TestStructType(%i, %i)", Regular, Token []) Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+X" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+Y" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "TestClassType" Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+SYMBOL "X" Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+SYMBOL "Y" Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+NEW Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "x" Default 0 3 Type
+SYMBOL "y" Default 0 3 Type
+RPAREN Default 0 2 Type
+BRACE_BAR Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "X" Default 0 2 Type
+SYMBOL "x" Default 0 2 Type
+RBRACKET Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "Y" Default 0 2 Type
+SYMBOL "y" Default 0 2 Type
+RBRACKET Default 0 2 Type
+BAR_BRACE Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.ToString" Default 0 2 Type
+LPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "sprintf" Default 0 3 Type
+STRING ("TestClassType(%i, %i)", Regular, Token []) Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+X" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+Y" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+HASH_BRACKET Default 0 1 LParen
+SYMBOL "Struct" Default 0 1 LParen
+RBRACKET Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "MutableStruct" Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+MUT Default 0 2 Type
+SYMBOL "intval" Default 0 2 Type
+SYMBOL "int" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+VAL Default 0 2 Type
+MUT Default 0 2 Type
+SYMBOL "strval" Default 0 2 Type
+SYMBOL "string" Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+OVERRIDE Default 0 2 Type
+FN Default 0 2 Type
+SYMBOL "t.ToString" Default 0 2 Type
+LPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+LPAREN Default 0 3 Type
+SYMBOL "sprintf" Default 0 3 Type
+STRING ("MutableStruct(%i, %s)", Regular, Token []) Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+intval" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+LPAREN Default 0 4 Type
+PROP_PLUS "+strval" Default 0 4 Type
+SYMBOL "t" Default 0 4 Type
+RPAREN Default 0 3 Type
+RPAREN Default 0 2 Type
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "myTestStruct" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "TestStructType" Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("TestStruct: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "myTestStruct" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "myTestClass" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "TestClassType" Default 0 2 LParen
+INT32 (3, false) Default 0 2 LParen
+INT32 (4, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("TestClass: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "myTestClass" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+MUT Default 0 1 LParen
+SYMBOL "myMutableStruct" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "MutableStruct" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("MutableStruct: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "myMutableStruct" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+intval" Default 0 2 LParen
+SYMBOL "myMutableStruct" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+INT32 (99, false) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("MutableStruct: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "myMutableStruct" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SET Default 0 1 LParen
+LPAREN Default 0 2 LParen
+PROP_PLUS "+strval" Default 0 2 LParen
+SYMBOL "myMutableStruct" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+STRING ("value has been set!", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("MutableStruct: %A", Regular, Token []) Default 0 1 LParen
+SYMBOL "myMutableStruct" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

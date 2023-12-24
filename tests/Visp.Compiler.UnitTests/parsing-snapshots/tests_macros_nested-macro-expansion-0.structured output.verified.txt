@@ -37,8 +37,8 @@
                   [Typed (Named (SynSymbol grid, (19,16--19,20)), Ident Grid, (19,15--19,27));
                    Trivia (Comma, (19,14--19,15));
                    Typed (Named (SynSymbol start, (19,29--19,34)), Ident Pos, (19,28--19,40))], (19,14--19,41)),
-             [Let (Named (SynSymbol grid, (20,7--20,11)), Symbol (SynSymbol grid), (20,3--20,16));
-              Let (Named (SynSymbol start, (21,7--21,12)), Symbol (SynSymbol start), (21,3--21,18));
+             [Let (Named (SynSymbol grid, (20,7--20,11)), Symbol (SynSymbol grid), None, [], (20,3--20,16));
+              Let (Named (SynSymbol start, (21,7--21,12)), Symbol (SynSymbol start), None, [], (21,3--21,18));
               OverrideFn
                 (SynSymbol _.ToString, Args (List [], (22,25--22,27)),
                  [FunctionCall
