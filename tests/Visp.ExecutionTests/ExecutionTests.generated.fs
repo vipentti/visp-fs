@@ -176,6 +176,11 @@ module ``tests_parsing_ambiguous-tokens-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/parsing/ambiguous-tokens-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_numbers-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/numbers-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_props`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/props.visp"

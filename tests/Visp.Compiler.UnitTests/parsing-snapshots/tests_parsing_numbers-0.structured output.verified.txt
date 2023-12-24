@@ -1,0 +1,298 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0   : %A", Regular, (8,10--8,20)), (8,10--8,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Int32 0, (8,37--8,38))], (8,32--8,38))),
+                 SynSymbol GetType, [], Tuple, (8,22--8,39))], (8,1--8,40)), (8,0--8,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0L  : %A", Regular, (9,10--9,20)), (9,10--9,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Int64 0L, (9,37--9,39))], (9,32--9,39))),
+                 SynSymbol GetType, [], Tuple, (9,22--9,40))], (9,1--9,41)), (9,0--9,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0I  : %A", Regular, (10,10--10,20)), (10,10--10,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UserNum (0, I), (10,37--10,39))], (10,32--10,39))),
+                 SynSymbol GetType, [], Tuple, (10,22--10,40))], (10,1--10,41)), (10,0--10,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0u  : %A", Regular, (11,10--11,20)), (11,10--11,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt32 0u, (11,37--11,39))], (11,32--11,39))),
+                 SynSymbol GetType, [], Tuple, (11,22--11,40))], (11,1--11,41)), (11,0--11,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0y  : %A", Regular, (12,10--12,20)), (12,10--12,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (SByte 0y, (12,37--12,39))], (12,32--12,39))),
+                 SynSymbol GetType, [], Tuple, (12,22--12,40))], (12,1--12,41)), (12,0--12,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0n  : %A", Regular, (13,10--13,20)), (13,10--13,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (IntPtr 0L, (13,37--13,39))], (13,32--13,39))),
+                 SynSymbol GetType, [], Tuple, (13,22--13,40))], (13,1--13,41)), (13,0--13,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0uy : %A", Regular, (14,10--14,20)), (14,10--14,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Byte 0uy, (14,37--14,40))], (14,32--14,40))),
+                 SynSymbol GetType, [], Tuple, (14,22--14,41))], (14,1--14,42)), (14,0--14,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0ul : %A", Regular, (15,10--15,20)), (15,10--15,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt32 0u, (15,37--15,40))], (15,32--15,40))),
+                 SynSymbol GetType, [], Tuple, (15,22--15,41))], (15,1--15,42)), (15,0--15,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0us : %A", Regular, (16,10--16,20)), (16,10--16,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt16 0us, (16,37--16,40))], (16,32--16,40))),
+                 SynSymbol GetType, [], Tuple, (16,22--16,41))], (16,1--16,42)), (16,0--16,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0un : %A", Regular, (17,10--17,20)), (17,10--17,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UIntPtr 0UL, (17,37--17,40))], (17,32--17,40))),
+                 SynSymbol GetType, [], Tuple, (17,22--17,41))], (17,1--17,42)), (17,0--17,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0UL : %A", Regular, (18,10--18,20)), (18,10--18,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt64 0UL, (18,37--18,40))], (18,32--18,40))),
+                 SynSymbol GetType, [], Tuple, (18,22--18,41))], (18,1--18,42)), (18,0--18,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0.0 : %A", Regular, (19,10--19,20)), (19,10--19,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Double 0.0, (19,37--19,40))], (19,32--19,40))),
+                 SynSymbol GetType, [], Tuple, (19,22--19,41))], (19,1--19,42)), (19,0--19,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0.0m: %A", Regular, (20,10--20,20)), (20,10--20,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Decimal 0.0M, (20,37--20,41))], (20,32--20,41))),
+                 SynSymbol GetType, [], Tuple, (20,22--20,42))], (20,1--20,43)), (20,0--20,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0.0M: %A", Regular, (21,10--21,20)), (21,10--21,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Decimal 0.0M, (21,37--21,41))], (21,32--21,41))),
+                 SynSymbol GetType, [], Tuple, (21,22--21,42))], (21,1--21,43)), (21,0--21,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0.0f: %A", Regular, (22,10--22,20)), (22,10--22,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Single 0.0f, (22,37--22,41))], (22,32--22,41))),
+                 SynSymbol GetType, [], Tuple, (22,22--22,42))], (22,1--22,43)), (22,0--22,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("0.0F: %A", Regular, (23,10--23,20)), (23,10--23,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Single 0.0f, (23,37--23,41))], (23,32--23,41))),
+                 SynSymbol GetType, [], Tuple, (23,22--23,42))], (23,1--23,43)), (23,0--23,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1   : %A", Regular, (25,10--25,20)), (25,10--25,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Int32 1, (25,37--25,38))], (25,32--25,38))),
+                 SynSymbol GetType, [], Tuple, (25,22--25,39))], (25,1--25,40)), (25,0--25,41));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1L  : %A", Regular, (26,10--26,20)), (26,10--26,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Int64 1L, (26,37--26,39))], (26,32--26,39))),
+                 SynSymbol GetType, [], Tuple, (26,22--26,40))], (26,1--26,41)), (26,0--26,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1I  : %A", Regular, (27,10--27,20)), (27,10--27,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UserNum (1, I), (27,37--27,39))], (27,32--27,39))),
+                 SynSymbol GetType, [], Tuple, (27,22--27,40))], (27,1--27,41)), (27,0--27,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1u  : %A", Regular, (28,10--28,20)), (28,10--28,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt32 1u, (28,37--28,39))], (28,32--28,39))),
+                 SynSymbol GetType, [], Tuple, (28,22--28,40))], (28,1--28,41)), (28,0--28,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1y  : %A", Regular, (29,10--29,20)), (29,10--29,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (SByte 1y, (29,37--29,39))], (29,32--29,39))),
+                 SynSymbol GetType, [], Tuple, (29,22--29,40))], (29,1--29,41)), (29,0--29,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1n  : %A", Regular, (30,10--30,20)), (30,10--30,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (IntPtr 1L, (30,37--30,39))], (30,32--30,39))),
+                 SynSymbol GetType, [], Tuple, (30,22--30,40))], (30,1--30,41)), (30,0--30,42));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1uy : %A", Regular, (31,10--31,20)), (31,10--31,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Byte 1uy, (31,37--31,40))], (31,32--31,40))),
+                 SynSymbol GetType, [], Tuple, (31,22--31,41))], (31,1--31,42)), (31,0--31,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1ul : %A", Regular, (32,10--32,20)), (32,10--32,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt32 1u, (32,37--32,40))], (32,32--32,40))),
+                 SynSymbol GetType, [], Tuple, (32,22--32,41))], (32,1--32,42)), (32,0--32,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1us : %A", Regular, (33,10--33,20)), (33,10--33,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt16 1us, (33,37--33,40))], (33,32--33,40))),
+                 SynSymbol GetType, [], Tuple, (33,22--33,41))], (33,1--33,42)), (33,0--33,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1un : %A", Regular, (34,10--34,20)), (34,10--34,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UIntPtr 1UL, (34,37--34,40))], (34,32--34,40))),
+                 SynSymbol GetType, [], Tuple, (34,22--34,41))], (34,1--34,42)), (34,0--34,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1UL : %A", Regular, (35,10--35,20)), (35,10--35,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (UInt64 1UL, (35,37--35,40))], (35,32--35,40))),
+                 SynSymbol GetType, [], Tuple, (35,22--35,41))], (35,1--35,42)), (35,0--35,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1.0 : %A", Regular, (36,10--36,20)), (36,10--36,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Double 1.0, (36,37--36,40))], (36,32--36,40))),
+                 SynSymbol GetType, [], Tuple, (36,22--36,41))], (36,1--36,42)), (36,0--36,43));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1.0m: %A", Regular, (37,10--37,20)), (37,10--37,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Decimal 1.0M, (37,37--37,41))], (37,32--37,41))),
+                 SynSymbol GetType, [], Tuple, (37,22--37,42))], (37,1--37,43)), (37,0--37,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1.0M: %A", Regular, (38,10--38,20)), (38,10--38,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Decimal 1.0M, (38,37--38,41))], (38,32--38,41))),
+                 SynSymbol GetType, [], Tuple, (38,22--38,42))], (38,1--38,43)), (38,0--38,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol eprintfn),
+             [Const (String ("1.0f: %A", Regular, (39,10--39,20)), (39,10--39,20));
+              DotMethod
+                (SyntaxMacroCall
+                   (SynMacroCall
+                      (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Single 1.0f, (39,37--39,41))], (39,32--39,41))),
+                 SynSymbol GetType, [], Tuple, (39,22--39,42))], (39,1--39,43)), (39,0--39,44));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (40,0--40,44)),
+             FunctionCall
+               (Symbol (SynSymbol eprintfn),
+                [Const (String ("1.0F: %A", Regular, (40,10--40,20)), (40,10--40,20));
+                 DotMethod
+                   (SyntaxMacroCall
+                      (SynMacroCall
+                         (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Const (Single 1.0f, (40,37--40,41))], (40,32--40,41))),
+                    SynSymbol GetType, [], Tuple, (40,22--40,42))], (40,1--40,43)), None, [], (40,0--40,44)),
+          (40,0--40,44));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (40,0--40,44)), (40,0--40,44)); Symbol (SynSymbol visp_result_todo)],
+             (40,0--40,44)), (40,0--40,44))], (8,0--40,44))]

@@ -1,0 +1,236 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"numbers-0.visp"
+eprintfn "0   : %A" ((
+  match 0 with
+    | tmp ->
+      // line 8 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 8 "0" tmp
+      tmp.GetType()))
+// line 9 @"numbers-0.visp"
+eprintfn "0L  : %A" ((
+  match 0L with
+    | tmp ->
+      // line 9 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 9 "0L" tmp
+      tmp.GetType()))
+// line 10 @"numbers-0.visp"
+eprintfn "0I  : %A" ((
+  match 0I with
+    | tmp ->
+      // line 10 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 10 "0I" tmp
+      tmp.GetType()))
+// line 11 @"numbers-0.visp"
+eprintfn "0u  : %A" ((
+  match 0ul with
+    | tmp ->
+      // line 11 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 11 "0ul" tmp
+      tmp.GetType()))
+// line 12 @"numbers-0.visp"
+eprintfn "0y  : %A" ((
+  match 0y with
+    | tmp ->
+      // line 12 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 12 "0y" tmp
+      tmp.GetType()))
+// line 13 @"numbers-0.visp"
+eprintfn "0n  : %A" ((
+  match 0n with
+    | tmp ->
+      // line 13 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 13 "0n" tmp
+      tmp.GetType()))
+// line 14 @"numbers-0.visp"
+eprintfn "0uy : %A" ((
+  match 0uy with
+    | tmp ->
+      // line 14 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 14 "0uy" tmp
+      tmp.GetType()))
+// line 15 @"numbers-0.visp"
+eprintfn "0ul : %A" ((
+  match 0ul with
+    | tmp ->
+      // line 15 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 15 "0ul" tmp
+      tmp.GetType()))
+// line 16 @"numbers-0.visp"
+eprintfn "0us : %A" ((
+  match 0us with
+    | tmp ->
+      // line 16 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 16 "0us" tmp
+      tmp.GetType()))
+// line 17 @"numbers-0.visp"
+eprintfn "0un : %A" ((
+  match 0un with
+    | tmp ->
+      // line 17 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 17 "0un" tmp
+      tmp.GetType()))
+// line 18 @"numbers-0.visp"
+eprintfn "0UL : %A" ((
+  match 0UL with
+    | tmp ->
+      // line 18 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 18 "0UL" tmp
+      tmp.GetType()))
+// line 19 @"numbers-0.visp"
+eprintfn "0.0 : %A" ((
+  match 0.0 with
+    | tmp ->
+      // line 19 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 19 "0.0" tmp
+      tmp.GetType()))
+// line 20 @"numbers-0.visp"
+eprintfn "0.0m: %A" ((
+  match 0.0M with
+    | tmp ->
+      // line 20 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 20 "0.0M" tmp
+      tmp.GetType()))
+// line 21 @"numbers-0.visp"
+eprintfn "0.0M: %A" ((
+  match 0.0M with
+    | tmp ->
+      // line 21 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 21 "0.0M" tmp
+      tmp.GetType()))
+// line 22 @"numbers-0.visp"
+eprintfn "0.0f: %A" ((
+  match 0f with
+    | tmp ->
+      // line 22 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 22 "0f" tmp
+      tmp.GetType()))
+// line 23 @"numbers-0.visp"
+eprintfn "0.0F: %A" ((
+  match 0f with
+    | tmp ->
+      // line 23 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 23 "0f" tmp
+      tmp.GetType()))
+// line 25 @"numbers-0.visp"
+eprintfn "1   : %A" ((
+  match 1 with
+    | tmp ->
+      // line 25 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 25 "1" tmp
+      tmp.GetType()))
+// line 26 @"numbers-0.visp"
+eprintfn "1L  : %A" ((
+  match 1L with
+    | tmp ->
+      // line 26 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 26 "1L" tmp
+      tmp.GetType()))
+// line 27 @"numbers-0.visp"
+eprintfn "1I  : %A" ((
+  match 1I with
+    | tmp ->
+      // line 27 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 27 "1I" tmp
+      tmp.GetType()))
+// line 28 @"numbers-0.visp"
+eprintfn "1u  : %A" ((
+  match 1ul with
+    | tmp ->
+      // line 28 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 28 "1ul" tmp
+      tmp.GetType()))
+// line 29 @"numbers-0.visp"
+eprintfn "1y  : %A" ((
+  match 1y with
+    | tmp ->
+      // line 29 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 29 "1y" tmp
+      tmp.GetType()))
+// line 30 @"numbers-0.visp"
+eprintfn "1n  : %A" ((
+  match 1n with
+    | tmp ->
+      // line 30 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 30 "1n" tmp
+      tmp.GetType()))
+// line 31 @"numbers-0.visp"
+eprintfn "1uy : %A" ((
+  match 1uy with
+    | tmp ->
+      // line 31 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 31 "1uy" tmp
+      tmp.GetType()))
+// line 32 @"numbers-0.visp"
+eprintfn "1ul : %A" ((
+  match 1ul with
+    | tmp ->
+      // line 32 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 32 "1ul" tmp
+      tmp.GetType()))
+// line 33 @"numbers-0.visp"
+eprintfn "1us : %A" ((
+  match 1us with
+    | tmp ->
+      // line 33 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 33 "1us" tmp
+      tmp.GetType()))
+// line 34 @"numbers-0.visp"
+eprintfn "1un : %A" ((
+  match 1un with
+    | tmp ->
+      // line 34 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 34 "1un" tmp
+      tmp.GetType()))
+// line 35 @"numbers-0.visp"
+eprintfn "1UL : %A" ((
+  match 1UL with
+    | tmp ->
+      // line 35 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 35 "1UL" tmp
+      tmp.GetType()))
+// line 36 @"numbers-0.visp"
+eprintfn "1.0 : %A" ((
+  match 1.0 with
+    | tmp ->
+      // line 36 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 36 "1.0" tmp
+      tmp.GetType()))
+// line 37 @"numbers-0.visp"
+eprintfn "1.0m: %A" ((
+  match 1.0M with
+    | tmp ->
+      // line 37 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 37 "1.0M" tmp
+      tmp.GetType()))
+// line 38 @"numbers-0.visp"
+eprintfn "1.0M: %A" ((
+  match 1.0M with
+    | tmp ->
+      // line 38 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 38 "1.0M" tmp
+      tmp.GetType()))
+// line 39 @"numbers-0.visp"
+eprintfn "1.0f: %A" ((
+  match 1f with
+    | tmp ->
+      // line 39 @"numbers-0.visp"
+      eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 39 "1f" tmp
+      tmp.GetType()))
+// line 40 @"numbers-0.visp"
+let visp_result_todo =
+  // line 40 @"numbers-0.visp"
+  eprintfn "1.0F: %A" ((
+    match 1f with
+      | tmp ->
+        // line 40 @"numbers-0.visp"
+        eprintfn "[%s:%i] %s = %A" "numbers-0.visp" 40 "1f" tmp
+        tmp.GetType()))
+// line 40 @"numbers-0.visp"
+printfn "%A" visp_result_todo
+

@@ -62,6 +62,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token <single> IEEE32
 %token <double> IEEE64
 %token <System.Decimal> DECIMAL
+%token <(string * string)> BIGNUM
 
 %token <string> HASH_IDENT
 %token <string> PROP_PLUS
@@ -103,7 +104,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc prec_new_exprs
 %nonassoc prec_new_no_exprs
 
-%nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL
+%nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL BIGNUM
 %nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
 %nonassoc HASH_IDENT
 %nonassoc prec_symbol
@@ -1204,6 +1205,8 @@ rawConstant:
       { SynConst.Double $1 }
 
     | DECIMAL { SynConst.Decimal($1)}
+
+    | BIGNUM { SynConst.UserNum $1 }
 
     | TRUE { SynConst.Bool(true)}
     | FALSE { SynConst.Bool(false)}

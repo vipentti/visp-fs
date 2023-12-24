@@ -160,6 +160,7 @@ type SynConst =
     | Int32 of int32
     | Char of char
     | Decimal of System.Decimal
+    | UserNum of value: string * suffix: string
     | String of text: string * synStringKind: SynStringKind * range: range
 
     member t.StructuredText =
@@ -181,6 +182,7 @@ type SynConst =
         | Int32 it -> sprintf "Int32 %A" it
         | Char it -> sprintf "Char %A" it
         | Decimal it -> sprintf "Decimal %A" it
+        | UserNum(va, su) -> sprintf "UserNum (%s, %s)" va su
         | String(text, k, r) -> StringWriterUtils.writeDebugStringType "String" text k r
 
 type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range
