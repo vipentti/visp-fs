@@ -52,7 +52,8 @@ let constToDoc =
     | SynConst.UIntPtr(it) -> text $"{it}un"
     | SynConst.Decimal(it) -> text $"{it}M"
     | SynConst.Single(it) -> text $"{it}f"
-    | SynConst.Double(it) -> text $"{it}"
+    | SynConst.Double(it) -> text (sprintf "%A" it)
+    | SynConst.UserNum(va, su) -> text $"{va}{su}"
     | SynConst.String(raw, kind, _) ->
         let quotes =
             match kind with

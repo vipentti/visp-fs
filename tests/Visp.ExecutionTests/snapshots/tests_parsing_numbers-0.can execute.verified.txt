@@ -1,0 +1,67 @@
+﻿[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:8] 0 = 0
+0   : System.Int32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:9] 0L = 0L
+0L  : System.Int64
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:10] 0I = 0
+0I  : System.Numerics.BigInteger
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:11] 0ul = 0u
+0u  : System.UInt32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:12] 0y = 0y
+0y  : System.SByte
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:13] 0n = 0n
+0n  : System.IntPtr
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:14] 0uy = 0uy
+0uy : System.Byte
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:15] 0ul = 0u
+0ul : System.UInt32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:16] 0us = 0us
+0us : System.UInt16
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:17] 0un = 0un
+0un : System.UIntPtr
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:18] 0UL = 0UL
+0UL : System.UInt64
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:19] 0.0 = 0.0
+0.0 : System.Double
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:20] 0.0M = 0.0M
+0.0m: System.Decimal
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:21] 0.0M = 0.0M
+0.0M: System.Decimal
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:22] 0f = 0.0f
+0.0f: System.Single
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:23] 0f = 0.0f
+0.0F: System.Single
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:25] 1 = 1
+1   : System.Int32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:26] 1L = 1L
+1L  : System.Int64
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:27] 1I = 1
+1I  : System.Numerics.BigInteger
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:28] 1ul = 1u
+1u  : System.UInt32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:29] 1y = 1y
+1y  : System.SByte
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:30] 1n = 1n
+1n  : System.IntPtr
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:31] 1uy = 1uy
+1uy : System.Byte
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:32] 1ul = 1u
+1ul : System.UInt32
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:33] 1us = 1us
+1us : System.UInt16
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:34] 1un = 1un
+1un : System.UIntPtr
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:35] 1UL = 1UL
+1UL : System.UInt64
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:36] 1.0 = 1.0
+1.0 : System.Double
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:37] 1.0M = 1.0M
+1.0m: System.Decimal
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:38] 1.0M = 1.0M
+1.0M: System.Decimal
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:39] 1f = 1.0f
+1.0f: System.Single
+[{SolutionDirectory}visp/tests/parsing/numbers-0.visp:40] 1f = 1.0f
+1.0F: System.Single
+()
+
+ExitCode: 0

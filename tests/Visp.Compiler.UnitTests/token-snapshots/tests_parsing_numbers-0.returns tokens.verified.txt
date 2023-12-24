@@ -1,0 +1,353 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0   : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT32 (0, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0L  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT64 (0L, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0I  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+BIGNUM ("0", "I") TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0u  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT32 0u TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0y  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT8 (0y, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0n  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+NATIVEINT (0L, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0uy : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT8 0uy TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0ul : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT32 0u TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0us : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT16 0us TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0un : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UNATIVEINT 0UL TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0UL : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT64 0UL TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0.0 : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE64 0.0 TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0.0m: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+DECIMAL 0.0M TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0.0M: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+DECIMAL 0.0M TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0.0f: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE32 0.0f TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("0.0F: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE32 0.0f TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1   : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT32 (1, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1L  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT64 (1L, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1I  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+BIGNUM ("1", "I") TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1u  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT32 1u TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1y  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+INT8 (1y, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1n  : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+NATIVEINT (1L, false) TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1uy : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT8 1uy TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1ul : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT32 1u TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1us : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT16 1us TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1un : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UNATIVEINT 1UL TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1UL : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+UINT64 1UL TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1.0 : %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE64 1.0 TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1.0m: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+DECIMAL 1.0M TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1.0M: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+DECIMAL 1.0M TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1.0f: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE32 1.0f TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "eprintfn" Default 0 1 LParen
+STRING ("1.0F: %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DOT_METHOD ".GetType" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 3 LParen
+IEEE32 1.0f TokenStream Macro 1 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

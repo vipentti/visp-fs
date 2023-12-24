@@ -347,7 +347,10 @@ module Write =
             tw.Write(value)
             tw.Write('M')
         | SynConst.Int32(value) -> tw.Write(value)
-        | SynConst.Double(value) -> tw.Write(value)
+        | SynConst.Double(value) -> fprintf tw "%A" value
+        | SynConst.UserNum(va, su) ->
+            tw.Write va
+            tw.Write su
         | SynConst.Char(value) ->
             w.Write('\'')
 

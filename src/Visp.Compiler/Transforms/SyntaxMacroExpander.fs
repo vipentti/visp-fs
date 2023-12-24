@@ -535,6 +535,7 @@ let rec private tokenizeEvaluated
             | SynConst.Double it -> res.Add(IEEE64 it)
             | SynConst.IntPtr it -> res.Add(NATIVEINT(it, false))
             | SynConst.UIntPtr it -> res.Add(UNATIVEINT it)
+            | SynConst.UserNum(va, su) -> res.Add(BIGNUM(va, su))
             | SynConst.Unit -> res.Add(UNIT)
             | SynConst.Nil -> res.Add(NIL)
             | SynConst.String(s, k, _) -> res.Add(STRING(s, k, ParseHelpers.LexCont.Token([])))

@@ -424,6 +424,10 @@ rule token (args: LexArgs) (skip: bool) = parse
         let n64 = (try int64 (removeUnderscores (lexemeTrimRight lexbuf 2)) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
         IEEE64 (System.BitConverter.Int64BitsToDouble(n64)) }
 
+  | bignum
+      { let s = lexeme lexbuf
+        BIGNUM (removeUnderscores (lexemeTrimRight lexbuf 1), s.[s.Length-1..s.Length-1]) }
+
   // --- END OF NUMBERS ---
 
   | '+'  { OP_PLUS }
@@ -696,6 +700,10 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
       {
         let n64 = (try int64 (removeUnderscores (lexemeTrimRight lexbuf 2)) with _ -> fail args lexbuf (SR.lexInvalidFloat()) 0L)
         IEEE64 (System.BitConverter.Int64BitsToDouble(n64)) }
+
+  | bignum
+      { let s = lexeme lexbuf
+        BIGNUM (removeUnderscores (lexemeTrimRight lexbuf 1), s.[s.Length-1..s.Length-1]) }
 
   // --- END OF NUMBERS ---
 

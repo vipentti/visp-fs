@@ -176,6 +176,11 @@ module ``tests_parsing_ambiguous-tokens-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/ambiguous-tokens-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_numbers-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/numbers-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_props`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/props.visp"

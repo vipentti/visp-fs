@@ -11,6 +11,7 @@ type token =
   | MACRO_NAME of (string)
   | PROP_PLUS of (string)
   | HASH_IDENT of (string)
+  | BIGNUM of ((string * string))
   | DECIMAL of (System.Decimal)
   | IEEE64 of (double)
   | IEEE32 of (single)
@@ -140,6 +141,7 @@ type tokenId =
     | TOKEN_MACRO_NAME
     | TOKEN_PROP_PLUS
     | TOKEN_HASH_IDENT
+    | TOKEN_BIGNUM
     | TOKEN_DECIMAL
     | TOKEN_IEEE64
     | TOKEN_IEEE32

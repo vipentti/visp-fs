@@ -34,7 +34,7 @@ printfn "/ is %A" (a / b / 52)
 // line 24 @"example-5.visp"
 printfn "/ is %A" (LanguagePrimitives.GenericOne / 2L)
 // line 26 @"example-5.visp"
-printfn "/ is %A" ((decimal a) / (decimal b) / (decimal 52))
+printfn "/ is %A" ((decimal a) / (decimal b) / (decimal 52.0))
 // line 27 @"example-5.visp"
 printfn "/ is %A" (LanguagePrimitives.GenericOne / 2)
 // line 28 @"example-5.visp"

@@ -1,0 +1,40 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(eprintfn "0   : %A" (.GetType (dbg! 0)))
+(eprintfn "0L  : %A" (.GetType (dbg! 0L)))
+(eprintfn "0I  : %A" (.GetType (dbg! 0I)))
+(eprintfn "0u  : %A" (.GetType (dbg! 0u)))
+(eprintfn "0y  : %A" (.GetType (dbg! 0y)))
+(eprintfn "0n  : %A" (.GetType (dbg! 0n)))
+(eprintfn "0uy : %A" (.GetType (dbg! 0uy)))
+(eprintfn "0ul : %A" (.GetType (dbg! 0ul)))
+(eprintfn "0us : %A" (.GetType (dbg! 0us)))
+(eprintfn "0un : %A" (.GetType (dbg! 0un)))
+(eprintfn "0UL : %A" (.GetType (dbg! 0UL)))
+(eprintfn "0.0 : %A" (.GetType (dbg! 0.0)))
+(eprintfn "0.0m: %A" (.GetType (dbg! 0.0m)))
+(eprintfn "0.0M: %A" (.GetType (dbg! 0.0M)))
+(eprintfn "0.0f: %A" (.GetType (dbg! 0.0f)))
+(eprintfn "0.0F: %A" (.GetType (dbg! 0.0F)))
+
+(eprintfn "1   : %A" (.GetType (dbg! 1)))
+(eprintfn "1L  : %A" (.GetType (dbg! 1L)))
+(eprintfn "1I  : %A" (.GetType (dbg! 1I)))
+(eprintfn "1u  : %A" (.GetType (dbg! 1u)))
+(eprintfn "1y  : %A" (.GetType (dbg! 1y)))
+(eprintfn "1n  : %A" (.GetType (dbg! 1n)))
+(eprintfn "1uy : %A" (.GetType (dbg! 1uy)))
+(eprintfn "1ul : %A" (.GetType (dbg! 1ul)))
+(eprintfn "1us : %A" (.GetType (dbg! 1us)))
+(eprintfn "1un : %A" (.GetType (dbg! 1un)))
+(eprintfn "1UL : %A" (.GetType (dbg! 1UL)))
+(eprintfn "1.0 : %A" (.GetType (dbg! 1.0)))
+(eprintfn "1.0m: %A" (.GetType (dbg! 1.0m)))
+(eprintfn "1.0M: %A" (.GetType (dbg! 1.0M)))
+(eprintfn "1.0f: %A" (.GetType (dbg! 1.0f)))
+(eprintfn "1.0F: %A" (.GetType (dbg! 1.0F)))
