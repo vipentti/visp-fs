@@ -1,0 +1,445 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require MathNet.Numerics "5.0.0")
+(require MathNet.Numerics.Fsharp "5.0.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open MathNet.Numerics.LinearAlgebra)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(let splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(syntax-macro read-while-not-empty
+  ([_ (id enu) body ...]
+    (while (.MoveNext enu)
+      (let id (+Current enu))
+      (unless (+IsEmpty id)
+        (begin body ...)
+      ))))
+
+(syntax-macro read-next
+  [(_ enu)
+    (begin
+      (ignore (.MoveNext enu))
+      (+Current enu))])
+
+(syntax-macro read-triple
+  [(_ cur fun)
+    (begin
+      (mut enu (SpanSplitChars [| #\, |] cur))
+      (let a (fun (.ToString (read-next enu))))
+      (let b (fun (.ToString (read-next enu))))
+      (let c (fun (.ToString (read-next enu))))
+      (a, b, c)
+    )
+  ])
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day24")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(typedef XYZ (double * double * double))
+
+(fn inline SubXYZ ((x0, y0, z0) (x1, y1, z1))
+  ((- x1 x0) , (- y1 y0) , (- z1 z0)))
+
+(fn inline AddXYZ ((x0, y0, z0) (x1, y1, z1))
+  ((+ x0 x1), (+ y0 y1), (+ z0 z1)))
+
+(fn inline MulXYZ ((x0, y0, z0) fac)
+  ((* x0 fac), (* y0 fac), (* z0 fac)))
+
+(fn inline DivXYZ ((x0, y0, z0) fac)
+  ((/ x0 fac), (/ y0 fac), (/ z0 fac)))
+
+(fn inline X ((x, _, _)) x)
+(fn inline Y ((_, y, _)) y)
+(fn inline Z ((_, _, z)) z)
+
+(const EPSILON 1.0E-8)
+
+(fn inline AboutEqual ([lhs: double] [rhs: double])
+  (< (abs (- lhs rhs)) EPSILON))
+
+(fn inline MagnitudeSquared ((x, y,z))
+  (+ (* x x) (* y y) (* z z)))
+
+(fn inline Magnitude (xyz)
+  (sqrt (MagnitudeSquared xyz)))
+
+(fn inline Normalize(xyz)
+  (let mag (Magnitude xyz))
+  (if (AboutEqual mag 0)
+    xyz
+    (DivXYZ xyz mag)))
+
+(fn inline Dot ((x0, y0, z0) (x1, y1, z1))
+  (+ (* x0 x1) (* y0 y1) (* z0 z1)))
+
+(fn inline Cross ((bx, by, bz) (cx, cy, cz))
+  (
+    (- (* by cz) (* bz cy))
+    ,
+    (- (* bz cx) (* bx cz))
+    ,
+    (- (* bx cy) (* by cx))
+  ))
+
+(fn inline Cross2D ((vx, vy) (wx, wy))
+  (- (* vx wy) (* vy wx)))
+
+(fn LineIntersection2D (lhs rhs)
+  (let res (Cross lhs rhs))
+  res)
+
+(typedef XYZGen<^T> (^T * ^T * ^T))
+
+(record Ray
+  [pos: XYZ]
+  [vel: XYZ]
+  [dir: XYZ]
+  )
+
+(record RayGen<^T>
+  [pos: XYZGen<^T>]
+  [vel: XYZGen<^T>]
+)
+
+(record RayVec
+  [pos: Vector<double>]
+  [vel: Vector<double>]
+)
+
+(fn inline SumComponents ((x, y, z)) (+ x y z))
+
+(fn IntersectionIn3D ([lhs: Ray] [rhs: Ray])
+  ;; line1
+
+  false
+)
+
+(fn RayIntesection3D ([lhs: Ray] [rhs: Ray])
+  (let {| [pos lhs_pos] [dir lhs_dir] |} lhs)
+  (let {| [pos rhs_pos] [dir rhs_dir] |} rhs)
+
+  (let (dx, dy, dz) (SubXYZ lhs_pos rhs_pos))
+
+  (let (cx, cy, cz) (Cross lhs_dir rhs_dir))
+
+  (let det (Dot (dx, dy, dz) (cx, cy, cz)))
+
+  (cond_
+    [(AboutEqual det 0) None]
+    [_
+      None
+    ]
+  )
+)
+
+(fn RayIntesection2D ([lhs: Ray] [rhs: Ray])
+  (let {| [pos lhs_pos] [dir (lx, ly, _)] |} lhs)
+  (let {| [pos rhs_pos] [dir (rx, ry, _)] |} rhs)
+
+  (let det (- (* lx ry) (* ly rx)))
+
+  (cond_
+    [(AboutEqual det 0) None]
+    [_
+      (let (diffX, diffY, _) (SubXYZ lhs_pos rhs_pos))
+
+      (let t (/ (- (* diffX ry) (* diffY rx)) det))
+      (let s (/ (- (* diffX ly) (* diffY lx)) det))
+
+      (cond_
+        [(&& (>= t 0) (>= s 0))
+          (Some (AddXYZ lhs_pos (MulXYZ (lx, ly, 0.0) t)))
+        ]
+        [_ None]
+      )
+    ]
+ ))
+
+(fn inline ParseFile ([text: string] parseFun mkRay)
+  (mut lines (SplitLines text))
+
+  (mut res (||))
+
+  (read-while-not-empty [line lines]
+    (mut parts (SpanSplitChars [| #\@ |] line))
+    (let lhs (read-next parts))
+    (let lhs (read-triple lhs parseFun))
+
+    (let rhs (read-next parts))
+    (let rhs (read-triple rhs parseFun))
+
+    ;; (up! res (cons {| [pos lhs] [vel rhs] [dir (Normalize rhs)] |}))
+    (up! res (cons (mkRay lhs rhs)))
+  )
+
+  (List.rev res))
+
+(fn Part1 (minpos maxpos rays)
+  (let rays (Array.ofList rays))
+  (let len_minus_1 (dec (+Length rays)))
+
+  (mut intersections 0)
+
+  (for/to [first (0 to len_minus_1)]
+    (let ray1 (.[first] rays))
+    (for/to [next ((inc first) to len_minus_1)]
+      (let ray2 (.[next] rays))
+      (match (RayIntesection2D ray1 ray2)
+        [(Some (x, y, _))
+          (when_ (&& (&& (>= x minpos) (<= x maxpos)) (&& (>= y minpos) (<= y maxpos)))
+            (up! intersections inc)
+          )
+        ]
+        [_ ()]
+      )
+    ))
+
+  intersections
+)
+
+(fn inline mul_inv (a b)
+  (let initial_b b)
+  (mut x0 LanguagePrimitives.GenericZero)
+  (mut x1 LanguagePrimitives.GenericOne)
+  (cond_
+    [(= b LanguagePrimitives.GenericOne) LanguagePrimitives.GenericOne]
+    [_
+      (mut a a)
+      (mut b b)
+      (while (> a LanguagePrimitives.GenericOne)
+        (let (dv,md) (divrem a b))
+        (set! a b)
+        (set! b md)
+        (let tx1 x1)
+        (set! x0 (- x1 (* dv x0)))
+        (set! x1 tx1)
+      )
+      (if (>= x1 LanguagePrimitives.GenericZero)
+        x1
+        (+ x1 initial_b)
+      )
+    ]))
+
+
+(fn inline ChineseRemainder (ns mods)
+  (let bases ns)
+  (mut prod LanguagePrimitives.GenericOne)
+  (for/in [x bases]
+    (up! prod (mul x))
+  )
+
+  (let inverses (List.ofSeq (seq-> (for/in [x bases] (yield (/ prod x))))))
+
+  (let muls (List.ofSeq (seq-> (for/in [(base, inv) (Seq.zip bases inverses)]
+    (yield (* inv (mul_inv inv base)))
+  ))))
+
+  (mut ret LanguagePrimitives.GenericZero)
+
+  (for/in [(mul, mod) (Seq.zip muls mods)]
+    (up! ret (add (* mul mod)))
+  )
+
+  (rem ret prod))
+
+(fn inline is_positive_int ((val: decimal))
+  (&& (> val LanguagePrimitives.GenericZero) (= val (System.Math.Floor val))))
+
+;; https://github.com/admp/aoc-2023/blob/main/24/p2.py
+(fn Part2 ((rays: list<RayGen<_>>))
+  (let (s, sd) ((!vec) . (!vec)))
+  (for/in [{| [pos pos] [vel vel] |} rays]
+    (.Add s (SumComponents pos))
+    (.Add sd (SumComponents vel))
+  )
+
+  (for/to [sdr_raw (-1001 to 1001)]
+    (let sdr (bigint sdr_raw))
+    (cond_
+      [(Seq.contains sdr sd)
+        ;; continue
+        ()
+      ]
+      [_
+        (mut m_and_s
+          (->> (seq-> (for/in [(si, sdi) (Seq.zip s sd)]
+            (yield ((- sdi sdr), (rem si (- sdi sdr))))
+            ))
+            (Seq.sortByDescending fst)
+            (List.ofSeq))
+        )
+
+        (set! m_and_s (->> m_and_s
+          (List.map #(begin
+            (let (a, b) %1)
+            (cond_
+              [(< a LanguagePrimitives.GenericOne)
+                (let rev_a (- a))
+                (let next_b (+ b rev_a))
+                (rev_a . next_b)
+              ]
+              [_ %1])
+          ))
+        ))
+
+        (let (m, s_) ((new ResizeArray<bigint>) . (new ResizeArray<bigint>)))
+
+        (mut looping true)
+
+        (while looping
+          (match m_and_s
+            [[] (set! looping false)]
+            [((m_i, s_i) :: rest)
+              (set! m_and_s rest)
+
+              (.Add m m_i)
+              (.Add s_ s_i)
+
+              (set! m_and_s (->> m_and_s
+                (List.filter #(= (gcd (fst %1) m_i) LanguagePrimitives.GenericOne))
+              ))
+            ]
+          )
+        )
+
+        (let sr (ChineseRemainder (.ToArray m) (.ToArray s_)))
+
+        (let all_pos (->> (Seq.zip s sd)
+          (Seq.map #(begin
+            (let (si, sdi) %1)
+            (/ (decimal (- sr si)) (decimal (- sdi sdr)))
+          ))
+          (Seq.forall is_positive_int)))
+
+        (when all_pos
+          (printfn "sr: %A" sr)
+        )
+      ]))
+
+  0
+)
+
+(fn inline triple ([arr: array<^T>]) ((.[0] arr), (.[1] arr), (.[2] arr)))
+
+(fn RunSolver ((A, B, C))
+  (let (Ax, Ay, Az) (->> (+pos A) (Vector.toArray) triple))
+  (let (Vax, Vay, Vaz) (->> (+vel A) (Vector.toArray) triple))
+
+  (let (Bx, By, Bz) (->> (+pos B) (Vector.toArray) triple))
+  (let (Vbx, Vby, Vbz) (->> (+vel B) (Vector.toArray) triple))
+
+  (let (Cx, Cy, Cz) (->> (+pos C) (Vector.toArray) triple))
+  (let (Vcx, Vcy, Vcz) (->> (+vel C) (Vector.toArray) triple))
+
+  (let M (matrix [|
+    (| (- Vay Vby) (- Vbx Vax) 0              (- By Ay) (- Ax Bx) 0         |)
+    (| (- Vay Vcy) (- Vcx Vax) 0              (- Cy Ay) (- Ax Cx) 0         |)
+    (| (- Vbz Vaz) 0           (- Vax Vbx)    (- Az Bz) 0         (- Bx Ax) |)
+    (| (- Vcz Vaz) 0           (- Vax Vcx)    (- Az Cz) 0         (- Cx Ax) |)
+    (| 0           (- Vaz Vbz) (- Vby Vay)    0         (- Bz Az) (- Ay By) |)
+    (| 0           (- Vaz Vcz) (- Vcy Vay)    0         (- Cz Az) (- Ay Cy) |)
+  |]))
+
+  (let b (vector (|
+    (- (- (* By Vbx) (* Bx Vby)) (- (* Ay Vax) (* Ax Vay)))
+    (- (- (* Cy Vcx) (* Cx Vcy)) (- (* Ay Vax) (* Ax Vay)))
+    (- (- (* Bx Vbz) (* Bz Vbx)) (- (* Ax Vaz) (* Az Vax)))
+    (- (- (* Cx Vcz) (* Cz Vcx)) (- (* Ax Vaz) (* Az Vax)))
+    (- (- (* Bz Vby) (* By Vbz)) (- (* Az Vay) (* Ay Vaz)))
+    (- (- (* Cz Vcy) (* Cy Vcz)) (- (* Az Vay) (* Ay Vaz)))
+  |)))
+
+  (let OUT (->> (.Solve M b) (Vector.toArray) (Array.map (>> round int64))))
+
+  ;; (printfn "%A" OUT)
+
+  (+ (.[0] OUT) (.[1] OUT) (.[2] OUT))
+)
+
+(fn FindCandidates (minval maxval rays)
+  (let candidates (->> rays
+    (Seq.windowed 3)
+    (Seq.map triple)
+    (Seq.map RunSolver)
+    (Seq.filter #(&& (> %1 minval) (< %1 maxval)))
+    (Set.ofSeq)
+    (List.ofSeq)
+  ))
+
+  candidates
+)
+
+;; https://github.com/vorber/AOC2023/blob/main/src/day24/Program.fs
+(fn Part2Solve (rays)
+  ;; these magical indices were picked by trial and error...
+  (let pick3 (>> Seq.toArray #((.[3] %1), (.[4] %1), (.[5] %1))))
+  ;; (let pick3 (>> Seq.toArray triple))
+  (let (A, B, C) (->> rays pick3))
+
+  (RunSolver (tuple A B C))
+)
+
+(let part1parsed (ParseFile fileText string->double #(begin {| [pos %1] [vel %2] [dir (Normalize %2)] |})))
+
+;;(printfn "%A" part1parsed)
+
+;;(printfn "%A" (RayIntesection2D (List.item 0 part1parsed) (List.item 1 part1parsed)))
+(let minpos (if example 7.0 200000000000000.0))
+(let maxpos (if example 27.0 400000000000000.0))
+
+(let part1 (Part1 minpos maxpos part1parsed))
+
+(WriteResult "part1" part1 (if example 2 31921))
+
+(let part2parsed (ParseFile fileText string->double #(begin
+  (let (px, py, pz) %1)
+  (let (dx, dy, dz) %2)
+
+  {| [pos (vector (|px py pz|))] [vel (vector (|dx dy dz|))]|}
+)))
+
+(let part2 (Part2Solve part2parsed))
+
+;; (let candidates (FindCandidates 761691907059630L 761691907059635L part2parsed))
+
+;; (printfn "%A candidates" (+Length candidates))
+
+;; (printfn "%A" candidates)
+
+;; 761691907059629L too low
+;; 761691907059630L too low
+;; 761691907059632L not right
+;; 761691907059633L not right
+;; 761691907059635L too high
+;; (when_ (&& (> part2 761691907059629L) (< part2 761691907059635L))
+;;   ;; 761691907059631L
+;;   (printfn "candidate: %A" part2)
+;; )
+
+(WriteResult "part2" part2 (if example 47 761691907059631L))
+
+()
