@@ -1,0 +1,5 @@
+﻿Example: { lhs = 1
+  rhs = 2 }
+()
+
+ExitCode: 0

@@ -166,6 +166,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 
 %nonassoc prec_record_expr_only
 %nonassoc prec_record_init
+%nonassoc prec_lambda_short_record
 
 %nonassoc prec_recover
 // %nonassoc EOF
@@ -274,14 +275,14 @@ expr:
         { SynExpr.Quote(true, $2, lhs parseState) }
     | LBRACE expr_list_or_empty RBRACE { CollExpr.mkHashMap $2 (lhs parseState)}
     | HASH_BRACE expr_list_or_empty RBRACE { CollExpr.mkHashSet $2 (lhs parseState)}
+    | brace_bar %prec prec_lambda { $1 }
+    | bracket_bar { $1 }
+    | paren_bar { $1 }
     | HASH_PAREN lambda_short_expr_list RPAREN
         { SynExpr.LambdaShort($2, lhs parseState)}
     | vector_start %prec prec_expr
         { $1 }
 
-    | brace_bar { $1 }
-    | bracket_bar { $1 }
-    | paren_bar { $1 }
     | inside_parens %prec prec_paren { $1 }
 
 brace_bar:
@@ -299,7 +300,7 @@ paren_bar:
     | PAREN_BAR expr_list BAR_PAREN { CollExpr.mkFsList $2 (lhs parseState)}
 
 lambda_short_expr_list:
-    | parens_expr { $1 }
+    | parens_expr_start { $1 }
 
 vector_start:
     | LBRACKET RBRACKET %prec prec_vector { CollExpr.mkVector [] (lhs parseState) }

@@ -1,0 +1,15 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(record Example
+  [lhs: int]
+  [rhs: int])
+
+(fn RecordMaker (lhs rhs mkRecord)
+  (mkRecord lhs rhs))
+
+(printfn "Example: %A" (RecordMaker 1 2 #(begin {| [lhs %1] [rhs %2] |})))

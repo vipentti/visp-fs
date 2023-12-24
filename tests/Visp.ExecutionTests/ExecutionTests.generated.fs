@@ -101,6 +101,11 @@ module ``tests_type_val-ctor-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/val-ctor-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_lambda-shorthand-record-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/lambda-shorthand-record-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_record-1`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/record-1.visp"
