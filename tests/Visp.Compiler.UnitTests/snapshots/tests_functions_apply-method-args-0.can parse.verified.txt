@@ -110,15 +110,8 @@ type TileMap (grid: Grid , rocks: array<Pos>) =
           Some ((grid.[y, x]))
         else
           // line 51 @"apply-method-args-0.visp"
-          if CoreMethods.isTruthy(
-            true)
-            then
-              // line 51 @"apply-method-args-0.visp"
-              
-              None
-            else
-              // line 51 @"apply-method-args-0.visp"
-              failwith "unreachable"
+          
+          None
         // line 58 @"apply-method-args-0.visp"
     and set (pos: Pos) ch =
       // line 59 @"apply-method-args-0.visp"
@@ -159,15 +152,8 @@ type TileMap (grid: Grid , rocks: array<Pos>) =
           grid.[y, x] <- ch
         else
           // line 61 @"apply-method-args-0.visp"
-          if CoreMethods.isTruthy(
-            true)
-            then
-              // line 61 @"apply-method-args-0.visp"
-              
-              ()
-            else
-              // line 61 @"apply-method-args-0.visp"
-              failwith "unreachable"
+          
+          ()
 // line 72 @"apply-method-args-0.visp"
 let TiltNorth (tm: TileMap) =
   // line 73 @"apply-method-args-0.visp"
