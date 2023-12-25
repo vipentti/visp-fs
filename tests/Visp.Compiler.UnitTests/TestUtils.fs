@@ -20,7 +20,7 @@ let parseCoreLibs () =
         for lib in libs do
             let path = lib.Path
 
-            CoreParser.parseFile path lib.ReturnLast
+            CoreParser.parseFile path ParserOptions.Library
             // TODO: We only really want macros here?
             |> CoreParser.transformFile
             |> ignore
@@ -65,7 +65,7 @@ let runStructuredOutputTest (name: string) =
         let path = getVispFilePath name
 
         try
-            let parsed = CoreParser.parseFile path true
+            let parsed = CoreParser.parseFile path ParserOptions.Default
 
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
@@ -89,7 +89,7 @@ let runWriteTest (name: string) =
             Path.GetDirectoryName path |> Path.TrimEndingDirectorySeparator
 
         try
-            let parsed = CoreParser.parseFile path true
+            let parsed = CoreParser.parseFile path ParserOptions.Default
 
             use stream = new StringWriter()
             CoreParser.writeToStreamNew parsed stream fileName

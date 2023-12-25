@@ -79,7 +79,14 @@ let mkTokenizerWithArgs args =
             args.UnnestIfNotDefault()
         | _ -> ()
 
-        // eprintfn "%A %A %i %i %A" next args.mode args.depth args.ContextCount args.CurrentContext
+        if args.debugTokens then
+            eprintfn
+                "%A %A %i %i %A"
+                next
+                args.mode
+                args.depth
+                args.ContextCount
+                args.CurrentContext
 
         next
 
@@ -109,13 +116,15 @@ let mkTokenizerWithArgs args =
 
     tokenizer
 
-let mkTokenizer () =
-    mkTokenizerWithArgs <| mkDefaultLextArgs ()
+let mkTokenizer dbg =
+    mkTokenizerWithArgs
+    <| { mkDefaultLextArgs () with
+           debugTokens = dbg }
 
 let parseStringToExpr fileName str =
     let lexbuf = LexBuffer<_>.FromString str
     lexbuf.EndPos <- Position.FirstLine fileName
-    let tokenizer = mkTokenizer ()
+    let tokenizer = mkTokenizer false
 
     try
         raw_expr tokenizer lexbuf
