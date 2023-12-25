@@ -8,12 +8,12 @@ let state = { Todo = () }
 // line 8 @"operators-0.visp"
 let OrTest a b =
   // line 8 @"operators-0.visp"
-  a || b
+  (a || b)
 
 // line 9 @"operators-0.visp"
 let AndTest a b =
   // line 9 @"operators-0.visp"
-  a && b
+  (a && b)
 
 // line 11 @"operators-0.visp"
 printfn "OrTest %A" (OrTest false false)

@@ -10,8 +10,8 @@ let temp =
   // line 8 @"lambda-shorthand-0.visp"
   (fun arg1 arg2 ->
     // line 8 @"lambda-shorthand-0.visp"
-    arg1 +
-    arg2)
+    (arg1 +
+    arg2))
 // line 9 @"lambda-shorthand-0.visp"
 let visp_result_todo =
   // line 9 @"lambda-shorthand-0.visp"

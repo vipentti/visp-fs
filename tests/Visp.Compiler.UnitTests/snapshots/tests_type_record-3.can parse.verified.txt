@@ -15,7 +15,7 @@ let SomeFun (r: TestRec) =
   // line 14 @"record-3.visp"
   let mutable value = r
   // line 16 @"record-3.visp"
-  while CoreMethods.isTruthy(counter < 10) do
+  while CoreMethods.isTruthy((counter < 10)) do
     // line 17 @"record-3.visp"
     value <- {
       value with

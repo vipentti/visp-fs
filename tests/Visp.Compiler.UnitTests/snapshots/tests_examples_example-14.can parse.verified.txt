@@ -21,7 +21,7 @@ let items =
 // line 18 @"example-14.visp"
 let result2 =
   // line 18 @"example-14.visp"
-  Value.from ((Value.from(1))::((Value.from(2))::((Value.from (CoreMethods.``add``(3, 4)))::([]))))
+  Value.from ((Value.from(1))::((Value.from(2))::((Value.from (CoreMethods.``add_any``(3, 4)))::([]))))
 // line 20 @"example-14.visp"
 printfn "result2 is %O" result2
 // line 22 @"example-14.visp"

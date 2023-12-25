@@ -6,7 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 13 @"let-values.visp"
-printfn "%i" (CoreMethods.``add``(1, 2))
+printfn "%i" (add 1 2)
 // line 14 @"let-values.visp"
 printfn "%i" (List.reduce add ([1;2;3;4;5]))
 // line 16 @"let-values.visp"

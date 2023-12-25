@@ -19,7 +19,7 @@ let inline DiffByOne (lhs: array<'T>) (rhs: array<'T>) =
       loop)
       then
         // line 13 @"while-1.visp"
-        index < ((lhs.Length))
+        (index < ((lhs.Length)))
       else
         false) do
     // line 14 @"while-1.visp"
@@ -49,7 +49,7 @@ let inline DiffByOne (lhs: array<'T>) (rhs: array<'T>) =
     // line 23 @"while-1.visp"
     index <- inc index
   // line 26 @"while-1.visp"
-  diff = 1
+  (diff = 1)
 
 // line 29 @"while-1.visp"
 let visp_result_todo =

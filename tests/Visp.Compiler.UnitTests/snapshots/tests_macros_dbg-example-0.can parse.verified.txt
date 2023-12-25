@@ -9,8 +9,8 @@ let state = { Todo = () }
 eprintfn "[%s:%i]" "dbg-example-0.visp" 8
 // line 9 @"dbg-example-0.visp"
 ignore (
-  match 1 +
-  2 with
+  match (1 +
+  2) with
     | tmp ->
       // line 9 @"dbg-example-0.visp"
       eprintfn "[%s:%i] %s = %A" "dbg-example-0.visp" 9 "(+ 1 2)" tmp

@@ -27,10 +27,10 @@ type Example (x: int , y: int , z: int , w: int) =
   // line 23 @"struct-macro-2.visp"
   member d.Sum () =
     // line 23 @"struct-macro-2.visp"
-    ((d.X)) +
+    (((d.X)) +
     ((d.Y)) +
     ((d.Z)) +
-    ((d.W))
+    ((d.W)))
 // line 23 @"struct-macro-2.visp"
 let mkExample x y z w =
   // line 23 @"struct-macro-2.visp"
