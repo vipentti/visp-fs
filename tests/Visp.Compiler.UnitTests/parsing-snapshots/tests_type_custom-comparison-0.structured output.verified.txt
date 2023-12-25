@@ -39,7 +39,7 @@
                             (Op
                                (Infix
                                   (SynSymbol :>, [Symbol (SynSymbol t); Symbol (SynSymbol IEquatable<_>)],
-                                   (24,18--24,36))), SynSymbol Equals, [Symbol (SynSymbol v)], Tuple, (24,9--24,39))],
+                                   (24,17--24,36))), SynSymbol Equals, [Symbol (SynSymbol v)], Tuple, (24,9--24,39))],
                          (23,7--24,40));
                       SynMatch (Discard (26,7--26,8), None, [Const (Bool false, (26,9--26,14))], (26,7--26,14))],
                      (22,5--26,15))], Override, [], (21,3--27,5));
@@ -97,7 +97,7 @@
                                 (Op
                                    (Infix
                                       (SynSymbol :>, [Symbol (SynSymbol t); Symbol (SynSymbol IComparable<_>)],
-                                       (42,23--42,42))), SynSymbol CompareTo, [Symbol (SynSymbol v)], Tuple,
+                                       (42,22--42,42))), SynSymbol CompareTo, [Symbol (SynSymbol v)], Tuple,
                                  (42,11--42,45))], (41,9--42,46));
                           SynMatch
                             (Named (SynSymbol null, (44,9--44,13)), None, [Const (Int32 1, (44,14--44,15))],

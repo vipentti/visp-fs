@@ -6,7 +6,7 @@ SYMBOL "a" Default 0 2 LParen
 SYMBOL "b" Default 0 2 LParen
 RPAREN Default 0 1 LParen
 LPAREN Default 0 2 LParen
-BAR_BAR Default 0 2 LParen
+INFIX_OP "||" Default 0 2 LParen
 SYMBOL "a" Default 0 2 LParen
 SYMBOL "b" Default 0 2 LParen
 RPAREN Default 0 1 LParen
@@ -19,7 +19,7 @@ SYMBOL "a" Default 0 2 LParen
 SYMBOL "b" Default 0 2 LParen
 RPAREN Default 0 1 LParen
 LPAREN Default 0 2 LParen
-AMP_AMP Default 0 2 LParen
+INFIX_OP "&&" Default 0 2 LParen
 SYMBOL "a" Default 0 2 LParen
 SYMBOL "b" Default 0 2 LParen
 RPAREN Default 0 1 LParen

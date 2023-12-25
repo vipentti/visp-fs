@@ -65,7 +65,7 @@ RPAREN Default 0 3 Type
 LPAREN Default 0 4 Type
 DOT_METHOD ".Equals" Default 0 4 Type
 LPAREN Default 0 5 Type
-COLON_GREATER Default 0 5 Type
+INFIX_OP ":>" Default 0 5 Type
 SYMBOL "t" Default 0 5 Type
 SYMBOL "IEquatable" Default 0 5 Type
 OP_LESS Default 0 5 Type
@@ -160,7 +160,7 @@ RPAREN Default 0 4 Member
 LPAREN Default 0 5 Member
 DOT_METHOD ".CompareTo" Default 0 5 Member
 LPAREN Default 0 6 Member
-COLON_GREATER Default 0 6 Member
+INFIX_OP ":>" Default 0 6 Member
 SYMBOL "t" Default 0 6 Member
 SYMBOL "IComparable" Default 0 6 Member
 OP_LESS Default 0 6 Member

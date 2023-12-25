@@ -5,7 +5,7 @@
 ;; for basic syntax highlighting
 ;; vim: set syntax=clojure:
 
-(fn OrTest (a b) (-|| a b))
+(fn OrTest (a b) (|| a b))
 (fn AndTest (a b) (&& a b))
 
 (printfn "OrTest %A" (OrTest false false))
