@@ -1,0 +1,430 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 9 @"operators-1.visp"
+type Grid = array<array<char>>
+// line 10 @"operators-1.visp"
+let ``dummyfn>>`` () =
+  99
+
+// line 11 @"operators-1.visp"
+let ``<<dummyfn`` () =
+  99
+
+// line 15 @"operators-1.visp"
+ignore (
+  match (([1;2;3]) |> (List.map ((fun arg1 ->
+    // line 15 @"operators-1.visp"
+    (arg1 * 2)))) |> (List.map id)) with
+    | tmp ->
+      // line 15 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 15 "(|> (|1 2 3|) (List.map #(* %1 2)) (List.map id))" tmp
+      tmp)
+// line 16 @"operators-1.visp"
+ignore (
+  match ((1, 2) ||> add) with
+    | tmp ->
+      // line 16 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 16 "(||> (1 , 2) add)" tmp
+      tmp)
+// line 17 @"operators-1.visp"
+ignore (
+  match ((1, 2, 3) |||> ((fun arg1 arg2 arg3 ->
+    // line 17 @"operators-1.visp"
+    (arg1 + arg2 + arg3)))) with
+    | tmp ->
+      // line 17 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 17 "(|||> (1 , 2 , 3) #(+ %1 %2 %3))" tmp
+      tmp)
+// line 18 @"operators-1.visp"
+ignore (
+  match (((fun arg1 ->
+    // line 18 @"operators-1.visp"
+    (arg1 + 1))) >> ((fun arg1 ->
+    // line 18 @"operators-1.visp"
+    (arg1 * 2)))) 100 with
+    | tmp ->
+      // line 18 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 18 "((>> #(+ %1 1) #(* %1 2)) 100)" tmp
+      tmp)
+// line 19 @"operators-1.visp"
+ignore (
+  match (((fun arg1 ->
+    // line 19 @"operators-1.visp"
+    (arg1 + 1))) << ((fun arg1 ->
+    // line 19 @"operators-1.visp"
+    (arg1 * 2)))) 2 with
+    | tmp ->
+      // line 19 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 19 "((<< #(+ %1 1) #(* %1 2)) 2)" tmp
+      tmp)
+// line 20 @"operators-1.visp"
+ignore (
+  match (((fun arg1 ->
+    // line 20 @"operators-1.visp"
+    (arg1 * 2))) <| 2) with
+    | tmp ->
+      // line 20 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 20 "(<| #(* %1 2) 2)" tmp
+      tmp)
+// line 21 @"operators-1.visp"
+ignore (
+  match (add <|| (1, 2)) with
+    | tmp ->
+      // line 21 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 21 "(<|| add (1 , 2))" tmp
+      tmp)
+// line 22 @"operators-1.visp"
+ignore (
+  match (((fun arg1 arg2 arg3 ->
+    // line 22 @"operators-1.visp"
+    (arg1 + arg2 + arg3))) <||| (1, 2, 3)) with
+    | tmp ->
+      // line 22 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 22 "(<||| #(+ %1 %2 %3) (1 , 2 , 3))" tmp
+      tmp)
+// line 25 @"operators-1.visp"
+ignore (
+  match (1 &&& 1) with
+    | tmp ->
+      // line 25 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 25 "(&&& 1 1)" tmp
+      tmp)
+// line 26 @"operators-1.visp"
+ignore (
+  match (1 ||| 2) with
+    | tmp ->
+      // line 26 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 26 "(||| 1 2)" tmp
+      tmp)
+// line 27 @"operators-1.visp"
+ignore (
+  match (1 ^^^ 0) with
+    | tmp ->
+      // line 27 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 27 "(^^^ 1 0)" tmp
+      tmp)
+// line 28 @"operators-1.visp"
+ignore (
+  match (~~~1) with
+    | tmp ->
+      // line 28 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 28 "(~~~ 1)" tmp
+      tmp)
+// line 29 @"operators-1.visp"
+ignore (
+  match (1 <<< 2) with
+    | tmp ->
+      // line 29 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 29 "(<<< 1 2)" tmp
+      tmp)
+// line 30 @"operators-1.visp"
+ignore (
+  match (8 >>> 2) with
+    | tmp ->
+      // line 30 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 30 "(>>> 8 2)" tmp
+      tmp)
+// line 33 @"operators-1.visp"
+ignore (
+  match (true && true) with
+    | tmp ->
+      // line 33 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 33 "(&& true true)" tmp
+      tmp)
+// line 34 @"operators-1.visp"
+ignore (
+  match (false && true) with
+    | tmp ->
+      // line 34 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 34 "(&& false true)" tmp
+      tmp)
+// line 35 @"operators-1.visp"
+ignore (
+  match (true && false) with
+    | tmp ->
+      // line 35 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 35 "(&& true false)" tmp
+      tmp)
+// line 36 @"operators-1.visp"
+ignore (
+  match (false && false) with
+    | tmp ->
+      // line 36 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 36 "(&& false false)" tmp
+      tmp)
+// line 37 @"operators-1.visp"
+ignore (
+  match (true || true) with
+    | tmp ->
+      // line 37 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 37 "(|| true true)" tmp
+      tmp)
+// line 38 @"operators-1.visp"
+ignore (
+  match (false || true) with
+    | tmp ->
+      // line 38 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 38 "(|| false true)" tmp
+      tmp)
+// line 39 @"operators-1.visp"
+ignore (
+  match (true || false) with
+    | tmp ->
+      // line 39 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 39 "(|| true false)" tmp
+      tmp)
+// line 40 @"operators-1.visp"
+ignore (
+  match (false || false) with
+    | tmp ->
+      // line 40 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 40 "(|| false false)" tmp
+      tmp)
+// line 41 @"operators-1.visp"
+ignore (
+  match CoreMethods.``not``(true) with
+    | tmp ->
+      // line 41 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 41 "(not true)" tmp
+      tmp)
+// line 42 @"operators-1.visp"
+ignore (
+  match CoreMethods.``not``(false) with
+    | tmp ->
+      // line 42 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 42 "(not false)" tmp
+      tmp)
+// line 45 @"operators-1.visp"
+ignore (
+  match (true = true) with
+    | tmp ->
+      // line 45 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 45 "(= true true)" tmp
+      tmp)
+// line 46 @"operators-1.visp"
+ignore (
+  match (false <> true) with
+    | tmp ->
+      // line 46 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 46 "(!= false true)" tmp
+      tmp)
+// line 47 @"operators-1.visp"
+ignore (
+  match (true = false) with
+    | tmp ->
+      // line 47 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 47 "(= true false)" tmp
+      tmp)
+// line 48 @"operators-1.visp"
+ignore (
+  match (false <> false) with
+    | tmp ->
+      // line 48 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 48 "(!= false false)" tmp
+      tmp)
+// line 49 @"operators-1.visp"
+ignore (
+  match (1 > 2) with
+    | tmp ->
+      // line 49 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 49 "(> 1 2)" tmp
+      tmp)
+// line 50 @"operators-1.visp"
+ignore (
+  match (2 > 1) with
+    | tmp ->
+      // line 50 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 50 "(> 2 1)" tmp
+      tmp)
+// line 51 @"operators-1.visp"
+ignore (
+  match (1 < 2) with
+    | tmp ->
+      // line 51 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 51 "(< 1 2)" tmp
+      tmp)
+// line 52 @"operators-1.visp"
+ignore (
+  match (2 < 1) with
+    | tmp ->
+      // line 52 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 52 "(< 2 1)" tmp
+      tmp)
+// line 53 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``gt``(1, 2, 3)) with
+    | tmp ->
+      // line 53 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 53 "(> 1 2 3)" tmp
+      tmp)
+// line 54 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``gt``(3, 2, 1)) with
+    | tmp ->
+      // line 54 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 54 "(> 3 2 1)" tmp
+      tmp)
+// line 55 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``lt``(1, 2, 3)) with
+    | tmp ->
+      // line 55 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 55 "(< 1 2 3)" tmp
+      tmp)
+// line 56 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``lt``(3, 2, 1)) with
+    | tmp ->
+      // line 56 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 56 "(< 3 2 1)" tmp
+      tmp)
+// line 57 @"operators-1.visp"
+ignore (
+  match (1 >= 2) with
+    | tmp ->
+      // line 57 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 57 "(>= 1 2)" tmp
+      tmp)
+// line 58 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``gte``(1, 2, 3)) with
+    | tmp ->
+      // line 58 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 58 "(>= 1 2 3)" tmp
+      tmp)
+// line 59 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``gte``(3, 2, 1)) with
+    | tmp ->
+      // line 59 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 59 "(>= 3 2 1)" tmp
+      tmp)
+// line 60 @"operators-1.visp"
+ignore (
+  match (1 <= 2) with
+    | tmp ->
+      // line 60 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 60 "(<= 1 2)" tmp
+      tmp)
+// line 61 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``lte``(1, 2, 3)) with
+    | tmp ->
+      // line 61 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 61 "(<= 1 2 3)" tmp
+      tmp)
+// line 62 @"operators-1.visp"
+ignore (
+  match (CoreMethods.``lte``(3, 2, 1)) with
+    | tmp ->
+      // line 62 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 62 "(<= 3 2 1)" tmp
+      tmp)
+// line 65 @"operators-1.visp"
+ignore (
+  match (0) with
+    | tmp ->
+      // line 65 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 65 "(+)" tmp
+      tmp)
+// line 66 @"operators-1.visp"
+ignore (
+  match (1) with
+    | tmp ->
+      // line 66 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 66 "(+ 1)" tmp
+      tmp)
+// line 67 @"operators-1.visp"
+ignore (
+  match (1 + 2) with
+    | tmp ->
+      // line 67 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 67 "(+ 1 2)" tmp
+      tmp)
+// line 68 @"operators-1.visp"
+ignore (
+  match (1 + 2 + 3) with
+    | tmp ->
+      // line 68 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 68 "(+ 1 2 3)" tmp
+      tmp)
+// line 69 @"operators-1.visp"
+ignore (
+  match (1) with
+    | tmp ->
+      // line 69 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 69 "(*)" tmp
+      tmp)
+// line 70 @"operators-1.visp"
+ignore (
+  match (1) with
+    | tmp ->
+      // line 70 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 70 "(* 1)" tmp
+      tmp)
+// line 71 @"operators-1.visp"
+ignore (
+  match (1 * 2) with
+    | tmp ->
+      // line 71 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 71 "(* 1 2)" tmp
+      tmp)
+// line 72 @"operators-1.visp"
+ignore (
+  match (1 * 2 * 3) with
+    | tmp ->
+      // line 72 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 72 "(* 1 2 3)" tmp
+      tmp)
+// line 73 @"operators-1.visp"
+ignore (
+  match (-1.0) with
+    | tmp ->
+      // line 73 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 73 "(- 1.0)" tmp
+      tmp)
+// line 74 @"operators-1.visp"
+ignore (
+  match (1.0 - 2.0) with
+    | tmp ->
+      // line 74 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 74 "(- 1.0 2.0)" tmp
+      tmp)
+// line 75 @"operators-1.visp"
+ignore (
+  match (1.0 - 2.0 - 3.0) with
+    | tmp ->
+      // line 75 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 75 "(- 1.0 2.0 3.0)" tmp
+      tmp)
+// line 76 @"operators-1.visp"
+ignore (
+  match (LanguagePrimitives.GenericOne / 1.0) with
+    | tmp ->
+      // line 76 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 76 "(/ 1.0)" tmp
+      tmp)
+// line 77 @"operators-1.visp"
+ignore (
+  match (1.0 / 2.0) with
+    | tmp ->
+      // line 77 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 77 "(/ 1.0 2.0)" tmp
+      tmp)
+// line 78 @"operators-1.visp"
+ignore (
+  match (1.0 / 2.0 / 3.0) with
+    | tmp ->
+      // line 78 @"operators-1.visp"
+      eprintfn "[%s:%i] %s = %A" "operators-1.visp" 78 "(/ 1.0 2.0 3.0)" tmp
+      tmp)
+// line 80 @"operators-1.visp"
+let visp_result_todo = ()
+// line 80 @"operators-1.visp"
+printfn "%A" visp_result_todo
+

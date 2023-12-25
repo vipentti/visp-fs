@@ -28,6 +28,27 @@ module private CompareHelpers =
 
         result
 
+    let inline allSatisfyArray<'a> ([<InlineIfLambda>] pred: 'a -> 'a -> bool) (values: 'a array) =
+        let len = values.Length
+
+        if values.Length = 0 then
+            failwith "empty array"
+
+        let mutable current = values[0]
+        let mutable result = true
+        let mutable index = 1
+
+        while result && index < len do
+            let next = values[index]
+
+            if not (pred current next) then
+                result <- false
+
+            current <- next
+            index <- index + 1
+
+        result
+
 [<AutoOpen>]
 module Bitwise =
     let inline bor (lhs: 'a) (rhs: 'a) = lhs ||| rhs
@@ -78,20 +99,20 @@ type CoreMethods =
 
     static member ``neq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs <> rhs
 
-    static member ``all-eq?``<'a when 'a: equality>([<ParamArray>] args: 'a[]) =
-        CompareHelpers.allSatisfy (=) args
+    static member inline ``all-eq?``<'a when 'a: equality>([<ParamArray>] args: 'a[]) =
+        CompareHelpers.allSatisfyArray (=) args
 
-    static member lt<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
-        CompareHelpers.allSatisfy (<) args
+    static member inline lt<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
+        CompareHelpers.allSatisfyArray (<) args
 
-    static member lte<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
-        CompareHelpers.allSatisfy (<=) args
+    static member inline lte<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
+        CompareHelpers.allSatisfyArray (<=) args
 
-    static member gt<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
-        CompareHelpers.allSatisfy (>) args
+    static member inline gt<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
+        CompareHelpers.allSatisfyArray (>) args
 
-    static member gte<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
-        CompareHelpers.allSatisfy (>=) args
+    static member inline gte<'a when 'a: comparison>([<ParamArray>] args: 'a[]) =
+        CompareHelpers.allSatisfyArray (>=) args
 
     static member gt_num([<ParamArray>] args: Number[]) = CompareHelpers.allSatisfy (<) args
 
@@ -150,15 +171,6 @@ module CompileHelpers =
 
         parameters.Length = 1 && parameters.[0].ParameterType = valueArrayType
 
-    // let hasSingleParamArrayTypeArg (m: Reflection.MethodInfo) =
-    //     let parameters = m.GetParameters()
-
-    //     if parameters.Length = 1 then
-    //         if parameters.[0]
-
-    //         false
-    //     else
-    //         false
     let hasParamArrayAttribute (methodInfo: Reflection.MethodInfo) =
         methodInfo.GetParameters()
         |> Array.exists (fun p ->
@@ -171,6 +183,13 @@ module CompileHelpers =
         parameters.Length = 2
         && parameters.[0].ParameterType = runtimeStateType
         && parameters.[1].ParameterType = valueArrayType
+
+    let comparisonMethods =
+        [ ("<", nameof CoreMethods.lt)
+          (">", nameof CoreMethods.gt)
+          ("<=", nameof CoreMethods.lte)
+          (">=", nameof CoreMethods.gte) ]
+        |> Map.ofList
 
     let getMethods () =
         let methods = typeof<CoreMethods>.GetMethods() |> List.ofArray
@@ -190,6 +209,10 @@ module CompileHelpers =
               ("/", nameof CoreMethods.div_any) ]
 
         extras |> List.fold (fun map (lhs, rhs) -> Map.add lhs (map[rhs]) map) map
+
+    let tryGetCoreMethod s =
+        let ms = getMethods ()
+        Map.tryFind s ms
 
     let methodSourceName (mi: MemberInfo) =
         mi.GetCustomAttributes(true)

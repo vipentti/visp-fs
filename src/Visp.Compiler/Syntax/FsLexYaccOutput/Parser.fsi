@@ -11,6 +11,8 @@ type token =
   | MACRO_NAME of (string)
   | PROP_PLUS of (string)
   | HASH_IDENT of (string)
+  | UNARY_OP of (string)
+  | INFIX_OP of (string)
   | BIGNUM of ((string * string))
   | DECIMAL of (System.Decimal)
   | IEEE64 of (double)
@@ -141,6 +143,8 @@ type tokenId =
     | TOKEN_MACRO_NAME
     | TOKEN_PROP_PLUS
     | TOKEN_HASH_IDENT
+    | TOKEN_UNARY_OP
+    | TOKEN_INFIX_OP
     | TOKEN_BIGNUM
     | TOKEN_DECIMAL
     | TOKEN_IEEE64
@@ -287,6 +291,8 @@ type nonTerminalId =
     | NONTERM_rev_expr_list
     | NONTERM_expr_list_or_empty
     | NONTERM_recover
+    | NONTERM_symbol_text
+    | NONTERM_symbol_op_text
     | NONTERM_symbol_with_ops
     | NONTERM_expr
     | NONTERM_brace_bar
@@ -343,8 +349,10 @@ type nonTerminalId =
     | NONTERM_unquote
     | NONTERM_splice_unquote
     | NONTERM_operators
-    | NONTERM_op_text
-    | NONTERM_op_sym
+    | NONTERM_infix_op_text
+    | NONTERM_infix_op_sym
+    | NONTERM_unary_op_text
+    | NONTERM_unary_op_sym
     | NONTERM_operators_not_in_parens
     | NONTERM_set
     | NONTERM_let_use_mut_kw

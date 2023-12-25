@@ -20,7 +20,7 @@ printfn "* is %i" (a * b * 52)
 // line 16 @"example-5.visp"
 printfn "* is %i" (2)
 // line 17 @"example-5.visp"
-printfn "* is %i" (LanguagePrimitives.GenericOne)
+printfn "* is %i" (1)
 // line 18 @"example-5.visp"
 printfn "* is %A" (2y * 1y)
 // line 20 @"example-5.visp"

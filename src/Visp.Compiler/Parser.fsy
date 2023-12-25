@@ -9,6 +9,7 @@
 open Visp.Compiler.DiagnosticsLogger
 open Visp.Compiler.StringResources
 open Visp.Compiler.Syntax
+open Visp.Compiler.Text
 open Visp.Compiler.ParseHelpers
 open Visp.Runtime.Library
 open FSharp.Text.Parsing
@@ -64,6 +65,8 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token <System.Decimal> DECIMAL
 %token <(string * string)> BIGNUM
 
+%token <string> INFIX_OP
+%token <string> UNARY_OP
 %token <string> HASH_IDENT
 %token <string> PROP_PLUS
 %token <string> MACRO_NAME
@@ -106,7 +109,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 
 %nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL BIGNUM
 %nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
-%nonassoc HASH_IDENT
+%nonassoc HASH_IDENT INFIX_OP UNARY_OP
 %nonassoc prec_symbol
 %nonassoc prec_name_list
 %nonassoc prec_syn_type_paren_op
@@ -260,11 +263,29 @@ recover:
    | error %prec prec_error { true }
    | EOF { false }
 
+symbol_text:
+    | SYMBOL { ($1, rhs parseState 1) }
+
+symbol_op_text:
+    | OP_GREATER { ($">", rhs2 parseState 1 1) }
+    | OP_GREATER OP_GREATER { ($">>", rhs2 parseState 1 2) }
+    | OP_GREATER SYMBOL { ($">{$2}", rhs2 parseState 1 2) }
+    | OP_LESS SYMBOL OP_GREATER { ($"<{$2}>", rhs2 parseState 1 3) }
+
 symbol_with_ops:
-    | SYMBOL { Syntax.mkSynSymbol $1 (rhs parseState 1) }
+    // | symbol_text symbol_op_text
+    //     {
+    //         let (t1, r1) = $1
+    //         let (t2, r2) = $2
+    //         Syntax.mkSynSymbol (t1 + t2) (Range.unionRanges r1 r2)
+    //     }
+    // | symbol_text { $1 ||> Syntax.mkSynSymbol }
+
     | SYMBOL OP_GREATER SYMBOL { Syntax.mkSynSymbol $"{$1}>{$3}" (rhs2 parseState 1 3) }
+    | SYMBOL OP_GREATER OP_GREATER { Syntax.mkSynSymbol $"{$1}>>" (rhs2 parseState 1 3) }
     | SYMBOL OP_LESS SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}<{$3}>" (rhs2 parseState 1 4) }
     | SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}>" (rhs2 parseState 1 2) }
+    | SYMBOL { Syntax.mkSynSymbol $1 (rhs parseState 1) }
 
 expr:
     | constant %prec prec_constant { SynExpr.Const(fst $1, snd $1) }
@@ -701,7 +722,7 @@ splice_unquote:
 operators:
     | LPAREN operators_not_in_parens RPAREN { $2 }
 
-op_text:
+infix_op_text:
     | OP_PLUS               {  ("+",  (rhs parseState 1) )}
     | OP_DIV                {  ("/",  (rhs parseState 1) )}
     | OP_MULT               {  ("*",  (rhs parseState 1) )}
@@ -716,13 +737,22 @@ op_text:
     | GREATER_EQUALS        {  (">=", (rhs parseState 1) )}
     | LESS_EQUALS           {  ("<=", (rhs parseState 1) )}
     | BANG_EQUALS           {  ("!=", (rhs parseState 1) )}
+    | INFIX_OP              {  ($1, (rhs parseState 1) )}
 
-op_sym:
-    | op_text { Syntax.mkSynSymbol (fst $1) (snd $1) }
+infix_op_sym:
+    | infix_op_text { Syntax.mkSynSymbol (fst $1) (snd $1) }
+
+unary_op_text:
+    | UNARY_OP              {  ($1, (rhs parseState 1) )}
+
+unary_op_sym:
+    | unary_op_text { Syntax.mkSynSymbol (fst $1) (snd $1) }
 
 operators_not_in_parens:
-    | op_sym { SynOp.Infix($1, [], lhs parseState) }
-    | op_sym expr_list { SynOp.Infix($1, $2, lhs parseState) }
+    | infix_op_sym { SynOp.Infix($1, [], lhs parseState) }
+    | infix_op_sym expr_list { SynOp.Infix($1, $2, lhs parseState) }
+    | unary_op_sym { SynOp.Unary($1, [], lhs parseState) }
+    | unary_op_sym expr_list { SynOp.Unary($1, $2, lhs parseState) }
 
 set:
     | SET expr expr
@@ -1233,8 +1263,11 @@ function_def:
     | invalid_function_def %prec prec_invalid_fn { $1 }
 
 function_def_name:
-    | symbol { $1 }
-    | symbol OP_GREATER symbol { Symbol.concat ">" [$1; $3] }
+    | SYMBOL OP_GREATER SYMBOL { Syntax.mkSynSymbol $"{$1}>{$3}" (rhs2 parseState 1 3) }
+    | SYMBOL OP_GREATER OP_GREATER { Syntax.mkSynSymbol $"{$1}>>" (rhs2 parseState 1 3) }
+    | SYMBOL OP_LESS SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}<{$3}>" (rhs2 parseState 1 4) }
+    | SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}>" (rhs2 parseState 1 2) }
+    | SYMBOL { Syntax.mkSynSymbol $1 (rhs parseState 1) }
 
 function_def_args: list_arg_pats { $1 }
 
