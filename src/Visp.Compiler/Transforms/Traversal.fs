@@ -131,8 +131,8 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for arg in args do
                         yield! loop arg
 
-                | SynExpr.Op(SynOp.Infix(_, args, _)) ->
-                    for arg in args do
+                | SynExpr.Op(op) ->
+                    for arg in op.Exprs do
                         yield! loop arg
 
                 | SynExpr.Atom(expr, _)

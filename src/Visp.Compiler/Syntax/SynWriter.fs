@@ -40,6 +40,8 @@ type SynWriter(writer: CustomFileWriter) =
     member this.Write(text: char) = this.writer.Write(text)
 
     member d.TW = d.writer.Inner
+
+    member t.TryGetKnownMethod s = Map.tryFind s t.knownMethods
 // member this.Write(it: int32) = this.writer.Write(it)
 // member this.Write(it: int64) = this.writer.Write(it)
 // member this.Write(it: int16) = this.writer.Write(it)
@@ -187,7 +189,7 @@ module Write =
           "base" ]
         |> Set.ofList
 
-    let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
+    let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':'; '<'; '>' ] |> Set.ofList
 
     let escapeString (w: SynWriter) (str: string) =
         let mutable finalIndentLevel = 0
@@ -256,8 +258,9 @@ module Write =
 
         sb.ToStringAndReturn()
 
-    let normalizeString name =
+    let normalizeString (name: string) =
         let mutable sb = PooledStringBuilder.Get()
+        sb.EnsureCapacity(name.Length) |> ignore
         let mutable needs_escape = false
 
         if Set.contains name reservedWords then
@@ -288,7 +291,6 @@ module Write =
 
         if escape && needs_escape then
             w.writer.Write("``")
-
 
     let symbol (w: SynWriter) (SynSymbol(id)) (escape: bool) = name w (id.idText) escape
 
@@ -1664,7 +1666,7 @@ module Write =
         if needsParens then
             char w ')'
 
-    and private writeOp w (st: WriteState) (SynOp.Infix(op, args, r)) =
+    and private writeOp w (st: WriteState) (synOp: SynOp) =
         let mutable firstEx = true
 
         let writeOpEx w st ex =
@@ -1681,47 +1683,72 @@ module Write =
             if newlineMandatory then
                 newlineIndent w
 
-        let opSym = op.Text
+        let opSym = synOp.OperatorChar
 
         let writeOpSeq args =
             writeSeq w WriteState.InlineNoParens (flip string $" {opSym}") (writeOpEx) args
 
-        match op.Text with
-        | "+" ->
-            match args with
-            | [] -> string w "0"
-            | [ one ] -> writeExpr w st one
-            | rest -> writeOpSeq rest
-        | "*" ->
-            match args with
-            | [] -> string w "LanguagePrimitives.GenericOne"
-            | [ one ] -> writeExpr w st one
-            | rest -> writeOpSeq rest
+        match synOp with
+        | SynOp.Unary(_, args, _) ->
+            string w opSym
+            writeSeq w WriteState.InlineNoParens (flip string "") writeExprInParens args
 
-        | "/" ->
-            match args with
-            | [ one ] ->
-                string w "LanguagePrimitives.GenericOne / "
-                writeExprInParens w WriteState.Inline one
-            | rest -> writeOpSeq rest
-        | "-" ->
-            match args with
-            | [ one ] ->
-                char w '-'
-                writeExpr w WriteState.Inline one
-            | rest -> writeOpSeq rest
+        | SynOp.Infix(op, args, r) ->
+            match opSym with
+            | "+" ->
+                match args with
+                | [] -> string w "0"
+                | [ one ] -> writeExpr w st one
+                | rest -> writeOpSeq rest
+            | "*" ->
+                match args with
+                | [] -> string w "1"
+                | [ one ] -> writeExpr w st one
+                | rest -> writeOpSeq rest
 
-        | ":>" ->
-            match args with
-            | [ lhs; rhs ] ->
-                writeExprInParens w WriteState.Inline lhs
-                string w " :> "
-                writeExpr w WriteState.Inline rhs
-            | _ -> writeOpSeq args
+            | "/" ->
+                match args with
+                | [ one ] ->
+                    string w "LanguagePrimitives.GenericOne / "
+                    writeExprInParens w WriteState.Inline one
+                | rest -> writeOpSeq rest
+            | "-" ->
+                match args with
+                | [ one ] ->
+                    char w '-'
+                    writeExpr w WriteState.Inline one
+                | rest -> writeOpSeq rest
 
-        | "!=" -> writeOp w st (SynOp.Infix(SynSymbol(Ident("<>", op.Range)), args, r))
+            | ":>" ->
+                match args with
+                | [ lhs; rhs ] ->
+                    writeExprInParens w WriteState.Inline lhs
+                    string w " :> "
 
-        | _ -> writeOpSeq args
+                    match rhs with
+                    | SynExpr.Symbol it -> symbol w it false
+                    | _ -> writeExpr w WriteState.Inline rhs
+                | _ -> writeOpSeq args
+
+            | "!=" -> writeOp w st (SynOp.Infix(SynSymbol(Ident("<>", op.Range)), args, r))
+
+            | op ->
+                // Comparison methods
+                if comparisonMethods.ContainsKey op then
+                    match w.TryGetKnownMethod op with
+                    | Some(meth) ->
+                        match args with
+                        | [ _; _ ] -> writeOpSeq args
+                        | args ->
+                            fmtprintf w "%s.``%s``" meth.DeclaringType.Name meth.Name
+                            string w "("
+                            writeInlineCommaSeparated w writeExprInParens args
+                            string w ")"
+
+                    | None -> writeOpSeq args
+                else
+                    writeOpSeq args
+
 
         ()
 

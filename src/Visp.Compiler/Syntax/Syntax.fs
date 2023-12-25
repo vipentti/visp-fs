@@ -582,12 +582,22 @@ and [<RequireQualifiedAccess>] SynQuasiquote =
 
 and [<RequireQualifiedAccess>] SynOp =
     | Infix of op: SynSymbol * args: SynExpr list * range: range
+    | Unary of op: SynSymbol * args: SynExpr list * range: range
 
-    member this.OperatorChar = let (Infix(op = op)) = this in op.Text
+    member this.OperatorChar =
+        match this with
+        | Infix(op = op)
+        | Unary(op = op) -> op.Text
 
-    member this.Exprs = let (Infix(args = e)) = this in e
+    member this.Exprs =
+        match this with
+        | Infix(args = op)
+        | Unary(args = op) -> op
 
-    member this.Range = let (Infix(range = r)) = this in r
+    member this.Range =
+        match this with
+        | Infix(range = op)
+        | Unary(range = op) -> op
 
 and SynLambda =
     | SynLambda of args: SynPat * body: SynExpr list * range: range

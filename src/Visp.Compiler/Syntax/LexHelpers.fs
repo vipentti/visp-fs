@@ -304,6 +304,25 @@ let unescape c =
 
 let isLetter (ch: char) = System.Char.IsLetter(ch)
 
+let unaryOperatorSet = [ "~~~" ] |> Set.ofList
+
+let infixOperatorSet =
+    [ "|>"
+      "||>"
+      "|||>"
+      "<<"
+      ">>"
+      "<|"
+      "<||"
+      "<|||"
+      ":?>"
+      "&&&"
+      "|||"
+      "^^^"
+      "<<<"
+      ">>>" ]
+    |> Set.ofList
+
 let specialSymbol (s: string) =
     match s with
     | "." -> Some(DOT)
@@ -325,8 +344,10 @@ let specialSymbol (s: string) =
     | "=" -> Some(EQUALS)
     | "&&" -> Some(AMP_AMP)
     | "||" -> Some(BAR_BAR)
-    | ">>" -> Some(GREATER_GREATER)
-    | _ -> None
+    | it ->
+        if infixOperatorSet.Contains it then Some(INFIX_OP it)
+        else if unaryOperatorSet.Contains it then Some(UNARY_OP it)
+        else None
 
 let symbolOrKeyword (ctx: LexContext) (s: string) =
     match tryGetKeyword ctx s with

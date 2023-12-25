@@ -205,7 +205,11 @@ let SymbolicExtra = [ '.' '\'' '/']
 // https://github.com/dotnet/fsharp/blob/ade794633b4bb495da85c92ee780068b9c6f7344/src/Compiler/lex.fsl#L300
 let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b' | 'r'))
 
+let ident_sep = ['-' '_' '/' '.']
+
 let ident_letter_chars = letter (letter | digit)*
+
+let ident_with_sep = letter (letter | digit | ident_sep)*
 
 let ident_start_char = letter | SymbolicStartCharacters
 let ident_char = ( ident_start_char | digit | SymbolicExtra )
@@ -219,6 +223,32 @@ let whitespace = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 let nonWhitespace = [^ ' ' '\t' '\r' '\n']
 // let possible_char = [.]
+
+// https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/symbol-and-operator-reference/#function-symbols-and-operators
+// keep in sync with LexHelpers.infixOperatorSet
+// src/Visp.Compiler/Syntax/LexHelpers.fs
+let infix_operators = (
+  "|>"
+  | "||>"
+  | "|||>"
+  | "<<"
+  | ">>"
+  | "<|"
+  | "<||"
+  | "<|||"
+  | ":?>"
+  | "&&&"
+  | "|||"
+  | "^^^"
+  | "<<<"
+  | ">>>"
+)
+
+// keep in sync with LexHelpers.unaryOperatorSet
+// src/Visp.Compiler/Syntax/LexHelpers.fs
+let unary_operators = (
+  "~~~"
+)
 
 let charWords = (
   "newline"
@@ -251,6 +281,15 @@ rule token (args: LexArgs) (skip: bool) = parse
   | eof        { EOF }
 
   // punct
+
+  | ident_arrow { SYMBOL (lexeme lexbuf) }
+  | ident_letter_chars ">>" { TOKENLIST [SYMBOL (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
+  | "<<" ident_letter_chars { SYMBOL (lexeme lexbuf) }
+
+  | infix_operators { INFIX_OP (lexeme lexbuf) }
+  | '(' infix_operators { TOKENLIST [LPAREN; INFIX_OP (lexemeTrimLeft lexbuf 1)] }
+  | unary_operators { UNARY_OP (lexeme lexbuf) }
+  | '(' unary_operators { TOKENLIST [LPAREN; UNARY_OP (lexemeTrimLeft lexbuf 1)] }
   | "||"          { BAR_BAR }
   | "-||"         { BAR_BAR }
   | '('           { LPAREN }
@@ -265,6 +304,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '|'           { BAR }
 
   | "..." { SYMBOL (lexeme lexbuf) }
+
 
   | "#nowarn" { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
 
@@ -439,8 +479,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "!=" { BANG_EQUALS }
   | '='  { EQUALS }
 
-  | ident_arrow { SYMBOL (lexeme lexbuf) }
-
   | "->>" { THREAD_LAST }
   | "->"  { THREAD_FIRST }
   | "<"   { OP_LESS }
@@ -508,6 +546,11 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "#line" { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
 
   // punct
+
+  | infix_operators { SYMBOL (lexeme lexbuf) }
+  | '(' infix_operators { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
+  | unary_operators { SYMBOL (lexeme lexbuf) }
+  | '(' unary_operators { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
@@ -530,10 +573,12 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "[|"          { BRACKET_BAR }
   | "|]"          { BAR_BRACKET }
 
+  | "(|>"         { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(||)"        { TOKENLIST [PAREN_BAR; BAR_PAREN] }
   | "(||"         { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(|"          { PAREN_BAR }
   | "|)"          { BAR_PAREN }
+
 
   | "..." { SYMBOL (lexeme lexbuf) }
 

@@ -59,6 +59,7 @@ let rec transform (func: SynExpr -> SynExpr) expr =
 
             match op with
             | SynOp.Infix(o, args, range) -> SynOp.Infix(o, List.map bound_transform args, range)
+            | SynOp.Unary(o, args, range) -> SynOp.Unary(o, List.map bound_transform args, range)
             |> SynExpr.Op
 
         | SynExpr.Atom(expr, range) -> SynExpr.Atom(bound_transform expr, range)

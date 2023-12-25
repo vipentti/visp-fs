@@ -1,0 +1,80 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; Ensure >> can be parsed as part of a type or symbol
+(typedef Grid array<array<char>>)
+(fn dummyfn>> () 99)
+(fn <<dummyfn () 99)
+
+;; function symbols & operators
+
+(ignore (dbg! (|> (| 1 2 3 |) (List.map #(* %1 2)) (List.map id))))
+(ignore (dbg! (||> (1, 2) add)))
+(ignore (dbg! (|||> (1, 2, 3) #(+ %1 %2 %3))))
+(ignore (dbg! ((>> #(+ %1 1) #(* %1 2)) 100)))
+(ignore (dbg! ((<< #(+ %1 1) #(* %1 2)) 2)))
+(ignore (dbg! (<| #(* %1 2) 2)))
+(ignore (dbg! (<|| add (1, 2))))
+(ignore (dbg! (<||| #(+ %1 %2 %3) (1, 2, 3))))
+
+;; bitwise operators
+(ignore (dbg! (&&& 0b0001 0b0001)))
+(ignore (dbg! (||| 0b0001 0b0010)))
+(ignore (dbg! (^^^ 0b0001 0b0000)))
+(ignore (dbg! (~~~ 0b0001)))
+(ignore (dbg! (<<< 0b0001 2)))
+(ignore (dbg! (>>> 0b1000 2)))
+
+;; boolean operators
+(ignore (dbg! (&& true true)))
+(ignore (dbg! (&& false true)))
+(ignore (dbg! (&& true false)))
+(ignore (dbg! (&& false false)))
+(ignore (dbg! (|| true true)))
+(ignore (dbg! (|| false true)))
+(ignore (dbg! (|| true false)))
+(ignore (dbg! (|| false false)))
+(ignore (dbg! (not true)))
+(ignore (dbg! (not false)))
+
+;; comparison & equality operators
+(ignore (dbg! (= true true)))
+(ignore (dbg! (!= false true)))
+(ignore (dbg! (= true false)))
+(ignore (dbg! (!= false false)))
+(ignore (dbg! (> 1 2)))
+(ignore (dbg! (> 2 1)))
+(ignore (dbg! (< 1 2)))
+(ignore (dbg! (< 2 1)))
+(ignore (dbg! (> 1 2 3)))
+(ignore (dbg! (> 3 2 1)))
+(ignore (dbg! (< 1 2 3)))
+(ignore (dbg! (< 3 2 1)))
+(ignore (dbg! (>= 1 2)))
+(ignore (dbg! (>= 1 2 3)))
+(ignore (dbg! (>= 3 2 1)))
+(ignore (dbg! (<= 1 2)))
+(ignore (dbg! (<= 1 2 3)))
+(ignore (dbg! (<= 3 2 1)))
+
+;; math operators
+(ignore (dbg! (+)))
+(ignore (dbg! (+ 1)))
+(ignore (dbg! (+ 1 2)))
+(ignore (dbg! (+ 1 2 3)))
+(ignore (dbg! (*)))
+(ignore (dbg! (* 1)))
+(ignore (dbg! (* 1 2)))
+(ignore (dbg! (* 1 2 3)))
+(ignore (dbg! (- 1.0)))
+(ignore (dbg! (- 1.0 2.0)))
+(ignore (dbg! (- 1.0 2.0 3.0)))
+(ignore (dbg! (/ 1.0)))
+(ignore (dbg! (/ 1.0 2.0)))
+(ignore (dbg! (/ 1.0 2.0 3.0)))
+
+()
