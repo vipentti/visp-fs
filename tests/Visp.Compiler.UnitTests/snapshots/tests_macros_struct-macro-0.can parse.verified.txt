@@ -19,8 +19,7 @@ type Example (x: int , y: int) =
   // line 16 @"struct-macro-0.visp"
   member d.Sum () =
     // line 16 @"struct-macro-0.visp"
-    (((d.X)) +
-    ((d.Y)))
+    ((d.X) + (d.Y))
 // line 22 @"struct-macro-0.visp"
 let instance =
   // line 22 @"struct-macro-0.visp"

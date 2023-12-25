@@ -76,19 +76,20 @@
   ))
 
 (fn inline gcd [a b]
-  (cond_
-    [(= b LanguagePrimitives.GenericZero) a]
-    [(= a LanguagePrimitives.GenericZero) b]
-    [_
-      (mut a a)
-      (mut b b)
-      (while (!= b LanguagePrimitives.GenericZero)
-        (let temp b)
-        (set! b (rem a b))
-        (set! a temp)
-      )
-      a
-    ]))
+  (if (= b LanguagePrimitives.GenericZero)
+    a
+    (if (= a LanguagePrimitives.GenericZero)
+      b
+      (begin
+        (mut a a)
+        (mut b b)
+        (while (!= b LanguagePrimitives.GenericZero)
+          (let temp b)
+          (set! b (rem a b))
+          (set! a temp)
+        )
+        a
+      ))))
 
 (fn inline lcm (a b)
   (/ (* a b) (gcd a b)))

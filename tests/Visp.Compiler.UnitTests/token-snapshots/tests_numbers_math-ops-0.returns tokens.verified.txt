@@ -1,0 +1,221 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("+ result is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_PLUS Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+FALSE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+TRUE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (1, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (2, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (2, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (102, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "_" Default 0 3 Match
+INT32 (-1, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+INT32 (9, false) Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("- result is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_MINUS Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+FALSE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+TRUE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (1, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (2, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (2, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (102, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "_" Default 0 3 Match
+INT32 (-1, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+INT32 (9, false) Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("* result is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+FALSE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+TRUE Default 0 3 LParen
+INT32 (99, false) Default 0 3 LParen
+INT32 (101, false) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (1, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (2, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (2, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+INT32 (102, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "_" Default 0 3 Match
+INT32 (-1, false) Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+INT32 (9, false) Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("/ result is %A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+OP_DIV Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+FALSE Default 0 3 LParen
+IEEE64 99.0 Default 0 3 LParen
+IEEE64 101.0 Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+IF_KW Default 0 3 LParen
+TRUE Default 0 3 LParen
+IEEE64 99.0 Default 0 3 LParen
+IEEE64 101.0 Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (1, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (2, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+IEEE64 2.0 Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+LPAREN Default 0 4 Match
+INT32 (101, false) Default 0 4 Match
+COMMA Default 0 4 Match
+INT32 (102, false) Default 0 4 Match
+RPAREN Default 0 3 Match
+IEEE64 102.0 Default 0 3 Match
+RBRACKET Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "_" Default 0 3 Match
+IEEE64 -1.0 Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MATCH Default 0 3 Match
+IEEE64 9.0 Default 0 3 Match
+LBRACKET Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+SYMBOL "it" Default 0 3 Match
+RBRACKET Default 0 3 Match
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

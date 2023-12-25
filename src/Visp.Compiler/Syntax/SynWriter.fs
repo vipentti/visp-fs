@@ -406,6 +406,21 @@ module Write =
         startExpr w (st.EnsureNewline()) r
         res
 
+    let private writeSeqNext<'a>
+        (w: SynWriter)
+        (st: WriteState)
+        (sep: SynWriter -> 'a -> unit)
+        (wrt: SynWriter -> WriteState -> 'a -> unit)
+        (items: seq<'a>)
+        =
+        let mutable fst = true
+
+        for it in items do
+            if fst then fst <- false else sep w it
+            wrt w st it
+
+        ()
+
     let private writeSeq<'a>
         (w: SynWriter)
         (st: WriteState)
@@ -1650,54 +1665,63 @@ module Write =
             char w ')'
 
     and private writeOp w (st: WriteState) (SynOp.Infix(op, args, r)) =
-        let opState = WriteState.Inline
+        let mutable firstEx = true
+
+        let writeOpEx w st ex =
+            let newlineMandatory = requiresNewline ex
+
+            if not firstEx then
+                space w
+
+            if firstEx then
+                firstEx <- false
+
+            writeExprInParens w st ex
+
+            if newlineMandatory then
+                newlineIndent w
+
+        let opSym = op.Text
+
+        let writeOpSeq args =
+            writeSeq w WriteState.InlineNoParens (flip string $" {opSym}") (writeOpEx) args
 
         match op.Text with
         | "+" ->
             match args with
             | [] -> string w "0"
             | [ one ] -> writeExpr w st one
-            | rest ->
-                writeSeq
-                    w
-                    WriteState.Inline
-                    (fun w ->
-                        string w " +"
-                        newlineIndent w)
-                    writeExprInParens
-                    rest
+            | rest -> writeOpSeq rest
         | "*" ->
             match args with
             | [] -> string w "LanguagePrimitives.GenericOne"
             | [ one ] -> writeExpr w st one
-            | rest -> writeSeq w WriteState.Inline (flip string " * ") writeExpr rest
+            | rest -> writeOpSeq rest
 
         | "/" ->
             match args with
             | [ one ] ->
                 string w "LanguagePrimitives.GenericOne / "
                 writeExprInParens w WriteState.Inline one
-            | rest -> writeSeq w WriteState.Inline (flip string " / ") writeExprInParens rest
+            | rest -> writeOpSeq rest
         | "-" ->
             match args with
             | [ one ] ->
                 char w '-'
-                writeExpr w opState one
-            | rest -> writeSeq w WriteState.Inline (flip string " - ") writeExpr rest
+                writeExpr w WriteState.Inline one
+            | rest -> writeOpSeq rest
 
         | ":>" ->
             match args with
             | [ lhs; rhs ] ->
-                string w "("
-                writeExpr w WriteState.Inline lhs
+                writeExprInParens w WriteState.Inline lhs
                 string w " :> "
                 writeExpr w WriteState.Inline rhs
-                string w ")"
-            | _ -> writeInlineSeparated w ($" {op} ") writeExprInParens args
+            | _ -> writeOpSeq args
 
         | "!=" -> writeOp w st (SynOp.Infix(SynSymbol(Ident("<>", op.Range)), args, r))
 
-        | op -> writeInlineSeparated w ($" {op} ") writeExprInParens args
+        | _ -> writeOpSeq args
 
         ()
 

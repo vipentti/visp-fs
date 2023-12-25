@@ -11,8 +11,7 @@ let macro_DbgMacroExample = "__MACRO_INIT__"
 eprintfn "[%s:%i]" "stringify-0.visp" 24
 // line 25 @"stringify-0.visp"
 ignore (
-  match (1 +
-  2) with
+  match (1 + 2) with
     | tmp ->
       // line 25 @"stringify-0.visp"
       eprintfn "[%s:%i] %s = %A" "stringify-0.visp" 25 "(+ 1 2)" tmp

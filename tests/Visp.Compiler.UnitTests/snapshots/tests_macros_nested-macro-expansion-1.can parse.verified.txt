@@ -43,7 +43,7 @@ let Something () =
   // line 24 @"nested-macro-expansion-1.visp"
   let mutable result = 0L
   // line 26 @"nested-macro-expansion-1.visp"
-  while CoreMethods.isTruthy((((work.Count)) > 0)) do
+  while CoreMethods.isTruthy(((work.Count) > 0)) do
     // line 27 @"nested-macro-expansion-1.visp"
     match PopWork () with
       | (bi , off , count) ->
@@ -56,8 +56,7 @@ let Something () =
         // line 31 @"nested-macro-expansion-1.visp"
         let offsetEnd =
           // line 31 @"nested-macro-expansion-1.visp"
-          (off +
-          brokenLength)
+          (off + brokenLength)
         // line 38 @"nested-macro-expansion-1.visp"
         if CoreMethods.isTruthy(
           (CoreMethods.``not``((
@@ -74,7 +73,7 @@ let Something () =
                     orTemp
                   else
                     // line 38 @"nested-macro-expansion-1.visp"
-                    (((conditions.[dec off])) <> '#'))))
+                    ((conditions.[dec off]) <> '#'))))
               then
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(
@@ -82,7 +81,7 @@ let Something () =
                     // line 38 @"nested-macro-expansion-1.visp"
                     let orTemp =
                       // line 38 @"nested-macro-expansion-1.visp"
-                      (offsetEnd = ((conditions.Length)))
+                      (offsetEnd = (conditions.Length))
                     // line 38 @"nested-macro-expansion-1.visp"
                     if CoreMethods.isTruthy(
                       orTemp)
@@ -91,10 +90,10 @@ let Something () =
                       else
                         // line 38 @"nested-macro-expansion-1.visp"
                         if CoreMethods.isTruthy(
-                          (offsetEnd < ((conditions.Length))))
+                          (offsetEnd < (conditions.Length)))
                           then
                             // line 38 @"nested-macro-expansion-1.visp"
-                            (((conditions.[offsetEnd])) <> '#')
+                            ((conditions.[offsetEnd]) <> '#')
                           else
                             false)))
                   then
@@ -122,8 +121,7 @@ let Something () =
                     // line 38 @"nested-macro-expansion-1.visp"
                     
                     // line 38 @"nested-macro-expansion-1.visp"
-                    result <- (result +
-                    count)
+                    result <- (result + count)
               else
                 // line 38 @"nested-macro-expansion-1.visp"
                 if CoreMethods.isTruthy(

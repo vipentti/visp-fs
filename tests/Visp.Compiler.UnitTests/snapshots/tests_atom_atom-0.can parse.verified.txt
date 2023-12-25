@@ -10,8 +10,7 @@ let state = { Todo = () }
 // line 11 @"atom-0.visp"
 let inc (v: Value) =
   // line 12 @"atom-0.visp"
-  Value.from (1L +
-  (unwrapInt v))
+  Value.from (1L + (unwrapInt v))
 
 // line 13 @"atom-0.visp"
 let count =

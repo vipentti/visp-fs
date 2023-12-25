@@ -10,9 +10,7 @@ let a = 5
 // line 9 @"example-5.visp"
 let b = 4
 // line 11 @"example-5.visp"
-printfn "+ is %i" (a +
-b +
-52)
+printfn "+ is %i" (a + b + 52)
 // line 12 @"example-5.visp"
 printfn "+ is %i" (0)
 // line 13 @"example-5.visp"
