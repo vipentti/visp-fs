@@ -1,0 +1,180 @@
+
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.0")
+(require FSharpx.Collections "3.1.0")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+(open FSharpx.Collections)
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+
+(syntax-macro read-while-not-empty
+  ([_ (id enu) body ...]
+    (while (.MoveNext enu)
+      (let id (+Current enu))
+      (unless (+IsEmpty id)
+        (begin body ...)
+      ))))
+
+(syntax-macro read-next
+  [(_ enu)
+    (begin
+      (ignore (.MoveNext enu))
+      (+Current enu))])
+
+(const splitOptions StringSplitOptions.TrimEntries)
+
+(fn SplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  splitOptions))
+
+(fn SpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch splitOptions))
+
+(let example (not (Array.contains "full" ARGV)))
+(let day "day25")
+(let filepath (String.concat "" [| "./inputs/" day (if example "_example" "") ".txt" |]))
+(printfn "file: %s" filepath)
+
+(let fileText (System.IO.File.ReadAllText filepath))
+
+(typedef ComponentMap Map<string, Set<string>>)
+
+(fn ParseFile ([text: string])
+  (mut lines (SplitLines text))
+
+  (mut res Map.empty)
+
+  (read-while-not-empty [line lines]
+    (mut parts (SpanSplitChars [|#\:|] line))
+    (let next (.ToString (read-next parts)))
+
+    (let targets (read-next parts))
+    (mut comps (SpanSplitChars [| #\space |] targets))
+
+    (mut targets Set.empty)
+
+    (read-while-not-empty [comp comps]
+      (let tgt (.ToString comp))
+
+      (up! targets (Set.add tgt)))
+
+    (up! res (Map.add next targets))
+  )
+
+  (for/in [(name, set) (Map.toList res)]
+    (for/in [item (Set.toList set)]
+      (match (Map.tryFind item res)
+        [None
+          (up! res (Map.add item (Set.singleton name)))
+        ]
+        [(Some found_set)
+          (up! res (Map.add item (Set.add name found_set)))
+        ])))
+
+  res
+)
+
+(fn BFS ([graph: ComponentMap] [src: string] [tgt: Option<string>])
+  (mut prev (!map (src . "")))
+  (let fakeStack (!vec src))
+  (mut sp 0)
+
+  (fn pop ()
+    (if (< sp (+Count fakeStack))
+      (begin
+        (let v (.[sp] fakeStack))
+        (up! sp inc)
+        (Some v))
+      None))
+
+  (fn push (v)
+    (.Add fakeStack v))
+
+  (mut looping true)
+  (let tgtValue (Option.defaultValue "" tgt))
+
+  (while looping
+    (match (pop)
+      [None (set! looping false)]
+      [(Some cur)
+        (cond_
+          [(= cur tgtValue) (set! looping false) ]
+          [_
+            (for/in [dst (.[cur] graph)]
+              (unless (Map.containsKey dst prev)
+                (up! prev (Map.add dst cur))
+                (push dst)
+            ))
+          ]
+        )
+      ]))
+
+  (fn getpath (tgt)
+    (mut path (||))
+    (mut tgt tgt)
+    ;; (printfn "%A" fakeStack)
+    (while-some [next (Map.tryFind tgt prev)]
+      ;; (printfn "getting %A -> %A" tgt next)
+      (when_ (> (+Length tgt) 0)
+        (up! path (cons tgt))
+      )
+      (set! tgt next)
+    )
+    (List.rev path))
+
+  (if (+IsNone tgt)
+    (getpath (.[(dec (+Count fakeStack))] fakeStack))
+    (if (not (Map.containsKey tgtValue prev))
+      (List.ofSeq fakeStack)
+      (getpath tgtValue)
+    )))
+
+;; https://github.com/p88h/aoc2023/blob/main/day25.py
+(fn EdmondKarp (graph count src)
+  (mut removed List.empty)
+  (mut tgt None)
+  (mut graph graph)
+
+  (for/to [_ (1 to count)]
+    (let path (BFS graph src tgt))
+    (mut pre (List.head path))
+    (set! tgt (Some pre))
+
+    (for/in [cur (List.tail path)]
+      (up! graph (Map.updateWith #(Some (Set.remove pre %2)) cur))
+      (up! graph (Map.updateWith #(Some (Set.remove cur %2)) pre))
+      (up! removed (cons (cur . pre)))
+      (set! pre cur)
+    ))
+
+  (let reachable (BFS graph src tgt))
+  (List.length reachable))
+
+(let parsed (ParseFile fileText))
+
+;; (for/in [(name, set) (Map.toList parsed)]
+;;   ;; (printfn "%A: %A" name (Set.toList set))
+;; )
+
+(let total (Map.count parsed))
+;; (let part1 (EdmondKarp parsed 3 (->> parsed (Map.toList) (List.head) fst)))
+(let reachable (EdmondKarp parsed 3 (if example "jqt" "dmm")))
+
+(let part1 (* reachable (- total reachable)))
+
+;; (printfn "%A" )
+(WriteResult "part1" part1 (if example 54 598120))
+
+;(printfn "%A" parsed)
+
+()
