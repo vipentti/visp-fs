@@ -174,7 +174,17 @@ module Write =
 
 
     let reservedWords =
-        [ "fun"; "then"; "done"; "val"; "end"; "begin"; "mod"; "to"; "with"; "fixed" ]
+        [ "fun"
+          "then"
+          "done"
+          "val"
+          "end"
+          "begin"
+          "mod"
+          "to"
+          "with"
+          "fixed"
+          "base" ]
         |> Set.ofList
 
     let escapableChars = [ '?'; '-'; '+'; '*'; '/'; '!'; ':' ] |> Set.ofList
@@ -622,6 +632,11 @@ module Write =
             | _ -> false
         | _ -> false
 
+    let usesParensByDefault =
+        function
+        | SynExpr.Tuple _
+        | SynExpr.Op _ -> true
+        | _ -> false
 
     let rec writeExpr (w: SynWriter) (st: WriteState) (expr: SynExpr) =
 
@@ -978,7 +993,11 @@ module Write =
 
         | SynExpr.LambdaDef lam -> writeSynLambda w st lam
 
-        | SynExpr.Op op -> writeOp w st op
+        | SynExpr.Op op ->
+            startExpr w st op.Range
+            string w "("
+            writeOp w st op
+            string w ")"
 
         | SynExpr.New(typ, args, range) ->
             startExpr w st range
@@ -1617,6 +1636,7 @@ module Write =
             | SynExpr.Const _
             | SynExpr.Tuple _
             | SynExpr.Literal _
+            | SynExpr.Op _
             | SynExpr.Symbol _ -> false
 
             | _ -> true
@@ -1631,8 +1651,6 @@ module Write =
 
     and private writeOp w (st: WriteState) (SynOp.Infix(op, args, r)) =
         let opState = WriteState.Inline
-
-        startExpr w st r
 
         match op.Text with
         | "+" ->
