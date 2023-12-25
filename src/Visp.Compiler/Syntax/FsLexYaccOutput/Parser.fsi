@@ -101,8 +101,6 @@ type token =
   | OP_LESS
   | COLON_QMARK
   | EQUALS
-  | AMP_AMP
-  | BAR_BAR
   | GREATER_EQUALS
   | LESS_EQUALS
   | GREATER_GREATER
@@ -115,7 +113,6 @@ type token =
   | COMMA
   | UNIT
   | BAR
-  | COLON_GREATER
   | LBRACE
   | RBRACE
   | HASH_BRACE
@@ -233,8 +230,6 @@ type tokenId =
     | TOKEN_OP_LESS
     | TOKEN_COLON_QMARK
     | TOKEN_EQUALS
-    | TOKEN_AMP_AMP
-    | TOKEN_BAR_BAR
     | TOKEN_GREATER_EQUALS
     | TOKEN_LESS_EQUALS
     | TOKEN_GREATER_GREATER
@@ -247,7 +242,6 @@ type tokenId =
     | TOKEN_COMMA
     | TOKEN_UNIT
     | TOKEN_BAR
-    | TOKEN_COLON_GREATER
     | TOKEN_LBRACE
     | TOKEN_RBRACE
     | TOKEN_HASH_BRACE

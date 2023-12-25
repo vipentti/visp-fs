@@ -228,7 +228,10 @@ let nonWhitespace = [^ ' ' '\t' '\r' '\n']
 // keep in sync with LexHelpers.infixOperatorSet
 // src/Visp.Compiler/Syntax/LexHelpers.fs
 let infix_operators = (
-  "|>"
+  "&&"
+  | "||"
+  | ":>"
+  | "|>"
   | "||>"
   | "|||>"
   | "<<"
@@ -290,8 +293,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '(' infix_operators { TOKENLIST [LPAREN; INFIX_OP (lexemeTrimLeft lexbuf 1)] }
   | unary_operators { UNARY_OP (lexeme lexbuf) }
   | '(' unary_operators { TOKENLIST [LPAREN; UNARY_OP (lexemeTrimLeft lexbuf 1)] }
-  | "||"          { BAR_BAR }
-  | "-||"         { BAR_BAR }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
@@ -319,7 +320,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "[|"   { BRACKET_BAR }
   | "|]"   { BAR_BRACKET }
   | "(||)" { TOKENLIST [PAREN_BAR; BAR_PAREN] }
-  | "(||"  { TOKENLIST [LPAREN; BAR_BAR] }
   | "(|"   { PAREN_BAR }
   | "|)"   { BAR_PAREN }
   | ".."   { DOTDOT }
@@ -475,7 +475,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | '.'  { DOT }
   | ">=" { GREATER_EQUALS }
   | "<=" { LESS_EQUALS }
-  | "&&" { AMP_AMP }
   | "!=" { BANG_EQUALS }
   | '='  { EQUALS }
 
@@ -483,7 +482,6 @@ rule token (args: LexArgs) (skip: bool) = parse
   | "->"  { THREAD_FIRST }
   | "<"   { OP_LESS }
   | ">"   { OP_GREATER }
-  | ":>"  { COLON_GREATER }
   | ":?"  { COLON_QMARK }
 
   | "#()"      { UNIT }

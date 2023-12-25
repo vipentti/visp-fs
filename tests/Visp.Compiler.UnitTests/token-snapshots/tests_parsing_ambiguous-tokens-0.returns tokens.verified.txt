@@ -34,7 +34,7 @@ LPAREN Default 0 1 LParen
 SYMBOL "printfn" Default 0 1 LParen
 STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
 LPAREN Default 0 2 LParen
-BAR_BAR Default 0 2 LParen
+INFIX_OP "||" Default 0 2 LParen
 TRUE Default 0 2 LParen
 FALSE Default 0 2 LParen
 RPAREN Default 0 1 LParen
@@ -52,12 +52,12 @@ SYMBOL "printfn" Default 0 1 LParen
 STRING ("non macro: %A", Regular, Token []) Default 0 1 LParen
 PAREN_BAR Default 0 1 LParen
 LPAREN Default 0 2 LParen
-BAR_BAR Default 0 2 LParen
+INFIX_OP "||" Default 0 2 LParen
 TRUE Default 0 2 LParen
 TRUE Default 0 2 LParen
 RPAREN Default 0 1 LParen
 LPAREN Default 0 2 LParen
-BAR_BAR Default 0 2 LParen
+INFIX_OP "||" Default 0 2 LParen
 FALSE Default 0 2 LParen
 FALSE Default 0 2 LParen
 RPAREN Default 0 1 LParen

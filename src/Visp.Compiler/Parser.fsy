@@ -32,8 +32,8 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token LPAREN RPAREN
 %token LBRACKET RBRACKET
 %token LBRACE RBRACE HASH_BRACE HASH_PAREN HASH_BRACKET BRACE_BAR BAR_BRACE PAREN_BAR BAR_PAREN BRACKET_BAR BAR_BRACKET
-%token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR COLON_GREATER
-%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS COLON_QMARK EQUALS AMP_AMP BAR_BAR GREATER_EQUALS LESS_EQUALS GREATER_GREATER BANG_EQUALS
+%token TRUE FALSE NIL COLON COLON_COLON COMMA UNIT BAR
+%token OP_PLUS OP_MINUS OP_MULT OP_DIV QUOTE_SYM OP_GREATER OP_LESS COLON_QMARK EQUALS GREATER_EQUALS LESS_EQUALS GREATER_GREATER BANG_EQUALS
 %token BANG_RANGE FOR_IN FOR_TO BANG_LIST BANG_MAP BANG_SET BANG_ARRAY BANG_VEC BANG_TUPLE
 %token DOTDOT
 %token AT
@@ -729,11 +729,7 @@ infix_op_text:
     | OP_MINUS              {  ("-",  (rhs parseState 1) )}
     | OP_GREATER            {  (">",  (rhs parseState 1) )}
     | OP_LESS               {  ("<",  (rhs parseState 1) )}
-    | COLON_GREATER         {  (":>", (rhs parseState 1) )}
     | EQUALS                {  ("=",  (rhs parseState 1) )}
-    | AMP_AMP               {  ("&&", (rhs parseState 1) )}
-    | BAR_BAR               {  ("||", (rhs parseState 1) )}
-    | OP_GREATER OP_GREATER {  (">>", (rhs2 parseState 1 2)) }
     | GREATER_EQUALS        {  (">=", (rhs parseState 1) )}
     | LESS_EQUALS           {  ("<=", (rhs parseState 1) )}
     | BANG_EQUALS           {  ("!=", (rhs parseState 1) )}

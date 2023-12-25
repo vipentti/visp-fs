@@ -307,7 +307,10 @@ let isLetter (ch: char) = System.Char.IsLetter(ch)
 let unaryOperatorSet = [ "~~~" ] |> Set.ofList
 
 let infixOperatorSet =
-    [ "|>"
+    [ "&&"
+      "||"
+      ":>"
+      "|>"
       "||>"
       "|||>"
       "<<"
@@ -342,8 +345,6 @@ let specialSymbol (s: string) =
     | "<=" -> Some(LESS_EQUALS)
     | "!=" -> Some(BANG_EQUALS)
     | "=" -> Some(EQUALS)
-    | "&&" -> Some(AMP_AMP)
-    | "||" -> Some(BAR_BAR)
     | it ->
         if infixOperatorSet.Contains it then Some(INFIX_OP it)
         else if unaryOperatorSet.Contains it then Some(UNARY_OP it)
