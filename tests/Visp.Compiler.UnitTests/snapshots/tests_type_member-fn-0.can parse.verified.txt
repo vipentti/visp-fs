@@ -17,8 +17,7 @@ type Mapping () =
   // line 13 @"member-fn-0.visp"
   member _.AddRange dest src len =
     // line 14 @"member-fn-0.visp"
-    for src_range in src .. (src +
-    (dec len)) do
+    for src_range in src .. (src + (dec len)) do
       // line 15 @"member-fn-0.visp"
       printfn "src %i" src_range
     ()

@@ -251,6 +251,11 @@ module ``tests_vector_vector-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/vector/vector-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_numbers_math-ops-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/numbers/math-ops-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_numbers_int-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/numbers/int-0.visp"

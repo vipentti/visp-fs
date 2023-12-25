@@ -21,8 +21,7 @@ type Range (start: int64 , len: int64) =
   // line 25 @"struct-macro-3.visp"
   member _.End =
     // line 25 @"struct-macro-3.visp"
-    (start +
-    len)
+    (start + len)
   // line 25 @"struct-macro-3.visp"
   member d.Offset v =
     // line 25 @"struct-macro-3.visp"
@@ -31,10 +30,10 @@ type Range (start: int64 , len: int64) =
   member d.Contains v =
     // line 25 @"struct-macro-3.visp"
     if CoreMethods.isTruthy(
-      (v >= ((d.Start))))
+      (v >= (d.Start)))
       then
         // line 25 @"struct-macro-3.visp"
-        (v < ((d.End)))
+        (v < (d.End))
       else
         false
   // line 25 @"struct-macro-3.visp"

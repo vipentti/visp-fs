@@ -166,7 +166,7 @@ let TiltNorth (tm: TileMap) =
     rocks
       |> Array.filter ((fun arg1 ->
         // line 74 @"apply-method-args-0.visp"
-        (((arg1.Y)) > 0)))
+        ((arg1.Y) > 0)))
   // line 77 @"apply-method-args-0.visp"
   for rock in rocksToMove do
     // line 78 @"apply-method-args-0.visp"

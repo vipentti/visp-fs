@@ -251,6 +251,11 @@ module ``tests_vector_vector-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/vector/vector-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_numbers_math-ops-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/numbers/math-ops-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_numbers_int-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/numbers/int-0.visp"

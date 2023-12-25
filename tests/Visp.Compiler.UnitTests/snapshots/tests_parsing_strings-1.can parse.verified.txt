@@ -111,27 +111,14 @@ let genTestTemplate (prefix: string) (path: string) =
       // line 57 @"strings-1.visp"
       let template4 =
         // line 57 @"strings-1.visp"
-        ``LiftedString18_strings-1`` prefix testname (1 +
-        2 +
-        3) (1 +
-        2 +
-        3)
+        ``LiftedString18_strings-1`` prefix testname (1 + 2 + 3) (1 + 2 + 3)
       // line 61 @"strings-1.visp"
-      (template +
-      lf +
-      template2 +
-      lf +
-      template3 +
-      lf +
-      template4 +
-      lf)))
+      (template + lf + template2 + lf + template3 + lf + template4 + lf)))
 
 // line 65 @"strings-1.visp"
 let visp_result_todo =
   // line 65 @"strings-1.visp"
-  ((genTestHeader "Temp") +
-  System.Environment.NewLine +
-  (genTestTemplate "example" "example"))
+  ((genTestHeader "Temp") + System.Environment.NewLine + (genTestTemplate "example" "example"))
 // line 65 @"strings-1.visp"
 printfn "%A" visp_result_todo
 

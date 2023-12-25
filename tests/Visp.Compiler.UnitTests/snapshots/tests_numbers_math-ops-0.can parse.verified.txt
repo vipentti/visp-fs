@@ -1,0 +1,124 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"math-ops-0.visp"
+printfn "+ result is %A" ((
+  if CoreMethods.isTruthy(
+    false)
+    then
+      99
+    else
+      101)
+ + (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      99
+    else
+      101)
+ + (
+  match (101, 102) with
+    | (1 , 2) ->
+      2
+    | (101 , 102) ->
+      102
+    | _ ->
+      -1)
+ + (
+  match 9 with
+    | it ->
+      it)
+)
+// line 21 @"math-ops-0.visp"
+printfn "- result is %A" ((
+  if CoreMethods.isTruthy(
+    false)
+    then
+      99
+    else
+      101)
+ - (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      99
+    else
+      101)
+ - (
+  match (101, 102) with
+    | (1 , 2) ->
+      2
+    | (101 , 102) ->
+      102
+    | _ ->
+      -1)
+ - (
+  match 9 with
+    | it ->
+      it)
+)
+// line 34 @"math-ops-0.visp"
+printfn "* result is %A" ((
+  if CoreMethods.isTruthy(
+    false)
+    then
+      99
+    else
+      101)
+ * (
+  if CoreMethods.isTruthy(
+    true)
+    then
+      99
+    else
+      101)
+ * (
+  match (101, 102) with
+    | (1 , 2) ->
+      2
+    | (101 , 102) ->
+      102
+    | _ ->
+      -1)
+ * (
+  match 9 with
+    | it ->
+      it)
+)
+// line 47 @"math-ops-0.visp"
+let visp_result_todo =
+  // line 47 @"math-ops-0.visp"
+  printfn "/ result is %A" ((
+    if CoreMethods.isTruthy(
+      false)
+      then
+        99.0
+      else
+        101.0)
+   / (
+    if CoreMethods.isTruthy(
+      true)
+      then
+        99.0
+      else
+        101.0)
+   / (
+    match (101, 102) with
+      | (1 , 2) ->
+        2.0
+      | (101 , 102) ->
+        102.0
+      | _ ->
+        -1.0)
+   / (
+    match 9.0 with
+      | it ->
+        it)
+  )
+// line 47 @"math-ops-0.visp"
+printfn "%A" visp_result_todo
+

@@ -1,0 +1,7 @@
+﻿+ result is 311
+- result is -109
+* result is 9179082
+/ result is 0.001111331177
+()
+
+ExitCode: 0

@@ -14,8 +14,7 @@ let mutable valuemut = 1
 // line 15 @"variables-0.visp"
 printfn "valuemut is %i" valuemut
 // line 19 @"variables-0.visp"
-valuemut <- (valuemut +
-1)
+valuemut <- (valuemut + 1)
 // line 21 @"variables-0.visp"
 let visp_result_todo =
   // line 21 @"variables-0.visp"
