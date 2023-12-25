@@ -45,7 +45,8 @@ let CreateAndRunProject filePath =
     generator.WriteVispFiles
         RuntimeLibraryReference.Package
         files
-        (Some "--debug- --nooptimizationdata --optimize-")
+        { WriteOptions.Default with
+            Flags = (Some "--debug- --nooptimizationdata --optimize-") }
 
     let dotnet =
         Cli

@@ -189,6 +189,12 @@ type VispFile =
     | Lib of string
     | Main of string
 
+    member this.IsLibrary =
+        match this with
+        | CoreLib _
+        | Lib _ -> true
+        | _ -> false
+
     member this.ReturnLast =
         match this with
         | CoreLib _
@@ -241,6 +247,17 @@ let state = {{ Todo = () }}
 
 let CoreLibs = [ VispFile.CoreLib "core-macros.visp"; VispFile.CoreLib "core.visp" ]
 
+type WriteOptions =
+    { DebugTokens: bool
+      DebugParse: bool
+      Flags: string option }
+
+    static member Default =
+        { DebugTokens = false
+          DebugParse = false
+          Flags = None }
+
+
 type FsharpGenerator(fs: IFileSystem, dir: string) =
     member _.fs = fs
     member _.dir = dir
@@ -254,7 +271,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
     member this.WriteVispFiles
         (typ: RuntimeLibraryReference)
         (files: VispFile list)
-        (flags: string option)
+        (options: WriteOptions)
         =
         let dir = this.fs.Directory.CreateDirectory this.dir
         let existingFiles = dir.GetFiles("*.fs", SearchOption.TopDirectoryOnly)
@@ -267,7 +284,14 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
             let name = this.NameOfWithoutExtension filePath
             let fsfileName = sprintf "%s.fs" name
             let outputPath = this.PathOf fsfileName
-            let parsed = CoreParser.parseFile filePath file.ReturnLast
+
+            let parsed =
+                CoreParser.parseFile
+                    filePath
+                    { ParserOptions.Default with
+                        DebugTokens = options.DebugTokens && not file.IsLibrary
+                        DebugParse = options.DebugParse && not file.IsLibrary
+                        ReturnLast = not file.IsLibrary }
 
             let requires = Transforms.Helpers.getAllRequires parsed
 
@@ -281,7 +305,7 @@ type FsharpGenerator(fs: IFileSystem, dir: string) =
         let requires = results |> List.map snd |> Set.unionMany
 
         let projTemplate =
-            generateFsProjectFile fileNames requires typ (Option.defaultValue "" flags)
+            generateFsProjectFile fileNames requires typ (Option.defaultValue "" options.Flags)
 
         let projPath = this.PathOf "project.fsproj"
 

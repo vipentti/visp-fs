@@ -12,6 +12,21 @@ open Visp.Compiler.SyntaxParser
 open Visp.Compiler.LexHelpers
 open Visp.Compiler.Syntax.Macros
 
+type ParserOptions =
+    { DebugTokens: bool
+      ReturnLast: bool
+      DebugParse: bool }
+
+    static member Default =
+        { DebugTokens = false
+          ReturnLast = true
+          DebugParse = false }
+
+    static member Library =
+        { ParserOptions.Default with
+            ReturnLast = false }
+
+
 
 module CoreParser =
     let getLibFilePath name =
@@ -86,21 +101,23 @@ let state = { Todo = () }
             eprintfn "Message: %A" ctx.Message
         | _ -> ()
 
-    let parseFile filePath returnLast =
+    let parseFile filePath (options: ParserOptions) =
         let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
 
         use _ = stream
         use _ = reader
 
-        let tokenizer = ParseUtils.mkTokenizer ()
+        let tokenizer = ParseUtils.mkTokenizer options.DebugTokens
 
         try
             let mutable res = start tokenizer lexbuf
 
-            // eprintfn "%A" res
+            if options.DebugParse then
+                eprintfn "%A" res
+
             // eprintfn "%s" (res.Pretty())
 
-            if returnLast then
+            if options.ReturnLast then
                 res <- Transforms.LastExpressionUpdater.update res
             // eprintfn "%A" res
 
@@ -139,7 +156,7 @@ let state = { Todo = () }
         let lexbuf = LexBuffer<_>.FromString str
         lexbuf.EndPos <- Position.FirstLine fileName
 
-        let tokenizer = ParseUtils.mkTokenizer ()
+        let tokenizer = ParseUtils.mkTokenizer false
 
         try
             let res = SyntaxParser.start tokenizer lexbuf
