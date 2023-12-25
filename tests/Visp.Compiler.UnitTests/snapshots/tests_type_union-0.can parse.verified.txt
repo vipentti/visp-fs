@@ -28,8 +28,8 @@ type MyList<'a> =
         0
       | (Cons (_ , rest)) ->
         // line 21 @"union-0.visp"
-        1 +
-        (rest.Length ())
+        (1 +
+        (rest.Length ()))
 // line 26 @"union-0.visp"
 let linkedList =
   // line 26 @"union-0.visp"

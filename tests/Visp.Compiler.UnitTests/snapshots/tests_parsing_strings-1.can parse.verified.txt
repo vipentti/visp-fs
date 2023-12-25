@@ -117,21 +117,21 @@ let genTestTemplate (prefix: string) (path: string) =
         2 +
         3)
       // line 61 @"strings-1.visp"
-      template +
+      (template +
       lf +
       template2 +
       lf +
       template3 +
       lf +
       template4 +
-      lf))
+      lf)))
 
 // line 65 @"strings-1.visp"
 let visp_result_todo =
   // line 65 @"strings-1.visp"
-  (genTestHeader "Temp") +
+  ((genTestHeader "Temp") +
   System.Environment.NewLine +
-  (genTestTemplate "example" "example")
+  (genTestTemplate "example" "example"))
 // line 65 @"strings-1.visp"
 printfn "%A" visp_result_todo
 

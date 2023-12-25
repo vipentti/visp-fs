@@ -23,7 +23,7 @@ let visp_result_todo =
           (arg1 > 1))
           then
             // line 11 @"macro-lambda-shorthand-0.visp"
-            arg1 < 10
+            (arg1 < 10)
           else
             false)) lst)
 // line 8 @"macro-lambda-shorthand-0.visp"

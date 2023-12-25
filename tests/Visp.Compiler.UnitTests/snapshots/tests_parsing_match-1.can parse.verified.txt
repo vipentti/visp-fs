@@ -20,7 +20,7 @@ let AreEqualStrings (lhs: obj) (rhs: obj) =
   match (lhs, rhs) with
     | ((:? string as lhss) , (:? string as rhss)) ->
       // line 17 @"match-1.visp"
-      lhss = rhss
+      (lhss = rhss)
     | _ ->
       false
 

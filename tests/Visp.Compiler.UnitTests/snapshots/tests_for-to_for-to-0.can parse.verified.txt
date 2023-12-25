@@ -30,13 +30,13 @@ func2 ()
 // line 21 @"for-to-0.visp"
 let start x y =
   // line 21 @"for-to-0.visp"
-  x - 2 * y
+  (x - (2 * y))
 
 // line 22 @"for-to-0.visp"
 let _end x y =
   // line 22 @"for-to-0.visp"
-  x +
-  (2 * y)
+  (x +
+  (2 * y))
 
 // line 24 @"for-to-0.visp"
 let func3 x y =

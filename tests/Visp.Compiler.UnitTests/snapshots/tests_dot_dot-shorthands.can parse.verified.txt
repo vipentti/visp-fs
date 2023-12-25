@@ -27,7 +27,7 @@ vec.Add(Value.int 64)
 // line 17 @"dot-shorthands.visp"
 let visp_result_todo =
   // line 17 @"dot-shorthands.visp"
-  printfn "%O" ((vec.[(vec.Count) - 1]))
+  printfn "%O" ((vec.[((vec.Count) - 1)]))
 // line 17 @"dot-shorthands.visp"
 printfn "%A" visp_result_todo
 

@@ -31,7 +31,7 @@ type MyCustomValue =
     match other with
       | (:? MyCustomValue as v) ->
         // line 24 @"custom-comparison-0.visp"
-        (t :> IEquatable<_>).Equals(v)
+        ((t :> IEquatable<_>)).Equals(v)
       | _ ->
         false
   // line 29 @"custom-comparison-0.visp"
@@ -44,7 +44,7 @@ type MyCustomValue =
           true
         | ((String lhs) , (String rhs)) ->
           // line 33 @"custom-comparison-0.visp"
-          lhs = rhs
+          (lhs = rhs)
         | (_ , _) ->
           false
   // line 38 @"custom-comparison-0.visp"
@@ -55,7 +55,7 @@ type MyCustomValue =
       match other with
         | (:? MyCustomValue as v) ->
           // line 42 @"custom-comparison-0.visp"
-          (t :> IComparable<_>).CompareTo(v)
+          ((t :> IComparable<_>)).CompareTo(v)
         | null ->
           1
         | _ ->
