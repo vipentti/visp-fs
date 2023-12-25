@@ -60,13 +60,13 @@ type CoreMethods =
         atom.Value <- method atom.Value
         Value.from atom
 
-    static member inline add([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (+)
+    static member inline add_any([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (+)
 
-    static member inline sub([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (-)
+    static member inline sub_any([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (-)
 
-    static member inline mul([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (*)
+    static member inline mul_any([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (*)
 
-    static member inline div([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (/)
+    static member inline div_any([<ParamArray>] args: 'a[]) : 'a = args |> Array.reduce (/)
 
     static member inline rem_impl (lhs: 'a) (rhs: 'a) : 'a = lhs % rhs
 
@@ -184,10 +184,10 @@ module CompileHelpers =
               (">", nameof CoreMethods.gt)
               ("<=", nameof CoreMethods.lte)
               (">=", nameof CoreMethods.gte)
-              ("+", nameof CoreMethods.add)
-              ("-", nameof CoreMethods.sub)
-              ("*", nameof CoreMethods.mul)
-              ("/", nameof CoreMethods.div) ]
+              ("+", nameof CoreMethods.add_any)
+              ("-", nameof CoreMethods.sub_any)
+              ("*", nameof CoreMethods.mul_any)
+              ("/", nameof CoreMethods.div_any) ]
 
         extras |> List.fold (fun map (lhs, rhs) -> Map.add lhs (map[rhs]) map) map
 
