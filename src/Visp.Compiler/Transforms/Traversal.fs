@@ -80,11 +80,71 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
     let rec main_loop (pred: SynExpr -> bool) (expr: SynExpr) =
         let loop = main_loop pred
 
+        let rec loop_members (pred: SynExpr -> bool) (mem: SynTypeMember) =
+            seq {
+                match mem with
+                | SynTypeMember.GetSet(_, get, set, _, attributes, _) ->
+                    for attrlist in attributes do
+                        for attr in attrlist.Attributes do
+                            yield! loop attr.ArgExpr
+
+                    match get with
+                    | None -> ()
+                    | Some(SynMemberGet(_, exprs, _)) ->
+                        for e in exprs do
+                            yield! loop e
+
+                    match set with
+                    | None -> ()
+                    | Some(SynMemberSet(_, _, exprs, _)) ->
+                        for e in exprs do
+                            yield! loop e
+
+                | SynTypeMember.Val(attributes = attributes) ->
+                    for attrlist in attributes do
+                        for attr in attrlist.Attributes do
+                            yield! loop attr.ArgExpr
+
+                | SynTypeMember.Let(_, e, _, attributes, _) ->
+                    for attrlist in attributes do
+                        for attr in attrlist.Attributes do
+                            yield! loop attr.ArgExpr
+
+                    yield! loop e
+
+                | SynTypeMember.Constructor(_, body, _) ->
+                    for e in body do
+                        yield! loop e
+
+                | SynTypeMember.Member(_, body, _, attributes, _)
+                | SynTypeMember.MemberFn(_, _, body, _, attributes, _) ->
+                    for attrlist in attributes do
+                        for attr in attrlist.Attributes do
+                            yield! loop attr.ArgExpr
+
+                    for e in body do
+                        yield! loop e
+
+                | SynTypeMember.Interface(_, mems, _) ->
+                    for m in mems do
+                        yield! loop_members pred m
+            }
+
         seq {
             yield expr
 
             if pred expr then
                 match expr with
+                | SynExpr.ObjectExpression(ctor, members, _) ->
+                    match ctor with
+                    | TypeOrCtor.Type _ -> ()
+                    | TypeOrCtor.Ctor(_, args, _) ->
+                        for b in args do
+                            yield! loop b
+
+                    for mem in members do
+                        yield! loop_members pred mem
+
                 | SynExpr.LetStar(bindings, body, _) ->
                     for SynBinding(_, value, _) in bindings do
                         yield! loop value
@@ -224,56 +284,6 @@ let depthFirstExprsUntilFalse (pred: SynExpr -> bool) (expr: SynExpr) =
                     for attrlist in attributes do
                         for attr in attrlist.Attributes do
                             yield! loop attr.ArgExpr
-
-                    let rec loop_members (pred: SynExpr -> bool) (mem: SynTypeMember) =
-                        seq {
-                            match mem with
-                            | SynTypeMember.GetSet(_, get, set, _, attributes, _) ->
-                                for attrlist in attributes do
-                                    for attr in attrlist.Attributes do
-                                        yield! loop attr.ArgExpr
-
-                                match get with
-                                | None -> ()
-                                | Some(SynMemberGet(_, exprs, _)) ->
-                                    for e in exprs do
-                                        yield! loop e
-
-                                match set with
-                                | None -> ()
-                                | Some(SynMemberSet(_, _, exprs, _)) ->
-                                    for e in exprs do
-                                        yield! loop e
-
-                            | SynTypeMember.Val(attributes = attributes) ->
-                                for attrlist in attributes do
-                                    for attr in attrlist.Attributes do
-                                        yield! loop attr.ArgExpr
-
-                            | SynTypeMember.Let(_, e, _, attributes, _) ->
-                                for attrlist in attributes do
-                                    for attr in attrlist.Attributes do
-                                        yield! loop attr.ArgExpr
-
-                                yield! loop e
-
-                            | SynTypeMember.Constructor(_, body, _) ->
-                                for e in body do
-                                    yield! loop e
-
-                            | SynTypeMember.Member(_, body, _, attributes, _)
-                            | SynTypeMember.MemberFn(_, _, body, _, attributes, _) ->
-                                for attrlist in attributes do
-                                    for attr in attrlist.Attributes do
-                                        yield! loop attr.ArgExpr
-
-                                for e in body do
-                                    yield! loop e
-
-                            | SynTypeMember.Interface(_, mems, _) ->
-                                for m in mems do
-                                    yield! loop_members pred m
-                        }
 
                     for mem in members do
                         yield! loop_members pred mem

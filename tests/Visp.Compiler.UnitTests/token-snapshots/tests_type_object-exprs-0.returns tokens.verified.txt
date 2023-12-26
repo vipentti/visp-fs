@@ -1,0 +1,156 @@
+﻿LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "obj1" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEWOBJ Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "System.Object" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "_.ToString" Default 0 3 Member
+LPAREN Default 0 4 Member
+RPAREN Default 0 3 Member
+STRING ("visp-fs", Regular, Token []) Default 0 3 Member
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%s", Regular, Token []) Default 0 1 LParen
+STRING ("{obj1}", Interpolated 1, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "delimiter" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "delim1" Default 0 2 LParen
+SYMBOL "delim2" Default 0 2 LParen
+SYMBOL "value" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEWOBJ Default 0 2 LParen
+SYMBOL "System.IFormattable" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "_.ToString" Default 0 3 Member
+LPAREN Default 0 4 Member
+LPAREN Default 0 5 Member
+LBRACKET Default 0 5 Member
+SYMBOL "format" Default 0 5 Member
+COLON Default 0 5 Member
+SYMBOL "string" Default 0 5 Member
+RBRACKET Default 0 5 Member
+COMMA Default 0 5 Member
+LBRACKET Default 0 5 Member
+SYMBOL "provider" Default 0 5 Member
+COLON Default 0 5 Member
+SYMBOL "System.IFormatProvider" Default 0 5 Member
+RBRACKET Default 0 5 Member
+RPAREN Default 0 4 Member
+RPAREN Default 0 3 Member
+LPAREN Default 0 4 Member
+IF_KW Default 0 4 Member
+LPAREN Default 0 5 Member
+EQUALS Default 0 5 Member
+SYMBOL "format" Default 0 5 Member
+STRING ("D", Regular, Token []) Default 0 5 Member
+RPAREN Default 0 4 Member
+LPAREN Default 0 5 Member
+OP_PLUS Default 0 5 Member
+SYMBOL "delim1" Default 0 5 Member
+SYMBOL "value" Default 0 5 Member
+SYMBOL "delim2" Default 0 5 Member
+RPAREN Default 0 4 Member
+SYMBOL "value" Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "obj2" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "delimiter" Default 0 2 LParen
+STRING ("{", Regular, Token []) Default 0 2 LParen
+STRING ("}", Regular, Token []) Default 0 2 LParen
+STRING ("Banananananas!", Regular, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("%A", Regular, Token []) Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "System.String.Format" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+STRING ("{0:D}", Regular, Token []) Default 0 3 LParen
+COMMA Default 0 3 LParen
+SYMBOL "obj2" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "makeDisposable" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("Making %s", Regular, Token []) Default 0 2 LParen
+SYMBOL "name" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEWOBJ Default 0 2 LParen
+SYMBOL "System.IDisposable" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+MEMBER Default 0 3 Member
+FN Default 0 3 Member
+SYMBOL "_.Dispose" Default 0 3 Member
+LPAREN Default 0 4 Member
+RPAREN Default 0 3 Member
+LPAREN Default 0 4 Member
+SYMBOL "printfn" Default 0 4 Member
+STRING ("Disposing %s", Regular, Token []) Default 0 4 Member
+SYMBOL "name" Default 0 4 Member
+RPAREN Default 0 3 Member
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "DisposeExample" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+USE Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "makeDisposable" Default 0 3 LParen
+STRING ("full-scope", Regular, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+DO_KW Default 0 2 LParen
+LPAREN Default 0 3 LParen
+USE Default 0 3 LParen
+SYMBOL "_" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+SYMBOL "makeDisposable" Default 0 4 LParen
+STRING ("do-scope", Regular, Token []) Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "DisposeExample" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -166,6 +166,15 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 fixAttributes bound_transform attributes,
                 range
             )
+        | SynExpr.ObjectExpression(ctor, members, range) ->
+            SynExpr.ObjectExpression(
+                match ctor with
+                | TypeOrCtor.Type _ -> ctor
+                | TypeOrCtor.Ctor(it, args, r) ->
+                    TypeOrCtor.Ctor(it, List.map bound_transform args, r)
+                , fixMembers bound_transform members
+                , range
+            )
 
     func result
 

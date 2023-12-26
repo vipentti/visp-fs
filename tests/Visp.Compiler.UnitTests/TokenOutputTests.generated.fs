@@ -101,6 +101,11 @@ module ``tests_type_val-ctor-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/type/val-ctor-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_object-exprs-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/type/object-exprs-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_lambda-shorthand-record-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/type/lambda-shorthand-record-0.visp"

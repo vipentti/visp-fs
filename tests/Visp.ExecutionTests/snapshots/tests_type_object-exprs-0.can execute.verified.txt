@@ -1,0 +1,9 @@
+﻿visp-fs
+"{Banananananas!}"
+Making full-scope
+Making do-scope
+Disposing do-scope
+Disposing full-scope
+()
+
+ExitCode: 0

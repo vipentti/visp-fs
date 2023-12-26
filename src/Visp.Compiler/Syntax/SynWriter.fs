@@ -662,6 +662,7 @@ module Write =
         | SynExpr.SyntaxMacro _ -> failwithf "unsupported %A" expr
         | SynExpr.LambdaShort _ -> failwithf "unsupported %O" expr
         | SynExpr.Collection it -> writeCollectionExprs w st it
+
         | SynExpr.Match(exprs, pats, range) ->
             use _ = startNewlineExpr w st range
 
@@ -1230,6 +1231,29 @@ module Write =
 
             string w " ="
             writeBody w writeMember members
+
+        | SynExpr.ObjectExpression(ctor, members, range) ->
+            startExpr w st range
+            string w "{"
+            use _ = withIndent w true
+            string w "new "
+
+            match ctor with
+            | TypeOrCtor.Type(ty, _) -> writeType w ty
+            | TypeOrCtor.Ctor(ty, args, _) ->
+                writeType w ty
+                string w "("
+                writeArgComma w writeExpr args
+                string w ")"
+                ()
+
+            string w " with"
+
+            writeBody w writeMember members
+
+            string w "}"
+
+            ()
 
         | SynExpr.Record(name, labels, members, attributes, range) ->
             writeAttributesIfNotEmpty w st attributes

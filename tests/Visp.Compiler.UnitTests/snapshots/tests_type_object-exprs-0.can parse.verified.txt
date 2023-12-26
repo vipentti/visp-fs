@@ -1,0 +1,77 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 16 @"object-exprs-0.visp"
+let inline ``LiftedString2_object-exprs-0`` obj1 =
+  $"{obj1}"
+
+// line 13 @"object-exprs-0.visp"
+let obj1 =
+  // line 13 @"object-exprs-0.visp"
+  {
+    new System.Object() with
+      // line 14 @"object-exprs-0.visp"
+      member _.ToString () =
+        "visp-fs"}
+// line 16 @"object-exprs-0.visp"
+printfn "%s" (``LiftedString2_object-exprs-0`` obj1)
+// line 18 @"object-exprs-0.visp"
+let delimiter delim1 delim2 value =
+  // line 19 @"object-exprs-0.visp"
+  {
+    new System.IFormattable with
+      // line 20 @"object-exprs-0.visp"
+      member _.ToString (format: string , provider: System.IFormatProvider) =
+        // line 21 @"object-exprs-0.visp"
+        if CoreMethods.isTruthy(
+          (format = "D"))
+          then
+            // line 22 @"object-exprs-0.visp"
+            (delim1 + value + delim2)
+          else
+            value}
+
+// line 26 @"object-exprs-0.visp"
+let obj2 =
+  // line 26 @"object-exprs-0.visp"
+  delimiter "{" "}" "Banananananas!"
+// line 28 @"object-exprs-0.visp"
+printfn "%A" (System.String.Format ("{0:D}", obj2))
+// line 30 @"object-exprs-0.visp"
+let makeDisposable name =
+  // line 31 @"object-exprs-0.visp"
+  printfn "Making %s" name
+  // line 32 @"object-exprs-0.visp"
+  {
+    new System.IDisposable with
+      // line 33 @"object-exprs-0.visp"
+      member _.Dispose () =
+        // line 34 @"object-exprs-0.visp"
+        printfn "Disposing %s" name}
+
+// line 36 @"object-exprs-0.visp"
+let DisposeExample () =
+  // line 37 @"object-exprs-0.visp"
+  use _ =
+    // line 37 @"object-exprs-0.visp"
+    makeDisposable "full-scope"
+  // line 38 @"object-exprs-0.visp"
+  (
+    // line 39 @"object-exprs-0.visp"
+    use _ =
+      // line 39 @"object-exprs-0.visp"
+      makeDisposable "do-scope"
+    ())
+  ()
+
+// line 43 @"object-exprs-0.visp"
+DisposeExample ()
+// line 45 @"object-exprs-0.visp"
+let visp_result_todo = ()
+// line 45 @"object-exprs-0.visp"
+printfn "%A" visp_result_todo
+

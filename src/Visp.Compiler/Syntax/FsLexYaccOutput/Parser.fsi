@@ -70,6 +70,7 @@ type token =
   | SET
   | DOT
   | NEW
+  | NEWOBJ
   | DOT_BRACKET
   | DOT_PLUS
   | IF_KW
@@ -199,6 +200,7 @@ type tokenId =
     | TOKEN_SET
     | TOKEN_DOT
     | TOKEN_NEW
+    | TOKEN_NEWOBJ
     | TOKEN_DOT_BRACKET
     | TOKEN_DOT_PLUS
     | TOKEN_IF_KW
@@ -319,6 +321,8 @@ type nonTerminalId =
     | NONTERM_collection_close_kind
     | NONTERM_macro_body
     | NONTERM_new_expr
+    | NONTERM_newobj_expr
+    | NONTERM_type_or_ctor
     | NONTERM_threadable_list
     | NONTERM_rev_threadable_list
     | NONTERM_threadable

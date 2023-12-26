@@ -1,0 +1,45 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/object-expressions#remarks
+
+;; This object expression specifies a System.Object but overrides the
+;; ToString method.
+;;(let obj1 { new (System.Object) (member fn _.ToString () "visp-fs") })
+(let obj1 (newobj (System.Object)
+  (member fn _.ToString () "visp-fs")))
+
+(printfn "%s" $"{obj1}")
+
+(fn delimiter (delim1 delim2 value)
+  (newobj System.IFormattable
+    (member fn _.ToString (([format: string], [provider: System.IFormatProvider]))
+      (if (= format "D")
+        (+ delim1 value delim2)
+        value
+      ))))
+
+(let obj2 (delimiter "{" "}" "Banananananas!"))
+
+(printfn "%A" (System.String.Format ("{0:D}", obj2)))
+
+(fn makeDisposable (name)
+  (printfn "Making %s" name)
+  (newobj System.IDisposable
+    (member fn _.Dispose ()
+      (printfn "Disposing %s" name))))
+
+(fn DisposeExample ()
+  (use _ (makeDisposable "full-scope"))
+  (do
+    (use _ (makeDisposable "do-scope"))
+    ())
+  ())
+
+(DisposeExample)
+
+()
