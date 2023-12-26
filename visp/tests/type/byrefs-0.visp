@@ -1,0 +1,54 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/byrefs
+(open System)
+
+(type C1 ()
+  (mut nums [| 1 3 7 15 31 63 127 255 511 1023 |])
+  (override fn _.ToString () (.Join System.String #\space nums))
+
+  (member fn _.FindLargestSmallerThan (target)
+    (mut ctr (dec (+Length nums)))
+
+    (while (&& (> ctr 0) (>= (.[ctr] nums) target))
+      (up! ctr dec))
+
+    (if (> ctr 0)
+      (.[ctr] &nums)
+      (.[0] &nums)
+    )))
+
+(fn C1Test ()
+  (let c1 (C1))
+  (printfn $"Original sequence: %O{c1}")
+  (let v (.FindLargestSmallerThan &c1 16))
+  (set! v (* v 2))
+  (printfn $"New sequence:      %O{c1}"))
+
+(C1Test)
+
+(fn f_inref ([dt: inref<DateTime>])
+  (printfn $"Now: {dt:``yyyy-MM-dd``}"))
+
+(fn f_byref ([dt: byref<DateTime>])
+  (printfn $"Now: {dt:``yyyy-MM-dd``}")
+  (set! dt (.AddDays dt 1)))
+
+(fn UsingByrefs ()
+  (let dt (new DateTime 2023 12 26))
+  (f_inref &dt)
+
+  (mut dt (new DateTime 2023 12 26))
+  (f_byref &dt)
+  (f_inref &dt)
+
+  ())
+
+(UsingByrefs)
+
+()

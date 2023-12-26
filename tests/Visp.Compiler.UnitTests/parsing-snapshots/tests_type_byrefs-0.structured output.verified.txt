@@ -1,0 +1,135 @@
+﻿ParsedFile
+  [AnonModule
+     ([Open (SynSymbol System, (9,1--9,12));
+       Expr
+         (Type
+            (SynSymbol C1, Args (Tuple [], (11,9--11,11)),
+             [Let
+                (Named (SynSymbol nums, (12,7--12,11)),
+                 Collection
+                   (SynCollection
+                      (FsArray,
+                       [Const (Int32 1, (12,15--12,16)); Const (Int32 3, (12,17--12,18));
+                        Const (Int32 7, (12,19--12,20)); Const (Int32 15, (12,21--12,23));
+                        Const (Int32 31, (12,24--12,26)); Const (Int32 63, (12,27--12,29));
+                        Const (Int32 127, (12,30--12,33)); Const (Int32 255, (12,34--12,37));
+                        Const (Int32 511, (12,38--12,41)); Const (Int32 1023, (12,42--12,46))], (12,12--12,49))),
+                 Mutable, [], (12,3--12,49));
+              MemberFn
+                (SynSymbol _.ToString, Args (List [], (13,26--13,28)),
+                 [DotMethod
+                    (Symbol (SynSymbol System.String), SynSymbol Join,
+                     [Const (Char ' ', (13,50--13,57)); Symbol (SynSymbol nums)], Tuple, (13,30--13,62))], Override, [],
+                 (13,3--13,63));
+              MemberFn
+                (SynSymbol _.FindLargestSmallerThan,
+                 Args (List [Named (SynSymbol target, (15,39--15,45))], (15,38--15,46)),
+                 [LetOrUse
+                    (Named (SynSymbol ctr, (16,9--16,12)),
+                     FunctionCall
+                       (Symbol (SynSymbol dec),
+                        [DotProperty (Symbol (SynSymbol nums), SynSymbol Length, (16,19--16,31))], (16,14--16,32)),
+                     Mutable, [], (16,5--16,33));
+                  While
+                    (Op
+                       (Infix
+                          (SynSymbol &&,
+                           [Op
+                              (Infix
+                                 (SynSymbol >, [Symbol (SynSymbol ctr); Const (Int32 0, (18,22--18,23))], (18,16--18,23)));
+                            Op
+                              (Infix
+                                 (SynSymbol >=,
+                                  [DotIndex (Symbol (SynSymbol nums), [Symbol (SynSymbol ctr)], (18,30--18,41));
+                                   Symbol (SynSymbol target)], (18,26--18,49)))], (18,11--18,50))),
+                     [SyntaxMacroCall
+                        (SynMacroCall
+                           (SynSymbol up!, [Symbol (SynSymbol up!); Symbol (SynSymbol ctr); Symbol (SynSymbol dec)],
+                            (19,7--19,18)))], (18,5--19,19));
+                  If
+                    (Op (Infix (SynSymbol >, [Symbol (SynSymbol ctr); Const (Int32 0, (21,15--21,16))], (21,9--21,16))),
+                     DotIndex (Symbol (SynSymbol &nums), [Symbol (SynSymbol ctr)], (22,7--22,19)),
+                     Some (DotIndex (Symbol (SynSymbol &nums), [Const (Int32 0, (23,9--23,10))], (23,7--23,17))),
+                     (21,5--23,18))], Default, [], (15,3--24,5))], [], (11,1--24,6)), (11,0--24,7));
+       Expr
+         (FunctionDef
+            (SynSymbol C1Test, None, Args (List [], (26,11--26,13)),
+             [LetOrUse
+                (Named (SynSymbol c1, (27,7--27,9)), FunctionCall (Symbol (SynSymbol C1), [], (27,11--27,13)), None, [],
+                 (27,3--27,14));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Original sequence: %O{c1}", Interpolated 1, (28,11--28,39)), (28,11--28,39))],
+                 (28,3--28,39));
+              LetOrUse
+                (Named (SynSymbol v, (29,7--29,8)),
+                 DotMethod
+                   (Symbol (SynSymbol &c1), SynSymbol FindLargestSmallerThan, [Const (Int32 16, (29,38--29,40))], Tuple,
+                    (29,10--29,40)), None, [], (29,3--29,41));
+              Set
+                (Symbol (SynSymbol v),
+                 Op (Infix (SynSymbol *, [Symbol (SynSymbol v); Const (Int32 2, (30,15--30,16))], (30,11--30,16))),
+                 (30,3--30,17));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("New sequence:      %O{c1}", Interpolated 1, (31,11--31,39)), (31,11--31,39))],
+                 (31,3--31,39))], None, (26,1--31,40)), (26,0--31,41));
+       Expr (FunctionCall (Symbol (SynSymbol C1Test), [], (33,1--33,7)), (33,0--33,8));
+       Expr
+         (FunctionDef
+            (SynSymbol f_inref, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol dt, (35,14--35,16)), Generic (Ident inref, [Ident DateTime], (35,18--35,33)),
+                      (35,13--35,34))], (35,12--35,35)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Now: {dt:``yyyy-MM-dd``}", Interpolated 1, (36,11--36,38)), (36,11--36,38))],
+                 (36,3--36,38))], None, (35,1--36,39)), (35,0--36,40));
+       Expr
+         (FunctionDef
+            (SynSymbol f_byref, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol dt, (38,14--38,16)), Generic (Ident byref, [Ident DateTime], (38,18--38,33)),
+                      (38,13--38,34))], (38,12--38,35)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Now: {dt:``yyyy-MM-dd``}", Interpolated 1, (39,11--39,38)), (39,11--39,38))],
+                 (39,3--39,38));
+              Set
+                (Symbol (SynSymbol dt),
+                 DotMethod
+                   (Symbol (SynSymbol dt), SynSymbol AddDays, [Const (Int32 1, (40,24--40,25))], Tuple, (40,12--40,25)),
+                 (40,3--40,26))], None, (38,1--40,27)), (38,0--40,28));
+       Expr
+         (FunctionDef
+            (SynSymbol UsingByrefs, None, Args (List [], (42,16--42,18)),
+             [LetOrUse
+                (Named (SynSymbol dt, (43,7--43,9)),
+                 New
+                   (Ident DateTime,
+                    [Const (Int32 2023, (43,24--43,28)); Const (Int32 12, (43,29--43,31));
+                     Const (Int32 26, (43,32--43,34))], (43,11--43,34)), None, [], (43,3--43,35));
+              FunctionCall (Symbol (SynSymbol f_inref), [Symbol (SynSymbol &dt)], (44,3--44,14));
+              LetOrUse
+                (Named (SynSymbol dt, (46,7--46,9)),
+                 New
+                   (Ident DateTime,
+                    [Const (Int32 2023, (46,24--46,28)); Const (Int32 12, (46,29--46,31));
+                     Const (Int32 26, (46,32--46,34))], (46,11--46,34)), Mutable, [], (46,3--46,35));
+              FunctionCall (Symbol (SynSymbol f_byref), [Symbol (SynSymbol &dt)], (47,3--47,14));
+              FunctionCall (Symbol (SynSymbol f_inref), [Symbol (SynSymbol &dt)], (48,3--48,14));
+              Const (Unit, (50,2--50,4))], None, (42,1--50,4)), (42,0--50,5));
+       Expr (FunctionCall (Symbol (SynSymbol UsingByrefs), [], (52,1--52,12)), (52,0--52,13));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (54,0--54,2)), Const (Unit, (54,0--54,2)), None, [], (54,0--54,2)),
+          (54,0--54,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (54,0--54,2)), (54,0--54,2)); Symbol (SynSymbol visp_result_todo)],
+             (54,0--54,2)), (54,0--54,2))], (9,0--54,2))]
