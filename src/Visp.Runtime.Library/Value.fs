@@ -413,8 +413,6 @@ and [<Struct; CustomComparison; CustomEquality>] AnyValue =
 
                 ()
 
-            let (AnyValue ob) = this
-
             tryWriteObject this.Value writer
 
     override this.ToString() =
@@ -443,7 +441,7 @@ and [<Struct; CustomComparison; CustomEquality>] AnyValue =
             | _ -> -1
 
     interface IComparable<AnyValue> with
-        member this.CompareTo other = 0
+        member this.CompareTo _other = 0
 
 and [<Struct; CustomComparison; CustomEquality>] Pair =
     | Pair of Value * Value

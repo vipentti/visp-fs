@@ -5,6 +5,7 @@
         <Features>strict</Features>
         <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
         <InvariantGlobalization>true</InvariantGlobalization>
+        <OtherFlags>$(OtherFlags) --warnon:1182</OtherFlags>
     </PropertyGroup>
 
     <!-- Build -->

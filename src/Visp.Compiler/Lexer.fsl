@@ -121,7 +121,6 @@ let startString nesting (lexbuf: LexBuffer<_>) =
             // Adjust the start-of-token mark back to the true start of the token
             lexbuf.StartPos <- startp
 
-            let isPart = context.HasFlag(LexerStringFinisherContext.InterpolatedPart)
             let isTripleQuote = context.HasFlag(LexerStringFinisherContext.TripleQuote)
 
             let synStringKind =
@@ -136,20 +135,6 @@ let startString nesting (lexbuf: LexBuffer<_>) =
                 else
                   Syntax.SynStringKind.Regular
 
-            // if kind.IsInterpolated then
-            //   let s = buf.ToString()
-            //   // if kind.IsInterpolatedFirst then
-            //   //   if isPart then
-            //   //     INTERP_STRING_BEGIN_PART (s, synStringKind, cont)
-            //   //   else
-            //   //     INTERP_STRING_BEGIN_END (s, synStringKind, cont)
-            //   // else
-            //   //   if isPart then
-            //   //     INTERP_STRING_PART (s, cont)
-            //   //   else
-            //   //     INTERP_STRING_END (s, cont)
-            //   STRING(buf.ToString(), Syntax.SynStringKind.Interpolated, cont)
-            // else
             STRING(buf.ToString(), synStringKind, cont)
         )
 
@@ -823,18 +808,18 @@ and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
     }
  | newline
   { newline lexbuf;
-    let (buf, _fin, m, kind, args) = sargs
+    let (buf, _fin, _m, _kind, _args) = sargs
     addUnicodeString buf (lexeme lexbuf)
     singleQuoteString sargs skip lexbuf
   }
  | escape_char
    {
-     let (buf, _fin, m, kind, args) = sargs
+     let (buf, _fin, _m, _kind, _args) = sargs
      addUnicodeString buf (lexeme lexbuf)
      singleQuoteString sargs skip lexbuf
    }
   | _
-    { let (buf, _fin, m, kind, args) = sargs
+    { let (buf, _fin, _m, _kind, _args) = sargs
       addUnicodeString buf (lexeme lexbuf)
       singleQuoteString sargs skip lexbuf }
 
@@ -846,17 +831,11 @@ and tripleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
     }
  | newline
   { newline lexbuf;
-    let (buf, _fin, m, kind, args) = sargs
+    let (buf, _fin, _m, _kind, _args) = sargs
     addUnicodeString buf (lexeme lexbuf)
     tripleQuoteString sargs skip lexbuf
   }
- // | escape_char
- //   {
- //     let (buf, _fin, m, kind, args) = sargs
- //     addUnicodeString buf (lexeme lexbuf)
- //     singleQuoteString sargs skip lexbuf
- //   }
  | _
-    { let (buf, _fin, m, kind, args) = sargs
+    { let (buf, _fin, _m, _kind, _args) = sargs
       addUnicodeString buf (lexeme lexbuf)
       tripleQuoteString sargs skip lexbuf }
