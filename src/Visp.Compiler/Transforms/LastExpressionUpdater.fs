@@ -13,7 +13,7 @@ module LastExpressionUpdater =
 
     and private updateLastFragment (lst: ParsedFileFragment list) =
         match lst with
-        | last :: [] -> [ updateFragment last ]
+        | [ last ] -> [ updateFragment last ]
         | lhs :: rest -> lhs :: (updateLastFragment rest)
         | _ -> lst
 
@@ -24,7 +24,7 @@ module LastExpressionUpdater =
 
     and private updateLastSynModuleDecl (decls: SynModuleDecl list) =
         match decls with
-        | last :: [] -> updateSynModuleDecl last
+        | [ last ] -> updateSynModuleDecl last
         | lhs :: rest -> lhs :: (updateLastSynModuleDecl rest)
         | _ -> decls
 

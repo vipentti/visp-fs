@@ -441,10 +441,10 @@ let docMapAnn<'a> (an: 'a -> Doc<'a> -> Doc<'a>) (doc: Doc<'a>) : Doc<'a> =
         | Nest(i, d) -> Nest(i, go d)
         | Union(l, r) -> Union(go l, go r)
         | Annotate(a, d) -> an a (go d)
-        | Column f -> Column(fun i -> go (f i))
-        | Nesting k -> Nesting(fun i -> go (k i))
-        | Columns k -> Columns(fun i -> go (k i))
-        | Ribbon k -> Ribbon(fun i -> go (k i))
+        | Column f -> Column(f >> go)
+        | Nesting k -> Nesting(k >> go)
+        | Columns k -> Columns(k >> go)
+        | Ribbon k -> Ribbon(k >> go)
 
     go doc
 
@@ -514,7 +514,7 @@ let nicest1
         | SEmpty -> true
         | SChar(_, x) -> fits m (w - 1) x
         | SText(l, _, x) -> fits m (w - l) x
-        | SLine(_, _) -> true
+        | SLine _ -> true
         | SPushAnn(_, x) -> fits m w x
         | SPopAnn(_, x) -> fits m w x
 
@@ -557,7 +557,7 @@ let nicestR
         | SChar(_, x) -> fits m (w - 1) x
         | SText(l, _, x) -> fits m (w - l) x
         | SLine(i, x) when m < i -> 1.0 + fits m (p - i) x
-        | SLine(_, _) -> 0.0
+        | SLine(_) -> 0.0
         | SPushAnn(_, x) -> fits m w x
         | SPopAnn(_, x) -> fits m w x
 
@@ -630,21 +630,15 @@ let simpleDocScanAnn mergeState initState (doc: SimpleDoc<'a>) : SimpleDoc<'a> =
     let merge stateStack a =
         match stateStack with
         | r :: _ -> (mergeState r a) :: stateStack
-        | [] -> failwith "Stack underflow" // Error: Stack underflow
+        | [] -> failwith "merge Stack underflow " // Error: Stack underflow
 
     let pop stateStack _ =
         match stateStack with
         | _ :: rs -> rs
-        | [] -> failwith "Stack underflow" // Error: Stack underflow
+        | [] -> failwith "pop Stack underflow" // Error: Stack underflow
 
     // Using simpleDocMapAnn with a state stack to scan annotations
-    simpleDocMapAnn
-        merge
-        pop
-        (fun rs -> List.head rs |> mkPushAnn)
-        (fun rs -> List.head rs |> mkPopAnn)
-        [ initState ]
-        doc
+    simpleDocMapAnn merge pop (List.head >> mkPushAnn) (List.head >> mkPopAnn) [ initState ] doc
 
 type System.String with
 

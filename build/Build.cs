@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Execution;
@@ -22,11 +23,11 @@ using static Vipentti.Nuke.Components.StandardNames;
     GitHubActionsImage.WindowsServer2019,
     GitHubActionsImage.UbuntuLatest,
     GitHubActionsImage.MacOsLatest,
-    OnPullRequestBranches = [ MainBranch, DevelopBranch ],
-    OnPushBranches = [ MainBranch, DevelopBranch ],
+    OnPullRequestBranches = [MainBranch, DevelopBranch],
+    OnPushBranches = [MainBranch, DevelopBranch],
     PublishArtifacts = false
     // FetchDepth = 0 // fetch full history
-    , SetupDotnetVersions = [ "8.x", ]
+    , SetupDotnetVersions = ["8.x",]
     , InvokedTargets = [
         nameof(ITest.Test),
         nameof(IUseLinters.InstallLinters),
@@ -37,6 +38,7 @@ class Build :
     NukeBuild,
     IUseCsharpier,
     IUseFantomas,
+    IUseFSharpLint,
     IUseCustomLinters,
     IHazSolution,
     ITest,
@@ -68,6 +70,7 @@ class Build :
 
     bool IUseCsharpier.UseGlobalTool => false;
     bool IUseFantomas.UseGlobalTool => false;
+    bool IUseFSharpLint.UseGlobalTool => false;
 
     IEnumerable<AbsolutePath> IUseFantomas.DirectoriesToFormat => new[]
     {
@@ -79,6 +82,7 @@ class Build :
     {
         From<IUseCsharpier>().Linter,
         From<IUseFantomas>().Linter,
+        From<IUseFSharpLint>().Linter,
     };
 
     // csharpier-ignore
@@ -135,6 +139,7 @@ class Build :
     // csharpier-ignore
     Configure<DotNetPackSettings> IPack.PackSettings => _ => _
         .AddProperty("TargetsForTfmSpecificContentInPackage", "");
+
 }
 
 public interface IUseCustomLinters : INukeBuild
@@ -268,6 +273,49 @@ public interface IUseFantomas : INukeBuild
         {
             DotNet(
                 arguments: $"{toolname} {path}" + (check ? " --check" : ""),
+                logInvocation: true
+            );
+        }
+    }
+}
+
+public interface IUseFSharpLint : INukeBuild, IHazSolution
+{
+    bool UseGlobalTool { get; }
+
+    IEnumerable<AbsolutePath> FilesToFormat => new[] { Solution.Path };
+
+    // csharpier-ignore
+    Target CheckFSharpLint => _ => _
+        .Executes(() => RunFSharpLint(check: true));
+
+    // csharpier-ignore
+    Target InstallFSharpLint => _ => _
+        .OnlyWhenDynamic(() => UseGlobalTool)
+        .Executes(ExecuteInstallGlobalFSharpLint);
+
+    sealed IProvideLinter Linter =>
+        new LinterDelegate(ExecuteInstallGlobalFSharpLint, () => RunFSharpLint(check: true));
+
+    sealed void ExecuteInstallGlobalFSharpLint()
+    {
+        if (UseGlobalTool)
+        {
+            DotNetToolUpdate(_ => _.SetGlobal(true).SetPackageName("dotnet-fsharplint"));
+        }
+    }
+
+    sealed void RunFSharpLint(bool check)
+    {
+        _ = check;
+        var toolname = UseGlobalTool ? "fsharplint" : "tool run dotnet-fsharplint";
+
+        FilesToFormat.ForEach(RunFormat);
+
+        void RunFormat(AbsolutePath path)
+        {
+            DotNet(
+                arguments: toolname + $" lint {path}",
                 logInvocation: true
             );
         }

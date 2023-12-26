@@ -1151,7 +1151,7 @@ module Write =
             startExpr w st range
 
             match args with
-            | [] -> failwith "empty?"
+            | [] -> failwith "unsupported empty ThreadFirst"
             | [ arg ] -> writeExpr w WriteState.Inline arg
             | arg :: rest ->
                 writeExpr w WriteState.Inline arg
@@ -1798,7 +1798,7 @@ module Write =
             string w " ()"
         else
             match args with
-            | SynExpr.Tuple _ as arg :: [] ->
+            | [ SynExpr.Tuple _ as arg ] ->
                 space w
                 writeExpr w WriteState.InlineNoParens arg
             | _ -> writeSeqLeading w WriteState.Inline space writeExprInParens args

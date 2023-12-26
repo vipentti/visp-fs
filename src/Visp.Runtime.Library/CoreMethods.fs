@@ -74,7 +74,7 @@ type CoreMethods =
     static member str(_: RuntimeState, [<ParamArray>] args: Value[]) =
         match Array.tryHead args with
         | Some(v) -> Value.string (sprintf "%O" v)
-        | _ -> failwith "invalid vector-push!"
+        | _ -> failwith "invalid str"
 
     static member ``swap!``(value: Value, method: Value -> Value) : Value =
         let atom = unwrapAtom value
@@ -93,7 +93,7 @@ type CoreMethods =
 
     static member inline euc_rem_impl (a: 'a) (b: 'a) = (a % b + b) % b
 
-    static member inline ``null?``<'a when 'a: null and 'a: equality>(v: 'a) = v = null
+    static member inline ``null?``<'a when 'a: null and 'a: equality>(v: 'a) = isNull v
 
     static member ``eq?``<'a when 'a: equality>(lhs: 'a, rhs: 'a) = lhs = rhs
 

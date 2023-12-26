@@ -22,7 +22,7 @@ open System.IO
 
 let (|MatchingText|) str (pat: SynMacroPat) =
     match pat with
-    | SynMacroPat.Symbol(it, _) -> if it.Text = str then true else false
+    | SynMacroPat.Symbol(it, _) -> it.Text = str
     | _ -> false
 
 let (|DiscardPredicate|Not|) (pat: SynMacroPat) =
@@ -46,8 +46,8 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
     // printfn "looking for\n%A\nin\n%A" args pats
     // TODO: Determine pattern matching
     match pats with
-    | SynMacroPat.Symbol _ :: SynMacroPat.Ellipsis _ :: [] -> true
-    | SynMacroPat.List(list, _) :: SynMacroPat.Ellipsis _ :: [] ->
+    | SynMacroPat.Symbol _ :: [ SynMacroPat.Ellipsis _ ] -> true
+    | SynMacroPat.List(list, _) :: [ SynMacroPat.Ellipsis _ ] ->
         // failwithf "list pattern matching %A vs %A" list args
         // printfn "ELLIPSIS MATCH"
         // matchesPat args list
@@ -111,10 +111,10 @@ let rec private bindPatterns
     =
 
     match pats with
-    | SynMacroPat.Symbol(sym, _) :: SynMacroPat.Ellipsis _ :: [] ->
+    | SynMacroPat.Symbol(sym, _) :: [ SynMacroPat.Ellipsis _ ] ->
         dict.Add(Syntax.textOfSymbol sym, BoundPatternBody.List(args))
         ()
-    | SynMacroPat.List(lst, _) :: SynMacroPat.Ellipsis _ :: [] ->
+    | SynMacroPat.List(lst, _) :: [ SynMacroPat.Ellipsis _ ] ->
 
         use tempPool = PooledDictionary.GetPooled<string, ResizeArray<_>>()
         let temp = tempPool.Value
@@ -332,10 +332,8 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
             let args = call_args |> List.map bound_evaluate
 
             match args with
-            | (sep :: EvaluatedItems lhs :: EvaluatedItems rhs :: []) ->
-                EvaluatedBody.Splice(
-                    List.zip lhs rhs |> List.map (fun (x, y) -> [ x; sep; y ]) |> List.concat
-                )
+            | (sep :: EvaluatedItems lhs :: [ EvaluatedItems rhs ]) ->
+                EvaluatedBody.Splice(List.zip lhs rhs |> List.collect (fun (x, y) -> [ x; sep; y ]))
 
             | _ -> failwithf "args: %A" args
 
@@ -343,10 +341,8 @@ let rec private evaluateBody (pats: BoundPats) (currentBody: SynMacroBody) =
             let args = call_args |> List.map bound_evaluate
 
             match args with
-            | (EvaluatedItems lhs :: EvaluatedItems rhs :: []) ->
-                EvaluatedBody.Splice(
-                    List.zip lhs rhs |> List.map (fun (x, y) -> [ x; y ]) |> List.concat
-                )
+            | (EvaluatedItems lhs :: [ EvaluatedItems rhs ]) ->
+                EvaluatedBody.Splice(List.zip lhs rhs |> List.collect (fun (x, y) -> [ x; y ]))
 
             | _ -> failwithf "args: %A" args
 
@@ -368,7 +364,7 @@ and private evaluateList pats kind (args: SynMacroBody list) accum =
 
         let splicable =
             match lst with
-            | (SynMacroBody.Symbol _) :: (SynMacroBody.Trivia _) :: (SynMacroBody.Symbol _) :: [] ->
+            | (SynMacroBody.Symbol _) :: (SynMacroBody.Trivia _) :: [ (SynMacroBody.Symbol _) ] ->
                 let lhs = List.item 0 evaled
                 let trivia = List.item 1 evaled
                 let rhs = List.item 2 evaled
@@ -381,7 +377,7 @@ and private evaluateList pats kind (args: SynMacroBody list) accum =
 
                     EvaluatedBody.Splice(items)
                 | _ -> failwithf "Unsupported ellipsis list %s %A" (lst.Pretty()) evaled
-            | (SynMacroBody.Symbol _) :: (SynMacroBody.Symbol _) :: [] ->
+            | (SynMacroBody.Symbol _) :: [ (SynMacroBody.Symbol _) ] ->
                 let lhs = List.item 0 evaled
                 let rhs = List.item 1 evaled
 
@@ -634,10 +630,10 @@ let private expandFully evaluator (SynMacroCall(_, _, range) as call) =
     evaluatedBodyToExpr range <| EvaluatedBody.Item evaluated
 
 
-let private expandSynMacro (SynMacro(_, _, _) as macro) (SynMacroCall(_, _, _) as call) =
+let private expandSynMacro macro call =
     expandFully (evaluateMacroToEvaluatedBody macro) call
 
-let private expandBuiltinMacro fn (SynMacroCall(_, _, _) as call) =
+let private expandBuiltinMacro fn call =
     expandFully (fn >> EvaluatedBody.Item) call
 
 let private tryExpandMacroCall (SynMacroCall(name = name) as call) =
