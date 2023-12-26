@@ -231,6 +231,11 @@ module ``tests_parsing_tupled-special-forms-0`` =
     let ``can parse`` () = TestUtils.runTest "tests/parsing/tupled-special-forms-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-2`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/parsing/strings-interpolation-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_operators-1`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/parsing/operators-1.visp"
