@@ -1,0 +1,30 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol printSourceLocation, None, Args (List [], (8,24--8,26)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Line: %s", Regular, (9,13--9,23)), (9,13--9,23));
+                  Const (SourceIdentifier (__LINE__, 9), (9,24--9,32))], (9,5--9,32));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Source Directory: %s", Regular, (10,13--10,35)), (10,13--10,35));
+                  Const
+                    (SourceIdentifier (__SOURCE_DIRECTORY__, {SolutionDirectory}visp/tests/parsing),
+                     (10,36--10,56))], (10,5--10,56));
+              FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Source File: %s", Regular, (11,13--11,30)), (11,13--11,30));
+                  Const (SourceIdentifier (__SOURCE_FILE__, keyword-strings-0.visp), (11,31--11,46))], (11,5--11,46))],
+             None, (8,1--11,47)), (8,0--12,1));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (14,0--14,21)),
+             FunctionCall (Symbol (SynSymbol printSourceLocation), [], (14,1--14,20)), None, [], (14,0--14,21)),
+          (14,0--14,21));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (14,0--14,21)), (14,0--14,21)); Symbol (SynSymbol visp_result_todo)],
+             (14,0--14,21)), (14,0--14,21))], (8,0--14,21))]

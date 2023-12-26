@@ -1894,7 +1894,7 @@ and token (args: LexArgs) (skip: bool) lexbuf =
 # 517 "Lexer.fsl"
                                
                      let text = lexeme lexbuf
-                     symbolOrKeyword args.CurrentContext text
+                     symbolOrKeywordToken args lexbuf text
                    
 # 1899 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
@@ -2487,86 +2487,78 @@ and tokenStream (args: LexArgs) (skip: bool) lexbuf =
 # 790 "Lexer.fsl"
                                
                    let text = lexeme lexbuf
-                   if args.mode.IsQuasiquoteMode then
-                     if text = "unquote" then
-                       UNQUOTE_KW
-                     else if text = "splice-unquote" then
-                       SPLICE_UNQUOTE_KW
-                     else
-                       SYMBOL text
-                   else
-                     SYMBOL text 
-# 2499 "Syntax/FsLexYaccOutput/Lexer.fs"
+                   symbolOrKeywordToken args lexbuf text 
+# 2491 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 97 -> ( 
-# 801 "Lexer.fsl"
+# 793 "Lexer.fsl"
                        unexpected_char "tokenStream" lexbuf 
-# 2504 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2496 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "tokenStream"
 // Rule singleQuoteString
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) lexbuf =
   match _fslex_tables.Interpret(8,lexbuf) with
   | 0 -> ( 
-# 805 "Lexer.fsl"
+# 797 "Lexer.fsl"
                      let (buf, fin, _m, kind, args) = sargs
                      let cont = LexCont.Token(args.stringNest)
                      fin.Finish buf kind (LexerStringFinisherContext()) cont
                    
-# 2516 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2508 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 1 -> ( 
-# 810 "Lexer.fsl"
+# 802 "Lexer.fsl"
                    newline lexbuf;
                    let (buf, _fin, _m, _kind, _args) = sargs
                    addUnicodeString buf (lexeme lexbuf)
                    singleQuoteString sargs skip lexbuf
                  
-# 2525 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2517 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 2 -> ( 
-# 816 "Lexer.fsl"
+# 808 "Lexer.fsl"
                    
                     let (buf, _fin, _m, _kind, _args) = sargs
                     addUnicodeString buf (lexeme lexbuf)
                     singleQuoteString sargs skip lexbuf
                   
-# 2534 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2526 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 3 -> ( 
-# 822 "Lexer.fsl"
+# 814 "Lexer.fsl"
                      let (buf, _fin, _m, _kind, _args) = sargs
                      addUnicodeString buf (lexeme lexbuf)
                      singleQuoteString sargs skip lexbuf 
-# 2541 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2533 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "singleQuoteString"
 // Rule tripleQuoteString
 and tripleQuoteString (sargs: LexerStringArgs) (skip: bool) lexbuf =
   match _fslex_tables.Interpret(0,lexbuf) with
   | 0 -> ( 
-# 828 "Lexer.fsl"
+# 820 "Lexer.fsl"
                      let (buf, fin, _m, kind, args) = sargs
                      let cont = LexCont.Token(args.stringNest)
                      fin.Finish buf kind (LexerStringFinisherContext.TripleQuote) cont
                    
-# 2553 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2545 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 1 -> ( 
-# 833 "Lexer.fsl"
+# 825 "Lexer.fsl"
                    newline lexbuf;
                    let (buf, _fin, _m, _kind, _args) = sargs
                    addUnicodeString buf (lexeme lexbuf)
                    tripleQuoteString sargs skip lexbuf
                  
-# 2562 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2554 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | 2 -> ( 
-# 839 "Lexer.fsl"
+# 831 "Lexer.fsl"
                      let (buf, _fin, _m, _kind, _args) = sargs
                      addUnicodeString buf (lexeme lexbuf)
                      tripleQuoteString sargs skip lexbuf 
-# 2569 "Syntax/FsLexYaccOutput/Lexer.fs"
+# 2561 "Syntax/FsLexYaccOutput/Lexer.fs"
           )
   | _ -> failwith "tripleQuoteString"
 

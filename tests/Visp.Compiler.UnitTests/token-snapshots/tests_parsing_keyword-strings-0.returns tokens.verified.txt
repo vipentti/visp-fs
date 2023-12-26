@@ -1,0 +1,26 @@
+﻿LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "printSourceLocation" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("Line: %s", Regular, Token []) Default 0 2 LParen
+KEYWORD_STRING ("__LINE__", "9") Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("Source Directory: %s", Regular, Token []) Default 0 2 LParen
+KEYWORD_STRING
+  ("__SOURCE_DIRECTORY__", "{SolutionDirectory}visp/tests/parsing") Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("Source File: %s", Regular, Token []) Default 0 2 LParen
+KEYWORD_STRING ("__SOURCE_FILE__", "keyword-strings-0.visp") Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printSourceLocation" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

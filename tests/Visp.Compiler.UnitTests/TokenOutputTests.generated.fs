@@ -156,6 +156,11 @@ module ``tests_parsing_strings-1`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/strings-1.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_keyword-strings-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/keyword-strings-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_match-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/match-0.visp"

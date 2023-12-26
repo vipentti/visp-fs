@@ -13,6 +13,7 @@ type token =
   | HASH_IDENT of (string)
   | UNARY_OP of (string)
   | INFIX_OP of (string)
+  | KEYWORD_STRING of ((string * string))
   | BIGNUM of ((string * string))
   | DECIMAL of (System.Decimal)
   | IEEE64 of (double)
@@ -143,6 +144,7 @@ type tokenId =
     | TOKEN_HASH_IDENT
     | TOKEN_UNARY_OP
     | TOKEN_INFIX_OP
+    | TOKEN_KEYWORD_STRING
     | TOKEN_BIGNUM
     | TOKEN_DECIMAL
     | TOKEN_IEEE64

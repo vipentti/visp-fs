@@ -516,7 +516,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ':' ident_char+ { SYMBOL (lexeme lexbuf) }
   | ident      {
       let text = lexeme lexbuf
-      symbolOrKeyword args.CurrentContext text
+      symbolOrKeywordToken args lexbuf text
     }
   | _ { unexpected_char "token" lexbuf }
 
@@ -789,15 +789,7 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
       SYMBOL text }
   | ident      {
     let text = lexeme lexbuf
-    if args.mode.IsQuasiquoteMode then
-      if text = "unquote" then
-        UNQUOTE_KW
-      else if text = "splice-unquote" then
-        SPLICE_UNQUOTE_KW
-      else
-        SYMBOL text
-    else
-      SYMBOL text }
+    symbolOrKeywordToken args lexbuf text }
   | _ { unexpected_char "tokenStream" lexbuf }
 
 and singleQuoteString (sargs: LexerStringArgs) (skip: bool) = parse
