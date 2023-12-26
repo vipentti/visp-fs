@@ -231,6 +231,11 @@ module ``tests_parsing_tupled-special-forms-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/tupled-special-forms-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-2`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/strings-interpolation-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_operators-1`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/operators-1.visp"

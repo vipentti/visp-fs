@@ -1,0 +1,21 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "dt" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "DateTime" Default 0 2 LParen
+INT32 (2023, false) Default 0 2 LParen
+INT32 (12, false) Default 0 2 LParen
+INT32 (26, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("string is '%s'", Regular, Token []) Default 0 1 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

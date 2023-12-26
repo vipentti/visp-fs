@@ -1,0 +1,4 @@
+﻿string is 'Date is: 2023-12-26'
+()
+
+ExitCode: 0

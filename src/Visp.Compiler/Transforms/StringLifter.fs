@@ -58,17 +58,19 @@ let liftLiteralStrings (file: ParsedFile) =
 
                 | SynStringKind.Interpolated(plain = nest)
                 | SynStringKind.InterpolatedTripleQuote(triple = nest) ->
-                    let sb = PooledStringBuilder.Get()
+                    // TODO: Support non-multiline interpolated strings as printf argument
+                    // e.g. (printfn $"something {(+ 1 2)}") should be valid
+                    let tempSb = PooledStringBuilder.Get()
 
                     for _ = 1 to nest do
-                        ignore <| sb.Append('{')
+                        ignore <| tempSb.Append('{')
 
-                    let op = sb.ToStringAndClear()
+                    let openBraces = tempSb.ToStringAndClear()
 
                     for _ = 1 to nest do
-                        ignore <| sb.Append('}')
+                        ignore <| tempSb.Append('}')
 
-                    let cl = sb.ToStringAndClear()
+                    let closeBraces = tempSb.ToStringAndClear()
 
                     let mutable argIndex = 0
                     let variables = ResizeArray<_>()
@@ -78,9 +80,10 @@ let liftLiteralStrings (file: ParsedFile) =
                     let mutable loop = true
 
                     let resultSb = PooledStringBuilder.Get()
+                    resultSb.EnsureCapacity(raw.Length) |> ignore
 
                     while loop && not span.IsEmpty do
-                        let openIndex = span.IndexOf(op)
+                        let openIndex = span.IndexOf(openBraces)
 
                         if openIndex = -1 then
                             resultSb.Append(span) |> ignore
@@ -88,15 +91,26 @@ let liftLiteralStrings (file: ParsedFile) =
                         else
                             resultSb.Append(span.Slice(0, openIndex)) |> ignore
 
-                            let currentSlice = span.Slice(openIndex + op.Length)
-                            let closeIndex = currentSlice.IndexOf(cl)
+                            let currentSlice = span.Slice(openIndex + openBraces.Length)
+                            let closeIndex = currentSlice.IndexOf(closeBraces)
 
                             if closeIndex = -1 then
                                 resultSb.Append(span) |> ignore
                                 loop <- false
                             else
-                                sb.Append(currentSlice.Slice(0, closeIndex)) |> ignore
-                                let varName = sb.ToStringAndClear()
+                                let varNameSlice = currentSlice.Slice(0, closeIndex)
+                                let colonIndex = varNameSlice.IndexOf(':')
+
+                                let (varName, fmt) =
+                                    if colonIndex = -1 then
+                                        let name = tempSb.Append(varNameSlice).ToStringAndClear()
+                                        (name, "")
+                                    else
+                                        let fmtSlice = varNameSlice.Slice(colonIndex)
+                                        let fmt = tempSb.Append(fmtSlice).ToStringAndClear()
+                                        let varNameSlice = varNameSlice.Slice(0, colonIndex)
+                                        let name = tempSb.Append(varNameSlice).ToStringAndClear()
+                                        (name, fmt)
 
                                 let expr = ParseUtils.parseStringToExpr constRange.FileName varName
 
@@ -106,14 +120,27 @@ let liftLiteralStrings (file: ParsedFile) =
                                     | _ -> true
 
                                 if needsArg then
-                                    sb.Append("exprArg").Append(argIndex) |> ignore
-                                    let argName = sb.ToStringAndClear()
+                                    let argName =
+                                        tempSb.Append("exprArg").Append(argIndex).ToStringAndClear()
+
                                     variables.Add(argName)
                                     argIndex <- argIndex + 1
-                                    resultSb.Append(op).Append(argName).Append(cl) |> ignore
+
+                                    resultSb
+                                        .Append(openBraces)
+                                        .Append(argName)
+                                        .Append(fmt)
+                                        .Append(closeBraces)
+                                    |> ignore
+
                                     expressions.Add(expr)
                                 else
-                                    resultSb.Append(op).Append(varName).Append(cl) |> ignore
+                                    resultSb
+                                        .Append(openBraces)
+                                        .Append(varName)
+                                        .Append(fmt)
+                                        .Append(closeBraces)
+                                    |> ignore
 
                                     match Seq.tryFindIndex (fun it -> it = varName) variables with
                                     | Some _ -> ()
@@ -122,14 +149,14 @@ let liftLiteralStrings (file: ParsedFile) =
                                         expressions.Add(expr)
 
 
-                                span <- currentSlice.Slice(closeIndex + cl.Length)
+                                span <- currentSlice.Slice(closeIndex + closeBraces.Length)
                                 ()
 
                             ()
 
                         ()
 
-                    sb.ReturnToPool()
+                    tempSb.ReturnToPool()
 
                     let args =
                         variables

@@ -231,6 +231,11 @@ module ``tests_parsing_tupled-special-forms-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/tupled-special-forms-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-2`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/strings-interpolation-2.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_operators-1`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/operators-1.visp"

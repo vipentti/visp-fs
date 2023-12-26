@@ -1,0 +1,23 @@
+﻿ParsedFile
+  [AnonModule
+     ([Open (SynSymbol System, (7,1--7,12));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol dt, (9,5--9,7)),
+             New
+               (Ident DateTime,
+                [Const (Int32 2023, (9,22--9,26)); Const (Int32 12, (9,27--9,29)); Const (Int32 26, (9,30--9,32))],
+                (9,9--9,32)), None, [], (9,1--9,33)), (9,0--9,34));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (11,0--11,58)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("string is '%s'", Regular, (11,9--11,25)), (11,9--11,25));
+                 Const (String ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, (11,26--11,57)), (11,26--11,57))],
+                (11,1--11,57)), None, [], (11,0--11,58)), (11,0--11,58));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (11,0--11,58)), (11,0--11,58)); Symbol (SynSymbol visp_result_todo)],
+             (11,0--11,58)), (11,0--11,58))], (7,0--11,58))]
