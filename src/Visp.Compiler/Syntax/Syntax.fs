@@ -658,7 +658,7 @@ module Patterns =
         | SynExpr.Symbol(SynSymbol(id)) -> id.idText
         | _ -> ""
 
-    let (|SymbolText|) (it: SynExpr) =
+    let (|SymbolText|_|) (it: SynExpr) =
         match it with
         | SynExpr.Symbol(sym) -> Some(sym.Text)
         | _ -> None
