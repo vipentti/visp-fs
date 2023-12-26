@@ -65,6 +65,9 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token <System.Decimal> DECIMAL
 %token <(string * string)> BIGNUM
 
+// __SOURCE_FILE__ etc
+%token <(string * string)> KEYWORD_STRING
+
 %token <string> INFIX_OP
 %token <string> UNARY_OP
 %token <string> HASH_IDENT
@@ -108,7 +111,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc prec_new_no_exprs
 
 %nonassoc INT8 INT16 INT32 INT64 NATIVEINT UINT8 UINT16 UINT32 UINT64 UNATIVEINT IEEE32 IEEE64 DECIMAL BIGNUM
-%nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING UNIT CHAR
+%nonassoc TRUE FALSE NIL SYMBOL KEYWORD RAWSTRING DOT_METHOD APPLY_METHOD STRING KEYWORD_STRING UNIT CHAR
 %nonassoc HASH_IDENT INFIX_OP UNARY_OP
 %nonassoc prec_symbol
 %nonassoc prec_name_list
@@ -1207,6 +1210,9 @@ rawConstant:
     | STRING
         { let (raw, kind, _) = $1
           SynConst.String(raw, kind, (lhs parseState))}
+    | KEYWORD_STRING
+        { let (s, c) = $1
+          SynConst.SourceIdentifier(s, c, lhs parseState)}
     | INT8
       { if snd $1 then errorR(mkDiagnosticWithText (SR.lexOutsideEightBitSigned(), lhs parseState))
         SynConst.SByte(fst $1) }

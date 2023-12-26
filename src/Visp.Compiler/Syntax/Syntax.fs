@@ -162,6 +162,7 @@ type SynConst =
     | Decimal of System.Decimal
     | UserNum of value: string * suffix: string
     | String of text: string * synStringKind: SynStringKind * range: range
+    | SourceIdentifier of constant: string * value: string * range: range
 
     member t.StructuredText =
         match t with
@@ -183,6 +184,7 @@ type SynConst =
         | Char it -> sprintf "Char %A" it
         | Decimal it -> sprintf "Decimal %A" it
         | UserNum(va, su) -> sprintf "UserNum (%s, %s)" va su
+        | SourceIdentifier(va, su, _) -> sprintf "SourceIdentifier (%s, %s)" va su
         | String(text, k, r) -> StringWriterUtils.writeDebugStringType "String" text k r
 
 type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range

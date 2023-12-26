@@ -1,0 +1,14 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn printSourceLocation ()
+    (printfn "Line: %s" __LINE__)
+    (printfn "Source Directory: %s" __SOURCE_DIRECTORY__)
+    (printfn "Source File: %s" __SOURCE_FILE__)
+)
+
+(printSourceLocation)

@@ -207,17 +207,17 @@ type private TokenizeMode =
 type private TokenizeArgs =
     { mutable depth: int32
       mutable mode: TokenizeMode
-      ctx: LexHelpers.LexContextStack }
+      lexArgs: LexArgs }
 
     static member Default() =
         { depth = 0
           mode = TokenizeMode.Default
-          ctx = LexHelpers.LexContextStack() }
+          lexArgs = mkDefaultLextArgs () }
 
     static member Macro() =
         { depth = 1
           mode = TokenizeMode.Macro
-          ctx = LexHelpers.LexContextStack() }
+          lexArgs = mkDefaultLextArgs () }
 
     member t.TryNest() =
         if t.mode = TokenizeMode.Macro then
@@ -444,7 +444,7 @@ let rec private tokenizeEvaluated
         match args.mode with
         | TokenizeMode.Macro -> res.Add(SYMBOL text)
         | TokenizeMode.Default ->
-            let tok = LexHelpers.symbolOrKeyword args.ctx.Current text
+            let tok = symbolOrKeyword args.lexArgs text
 
             match tok with
             | MACRO_NAME _
@@ -473,7 +473,7 @@ let rec private tokenizeEvaluated
                 | (EvaluatedSymbolText "member") :: rest when args.mode = TokenizeMode.Default ->
                     // args.StartMacro()
                     res.Add(MEMBER)
-                    args.ctx.Push LexContext.Member
+                    args.lexArgs.PushContext LexContext.Member
                     didPush <- true
                     rest
                 | it ->
@@ -488,7 +488,7 @@ let rec private tokenizeEvaluated
         args.TryUnnest()
 
         if didPush then
-            args.ctx.Pop()
+            args.lexArgs.PopContext()
 
         res.Add(closeToken kind)
 
@@ -532,6 +532,7 @@ let rec private tokenizeEvaluated
             | SynConst.IntPtr it -> res.Add(NATIVEINT(it, false))
             | SynConst.UIntPtr it -> res.Add(UNATIVEINT it)
             | SynConst.UserNum(va, su) -> res.Add(BIGNUM(va, su))
+            | SynConst.SourceIdentifier(va, su, _) -> res.Add(KEYWORD_STRING(va, su))
             | SynConst.Unit -> res.Add(UNIT)
             | SynConst.Nil -> res.Add(NIL)
             | SynConst.String(s, k, _) -> res.Add(STRING(s, k, ParseHelpers.LexCont.Token([])))

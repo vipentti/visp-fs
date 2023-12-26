@@ -1,0 +1,6 @@
+﻿Line: 9
+Source Directory: {SolutionDirectory}visp/tests/parsing
+Source File: keyword-strings-0.visp
+()
+
+ExitCode: 0

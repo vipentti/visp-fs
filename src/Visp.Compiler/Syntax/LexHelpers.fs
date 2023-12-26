@@ -92,9 +92,42 @@ type LexMode =
         | TokenStream t -> t.IsQuoteMode
         | _ -> false
 
+/// Manage lexer resources (string interning)
+[<Sealed>]
+type LexResourceManager(?capacity: int) =
+    let symbols =
+        Collections.Concurrent.ConcurrentDictionary<string, token>(
+            Environment.ProcessorCount,
+            defaultArg capacity 1024
+        )
+
+    let macros =
+        Collections.Concurrent.ConcurrentDictionary<string, token>(
+            Environment.ProcessorCount,
+            defaultArg capacity 1024
+        )
+
+    member _.InternWith s fn =
+        match symbols.TryGetValue s with
+        | true, res -> res
+        | _ ->
+            let res = fn s
+            symbols[s] <- res
+            res
+
+    member _.InternMacro s fn =
+        match macros.TryGetValue s with
+        | true, res -> res
+        | _ ->
+            let res = fn s
+            symbols[s] <- res
+            res
+
+
 type LexArgs =
     { diagnosticsLogger: DiagnosticsLogger.DiagnosticsLogger
       contextStack: LexContextStack
+      resourceManager: LexResourceManager
       mutable debugTokens: bool
       mutable mode: LexMode
       mutable stringNest: LexerInterpolatedStringNesting
@@ -114,6 +147,15 @@ type LexArgs =
     member t.ContextCount = t.contextStack.Count
 
     member t.PopContext() = t.contextStack.Pop()
+
+    member t.IsDefaultMode = t.mode.IsDefaultMode
+
+    member t.IsTokenStreamMode = not t.mode.IsDefaultMode
+
+    member t.IsTokenStreamOf m =
+        match t.mode with
+        | LexMode.Default -> false
+        | LexMode.TokenStream it -> it = m
 
     member this.NestIfNotDefault() =
         if not this.mode.IsDefaultMode then
@@ -135,6 +177,7 @@ type LexArgs =
 let mkDefaultLextArgs () =
     { diagnosticsLogger = DiagnosticsLogger.DiagnosticsThreadStatics.DiagnosticsLogger
       contextStack = new LexContextStack()
+      resourceManager = LexResourceManager()
       debugTokens = false
       mode = LexMode.Default
       depth = 0
@@ -246,12 +289,36 @@ let contextSpecificKeywordsMap =
     |> List.map (fun (it, rs) -> (it, Map.ofList rs))
     |> Map.ofList
 
-let keywordToTokenMap = keywordTokenList |> Map.ofList
+
+let inline dictTryFind w (di: Dictionary<'a, 'b>) =
+    match di.TryGetValue w with
+    | true, it -> Some it
+    | _ -> None
+
+let inline dictOfList (items: ('a * 'b) list) =
+    let ds = Dictionary<'a, 'b>(items.Length)
+
+    for key, rs in items do
+        ds.Add(key, rs)
+
+    ds
+
+let inline dictOfSeq (items: ('a * 'b) seq) = items |> List.ofSeq |> dictOfList
+
+let contextSpecificKeywordsDict =
+    let ds =
+        Dictionary<LexContext, Dictionary<string, token>>(contextSpecificKeywords.Length)
+
+    for key, rs in contextSpecificKeywords do
+        ds.Add(key, dictOfList rs)
+
+    ds
+
+let keywordToTokenDict = dictOfList keywordTokenList
 
 let tokenToKeywordList = keywordTokenList |> List.map (fun (x, y) -> (y, x))
 
 let alwaysSymbol (s: string) = SYMBOL(s)
-
 
 let tryGetKeywordTextForToken (w: token) =
     tokenToKeywordList
@@ -264,13 +331,12 @@ let symbolForKeywordToken (w: token) =
     getKeywordTextForToken w |> alwaysSymbol
 
 let tryGetContextKeyword (ctx: LexContext) w =
-    contextSpecificKeywordsMap.TryFind(ctx)
-    |> Option.bind (fun ctx -> ctx.TryFind(w))
+    dictTryFind ctx contextSpecificKeywordsDict |> Option.bind (dictTryFind w)
 
 let tryGetKeyword (ctx: LexContext) w =
     match tryGetContextKeyword ctx w with
     | Some(it) -> Some(it)
-    | None -> keywordToTokenMap.TryFind w
+    | None -> dictTryFind w keywordToTokenDict
 
 let escape c =
     match c with
@@ -301,9 +367,9 @@ let unescape c =
 
 let isLetter (ch: char) = System.Char.IsLetter(ch)
 
-let unaryOperatorSet = [ "~~~" ] |> Set.ofList
+let unaryOperators = [ "~~~" ]
 
-let infixOperatorSet =
+let infixOperators =
     [ "&&"
       "||"
       ":>"
@@ -321,44 +387,78 @@ let infixOperatorSet =
       "^^^"
       "<<<"
       ">>>" ]
-    |> Set.ofList
 
-let specialSymbol (s: string) =
-    match s with
-    | "." -> Some(DOT)
-    | ".." -> Some(DOTDOT)
-    | ".+" -> Some(DOT_PLUS)
-    // TODO: Better conditions?
-    | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(PROP_PLUS s)
-    | it when it.Length > 1 && it[0] = '.' && isLetter it[1] -> Some(DOT_METHOD s)
-    | it when it.Length > 1 && it[0] = '-' && isLetter it[1] -> Some(APPLY_METHOD s)
-    | "+" -> Some(OP_PLUS)
-    | "-" -> Some(OP_MINUS)
-    | "/" -> Some(OP_DIV)
-    | "*" -> Some(OP_MULT)
-    | ">" -> Some(OP_GREATER)
-    | ">=" -> Some(GREATER_EQUALS)
-    | "<" -> Some(OP_LESS)
-    | "<=" -> Some(LESS_EQUALS)
-    | "!=" -> Some(BANG_EQUALS)
-    | "=" -> Some(EQUALS)
-    | it ->
-        if infixOperatorSet.Contains it then Some(INFIX_OP it)
-        else if unaryOperatorSet.Contains it then Some(UNARY_OP it)
-        else None
+let infixOperatorTokenList =
+    infixOperators |> List.map (fun it -> (it, INFIX_OP it))
 
-let symbolOrKeyword (ctx: LexContext) (s: string) =
-    match tryGetKeyword ctx s with
+let unaryOperatorTokenList =
+    unaryOperators |> List.map (fun it -> (it, UNARY_OP it))
+
+let specialSymbolList =
+    [ (".", DOT)
+      ("..", DOTDOT)
+      (".+", DOT_PLUS)
+      ("+", OP_PLUS)
+      ("-", OP_MINUS)
+      ("/", OP_DIV)
+      ("*", OP_MULT)
+      (">", OP_GREATER)
+      (">=", GREATER_EQUALS)
+      ("<", OP_LESS)
+      ("<=", LESS_EQUALS)
+      ("!=", BANG_EQUALS)
+      ("=", EQUALS) ]
+
+let specialSymbolDict =
+    dictOfList (specialSymbolList @ infixOperatorTokenList @ unaryOperatorTokenList)
+
+let specialSymbolInterned (args: LexArgs) (s: string) =
+    let res = args.resourceManager
+
+    match dictTryFind s specialSymbolDict with
+    | Some(it) -> Some(it)
+    | None ->
+        match s with
+        | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(res.InternWith s PROP_PLUS)
+        | it when it.Length > 1 && it[0] = '.' && isLetter it[1] ->
+            Some(res.InternWith s DOT_METHOD)
+        | it when it.Length > 1 && it[0] = '-' && isLetter it[1] ->
+            Some(res.InternWith s APPLY_METHOD)
+        | _ -> None
+
+let symbolOrKeyword (args: LexArgs) (s: string) =
+    match tryGetKeyword args.CurrentContext s with
     | Some(tok) -> tok
     | None ->
         if macroTable.IsMacro(s) then
-            MACRO_NAME(s)
+            args.resourceManager.InternMacro s MACRO_NAME
         else if s.EndsWith("!!") then
-            MACRO_NAME(s.TrimEnd('!'))
+            args.resourceManager.InternMacro s (fun s -> MACRO_NAME(s.TrimEnd('!')))
         else
-            match specialSymbol s with
+            match specialSymbolInterned args s with
             | Some(it) -> it
-            | None -> SYMBOL s
+            | None -> args.resourceManager.InternWith s SYMBOL
+
+let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_>) s =
+    match s with
+    | "__LINE__" -> KEYWORD_STRING(s, string lexbuf.StartPos.Line)
+    | "__SOURCE_FILE__" -> KEYWORD_STRING(s, System.IO.Path.GetFileName(lexbuf.StartPos.FileName))
+    | "__SOURCE_DIRECTORY__" ->
+        let filename = lexbuf.StartPos.FileName
+
+        if String.IsNullOrWhiteSpace(filename) then
+            String.Empty
+        else
+            filename |> System.IO.Path.GetFullPath |> System.IO.Path.GetDirectoryName
+        |> fun dir -> KEYWORD_STRING(s, dir)
+    | it ->
+        if args.IsTokenStreamMode then
+            match s with
+            | "unquote" when args.mode.IsQuasiquoteMode -> UNQUOTE_KW
+            | "splice-unquote" when args.mode.IsQuasiquoteMode -> SPLICE_UNQUOTE_KW
+            | it -> args.resourceManager.InternWith it SYMBOL
+        else
+            symbolOrKeyword args it
 
 let outputSyntaxError (syn: SyntaxError) =
     match syn.Data0 with

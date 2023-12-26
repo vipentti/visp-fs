@@ -307,6 +307,9 @@ module Write =
         let tw = w.TW
 
         match cnst with
+        | SynConst.SourceIdentifier(_, str, _) ->
+            surroundWithCh w '"' (flip string str) '"'
+            ()
         | SynConst.String(str, kind, _) ->
             match kind with
             | SynStringKind.Regular -> surroundWithCh w '"' (flip string str) '"'
