@@ -137,6 +137,7 @@ let debugTokenOutput args (lexbuf: LexBuffer<_>) =
         function
         | STRING(text, kind, cont) ->
             Syntax.StringWriterUtils.writeDebugStringType "STRING" text kind cont
+        | KEYWORD_STRING(lhs, rhs) -> sprintf "KEYWORD_STRING (\"%s\", \"%s\")" lhs rhs
         | it -> sprintf "%A" it
 
     seq {
