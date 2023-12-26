@@ -325,6 +325,7 @@ type SynExpr =
         members: SynTypeMember list *
         attributes: SynAttributes *
         range: range
+    | ObjectExpression of name: TypeOrCtor * members: SynTypeMember list * range: range
     | TypeAlias of name: SynSymbol * typ: SynType * range: range
     | ThreadFirst of exprs: SynExpr list * range: range
     | ThreadLast of exprs: SynThreadable list * range: range
@@ -356,6 +357,7 @@ type SynExpr =
         | Keyword(SynKeyword(id)) -> id.idRange
 
         | Match(range = r)
+        | ObjectExpression(range = r)
         | Literal(range = r)
         | Tuple(range = r)
         | RangeExpr(range = r)
@@ -425,6 +427,10 @@ and SynMacroCall =
     member this.NameText = let (SynMacroCall(name = n)) = this in n.Text
 
 and SynMacroCase = SynMacroCase of pats: SynMacroPat list * body: SynMacroBody * range: range
+
+and [<NoEquality; NoComparison; RequireQualifiedAccess>] TypeOrCtor =
+    | Type of typ: SynType * range: range
+    | Ctor of typ: SynType * args: SynExpr list * range: range
 
 and [<RequireQualifiedAccess>] UnionField =
     | Type of typ: SynType * range: range

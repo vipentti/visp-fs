@@ -212,6 +212,7 @@ let keywordTokenList =
       ("module", MODULE)
       ("mut", MUT)
       ("new", NEW)
+      ("newobj", NEWOBJ)
       ("open", OPEN)
       ("override", OVERRIDE)
       ("quasiquote", QUASIQUOTE_KW)

@@ -38,7 +38,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token DOTDOT
 %token AT
 %token OPEN MODULE
-%token FN FNSTAR LET USE VAL STATIC LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
+%token FN FNSTAR LET USE VAL STATIC LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW NEWOBJ DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN REQUIRE
 %token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
 %token INLINE REC RINIT
@@ -376,6 +376,7 @@ parens_expr:
     | list_expr { $1 }
     | match_expr { $1 }
     | new_expr { $1 }
+    | newobj_expr { $1 }
     | operators_not_in_parens { SynExpr.Op($1) }
     | syntax_macro_expr { $1 }
     | macro_call_expr { $1 }
@@ -553,6 +554,22 @@ new_expr:
         { SynExpr.New($2, $3, lhs parseState) }
     | NEW
         { SynExpr.New(Syntax.parserRecoveryType (lhs parseState), [], lhs parseState) }
+
+newobj_expr:
+    | NEWOBJ type_or_ctor
+        { SynExpr.ObjectExpression($2, [], lhs parseState) }
+    | NEWOBJ type_or_ctor member_list_start
+        { SynExpr.ObjectExpression($2, $3, lhs parseState) }
+    | NEWOBJ
+        { SynExpr.ObjectExpression(TypeOrCtor.Type(Syntax.parserRecoveryType (lhs parseState), lhs parseState), [], lhs parseState) }
+
+type_or_ctor:
+    | LPAREN syn_type_name RPAREN
+        { TypeOrCtor.Ctor($2, [], lhs parseState) }
+    | LPAREN syn_type_name expr_list RPAREN
+        { TypeOrCtor.Ctor($2, $3, lhs parseState) }
+    | syn_type_name
+        { TypeOrCtor.Type($1, rhs parseState 1) }
 
 threadable_list: rev_threadable_list { List.rev $1 }
 rev_threadable_list:
