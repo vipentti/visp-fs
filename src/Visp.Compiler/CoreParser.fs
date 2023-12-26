@@ -31,13 +31,6 @@ type ParserOptions =
 module CoreParser =
     let getLibFilePath name =
         let src_dir = __SOURCE_DIRECTORY__
-
-        let my2DArray: int array2d = array2D [ [ 1; 0 ]; [ 0; 1 ] ]
-
-        let xx = Array2D.length1 my2DArray
-
-        let yy = my2DArray[0, 0]
-
         Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
 
     let private tfs =

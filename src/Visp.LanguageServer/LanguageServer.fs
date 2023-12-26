@@ -598,15 +598,15 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
 
         ()
 
-    member this.OnRpcDisconnected(ev: JsonRpcDisconnectedEventArgs) =
+    member this.OnRpcDisconnected(_: JsonRpcDisconnectedEventArgs) =
         this.LogInfo "Disconnecting"
         this.Exit()
 
-    member this.OnInitialized (sender: obj) (ev: EventArgs) = this.LogInfo "OnInitialized"
+    member this.OnInitialized (_: obj) (_: EventArgs) = this.LogInfo "OnInitialized"
 
-    member this.OnInitializeCompletion (sender: obj) (ev: EventArgs) = this.LogInfo "init complete"
+    member this.OnInitializeCompletion (_: obj) (_: EventArgs) = this.LogInfo "init complete"
 
-    member this.OnShutdown (sender: obj) (ev: EventArgs) = this.LogInfo "shutdown"
+    member this.OnShutdown (_: obj) (_: EventArgs) = this.LogInfo "shutdown"
 
     member this.OnTextDocumentOpened(message: DidOpenTextDocumentParams) =
         this.LogInfo(sprintf "Received %O" message.TextDocument.Uri)

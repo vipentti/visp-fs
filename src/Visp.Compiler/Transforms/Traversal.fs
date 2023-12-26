@@ -37,6 +37,14 @@ type private TraversalTree<'T when 'T: not struct>() =
         | false, _ -> None
         | true, it -> Some(it)
 
+    member t.NextSibling child =
+        match siblings.TryGetValue child with
+        | true, que ->
+            match que.TryDequeue() with
+            | true, it -> Some(it)
+            | _ -> None
+        | _ -> None
+
     member _.AddChild parent child =
         let childs =
             match children.TryGetValue(parent) with

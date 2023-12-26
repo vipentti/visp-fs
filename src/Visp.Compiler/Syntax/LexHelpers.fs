@@ -161,10 +161,6 @@ let addUnicodeChar (buf: StringBuffer) (ch: char) =
     buf.Append(ch) |> ignore
     ()
 
-let lastNewline (buf: StringBuffer) =
-    let len = buf.Length
-    0
-
 type LexerStringFinisher =
     | LexerStringFinisher of
         (StringBuffer -> LexerStringKind -> LexerStringFinisherContext -> LexerContinuation -> token)
