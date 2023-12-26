@@ -278,14 +278,13 @@ let rec textRangeOfPat =
     | SynPat.Args(args, _) ->
         match args with
         | SynArgPats.List(pats)
-        | SynArgPats.Tuple(pats) -> List.concat (List.map textRangeOfPat pats)
+        | SynArgPats.Tuple(pats) -> List.collect textRangeOfPat pats
     | SynPat.As(lhs, rhs, _) -> (textRangeOfPat lhs) @ (textRangeOfPat rhs)
-    | SynPat.Collection(SynCollection(_, its, _)) -> its |> List.map textRangeOfPat |> List.concat
+    | SynPat.Collection(SynCollection(_, its, _)) -> its |> List.collect textRangeOfPat
     | SynPat.Record(fields, _) ->
         fields
-        |> List.map (fun (name, pat) ->
+        |> List.collect (fun (name, pat) ->
             [ (name.Text, name.Range |> textRangeToSyntaxRange) ] @ textRangeOfPat pat)
-        |> List.concat
     | SynPat.Const _ -> []
     | SynPat.IsInst _ -> []
     | SynPat.Trivia _ -> []
@@ -364,8 +363,9 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.AddRange(
             members
-            |> Seq.map (memberToSymbolDetails name.Text SymbolDetails.Member SymbolDetails.Variable)
-            |> Seq.concat
+            |> Seq.collect (
+                memberToSymbolDetails name.Text SymbolDetails.Member SymbolDetails.Variable
+            )
         )
 
     | SynExpr.Union(name, cases, members, _, _) ->
@@ -380,7 +380,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
 
         syms.AddRange(
             cases
-            |> Seq.map (fun (UnionCase(name, _, _)) ->
+            |> Seq.collect (fun (UnionCase(name, _, _)) ->
                 [ (SymbolDetails.UnionMember(
                       name.Text,
                       false,
@@ -391,13 +391,13 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
                       false,
                       name.Range |> textRangeToSyntaxRange
                   )) ])
-            |> Seq.concat
         )
 
         syms.AddRange(
             members
-            |> Seq.map (memberToSymbolDetails unionName SymbolDetails.Member SymbolDetails.Variable)
-            |> Seq.concat
+            |> Seq.collect (
+                memberToSymbolDetails unionName SymbolDetails.Member SymbolDetails.Variable
+            )
         )
 
     | SynExpr.LetOrUse(name, _, f, _, _) ->
@@ -424,7 +424,7 @@ let fsharpCollectionMethodSymbolDetails =
 
 let fsharpCollectionMethodCompletions word _ index =
     fsharpCollectionMethodSymbolDetails
-    |> Array.map (fun (_, items) ->
+    |> Array.collect (fun (_, items) ->
         items
         |> Array.choose (fun it ->
             let item = it.ToCompletionItem(index ())
@@ -433,7 +433,6 @@ let fsharpCollectionMethodCompletions word _ index =
                 Some(item)
             else
                 None))
-    |> Array.concat
 
 let interopSymbolDetails =
     Keywords.interopCompletions
@@ -532,6 +531,7 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
         let jsonRpc = new JsonRpc(handler)
 
         let options =
+            // fsharplint:disable-next-line
             new JsonRpcTargetOptions(UseSingleObjectParameterDeserialization = true)
 
         jsonRpc.AddLocalRpcTarget(target, options)
@@ -713,7 +713,7 @@ type LanguageServerClient(sender: Stream, reader: Stream, jsonRpcTraceSource: Tr
                 |> Array.choose (fun it ->
                     let mutable temp = false
 
-                    if it.InsertText <> null then
+                    if not <| isNull it.InsertText then
                         temp <- it.InsertText.Contains(withoutExlamation, StringComparison.Ordinal)
 
                     if
@@ -790,7 +790,7 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
     [<JsonRpcMethod(Methods.InitializeName, UseSingleObjectParameterDeserialization = true)>]
     member this.Initialize(arg: JsonDocument) =
         this.LogEnter arg
-
+        // fsharplint:disable
         let result =
             new InitializeResult(
                 Capabilities =
@@ -810,8 +810,9 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
                     // TODO: Rest of capabilities
                     )
             )
+        // fsharplint:enable
 
-        if arg <> null then
+        if not <| isNull arg then
             let root = arg.RootElement
 
             match root.TryGetProperty("trace") with
@@ -851,7 +852,7 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
     member this.UpdateTraceLevel(arg: JsonDocument) =
         this.LogEnter(arg)
 
-        if arg <> null then
+        if not <| isNull arg then
             let root = arg.RootElement
 
             match root.TryGetProperty("value") with
