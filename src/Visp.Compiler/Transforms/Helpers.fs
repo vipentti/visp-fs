@@ -49,8 +49,8 @@ let rec transform (func: SynExpr -> SynExpr) expr =
                 Option.map bound_transform alt,
                 range
             )
-        | SynExpr.FunctionDef(name, is, args, body, range) ->
-            SynExpr.FunctionDef(name, is, args, List.map bound_transform body, range)
+        | SynExpr.FunctionDef(name, is, args, body, retty, range) ->
+            SynExpr.FunctionDef(name, is, args, List.map bound_transform body, retty, range)
         | SynExpr.FunctionCall(name, args, range) ->
             SynExpr.FunctionCall(bound_transform name, List.map bound_transform args, range)
         | SynExpr.LambdaDef(SynLambda(args, body, lambdaRange)) ->

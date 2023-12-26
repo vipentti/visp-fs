@@ -235,7 +235,7 @@ let rec exprToDoc =
 
     | SynExpr.LambdaDef(def) -> lambdaToDoc def
 
-    | SynExpr.FunctionDef(name, flags, args, body, _) ->
+    | SynExpr.FunctionDef(name, flags, args, body, _, _) ->
 
         parens
         <| hcat

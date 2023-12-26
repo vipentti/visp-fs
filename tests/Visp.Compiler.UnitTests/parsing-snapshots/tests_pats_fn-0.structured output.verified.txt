@@ -6,7 +6,7 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("no-type %A", Regular, (8,25--8,37)), (8,25--8,37)); Symbol (SynSymbol s)],
-                 (8,17--8,39))], (8,1--8,40)), (8,0--8,41));
+                 (8,17--8,39))], None, (8,1--8,40)), (8,0--8,41));
        Expr
          (FunctionCall
             (Symbol (SynSymbol no-type), [Const (String ("hello", Regular, (9,9--9,16)), (9,9--9,16))], (9,1--9,16)),
@@ -18,7 +18,7 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("with-type %A", Regular, (11,37--11,51)), (11,37--11,51)); Symbol (SynSymbol s)],
-                 (11,29--11,53))], (11,1--11,54)), (11,0--11,55));
+                 (11,29--11,53))], None, (11,1--11,54)), (11,0--11,55));
        Expr
          (FunctionCall
             (Symbol (SynSymbol with-type), [Const (String ("hello", Regular, (12,11--12,18)), (12,11--12,18))],
@@ -37,7 +37,7 @@
               FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("with-type-multiple %A", Regular, (16,11--16,34)), (16,11--16,34));
-                  Symbol (SynSymbol b)], (16,3--16,36))], (14,1--16,37)), (14,0--17,3));
+                  Symbol (SynSymbol b)], (16,3--16,36))], None, (14,1--16,37)), (14,0--17,3));
        Expr
          (FunctionCall
             (Symbol (SynSymbol with-type-multiple),
@@ -56,8 +56,8 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("with-tuple %A", Regular, (20,33--20,48)), (20,33--20,48));
-                  Tuple ([Symbol (SynSymbol x); Symbol (SynSymbol y)], (20,50--20,55))], (20,25--20,56))], (20,1--20,57)),
-          (20,0--20,58));
+                  Tuple ([Symbol (SynSymbol x); Symbol (SynSymbol y)], (20,50--20,55))], (20,25--20,56))], None,
+             (20,1--20,57)), (20,0--20,58));
        Expr
          (FunctionCall
             (Symbol (SynSymbol with-tuple),
@@ -79,8 +79,8 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("with-tuple-type %A", Regular, (23,51--23,71)), (23,51--23,71));
-                  Tuple ([Symbol (SynSymbol x); Symbol (SynSymbol y)], (23,73--23,78))], (23,43--23,79))], (23,1--23,80)),
-          (23,0--23,81));
+                  Tuple ([Symbol (SynSymbol x); Symbol (SynSymbol y)], (23,73--23,78))], (23,43--23,79))], None,
+             (23,1--23,80)), (23,0--23,81));
        Expr
          (FunctionCall
             (Symbol (SynSymbol with-tuple-type),
@@ -114,7 +114,7 @@
               FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("with-tuple-multiple %A", Regular, (28,11--28,35)), (28,11--28,35));
-                  Tuple ([Symbol (SynSymbol x2); Symbol (SynSymbol y2)], (28,37--28,44))], (28,3--28,45))],
+                  Tuple ([Symbol (SynSymbol x2); Symbol (SynSymbol y2)], (28,37--28,44))], (28,3--28,45))], None,
              (26,1--28,46)), (26,0--29,3));
        Expr
          (FunctionCall

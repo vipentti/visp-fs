@@ -337,7 +337,7 @@ let findAllSymbolDetails (syms: ResizeArray<_>) expr =
         syms.Add(SymbolDetails.SyntaxMacro(text, textRangeToSyntaxRange range))
         ()
 
-    | SynExpr.FunctionDef(name, _, args, _, _) ->
+    | SynExpr.FunctionDef(name, _, args, _, _, _) ->
 
         let r = Syntax.rangeOfSymbol name
 

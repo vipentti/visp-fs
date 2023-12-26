@@ -9,7 +9,7 @@
                  [SynMatch
                     (IsInst (Ident string, (10,5--10,16)), None, [Const (Bool true, (10,17--10,21))], (10,5--10,21));
                   SynMatch (Discard (11,5--11,6), None, [Const (Bool false, (11,7--11,12))], (11,5--11,12))],
-                 (9,3--11,13))], (8,1--12,3)), (8,0--12,4));
+                 (9,3--11,13))], None, (8,1--12,3)), (8,0--12,4));
        Expr
          (FunctionDef
             (SynSymbol AreEqualStrings, None,
@@ -38,7 +38,7 @@
                      [Op (Infix (SynSymbol =, [Symbol (SynSymbol lhss); Symbol (SynSymbol rhss)], (17,7--17,18)))],
                      (16,5--17,19));
                   SynMatch (Discard (19,5--19,6), None, [Const (Bool false, (19,7--19,12))], (19,5--19,12))],
-                 (15,3--19,13))], (14,1--20,3)), (14,0--21,1));
+                 (15,3--19,13))], None, (14,1--20,3)), (14,0--21,1));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

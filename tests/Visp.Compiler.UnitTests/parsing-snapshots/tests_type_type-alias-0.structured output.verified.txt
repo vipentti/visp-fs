@@ -15,7 +15,7 @@
                    (SynSymbol +,
                     [FunctionCall (Symbol (SynSymbol fst), [Symbol (SynSymbol r)], (11,6--11,11));
                      FunctionCall (Symbol (SynSymbol snd), [Symbol (SynSymbol r)], (11,14--11,19))], (11,3--11,20)))],
-             (10,1--11,21)), (10,0--11,22));
+             None, (10,1--11,21)), (10,0--11,22));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (13,0--13,41)),

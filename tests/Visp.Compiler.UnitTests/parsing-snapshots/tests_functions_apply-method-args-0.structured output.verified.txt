@@ -35,7 +35,7 @@
                  [DotProperty (Symbol (SynSymbol p), SynSymbol X, (20,10--20,14));
                   FunctionCall
                     (Symbol (SynSymbol dec), [DotProperty (Symbol (SynSymbol p), SynSymbol Y, (20,22--20,26))],
-                     (20,17--20,27))], (20,3--20,28))], (19,1--20,29)), (19,0--20,30));
+                     (20,17--20,27))], (20,3--20,28))], None, (19,1--20,29)), (19,0--20,30));
        Expr
          (Type
             (SynSymbol TileMap,
@@ -245,7 +245,7 @@
               FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("%A", Regular, (84,11--84,15)), (84,11--84,15)); Symbol (SynSymbol tm)], (84,3--84,18));
-              Const (Unit, (86,2--86,4))], (72,1--86,4)), (72,0--86,5));
+              Const (Unit, (86,2--86,4))], None, (72,1--86,4)), (72,0--86,5));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (88,0--88,14)),

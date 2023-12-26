@@ -2,16 +2,16 @@
   [AnonModule
      ([Expr
          (FunctionDef
-            (SynSymbol condition, None, Args (List [], (8,14--8,16)), [Const (Bool false, (8,17--8,22))], (8,1--8,22)),
-          (8,0--8,23));
+            (SynSymbol condition, None, Args (List [], (8,14--8,16)), [Const (Bool false, (8,17--8,22))], None,
+             (8,1--8,22)), (8,0--8,23));
        Expr
          (FunctionDef
             (SynSymbol then, None, Args (List [], (9,9--9,11)),
-             [Const (String ("then", Regular, (9,12--9,18)), (9,12--9,18))], (9,1--9,18)), (9,0--9,19));
+             [Const (String ("then", Regular, (9,12--9,18)), (9,12--9,18))], None, (9,1--9,18)), (9,0--9,19));
        Expr
          (FunctionDef
             (SynSymbol alt, None, Args (List [], (10,8--10,10)),
-             [Const (String ("alt", Regular, (10,11--10,16)), (10,11--10,16))], (10,1--10,16)), (10,0--10,17));
+             [Const (String ("alt", Regular, (10,11--10,16)), (10,11--10,16))], None, (10,1--10,16)), (10,0--10,17));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (12,0--14,10)),

@@ -46,7 +46,7 @@
                               (SynSymbol +,
                                [Symbol (SynSymbol delim1); Symbol (SynSymbol value); Symbol (SynSymbol delim2)],
                                (22,9--22,30))), Some (Symbol (SynSymbol value)), (21,7--23,13))], Default, [],
-                     (20,5--24,7))], (19,3--24,8))], (18,1--24,9)), (18,0--24,10));
+                     (20,5--24,7))], (19,3--24,8))], None, (18,1--24,9)), (18,0--24,10));
        Expr
          (LetOrUse
             (Named (SynSymbol obj2, (26,5--26,9)),
@@ -79,7 +79,7 @@
                      [FunctionCall
                         (Symbol (SynSymbol printfn),
                          [Const (String ("Disposing %s", Regular, (34,15--34,29)), (34,15--34,29));
-                          Symbol (SynSymbol name)], (34,7--34,34))], Default, [], (33,5--34,35))], (32,3--34,36))],
+                          Symbol (SynSymbol name)], (34,7--34,34))], Default, [], (33,5--34,35))], (32,3--34,36))], None,
              (30,1--34,37)), (30,0--34,38));
        Expr
          (FunctionDef
@@ -96,7 +96,7 @@
                      FunctionCall
                        (Symbol (SynSymbol makeDisposable),
                         [Const (String ("do-scope", Regular, (39,27--39,37)), (39,27--39,37))], (39,12--39,37)), Use, [],
-                     (39,5--39,38)); Const (Unit, (40,4--40,6))], Do, (38,3--40,6)); Const (Unit, (41,2--41,4))],
+                     (39,5--39,38)); Const (Unit, (40,4--40,6))], Do, (38,3--40,6)); Const (Unit, (41,2--41,4))], None,
              (36,1--41,4)), (36,0--41,5));
        Expr (FunctionCall (Symbol (SynSymbol DisposeExample), [], (43,1--43,15)), (43,0--43,16));
        Expr

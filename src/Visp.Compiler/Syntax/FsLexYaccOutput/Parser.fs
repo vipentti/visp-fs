@@ -7281,7 +7281,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1265 "Parser.fsy"
-                               SynExpr.FunctionDef(_2, FunctionFlags.None, _3, _4, (lhs parseState)) 
+                               SynExpr.FunctionDef(_2, FunctionFlags.None, _3, _4, None, (lhs parseState)) 
                    )
 # 1265 "Parser.fsy"
                  : 'gentype_function_def));
@@ -7294,7 +7294,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1267 "Parser.fsy"
-                               SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, _5, (lhs parseState)) 
+                               SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, _5, None, (lhs parseState)) 
                    )
 # 1267 "Parser.fsy"
                  : 'gentype_function_def));
@@ -7307,7 +7307,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1269 "Parser.fsy"
-                               SynExpr.FunctionDef(_4, FunctionFlags.Recursive ||| FunctionFlags.Inline, _5, _6, (lhs parseState)) 
+                               SynExpr.FunctionDef(_4, FunctionFlags.Recursive ||| FunctionFlags.Inline, _5, _6, None, (lhs parseState)) 
                    )
 # 1269 "Parser.fsy"
                  : 'gentype_function_def));
@@ -7320,7 +7320,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1271 "Parser.fsy"
-                               SynExpr.FunctionDef(_3, FunctionFlags.Recursive, _4, _5, (lhs parseState)) 
+                               SynExpr.FunctionDef(_3, FunctionFlags.Recursive, _4, _5, None, (lhs parseState)) 
                    )
 # 1271 "Parser.fsy"
                  : 'gentype_function_def));
@@ -7444,7 +7444,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1293 "Parser.fsy"
-                               SynExpr.FunctionDef(_2, FunctionFlags.None, mkRecoveryPat parseState, [], lhs parseState) 
+                               SynExpr.FunctionDef(_2, FunctionFlags.None, mkRecoveryPat parseState, [], None, lhs parseState) 
                    )
 # 1293 "Parser.fsy"
                  : 'gentype_invalid_function_def));
@@ -7467,7 +7467,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1299 "Parser.fsy"
-                               SynExpr.FunctionDef(_2, FunctionFlags.None, _3, [], (lhs parseState)) 
+                               SynExpr.FunctionDef(_2, FunctionFlags.None, _3, [], None, (lhs parseState)) 
                    )
 # 1299 "Parser.fsy"
                  : 'gentype_invalid_function_def));
@@ -7479,7 +7479,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 1301 "Parser.fsy"
-                               SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, [], (lhs parseState)) 
+                               SynExpr.FunctionDef(_3, FunctionFlags.Inline, _4, [], None, (lhs parseState)) 
                    )
 # 1301 "Parser.fsy"
                  : 'gentype_invalid_function_def));

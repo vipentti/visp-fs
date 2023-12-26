@@ -62,7 +62,7 @@
   module %s
   ", TripleQuote, (25,16--34,5)),
                             (25,16--34,5)); Symbol (SynSymbol moduleName); Symbol (SynSymbol moduleName)], (25,8--34,27)),
-                     (25,7--34,28))], (25,3--34,28))], (24,1--35,5)), (24,0--35,6));
+                     (25,7--34,28))], (25,3--34,28))], None, (24,1--35,5)), (24,0--35,6));
        Expr
          (LetOrUse
             (Named (SynSymbol lf, (37,5--37,7)), Symbol (SynSymbol System.Environment.NewLine), None, [], (37,1--37,34)),
@@ -135,7 +135,7 @@
                             [Symbol (SynSymbol template); Symbol (SynSymbol lf); Symbol (SynSymbol template2);
                              Symbol (SynSymbol lf); Symbol (SynSymbol template3); Symbol (SynSymbol lf);
                              Symbol (SynSymbol template4); Symbol (SynSymbol lf)], (61,7--61,59)))], Do, (44,5--61,60))],
-                 Do, (43,3--62,5))], (39,1--62,6)), (39,0--63,1));
+                 Do, (43,3--62,5))], None, (39,1--62,6)), (39,0--63,1));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (65,0--65,91)),

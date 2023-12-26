@@ -44,7 +44,7 @@
                      [Op (Infix (SynSymbol +, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (28,19--28,24)))],
                      (28,5--28,25));
                   SynMatch (Discard (29,5--29,6), None, [Const (Int32 0, (29,7--29,8))], (29,5--29,8))], (27,3--29,9))],
-             (26,1--29,10)), (26,0--29,11));
+             None, (26,1--29,10)), (26,0--29,11));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (31,0--33,23)),

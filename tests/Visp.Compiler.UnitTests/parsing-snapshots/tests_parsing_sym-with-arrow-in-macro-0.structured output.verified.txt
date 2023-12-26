@@ -13,7 +13,7 @@
        Expr
          (FunctionDef
             (SynSymbol something->nothing, Inline, Args (List [Named (SynSymbol i, (13,31--13,32))], (13,30--13,33)),
-             [Symbol (SynSymbol i)], (13,1--13,35)), (13,0--13,36));
+             [Symbol (SynSymbol i)], None, (13,1--13,35)), (13,0--13,36));
        Expr
          (FunctionDef
             (SynSymbol Test, Inline, Args (List [Named (SynSymbol i, (15,17--15,18))], (15,16--15,19)),
@@ -22,7 +22,7 @@
                    (SynSymbol noop-macro-1,
                     [Symbol (SynSymbol noop-macro-1);
                      List (Paren, [Symbol (SynSymbol something->nothing); Symbol (SynSymbol i)], (16,16--16,38))],
-                    (16,3--16,38)))], (15,1--16,39)), (15,0--16,40));
+                    (16,3--16,38)))], None, (15,1--16,39)), (15,0--16,40));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

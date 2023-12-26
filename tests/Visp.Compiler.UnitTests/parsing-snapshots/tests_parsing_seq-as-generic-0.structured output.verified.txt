@@ -8,7 +8,7 @@
                   [Typed
                      (Named (SynSymbol items, (8,15--8,20)), Generic (Ident seq, [Ident ^T], (8,22--8,29)), (8,14--8,30))],
                 (8,13--8,31)), [FunctionCall (Symbol (SynSymbol Seq.length), [Symbol (SynSymbol items)], (8,33--8,49))],
-             (8,1--8,50)), (8,0--8,51));
+             None, (8,1--8,50)), (8,0--8,51));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

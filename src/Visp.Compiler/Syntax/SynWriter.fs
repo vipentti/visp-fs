@@ -758,7 +758,7 @@ module Write =
 
             ()
 
-        | SynExpr.FunctionDef(name_, flags, args, body, range) ->
+        | SynExpr.FunctionDef(name_, flags, args, body, retty, range) ->
             startExpr w st range
 
             string w "let "
@@ -773,6 +773,14 @@ module Write =
             space w
             //writeArgsOrEmpty w args
             synPat w args
+
+            match retty with
+            | None -> ()
+            | Some(ty) ->
+                string w " : "
+                writeType w ty
+                ()
+
             string w " ="
 
             use _ = withIndent w false
