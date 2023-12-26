@@ -461,11 +461,19 @@ let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_
     | "__SOURCE_DIRECTORY__" ->
         let filename = lexbuf.StartPos.FileName
 
-        if String.IsNullOrWhiteSpace(filename) then
-            String.Empty
-        else
-            filename |> System.IO.Path.GetFullPath |> System.IO.Path.GetDirectoryName
-        |> fun dir -> KEYWORD_STRING(s, dir)
+        let dirname =
+            if String.IsNullOrWhiteSpace(filename) then
+                String.Empty
+            else
+                filename |> System.IO.Path.GetFullPath |> System.IO.Path.GetDirectoryName
+
+        let dirname =
+            if Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings then
+                dirname.Replace('\\', '/')
+            else
+                dirname
+
+        dirname |> fun dir -> KEYWORD_STRING(s, dir)
     | it ->
         if args.IsTokenStreamMode then
             match s with
