@@ -24,8 +24,6 @@ let inline private toListAndReturn (lst: ResizeArray<'T>) =
 
 let private handleInterpolatedString nest ((raw, kind, stringRange): Str) (constRange: range) =
     let normalized = Visp.Runtime.Library.StringMethods.normalizeIndent raw
-    // TODO: Support non-multiline interpolated strings as printf argument
-    // e.g. (printfn $"something {(+ 1 2)}") should be valid
     let tempSb = PooledStringBuilder.Get()
 
     for _ = 1 to nest do
@@ -183,63 +181,12 @@ let private matchesFmtMethod (str: string) (met: FmtMethod) =
 
     strSpan.Equals(met.name, StringComparison.Ordinal)
 
-let private isFmtMethod (str: string) =
-    fmtMethods |> List.exists (matchesFmtMethod str)
+let private tryGetFmtMethod (str: string) =
+    fmtMethods |> List.tryFind (matchesFmtMethod str)
 
-let private getFmtMethod (str: string) =
-    fmtMethods |> List.find (matchesFmtMethod str)
-
-let private fmtMethodFactories =
-    [ ("bprintf", fmtTypeFactory "BuilderFormat<_>")
-      ("fprintf", fmtTypeFactory "TextWriterFormat<_>")
-      ("fprintfn", fmtTypeFactory "TextWriterFormat<_>")
-      ("eprintf", fmtTypeFactory "TextWriterFormat<_>")
-      ("eprintfn", fmtTypeFactory "TextWriterFormat<_>")
-      ("printf", fmtTypeFactory "TextWriterFormat<_>")
-      ("printfn", fmtTypeFactory "TextWriterFormat<_>")
-      ("sprintf", fmtTypeFactory "StringFormat<_>")
-      ("kbprintf", fmtTypeFactory "BuilderFormat<_, _>")
-      ("kfprintf", fmtTypeFactory "TextWriterFormat<_, _>")
-      ("kprintf", fmtTypeFactory "StringFormat<_, _>")
-      ("ksprintf", fmtTypeFactory "StringFormat<_, _>")
-      ("failwithf", fmtTypeFactory "StringFormat<_, _>") ]
-    |> Map.ofList
-
-let private fmtArgMatches =
-    [ ("bprintf", 1)
-      ("fprintf", 1)
-      ("fprintfn", 1)
-      ("eprintf", 0)
-      ("eprintfn", 0)
-      ("printf", 0)
-      ("printfn", 0)
-      ("sprintf", 0)
-      ("kbprintf", 2)
-      ("kfprintf", 2)
-      ("kprintf", 1)
-      ("ksprintf", 1)
-      ("failwithf", 0) ]
-    |> Map.ofList
-
-type private InterpolatedStringData =
-    { text: string
-      kind: SynStringKind
-      stringRange: range
-      constRange: range }
-
-let private (|InterpolatedString|_|) (ex: SynExpr) =
+let private (|FormatMethod|_|) (ex: SynExpr) =
     match ex with
-    | SynExpr.Const(SynConst.String(raw, kind, stringRange), constRange) ->
-        match kind with
-        | SynStringKind.Interpolated _
-        | SynStringKind.InterpolatedTripleQuote _ ->
-            Some(
-                { text = raw
-                  kind = kind
-                  stringRange = stringRange
-                  constRange = constRange }
-            )
-        | _ -> None
+    | Patterns.SymbolText maybeFmt -> tryGetFmtMethod maybeFmt
     | _ -> None
 
 let liftLiteralStrings (file: ParsedFile) =
@@ -248,7 +195,6 @@ let liftLiteralStrings (file: ParsedFile) =
     let mutable strIndex = 0
     let mutable minRange = range.Zero
     let mutable maxRange = range.Zero
-    let mutable maybeNextReturnType = None
 
     let (|InterpolatedStringCall|_|) (ex: SynExpr) =
         match ex with
@@ -261,13 +207,8 @@ let liftLiteralStrings (file: ParsedFile) =
     let file =
         file
         |> Helpers.transformParsedFile (function
-            | SynExpr.FunctionCall(Patterns.SymbolWith maybePrint, args, range) as it when
-                isFmtMethod maybePrint
-                ->
-
-                let method = getFmtMethod maybePrint
-                let retTy = fmtTypeFactory method.typeName range
-                let argIndex = method.fmtArgPos
+            | SynExpr.FunctionCall(FormatMethod fmtMethod, args, _) as it ->
+                let argIndex = fmtMethod.fmtArgPos
 
                 match args with
                 | ArgMatch argIndex (InterpolatedStringCall(name,
@@ -277,6 +218,8 @@ let liftLiteralStrings (file: ParsedFile) =
                                                                                 body,
                                                                                 None,
                                                                                 range))) ->
+
+                    let retTy = fmtTypeFactory fmtMethod.typeName range
 
                     liftableStrings[name] <-
                         SynExpr.FunctionDef(fnname, flags, args, body, Some retTy, range)
@@ -331,20 +274,13 @@ let liftLiteralStrings (file: ParsedFile) =
                     let args =
                         variables |> List.map (fun it -> Syntax.mkInferredNamePat it constRange)
 
-                    let retTy =
-                        match maybeNextReturnType with
-                        | Some(it) ->
-                            maybeNextReturnType <- None
-                            Some it
-                        | None -> None
-
                     let func =
                         SynExpr.FunctionDef(
                             Syntax.mkSynSymbol name constRange,
                             FunctionFlags.Inline,
                             SynPat.Args(SynArgPats.List(args), constRange),
                             [ newConst ],
-                            retTy,
+                            None,
                             constRange
                         )
 
