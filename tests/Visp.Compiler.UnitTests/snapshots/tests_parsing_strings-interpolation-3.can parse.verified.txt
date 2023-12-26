@@ -1,0 +1,142 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 14 @"strings-interpolation-3.visp"
+let inline ``LiftedString0_strings-interpolation-3`` dt : Printf.StringFormat<_, _> =
+  $"Date is: {dt:``yyyy-MM-dd``}"
+
+// line 17 @"strings-interpolation-3.visp"
+let inline ``LiftedString1_strings-interpolation-3`` dt : Printf.TextWriterFormat<_> =
+  $"printfn_test: Date is: {dt:``yyyy-MM-dd``}"
+
+// line 21 @"strings-interpolation-3.visp"
+let inline ``LiftedString2_strings-interpolation-3`` dt : Printf.TextWriterFormat<_> =
+  $"""
+  printfn_multiline_test: start
+  Date is: {dt:``yyyy-MM-dd``}
+  printfn_multiline_test: end
+"""
+
+// line 31 @"strings-interpolation-3.visp"
+let inline ``LiftedString3_strings-interpolation-3`` dt : Printf.BuilderFormat<_> =
+  $"Date is: {dt:``yyyy-MM-dd``}"
+
+// line 36 @"strings-interpolation-3.visp"
+let inline ``LiftedString6_strings-interpolation-3`` dt : Printf.BuilderFormat<_, _> =
+  $"Date is: {dt:``yyyy-MM-dd``}"
+
+// line 40 @"strings-interpolation-3.visp"
+let inline ``LiftedString8_strings-interpolation-3`` dt : Printf.TextWriterFormat<_, _> =
+  $"Date is: {dt:``yyyy-MM-dd``}"
+
+// line 44 @"strings-interpolation-3.visp"
+let inline ``LiftedString9_strings-interpolation-3`` dt : Printf.TextWriterFormat<_> =
+  $"""
+  fprintfn_test: start
+  Date is: {dt:``yyyy-MM-dd``}
+  fprintfn_test: end
+"""
+
+// line 52 @"strings-interpolation-3.visp"
+let inline ``LiftedString12_strings-interpolation-3`` dt : Printf.StringFormat<_> =
+  $"Date is: {dt:``yyyy-MM-dd``}"
+
+// line 7 @"strings-interpolation-3.visp"
+open System
+
+// line 8 @"strings-interpolation-3.visp"
+open System.Text
+
+// line 9 @"strings-interpolation-3.visp"
+open System.IO
+
+// line 11 @"strings-interpolation-3.visp"
+let dt =
+  // line 11 @"strings-interpolation-3.visp"
+  (new DateTime(2023, 12, 26))
+// line 13 @"strings-interpolation-3.visp"
+let FailwithButDoNotCall () =
+  // line 14 @"strings-interpolation-3.visp"
+  failwithf (``LiftedString0_strings-interpolation-3`` dt)
+
+// line 16 @"strings-interpolation-3.visp"
+let printfn_test () =
+  // line 17 @"strings-interpolation-3.visp"
+  printfn (``LiftedString1_strings-interpolation-3`` dt)
+
+// line 19 @"strings-interpolation-3.visp"
+let printfn_multiline_test () =
+  // line 20 @"strings-interpolation-3.visp"
+  let SomeFunction () =
+    // line 21 @"strings-interpolation-3.visp"
+    printfn (``LiftedString2_strings-interpolation-3`` dt)
+
+  // line 27 @"strings-interpolation-3.visp"
+  SomeFunction ()
+
+// line 29 @"strings-interpolation-3.visp"
+let bprintf_test () =
+  // line 30 @"strings-interpolation-3.visp"
+  let buf =
+    // line 30 @"strings-interpolation-3.visp"
+    (new StringBuilder())
+  // line 31 @"strings-interpolation-3.visp"
+  Printf.bprintf buf (``LiftedString3_strings-interpolation-3`` dt)
+  // line 32 @"strings-interpolation-3.visp"
+  printfn "bprintf_test: %s" ((buf.ToString()))
+
+// line 34 @"strings-interpolation-3.visp"
+let kbprintf_test () =
+  // line 35 @"strings-interpolation-3.visp"
+  let buf =
+    // line 35 @"strings-interpolation-3.visp"
+    (new StringBuilder())
+  // line 36 @"strings-interpolation-3.visp"
+  printfn "kbprintf_test: %s" (Printf.kbprintf ((fun () ->
+    // line 36 @"strings-interpolation-3.visp"
+    buf.ToString())) buf (``LiftedString6_strings-interpolation-3`` dt))
+
+// line 38 @"strings-interpolation-3.visp"
+let kfprintf_test () =
+  // line 39 @"strings-interpolation-3.visp"
+  let sw =
+    // line 39 @"strings-interpolation-3.visp"
+    (new StringWriter())
+  // line 40 @"strings-interpolation-3.visp"
+  printfn "kfprintf_test: %s" (Printf.kfprintf ((fun () ->
+    // line 40 @"strings-interpolation-3.visp"
+    sw.ToString())) sw (``LiftedString8_strings-interpolation-3`` dt))
+
+// line 42 @"strings-interpolation-3.visp"
+let fprintfn_test () =
+  // line 43 @"strings-interpolation-3.visp"
+  let sw =
+    // line 43 @"strings-interpolation-3.visp"
+    (new StringWriter())
+  // line 44 @"strings-interpolation-3.visp"
+  fprintfn sw (``LiftedString9_strings-interpolation-3`` dt)
+  // line 49 @"strings-interpolation-3.visp"
+  printf "fprintfn_test: %s" ((sw.ToString()))
+
+// line 51 @"strings-interpolation-3.visp"
+let sprintf_test () =
+  // line 52 @"strings-interpolation-3.visp"
+  printfn "sprintf_test: %s" (sprintf (``LiftedString12_strings-interpolation-3`` dt))
+
+// line 54 @"strings-interpolation-3.visp"
+let tests =
+  // line 54 @"strings-interpolation-3.visp"
+  [|printfn_test;printfn_multiline_test;fprintfn_test;bprintf_test;kbprintf_test;kfprintf_test;sprintf_test|]
+// line 63 @"strings-interpolation-3.visp"
+(tests |> (Array.iter ((fun arg1 ->
+  // line 63 @"strings-interpolation-3.visp"
+  arg1 ()))))
+// line 65 @"strings-interpolation-3.visp"
+let visp_result_todo = ()
+// line 65 @"strings-interpolation-3.visp"
+printfn "%A" visp_result_todo
+

@@ -156,6 +156,11 @@ module ``tests_parsing_match-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/match-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-3`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/strings-interpolation-3.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_sym-with-arrow-in-macro-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/sym-with-arrow-in-macro-0.visp"

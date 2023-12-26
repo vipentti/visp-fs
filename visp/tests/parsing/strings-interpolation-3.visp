@@ -1,0 +1,69 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System)
+(open System.Text)
+(open System.IO)
+
+(let dt (new DateTime 2023 12 26))
+
+(fn FailwithButDoNotCall ()
+  (failwithf $"Date is: {dt:``yyyy-MM-dd``}"))
+
+(fn printfn_test ()
+  (printfn $"printfn_test: Date is: {dt:``yyyy-MM-dd``}"))
+
+(fn printfn_multiline_test ()
+  (fn SomeFunction ()
+    (printfn $"""
+      printfn_multiline_test: start
+      Date is: {dt:``yyyy-MM-dd``}
+      printfn_multiline_test: end
+    """))
+
+  (SomeFunction))
+
+(fn bprintf_test ()
+  (let buf (new StringBuilder))
+  (Printf.bprintf buf $"Date is: {dt:``yyyy-MM-dd``}")
+  (printfn "bprintf_test: %s" (.ToString buf)))
+
+(fn kbprintf_test ()
+  (let buf (new StringBuilder))
+  (printfn "kbprintf_test: %s" (Printf.kbprintf (fn () (.ToString buf)) buf $"Date is: {dt:``yyyy-MM-dd``}")))
+
+(fn kfprintf_test ()
+  (let sw (new StringWriter))
+  (printfn "kfprintf_test: %s" (Printf.kfprintf (fn () (.ToString sw)) sw $"Date is: {dt:``yyyy-MM-dd``}")))
+
+(fn fprintfn_test ()
+  (let sw (new StringWriter))
+  (fprintfn sw $"""
+      fprintfn_test: start
+      Date is: {dt:``yyyy-MM-dd``}
+      fprintfn_test: end
+    """)
+  (printf "fprintfn_test: %s" (.ToString sw)))
+
+(fn sprintf_test ()
+  (printfn "sprintf_test: %s" (sprintf $"Date is: {dt:``yyyy-MM-dd``}")))
+
+(let tests [|
+  printfn_test
+  printfn_multiline_test
+  fprintfn_test
+  bprintf_test
+  kbprintf_test
+  kfprintf_test
+  sprintf_test|])
+
+(|> tests (Array.iter #(%1)))
+
+()
+;; (bprintf_test)
+;; (kbprintf_test)
+;; (kfprintf_test)
+

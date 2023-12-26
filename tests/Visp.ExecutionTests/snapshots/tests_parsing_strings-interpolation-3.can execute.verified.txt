@@ -1,0 +1,18 @@
+﻿printfn_test: Date is: 2023-12-26
+
+  printfn_multiline_test: start
+  Date is: 2023-12-26
+  printfn_multiline_test: end
+
+fprintfn_test: 
+  fprintfn_test: start
+  Date is: 2023-12-26
+  fprintfn_test: end
+
+bprintf_test: Date is: 2023-12-26
+kbprintf_test: Date is: 2023-12-26
+kfprintf_test: Date is: 2023-12-26
+sprintf_test: Date is: 2023-12-26
+()
+
+ExitCode: 0

@@ -156,6 +156,11 @@ module ``tests_parsing_match-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/parsing/match-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_strings-interpolation-3`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/strings-interpolation-3.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_sym-with-arrow-in-macro-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/sym-with-arrow-in-macro-0.visp"
