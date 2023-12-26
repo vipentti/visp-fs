@@ -24,14 +24,14 @@
                      (17,5--17,22));
                   DotMethod
                     (Symbol (SynSymbol work), SynSymbol RemoveAt, [Const (Int32 0, (18,20--18,21))], Tuple,
-                     (18,5--18,21)); Symbol (SynSymbol r)], (16,3--19,5));
+                     (18,5--18,21)); Symbol (SynSymbol r)], None, (16,3--19,5));
               FunctionDef
                 (SynSymbol EnqueueWork, None,
                  Args
                    (List
                       [Named (SynSymbol bi, (21,19--21,21)); Named (SynSymbol offsetEnd, (21,22--21,31));
                        Named (SynSymbol nextPos, (21,32--21,39)); Named (SynSymbol count, (21,40--21,45))],
-                    (21,18--21,46)), [Const (Unit, (22,4--22,6))], (21,3--22,6));
+                    (21,18--21,46)), [Const (Unit, (22,4--22,6))], None, (21,3--22,6));
               LetOrUse
                 (Named (SynSymbol result, (24,7--24,13)), Const (Int64 0L, (24,14--24,16)), Mutable, [], (24,3--24,16));
               While
@@ -198,8 +198,8 @@
                                          List (Paren, [Symbol (SynSymbol inc); Symbol (SynSymbol bi)], (59,25--59,33));
                                          Symbol (SynSymbol offsetEnd); Symbol (SynSymbol nextPossibleIndex);
                                          Symbol (SynSymbol count)], (59,12--59,68))], (54,10--60,11))], (38,9--60,11)));
-                          Const (Unit, (62,8--62,10))], (28,7--62,10))], (27,5--63,7))], (26,3--63,8))], (9,1--64,5)),
-          (9,0--65,1));
+                          Const (Unit, (62,8--62,10))], (28,7--62,10))], (27,5--63,7))], (26,3--63,8))], None,
+             (9,1--64,5)), (9,0--65,1));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (67,0--67,14)),

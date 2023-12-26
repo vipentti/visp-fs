@@ -60,7 +60,7 @@
                     (Symbol (SynSymbol index),
                      FunctionCall (Symbol (SynSymbol inc), [Symbol (SynSymbol index)], (23,17--23,26)), (23,5--23,27))],
                  (13,3--23,28));
-              Op (Infix (SynSymbol =, [Symbol (SynSymbol diff); Const (Int32 1, (26,10--26,11))], (26,3--26,11)))],
+              Op (Infix (SynSymbol =, [Symbol (SynSymbol diff); Const (Int32 1, (26,10--26,11))], (26,3--26,11)))], None,
              (8,1--26,12)), (8,0--26,13));
        Expr
          (LetOrUse

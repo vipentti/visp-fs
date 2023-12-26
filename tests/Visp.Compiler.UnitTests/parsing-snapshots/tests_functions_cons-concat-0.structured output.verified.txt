@@ -13,7 +13,7 @@
                        (SynSymbol up!,
                         [Symbol (SynSymbol up!); Symbol (SynSymbol lst);
                          List (Paren, [Symbol (SynSymbol cons); Symbol (SynSymbol i)], (12,13--12,21))], (12,5--12,21)))],
-                 false, (11,3--12,22)); Symbol (SynSymbol lst)], (8,1--14,5)), (8,0--14,6));
+                 false, (11,3--12,22)); Symbol (SynSymbol lst)], None, (8,1--14,5)), (8,0--14,6));
        Expr
          (LetOrUse
             (Named (SynSymbol concat123, (16,5--16,14)),

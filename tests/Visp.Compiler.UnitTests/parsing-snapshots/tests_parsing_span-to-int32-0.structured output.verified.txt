@@ -9,8 +9,8 @@
                 (Named (SynSymbol span1, (11,7--11,12)),
                  DotMethod (Symbol (SynSymbol text), SynSymbol AsSpan, [], Tuple, (11,14--11,26)), None, [],
                  (11,3--11,27));
-              FunctionCall (Symbol (SynSymbol span->int32), [Symbol (SynSymbol span1)], (12,3--12,20))], (10,1--12,21)),
-          (10,0--13,1));
+              FunctionCall (Symbol (SynSymbol span->int32), [Symbol (SynSymbol span1)], (12,3--12,20))], None,
+             (10,1--12,21)), (10,0--13,1));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn),

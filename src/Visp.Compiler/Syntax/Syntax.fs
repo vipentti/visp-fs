@@ -267,6 +267,7 @@ type SynExpr =
         flags: FunctionFlags *
         args: SynPat *
         body: SynExpr list *
+        returnType: SynType option *
         range: range
     | FunctionCall of name: SynExpr * args: SynExpr list * range: range
     | LambdaShort of expr: SynExpr * range: range

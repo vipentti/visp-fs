@@ -34,7 +34,7 @@ let ``can parse %s`` =
   |> Async.AwaitTask
   ", TripleQuote, (22,25--26,5)),
                         (22,25--26,5)); Symbol (SynSymbol path); Symbol (SynSymbol path)], (22,17--26,15)), None, [],
-                 (22,3--26,16)); Symbol (SynSymbol template)], (21,1--28,10)), (21,0--28,11));
+                 (22,3--26,16)); Symbol (SynSymbol template)], None, (21,1--28,10)), (21,0--28,11));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (30,0--30,49)),

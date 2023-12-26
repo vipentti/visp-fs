@@ -13,7 +13,8 @@
                        (SynSymbol up!,
                         [Symbol (SynSymbol up!); Symbol (SynSymbol items);
                          List (Paren, [Symbol (SynSymbol Set.add); Symbol (SynSymbol i)], (12,15--12,26))],
-                        (12,5--12,26)))], false, (11,3--12,27)); Symbol (SynSymbol items)], (8,1--14,7)), (8,0--14,8));
+                        (12,5--12,26)))], false, (11,3--12,27)); Symbol (SynSymbol items)], None, (8,1--14,7)),
+          (8,0--14,8));
        Expr
          (LetOrUse
             (Named (SynSymbol visp_result_todo, (17,0--17,28)),

@@ -38,7 +38,7 @@
                 (Symbol (SynSymbol printfn),
                  [Const (String ("dir %A", Regular, (17,11--17,19)), (17,11--17,19));
                   Tuple ([Symbol (SynSymbol dx); Symbol (SynSymbol dy); Symbol (SynSymbol dz)], (17,21--17,31))],
-                 (17,3--17,32))], (15,1--17,33)), (15,0--18,1));
+                 (17,3--17,32))], None, (15,1--17,33)), (15,0--18,1));
        Expr
          (FunctionDef
             (SynSymbol DoStuffWithDirOnly, None,
@@ -57,7 +57,7 @@
                 (Symbol (SynSymbol printfn),
                  [Const (String ("dir %A", Regular, (21,11--21,19)), (21,11--21,19));
                   Tuple ([Symbol (SynSymbol dx); Symbol (SynSymbol dy); Symbol (SynSymbol dz)], (21,21--21,31))],
-                 (21,3--21,32))], (20,1--21,33)), (20,0--22,1));
+                 (21,3--21,32))], None, (20,1--21,33)), (20,0--22,1));
        Expr
          (FunctionDef
             (SynSymbol MatchRecord, None, Args (List [Named (SynSymbol ray, (24,17--24,20))], (24,16--24,21)),
@@ -79,7 +79,7 @@
                       FunctionCall
                         (Symbol (SynSymbol printfn),
                          [Const (String ("dy %A", Regular, (28,15--28,22)), (28,15--28,22)); Symbol (SynSymbol dy)],
-                         (28,7--28,25))], (26,5--28,26))], (25,3--29,5))], (24,1--30,3)), (24,0--31,1));
+                         (28,7--28,25))], (26,5--28,26))], (25,3--29,5))], None, (24,1--30,3)), (24,0--31,1));
        Expr
          (FunctionDef
             (SynSymbol LetRecord, None, Args (List [Named (SynSymbol ray, (33,15--33,18))], (33,14--33,19)),
@@ -89,7 +89,7 @@
               FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("dir is %A", Regular, (35,11--35,22)), (35,11--35,22)); Symbol (SynSymbol dd)],
-                 (35,3--35,25))], (33,1--35,26)), (33,0--35,27));
+                 (35,3--35,25))], None, (33,1--35,26)), (33,0--35,27));
        Expr
          (FunctionCall
             (Symbol (SynSymbol DoStuffWithRay),

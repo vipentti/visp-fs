@@ -4,13 +4,13 @@
          (FunctionDef
             (SynSymbol OrTest, None,
              Args (List [Named (SynSymbol a, (8,12--8,13)); Named (SynSymbol b, (8,14--8,15))], (8,11--8,16)),
-             [Op (Infix (SynSymbol ||, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (8,17--8,24)))], (8,1--8,25)),
+             [Op (Infix (SynSymbol ||, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (8,17--8,24)))], None, (8,1--8,25)),
           (8,0--8,26));
        Expr
          (FunctionDef
             (SynSymbol AndTest, None,
              Args (List [Named (SynSymbol a, (9,13--9,14)); Named (SynSymbol b, (9,15--9,16))], (9,12--9,17)),
-             [Op (Infix (SynSymbol &&, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (9,18--9,25)))], (9,1--9,26)),
+             [Op (Infix (SynSymbol &&, [Symbol (SynSymbol a); Symbol (SynSymbol b)], (9,18--9,25)))], None, (9,1--9,26)),
           (9,0--9,27));
        Expr
          (FunctionCall

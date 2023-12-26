@@ -7,14 +7,14 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("hello %s", Regular, (12,13--12,23)), (12,13--12,23)); Symbol (SynSymbol name)],
-                 (12,5--12,28))], (10,1--12,29)), (10,0--12,30));
+                 (12,5--12,28))], None, (10,1--12,29)), (10,0--12,30));
        Expr
          (FunctionDef
             (SynSymbol hello-no-types, None, Args (List [Named (SynSymbol name, (16,20--16,24))], (16,19--16,25)),
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("hello %s", Regular, (17,13--17,23)), (17,13--17,23)); Symbol (SynSymbol name)],
-                 (17,5--17,28))], (16,1--17,29)), (16,0--17,30));
+                 (17,5--17,28))], None, (16,1--17,29)), (16,0--17,30));
        Expr
          (FunctionDef
             (SynSymbol hello-with-vector, None,
@@ -22,7 +22,7 @@
              [FunctionCall
                 (Symbol (SynSymbol printfn),
                  [Const (String ("hello %s", Regular, (21,13--21,23)), (21,13--21,23)); Symbol (SynSymbol name)],
-                 (21,5--21,28))], (20,1--21,29)), (20,0--21,30));
+                 (21,5--21,28))], None, (20,1--21,29)), (20,0--21,30));
        Expr
          (LetOrUse
             (Named (SynSymbol anon, (24,5--24,9)),

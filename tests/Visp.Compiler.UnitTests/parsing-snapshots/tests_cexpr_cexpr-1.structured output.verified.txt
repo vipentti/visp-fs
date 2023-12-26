@@ -16,7 +16,7 @@
                   FunctionCall
                     (Symbol (SynSymbol printfn),
                      [Const (String ("continuing...", Regular, (13,16--13,31)), (13,16--13,31))], (13,8--13,31));
-                  FsReturn (Const (Int32 1, (14,15--14,16)), false, (14,8--14,16))], (11,3--14,17))], (10,1--15,3)),
+                  FsReturn (Const (Int32 1, (14,15--14,16)), false, (14,8--14,16))], (11,3--14,17))], None, (10,1--15,3)),
           (10,0--15,4));
        Expr
          (LetOrUse

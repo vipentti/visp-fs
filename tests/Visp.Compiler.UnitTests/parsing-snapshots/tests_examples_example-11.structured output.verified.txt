@@ -17,7 +17,7 @@
                 (SynSymbol hello, None, Args (List [], (12,14--12,16)),
                  [FunctionCall
                     (Symbol (SynSymbol printfn),
-                     [Const (String ("hello world", Regular, (13,17--13,30)), (13,17--13,30))], (13,9--13,30))],
+                     [Const (String ("hello world", Regular, (13,17--13,30)), (13,17--13,30))], (13,9--13,30))], None,
                  (12,5--13,31)), (12,4--13,32));
            Expr (FunctionCall (Symbol (SynSymbol hello), [], (15,5--15,10)), (15,4--15,11))], (10,1--15,11));
        Expr

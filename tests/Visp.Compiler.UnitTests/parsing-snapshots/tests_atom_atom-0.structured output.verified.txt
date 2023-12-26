@@ -12,7 +12,7 @@
                        (SynSymbol +,
                         [Const (Int64 1L, (12,19--12,21));
                          FunctionCall (Symbol (SynSymbol unwrapInt), [Symbol (SynSymbol v)], (12,23--12,34))],
-                        (12,17--12,35)))], (12,5--12,36))], (11,1--12,37)), (11,0--12,38));
+                        (12,17--12,35)))], (12,5--12,36))], None, (11,1--12,37)), (11,0--12,38));
        Expr
          (LetOrUse
             (Named (SynSymbol count, (13,5--13,10)), Atom (Const (Int64 0L, (13,17--13,19)), (13,12--13,19)), None, [],
