@@ -193,8 +193,13 @@ let liftLiteralStrings (file: ParsedFile) =
     use liftableStringsPooled = PooledDictionary.GetPooled()
     let liftableStrings = liftableStringsPooled.Value
     let mutable strIndex = 0
-    let mutable minRange = range.Zero
-    let mutable maxRange = range.Zero
+
+    let getNextName (constRange: range) =
+        let fileName = System.IO.Path.GetFileNameWithoutExtension constRange.FileName
+        let name = $"LiftedString{strIndex}_{fileName}"
+        let nameExpr = Syntax.mkSynSymbolExpr name constRange
+        strIndex <- strIndex + 1
+        (name, nameExpr)
 
     let (|InterpolatedStringCall|_|) (ex: SynExpr) =
         match ex with
@@ -229,24 +234,13 @@ let liftLiteralStrings (file: ParsedFile) =
 
                 it
             | SynExpr.Const(SynConst.String(raw, kind, stringRange), constRange) as ex ->
-
-                if strIndex = 0 then
-                    minRange <- constRange
-
-                maxRange <- constRange
-
-                let fileName = System.IO.Path.GetFileNameWithoutExtension stringRange.FileName
-
-                let name = $"LiftedString{strIndex}_{fileName}"
-                strIndex <- strIndex + 1
-
-                let nameExpr = Syntax.mkSynSymbolExpr name constRange
-
                 match kind with
                 | SynStringKind.Verbatim
                 | SynStringKind.Regular
                 | SynStringKind.TripleQuote ->
                     if Visp.Runtime.Library.StringMethods.isMultilineString raw then
+                        let (name, nameExpr) = getNextName constRange
+
                         let normalized = Visp.Runtime.Library.StringMethods.normalizeIndent raw
 
                         let bind =
@@ -268,6 +262,8 @@ let liftLiteralStrings (file: ParsedFile) =
 
                 | SynStringKind.Interpolated(plain = nest)
                 | SynStringKind.InterpolatedTripleQuote(triple = nest) ->
+                    let (name, nameExpr) = getNextName constRange
+
                     let (newConst, variables, expressions) =
                         handleInterpolatedString nest (raw, kind, stringRange) constRange
 
@@ -291,9 +287,9 @@ let liftLiteralStrings (file: ParsedFile) =
 
     let moduleDecls =
         liftableStrings.Values
-        |> Seq.map (fun expr -> SynModuleDecl.Expr(expr, expr.Range))
+        |> Seq.map (fun expr ->
+            ParsedFileFragment.AnonModule([ SynModuleDecl.Expr(expr, expr.Range) ], expr.Range))
         |> List.ofSeq
-        |> (fun its -> ParsedFileFragment.AnonModule(its, Range.unionRanges minRange maxRange))
 
     let (ParsedFile frags) = file
-    ParsedFile(moduleDecls :: frags)
+    ParsedFile(moduleDecls @ frags)

@@ -7,17 +7,17 @@ open Visp.Runtime.Library
 let state = { Todo = () }
 // line 13 @"strings-1.visp"
 [<Literal>]
-let ``LiftedString7_strings-1`` = """
+let ``LiftedString0_strings-1`` = """
   multiple lines are okay?
 """
 // line 19 @"strings-1.visp"
 [<Literal>]
-let ``LiftedString9_strings-1`` = """
+let ``LiftedString1_strings-1`` = """
   multiple lines are okay?
 """
 // line 25 @"strings-1.visp"
 [<Literal>]
-let ``LiftedString10_strings-1`` = """
+let ``LiftedString2_strings-1`` = """
 // AUTO GENERATED
 // DO NOT MODIFY BY HAND
 
@@ -29,26 +29,26 @@ module %s
 """
 // line 45 @"strings-1.visp"
 [<Literal>]
-let ``LiftedString15_strings-1`` = """
+let ``LiftedString3_strings-1`` = """
   [<Fact>]
   let ``%s %s`` () = TestUtils.runTest "%s"
 """
 // line 49 @"strings-1.visp"
-let inline ``LiftedString16_strings-1`` prefix testname path =
+let inline ``LiftedString4_strings-1`` prefix testname path =
   $"""
   [<Fact>]
   let ``interpolated {prefix} {testname}`` () = TestUtils.runTest "{path}"
 """
 
 // line 53 @"strings-1.visp"
-let inline ``LiftedString17_strings-1`` prefix testname path =
+let inline ``LiftedString5_strings-1`` prefix testname path =
   $$"""
   [<Fact>]
   let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{path}} {path}"
 """
 
 // line 57 @"strings-1.visp"
-let inline ``LiftedString18_strings-1`` prefix testname exprArg0 exprArg1 =
+let inline ``LiftedString6_strings-1`` prefix testname exprArg0 exprArg1 =
   $$"""
   [<Fact>]
   let ``interpolated {{prefix}} {{testname}}`` () = TestUtils.runTest "{{exprArg0}} {{exprArg1}} {(+ 1 2 3)}"
@@ -63,7 +63,7 @@ printfn "string is '%s'" """r:\rt:\tn:\na:\a"""
 // line 12 @"strings-1.visp"
 printfn "string is '%s'" """r:\rt:\tn:\na:\a"""
 // line 13 @"strings-1.visp"
-printfn "string is '%s'" ``LiftedString7_strings-1``
+printfn "string is '%s'" ``LiftedString0_strings-1``
 // line 16 @"strings-1.visp"
 (
   // line 17 @"strings-1.visp"
@@ -71,11 +71,11 @@ printfn "string is '%s'" ``LiftedString7_strings-1``
     // line 18 @"strings-1.visp"
     (
       // line 19 @"strings-1.visp"
-      printfn "string is '%s'" ``LiftedString9_strings-1``)))
+      printfn "string is '%s'" ``LiftedString1_strings-1``)))
 // line 24 @"strings-1.visp"
 let genTestHeader moduleName =
   // line 25 @"strings-1.visp"
-  sprintf ``LiftedString10_strings-1`` moduleName moduleName
+  sprintf ``LiftedString2_strings-1`` moduleName moduleName
 
 // line 37 @"strings-1.visp"
 let lf = System.Environment.NewLine
@@ -99,19 +99,19 @@ let genTestTemplate (prefix: string) (path: string) =
       // line 45 @"strings-1.visp"
       let template =
         // line 45 @"strings-1.visp"
-        sprintf ``LiftedString15_strings-1`` prefix testname path
+        sprintf ``LiftedString3_strings-1`` prefix testname path
       // line 49 @"strings-1.visp"
       let template2 =
         // line 49 @"strings-1.visp"
-        ``LiftedString16_strings-1`` prefix testname path
+        ``LiftedString4_strings-1`` prefix testname path
       // line 53 @"strings-1.visp"
       let template3 =
         // line 53 @"strings-1.visp"
-        ``LiftedString17_strings-1`` prefix testname path
+        ``LiftedString5_strings-1`` prefix testname path
       // line 57 @"strings-1.visp"
       let template4 =
         // line 57 @"strings-1.visp"
-        ``LiftedString18_strings-1`` prefix testname (1 + 2 + 3) (1 + 2 + 3)
+        ``LiftedString6_strings-1`` prefix testname (1 + 2 + 3) (1 + 2 + 3)
       // line 61 @"strings-1.visp"
       (template + lf + template2 + lf + template3 + lf + template4 + lf)))
 
