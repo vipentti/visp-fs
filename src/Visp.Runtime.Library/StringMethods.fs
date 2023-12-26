@@ -22,13 +22,15 @@ let normalizeIndent (str: string) =
 
         while lines.MoveNext() do
             let cur = lines.Current
-            let mutable enu = cur.GetEnumerator()
+            let len = cur.Length
+
             let mutable isDone = false
-
             let mutable level = 0
+            let mutable index = 0
 
-            while not isDone && enu.MoveNext() do
-                let ch = enu.Current
+            while not isDone && index < len do
+                let ch = cur[index]
+                index <- index + 1
 
                 if not (System.Char.IsWhiteSpace ch) then
                     isDone <- true
@@ -43,31 +45,35 @@ let normalizeIndent (str: string) =
         if finalIndentLevel = 0 then
             str
         else
+            let len = str.Length
             let mutable sb = PooledStringBuilder.Get()
-            ignore <| sb.EnsureCapacity(str.Length)
+            ignore <| sb.EnsureCapacity(len)
             let mutable lastNewline = false
             let mutable indent = 1
-            let mutable enu = str.GetEnumerator()
+            let mutable index = 0
 
-            while (enu.MoveNext()) do
-                let mutable ch = enu.Current
+            while index < len do
+                let mutable ch = str[index]
+                index <- index + 1
 
                 if ch = '\n' && finalIndentLevel > 0 then
                     lastNewline <- true
                     indent <- 1
                     sb <- sb.Append ch
                 else if lastNewline && ch = ' ' then
-                    while (indent < finalIndentLevel && ch = ' ' && enu.MoveNext()) do
+                    while (indent < finalIndentLevel && ch = ' ' && index < len) do
+                        ch <- str[index]
                         indent <- indent + 1
-                        ch <- enu.Current
+                        index <- index + 1
                         ()
 
                     if ch <> ' ' then
                         sb <- sb.Append ch
 
-                    while ch = ' ' && enu.MoveNext() do
-                        ch <- enu.Current
+                    while ch = ' ' && index < len do
+                        ch <- str[index]
                         sb <- sb.Append ch
+                        index <- index + 1
                         ()
 
                     lastNewline <- false
