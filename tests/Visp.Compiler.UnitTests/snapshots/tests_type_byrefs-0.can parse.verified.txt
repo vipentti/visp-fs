@@ -1,0 +1,113 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 28 @"byrefs-0.visp"
+let inline ``LiftedString0_byrefs-0`` c1 : Printf.TextWriterFormat<_> =
+  $"Original sequence: %O{c1}"
+
+// line 31 @"byrefs-0.visp"
+let inline ``LiftedString1_byrefs-0`` c1 : Printf.TextWriterFormat<_> =
+  $"New sequence:      %O{c1}"
+
+// line 36 @"byrefs-0.visp"
+let inline ``LiftedString2_byrefs-0`` dt : Printf.TextWriterFormat<_> =
+  $"Now: {dt:``yyyy-MM-dd``}"
+
+// line 39 @"byrefs-0.visp"
+let inline ``LiftedString3_byrefs-0`` dt : Printf.TextWriterFormat<_> =
+  $"Now: {dt:``yyyy-MM-dd``}"
+
+// line 9 @"byrefs-0.visp"
+open System
+
+// line 11 @"byrefs-0.visp"
+type C1 () =
+  // line 12 @"byrefs-0.visp"
+  let mutable nums =
+    // line 12 @"byrefs-0.visp"
+    [|1;3;7;15;31;63;127;255;511;1023|]
+  // line 13 @"byrefs-0.visp"
+  override _.ToString () =
+    // line 13 @"byrefs-0.visp"
+    System.String.Join(' ', nums)
+  // line 15 @"byrefs-0.visp"
+  member _.FindLargestSmallerThan target =
+    // line 16 @"byrefs-0.visp"
+    let mutable ctr =
+      // line 16 @"byrefs-0.visp"
+      dec ((nums.Length))
+    // line 18 @"byrefs-0.visp"
+    while CoreMethods.isTruthy(((ctr > 0) && ((nums.[ctr]) >= target))) do
+      // line 19 @"byrefs-0.visp"
+      
+      // line 19 @"byrefs-0.visp"
+      ctr <- dec ctr
+    // line 21 @"byrefs-0.visp"
+    if CoreMethods.isTruthy(
+      (ctr > 0))
+      then
+        // line 22 @"byrefs-0.visp"
+        (&nums.[ctr])
+      else
+        // line 23 @"byrefs-0.visp"
+        (&nums.[0])
+// line 26 @"byrefs-0.visp"
+let C1Test () =
+  // line 27 @"byrefs-0.visp"
+  let c1 =
+    // line 27 @"byrefs-0.visp"
+    C1 ()
+  // line 28 @"byrefs-0.visp"
+  printfn (``LiftedString0_byrefs-0`` c1)
+  // line 29 @"byrefs-0.visp"
+  let v =
+    // line 29 @"byrefs-0.visp"
+    &c1.FindLargestSmallerThan(16)
+  // line 30 @"byrefs-0.visp"
+  v <- (v * 2)
+  // line 31 @"byrefs-0.visp"
+  printfn (``LiftedString1_byrefs-0`` c1)
+
+// line 33 @"byrefs-0.visp"
+C1Test ()
+// line 35 @"byrefs-0.visp"
+let f_inref (dt: inref<DateTime>) =
+  // line 36 @"byrefs-0.visp"
+  printfn (``LiftedString2_byrefs-0`` dt)
+
+// line 38 @"byrefs-0.visp"
+let f_byref (dt: byref<DateTime>) =
+  // line 39 @"byrefs-0.visp"
+  printfn (``LiftedString3_byrefs-0`` dt)
+  // line 40 @"byrefs-0.visp"
+  dt <- (dt.AddDays(1))
+
+// line 42 @"byrefs-0.visp"
+let UsingByrefs () =
+  // line 43 @"byrefs-0.visp"
+  let dt =
+    // line 43 @"byrefs-0.visp"
+    (new DateTime(2023, 12, 26))
+  // line 44 @"byrefs-0.visp"
+  f_inref &dt
+  // line 46 @"byrefs-0.visp"
+  let mutable dt =
+    // line 46 @"byrefs-0.visp"
+    (new DateTime(2023, 12, 26))
+  // line 47 @"byrefs-0.visp"
+  f_byref &dt
+  // line 48 @"byrefs-0.visp"
+  f_inref &dt
+  ()
+
+// line 52 @"byrefs-0.visp"
+UsingByrefs ()
+// line 54 @"byrefs-0.visp"
+let visp_result_todo = ()
+// line 54 @"byrefs-0.visp"
+printfn "%A" visp_result_todo
+

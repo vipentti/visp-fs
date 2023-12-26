@@ -66,6 +66,11 @@ module ``tests_type_custom-comparison-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/type/custom-comparison-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_byrefs-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/type/byrefs-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_type_static-members-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/type/static-members-0.visp"
