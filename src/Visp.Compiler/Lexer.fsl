@@ -262,6 +262,41 @@ let punct = [
 
 let propShort = letter ident_char*
 
+let keyword_ex = ':' propShort
+
+let tokenSymbol = (
+  ':' ident_char+
+  | ident
+  | ident_arrow
+)
+
+let tokenStreamSymbol = (
+  ':' ident_char+
+  | '.' ident_char+
+  | '+' ident_char+
+  | '-' ident_char+
+  | ident_arrow
+  | "->>"
+  | "->"
+  | "+"
+  | "/"
+  | "-"
+  | "*"
+  | "..."
+  | ">="
+  | "<="
+  | ">>"
+  | "!="
+  | '<'
+  | '>'
+  | '='
+  | "&&"
+  | "||"
+  | ":>"
+  | ":?"
+  | ident
+)
+
 rule token (args: LexArgs) (skip: bool) = parse
   | whitespace { token args skip lexbuf }
   | newline    { newline lexbuf; token args skip lexbuf }
@@ -270,14 +305,13 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   // punct
 
-  | ident_arrow { SYMBOL (lexeme lexbuf) }
-  | ident_letter_chars ">>" { TOKENLIST [SYMBOL (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
-  | "<<" ident_letter_chars { SYMBOL (lexeme lexbuf) }
+  | ident_letter_chars ">>" { TOKENLIST [symbolOrKeywordToken args lexbuf (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
+  | "<<" ident_letter_chars { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
 
-  | infix_operators { INFIX_OP (lexeme lexbuf) }
-  | '(' infix_operators { TOKENLIST [LPAREN; INFIX_OP (lexemeTrimLeft lexbuf 1)] }
-  | unary_operators { UNARY_OP (lexeme lexbuf) }
-  | '(' unary_operators { TOKENLIST [LPAREN; UNARY_OP (lexemeTrimLeft lexbuf 1)] }
+  | infix_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+  | '(' infix_operators { TOKENLIST [LPAREN; symbolOrKeywordToken args lexbuf (lexemeTrimLeft lexbuf 1)] }
+  | unary_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+  | '(' unary_operators { TOKENLIST [LPAREN; symbolOrKeywordToken args lexbuf (lexemeTrimLeft lexbuf 1)] }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
@@ -288,12 +322,8 @@ rule token (args: LexArgs) (skip: bool) = parse
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
   | '|'           { BAR }
-
-  | "..." { SYMBOL (lexeme lexbuf) }
-
-
-  | "#nowarn" { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
-
+  | "..."         { SYMBOL (lexeme lexbuf) }
+  | "#nowarn"     { HASH_IDENT ((lexeme lexbuf).TrimStart('#'))}
   | '.' propShort { DOT_METHOD (lexeme lexbuf) }
   | '-' propShort { APPLY_METHOD (lexeme lexbuf) }
   | '+' propShort { PROP_PLUS (lexeme lexbuf) }
@@ -457,6 +487,8 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   | '+'  { OP_PLUS }
   | '-'  { OP_MINUS }
+  | '*'  { OP_MULT }
+  | '/'  { OP_DIV }
   | '.'  { DOT }
   | ">=" { GREATER_EQUALS }
   | "<=" { LESS_EQUALS }
@@ -509,12 +541,8 @@ rule token (args: LexArgs) (skip: bool) = parse
       // TODO: validate
       singleQuoteString (buf, fin, m, LexerStringKind.InterpolatedStringFirst, args) skip lexbuf
     }
-
-  | '*'        { OP_MULT }
-  | '/'        { OP_DIV }
-  | ':' propShort { KEYWORD (lexeme lexbuf) }
-  | ':' ident_char+ { SYMBOL (lexeme lexbuf) }
-  | ident      {
+  | keyword_ex { KEYWORD (lexeme lexbuf) }
+  | tokenSymbol {
       let text = lexeme lexbuf
       symbolOrKeywordToken args lexbuf text
     }
@@ -530,10 +558,10 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
 
   // punct
 
-  | infix_operators { SYMBOL (lexeme lexbuf) }
-  | '(' infix_operators { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
-  | unary_operators { SYMBOL (lexeme lexbuf) }
-  | '(' unary_operators { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
+  | infix_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+  | '(' infix_operators { TOKENLIST [LPAREN; symbolOrKeywordToken args lexbuf (lexemeTrimLeft lexbuf 1)] }
+  | unary_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+  | '(' unary_operators { TOKENLIST [LPAREN; symbolOrKeywordToken args lexbuf (lexemeTrimLeft lexbuf 1)] }
   | '('           { LPAREN }
   | ')'           { RPAREN }
   | '{'           { LBRACE }
@@ -543,8 +571,6 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "::" anyspace+ { COLON_COLON }
   | ':' anyspace+ { COLON }
   | ','           { COMMA }
-  | "||"          { SYMBOL (lexeme lexbuf) }
-  | "-||"          { SYMBOL (lexeme lexbuf) }
   | '|'           { BAR }
   | '.' anyspace+ { DOT }
   | "#("          { HASH_PAREN }
@@ -555,37 +581,9 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
   | "|}"          { BAR_BRACE }
   | "[|"          { BRACKET_BAR }
   | "|]"          { BAR_BRACKET }
-
-  | "(|>"         { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(||)"        { TOKENLIST [PAREN_BAR; BAR_PAREN] }
-  | "(||"         { TOKENLIST [LPAREN; SYMBOL (lexemeTrimLeft lexbuf 1)] }
   | "(|"          { PAREN_BAR }
   | "|)"          { BAR_PAREN }
-
-
-  | "..." { SYMBOL (lexeme lexbuf) }
-
-  // operators
-  | '-' anyspace+   { SYMBOL "-" }
-  | '*' anyspace+   { SYMBOL "*" }
-  | '+' anyspace+   { SYMBOL "+" }
-  | '/' anyspace+   { SYMBOL "/" }
-
-  | ident_arrow { SYMBOL (lexeme lexbuf) }
-
-  | "->>" { SYMBOL (lexeme lexbuf) }
-  | "->"  { SYMBOL (lexeme lexbuf) }
-  | ">="  { SYMBOL (lexeme lexbuf) }
-  | "<="  { SYMBOL (lexeme lexbuf) }
-  | ">>"  { SYMBOL (lexeme lexbuf) }
-  | "!="  { SYMBOL (lexeme lexbuf) }
-  | '<'   { SYMBOL (lexeme lexbuf) }
-  | '>'   { SYMBOL (lexeme lexbuf) }
-  | '='   { SYMBOL (lexeme lexbuf) }
-  | "&&"  { SYMBOL (lexeme lexbuf) }
-  | "||"  { SYMBOL (lexeme lexbuf) }
-  | ":>"  { SYMBOL (lexeme lexbuf) }
-  | ":?"  { SYMBOL (lexeme lexbuf) }
 
   // Constants
   | "#()"      { UNIT }
@@ -776,18 +774,8 @@ and tokenStream (args: LexArgs) (skip: bool) = parse
     }
 
   // Exprs
-  | ':' propShort { KEYWORD (lexeme lexbuf) }
-  | ':' ident_char+ { SYMBOL (lexeme lexbuf) }
-  | '.' ident_char+ {
-      let text = lexeme lexbuf;
-      SYMBOL text }
-  | '+' ident_char+ {
-      let text = lexeme lexbuf;
-      SYMBOL text }
-  | '-' ident_char+ {
-      let text = lexeme lexbuf;
-      SYMBOL text }
-  | ident      {
+  | keyword_ex { KEYWORD (lexeme lexbuf) }
+  | tokenStreamSymbol {
     let text = lexeme lexbuf
     symbolOrKeywordToken args lexbuf text }
   | _ { unexpected_char "tokenStream" lexbuf }
