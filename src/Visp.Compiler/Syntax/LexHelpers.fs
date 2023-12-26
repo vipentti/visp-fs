@@ -468,7 +468,7 @@ let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_
                 filename |> System.IO.Path.GetFullPath |> System.IO.Path.GetDirectoryName
 
         let dirname =
-            if Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings then
+            if Syntax.SyntaxWriteUtilThreadStatics.RunningTests then
                 dirname.Replace('\\', '/')
             else
                 dirname
