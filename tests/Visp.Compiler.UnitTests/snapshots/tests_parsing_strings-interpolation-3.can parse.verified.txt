@@ -26,15 +26,15 @@ let inline ``LiftedString3_strings-interpolation-3`` dt : Printf.BuilderFormat<_
   $"Date is: {dt:``yyyy-MM-dd``}"
 
 // line 36 @"strings-interpolation-3.visp"
-let inline ``LiftedString6_strings-interpolation-3`` dt : Printf.BuilderFormat<_, _> =
+let inline ``LiftedString4_strings-interpolation-3`` dt : Printf.BuilderFormat<_, _> =
   $"Date is: {dt:``yyyy-MM-dd``}"
 
 // line 40 @"strings-interpolation-3.visp"
-let inline ``LiftedString8_strings-interpolation-3`` dt : Printf.TextWriterFormat<_, _> =
+let inline ``LiftedString5_strings-interpolation-3`` dt : Printf.TextWriterFormat<_, _> =
   $"Date is: {dt:``yyyy-MM-dd``}"
 
 // line 44 @"strings-interpolation-3.visp"
-let inline ``LiftedString9_strings-interpolation-3`` dt : Printf.TextWriterFormat<_> =
+let inline ``LiftedString6_strings-interpolation-3`` dt : Printf.TextWriterFormat<_> =
   $"""
   fprintfn_test: start
   Date is: {dt:``yyyy-MM-dd``}
@@ -42,7 +42,7 @@ let inline ``LiftedString9_strings-interpolation-3`` dt : Printf.TextWriterForma
 """
 
 // line 52 @"strings-interpolation-3.visp"
-let inline ``LiftedString12_strings-interpolation-3`` dt : Printf.StringFormat<_> =
+let inline ``LiftedString7_strings-interpolation-3`` dt : Printf.StringFormat<_> =
   $"Date is: {dt:``yyyy-MM-dd``}"
 
 // line 7 @"strings-interpolation-3.visp"
@@ -98,7 +98,7 @@ let kbprintf_test () =
   // line 36 @"strings-interpolation-3.visp"
   printfn "kbprintf_test: %s" (Printf.kbprintf ((fun () ->
     // line 36 @"strings-interpolation-3.visp"
-    buf.ToString())) buf (``LiftedString6_strings-interpolation-3`` dt))
+    buf.ToString())) buf (``LiftedString4_strings-interpolation-3`` dt))
 
 // line 38 @"strings-interpolation-3.visp"
 let kfprintf_test () =
@@ -109,7 +109,7 @@ let kfprintf_test () =
   // line 40 @"strings-interpolation-3.visp"
   printfn "kfprintf_test: %s" (Printf.kfprintf ((fun () ->
     // line 40 @"strings-interpolation-3.visp"
-    sw.ToString())) sw (``LiftedString8_strings-interpolation-3`` dt))
+    sw.ToString())) sw (``LiftedString5_strings-interpolation-3`` dt))
 
 // line 42 @"strings-interpolation-3.visp"
 let fprintfn_test () =
@@ -118,14 +118,14 @@ let fprintfn_test () =
     // line 43 @"strings-interpolation-3.visp"
     (new StringWriter())
   // line 44 @"strings-interpolation-3.visp"
-  fprintfn sw (``LiftedString9_strings-interpolation-3`` dt)
+  fprintfn sw (``LiftedString6_strings-interpolation-3`` dt)
   // line 49 @"strings-interpolation-3.visp"
   printf "fprintfn_test: %s" ((sw.ToString()))
 
 // line 51 @"strings-interpolation-3.visp"
 let sprintf_test () =
   // line 52 @"strings-interpolation-3.visp"
-  printfn "sprintf_test: %s" (sprintf (``LiftedString12_strings-interpolation-3`` dt))
+  printfn "sprintf_test: %s" (sprintf (``LiftedString7_strings-interpolation-3`` dt))
 
 // line 54 @"strings-interpolation-3.visp"
 let tests =

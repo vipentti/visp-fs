@@ -6,7 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 16 @"object-exprs-0.visp"
-let inline ``LiftedString2_object-exprs-0`` obj1 =
+let inline ``LiftedString0_object-exprs-0`` obj1 =
   $"{obj1}"
 
 // line 13 @"object-exprs-0.visp"
@@ -18,7 +18,7 @@ let obj1 =
       member _.ToString () =
         "visp-fs"}
 // line 16 @"object-exprs-0.visp"
-printfn "%s" (``LiftedString2_object-exprs-0`` obj1)
+printfn "%s" (``LiftedString0_object-exprs-0`` obj1)
 // line 18 @"object-exprs-0.visp"
 let delimiter delim1 delim2 value =
   // line 19 @"object-exprs-0.visp"

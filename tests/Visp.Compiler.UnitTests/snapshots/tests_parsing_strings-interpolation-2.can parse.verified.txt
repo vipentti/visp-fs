@@ -6,7 +6,7 @@ open Visp.Runtime.Library
 
 let state = { Todo = () }
 // line 11 @"strings-interpolation-2.visp"
-let inline ``LiftedString1_strings-interpolation-2`` dt =
+let inline ``LiftedString0_strings-interpolation-2`` dt =
   $"Date is: {dt:``yyyy-MM-dd``}"
 
 // line 7 @"strings-interpolation-2.visp"
@@ -19,7 +19,7 @@ let dt =
 // line 11 @"strings-interpolation-2.visp"
 let visp_result_todo =
   // line 11 @"strings-interpolation-2.visp"
-  printfn "string is '%s'" (``LiftedString1_strings-interpolation-2`` dt)
+  printfn "string is '%s'" (``LiftedString0_strings-interpolation-2`` dt)
 // line 11 @"strings-interpolation-2.visp"
 printfn "%A" visp_result_todo
 
