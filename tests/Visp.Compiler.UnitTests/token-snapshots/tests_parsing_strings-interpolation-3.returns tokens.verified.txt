@@ -1,0 +1,228 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.Text" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.IO" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "dt" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "DateTime" Default 0 2 LParen
+INT32 (2023, false) Default 0 2 LParen
+INT32 (12, false) Default 0 2 LParen
+INT32 (26, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "FailwithButDoNotCall" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "failwithf" Default 0 2 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "printfn_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("printfn_test: Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "printfn_multiline_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FN Default 0 2 LParen
+SYMBOL "SomeFunction" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("
+      printfn_multiline_test: start
+      Date is: {dt:``yyyy-MM-dd``}
+      printfn_multiline_test: end
+    ", InterpolatedTripleQuote 1, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "SomeFunction" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "bprintf_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "buf" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "StringBuilder" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Printf.bprintf" Default 0 2 LParen
+SYMBOL "buf" Default 0 2 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("bprintf_test: %s", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_METHOD ".ToString" Default 0 3 LParen
+SYMBOL "buf" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "kbprintf_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "buf" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "StringBuilder" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("kbprintf_test: %s", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "Printf.kbprintf" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+FN Default 0 4 LParen
+LPAREN Default 0 5 LParen
+RPAREN Default 0 4 LParen
+LPAREN Default 0 5 LParen
+DOT_METHOD ".ToString" Default 0 5 LParen
+SYMBOL "buf" Default 0 5 LParen
+RPAREN Default 0 4 LParen
+RPAREN Default 0 3 LParen
+SYMBOL "buf" Default 0 3 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "kfprintf_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "sw" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "StringWriter" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("kfprintf_test: %s", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "Printf.kfprintf" Default 0 3 LParen
+LPAREN Default 0 4 LParen
+FN Default 0 4 LParen
+LPAREN Default 0 5 LParen
+RPAREN Default 0 4 LParen
+LPAREN Default 0 5 LParen
+DOT_METHOD ".ToString" Default 0 5 LParen
+SYMBOL "sw" Default 0 5 LParen
+RPAREN Default 0 4 LParen
+RPAREN Default 0 3 LParen
+SYMBOL "sw" Default 0 3 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "fprintfn_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LET Default 0 2 LParen
+SYMBOL "sw" Default 0 2 LParen
+LPAREN Default 0 3 LParen
+NEW Default 0 3 LParen
+SYMBOL "StringWriter" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "fprintfn" Default 0 2 LParen
+SYMBOL "sw" Default 0 2 LParen
+STRING ("
+      fprintfn_test: start
+      Date is: {dt:``yyyy-MM-dd``}
+      fprintfn_test: end
+    ", InterpolatedTripleQuote 1, Token []) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printf" Default 0 2 LParen
+STRING ("fprintfn_test: %s", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+DOT_METHOD ".ToString" Default 0 3 LParen
+SYMBOL "sw" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "sprintf_test" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "printfn" Default 0 2 LParen
+STRING ("sprintf_test: %s", Regular, Token []) Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "sprintf" Default 0 3 LParen
+STRING ("Date is: {dt:``yyyy-MM-dd``}", Interpolated 1, Token []) Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "tests" Default 0 1 LParen
+BRACKET_BAR Default 0 1 LParen
+SYMBOL "printfn_test" Default 0 1 LParen
+SYMBOL "printfn_multiline_test" Default 0 1 LParen
+SYMBOL "fprintfn_test" Default 0 1 LParen
+SYMBOL "bprintf_test" Default 0 1 LParen
+SYMBOL "kbprintf_test" Default 0 1 LParen
+SYMBOL "kfprintf_test" Default 0 1 LParen
+SYMBOL "sprintf_test" Default 0 1 LParen
+BAR_BRACKET Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+INFIX_OP "|>" Default 0 1 LParen
+SYMBOL "tests" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+SYMBOL "Array.iter" Default 0 2 LParen
+HASH_PAREN Default 0 3 LParen
+SYMBOL "%1" Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default
