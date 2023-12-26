@@ -95,24 +95,38 @@ type LexMode =
 /// Manage lexer resources (string interning)
 [<Sealed>]
 type LexResourceManager(?capacity: int) =
-    let symbols =
+    let defaultSymbols =
         Collections.Concurrent.ConcurrentDictionary<string, token>(
             Environment.ProcessorCount,
-            defaultArg capacity 1024
+            defaultArg capacity 512
+        )
+
+    let tokenStreamSymbols =
+        Collections.Concurrent.ConcurrentDictionary<string, token>(
+            Environment.ProcessorCount,
+            defaultArg capacity 512
         )
 
     let macros =
         Collections.Concurrent.ConcurrentDictionary<string, token>(
             Environment.ProcessorCount,
-            defaultArg capacity 1024
+            defaultArg capacity 128
         )
 
-    member _.InternWith s fn =
-        match symbols.TryGetValue s with
+    member _.InternDefault s fn =
+        match defaultSymbols.TryGetValue s with
         | true, res -> res
         | _ ->
             let res = fn s
-            symbols[s] <- res
+            defaultSymbols[s] <- res
+            res
+
+    member _.InternTokenStream s fn =
+        match tokenStreamSymbols.TryGetValue s with
+        | true, res -> res
+        | _ ->
+            let res = fn s
+            tokenStreamSymbols[s] <- res
             res
 
     member _.InternMacro s fn =
@@ -120,7 +134,7 @@ type LexResourceManager(?capacity: int) =
         | true, res -> res
         | _ ->
             let res = fn s
-            symbols[s] <- res
+            macros[s] <- res
             res
 
 
@@ -419,11 +433,12 @@ let specialSymbolInterned (args: LexArgs) (s: string) =
     | Some(it) -> Some(it)
     | None ->
         match s with
-        | it when it.Length > 1 && it[0] = '+' && isLetter it[1] -> Some(res.InternWith s PROP_PLUS)
+        | it when it.Length > 1 && it[0] = '+' && isLetter it[1] ->
+            Some(res.InternDefault s PROP_PLUS)
         | it when it.Length > 1 && it[0] = '.' && isLetter it[1] ->
-            Some(res.InternWith s DOT_METHOD)
+            Some(res.InternDefault s DOT_METHOD)
         | it when it.Length > 1 && it[0] = '-' && isLetter it[1] ->
-            Some(res.InternWith s APPLY_METHOD)
+            Some(res.InternDefault s APPLY_METHOD)
         | _ -> None
 
 let symbolOrKeyword (args: LexArgs) (s: string) =
@@ -437,7 +452,7 @@ let symbolOrKeyword (args: LexArgs) (s: string) =
         else
             match specialSymbolInterned args s with
             | Some(it) -> it
-            | None -> args.resourceManager.InternWith s SYMBOL
+            | None -> args.resourceManager.InternDefault s SYMBOL
 
 let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_>) s =
     match s with
@@ -456,7 +471,7 @@ let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_
             match s with
             | "unquote" when args.mode.IsQuasiquoteMode -> UNQUOTE_KW
             | "splice-unquote" when args.mode.IsQuasiquoteMode -> SPLICE_UNQUOTE_KW
-            | it -> args.resourceManager.InternWith it SYMBOL
+            | it -> args.resourceManager.InternTokenStream it SYMBOL
         else
             symbolOrKeyword args it
 
