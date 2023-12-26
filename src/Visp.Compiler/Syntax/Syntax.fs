@@ -113,11 +113,11 @@ type SynStringKind =
 
 type SyntaxWriteUtilThreadStatics =
     [<System.ThreadStatic; DefaultValue>]
-    static val mutable private normalizeLineEndings: bool
+    static val mutable private runningTests: bool
 
-    static member NormalizeLineEndings
-        with get () = SyntaxWriteUtilThreadStatics.normalizeLineEndings
-        and set v = SyntaxWriteUtilThreadStatics.normalizeLineEndings <- v
+    static member RunningTests
+        with get () = SyntaxWriteUtilThreadStatics.runningTests
+        and set v = SyntaxWriteUtilThreadStatics.runningTests <- v
 
 module StringWriterUtils =
     let inline writeDebugStringType (name: string) (text: string) kind range =
@@ -129,7 +129,7 @@ module StringWriterUtils =
 
         for ch in text do
             match ch with
-            | '\r' when SyntaxWriteUtilThreadStatics.NormalizeLineEndings -> ()
+            | '\r' when SyntaxWriteUtilThreadStatics.RunningTests -> ()
             | it -> ignore (sb.Append it)
 
         sb.Append "\", " |> ignore
@@ -184,7 +184,14 @@ type SynConst =
         | Char it -> sprintf "Char %A" it
         | Decimal it -> sprintf "Decimal %A" it
         | UserNum(va, su) -> sprintf "UserNum (%s, %s)" va su
-        | SourceIdentifier(va, su, _) -> sprintf "SourceIdentifier (%s, %s)" va su
+        | SourceIdentifier(va, su, _) ->
+            if SyntaxWriteUtilThreadStatics.RunningTests then
+                match va with
+                | "__SOURCE_DIRECTORY__" ->
+                    sprintf "SourceIdentifier (\"%s\", \"%s\")" va (System.IO.Path.GetFileName su)
+                | _ -> sprintf "SourceIdentifier (\"%s\", \"%s\")" va su
+            else
+                sprintf "SourceIdentifier (%s, %s)" va su
         | String(text, k, r) -> StringWriterUtils.writeDebugStringType "String" text k r
 
 type SynTyped = SynTyped of name: SynSymbol * argtype: SynType * range: range

@@ -52,7 +52,7 @@ let runTokenTest (name: string) =
         try
             let parsed = CoreParser.debugLexFile path
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
-            Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings <- true
+            Syntax.SyntaxWriteUtilThreadStatics.RunningTests <- true
             let output = parsed |> String.concat "\n"
             return! verify output "token-snapshots" nameParam
         with :? ParseHelpers.SyntaxError as syn ->
@@ -69,7 +69,7 @@ let runStructuredOutputTest (name: string) =
 
             let nameParam = name.Replace('/', '_').Replace('\\', '_')
 
-            Syntax.SyntaxWriteUtilThreadStatics.NormalizeLineEndings <- true
+            Syntax.SyntaxWriteUtilThreadStatics.RunningTests <- true
 
             let output = (sprintf "%120A" parsed).Replace("\\r\\n", "\\n").Replace("\r\n", "\n")
 
