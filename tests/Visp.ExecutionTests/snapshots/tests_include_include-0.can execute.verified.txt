@@ -1,0 +1,8 @@
+﻿include-0 loading...
+skip-same-dir loading
+skip-same-dir loaded...
+include-0 loaded
+Calling IncludedFunction
+()
+
+ExitCode: 0

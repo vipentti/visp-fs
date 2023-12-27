@@ -1,0 +1,15 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "skip-nested-0 loading")
+
+(fn Nested0IncludedFunction ()
+  (printfn "Calling Nested0IncludedFunction"))
+
+(printfn "skip-nested-0 loaded...")
+
+(include "./skip-nested-1.visp")

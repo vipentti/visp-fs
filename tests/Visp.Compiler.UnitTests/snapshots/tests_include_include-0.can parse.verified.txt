@@ -1,0 +1,31 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"include-0.visp"
+printfn "include-0 loading..."
+// line 10 @"include-0.visp"
+let _ = "./skip-same-dir.visp"
+// line 8 @"skip-same-dir.visp"
+printfn "skip-same-dir loading"
+// line 10 @"skip-same-dir.visp"
+let IncludedFunction () =
+  // line 11 @"skip-same-dir.visp"
+  printfn "Calling IncludedFunction"
+
+// line 13 @"skip-same-dir.visp"
+printfn "skip-same-dir loaded..."
+
+
+// line 12 @"include-0.visp"
+printfn "include-0 loaded"
+// line 14 @"include-0.visp"
+let visp_result_todo =
+  // line 14 @"include-0.visp"
+  IncludedFunction ()
+// line 14 @"include-0.visp"
+printfn "%A" visp_result_todo
+

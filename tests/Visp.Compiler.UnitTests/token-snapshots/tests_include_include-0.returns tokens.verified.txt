@@ -1,0 +1,16 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("include-0 loading...", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+INCLUDE Default 0 1 LParen
+STRING ("./skip-same-dir.visp", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("include-0 loaded", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "IncludedFunction" Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

@@ -5,7 +5,6 @@
 namespace Visp.Compiler.Transforms
 
 open Visp.Compiler.Syntax
-open Visp.Compiler.Text
 
 module LastExpressionUpdater =
     let rec update (ParsedFile fragments) =

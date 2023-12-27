@@ -8,6 +8,55 @@ open Visp.Compiler.Text
 open System.Diagnostics
 open Visp.Common
 
+type SyntaxWriteUtilThreadStatics =
+    [<System.ThreadStatic; DefaultValue>]
+    static val mutable private runningTests: bool
+
+    static member RunningTests
+        with get () = SyntaxWriteUtilThreadStatics.runningTests
+        and set v = SyntaxWriteUtilThreadStatics.runningTests <- v
+
+module StringWriterUtils =
+    let inline writeStringWith (fn: char -> char option) (name: string) (text: string) range =
+        let sb = PooledStringBuilder.Get()
+        // Reserve capacity for the text + all the extra data being written
+        sb.EnsureCapacity(text.Length + 60) |> ignore
+        sb.Append name |> ignore
+        sb.Append " (\"" |> ignore
+
+        for ch in text do
+            match fn ch with
+            | Some(ch) -> ignore (sb.Append ch)
+            | None -> ()
+
+        sb.Append "\", " |> ignore
+        sb.Append(sprintf "%A" range) |> ignore
+
+        sb.Append ")" |> ignore
+
+        sb.ToStringAndReturn()
+
+    let inline writeDebugStringType (name: string) (text: string) kind range =
+        let sb = PooledStringBuilder.Get()
+        // Reserve capacity for the text + all the extra data being written
+        sb.EnsureCapacity(text.Length + 60) |> ignore
+        sb.Append name |> ignore
+        sb.Append " (\"" |> ignore
+
+        for ch in text do
+            match ch with
+            | '\r' when SyntaxWriteUtilThreadStatics.RunningTests -> ()
+            | it -> ignore (sb.Append it)
+
+        sb.Append "\", " |> ignore
+        sb.Append(sprintf "%A" kind) |> ignore
+        sb.Append(", ") |> ignore
+        sb.Append(sprintf "%A" range) |> ignore
+
+        sb.Append ")" |> ignore
+
+        sb.ToStringAndReturn()
+
 [<Struct; NoEquality; NoComparison; DebuggerDisplay("{idText}({idRange})")>]
 type Ident(text: string, range: range) =
     member _.idText = text
@@ -26,6 +75,41 @@ type Ident(text: string, range: range) =
         Ident(newText, this.idRange)
 
     override _.ToString() = text
+
+[<StructuredFormatDisplay("{Path}")>]
+type NormalizedPath(text: string) =
+    let original = text
+
+    let normalized =
+
+        let len = text.Length
+
+        let sb = PooledStringBuilder.Get()
+        sb.EnsureCapacity(len) |> ignore
+
+        let mutable index = 0
+
+        while index < len do
+            let ch = text[index]
+            index <- index + 1
+
+            let ch =
+                match ch with
+                | '\\' ->
+                    if index + 1 < len && text[index + 1] = '\\' then
+                        index <- index + 1
+
+                    '/'
+                | it -> it
+
+            sb.Append(ch) |> ignore
+
+        sb.ToStringAndReturn()
+
+    member _.Original = original
+    member _.Path = normalized
+    override _.ToString() = normalized
+
 
 type SynSymbol =
     | SynSymbol of ident: Ident
@@ -111,35 +195,43 @@ type SynStringKind =
     | Interpolated of plain: int
     | InterpolatedTripleQuote of triple: int
 
-type SyntaxWriteUtilThreadStatics =
-    [<System.ThreadStatic; DefaultValue>]
-    static val mutable private runningTests: bool
 
-    static member RunningTests
-        with get () = SyntaxWriteUtilThreadStatics.runningTests
-        and set v = SyntaxWriteUtilThreadStatics.runningTests <- v
+[<StructuredFormatDisplay("{StructuredText}")>]
+type SynString =
+    | SynString of text: string * synStringKind: SynStringKind * range: range
 
-module StringWriterUtils =
-    let inline writeDebugStringType (name: string) (text: string) kind range =
-        let sb = PooledStringBuilder.Get()
-        // Reserve capacity for the text + all the extra data being written
-        sb.EnsureCapacity(text.Length + 60) |> ignore
-        sb.Append name |> ignore
-        sb.Append " (\"" |> ignore
+    member t.Text = let (SynString(text = it)) = t in it
 
-        for ch in text do
-            match ch with
-            | '\r' when SyntaxWriteUtilThreadStatics.RunningTests -> ()
-            | it -> ignore (sb.Append it)
+    member t.Range = let (SynString(range = it)) = t in it
 
-        sb.Append "\", " |> ignore
-        sb.Append(sprintf "%A" kind) |> ignore
-        sb.Append(", ") |> ignore
-        sb.Append(sprintf "%A" range) |> ignore
+    member t.Kind = let (SynString(synStringKind = it)) = t in it
 
-        sb.Append ")" |> ignore
+    member t.StructuredText =
+        let (SynString(text, k, r)) = t
+        StringWriterUtils.writeDebugStringType "SynString" text k r
 
-        sb.ToStringAndReturn()
+    override t.ToString() =
+        let (SynString(text, k, r)) = t
+        StringWriterUtils.writeDebugStringType "SynString" text k r
+
+[<StructuredFormatDisplay("{StructuredText}")>]
+type FilePath =
+    | FilePath of text: NormalizedPath * range: range
+
+    member t.Text = let (FilePath(text = it)) = t in it.Path
+
+    member t.Range = let (FilePath(range = it)) = t in it
+
+    member t.StructuredText = t.ToString()
+
+    override t.ToString() =
+        StringWriterUtils.writeStringWith
+            (function
+            | '\\' when SyntaxWriteUtilThreadStatics.RunningTests -> Some('/')
+            | it -> Some(it))
+            (nameof FilePath)
+            t.Text
+            t.Range
 
 [<NoEquality; NoComparison; RequireQualifiedAccess; StructuredFormatDisplay("{StructuredText}")>]
 type SynConst =
@@ -674,6 +766,11 @@ module Patterns =
 
     let (|Text|) (it: SynSymbol) = it.Text
 
+    let (|ConstString|_|) =
+        function
+        | SynExpr.Const(SynConst.String(value, kind, r), _) -> Some((value, kind, r))
+        | _ -> None
+
 
 module CollExpr =
     let mkList its r = Coll.mkList its r |> SynExpr.Collection
@@ -814,6 +911,8 @@ type ParsedHashDirective =
 type SynModuleDecl =
     | ModuleAbbrev of ident: Ident * longId: LongIdent * range: range
     | NestedModule of ident: SynSymbol * decls: SynModuleDecl list * range: range
+    | IncludedModule of path: FilePath * decls: SynModuleDecl list * range: range
+    | ModuleList of decls: SynModuleDecl list * range: range
     // isContinuing: bool *
     // moduleInfo: SynComponentInfo *
     // isRecursive: bool *
@@ -830,6 +929,7 @@ type SynModuleDecl =
 
     | Open of target: SynSymbol * range: range
     | Require of target: SynSymbol * version: string * range: range
+    | Include of paths: FilePath list * range: range
 
     // | Attributes of attributes: SynAttributes * range: range
 
@@ -843,8 +943,12 @@ type SynModuleDecl =
         | SynModuleDecl.ModuleAbbrev(range = m)
         | SynModuleDecl.NestedModule(range = m)
         | SynModuleDecl.Expr(range = m)
+        | SynModuleDecl.ModuleList(range = m)
         | SynModuleDecl.Require(range = m)
+        | SynModuleDecl.Include(range = m)
+        | SynModuleDecl.IncludedModule(range = m)
         | SynModuleDecl.Open(range = m) -> m
+
 
 // | SynModuleDecl.Let (range = m)
 // | SynModuleDecl.Expr (range = m)
@@ -861,6 +965,8 @@ type ParsedFileFragment =
     member d.Range =
         match d with
         | ParsedFileFragment.AnonModule(range = m) -> m
+
+    member d.Decls = let (AnonModule(decls = it)) = d in it
 
 //| NamedModule of namedModule: SynModuleOrNamespace
 

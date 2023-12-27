@@ -15,7 +15,7 @@ type WalkEvent<'a> =
 let inline private enter a = WalkEvent.Enter a
 let inline private leave a = WalkEvent.Enter a
 
-let inline private MakeRefComparer<'T when 'T: not struct> () =
+let inline MakeRefComparer<'T when 'T: not struct> () =
     { new IEqualityComparer<'T> with
         member _.GetHashCode(x) = System.HashCode.Combine(x)
         member _.Equals(x, y) = LanguagePrimitives.PhysicalEquality x y }
@@ -314,8 +314,11 @@ let depthFirstExprsInFilePred (pred: SynExpr -> bool) (ParsedFile(fragments)) =
             | SynModuleDecl.Expr(ex, _) -> yield! depthFirstExprsUntilFalse pred ex
             | SynModuleDecl.HashDirective _
             | SynModuleDecl.Open _
+            | SynModuleDecl.Include _
             | SynModuleDecl.Require _
             | SynModuleDecl.ModuleAbbrev _ -> ()
+            | SynModuleDecl.ModuleList(decls, _)
+            | SynModuleDecl.IncludedModule(_, decls, _)
             | SynModuleDecl.NestedModule(_, decls, _) ->
                 for decl in decls do
                     yield! main_loop pred decl

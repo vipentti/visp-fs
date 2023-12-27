@@ -29,9 +29,76 @@ type ParserOptions =
 
 
 module CoreParser =
+    open Visp.Compiler.Syntax
+    open System.Collections.Generic
+
     let getLibFilePath name =
         let src_dir = __SOURCE_DIRECTORY__
         Path.Combine(src_dir, "..", "..", "visp", "lib", name) |> Path.GetFullPath
+
+    let parseFile filePath (options: ParserOptions) =
+        let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
+
+        use _ = stream
+        use _ = reader
+
+        let tokenizer = ParseUtils.mkTokenizer options.DebugTokens
+
+        try
+            let mutable res = start tokenizer lexbuf
+
+            if options.DebugParse then
+                eprintfn "%A" res
+
+            if options.ReturnLast then
+                res <- Transforms.LastExpressionUpdater.update res
+
+            res
+        with :? ParseHelpers.SyntaxError as syn ->
+            outputSyntaxError syn
+
+            reraise ()
+
+    let pathsToFile = Dictionary<string, ParsedFile>()
+
+    let includeFiles = Dictionary<string, SynModuleDecl list>()
+
+    let rec readIncludeFiles (ParsedFile _ as file) =
+        let rec readFilePath rootPath (FilePath(path, range) as fp) =
+            let path = System.IO.Path.Combine(rootPath, path.Path) |> System.IO.Path.GetFullPath
+
+            let nestedDecls =
+                match dictTryFind path includeFiles with
+                | Some(it) -> it
+                | None ->
+                    let parsed = parseFile path ParserOptions.Library |> readIncludeFiles
+                    pathsToFile.Add(path, parsed)
+                    let (ParsedFile fragments) = parsed
+
+                    let nestedDecls =
+                        fragments
+                        |> List.collect (fun (ParsedFileFragment.AnonModule(decls, _)) -> decls)
+
+                    includeFiles.Add(path, nestedDecls)
+
+                    nestedDecls
+
+            SynModuleDecl.IncludedModule(fp, nestedDecls, range)
+
+        and readInclude =
+            function
+            | SynModuleDecl.Include(paths, range) as _ ->
+
+                let filePath =
+                    System.IO.Path.GetDirectoryName range.FileName |> System.IO.Path.GetFullPath
+
+                let includedModules = paths |> List.map (readFilePath filePath)
+
+                SynModuleDecl.ModuleList(includedModules, range)
+
+            | it -> it
+
+        Transforms.Helpers.transformSynModuleDecls readInclude file
 
     let private tfs =
         [| Transforms.SyntaxMacros.expand
@@ -44,6 +111,7 @@ module CoreParser =
 
     let transformFile file =
         file
+        |> readIncludeFiles
         |> Transforms.StringLifter.liftLiteralStrings
         |> Transforms.Helpers.transformParsedFile expandExpr
 
@@ -93,36 +161,6 @@ let state = { Todo = () }
             eprintfn "Token: %A" ctx.CurrentToken
             eprintfn "Message: %A" ctx.Message
         | _ -> ()
-
-    let parseFile filePath (options: ParserOptions) =
-        let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)
-
-        use _ = stream
-        use _ = reader
-
-        let tokenizer = ParseUtils.mkTokenizer options.DebugTokens
-
-        try
-            let mutable res = start tokenizer lexbuf
-
-            if options.DebugParse then
-                eprintfn "%A" res
-
-            // eprintfn "%s" (res.Pretty())
-
-            if options.ReturnLast then
-                res <- Transforms.LastExpressionUpdater.update res
-            // eprintfn "%A" res
-
-            // use outputStream = new StringWriter()
-            // writeToStreamNew res outputStream filePath
-            // printfn "%s" (outputStream.ToString())
-
-            res
-        with :? ParseHelpers.SyntaxError as syn ->
-            outputSyntaxError syn
-
-            reraise ()
 
     let debugLexFile filePath =
         let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(filePath, None)

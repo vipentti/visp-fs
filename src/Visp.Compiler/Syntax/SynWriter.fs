@@ -1891,6 +1891,7 @@ module Write =
                     ()
                 | SynModuleDecl.ModuleAbbrev _ -> ()
                 | SynModuleDecl.Require _ -> ()
+                | SynModuleDecl.Include _ -> ()
                 | SynModuleDecl.Expr(ex, _) -> writeExpr w WriteState.Body ex
                 | SynModuleDecl.Open(target, range) ->
                     indent w
@@ -1898,6 +1899,12 @@ module Write =
                     indent w
                     fmtprintfn w "open %s" (Syntax.textOfSymbol target)
                     ()
+                | SynModuleDecl.ModuleList(decls, _) -> writeModuleDecls w decls
+
+                | SynModuleDecl.IncludedModule(path, decls, range) ->
+                    startExpr w WriteState.Body range
+                    fmtprintfn w "let _ = \"%s\"" path.Text
+                    writeModuleDecls w decls
                 | SynModuleDecl.NestedModule(name, decls, range) ->
                     indent w
                     lineof w range

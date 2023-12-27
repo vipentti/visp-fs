@@ -311,6 +311,16 @@ module ``tests_chars_char-2`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/chars/char-2.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_include_include-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/include/include-0.visp"
+
+[<VerifyXunit.UsesVerify>]
+module ``tests_include_include-1`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/include/include-1.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_hashmap_hashmap-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/hashmap/hashmap-0.visp"

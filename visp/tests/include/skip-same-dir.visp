@@ -1,0 +1,13 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "skip-same-dir loading")
+
+(fn IncludedFunction ()
+  (printfn "Calling IncludedFunction"))
+
+(printfn "skip-same-dir loaded...")

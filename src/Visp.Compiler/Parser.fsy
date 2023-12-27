@@ -40,7 +40,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token OPEN MODULE
 %token FN FNSTAR LET USE VAL STATIC LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW NEWOBJ DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN REQUIRE
-%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION INCLUDE
 %token INLINE REC RINIT
 %token <bool> YIELD
 %token <bool> RETURN
@@ -246,6 +246,30 @@ module_help:
     | REQUIRE symbol STRING
         { let (raw, _, _) = $3
           SynModuleDecl.Require($2, raw, lhs parseState) }
+    | INCLUDE file_path
+        { SynModuleDecl.Include([$2], lhs parseState) }
+    | INCLUDE file_path file_path_list
+        { SynModuleDecl.Include($2 :: $3, lhs parseState) }
+
+file_path:
+    | STRING
+        { let (raw, _, _) = $1
+          FilePath (NormalizedPath(raw), rhs parseState 1) }
+
+file_path_list: rev_file_path_list { List.rev $1 }
+rev_file_path_list:
+    | file_path { [$1] }
+    | rev_file_path_list file_path { $2 :: $1 }
+
+syn_string:
+    | STRING
+        { let (raw, kind, _) = $1
+          SynString (raw, kind, rhs parseState 1) }
+
+string_list: rev_string_list { List.rev $1 }
+rev_string_list:
+    | syn_string { [$1] }
+    | rev_string_list syn_string { $2 :: $1 }
 
 syn_symbol:
     | SYMBOL {Syntax.mkSynSymbol $1 (rhs parseState 1)}
