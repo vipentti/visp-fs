@@ -1,0 +1,20 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn), [Const (String ("include-0 loading...", Regular, (8,9--8,31)), (8,9--8,31))],
+             (8,1--8,31)), (8,0--8,32)); Include ([FilePath ("./skip-same-dir.visp", (10,9--10,31))], (10,1--10,31));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn), [Const (String ("include-0 loaded", Regular, (12,9--12,27)), (12,9--12,27))],
+             (12,1--12,27)), (12,0--12,28));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (14,0--14,18)),
+             FunctionCall (Symbol (SynSymbol IncludedFunction), [], (14,1--14,17)), None, [], (14,0--14,18)),
+          (14,0--14,18));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (14,0--14,18)), (14,0--14,18)); Symbol (SynSymbol visp_result_todo)],
+             (14,0--14,18)), (14,0--14,18))], (8,0--14,18))]

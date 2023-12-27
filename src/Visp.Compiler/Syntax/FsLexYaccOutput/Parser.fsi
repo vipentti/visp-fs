@@ -40,6 +40,7 @@ type token =
   | SYNTAX_MACRO
   | SEQ
   | UNION
+  | INCLUDE
   | ATOM_KW
   | DEREF_KW
   | WHILE
@@ -171,6 +172,7 @@ type tokenId =
     | TOKEN_SYNTAX_MACRO
     | TOKEN_SEQ
     | TOKEN_UNION
+    | TOKEN_INCLUDE
     | TOKEN_ATOM_KW
     | TOKEN_DEREF_KW
     | TOKEN_WHILE
@@ -283,6 +285,12 @@ type nonTerminalId =
     | NONTERM_hash_ident_arg
     | NONTERM_module_parens
     | NONTERM_module_help
+    | NONTERM_file_path
+    | NONTERM_file_path_list
+    | NONTERM_rev_file_path_list
+    | NONTERM_syn_string
+    | NONTERM_string_list
+    | NONTERM_rev_string_list
     | NONTERM_syn_symbol
     | NONTERM_symbol
     | NONTERM_expr_list

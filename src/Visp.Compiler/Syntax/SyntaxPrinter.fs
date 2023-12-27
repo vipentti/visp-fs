@@ -300,14 +300,41 @@ type SynExpr with
         Print.writeSimpleDoc sw <| Print.renderPrettyDefault doc
         sb.ToStringAndReturn()
 
+let filePathToDoc (FilePath(raw, _)) = Print.text ("\"" + raw.Path + "\"")
+
+let synStringToDoc (SynString(raw, kind, _)) =
+    let quotes =
+        match kind with
+        | SynStringKind.Interpolated _
+        | SynStringKind.Regular
+        | SynStringKind.Verbatim -> "\""
+        | SynStringKind.InterpolatedTripleQuote _
+        | SynStringKind.TripleQuote
+        | SynStringKind.Verbatim -> "\"\"\""
+
+    let prefix =
+        match kind with
+        | SynStringKind.Interpolated nest -> String.replicate nest "$"
+        | SynStringKind.Verbatim -> "@"
+        | SynStringKind.InterpolatedTripleQuote nest -> String.replicate nest "$"
+        | _ -> ""
+
+    // TODO: This could be optimized to used PooledStringBuilder and only allocate once
+    // but let's wait until there is a need
+    Print.text (prefix + quotes + raw + quotes)
+
 let rec moduleDeclToDoc =
     function
     | SynModuleDecl.Open(it, _) -> parens <| cat [ text "open"; space; text it.Text ]
     | SynModuleDecl.Require(it, vers, _) ->
         parens <| cat [ text "require"; space; text it.Text; space; text vers ]
+    | SynModuleDecl.Include(paths, _) ->
+        parens <| (text "include" <+> (paths |> List.map filePathToDoc |> hsep))
     | SynModuleDecl.Expr(it, _) -> exprToDoc it
     | SynModuleDecl.HashDirective _ -> failwithf "todo hash"
     | SynModuleDecl.NestedModule _ -> failwith "todo nested"
+    | SynModuleDecl.IncludedModule _ -> failwith "todo include"
+    | SynModuleDecl.ModuleList _ -> failwith "todo module list"
     | SynModuleDecl.ModuleAbbrev _ -> failwith "todo abbrev"
 
 let doubleLine a b = hcat [ a; line; line; b ]

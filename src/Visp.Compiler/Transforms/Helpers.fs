@@ -260,9 +260,12 @@ let getAllRequires (file: ParsedFile) =
         match decl with
         | SynModuleDecl.HashDirective _ -> ()
         | SynModuleDecl.Expr _ -> ()
+        | SynModuleDecl.Include _ -> ()
         | SynModuleDecl.Open _ -> ()
         | SynModuleDecl.Require(name, ver, _) -> res.Add(Require(Syntax.textOfSymbol name, ver))
         | SynModuleDecl.ModuleAbbrev _ -> ()
+        | SynModuleDecl.ModuleList(decls, _) -> List.iter (transformModuleDecl res) decls
+        | SynModuleDecl.IncludedModule(_, decls, _) -> List.iter (transformModuleDecl res) decls
         | SynModuleDecl.NestedModule(_, decls, _) -> List.iter (transformModuleDecl res) decls
 
         ()
@@ -286,7 +289,12 @@ let transformParsedFile (func: SynExpr -> SynExpr) (file: ParsedFile) =
         | SynModuleDecl.HashDirective _ as it -> it
         | SynModuleDecl.Open _ as it -> it
         | SynModuleDecl.Require _ as it -> it
+        | SynModuleDecl.Include _ as it -> it
         | SynModuleDecl.ModuleAbbrev _ as it -> it
+        | SynModuleDecl.ModuleList(decls, range) ->
+            SynModuleDecl.ModuleList(List.map transformModuleDecl decls, range)
+        | SynModuleDecl.IncludedModule(path, decls, range) ->
+            SynModuleDecl.IncludedModule(path, List.map transformModuleDecl decls, range)
         | SynModuleDecl.NestedModule(name, decls, range) ->
             SynModuleDecl.NestedModule(name, List.map transformModuleDecl decls, range)
 
@@ -297,3 +305,33 @@ let transformParsedFile (func: SynExpr -> SynExpr) (file: ParsedFile) =
 
     let (ParsedFile(fragments)) = file
     ParsedFile(List.map transformFragment fragments)
+
+let transformSynModuleDecls (func: SynModuleDecl -> SynModuleDecl) (file: ParsedFile) =
+
+    let rec transformModuleDecl (func: SynModuleDecl -> SynModuleDecl) (decl: SynModuleDecl) =
+        let bound_transform = transformModuleDecl func
+
+        let result =
+            match decl with
+            | SynModuleDecl.Expr(_) as it -> it
+            | SynModuleDecl.HashDirective _ as it -> it
+            | SynModuleDecl.Open _ as it -> it
+            | SynModuleDecl.Require _ as it -> it
+            | SynModuleDecl.Include _ as it -> it
+            | SynModuleDecl.ModuleAbbrev _ as it -> it
+            | SynModuleDecl.ModuleList(decls, range) ->
+                SynModuleDecl.ModuleList(List.map bound_transform decls, range)
+            | SynModuleDecl.IncludedModule(path, decls, range) ->
+                SynModuleDecl.IncludedModule(path, List.map bound_transform decls, range)
+            | SynModuleDecl.NestedModule(name, decls, range) ->
+                SynModuleDecl.NestedModule(name, List.map bound_transform decls, range)
+
+        func result
+
+    let transformFragment func (frag: ParsedFileFragment) =
+        let (ParsedFileFragment.AnonModule(decls, range)) = frag
+
+        ParsedFileFragment.AnonModule(List.map (transformModuleDecl func) decls, range)
+
+    let (ParsedFile(fragments)) = file
+    ParsedFile(List.map (transformFragment func) fragments)

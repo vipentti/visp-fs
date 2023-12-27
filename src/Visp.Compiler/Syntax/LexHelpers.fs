@@ -253,6 +253,7 @@ let keywordTokenList =
       ("for/in", FOR_IN)
       ("for/to", FOR_TO)
       ("if", IF_KW)
+      ("include", INCLUDE)
       ("inline", INLINE)
       ("let!", LET_BANG)
       ("let", LET)
