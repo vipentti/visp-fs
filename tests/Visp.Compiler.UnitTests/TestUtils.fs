@@ -88,6 +88,8 @@ let runWriteTest (name: string) =
         let filePathToReplace =
             Path.GetDirectoryName path |> Path.TrimEndingDirectorySeparator
 
+        let normalizedPathToReplace = Syntax.NormalizedPath(filePathToReplace).Path
+
         try
             let parsed = CoreParser.parseFile path ParserOptions.Default
 
@@ -97,6 +99,7 @@ let runWriteTest (name: string) =
             let output =
                 stream
                     .ToString()
+                    .Replace(normalizedPathToReplace + "/", "")
                     .Replace(filePathToReplace + "/", "")
                     .Replace(filePathToReplace + "\\", "")
 
