@@ -137,7 +137,10 @@ module Write =
     let newlineIndent: SynWriter -> unit = chain newline indent
 
     let lineof (w: SynWriter) (range: range) =
-        fmtprintfn w "// line %i @\"%s\"" range.StartLine range.FileName
+        if SyntaxWriteUtilThreadStatics.RunningTests then
+            fmtprintfn w "// line %i @\"%s\"" range.StartLine ((NormalizedPath range.FileName).Path)
+        else
+            fmtprintfn w "// line %i @\"%s\"" range.StartLine range.FileName
 
     let text (w: SynWriter) (txt: Text) =
         match txt with
