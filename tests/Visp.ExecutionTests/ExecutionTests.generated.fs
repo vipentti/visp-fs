@@ -181,6 +181,11 @@ module ``tests_parsing_tuple-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/parsing/tuple-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_generic-args-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/generic-args-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_strings-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/strings-0.visp"

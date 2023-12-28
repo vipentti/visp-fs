@@ -203,6 +203,11 @@ let ident = ident_start_char ident_char*
 
 let ident_arrow = ident_letter_chars "->" ident_letter_chars?
 
+let possible_generic_arg = (
+    '_'
+    | '^' ident_letter_chars
+)
+
 let anyspace = [' ' '\t' '\r' '\n']
 let whitespace = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
@@ -306,6 +311,7 @@ rule token (args: LexArgs) (skip: bool) = parse
   // punct
 
   | ident_letter_chars ">>" { TOKENLIST [symbolOrKeywordToken args lexbuf (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
+  | possible_generic_arg ">>" { TOKENLIST [symbolOrKeywordToken args lexbuf (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
   | "<<" ident_letter_chars { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
 
   | infix_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }

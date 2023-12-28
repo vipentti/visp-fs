@@ -1,0 +1,37 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"generic-args-0.visp"
+type MyGen<'T> (v: 'T) =
+  // line 9 @"generic-args-0.visp"
+  member _.Value =
+    v
+// line 11 @"generic-args-0.visp"
+let SomeFunUnderscore (items: list<MyGen<_>>) =
+  // line 12 @"generic-args-0.visp"
+  for v in items do
+    // line 13 @"generic-args-0.visp"
+    printfn "SomeFunUnderscore: %A" ((v.Value))
+  ()
+
+// line 17 @"generic-args-0.visp"
+let SomeFunGen (items: list<MyGen<'T>>) =
+  // line 18 @"generic-args-0.visp"
+  for v in items do
+    // line 19 @"generic-args-0.visp"
+    printfn "SomeFunGen: %A" ((v.Value))
+  ()
+
+// line 23 @"generic-args-0.visp"
+SomeFunUnderscore ([((new MyGen<_>(1)));((new MyGen<_>(2)))])
+// line 24 @"generic-args-0.visp"
+SomeFunGen ([((new MyGen<_>(1)));((new MyGen<_>(2)))])
+// line 26 @"generic-args-0.visp"
+let visp_result_todo = ()
+// line 26 @"generic-args-0.visp"
+printfn "%A" visp_result_todo
+
