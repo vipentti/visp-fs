@@ -1,0 +1,68 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Type
+            (SynSymbol MyGen<^T>,
+             Args (Tuple [Typed (Named (SynSymbol v, (8,18--8,19)), Ident ^T, (8,17--8,24))], (8,16--8,25)),
+             [Member (SynSymbol _.Value, [Symbol (SynSymbol v)], Default, [], (9,3--9,19))], [], (8,1--9,20)),
+          (8,0--9,21));
+       Expr
+         (FunctionDef
+            (SynSymbol SomeFunUnderscore, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol items, (11,24--11,29)),
+                      Generic
+                        (Ident list, [Generic (Ident MyGen, [Discard (11,42--11,45)], (11,36--11,45))], (11,31--11,45)),
+                      (11,23--11,46))], (11,22--11,47)),
+             [ForIn
+                (Named (SynSymbol v, (12,11--12,12)), Symbol (SynSymbol items),
+                 [FunctionCall
+                    (Symbol (SynSymbol printfn),
+                     [Const (String ("SomeFunUnderscore: %A", Regular, (13,13--13,36)), (13,13--13,36));
+                      DotProperty (Symbol (SynSymbol v), SynSymbol Value, (13,38--13,47))], (13,5--13,48))],
+                 (12,3--13,49)); Const (Unit, (15,2--15,4))], None, (11,1--15,4)), (11,0--15,5));
+       Expr
+         (FunctionDef
+            (SynSymbol SomeFunGen, None,
+             Args
+               (List
+                  [Typed
+                     (Named (SynSymbol items, (17,17--17,22)),
+                      Generic (Ident list, [Generic (Ident MyGen, [Ident ^T], (17,29--17,39))], (17,24--17,39)),
+                      (17,16--17,40))], (17,15--17,41)),
+             [ForIn
+                (Named (SynSymbol v, (18,11--18,12)), Symbol (SynSymbol items),
+                 [FunctionCall
+                    (Symbol (SynSymbol printfn),
+                     [Const (String ("SomeFunGen: %A", Regular, (19,13--19,29)), (19,13--19,29));
+                      DotProperty (Symbol (SynSymbol v), SynSymbol Value, (19,31--19,40))], (19,5--19,41))],
+                 (18,3--19,42)); Const (Unit, (21,2--21,4))], None, (17,1--21,4)), (17,0--21,5));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol SomeFunUnderscore),
+             [Collection
+                (SynCollection
+                   (FsList,
+                    [New (Ident MyGen<_>, [Const (Int32 1, (23,36--23,37))], (23,23--23,37));
+                     New (Ident MyGen<_>, [Const (Int32 2, (23,53--23,54))], (23,40--23,54))], (23,19--23,57)))],
+             (23,1--23,57)), (23,0--23,58));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol SomeFunGen),
+             [Collection
+                (SynCollection
+                   (FsList,
+                    [New (Ident MyGen<_>, [Const (Int32 1, (24,29--24,30))], (24,16--24,30));
+                     New (Ident MyGen<_>, [Const (Int32 2, (24,46--24,47))], (24,33--24,47))], (24,12--24,50)))],
+             (24,1--24,50)), (24,0--24,51));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (26,0--26,2)), Const (Unit, (26,0--26,2)), None, [], (26,0--26,2)),
+          (26,0--26,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (26,0--26,2)), (26,0--26,2)); Symbol (SynSymbol visp_result_todo)],
+             (26,0--26,2)), (26,0--26,2))], (8,0--26,2))]

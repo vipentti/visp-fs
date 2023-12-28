@@ -1,0 +1,7 @@
+﻿SomeFunUnderscore: 1
+SomeFunUnderscore: 2
+SomeFunGen: 1
+SomeFunGen: 2
+()
+
+ExitCode: 0

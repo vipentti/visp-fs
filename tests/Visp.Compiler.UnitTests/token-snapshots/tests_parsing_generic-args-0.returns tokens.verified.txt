@@ -1,0 +1,134 @@
+﻿LPAREN Default 0 1 LParen
+TYPE Default 0 1 Type
+SYMBOL "MyGen" Default 0 1 Type
+OP_LESS Default 0 1 Type
+SYMBOL "^T" Default 0 1 Type
+OP_GREATER Default 0 1 Type
+LPAREN Default 0 2 Type
+LBRACKET Default 0 2 Type
+SYMBOL "v" Default 0 2 Type
+COLON Default 0 2 Type
+SYMBOL "^T" Default 0 2 Type
+RBRACKET Default 0 2 Type
+RPAREN Default 0 1 Type
+LPAREN Default 0 2 Type
+MEMBER Default 0 2 Member
+SYMBOL "_.Value" Default 0 2 Member
+SYMBOL "v" Default 0 2 Member
+RPAREN Default 0 1 Type
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "SomeFunUnderscore" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "list" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_IN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "v" Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("SomeFunUnderscore: %A", Regular, Token []) Default 0 3 LParen
+LPAREN Default 0 4 LParen
+DOT_PLUS Default 0 4 LParen
+SYMBOL "Value" Default 0 4 LParen
+SYMBOL "v" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+FN Default 0 1 LParen
+SYMBOL "SomeFunGen" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+COLON Default 0 2 LParen
+SYMBOL "list" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "^T" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+FOR_IN Default 0 2 LParen
+LBRACKET Default 0 2 LParen
+SYMBOL "v" Default 0 2 LParen
+SYMBOL "items" Default 0 2 LParen
+RBRACKET Default 0 2 LParen
+LPAREN Default 0 3 LParen
+SYMBOL "printfn" Default 0 3 LParen
+STRING ("SomeFunGen: %A", Regular, Token []) Default 0 3 LParen
+LPAREN Default 0 4 LParen
+DOT_PLUS Default 0 4 LParen
+SYMBOL "Value" Default 0 4 LParen
+SYMBOL "v" Default 0 4 LParen
+RPAREN Default 0 3 LParen
+RPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "SomeFunUnderscore" Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "SomeFunGen" Default 0 1 LParen
+PAREN_BAR Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+INT32 (1, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "MyGen" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "_" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+INT32 (2, false) Default 0 2 LParen
+RPAREN Default 0 1 LParen
+BAR_PAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

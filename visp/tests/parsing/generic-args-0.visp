@@ -1,0 +1,26 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(type MyGen<^T> ([v: ^T])
+  (member _.Value v))
+
+(fn SomeFunUnderscore ([items: list<MyGen<_>>])
+  (for/in [v items]
+    (printfn "SomeFunUnderscore: %A" (.+Value v))
+  )
+  ())
+
+(fn SomeFunGen ([items: list<MyGen<^T>>])
+  (for/in [v items]
+    (printfn "SomeFunGen: %A" (.+Value v))
+  )
+  ())
+
+(SomeFunUnderscore (| (new MyGen<_> 1) (new MyGen<_> 2)|))
+(SomeFunGen (| (new MyGen<_> 1) (new MyGen<_> 2)|))
+
+()
