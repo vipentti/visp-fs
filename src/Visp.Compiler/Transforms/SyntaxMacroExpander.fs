@@ -74,9 +74,7 @@ let rec private matchesPat (args: SynMacroBody list) (pats: SynMacroPat list) =
             // printfn "matching %A with %A" arg pt
             let temp =
                 match (pt, arg) with
-                | (DiscardPredicate, SynMacroBody.Discard _) ->
-                    // printfn "DISCAAARD pt: %A lhs: %A\nRESTPAT:\n%A\nARGREST:\n%A" pt arg rest argRest
-                    true
+                | (DiscardPredicate, SynMacroBody.Discard _) -> true
                 // TODO: Constant matching
                 | (SynMacroPat.Const _, SynMacroBody.Const _) -> true
                 // TODO: Trivia matching
