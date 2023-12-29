@@ -367,6 +367,8 @@ type nonTerminalId =
     | NONTERM_let_or_use
     | NONTERM_letstar
     | NONTERM_type_name_text
+    | NONTERM_symbol_star_list
+    | NONTERM_rev_symbol_star_list
     | NONTERM_syn_type_name
     | NONTERM_type_name
     | NONTERM_symbol_comma_list

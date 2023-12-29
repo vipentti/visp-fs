@@ -184,8 +184,10 @@ let xieee64 = xinteger 'L' 'F'
 
 // ----- numbers ----
 
-let SymbolicStartCharacters = ['%' '+' '-' '!' '?' '_' '-' '*' '&' '^']
+let SymbolicStartCharacters = ['%' '!' '?' '_' '&' '^' '~']
 let SymbolicExtra = [ '.' '\'' '/']
+
+let operator_chars = ['+' '-' '*' '/']
 
 // https://github.com/dotnet/fsharp/blob/ade794633b4bb495da85c92ee780068b9c6f7344/src/Compiler/lex.fsl#L300
 let escape_char = ('\\' ( '\\' | "\"" | '\'' | 'a' | 'f' | 'v' | 'n' | 't' | 'b' | 'r'))
@@ -197,11 +199,14 @@ let ident_letter_chars = letter (letter | digit)*
 let ident_with_sep = letter (letter | digit | ident_sep)*
 
 let ident_start_char = letter | SymbolicStartCharacters
-let ident_char = ( ident_start_char | digit | SymbolicExtra )
+let ident_char = ( ident_start_char | digit | ident_sep )
 let ident = ident_start_char ident_char*
 // let ident_array = letter (letter | digit)* '[' (',')* ']'
 
 let ident_arrow = ident_letter_chars "->" ident_letter_chars?
+
+let ident_with_stars =
+  ['*']* ident_with_sep (ident_with_sep | '*')*
 
 let possible_generic_arg = (
     '_'
@@ -300,6 +305,8 @@ let tokenStreamSymbol = (
   | ":>"
   | ":?"
   | ident
+  | ident_with_stars
+  | ident_with_sep '+'
 )
 
 rule token (args: LexArgs) (skip: bool) = parse
@@ -310,9 +317,12 @@ rule token (args: LexArgs) (skip: bool) = parse
 
   // punct
 
-  | ident_letter_chars ">>" { TOKENLIST [symbolOrKeywordToken args lexbuf (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
+  | ident_with_stars ">>" { TOKENLIST ((nextTokensTrimRight args lexbuf 2) @ [OP_GREATER; OP_GREATER]) }
   | possible_generic_arg ">>" { TOKENLIST [symbolOrKeywordToken args lexbuf (lexemeTrimRight lexbuf 2); OP_GREATER; OP_GREATER] }
   | "<<" ident_letter_chars { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+
+  | ident_with_sep '+' { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
+  | ident_with_stars { nextTokens args lexbuf |> TOKENLIST }
 
   | infix_operators { symbolOrKeywordToken args lexbuf (lexeme lexbuf) }
   | '(' infix_operators { TOKENLIST [LPAREN; symbolOrKeywordToken args lexbuf (lexemeTrimLeft lexbuf 1)] }

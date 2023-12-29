@@ -1,0 +1,8 @@
+﻿[{SolutionDirectory}visp/tests/parsing/stars-in-places-0.visp:23] *some-var-with-star* = "*some-var-with-star*"
+[{SolutionDirectory}visp/tests/parsing/stars-in-places-0.visp:26] **some-var-with-star** = "**some-var-with-star**"
+[{SolutionDirectory}visp/tests/parsing/stars-in-places-0.visp:29] some-var-with-star* = "some-var-with-star*"
+[{SolutionDirectory}visp/tests/parsing/stars-in-places-0.visp:32] some-var-with-star** = "some-var-with-star**"
+OK
+()
+
+ExitCode: 0

@@ -1,0 +1,77 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 7 @"stars-in-places-0.visp"
+open System.Collections.Generic
+
+// line 9 @"stars-in-places-0.visp"
+type Dict = Dictionary<string, string * string>
+// line 10 @"stars-in-places-0.visp"
+type MapType = list<char> * Dict
+// line 12 @"stars-in-places-0.visp"
+type Dict2 = Dictionary<string, string * string>
+// line 13 @"stars-in-places-0.visp"
+type MapType2 = list<char> * Dict2
+// line 15 @"stars-in-places-0.visp"
+type MyGenList<'T> = list<'T>
+// line 16 @"stars-in-places-0.visp"
+type ExampleResizeArray = ResizeArray<MyGenList<int * int * int64>>
+// line 18 @"stars-in-places-0.visp"
+let ``**newWithStar**`` =
+  // line 18 @"stars-in-places-0.visp"
+  (new ResizeArray<int*int*int64>())
+// line 19 @"stars-in-places-0.visp"
+let ``**newWithStarGenerics**`` =
+  // line 19 @"stars-in-places-0.visp"
+  (new ResizeArray<MyGenList<int*int*int64>>())
+// line 20 @"stars-in-places-0.visp"
+let ``**newWithStar2**`` =
+  // line 20 @"stars-in-places-0.visp"
+  (new ExampleResizeArray())
+// line 22 @"stars-in-places-0.visp"
+let ``*some-var-with-star*`` = "*some-var-with-star*"
+// line 23 @"stars-in-places-0.visp"
+ignore (
+  match ``*some-var-with-star*`` with
+    | tmp ->
+      // line 23 @"stars-in-places-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stars-in-places-0.visp" 23 "*some-var-with-star*" tmp
+      tmp)
+// line 25 @"stars-in-places-0.visp"
+let ``**some-var-with-star**`` = "**some-var-with-star**"
+// line 26 @"stars-in-places-0.visp"
+ignore (
+  match ``**some-var-with-star**`` with
+    | tmp ->
+      // line 26 @"stars-in-places-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stars-in-places-0.visp" 26 "**some-var-with-star**" tmp
+      tmp)
+// line 28 @"stars-in-places-0.visp"
+let ``some-var-with-star*`` = "some-var-with-star*"
+// line 29 @"stars-in-places-0.visp"
+ignore (
+  match ``some-var-with-star*`` with
+    | tmp ->
+      // line 29 @"stars-in-places-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stars-in-places-0.visp" 29 "some-var-with-star*" tmp
+      tmp)
+// line 31 @"stars-in-places-0.visp"
+let ``some-var-with-star**`` = "some-var-with-star**"
+// line 32 @"stars-in-places-0.visp"
+ignore (
+  match ``some-var-with-star**`` with
+    | tmp ->
+      // line 32 @"stars-in-places-0.visp"
+      eprintfn "[%s:%i] %s = %A" "stars-in-places-0.visp" 32 "some-var-with-star**" tmp
+      tmp)
+// line 34 @"stars-in-places-0.visp"
+let visp_result_todo =
+  // line 34 @"stars-in-places-0.visp"
+  printfn "OK"
+// line 34 @"stars-in-places-0.visp"
+printfn "%A" visp_result_todo
+
