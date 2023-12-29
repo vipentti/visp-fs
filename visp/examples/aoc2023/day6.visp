@@ -61,9 +61,9 @@
 
 (let races (ParseRaces contents))
 
-(fn inline distance ([time: 'a] [speed: 'a]) (* time speed))
+(fn inline distance ([time: ^a] [speed: ^a]) (* time speed))
 
-(fn inline estimate ([time: 'a] [held: 'a])
+(fn inline estimate ([time: ^a] [held: ^a])
   (let speed held)
   (let remaining (- time held))
   (distance remaining speed))

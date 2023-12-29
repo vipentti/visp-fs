@@ -529,7 +529,7 @@
 ;; (let part2Locations (->> (+Seeds part2Almanac) (Array.Parallel.map #(GetPart2Locations part2Almanac %1))))
 ;; (let part2 (->> part2Locations (Array.min)))
 
-(WriteResult "part2" part2 (if example 46 -1))
+(WriteResult "part2" part2 (if example 46 1928058L))
 
 ()
 
