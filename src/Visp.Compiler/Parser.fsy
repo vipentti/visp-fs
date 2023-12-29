@@ -979,7 +979,7 @@ record_label_or_member_parens:
         { Choice2Of2 (RecordLabel(RecordLabelKind.Mutable, fst $3, snd $3, lhs parseState)) }
     | LBRACKET record_label RBRACKET
         { Choice2Of2 (RecordLabel(RecordLabelKind.Default, fst $2, snd $2, lhs parseState)) }
-    | member { eprintfn "CAAAA"; Choice1Of2($1) }
+    | member { Choice1Of2($1) }
 
 record_label:
     | symbol COLON syn_type { ($1, $3) }

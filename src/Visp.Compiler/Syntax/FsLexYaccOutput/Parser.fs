@@ -5870,7 +5870,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 982 "Parser.fsy"
-                                    eprintfn "CAAAA"; Choice1Of2(_1) 
+                                    Choice1Of2(_1) 
                    )
 # 982 "Parser.fsy"
                  : 'gentype_record_label_or_member_parens));
