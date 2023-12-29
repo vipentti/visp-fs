@@ -38,7 +38,6 @@ type token =
   | THREAD_FIRST
   | THREAD_LAST
   | SYNTAX_MACRO
-  | SEQ
   | UNION
   | INCLUDE
   | ATOM_KW
@@ -170,7 +169,6 @@ type tokenId =
     | TOKEN_THREAD_FIRST
     | TOKEN_THREAD_LAST
     | TOKEN_SYNTAX_MACRO
-    | TOKEN_SEQ
     | TOKEN_UNION
     | TOKEN_INCLUDE
     | TOKEN_ATOM_KW

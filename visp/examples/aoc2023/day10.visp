@@ -40,7 +40,7 @@
 
 (module Pos
   (fn Adjacent ([p: Pos])
-    (seq
+    (seq->
       (let y (+Y p))
       (let x (+X p))
 
@@ -50,7 +50,7 @@
       (yield (mkPos (inc x) y))
     ))
   (fn AdjacentBy ([ch: char] [p: Pos])
-    (seq
+    (seq->
       (let y (+Y p))
       (let x (+X p))
 
@@ -141,7 +141,7 @@
   ))
 
 (fn AllPoints ([tm: TileMap])
-  (seq
+  (seq->
     (let w (dec (+Width tm)))
     (let h (dec (+Height tm)))
 
@@ -260,7 +260,7 @@
   (let count (+Length poly))
   (let end (dec count))
 
-  (mut enu (->> (seq (!range 0 .. end)) .GetEnumerator))
+  (mut enu (->> (seq-> (!range 0 .. end)) .GetEnumerator))
   (mut loop true)
 
   (let testX (+X testPos))

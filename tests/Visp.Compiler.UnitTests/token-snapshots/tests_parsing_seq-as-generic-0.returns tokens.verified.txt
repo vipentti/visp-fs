@@ -5,7 +5,7 @@ LPAREN Default 0 2 LParen
 LBRACKET Default 0 2 LParen
 SYMBOL "items" Default 0 2 LParen
 COLON Default 0 2 LParen
-SEQ Default 0 2 LParen
+SYMBOL "seq" Default 0 2 LParen
 OP_LESS Default 0 2 LParen
 SYMBOL "^T" Default 0 2 LParen
 OP_GREATER Default 0 2 LParen
