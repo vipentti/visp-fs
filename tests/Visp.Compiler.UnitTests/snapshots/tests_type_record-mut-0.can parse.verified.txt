@@ -1,0 +1,47 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"record-mut-0.visp"
+type State =
+  // line 8 @"record-mut-0.visp"
+  | On
+  // line 8 @"record-mut-0.visp"
+  | Off
+
+// line 10 @"record-mut-0.visp"
+type FlipFlop =
+  { mutable state: State }
+    // line 11 @"record-mut-0.visp"
+    member t.Toggle () =
+      // line 12 @"record-mut-0.visp"
+      match (t.state) with
+        | State.Off ->
+          // line 13 @"record-mut-0.visp"
+          t.state <- State.On
+          State.Off
+        | State.On ->
+          // line 14 @"record-mut-0.visp"
+          t.state <- State.Off
+          State.On
+// line 18 @"record-mut-0.visp"
+let flop =
+  // line 18 @"record-mut-0.visp"
+  {
+    // line 18 @"record-mut-0.visp"
+    state = State.Off
+  }
+// line 19 @"record-mut-0.visp"
+printfn "%A" flop
+// line 20 @"record-mut-0.visp"
+ignore ((flop.Toggle()))
+// line 21 @"record-mut-0.visp"
+printfn "%A" flop
+// line 23 @"record-mut-0.visp"
+let visp_result_todo = ()
+// line 23 @"record-mut-0.visp"
+printfn "%A" visp_result_todo
+

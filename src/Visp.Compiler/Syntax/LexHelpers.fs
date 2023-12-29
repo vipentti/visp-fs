@@ -146,7 +146,8 @@ type LexArgs =
       mutable mode: LexMode
       mutable stringNest: LexerInterpolatedStringNesting
       mutable interpolationDelimiterLength: int
-      mutable depth: int }
+      mutable depth: int
+      mutable angleDepth: int }
 
     member this.Nested m =
         this.mode <- m
@@ -180,6 +181,10 @@ type LexArgs =
             if this.Unnest() <= 0 then
                 this.Reset()
 
+    member this.NestAngle() = this.angleDepth <- this.angleDepth + 1
+
+    member this.UnnestAngle() = this.angleDepth <- this.angleDepth - 1
+
     member this.Unnest() =
         this.depth <- this.depth - 1
         this.depth
@@ -195,6 +200,7 @@ let mkDefaultLextArgs () =
       debugTokens = false
       mode = LexMode.Default
       depth = 0
+      angleDepth = 0
       interpolationDelimiterLength = 0
       stringNest = [] }
 

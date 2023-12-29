@@ -386,7 +386,7 @@ type nonTerminalId =
     | NONTERM_record_labels_or_members
     | NONTERM_rev_record_labels_or_members
     | NONTERM_record_label_or_member_parens
-    | NONTERM_record_label_or_member
+    | NONTERM_record_label
     | NONTERM_record_members
     | NONTERM_record_init_expr
     | NONTERM_record_init_bar_list

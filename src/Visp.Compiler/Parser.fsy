@@ -147,7 +147,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc prec_paren
 %nonassoc prec_bracket
 
-%nonassoc prec_binding prec_member
+%nonassoc prec_binding prec_member prec_member_in_parens
 %nonassoc prec_arg prec_name
 
 %nonassoc prec_binding_empty
@@ -172,7 +172,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %nonassoc prec_record_with_members
 
 %nonassoc prec_record_expr_only
-%nonassoc prec_record_init
+%nonassoc prec_record_init prec_record_label
 %nonassoc prec_lambda_short_record
 
 %nonassoc prec_recover
@@ -971,15 +971,18 @@ rev_record_labels_or_members:
     | rev_record_labels_or_members record_label_or_member_parens { $2 :: $1 }
 
 record_label_or_member_parens:
-    | LPAREN record_label_or_member RPAREN { $2 }
-    | LBRACKET record_label_or_member RBRACKET { $2 }
+    | LPAREN MUT record_label RPAREN
+        { Choice2Of2 (RecordLabel(RecordLabelKind.Mutable, fst $3, snd $3, lhs parseState)) }
+    | LPAREN record_label RPAREN
+        { Choice2Of2 (RecordLabel(RecordLabelKind.Default, fst $2, snd $2, lhs parseState)) }
+    | LBRACKET MUT record_label RBRACKET
+        { Choice2Of2 (RecordLabel(RecordLabelKind.Mutable, fst $3, snd $3, lhs parseState)) }
+    | LBRACKET record_label RBRACKET
+        { Choice2Of2 (RecordLabel(RecordLabelKind.Default, fst $2, snd $2, lhs parseState)) }
+    | member { eprintfn "CAAAA"; Choice1Of2($1) }
 
-record_label_or_member:
-    | member_in_parens { Choice1Of2($1) }
-    | symbol COLON syn_type
-        { Choice2Of2 (RecordLabel(RecordLabelKind.Default, $1, $3, lhs parseState)) }
-    | MUT symbol COLON syn_type
-        { Choice2Of2 (RecordLabel(RecordLabelKind.Mutable, $2, $4, lhs parseState)) }
+record_label:
+    | symbol COLON syn_type { ($1, $3) }
 
 record_members:
     | LPAREN MEMBERS member_list_start RPAREN { $3 }

@@ -2,7 +2,7 @@
   [AnonModule
      ([Expr
          (Record
-            (SynSymbol TestRec, [RecordLabel (Default, SynSymbol value, Ident int, (10,3--10,13))],
+            (SynSymbol TestRec, [RecordLabel (Default, SynSymbol value, Ident int, (10,2--10,14))],
              [Member
                 (SynSymbol t.Structuredtext,
                  [DotMethod (Symbol (SynSymbol t), SynSymbol ToString, [], Tuple, (12,28--12,39))], Default, [],

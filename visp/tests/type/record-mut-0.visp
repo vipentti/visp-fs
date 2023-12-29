@@ -1,0 +1,23 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(union State On Off)
+
+(record FlipFlop [mut state: State]
+  (member fn t.Toggle ()
+    (match (+state t)
+      [State.Off (set! (+state t) State.On) State.Off]
+      [State.On (set! (+state t) State.Off) State.On]
+    )
+  ))
+
+(let flop {| state State.Off |})
+(printfn "%A" flop)
+(ignore (.Toggle flop))
+(printfn "%A" flop)
+
+()

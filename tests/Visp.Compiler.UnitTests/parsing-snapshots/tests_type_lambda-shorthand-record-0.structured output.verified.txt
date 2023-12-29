@@ -3,8 +3,8 @@
      ([Expr
          (Record
             (SynSymbol Example,
-             [RecordLabel (Default, SynSymbol lhs, Ident int, (9,3--9,11));
-              RecordLabel (Default, SynSymbol rhs, Ident int, (10,3--10,11))], [], [], (8,1--10,12)), (8,0--10,13));
+             [RecordLabel (Default, SynSymbol lhs, Ident int, (9,2--9,12));
+              RecordLabel (Default, SynSymbol rhs, Ident int, (10,2--10,12))], [], [], (8,1--10,12)), (8,0--10,13));
        Expr
          (FunctionDef
             (SynSymbol RecordMaker, None,

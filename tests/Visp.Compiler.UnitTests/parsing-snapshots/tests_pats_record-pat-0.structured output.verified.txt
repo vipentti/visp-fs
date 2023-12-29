@@ -12,8 +12,8 @@
        Expr
          (Record
             (SynSymbol Ray,
-             [RecordLabel (Default, SynSymbol pos, Ident XYZ, (11,3--11,11));
-              RecordLabel (Default, SynSymbol dir, Ident XYZ, (12,3--12,11))], [], [], (10,1--12,12)), (10,0--12,13));
+             [RecordLabel (Default, SynSymbol pos, Ident XYZ, (11,2--11,12));
+              RecordLabel (Default, SynSymbol dir, Ident XYZ, (12,2--12,12))], [], [], (10,1--12,12)), (10,0--12,13));
        Expr
          (FunctionDef
             (SynSymbol DoStuffWithRay, None,
