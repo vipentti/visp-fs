@@ -277,7 +277,6 @@ let keywordTokenList =
       ("return!", RETURN true)
       ("return", RETURN false)
       ("rinit", RINIT)
-      ("seq", SEQ)
       ("set!", SET)
       ("splice-unquote", SPLICE_UNQUOTE_KW)
       ("syntax-macro", SYNTAX_MACRO)

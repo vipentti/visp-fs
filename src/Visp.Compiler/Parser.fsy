@@ -40,7 +40,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 %token OPEN MODULE
 %token FN FNSTAR LET USE VAL STATIC LET_BANG USE_BANG DO_BANG LETSTAR MUT SET DOT NEW NEWOBJ DOT_BRACKET DOT_PLUS IF_KW BEGIN_KW DO_KW QUOTE_KW UNQUOTE_KW SPLICE_UNQUOTE_KW QUASIQUOTE_KW
 %token ATOM_KW DEREF_KW WHILE TYPE TYPEALIAS INTERFACE RECORD MEMBER MEMBERS MEMBERFN MEMBER_GET MEMBER_SET OVERRIDE MACRO MATCH WHEN REQUIRE
-%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO SEQ UNION INCLUDE
+%token THREAD_FIRST THREAD_LAST SYNTAX_MACRO UNION INCLUDE
 %token INLINE REC RINIT
 %token <bool> YIELD
 %token <bool> RETURN
@@ -435,7 +435,6 @@ parens_expr:
     | BANG_VEC { CollExpr.mkFsVec [] (lhs parseState)}
     | BANG_VEC expr_list { CollExpr.mkFsVec $2 (lhs parseState)}
 
-    | SEQ expr_list { SynExpr.FsSeq($2, lhs parseState) }
     | YIELD expr { SynExpr.FsYield($2, $1, lhs parseState) }
     | RETURN expr { SynExpr.FsReturn($2, $1, lhs parseState) }
     | DO_BANG expr { SynExpr.FsDo($2, true, lhs parseState) }
@@ -1199,7 +1198,6 @@ syn_type:
         { SynType.Fun ($1, $3, lhs parseState) }
     | syn_type arrayTypeSuffixHelp %prec prec_syn_type_array
         { SynType.Array($2, $1, lhs parseState) }
-    | SEQ { SynType.Ident(Ident("seq", rhs parseState 1)) }
     | SYMBOL %prec prec_syn_type
       { let text = $1
         if (text = "_") then

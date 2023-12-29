@@ -28,7 +28,7 @@
 (let fileText (System.IO.File.ReadAllText filepath))
 
 (fn rec cycle [xs]
-  (seq
+  (seq->
     (yield! xs)
     (yield! (cycle xs))
   ))

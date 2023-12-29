@@ -57,7 +57,7 @@
   (member fn d.Seq ()
     (let s (+Start d))
     (let end (dec64 (+End d)))
-    (seq (!range s .. end)))
+    (seq-> (!range s .. end)))
 
   (override fn t.ToString ()
     (sprintf "Range(%i, %i)" (+Start t) (+Len t)))
@@ -86,7 +86,7 @@
   (let r1 (snd lhs))
   (let l2 (fst rhs))
   (let r2 (snd rhs))
-  (seq
+  (seq->
     (cond
       (and (= l1 l2) (= r1 r2))
         ()
@@ -169,7 +169,7 @@
   (let r1 (+Last lhs))
   (let l2 (+Start rhs))
   (let r2 (+Last rhs))
-  (seq
+  (seq->
     (cond
       (and (= l1 l2) (= r1 r2))
         ()
@@ -254,8 +254,8 @@
 
     (.Add ranges (new SourceDestMap dest src len))
 
-    ;; (let src_range (seq (!range src .. (+ src (dec64 len)))))
-    ;; (let dest_range (seq (!range dest .. (+ dest (dec64 len)))))
+    ;; (let src_range (seq-> (!range src .. (+ src (dec64 len)))))
+    ;; (let dest_range (seq-> (!range dest .. (+ dest (dec64 len)))))
 
     ;; (for/in [pair (Seq.zip src_range dest_range)]
     ;;   (match pair

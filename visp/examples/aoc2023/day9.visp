@@ -81,7 +81,7 @@
     (Seq.windowed windowSize (+Items source)))
 
   (fn pairs ([source: HistList])
-    (seq
+    (seq->
       (let end (dec (+Count source)))
       (for/in [index (!range 0 .. end)]
         (let next (inc index))
