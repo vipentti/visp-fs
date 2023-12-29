@@ -16,7 +16,7 @@ let mkTokenizerWithArgs args =
         | LexMode.Default -> Lexer.token args false buf
         | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
 
-    let inline handle_next args next =
+    let handle_next (args: LexArgs) next =
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
         | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
@@ -45,6 +45,9 @@ let mkTokenizerWithArgs args =
             if args.CurrentContext = LexContext.LParen then
                 args.PopContext()
                 args.PushContext LexContext.Type
+
+        | OP_LESS -> args.NestAngle()
+        | OP_GREATER -> args.UnnestAngle()
 
         | HASH_PAREN
         | HASH_BRACKET

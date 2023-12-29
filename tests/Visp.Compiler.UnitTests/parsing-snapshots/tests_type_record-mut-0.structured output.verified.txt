@@ -1,0 +1,53 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (Union
+            (SynSymbol State, [UnionCase (SynSymbol On, [], (8,13--8,15)); UnionCase (SynSymbol Off, [], (8,16--8,19))],
+             [], [], (8,1--8,19)), (8,0--8,20));
+       Expr
+         (Record
+            (SynSymbol FlipFlop, [RecordLabel (Mutable, SynSymbol state, Ident State, (10,17--10,35))],
+             [MemberFn
+                (SynSymbol t.Toggle, Args (List [], (11,22--11,24)),
+                 [Match
+                    (DotProperty (Symbol (SynSymbol t), SynSymbol state, (12,12--12,20)),
+                     [SynMatch
+                        (Named (SynSymbol State.Off, (13,7--13,16)), None,
+                         [Set
+                            (DotProperty (Symbol (SynSymbol t), SynSymbol state, (13,24--13,32)),
+                             Symbol (SynSymbol State.On), (13,18--13,42)); Symbol (SynSymbol State.Off)], (13,7--13,53));
+                      SynMatch
+                        (Named (SynSymbol State.On, (14,7--14,15)), None,
+                         [Set
+                            (DotProperty (Symbol (SynSymbol t), SynSymbol state, (14,23--14,31)),
+                             Symbol (SynSymbol State.Off), (14,17--14,42)); Symbol (SynSymbol State.On)], (14,7--14,52))],
+                     (12,5--14,53))], Default, [], (11,3--15,5))], [], (10,1--16,3)), (10,0--16,4));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol flop, (18,5--18,9)),
+             RecordInit ([SynInit (SynSymbol state, Symbol (SynSymbol State.Off), (18,13--18,28))], (18,10--18,31)),
+             None, [], (18,1--18,31)), (18,0--18,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (19,9--19,13)), (19,9--19,13)); Symbol (SynSymbol flop)], (19,1--19,18)),
+          (19,0--19,19));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [DotMethod (Symbol (SynSymbol flop), SynSymbol Toggle, [], Tuple, (20,9--20,21))], (20,1--20,22)),
+          (20,0--20,23));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (21,9--21,13)), (21,9--21,13)); Symbol (SynSymbol flop)], (21,1--21,18)),
+          (21,0--21,19));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (23,0--23,2)), Const (Unit, (23,0--23,2)), None, [], (23,0--23,2)),
+          (23,0--23,2));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (23,0--23,2)), (23,0--23,2)); Symbol (SynSymbol visp_result_todo)],
+             (23,0--23,2)), (23,0--23,2))], (8,0--23,2))]

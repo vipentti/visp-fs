@@ -131,6 +131,11 @@ module ``tests_type_record-4`` =
     let ``can parse`` () = TestUtils.runTest "tests/type/record-4.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-mut-0`` =
+    [<Fact>]
+    let ``can parse`` () = TestUtils.runTest "tests/type/record-mut-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_functions_apply-method-args-0`` =
     [<Fact>]
     let ``can parse`` () = TestUtils.runTest "tests/functions/apply-method-args-0.visp"

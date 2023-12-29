@@ -131,6 +131,11 @@ module ``tests_type_record-4`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/type/record-4.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_type_record-mut-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/type/record-mut-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_functions_apply-method-args-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/functions/apply-method-args-0.visp"
