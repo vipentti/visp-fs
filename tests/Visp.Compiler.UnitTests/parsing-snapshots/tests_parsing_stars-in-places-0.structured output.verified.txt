@@ -1,0 +1,121 @@
+﻿ParsedFile
+  [AnonModule
+     ([Open (SynSymbol System.Collections.Generic, (7,1--7,32));
+       Expr
+         (TypeAlias
+            (SynSymbol Dict,
+             Generic
+               (Ident Dictionary,
+                [Ident string;
+                 Tuple (false, [Type (Ident string); Star (9,32--9,45); Type (Ident string)], (9,32--9,45))],
+                (9,14--9,46)), (9,1--9,46)), (9,0--9,47));
+       Expr
+         (TypeAlias
+            (SynSymbol MapType,
+             Tuple
+               (false,
+                [Type (Generic (Ident list, [Ident char], (10,17--10,27))); Star (10,27--10,32); Type (Ident Dict)],
+                (10,17--10,32)), (10,1--10,32)), (10,0--10,33));
+       Expr
+         (TypeAlias
+            (SynSymbol Dict2,
+             Generic
+               (Ident Dictionary,
+                [Ident string;
+                 Tuple (false, [Type (Ident string); Star (12,42--12,43); Type (Ident string)], (12,35--12,50))],
+                (12,15--12,52)), (12,1--12,52)), (12,0--12,54));
+       Expr
+         (TypeAlias
+            (SynSymbol MapType2,
+             Tuple
+               (false,
+                [Type (Generic (Ident list, [Ident char], (13,18--13,29))); Star (13,29--13,30); Type (Ident Dict2)],
+                (13,18--13,36)), (13,1--13,36)), (13,0--13,37));
+       Expr
+         (TypeAlias (SynSymbol MyGenList<^T>, Generic (Ident list, [Ident ^T], (15,23--15,31)), (15,1--15,31)),
+          (15,0--15,32));
+       Expr
+         (TypeAlias
+            (SynSymbol ExampleResizeArray,
+             Generic
+               (Ident ResizeArray,
+                [Generic
+                   (Ident MyGenList,
+                    [Tuple
+                       (false,
+                        [Type (Ident int); Star (16,50--16,65);
+                         Type
+                           (Tuple (false, [Type (Ident int); Star (16,50--16,65); Type (Ident int64)], (16,50--16,65)))],
+                        (16,50--16,65))], (16,40--16,65))], (16,28--16,65)), (16,1--16,65)), (16,0--16,66));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol **newWithStar**, (18,5--18,20)),
+             New (Ident ResizeArray<int*int*int64>, [], (18,22--18,52)), None, [], (18,1--18,53)), (18,0--18,54));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol **newWithStarGenerics**, (19,5--19,28)),
+             New (Ident ResizeArray<MyGenList<int*int*int64>>, [], (19,30--19,71)), None, [], (19,1--19,72)),
+          (19,0--19,73));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol **newWithStar2**, (20,5--20,21)), New (Ident ExampleResizeArray, [], (20,23--20,45)), None,
+             [], (20,1--20,46)), (20,0--20,47));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol *some-var-with-star*, (22,5--22,25)),
+             Const (String ("*some-var-with-star*", Regular, (22,26--22,48)), (22,26--22,48)), None, [], (22,1--22,48)),
+          (22,0--22,49));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Symbol (SynSymbol *some-var-with-star*)], (23,9--23,34)))],
+             (23,1--23,35)), (23,0--23,36));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol **some-var-with-star**, (25,5--25,27)),
+             Const (String ("**some-var-with-star**", Regular, (25,28--25,52)), (25,28--25,52)), None, [], (25,1--25,52)),
+          (25,0--25,53));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Symbol (SynSymbol **some-var-with-star**)], (26,9--26,36)))],
+             (26,1--26,37)), (26,0--26,38));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol some-var-with-star*, (28,5--28,24)),
+             Const (String ("some-var-with-star*", Regular, (28,25--28,46)), (28,25--28,46)), None, [], (28,1--28,46)),
+          (28,0--28,47));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Symbol (SynSymbol some-var-with-star*)], (29,9--29,33)))],
+             (29,1--29,34)), (29,0--29,35));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol some-var-with-star**, (31,5--31,25)),
+             Const (String ("some-var-with-star**", Regular, (31,26--31,48)), (31,26--31,48)), None, [], (31,1--31,48)),
+          (31,0--31,49));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol ignore),
+             [SyntaxMacroCall
+                (SynMacroCall
+                   (SynSymbol dbg!, [Symbol (SynSymbol dbg!); Symbol (SynSymbol some-var-with-star**)], (32,9--32,34)))],
+             (32,1--32,35)), (32,0--32,36));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (34,0--34,14)),
+             FunctionCall
+               (Symbol (SynSymbol printfn), [Const (String ("OK", Regular, (34,9--34,13)), (34,9--34,13))],
+                (34,1--34,13)), None, [], (34,0--34,14)), (34,0--34,14));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (34,0--34,14)), (34,0--34,14)); Symbol (SynSymbol visp_result_todo)],
+             (34,0--34,14)), (34,0--34,14))], (7,0--34,14))]

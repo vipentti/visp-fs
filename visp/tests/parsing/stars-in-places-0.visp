@@ -1,0 +1,34 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(open System.Collections.Generic)
+
+(typedef Dict Dictionary<string,string*string>)
+(typedef MapType list<char>*Dict)
+
+(typedef Dict2 Dictionary< string ,string * string > )
+(typedef MapType2 list< char>* Dict2)
+
+(typedef MyGenList<^T> list<^T>)
+(typedef ExampleResizeArray ResizeArray<MyGenList<int*int*int64>>)
+
+(let **newWithStar** (new ResizeArray<int*int*int64>))
+(let **newWithStarGenerics** (new ResizeArray<MyGenList<int*int*int64>>))
+(let **newWithStar2** (new ExampleResizeArray))
+
+(let *some-var-with-star* "*some-var-with-star*")
+(ignore (dbg! *some-var-with-star*))
+
+(let **some-var-with-star** "**some-var-with-star**")
+(ignore (dbg! **some-var-with-star**))
+
+(let some-var-with-star* "some-var-with-star*")
+(ignore (dbg! some-var-with-star*))
+
+(let some-var-with-star** "some-var-with-star**")
+(ignore (dbg! some-var-with-star**))
+
+(printfn "OK")

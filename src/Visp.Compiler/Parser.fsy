@@ -152,6 +152,7 @@ let mkRecoveryPat s = Syntax.parserRecoveryPat (lhs s)
 
 %nonassoc prec_binding_empty
 %nonassoc binding_list_empty
+%nonassoc prec_star_list
 
 %nonassoc prec_fn
 %nonassoc prec_invalid_fn
@@ -300,14 +301,6 @@ symbol_op_text:
     | OP_LESS SYMBOL OP_GREATER { ($"<{$2}>", rhs2 parseState 1 3) }
 
 symbol_with_ops:
-    // | symbol_text symbol_op_text
-    //     {
-    //         let (t1, r1) = $1
-    //         let (t2, r2) = $2
-    //         Syntax.mkSynSymbol (t1 + t2) (Range.unionRanges r1 r2)
-    //     }
-    // | symbol_text { $1 ||> Syntax.mkSynSymbol }
-
     | SYMBOL OP_GREATER SYMBOL { Syntax.mkSynSymbol $"{$1}>{$3}" (rhs2 parseState 1 3) }
     | SYMBOL OP_GREATER OP_GREATER { Syntax.mkSynSymbol $"{$1}>>" (rhs2 parseState 1 3) }
     | SYMBOL OP_LESS SYMBOL OP_GREATER { Syntax.mkSynSymbol $"{$1}<{$3}>" (rhs2 parseState 1 4) }
@@ -837,13 +830,24 @@ letstar:
 
 type_name_text:
     | SYMBOL { ($1, (rhs parseState 1)) }
-    | SYMBOL OP_LESS SYMBOL OP_GREATER
-        { ($"{$1}<{$3}>", rhs2 parseState 1 4) }
-    | SYMBOL OP_LESS SYMBOL COMMA symbol_comma_list OP_GREATER
+    | SYMBOL OP_LESS type_name_text OP_GREATER
+        { ($"{$1}<{fst $3}>", rhs2 parseState 1 4) }
+    | SYMBOL OP_LESS type_name_text COMMA symbol_comma_list OP_GREATER
         {
           let lst = $3 :: $5
-          let args = String.concat "," lst
+          let args = String.concat "," (List.map fst lst)
           ($"{$1}<{args}>", rhs2 parseState 1 6) }
+    | SYMBOL OP_MULT symbol_star_list
+        {
+          let lst = $1 :: (List.map fst $3)
+          let args = String.concat "*" lst
+          ($"{args}", rhs2 parseState 1 3)
+        }
+
+symbol_star_list: rev_symbol_star_list %prec prec_star_list { List.rev $1 }
+rev_symbol_star_list:
+    | type_name_text %prec prec_star_list { [$1] }
+    | rev_symbol_star_list OP_MULT type_name_text %prec prec_star_list { $3 :: $1 }
 
 syn_type_name:
     | type_name_text
@@ -861,8 +865,8 @@ type_name:
 
 symbol_comma_list: rev_symbol_comma_list { List.rev $1 }
 rev_symbol_comma_list:
-    | SYMBOL { [$1] }
-    | rev_symbol_comma_list COMMA SYMBOL { $3 :: $1 }
+    | type_name_text { [$1] }
+    | rev_symbol_comma_list COMMA type_name_text { $3 :: $1 }
 
 type_expr:
     | TYPEALIAS type_name syn_type
@@ -1209,7 +1213,6 @@ syn_type:
 
 syn_type_generic_list: rev_syn_type_generic_list { List.rev $1 }
 rev_syn_type_generic_list:
-    | { [] }
     | syn_type %prec prec_syn_type_generic { [$1] }
     | rev_syn_type_generic_list COMMA syn_type %prec prec_syn_type_generic { $3 :: $1 }
 
@@ -1429,12 +1432,7 @@ syn_pat:
     | constant %prec prec_match_pattern_const { SynPat.Const(fst $1, snd $1) }
     | pat_open_kind syn_pat COLON syn_type collection_close_kind %prec prec_syn_type
         { SynPat.Typed($2, $4, lhs parseState) }
-    | SYMBOL %prec prec_syn_pat {
-        let text = $1
-        if (text = "_") then
-            SynPat.Discard (lhs parseState)
-        else
-            SynPat.Named (Syntax.mkSynSymbol text (rhs parseState 1), (rhs parseState 1)) }
+    | syn_pat_named { $1 }
     | pat_open_kind COLON_QMARK syn_type collection_close_kind
         { SynPat.IsInst($3, lhs parseState) }
     | pat_open_kind COLON_QMARK syn_type syn_pat collection_close_kind

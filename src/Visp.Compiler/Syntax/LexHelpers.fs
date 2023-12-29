@@ -291,6 +291,10 @@ let keywordTokenList =
       ("use!", USE_BANG)
       ("use", USE)
       ("while", WHILE)
+      ("true", TRUE)
+      ("false", FALSE)
+      ("nil", NIL)
+      ("unit", UNIT)
       ("yield!", YIELD true)
       ("yield", YIELD false) ]
 
@@ -483,6 +487,117 @@ let symbolOrKeywordToken (args: LexArgs) (lexbuf: FSharp.Text.Lexing.LexBuffer<_
             | it -> args.resourceManager.InternTokenStream it SYMBOL
         else
             symbolOrKeyword args it
+
+open FSharp.NativeInterop
+
+#nowarn "9"
+
+let inline stackalloc<'a when 'a: unmanaged> (length: int) : Span<'a> =
+    let p = NativePtr.stackalloc<'a> length |> NativePtr.toVoidPtr
+    Span<'a>(p, length)
+
+let inline isLetterOrDigit ch = System.Char.IsLetterOrDigit ch
+
+let inline isSymbolic ch = isLetterOrDigit ch || ch = '_'
+
+let inline unreachable () = failwith "unreachable"
+
+let inline private tryPeekNext (i: int) (s: Span<_>) =
+    if i + 1 < s.Length then Some(s[i + 1]) else None
+
+let inline private prevChar (i: int) (s: Span<char>) =
+    if i - 1 >= 0 then s[i - 1] else '\u0000'
+
+let inline private nextChar (i: int) (s: Span<char>) =
+    if i + 1 < s.Length then s[i + 1] else '\u0000'
+
+let inline private ResizeArrayToList (lst: ResizeArray<'T>) =
+    let mutable res = ([]: 'T list)
+
+    for i = lst.Count - 1 downto 0 do
+        res <- lst[i] :: res
+
+    res
+
+let nextTokensTrimBoth
+    (args: LexArgs)
+    (lexbuf: FSharp.Text.Lexing.LexBuffer<char>)
+    (n: int)
+    (m: int)
+    =
+    let bufLen = lexbuf.LexemeLength
+    assert (bufLen > 0)
+    let boundsymbolOrKeywordToken = symbolOrKeywordToken args lexbuf
+
+    let mutable pooled: Option<char[]> = None
+
+    let bufLen = bufLen - (n + m)
+
+    let buf: Span<char> =
+        if bufLen < 1024 then
+            stackalloc<char> bufLen
+        else
+            let pool = Buffers.ArrayPool<char>.Shared.Rent(bufLen)
+            pooled <- Some(pool)
+            pool.AsSpan(0, bufLen)
+
+    // fill buffer
+    for i = n to bufLen - 1 do
+        buf[i] <- lexbuf.LexemeChar i
+
+    let sb = PooledStringBuilder.Get()
+    sb.EnsureCapacity(bufLen) |> ignore
+    let tokens = PooledList.Get()
+    let inline add n = tokens.Add n
+
+    let mutable curbuf = buf
+
+    while not curbuf.IsEmpty do
+        let sepStart = curbuf.IndexOf('*')
+
+        if sepStart = -1 then
+            add (boundsymbolOrKeywordToken (sb.Append(curbuf).ToStringAndClear()))
+            curbuf <- Span<char>.Empty
+        else
+            let mutable sepEnd = sepStart
+
+            while (nextChar sepEnd curbuf) = '*' do
+                sepEnd <- sepEnd + 1
+
+            if sepStart = 0 then
+                // *something -> * something
+                if sepEnd = 0 then
+                    let lastIndex = curbuf.LastIndexOf('*')
+
+                    if lastIndex = curbuf.Length - 1 then
+                        add (boundsymbolOrKeywordToken (sb.Append(curbuf).ToStringAndClear()))
+                        curbuf <- Span<char>.Empty
+                    else
+                        add OP_MULT
+                        curbuf <- curbuf.Slice(sepStart + 1)
+                else
+                    add (boundsymbolOrKeywordToken (sb.Append(curbuf).ToStringAndClear()))
+                    curbuf <- Span<char>.Empty
+            else if sepEnd = curbuf.Length - 1 then
+                add (boundsymbolOrKeywordToken (sb.Append(curbuf).ToStringAndClear()))
+                curbuf <- Span<char>.Empty
+            else
+                let beforeSep = curbuf.Slice(0, sepStart)
+                let afterSep = curbuf.Slice(sepStart + 1)
+                add (boundsymbolOrKeywordToken (sb.Append(beforeSep).ToStringAndClear()))
+                add OP_MULT
+                curbuf <- afterSep
+
+    sb.ReturnToPool()
+    pooled |> Option.iter Buffers.ArrayPool<char>.Shared.Return
+
+    let list = ResizeArrayToList tokens
+    tokens.ReturnToPool()
+    list
+
+let nextTokensTrimRight args lexbuf n = nextTokensTrimBoth args lexbuf 0 n
+let nextTokensTrimLeft args lexbuf n = nextTokensTrimBoth args lexbuf n 0
+let nextTokens args lexbuf = nextTokensTrimBoth args lexbuf 0 0
 
 let outputSyntaxError (syn: SyntaxError) =
     match syn.Data0 with

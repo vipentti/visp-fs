@@ -146,6 +146,11 @@ module ``tests_hashset_hashset-0`` =
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/hashset/hashset-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_stars-in-places-0`` =
+    [<Fact>]
+    let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/stars-in-places-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_strings-interpolation-0`` =
     [<Fact>]
     let ``returns tokens`` () = TestUtils.runTokenTest "tests/parsing/strings-interpolation-0.visp"

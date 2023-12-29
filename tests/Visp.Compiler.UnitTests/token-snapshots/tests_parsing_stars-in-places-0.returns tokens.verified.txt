@@ -1,0 +1,168 @@
+﻿LPAREN Default 0 1 LParen
+OPEN Default 0 1 LParen
+SYMBOL "System.Collections.Generic" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "Dict" Default 0 1 LParen
+SYMBOL "Dictionary" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+COMMA Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "MapType" Default 0 1 LParen
+SYMBOL "list" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "char" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "Dict" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "Dict2" Default 0 1 LParen
+SYMBOL "Dictionary" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+COMMA Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "string" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "MapType2" Default 0 1 LParen
+SYMBOL "list" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "char" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "Dict2" Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "MyGenList" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "^T" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+SYMBOL "list" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "^T" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+TYPEALIAS Default 0 1 LParen
+SYMBOL "ExampleResizeArray" Default 0 1 LParen
+SYMBOL "ResizeArray" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "MyGenList" Default 0 1 LParen
+OP_LESS Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "int" Default 0 1 LParen
+OP_MULT Default 0 1 LParen
+SYMBOL "int64" Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+OP_GREATER Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "**newWithStar**" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "ResizeArray" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int64" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "**newWithStarGenerics**" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "ResizeArray" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "MyGenList" Default 0 2 LParen
+OP_LESS Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int" Default 0 2 LParen
+OP_MULT Default 0 2 LParen
+SYMBOL "int64" Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+OP_GREATER Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "**newWithStar2**" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+NEW Default 0 2 LParen
+SYMBOL "ExampleResizeArray" Default 0 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "*some-var-with-star*" Default 0 1 LParen
+STRING ("*some-var-with-star*", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "ignore" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 2 LParen
+SYMBOL "*some-var-with-star*" TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "**some-var-with-star**" Default 0 1 LParen
+STRING ("**some-var-with-star**", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "ignore" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 2 LParen
+SYMBOL "**some-var-with-star**" TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "some-var-with-star*" Default 0 1 LParen
+STRING ("some-var-with-star*", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "ignore" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 2 LParen
+SYMBOL "some-var-with-star*" TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+LET Default 0 1 LParen
+SYMBOL "some-var-with-star**" Default 0 1 LParen
+STRING ("some-var-with-star**", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "ignore" Default 0 1 LParen
+LPAREN Default 0 2 LParen
+MACRO_NAME "dbg!" TokenStream Macro 1 2 LParen
+SYMBOL "some-var-with-star**" TokenStream Macro 1 2 LParen
+RPAREN Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("OK", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

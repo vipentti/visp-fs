@@ -146,6 +146,11 @@ module ``tests_hashset_hashset-0`` =
     let ``can execute`` () = TestUtils.runTest "tests/hashset/hashset-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_stars-in-places-0`` =
+    [<Fact>]
+    let ``can execute`` () = TestUtils.runTest "tests/parsing/stars-in-places-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_strings-interpolation-0`` =
     [<Fact>]
     let ``can execute`` () = TestUtils.runTest "tests/parsing/strings-interpolation-0.visp"

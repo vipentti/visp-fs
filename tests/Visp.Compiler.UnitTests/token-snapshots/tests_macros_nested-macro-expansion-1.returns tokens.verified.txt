@@ -14,7 +14,11 @@ LPAREN Default 0 3 LParen
 NEW Default 0 3 LParen
 SYMBOL "ResizeArray" Default 0 3 LParen
 OP_LESS Default 0 3 LParen
-SYMBOL "int*int*int64" Default 0 3 LParen
+SYMBOL "int" Default 0 3 LParen
+OP_MULT Default 0 3 LParen
+SYMBOL "int" Default 0 3 LParen
+OP_MULT Default 0 3 LParen
+SYMBOL "int64" Default 0 3 LParen
 OP_GREATER Default 0 3 LParen
 RPAREN Default 0 2 LParen
 RPAREN Default 0 1 LParen
