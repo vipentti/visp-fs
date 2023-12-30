@@ -1,0 +1,29 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"generic-method-or-variable-0.visp"
+let MyGenMethod<'T> (v: 'T) =
+  // line 8 @"generic-method-or-variable-0.visp"
+  printfn "Value is %A" v
+
+// line 10 @"generic-method-or-variable-0.visp"
+let items =
+  // line 10 @"generic-method-or-variable-0.visp"
+  Set.empty<_>
+    |> Set.add 1
+    |> Set.add 2
+// line 12 @"generic-method-or-variable-0.visp"
+printfn "Items: %A" items
+// line 13 @"generic-method-or-variable-0.visp"
+printfn "Singleton %A" (Set.singleton<int> 1)
+// line 14 @"generic-method-or-variable-0.visp"
+let visp_result_todo =
+  // line 14 @"generic-method-or-variable-0.visp"
+  MyGenMethod<string> "hello world"
+// line 14 @"generic-method-or-variable-0.visp"
+printfn "%A" visp_result_todo
+

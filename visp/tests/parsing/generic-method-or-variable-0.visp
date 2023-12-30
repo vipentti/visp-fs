@@ -1,0 +1,14 @@
+;; Copyright 2023 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(fn MyGenMethod<^T> ([v: ^T]) (printfn "Value is %A" v))
+
+(let items (->> Set.empty<_> (Set.add 1) (Set.add 2)))
+
+(printfn "Items: %A" items)
+(printfn "Singleton %A" (Set.singleton<int> 1))
+(MyGenMethod<string> "hello world")

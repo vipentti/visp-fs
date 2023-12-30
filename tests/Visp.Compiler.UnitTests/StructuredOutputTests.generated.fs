@@ -191,6 +191,11 @@ module ``tests_parsing_tuple-0`` =
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/tuple-0.visp"
 
 [<VerifyXunit.UsesVerify>]
+module ``tests_parsing_generic-method-or-variable-0`` =
+    [<Fact>]
+    let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/generic-method-or-variable-0.visp"
+
+[<VerifyXunit.UsesVerify>]
 module ``tests_parsing_generic-args-0`` =
     [<Fact>]
     let ``structured output`` () = TestUtils.runStructuredOutputTest "tests/parsing/generic-args-0.visp"

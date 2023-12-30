@@ -1,0 +1,44 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionDef
+            (SynSymbol MyGenMethod<^T>, None,
+             Args (List [Typed (Named (SynSymbol v, (8,22--8,23)), Ident ^T, (8,21--8,28))], (8,20--8,29)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Value is %A", Regular, (8,39--8,52)), (8,39--8,52)); Symbol (SynSymbol v)],
+                 (8,31--8,54))], None, (8,1--8,55)), (8,0--8,56));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol items, (10,5--10,10)),
+             ThreadLast
+               ([Expr (Symbol (SynSymbol Set.empty<_>), (10,16--10,28));
+                 Expr
+                   (FunctionCall (Symbol (SynSymbol Set.add), [Const (Int32 1, (10,38--10,39))], (10,30--10,39)),
+                    (10,29--10,40));
+                 Expr
+                   (FunctionCall (Symbol (SynSymbol Set.add), [Const (Int32 2, (10,50--10,51))], (10,42--10,51)),
+                    (10,41--10,52))], (10,12--10,52)), None, [], (10,1--10,53)), (10,0--10,54));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("Items: %A", Regular, (12,9--12,20)), (12,9--12,20)); Symbol (SynSymbol items)],
+             (12,1--12,26)), (12,0--12,27));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("Singleton %A", Regular, (13,9--13,23)), (13,9--13,23));
+              FunctionCall (Symbol (SynSymbol Set.singleton<int>), [Const (Int32 1, (13,44--13,45))], (13,25--13,45))],
+             (13,1--13,46)), (13,0--13,47));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (14,0--14,35)),
+             FunctionCall
+               (Symbol (SynSymbol MyGenMethod<string>),
+                [Const (String ("hello world", Regular, (14,21--14,34)), (14,21--14,34))], (14,1--14,34)), None, [],
+             (14,0--14,35)), (14,0--14,35));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (14,0--14,35)), (14,0--14,35)); Symbol (SynSymbol visp_result_todo)],
+             (14,0--14,35)), (14,0--14,35))], (8,0--14,35))]
