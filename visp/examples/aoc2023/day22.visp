@@ -150,7 +150,7 @@
   (let c5 (< (Y lhs_max) (Y rhs_min)))
   (let c6 (< (Y rhs_max) (Y lhs_min)))
 
-  (not (-|| c1 c2 c3 c4 c5 c6)))
+  (not (|| c1 c2 c3 c4 c5 c6)))
 
 (fn inline IntersectsXY ([lhs: Brick] [rhs: Brick])
   (let (lhs_min, lhs_max) (+Original lhs))
