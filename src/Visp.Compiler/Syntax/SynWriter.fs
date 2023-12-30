@@ -4,6 +4,7 @@
 
 module Visp.Syntax.SynWriter
 
+open System
 open SpanUtils.Extensions
 open Visp.Compiler.Writer
 open Visp.Common
@@ -261,6 +262,15 @@ module Write =
 
         sb.ToStringAndReturn()
 
+    let private countChars ch (span: ReadOnlySpan<char>) =
+        let mutable c = 0
+
+        for ms in span do
+            if ms = ch then
+                c <- c + 1
+
+        c
+
     let normalizeString (name: string) =
         let mutable sb = PooledStringBuilder.Get()
         sb.EnsureCapacity(name.Length) |> ignore
@@ -270,15 +280,29 @@ module Write =
             sb <- sb.Append('_')
             ()
 
-        for ch in name do
-            if Set.contains ch escapableChars then
-                needs_escape <- true
+        let nameSpan = name.AsSpan()
 
-            // TODO: Allow ^ also
-            if ch = '^' then
-                sb <- sb.Append('\'')
-            else
-                sb <- sb.Append(ch)
+        // TODO: Actual generic argument support
+        let countLess = countChars '<' nameSpan
+        let countGreater = countChars '>' nameSpan
+
+        if countLess = countGreater && countLess > 0 then
+            for ch in name do
+                // TODO: Allow ^ also
+                if ch = '^' then
+                    sb <- sb.Append('\'')
+                else
+                    sb <- sb.Append(ch)
+        else
+            for ch in name do
+                if Set.contains ch escapableChars then
+                    needs_escape <- true
+
+                // TODO: Allow ^ also
+                if ch = '^' then
+                    sb <- sb.Append('\'')
+                else
+                    sb <- sb.Append(ch)
 
         (PooledStringBuilder.ToStringAndReturn(sb), needs_escape)
 

@@ -1,0 +1,6 @@
+﻿Items: set [1; 2]
+Singleton set [1]
+Value is "hello world"
+()
+
+ExitCode: 0
