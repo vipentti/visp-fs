@@ -7,6 +7,7 @@ open System.IO.Abstractions
 open System.Text
 open VerifyXunit
 open Visp.Compiler.ProjectGenerator
+open Visp.Compiler
 
 let getVispFilePath name =
     let src_dir = __SOURCE_DIRECTORY__
@@ -35,11 +36,26 @@ let CreateAndRunProject filePath =
             (sprintf "%s-%s-project" fileNameWithoutExtension rnd)
         )
 
+    let outputPath =
+        Path.Combine(
+            projectPath,
+            "output"
+        )
+
+    let dllPath =
+        Path.Combine(
+            outputPath,
+            "project.dll"
+        )
+
     let files = CoreLibs @ [ VispFile.Main filePath ]
 
     let generator = new FsharpGenerator(new FileSystem(), projectPath)
 
     let sb = new StringBuilder()
+    let buildSb = new StringBuilder()
+
+    Syntax.SyntaxWriteUtilThreadStatics.RunningTests <- true
 
     // https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/compiler-options#compiler-options-listed-alphabetically
     generator.WriteVispFiles
@@ -48,27 +64,48 @@ let CreateAndRunProject filePath =
         { WriteOptions.Default with
             Flags = (Some "--debug- --nooptimizationdata --optimize-") }
 
-    let dotnet =
-        Cli
-            .Wrap("dotnet")
-            .WithArguments(Array.concat [| [| "run"; "--project"; projectPath |] |])
-            .WithWorkingDirectory(cwd)
-            .WithStandardOutputPipe(PipeTarget.ToStringBuilder(sb))
-            .WithStandardErrorPipe(PipeTarget.ToStringBuilder(sb))
-            .WithValidation(CommandResultValidation.None)
+
+    //let dotnetBuild =
+    //    Cli
+    //        .Wrap("dotnet")
+    //        .WithArguments(Array.concat [| [| "build"; projectPath; "--output"; outputPath |] |])
+    //        .WithWorkingDirectory(cwd)
+    //        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(buildSb))
+    //        .WithStandardErrorPipe(PipeTarget.ToStringBuilder(buildSb))
+    //        .WithValidation(CommandResultValidation.None)
+
+    //let dotnet =
+    //    Cli
+    //        .Wrap("dotnet")
+    //        .WithArguments(Array.concat [| [| dllPath |] |])
+    //        // .WithArguments(Array.concat [| [| "run"; "--project"; projectPath |] |])
+    //        .WithWorkingDirectory(cwd)
+    //        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(sb))
+    //        .WithStandardErrorPipe(PipeTarget.ToStringBuilder(sb))
+    //        .WithValidation(CommandResultValidation.None)
 
     async {
         let mutable succeed = false
 
         try
-            let! result = dotnet.ExecuteAsync().Task |> Async.AwaitTask
+            //let! buildResult = dotnetBuild.ExecuteAsync().Task |> Async.AwaitTask
 
-            sb.AppendLine().Append("ExitCode: ").Append(result.ExitCode).AppendLine()
+            //if buildResult.ExitCode <> 0 then
+            //    failwithf "Build failed: %s" (buildSb.ToString())
+
+            //let! result = dotnet.ExecuteAsync().Task |> Async.AwaitTask
+
+
+            let! result = DotnetCompiler.buildAndRun projectPath cwd DotnetCompiler.BuildConfiguration.Debug [||]
+
+            sb.Append(result.Output).AppendLine().Append("ExitCode: ").Append(result.ExitCode).AppendLine()
             |> ignore
 
             succeed <- result.ExitCode = 0
 
-            return (result.ExitCode, sb.ToString())
+            // Remove once https://github.com/dotnet/msbuild/issues/10998 is fixed
+            // https://github.com/dotnet/runtime/issues/109815
+            return (result.ExitCode, sb.ToString().Replace("\x1b]9;4;3;\x1b\\", "").Replace("\x1b]9;4;0;\x1b\\", ""))
         finally
             try
                 if succeed && Directory.Exists(projectPath) then
