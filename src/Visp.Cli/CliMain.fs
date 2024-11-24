@@ -33,11 +33,11 @@ let main args =
         else
             CoreLibs @ mainFile
 
-    let release =
+    let buildConfig =
         if Array.contains "--release" args then
-            [| "--configuration"; "Release" |]
+            DotnetCompiler.BuildConfiguration.Release
         else
-            [||]
+            DotnetCompiler.BuildConfiguration.Debug
 
     let pkg =
         if Array.contains "--package" args then
@@ -58,18 +58,9 @@ let main args =
 
     generator.WriteVispFiles pkg files options
 
-    let dotnet =
-        Cli
-            .Wrap("dotnet")
-            .WithArguments(
-                Array.concat
-                    [| [| "run"; "--project"; projectPath |]; release; [| "--" |]; cmdArguments |]
-            )
-            .WithWorkingDirectory(cwd)
-            .WithStandardOutputPipe(PipeTarget.ToDelegate(fun x -> printfn "%s" x))
-            .WithStandardErrorPipe(PipeTarget.ToDelegate(fun x -> printfn "%s" x))
-            .WithValidation(CommandResultValidation.None)
+    let result = DotnetCompiler.buildAndRun projectPath cwd buildConfig cmdArguments |> Async.RunSynchronously
 
-    let result = dotnet.ExecuteAsync().Task |> Async.AwaitTask |> Async.RunSynchronously
+    printfn "%s" result.Output
 
     result.ExitCode
+
