@@ -1,7 +1,6 @@
 module TestUtils
 
 open FsUnit.Xunit
-open CliWrap
 open System.IO
 open System.IO.Abstractions
 open System.Text
@@ -36,24 +35,11 @@ let CreateAndRunProject filePath =
             (sprintf "%s-%s-project" fileNameWithoutExtension rnd)
         )
 
-    let outputPath =
-        Path.Combine(
-            projectPath,
-            "output"
-        )
-
-    let dllPath =
-        Path.Combine(
-            outputPath,
-            "project.dll"
-        )
-
     let files = CoreLibs @ [ VispFile.Main filePath ]
 
     let generator = new FsharpGenerator(new FileSystem(), projectPath)
 
     let sb = new StringBuilder()
-    let buildSb = new StringBuilder()
 
     Syntax.SyntaxWriteUtilThreadStatics.RunningTests <- true
 
@@ -64,38 +50,10 @@ let CreateAndRunProject filePath =
         { WriteOptions.Default with
             Flags = (Some "--debug- --nooptimizationdata --optimize-") }
 
-
-    //let dotnetBuild =
-    //    Cli
-    //        .Wrap("dotnet")
-    //        .WithArguments(Array.concat [| [| "build"; projectPath; "--output"; outputPath |] |])
-    //        .WithWorkingDirectory(cwd)
-    //        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(buildSb))
-    //        .WithStandardErrorPipe(PipeTarget.ToStringBuilder(buildSb))
-    //        .WithValidation(CommandResultValidation.None)
-
-    //let dotnet =
-    //    Cli
-    //        .Wrap("dotnet")
-    //        .WithArguments(Array.concat [| [| dllPath |] |])
-    //        // .WithArguments(Array.concat [| [| "run"; "--project"; projectPath |] |])
-    //        .WithWorkingDirectory(cwd)
-    //        .WithStandardOutputPipe(PipeTarget.ToStringBuilder(sb))
-    //        .WithStandardErrorPipe(PipeTarget.ToStringBuilder(sb))
-    //        .WithValidation(CommandResultValidation.None)
-
     async {
         let mutable succeed = false
 
         try
-            //let! buildResult = dotnetBuild.ExecuteAsync().Task |> Async.AwaitTask
-
-            //if buildResult.ExitCode <> 0 then
-            //    failwithf "Build failed: %s" (buildSb.ToString())
-
-            //let! result = dotnet.ExecuteAsync().Task |> Async.AwaitTask
-
-
             let! result = DotnetCompiler.buildAndRun projectPath cwd DotnetCompiler.BuildConfiguration.Debug [||]
 
             sb.Append(result.Output).AppendLine().Append("ExitCode: ").Append(result.ExitCode).AppendLine()
