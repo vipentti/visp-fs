@@ -1,4 +1,4 @@
-[<VerifyXunit.UsesVerify>]
+
 module Tests
 
 open Xunit
