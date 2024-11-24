@@ -80,6 +80,28 @@ type Ident(text: string, range: range) =
 type NormalizedPath(text: string) =
     let original = text
 
+    let originalPlus =
+        let len = text.Length
+
+        let sb = PooledStringBuilder.Get()
+        sb.EnsureCapacity(len) |> ignore
+
+        let mutable index = 0
+
+        while index < len do
+            let ch = text[index]
+            index <- index + 1
+
+            match ch with
+            | '\\' ->
+                if index + 1 < len && text[index + 1] = '\\' then
+                    index <- index + 1
+
+                sb.Append('\\').Append('\\') |> ignore
+            | it -> sb.Append(it) |> ignore
+
+        sb.ToStringAndReturn()
+
     let normalized =
 
         let len = text.Length
@@ -107,9 +129,25 @@ type NormalizedPath(text: string) =
         sb.ToStringAndReturn()
 
     member _.Original = original
+    member _.OriginalDisplay = originalPlus
     member _.Path = normalized
     override _.ToString() = normalized
 
+module FormatPath =
+    let private isTruthy (value: string) =
+        System.String.Equals(value, "true", System.StringComparison.OrdinalIgnoreCase)
+        || System.String.Equals(value, "1", System.StringComparison.OrdinalIgnoreCase)
+
+    let private isEnvVarSet (key: string) =
+        isTruthy <| System.Environment.GetEnvironmentVariable(key)
+
+    let normalizePath text =
+        let normalized = NormalizedPath text
+
+        if SyntaxWriteUtilThreadStatics.RunningTests || (isEnvVarSet "VISP_FS_RUNNING_TESTS") then
+            normalized.Path
+        else
+            normalized.OriginalDisplay
 
 type SynSymbol =
     | SynSymbol of ident: Ident
