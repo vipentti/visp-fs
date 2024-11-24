@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
@@ -14,21 +14,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="19.2.87" />
-    <PackageReference Include="CliWrap" Version="3.6.4" />
-    <PackageReference Include="FsUnit.Xunit" Version="5.6.1" />
-    <PackageReference Include="GitHubActionsTestLogger" Version="2.3.3">
+    <PackageReference Include="TestableIO.System.IO.Abstractions.Wrappers" Version="21.1.3" />
+    <PackageReference Include="CliWrap" Version="3.6.7" />
+    <PackageReference Include="FsUnit.Xunit" Version="6.0.1" />
+    <PackageReference Include="GitHubActionsTestLogger" Version="2.4.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
-    <PackageReference Include="Verify.Xunit" Version="22.6.1" />
-    <PackageReference Include="xunit" Version="2.6.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="Verify.Xunit" Version="28.3.2" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="6.0.0">
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

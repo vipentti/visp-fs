@@ -17,6 +17,6 @@
     <ProjectReference Include="..\Visp.Common\Visp.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SpanUtils" Version="0.4.0" />
+    <PackageReference Include="SpanUtils" Version="0.4.1" />
   </ItemGroup>
 </Project>

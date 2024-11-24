@@ -27,7 +27,7 @@ using static Vipentti.Nuke.Components.StandardNames;
     OnPushBranches = [MainBranch, DevelopBranch],
     PublishArtifacts = false
     // FetchDepth = 0 // fetch full history
-    , SetupDotnetVersions = ["8.x",]
+    , SetupDotnetVersions = ["9.x",]
     , InvokedTargets = [
         nameof(ITest.Test),
         nameof(IUseLinters.InstallLinters),
@@ -99,7 +99,7 @@ class Build :
         SrcFolder.GetProject("Visp.Runtime.Library"),
     ];
 
-    IEnumerable<string> TargetFrameworks => ["net8.0"];
+    IEnumerable<string> TargetFrameworks => ["net9.0"];
 
     IEnumerable<(Project Project, string Framework)> ICompile.PublishConfigurations =>
         from project in ProjectsToPack
@@ -197,7 +197,7 @@ public interface IPackSpecificPackagesWithoutTesting : IPack
     [Parameter]
     bool CleanPackagesDirectory => true;
 
-    IEnumerable<string> TargetFrameworks => ["net8.0"];
+    IEnumerable<string> TargetFrameworks => ["net9.0"];
 
     IEnumerable<(Project Project, string Framework)> ICompile.PublishConfigurations =>
         from project in ProjectsToPack
@@ -248,8 +248,8 @@ public interface IUseFantomas : INukeBuild
 
     // csharpier-ignore
     Target FormatFantomas => _ => _
-        .TryBefore<IUseDotNetFormat>(x => x.Format)
-        .TryDependentFor<IUseDotNetFormat>(x => x.Format)
+        .TryBefore<IUseDotNetFormat>(x => x.FormatDotNet)
+        .TryDependentFor<IUseDotNetFormat>(x => x.FormatDotNet)
         .Executes(() => RunFantomas(check: false));
 
     sealed IProvideLinter Linter =>
