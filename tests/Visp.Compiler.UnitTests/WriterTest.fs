@@ -2,7 +2,7 @@
 // Distributed under the MIT License.
 // https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
 
-[<VerifyXunit.UsesVerify>]
+
 module WriterTests
 
 open System

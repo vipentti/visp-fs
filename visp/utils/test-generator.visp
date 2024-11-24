@@ -73,7 +73,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
       (let write (write writer))
       (let writeln (writeln writer))
 
-      (writeln "[<VerifyXunit.UsesVerify>]")
+      (writeln "")
       (writeln (sprintf "module ``%s`` =" id))
 
       (for/in [[file: string] files]
@@ -98,7 +98,7 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (let file (GetTestFilePath parent file))
   (let id (NormalizeTestName parent file))
 
-  (writeln "[<VerifyXunit.UsesVerify>]")
+  (writeln "")
   (writeln (sprintf "module ``%s`` =" (.Replace id ".visp" "")))
 
   ;; (let name (->> (.Replace file "\\" "/") #(.Replace %1 "/" "_")))

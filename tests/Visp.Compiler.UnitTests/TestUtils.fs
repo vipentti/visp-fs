@@ -80,6 +80,8 @@ let runStructuredOutputTest (name: string) =
 
 let runWriteTest (name: string) =
     async {
+        Syntax.SyntaxWriteUtilThreadStatics.RunningTests <- true
+
         parseCoreLibs ()
 
         let path = getVispFilePath name
