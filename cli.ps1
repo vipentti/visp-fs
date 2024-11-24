@@ -12,16 +12,16 @@ function ExecSafe([scriptblock] $cmd) {
 
 $buildArgs = @(
     "build"
+    "-v", "q"
+    "-tl:off"
 )
 
 if (-not $NoBuild) {
-    ExecSafe { & dotnet @buildArgs }
+    ExecSafe { & dotnet @buildArgs | Out-Null }
 }
 
 $dotnetArgs = @(
-    "run"
-    "--project", "./src/Visp.Cli"
-    "--no-build"
+    "src/Visp.Cli/bin/Debug/net9.0/Visp.Cli.dll"
 )
 
-ExecSafe { & dotnet @dotnetArgs `-- @CmdArgs }
+ExecSafe { & dotnet @dotnetArgs @CmdArgs }
