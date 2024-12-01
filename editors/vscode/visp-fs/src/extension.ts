@@ -17,12 +17,12 @@ function getConfiguredClient(outputChannel: vscode.OutputChannel) {
     .getConfiguration("visp-fs.server")
     .get("path", "");
 
-  let command = process.env.VISP_FS_SERVER_PATH ?? languageServerPath;
+  const command = process.env.VISP_FS_SERVER_PATH ?? languageServerPath;
 
   if ((command?.length ?? 0) > 0) {
     if (fs.existsSync(command)) {
       // Options to control the language client
-      let clientOptions: LanguageClientOptions = {
+      const clientOptions: LanguageClientOptions = {
         // Register the server for visp-fs
         documentSelector: [{ scheme: "file", language: "visp-fs" }],
         synchronize: {
@@ -42,7 +42,7 @@ function getConfiguredClient(outputChannel: vscode.OutputChannel) {
 
       // If the extension is launched in debug mode then the debug server options are used
       // Otherwise the run options are used
-      let serverOptions: ServerOptions = {
+      const serverOptions: ServerOptions = {
         run,
         debug: run,
       };
