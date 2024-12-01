@@ -13,8 +13,7 @@ open System.Collections.Generic
 
 type NestedTokenizer =
     { mutable index: int
-      tokens: IReadOnlyList<token>
-    }
+      tokens: IReadOnlyList<token> }
 
     member t.ReadNext() =
         if t.index < t.tokens.Count then
@@ -32,6 +31,7 @@ let rec mkTokenizerWithArgs args =
 
     let handle_next (args: LexArgs) next =
         let mutable actual = next
+
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
         | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
@@ -124,7 +124,7 @@ let rec mkTokenizerWithArgs args =
     let mutable token_list = []
     let mutable include_tokenizers: NestedTokenizer list = []
 
-    let read_next_nested_token ()  =
+    let read_next_nested_token () =
         match include_tokenizers with
         | [] -> None
         | it :: rest ->
@@ -132,8 +132,7 @@ let rec mkTokenizerWithArgs args =
             | None ->
                 include_tokenizers <- rest
                 None
-            | Some (tok) ->
-                Some(tok)
+            | Some(tok) -> Some(tok)
 
     let read_next_token_list_token buf =
         match token_list with
@@ -166,11 +165,13 @@ let rec mkTokenizerWithArgs args =
 
             while loop do
                 let next = next_token buf
+
                 match next with
-                | STRING (it, _ ,_) ->
+                | STRING(it, _, _) ->
                     includes <- it :: includes
                     ()
                 | _ -> ()
+
                 loop <- next <> RPAREN
                 ()
             // includes <- List.rev includes
@@ -184,6 +185,7 @@ let rec mkTokenizerWithArgs args =
                     let tokz = getNestedTokens buf.EndPos.FileName it false
                     include_tokenizers <- tokz :: include_tokenizers
                     includes <- rest
+
                 ()
 
             // Includes will not be part of the final parse result
@@ -211,10 +213,11 @@ and private getNestedTokens rootFile filePath dbg =
 
     while not lexbuf.IsPastEndOfStream do
         let next = tokenizer lexbuf
+
         if next <> EOF then
             arr.Add(next)
 
-    { tokens = arr; index = 0}
+    { tokens = arr; index = 0 }
 
 and mkTokenizer dbg =
     mkTokenizerWithArgs

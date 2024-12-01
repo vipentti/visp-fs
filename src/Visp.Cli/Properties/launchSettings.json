@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Visp.Cli": {
+      "commandName": "Project"
+    },
+    "Debug.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": ".\\visp\\tests\\include\\include-macros-0.visp --debug-tokens",
+      "workingDirectory": "$(SolutionDir)"
+    }
+  }
+}
