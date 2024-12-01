@@ -9,7 +9,6 @@ open Visp.Compiler.Text
 open System
 open System.Diagnostics
 open System.Reflection
-open System.Threading
 
 /// Thrown when we want to add some range information to a .NET exception
 exception WrappedError of exn * range with

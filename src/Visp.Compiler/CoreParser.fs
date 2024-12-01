@@ -4,13 +4,11 @@
 
 namespace Visp.Compiler.Core
 
-open Visp.Compiler.SyntaxPrinter
 open System.IO
 open FSharp.Text.Lexing
 open Visp.Compiler
 open Visp.Compiler.SyntaxParser
 open Visp.Compiler.LexHelpers
-open Visp.Compiler.Syntax.Macros
 
 type ParserOptions =
     { DebugTokens: bool

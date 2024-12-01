@@ -5,9 +5,7 @@
 
 module WriterTests
 
-open System
 open Xunit
-open FsUnit.Xunit
 open VerifyXunit
 open Visp.Compiler.Core
 open System.IO
