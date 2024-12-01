@@ -54,16 +54,28 @@ let CreateAndRunProject filePath =
         let mutable succeed = false
 
         try
-            let! result = DotnetCompiler.buildAndRun projectPath cwd DotnetCompiler.BuildConfiguration.Debug [||]
+            let! result =
+                DotnetCompiler.buildAndRun
+                    projectPath
+                    cwd
+                    DotnetCompiler.BuildConfiguration.Debug
+                    [||]
 
-            sb.Append(result.Output).AppendLine().Append("ExitCode: ").Append(result.ExitCode).AppendLine()
+            sb
+                .Append(result.Output)
+                .AppendLine()
+                .Append("ExitCode: ")
+                .Append(result.ExitCode)
+                .AppendLine()
             |> ignore
 
             succeed <- result.ExitCode = 0
 
             // Remove once https://github.com/dotnet/msbuild/issues/10998 is fixed
             // https://github.com/dotnet/runtime/issues/109815
-            return (result.ExitCode, sb.ToString().Replace("\x1b]9;4;3;\x1b\\", "").Replace("\x1b]9;4;0;\x1b\\", ""))
+            return
+                (result.ExitCode,
+                 sb.ToString().Replace("\x1b]9;4;3;\x1b\\", "").Replace("\x1b]9;4;0;\x1b\\", ""))
         finally
             try
                 if succeed && Directory.Exists(projectPath) then

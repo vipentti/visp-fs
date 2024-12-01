@@ -144,7 +144,10 @@ module FormatPath =
     let normalizePath text =
         let normalized = NormalizedPath text
 
-        if SyntaxWriteUtilThreadStatics.RunningTests || (isEnvVarSet "VISP_FS_RUNNING_TESTS") then
+        if
+            SyntaxWriteUtilThreadStatics.RunningTests
+            || (isEnvVarSet "VISP_FS_RUNNING_TESTS")
+        then
             normalized.Path
         else
             normalized.OriginalDisplay

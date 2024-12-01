@@ -940,10 +940,8 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
         result
 
     member this.LogEnter
-        (
-            arg: obj,
-            [<CallerMemberName; Optional; DefaultParameterValue("")>] memberName: string
-        ) =
+        (arg: obj, [<CallerMemberName; Optional; DefaultParameterValue("")>] memberName: string)
+        =
         if this.LogEnabled then
 
             let text =
@@ -963,10 +961,7 @@ and LanguageServerTarget(server: LanguageServerClient, traceSource: TraceSource)
 
 
     member this.LogExit
-        (
-            result: obj,
-            [<CallerMemberName; Optional; DefaultParameterValue("")>] memberName: string
-        ) =
+        (result: obj, [<CallerMemberName; Optional; DefaultParameterValue("")>] memberName: string) =
         if this.LogEnabled then
 
             let text =

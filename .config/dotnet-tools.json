@@ -3,28 +3,32 @@
   "isRoot": true,
   "tools": {
     "fantomas": {
-      "version": "6.2.3",
+      "version": "6.3.16",
       "commands": [
         "fantomas"
-      ]
+      ],
+      "rollForward": false
     },
     "verify.tool": {
       "version": "0.6.0",
       "commands": [
         "dotnet-verify"
-      ]
+      ],
+      "rollForward": false
     },
     "csharpier": {
-      "version": "0.26.4",
+      "version": "0.30.2",
       "commands": [
         "dotnet-csharpier"
-      ]
+      ],
+      "rollForward": false
     },
     "dotnet-fsharplint": {
-      "version": "0.21.10",
+      "version": "0.24.2",
       "commands": [
         "dotnet-fsharplint"
-      ]
+      ],
+      "rollForward": false
     }
   }
 }
