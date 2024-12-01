@@ -24,8 +24,6 @@ type ParserOptions =
         { ParserOptions.Default with
             ReturnLast = false }
 
-
-
 module CoreParser =
     open Visp.Compiler.Syntax
     open System.Collections.Generic
