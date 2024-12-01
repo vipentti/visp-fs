@@ -27,6 +27,15 @@ let NormalizePath (str: string) =
 
     if file.StartsWith('/') then file else "/" + file
 
+let denormalizePath (uri: Uri) =
+    let full = uri.ToString()
+    let full = full.Replace("file://", "").Replace("%3A", ":")
+    if full.StartsWith("/") then
+        full.Substring(1)
+    else
+        full
+
+
 let ToFileUri (str: string) =
     str |> NormalizePath |> (+) "file://" |> Uri
 
@@ -479,7 +488,7 @@ type VispDocumentItem =
             eprintfn "Parsing %s" (this.Uri.ToString())
 
             let file =
-                Core.CoreParser.parseString (this.Text) (this.Uri.ToString())
+                Core.CoreParser.parseString (this.Text) (denormalizePath this.Uri)
                 |> Transforms.Helpers.transformParsedFile Core.CoreParser.expandExpr
 
             let syms = ResizeArray<SymbolDetails>()
