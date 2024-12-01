@@ -129,6 +129,20 @@ class Build :
             _.RemoveLoggers($"trx;LogFileName={v.Name}.trx")
                 .AddLoggers($"trx;LogFilePrefix={v.Name}");
 
+    Project LanguageServerProject => CurrentSolution.GetSolutionFolder("src").GetProject("Visp.LanguageServer");
+
+    // csharpier-ignore
+    public Target PublishLanguageServer => _ => _
+        .DependsOn<ICompile>(x => x.Compile)
+        .Executes(() =>
+        {
+            DotNetPublish(it => it
+                .SetProject(LanguageServerProject)
+                .SetNoRestore(true)
+                .SetOutput(RootDirectory / "artifacts" / "Visp.LanguageServer")
+                .AddProperty("TargetsForTfmSpecificContentInPackage", ""));
+        });
+
     // specifying TargetsForTfmSpecificContentInPackage because of
     // https://github.com/dotnet/fsharp/issues/12320#issuecomment-1059791494
 
