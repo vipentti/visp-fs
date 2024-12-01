@@ -36,6 +36,7 @@
         "InstallLinters",
         "Lint",
         "Pack",
+        "PublishLanguageServer",
         "Restore",
         "RestoreTools",
         "Test"
