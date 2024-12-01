@@ -135,7 +135,6 @@ class Build :
 
     // csharpier-ignore
     public Target PublishLanguageServer => _ => _
-        .DependsOn<ICompile>(x => x.Compile)
         .Executes(() =>
         {
             DotNetPublish(it => it
