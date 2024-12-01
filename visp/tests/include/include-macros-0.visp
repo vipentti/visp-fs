@@ -1,0 +1,26 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "include-macros-0.visp loading...")
+
+(include "./include-macros-0-macros.visp")
+
+(printfn "include-macros-0.visp loaded")
+
+(MyStruct Example ([x: int] [y: int])
+  (member _.X x)
+  (member _.Y y)
+
+  (member fn d.Sum () (+ (+X d) (+Y d))))
+
+(let instance (new Example 1 2))
+
+(printfn "Example Struct is %A" instance)
+(printfn "Example IsValueType %A" (->> instance .GetType +IsValueType))
+(printfn "Example Result is %i" (.Sum instance))
+
+()

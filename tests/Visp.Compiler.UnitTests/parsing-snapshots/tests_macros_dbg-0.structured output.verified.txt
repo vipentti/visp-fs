@@ -1,0 +1,12 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (8,0--8,6)),
+             SyntaxMacroCall (SynMacroCall (SynSymbol dbg!, [Symbol (SynSymbol dbg!)], (8,1--8,5))), None, [],
+             (8,0--8,6)), (8,0--8,6));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (8,0--8,6)), (8,0--8,6)); Symbol (SynSymbol visp_result_todo)], (8,0--8,6)),
+          (8,0--8,6))], (8,0--8,6))]

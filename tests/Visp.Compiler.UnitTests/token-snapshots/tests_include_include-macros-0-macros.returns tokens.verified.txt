@@ -1,0 +1,40 @@
+﻿LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("include-macros-0-macros.visp loading...", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYNTAX_MACRO TokenStream SyntaxMacroStart 1 1 LParen
+SYMBOL "MyStruct" TokenStream Macro 1 1 LParen
+LBRACKET TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+SYMBOL "_" TokenStream Macro 3 2 LParen
+SYMBOL "typ" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+SYMBOL "ctor" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+LPAREN TokenStream Macro 3 2 LParen
+HASH_BRACKET TokenStream Macro 4 2 LParen
+SYMBOL "Struct" TokenStream Macro 4 2 LParen
+RBRACKET TokenStream Macro 3 2 LParen
+SYMBOL "type" TokenStream Macro 3 2 LParen
+SYMBOL "typ" TokenStream Macro 3 2 LParen
+LPAREN TokenStream Macro 4 3 LParen
+SYMBOL "arg" TokenStream Macro 4 3 LParen
+SYMBOL "ctor" TokenStream Macro 4 3 LParen
+SYMBOL "..." TokenStream Macro 4 3 LParen
+RPAREN TokenStream Macro 3 2 LParen
+SYMBOL "body" TokenStream Macro 3 2 LParen
+SYMBOL "..." TokenStream Macro 3 2 LParen
+RPAREN TokenStream Macro 2 1 LParen
+RBRACKET TokenStream Macro 1 1 LParen
+RPAREN Default 0 0 Default
+LPAREN Default 0 1 LParen
+SYMBOL "printfn" Default 0 1 LParen
+STRING ("include-macros-0-macros.visp loaded", Regular, Token []) Default 0 1 LParen
+RPAREN Default 0 0 Default
+EOF Default 0 0 Default

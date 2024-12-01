@@ -1,0 +1,52 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"include-macros-0.visp"
+printfn "include-macros-0.visp loading..."
+()
+// line 10 @"include-macros-0.visp"
+printfn "include-macros-0-macros.visp loading..."
+// line 10 @"include-macros-0.visp"
+let macro_MyStruct = "__MACRO_INIT__"
+// line 10 @"include-macros-0.visp"
+printfn "include-macros-0-macros.visp loaded"
+// line 12 @"include-macros-0.visp"
+printfn "include-macros-0.visp loaded"
+[<Struct()>]
+// line 14 @"include-macros-0.visp"
+type Example (x: int , y: int) =
+  // line 14 @"include-macros-0.visp"
+  member _.X =
+    x
+  // line 14 @"include-macros-0.visp"
+  member _.Y =
+    y
+  // line 14 @"include-macros-0.visp"
+  member d.Sum () =
+    // line 14 @"include-macros-0.visp"
+    ((d.X) + (d.Y))
+// line 20 @"include-macros-0.visp"
+let instance =
+  // line 20 @"include-macros-0.visp"
+  (new Example(1, 2))
+// line 22 @"include-macros-0.visp"
+printfn "Example Struct is %A" instance
+// line 23 @"include-macros-0.visp"
+printfn "Example IsValueType %A" (instance
+  |> (fun a1 ->
+    // line 23 @"include-macros-0.visp"
+    a1.GetType())
+  |> (fun a1 ->
+    // line 23 @"include-macros-0.visp"
+    (a1.IsValueType)))
+// line 24 @"include-macros-0.visp"
+printfn "Example Result is %i" ((instance.Sum()))
+// line 26 @"include-macros-0.visp"
+let visp_result_todo = ()
+// line 26 @"include-macros-0.visp"
+printfn "%A" visp_result_todo
+

@@ -1,0 +1,18 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(printfn "include-macros-0-macros.visp loading...")
+
+(syntax-macro MyStruct
+  [(_ typ (arg ctor ...) body ...)
+    (#[Struct]
+      type typ (arg ctor ...)
+      body ...
+    )
+  ])
+
+(printfn "include-macros-0-macros.visp loaded")
