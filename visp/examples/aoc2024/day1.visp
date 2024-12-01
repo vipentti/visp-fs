@@ -1,0 +1,72 @@
+
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;; day1
+;;
+;; Include common utlities
+(include "./common.visp")
+
+;; Functions & types
+
+(fn ParseFile ([text: string])
+  (mut lines (EnumerateSpanSplitLines text))
+
+  (mut lhs_items (||))
+  (mut rhs_items (||))
+
+  (Macro_ReadWhileNotEmpty [line lines]
+    (mut parts (.EnumerateSplitSubstrings line [| #\space |] (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries)))
+    (let lhs (span->int64 (Macro_ReadNext parts)))
+    (let rhs (span->int64 (Macro_ReadNext parts)))
+
+    (up! lhs_items (cons lhs))
+    (up! rhs_items (cons rhs))
+
+    ())
+
+    (lhs_items . rhs_items))
+
+(fn Part1 (parsedInput)
+  ;; Implement part1
+
+  (let (lhs, rhs) parsedInput)
+
+  (let sorted_lhs (-> lhs List.sort))
+  (let sorted_rhs (-> rhs List.sort))
+
+  (let zipper (List.zip sorted_lhs sorted_rhs))
+  (-> zipper
+    (List.fold #(+ %1 (abs (- (fst %2) (snd %2)))) 0L)
+  ))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  (let (lhs, rhs) parsedInput)
+
+  (let result (-> lhs
+    (List.fold #(begin
+      (let cur %2)
+      (let counts (-> rhs (List.filter #(= cur %1)) List.length))
+      (+ %1 (* cur (int64 counts)))
+    ) 0L)
+  ))
+
+  result)
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day1") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 11 2264607))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 31 19457120))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
