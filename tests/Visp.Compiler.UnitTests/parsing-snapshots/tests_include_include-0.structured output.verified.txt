@@ -3,7 +3,24 @@
      ([Expr
          (FunctionCall
             (Symbol (SynSymbol printfn), [Const (String ("include-0 loading...", Regular, (8,9--8,31)), (8,9--8,31))],
-             (8,1--8,31)), (8,0--8,32)); Include ([FilePath ("./skip-same-dir.visp", (10,9--10,31))], (10,1--10,31));
+             (8,1--8,31)), (8,0--8,32)); Expr (Const (Unit, (10,0--10,32)), (10,0--10,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-same-dir loading", Regular, (10,31--10,32)), (10,31--10,32))], (10,31--10,32)),
+          (10,31--10,32));
+       Expr
+         (FunctionDef
+            (SynSymbol IncludedFunction, None, Args (List [], (10,31--10,32)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Calling IncludedFunction", Regular, (10,31--10,32)), (10,31--10,32))], (10,31--10,32))],
+             None, (10,31--10,32)), (10,31--10,32));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-same-dir loaded...", Regular, (10,31--10,32)), (10,31--10,32))], (10,31--10,32)),
+          (10,31--10,32));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn), [Const (String ("include-0 loaded", Regular, (12,9--12,27)), (12,9--12,27))],

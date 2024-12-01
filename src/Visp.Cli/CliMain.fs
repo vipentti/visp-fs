@@ -4,7 +4,6 @@
 
 open System.IO.Abstractions
 open Visp.Compiler.ProjectGenerator
-open CliWrap
 
 let tryNextArg v args =
     match Array.tryFindIndex v args with

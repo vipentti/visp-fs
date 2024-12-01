@@ -9,14 +9,29 @@ open Visp.Compiler
 open Visp.Compiler.SyntaxParser
 open Visp.Compiler.LexHelpers
 open Visp.Compiler.Syntax.Macros
+open System.Collections.Generic
 
-let mkTokenizerWithArgs args =
+type NestedTokenizer =
+    { mutable index: int
+      tokens: IReadOnlyList<token>
+    }
+
+    member t.ReadNext() =
+        if t.index < t.tokens.Count then
+            let next = Some(t.tokens[t.index])
+            t.index <- t.index + 1
+            next
+        else
+            None
+
+let rec mkTokenizerWithArgs args =
     let inline read_next args buf =
         match args.mode with
         | LexMode.Default -> Lexer.token args false buf
         | LexMode.TokenStream _ -> Lexer.tokenStream args false buf
 
     let handle_next (args: LexArgs) next =
+        let mutable actual = next
         match next with
         | QUOTE_SYM -> args.mode <- LexMode.TokenStream TokenStreamMode.QuoteSym
         | QUOTE_KW -> // args.mode <- LexMode.TokenStream TokenStreamMode.Quote
@@ -83,43 +98,125 @@ let mkTokenizerWithArgs args =
         | _ -> ()
 
         if args.debugTokens then
-            eprintfn
-                "%A %A %i %i %A"
-                next
-                args.mode
-                args.depth
-                args.ContextCount
-                args.CurrentContext
+            if next <> actual then
+                eprintfn
+                    "%A -> (%A) %A %i %i %A"
+                    next
+                    actual
+                    args.mode
+                    args.depth
+                    args.ContextCount
+                    args.CurrentContext
+            else
+                eprintfn
+                    "%A %A %i %i %A"
+                    next
+                    args.mode
+                    args.depth
+                    args.ContextCount
+                    args.CurrentContext
 
-        next
+        actual
 
     let next_token = read_next args
     let handle_token = handle_next args
 
     let mutable token_list = []
+    let mutable include_tokenizers: NestedTokenizer list = []
+
+    let read_next_nested_token ()  =
+        match include_tokenizers with
+        | [] -> None
+        | it :: rest ->
+            match it.ReadNext() with
+            | None ->
+                include_tokenizers <- rest
+                None
+            | Some (tok) ->
+                Some(tok)
+
+    let read_next_token_list_token buf =
+        match token_list with
+        | [] ->
+            match next_token buf with
+            | TOKENLIST toks ->
+                match toks with
+                | tok :: rest ->
+                    token_list <- rest
+                    tok
+                | [] -> (failwith "empty TOKENLIST is not supported")
+            | it -> it
+        | tok :: rest ->
+            token_list <- rest
+            tok
 
     // Nested TOKENLISTS are not supported.
+    // TODO: Support correct file & ranges for includes
     let tokenizer buf =
         let token =
-            match token_list with
-            | [] ->
-                match next_token buf with
-                | TOKENLIST toks ->
-                    match toks with
-                    | tok :: rest ->
-                        token_list <- rest
-                        tok
-                    | [] -> (failwith "empty TOKENLIST is not supported")
-                | it -> it
-            | tok :: rest ->
-                token_list <- rest
-                tok
+            match read_next_nested_token () with
+            | Some(tok) -> tok
+            | None -> read_next_token_list_token buf
 
-        handle_token token
+        match token with
+        | INCLUDE ->
+            let mutable includes = []
+
+            let mutable loop = true
+
+            while loop do
+                let next = next_token buf
+                match next with
+                | STRING (it, _ ,_) ->
+                    includes <- it :: includes
+                    ()
+                | _ -> ()
+                loop <- next <> RPAREN
+                ()
+            // includes <- List.rev includes
+
+            loop <- true
+
+            while loop do
+                match includes with
+                | [] -> loop <- false
+                | it :: rest ->
+                    let tokz = getNestedTokens buf.EndPos.FileName it false
+                    include_tokenizers <- tokz :: include_tokenizers
+                    includes <- rest
+                ()
+
+            // Includes will not be part of the final parse result
+            // Close the paren which was before the INCLUDE
+            // NOTE: This assumes correct formatting.
+            RPAREN
+        | it -> handle_token it
 
     tokenizer
 
-let mkTokenizer dbg =
+and private getNestedTokens rootFile filePath dbg =
+
+    let actualPath =
+        System.IO.Path.GetDirectoryName rootFile
+        |> System.IO.Path.GetFullPath
+        |> fun (r) -> System.IO.Path.Combine(r, filePath)
+        |> System.IO.Path.GetFullPath
+
+    let (stream, reader, lexbuf) = UnicodeFileAsLexbuf(actualPath, None)
+    use _ = stream
+    use _ = reader
+
+    let tokenizer = mkTokenizer dbg
+    let arr = ResizeArray<token>()
+
+    while not lexbuf.IsPastEndOfStream do
+        let next = tokenizer lexbuf
+        if next <> EOF then
+            arr.Add(next)
+
+    { tokens = arr; index = 0}
+
+and mkTokenizer dbg =
     mkTokenizerWithArgs
     <| { mkDefaultLextArgs () with
            debugTokens = dbg }

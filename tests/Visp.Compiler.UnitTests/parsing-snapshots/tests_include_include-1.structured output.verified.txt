@@ -3,8 +3,41 @@
      ([Expr
          (FunctionCall
             (Symbol (SynSymbol printfn), [Const (String ("include-1 loading...", Regular, (8,9--8,31)), (8,9--8,31))],
-             (8,1--8,31)), (8,0--8,32));
-       Include ([FilePath ("./nested/skip-nested-0.visp", (10,9--10,38))], (10,1--10,38));
+             (8,1--8,31)), (8,0--8,32)); Expr (Const (Unit, (10,0--10,39)), (10,0--10,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-nested-0 loading", Regular, (10,38--10,39)), (10,38--10,39))], (10,38--10,39)),
+          (10,38--10,39));
+       Expr
+         (FunctionDef
+            (SynSymbol Nested0IncludedFunction, None, Args (List [], (10,38--10,39)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Calling Nested0IncludedFunction", Regular, (10,38--10,39)), (10,38--10,39))],
+                 (10,38--10,39))], None, (10,38--10,39)), (10,38--10,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-nested-0 loaded...", Regular, (10,38--10,39)), (10,38--10,39))], (10,38--10,39)),
+          (10,38--10,39)); Expr (Const (Unit, (10,38--10,39)), (10,38--10,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-nested-1 loading", Regular, (10,38--10,39)), (10,38--10,39))], (10,38--10,39)),
+          (10,38--10,39));
+       Expr
+         (FunctionDef
+            (SynSymbol Nested1IncludedFunction, None, Args (List [], (10,38--10,39)),
+             [FunctionCall
+                (Symbol (SynSymbol printfn),
+                 [Const (String ("Calling Nested1IncludedFunction", Regular, (10,38--10,39)), (10,38--10,39))],
+                 (10,38--10,39))], None, (10,38--10,39)), (10,38--10,39));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("skip-nested-1 loaded...", Regular, (10,38--10,39)), (10,38--10,39))], (10,38--10,39)),
+          (10,38--10,39));
        Expr
          (FunctionCall
             (Symbol (SynSymbol printfn), [Const (String ("include-1 loaded", Regular, (12,9--12,27)), (12,9--12,27))],
