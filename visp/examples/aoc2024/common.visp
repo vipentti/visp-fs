@@ -1,0 +1,44 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+(require SpanUtils "0.4.1")
+
+(open System)
+(open System.Collections.Generic)
+(open System.Text.RegularExpressions)
+(open SpanUtils.Extensions)
+
+(let commonSplitOptions StringSplitOptions.TrimEntries)
+
+(let IS_EXAMPLE (not (Array.contains "full" ARGV)))
+
+(fn WriteResult (part value ex)
+  (printfn "%s: %A %A" part value (= value ex)))
+
+(fn EnumerateSpanSplitLines ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |]  commonSplitOptions))
+
+(fn EnumareteSpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch commonSplitOptions))
+
+(fn ReadInput ([day: string])
+  (let filepath (String.concat "" [| "./inputs/" day (if IS_EXAMPLE "_example" "") ".txt" |]))
+  (printfn "file: %s" filepath)
+  (System.IO.File.ReadAllText filepath))
+
+(syntax-macro Macro_ReadWhileNotEmpty
+  ([_ (id enu) body ...]
+    (while (.MoveNext enu)
+      (let id (+Current enu))
+      (unless (+IsEmpty id)
+        (begin body ...)
+      ))))
+
+(syntax-macro Macro_ReadNext
+  [(_ enu)
+    (begin
+      (ignore (.MoveNext enu))
+      (+Current enu))])
