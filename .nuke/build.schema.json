@@ -26,13 +26,11 @@
       "enum": [
         "CheckCsharpier",
         "CheckFantomas",
-        "CheckFSharpLint",
         "Compile",
         "FormatCsharpier",
         "FormatFantomas",
         "InstallCsharpier",
         "InstallFantomas",
-        "InstallFSharpLint",
         "InstallLinters",
         "Lint",
         "Pack",

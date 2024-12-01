@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Execution;
@@ -38,7 +37,7 @@ class Build :
     NukeBuild,
     IUseCsharpier,
     IUseFantomas,
-    IUseFSharpLint,
+    //IUseFSharpLint,
     IUseCustomLinters,
     IHazSolution,
     ITest,
@@ -70,20 +69,20 @@ class Build :
 
     bool IUseCsharpier.UseGlobalTool => false;
     bool IUseFantomas.UseGlobalTool => false;
-    bool IUseFSharpLint.UseGlobalTool => false;
+    //bool IUseFSharpLint.UseGlobalTool => false;
 
-    IEnumerable<AbsolutePath> IUseFantomas.DirectoriesToFormat => new[]
-    {
+    IEnumerable<AbsolutePath> IUseFantomas.DirectoriesToFormat =>
+    [
         RootDirectory / "src",
         RootDirectory / "tests",
-    };
+    ];
 
-    IEnumerable<IProvideLinter> IUseCustomLinters.Linters => new IProvideLinter[]
-    {
+    IEnumerable<IProvideLinter> IUseCustomLinters.Linters =>
+    [
         From<IUseCsharpier>().Linter,
         From<IUseFantomas>().Linter,
-        From<IUseFSharpLint>().Linter,
-    };
+        //From<IUseFSharpLint>().Linter,
+    ];
 
     // csharpier-ignore
     public Target RestoreTools => _ => _
@@ -297,7 +296,10 @@ public interface IUseFSharpLint : INukeBuild, IHazSolution
 {
     bool UseGlobalTool { get; }
 
-    IEnumerable<AbsolutePath> FilesToFormat => new[] { Solution.Path };
+    IEnumerable<AbsolutePath> FilesToFormat => Solution
+        .AllProjects
+        .Where(it => it.Path.Extension.Contains("fsproj"))
+        .Select(it => it.Path);
 
     // csharpier-ignore
     Target CheckFSharpLint => _ => _
@@ -330,7 +332,12 @@ public interface IUseFSharpLint : INukeBuild, IHazSolution
         {
             DotNet(
                 arguments: toolname + $" lint {path}",
-                logInvocation: true
+                logInvocation: true,
+                environmentVariables: new Dictionary<string, string>
+                {
+                    // https://github.com/fsprojects/FSharpLint/issues/687
+                    ["DOTNET_ROLL_FORWARD"] = "latestMajor",
+                }
             );
         }
     }

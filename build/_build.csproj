@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nuke.Common" Version="9.0.1" />
-    <PackageReference Include="Nuke.Components" Version="9.0.1" />
+    <PackageReference Include="Nuke.Common" Version="8.1.4" />
+    <PackageReference Include="Nuke.Components" Version="8.1.4" />
     <PackageReference Include="Vipentti.Nuke.Components" Version="0.5.2" />
   </ItemGroup>
 
