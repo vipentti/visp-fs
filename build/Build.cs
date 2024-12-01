@@ -26,7 +26,8 @@ using static Vipentti.Nuke.Components.StandardNames;
     OnPushBranches = [MainBranch, DevelopBranch],
     PublishArtifacts = false
     // FetchDepth = 0 // fetch full history
-    , SetupDotnetVersions = ["9.x",]
+    , SetupDotnetVersions = ["9.0.1xx",]
+    , SetupDotnetQuality = DotnetVersionQuality.Daily
     , InvokedTargets = [
         nameof(ITest.Test),
         nameof(IUseLinters.InstallLinters),
@@ -84,11 +85,13 @@ class Build :
         //From<IUseFSharpLint>().Linter,
     ];
 
+    AbsolutePath ToolsManifestPath => RootDirectory / ".config" / "dotnet-tools.json";
+
     // csharpier-ignore
     public Target RestoreTools => _ => _
         .Before<IRestore>(it => it.Restore)
         .DependentFor<IUseCustomLinters>(it => it.InstallLinters)
-        .Executes(() => DotNetToolRestore())
+        .Executes(() => DotNetToolRestore(it => it.SetToolManifest(ToolsManifestPath)))
         ;
 
     public SolutionFolder SrcFolder => CurrentSolution.GetSolutionFolder("src");
