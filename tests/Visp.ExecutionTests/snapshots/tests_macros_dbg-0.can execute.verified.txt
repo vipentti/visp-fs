@@ -1,0 +1,4 @@
+﻿[{SolutionDirectory}visp/tests/macros/dbg-0.visp:8]
+()
+
+ExitCode: 0

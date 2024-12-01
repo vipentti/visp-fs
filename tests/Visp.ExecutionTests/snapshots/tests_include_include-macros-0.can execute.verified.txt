@@ -1,0 +1,10 @@
+﻿include-macros-0.visp loading...
+include-macros-0-macros.visp loading...
+include-macros-0-macros.visp loaded
+include-macros-0.visp loaded
+Example Struct is include-macros-0+Example
+Example IsValueType true
+Example Result is 3
+()
+
+ExitCode: 0

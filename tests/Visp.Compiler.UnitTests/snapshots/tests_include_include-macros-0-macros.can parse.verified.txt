@@ -1,0 +1,18 @@
+﻿// This file is auto-generated
+
+#nowarn "0020"  // unused results from functions
+
+open Visp.Runtime.Library
+
+let state = { Todo = () }
+// line 8 @"include-macros-0-macros.visp"
+printfn "include-macros-0-macros.visp loading..."
+// line 10 @"include-macros-0-macros.visp"
+let macro_MyStruct = "__MACRO_INIT__"
+// line 18 @"include-macros-0-macros.visp"
+let visp_result_todo =
+  // line 18 @"include-macros-0-macros.visp"
+  printfn "include-macros-0-macros.visp loaded"
+// line 18 @"include-macros-0-macros.visp"
+printfn "%A" visp_result_todo
+

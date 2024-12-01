@@ -98,7 +98,6 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (let file (GetTestFilePath parent file))
   (let id (NormalizeTestName parent file))
 
-  (writeln "")
   (writeln (sprintf "module ``%s`` =" (.Replace id ".visp" "")))
 
   ;; (let name (->> (.Replace file "\\" "/") #(.Replace %1 "/" "_")))
@@ -243,8 +242,12 @@ let ``%s %s`` () = TestUtils.runTest "%s"
   (let files (->> (.GetFiles Directory vispTests "*.visp" (+AllDirectories SearchOption)) (List.ofSeq)))
   (let projectRoot (+FullName projectRoot))
 
+  (fn OrdComp ([lhs: string] [rhs: string])
+    (.Compare System.StringComparer.OrdinalIgnoreCase lhs rhs))
+
   (let groups
     (->> files
+      (List.sortWith OrdComp)
       (List.filter #(not (IsIgnoredFile %1)))
   ))
 

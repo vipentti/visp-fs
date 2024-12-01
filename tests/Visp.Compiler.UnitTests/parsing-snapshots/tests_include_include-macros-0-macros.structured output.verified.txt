@@ -1,0 +1,37 @@
+﻿ParsedFile
+  [AnonModule
+     ([Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("include-macros-0-macros.visp loading...", Regular, (8,9--8,50)), (8,9--8,50))],
+             (8,1--8,50)), (8,0--8,51));
+       Expr
+         (SyntaxMacro
+            (SynMacro
+               (SynSymbol MyStruct,
+                [SynMacroCase
+                   ([Discard (11,4--11,5); Symbol (SynSymbol typ, (11,6--11,9));
+                     List
+                       ([Symbol (SynSymbol arg, (11,11--11,14)); Symbol (SynSymbol ctor, (11,15--11,19));
+                         Ellipsis (11,20--11,23)], (11,10--11,24)); Symbol (SynSymbol body, (11,25--11,29));
+                     Ellipsis (11,30--11,33)],
+                    List
+                      (Paren,
+                       [List (HashBracket, [Symbol (SynSymbol Struct)], (12,5--12,14)); Symbol (SynSymbol type);
+                        Symbol (SynSymbol typ);
+                        List
+                          (Paren, [Symbol (SynSymbol arg); Symbol (SynSymbol ctor); Ellipsis (13,25--13,28)],
+                           (13,15--13,29)); Symbol (SynSymbol body); Ellipsis (14,11--14,14)], (12,4--15,5)),
+                    (11,2--16,3))], (10,1--16,3))), (10,0--16,4));
+       Expr
+         (LetOrUse
+            (Named (SynSymbol visp_result_todo, (18,0--18,47)),
+             FunctionCall
+               (Symbol (SynSymbol printfn),
+                [Const (String ("include-macros-0-macros.visp loaded", Regular, (18,9--18,46)), (18,9--18,46))],
+                (18,1--18,46)), None, [], (18,0--18,47)), (18,0--18,47));
+       Expr
+         (FunctionCall
+            (Symbol (SynSymbol printfn),
+             [Const (String ("%A", Regular, (18,0--18,47)), (18,0--18,47)); Symbol (SynSymbol visp_result_todo)],
+             (18,0--18,47)), (18,0--18,47))], (8,0--18,47))]
