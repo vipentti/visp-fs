@@ -28,13 +28,14 @@ let NormalizePath (str: string) =
     if file.StartsWith('/') then file else "/" + file
 
 let denormalizePath (uri: Uri) =
-    let full = uri.ToString()
-    let full = full.Replace("file://", "").Replace("%3A", ":")
-    if full.StartsWith("/") then
+    let full = uri.ToString().Replace("file://", "")
+    let probablyWindows = full.IndexOf("%3A") > -1
+    let full = full.Replace("%3A", ":")
+
+    if probablyWindows && full.StartsWith("/") then
         full.Substring(1)
     else
         full
-
 
 let ToFileUri (str: string) =
     str |> NormalizePath |> (+) "file://" |> Uri
