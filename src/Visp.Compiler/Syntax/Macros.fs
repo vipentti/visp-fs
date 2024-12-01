@@ -50,7 +50,10 @@ module Macros =
         SynMacroBody.Const(SynConst.String(docToStringPooled docs, SynStringKind.Regular, r), r)
 
     let inline private builtinMacroFile (SynMacroCall(_, _, r)) =
-        SynMacroBody.Const(SynConst.String(FormatPath.normalizePath r.FileName, SynStringKind.Regular, r), r)
+        SynMacroBody.Const(
+            SynConst.String(FormatPath.normalizePath r.FileName, SynStringKind.Regular, r),
+            r
+        )
 
     let inline private builtinMacroLine (SynMacroCall(_, _, r)) =
         SynMacroBody.Const(SynConst.Int32(r.StartLine), r)

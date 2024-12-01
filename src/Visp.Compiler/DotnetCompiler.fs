@@ -8,43 +8,37 @@ type BuildConfiguration =
     | Debug
     | Release
 
-type BuildResult (exitCode: int, output: string, dllPath: string) =
+type BuildResult(exitCode: int, output: string, dllPath: string) =
     member _.ExitCode = exitCode
     member _.Output = output
     member _.DllPath = dllPath
 
-type RunResult (exitCode: int, output: string) =
+type RunResult(exitCode: int, output: string) =
     member _.ExitCode = exitCode
     member _.Output = output
 
 let buildProject projectPath cwd (config: BuildConfiguration) =
 
-    let outputPath =
-        Path.Combine(
-            projectPath,
-            "output"
-        )
+    let outputPath = Path.Combine(projectPath, "output")
 
-    let dllPath =
-        Path.Combine(
-            outputPath,
-            "project.dll"
-        )
+    let dllPath = Path.Combine(outputPath, "project.dll")
 
     let buildSb = new StringBuilder()
 
     let buildConfig =
-        [|
-            "--configuration";
-            match config with
-            | Debug -> "Debug"
-            | Release -> "Release"
-        |]
+        [| "--configuration"
+           match config with
+           | Debug -> "Debug"
+           | Release -> "Release" |]
 
     let dotnetBuild =
         Cli
             .Wrap("dotnet")
-            .WithArguments(Array.concat [| [| "build"; projectPath; "--output"; outputPath; "--tl:off" |]; buildConfig |])
+            .WithArguments(
+                Array.concat
+                    [| [| "build"; projectPath; "--output"; outputPath; "--tl:off" |]
+                       buildConfig |]
+            )
             .WithEnvironmentVariables(fun it -> it.Set("MSBUILDTERMINALLOGGER", "off") |> ignore)
             .WithWorkingDirectory(cwd)
             .WithStandardOutputPipe(PipeTarget.ToStringBuilder(buildSb))
@@ -76,7 +70,7 @@ let runBuildResult (result: BuildResult) cwd cmdArgs =
         return RunResult(result.ExitCode, sb.ToString())
     }
 
-let buildAndRun projectPath cwd (config: BuildConfiguration) cmdArgs  =
+let buildAndRun projectPath cwd (config: BuildConfiguration) cmdArgs =
     async {
         let! buildResult = buildProject projectPath cwd config
 

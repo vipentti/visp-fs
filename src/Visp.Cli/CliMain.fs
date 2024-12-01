@@ -58,9 +58,10 @@ let main args =
 
     generator.WriteVispFiles pkg files options
 
-    let result = DotnetCompiler.buildAndRun projectPath cwd buildConfig cmdArguments |> Async.RunSynchronously
+    let result =
+        DotnetCompiler.buildAndRun projectPath cwd buildConfig cmdArguments
+        |> Async.RunSynchronously
 
     printfn "%s" result.Output
 
     result.ExitCode
-
