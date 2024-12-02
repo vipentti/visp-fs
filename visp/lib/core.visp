@@ -101,6 +101,9 @@
     [(x, y) (gcd64 y (rem x y))]
   ))
 
+(fn inline int32->sign [(a: int32)] (System.Math.Sign a))
+(fn inline int64->sign [(a: int64)] (System.Math.Sign a))
+
 (fn inline lcm64 (a b)
   (/ (* a b) (gcd64 a b)))
 

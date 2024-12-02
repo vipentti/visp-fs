@@ -24,6 +24,9 @@
 (fn EnumareteSpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
   (.EnumerateSplitSubstrings text ch commonSplitOptions))
 
+(fn EnumerateSpaceSeparated ([text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text [| #\space |] (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries)))
+
 (fn ReadInput ([day: string])
   (let filepath (String.concat "" [| "./inputs/" day (if IS_EXAMPLE "_example" "") ".txt" |]))
   (printfn "file: %s" filepath)

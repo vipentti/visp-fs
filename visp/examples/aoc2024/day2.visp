@@ -1,0 +1,92 @@
+
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;;
+;; day2
+;;
+;; Include common utlities
+(include "./common.visp")
+
+;; Functions & types
+
+(fn ParseFile ([text: string])
+  (mut lines (EnumerateSpanSplitLines text))
+
+  (mut data (||))
+
+  (Macro_ReadWhileNotEmpty [line lines]
+    ;; Read contents here
+    (mut parts (EnumerateSpaceSeparated line))
+
+    (mut items (||))
+
+    (Macro_ReadWhileNotEmpty [part parts]
+      (up! items (cons (span->int32 part))))
+
+    (up! data (cons (List.rev items)))
+
+    ())
+
+  (List.rev data))
+
+(fn Part1 (parsedInput)
+  ;; (printfn "%A" parsedInput)
+
+  (fn IsSafeList (lst)
+    (-> lst
+      (List.pairwise)
+      (List.fold
+        #(begin
+          (let [(valid, validDiff) : bool * int32] %1)
+
+          (if (not valid)
+            (false . 0)
+            (begin
+              (let [(lhs, rhs) : int32 * int32] %2)
+              (let diff (- rhs lhs))
+              (let diff_sign (int32->sign diff))
+              (let abs_diff (abs diff))
+              (let safe (and (>= abs_diff 1) (<= abs_diff 3)))
+
+              (cond_
+                [(and safe (= validDiff 0))
+                  (true . diff_sign)]
+
+                [(and safe (= validDiff diff_sign))
+                  (true . diff_sign)
+                ]
+                [_ (false . 0)])
+            ))
+
+
+        ) (true . 0))
+      fst
+    ))
+
+  ;; Implement part1
+  (-> parsedInput
+    (List.filter IsSafeList)
+    (List.length)
+  ))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  0)
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day2") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 2 606))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE -1 -1))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
