@@ -34,39 +34,43 @@
 
   (List.rev data))
 
+(fn IsSafeList (lst)
+  (-> lst
+    (List.pairwise)
+    (List.fold
+      #(begin
+        (let [(valid, validDiff) : bool * int32] %1)
+
+        (if (not valid)
+          (false . 0)
+          (begin
+            (let [(lhs, rhs) : int32 * int32] %2)
+            (let diff (- rhs lhs))
+            (let diff_sign (int32->sign diff))
+            (let abs_diff (abs diff))
+            (let safe (and (>= abs_diff 1) (<= abs_diff 3)))
+
+            (cond_
+              [(and safe (= validDiff 0))
+                (true . diff_sign)]
+
+              [(and safe (= validDiff diff_sign))
+                (true . diff_sign)
+              ]
+              [_ (false . 0)])
+          ))) (true . 0))
+    fst))
+
+(fn OneRemoved (lst)
+  (mut lists (||))
+
+  (for/in [idx (!r 0 .. 1 .. (dec (List.length lst)))]
+    (up! lists (cons (List.removeAt idx lst))))
+
+  lists)
+
 (fn Part1 (parsedInput)
   ;; (printfn "%A" parsedInput)
-
-  (fn IsSafeList (lst)
-    (-> lst
-      (List.pairwise)
-      (List.fold
-        #(begin
-          (let [(valid, validDiff) : bool * int32] %1)
-
-          (if (not valid)
-            (false . 0)
-            (begin
-              (let [(lhs, rhs) : int32 * int32] %2)
-              (let diff (- rhs lhs))
-              (let diff_sign (int32->sign diff))
-              (let abs_diff (abs diff))
-              (let safe (and (>= abs_diff 1) (<= abs_diff 3)))
-
-              (cond_
-                [(and safe (= validDiff 0))
-                  (true . diff_sign)]
-
-                [(and safe (= validDiff diff_sign))
-                  (true . diff_sign)
-                ]
-                [_ (false . 0)])
-            ))
-
-
-        ) (true . 0))
-      fst
-    ))
 
   ;; Implement part1
   (-> parsedInput
@@ -76,7 +80,18 @@
 
 (fn Part2 (parsedInput)
   ;; Implement part2
-  0)
+  (-> parsedInput
+    (List.filter #(begin
+      (let origSafe (IsSafeList %1))
+      (if origSafe
+        true
+        (begin
+          (-> (OneRemoved %1)
+              (List.exists IsSafeList))
+        ))
+    ))
+    (List.length)
+  ))
 
 ;; Implementation
 
@@ -84,7 +99,7 @@
 
 ;; Expected results
 (let PART1_EXPECTED_RESULT (if IS_EXAMPLE 2 606))
-(let PART2_EXPECTED_RESULT (if IS_EXAMPLE -1 -1))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 4 644))
 
 (WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
 (WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
