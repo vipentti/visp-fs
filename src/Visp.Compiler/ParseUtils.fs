@@ -228,9 +228,16 @@ and private getNestedTokens origBuf filePath dbg =
         let ep = lexbuf.EndPos
 
         if next <> EOF then
-            arr.Add({ token = next; startPos = sp; endPos = ep; })
+            arr.Add(
+                { token = next
+                  startPos = sp
+                  endPos = ep }
+            )
 
-    { tokens = arr; index = 0; origStartPos = origBuf.StartPos; origEndPos = origBuf.EndPos; }
+    { tokens = arr
+      index = 0
+      origStartPos = origBuf.StartPos
+      origEndPos = origBuf.EndPos }
 
 and mkTokenizer dbg =
     mkTokenizerWithArgs
