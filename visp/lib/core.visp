@@ -12,6 +12,9 @@
         (failwithf "not valid number '%s'" it)
         (. result +Value)))
 
+(fn string->int32 [(it: string)]
+    (System.Int32.Parse it))
+
 (fn string->int [(it: string)]
     (System.Int64.Parse it))
 
