@@ -11,9 +11,16 @@ open Visp.Compiler.LexHelpers
 open Visp.Compiler.Syntax.Macros
 open System.Collections.Generic
 
+type TokenWithPos =
+    { token: token
+      startPos: Position
+      endPos: Position }
+
 type NestedTokenizer =
     { mutable index: int
-      tokens: IReadOnlyList<token> }
+      tokens: IReadOnlyList<TokenWithPos>
+      origStartPos: Position
+      origEndPos: Position }
 
     member t.ReadNext() =
         if t.index < t.tokens.Count then
@@ -124,15 +131,20 @@ let rec mkTokenizerWithArgs args =
     let mutable token_list = []
     let mutable include_tokenizers: NestedTokenizer list = []
 
-    let read_next_nested_token () =
+    let read_next_nested_token (buf: LexBuffer<_>) =
         match include_tokenizers with
         | [] -> None
         | it :: rest ->
             match it.ReadNext() with
             | None ->
+                buf.StartPos <- it.origStartPos
+                buf.EndPos <- it.origEndPos
                 include_tokenizers <- rest
                 None
-            | Some(tok) -> Some(tok)
+            | Some(tok) ->
+                buf.StartPos <- tok.startPos
+                buf.EndPos <- tok.endPos
+                Some(tok.token)
 
     let read_next_token_list_token buf =
         match token_list with
@@ -150,10 +162,9 @@ let rec mkTokenizerWithArgs args =
             tok
 
     // Nested TOKENLISTS are not supported.
-    // TODO: Support correct file & ranges for includes
     let tokenizer buf =
         let token =
-            match read_next_nested_token () with
+            match read_next_nested_token buf with
             | Some(tok) -> tok
             | None -> read_next_token_list_token buf
 
@@ -174,7 +185,6 @@ let rec mkTokenizerWithArgs args =
 
                 loop <- next <> RPAREN
                 ()
-            // includes <- List.rev includes
 
             loop <- true
 
@@ -182,7 +192,7 @@ let rec mkTokenizerWithArgs args =
                 match includes with
                 | [] -> loop <- false
                 | it :: rest ->
-                    let tokz = getNestedTokens buf.EndPos.FileName it false
+                    let tokz = getNestedTokens buf it false
                     include_tokenizers <- tokz :: include_tokenizers
                     includes <- rest
 
@@ -196,7 +206,8 @@ let rec mkTokenizerWithArgs args =
 
     tokenizer
 
-and private getNestedTokens rootFile filePath dbg =
+and private getNestedTokens origBuf filePath dbg =
+    let rootFile = origBuf.EndPos.FileName
 
     let actualPath =
         System.IO.Path.GetDirectoryName rootFile
@@ -209,15 +220,24 @@ and private getNestedTokens rootFile filePath dbg =
     use _ = reader
 
     let tokenizer = mkTokenizer dbg
-    let arr = ResizeArray<token>()
+    let arr = ResizeArray<TokenWithPos>()
 
     while not lexbuf.IsPastEndOfStream do
         let next = tokenizer lexbuf
+        let sp = lexbuf.StartPos
+        let ep = lexbuf.EndPos
 
         if next <> EOF then
-            arr.Add(next)
+            arr.Add(
+                { token = next
+                  startPos = sp
+                  endPos = ep }
+            )
 
-    { tokens = arr; index = 0 }
+    { tokens = arr
+      index = 0
+      origStartPos = origBuf.StartPos
+      origEndPos = origBuf.EndPos }
 
 and mkTokenizer dbg =
     mkTokenizerWithArgs
