@@ -1,0 +1,87 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;;
+;; day3
+;;
+;; Include common utlities
+(include "./common.visp")
+
+;; Functions & types
+(union Ins
+  [Mul [lhs: int] [rhs: int]]
+  Do
+  Dont)
+
+(fn ParseFile ([text: string])
+  ;; (mut lines (EnumerateSpanSplitLines text))
+
+  (let rx (new Regex "mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\)" (.+Compiled RegexOptions)))
+
+  (let matches (.Matches rx text))
+
+  (mut pairs (||))
+
+  (for/in [mtch matches]
+    ;; (printfn "foo %A" (.+Value mtch))
+    (let val (+Value mtch))
+    (cond_
+      [(.StartsWith val "mul")
+        ()
+      (up! pairs (cons (Ins.Mul ((->> mtch +Groups .[1] +Value int) . (->> mtch +Groups .[2] +Value int)))))
+      ]
+      [(.StartsWith val "don't")
+        (up! pairs (cons Ins.Dont))
+      ]
+      [(.StartsWith val "do")
+        (up! pairs (cons Ins.Do))
+      ]
+    ))
+
+  (List.rev pairs))
+
+(fn Part1 (parsedInput)
+  ;; Implement part1
+  ;; (printfn "%A" parsedInput)
+  (->> parsedInput
+    (List.map #(match %1
+      [(Ins.Mul (lhs . rhs)) (lhs . rhs)]
+      [_ (0 . 0)]
+    ))
+    (List.fold #(+ %1 (* (fst %2) (snd %2))) 0)))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  ;; (printfn "%A" parsedInput)
+  (->> parsedInput
+    (List.fold #(begin
+      (let [(enabled, total) : bool * int] %1)
+      (match %2
+        [(Ins.Mul (lhs . rhs))
+          (if enabled
+            (enabled . (+ total (* lhs rhs)))
+            (enabled . total))
+        ]
+        [Ins.Do (true . total)]
+        [Ins.Dont (false . total)]
+      )
+    ) (true . 0))
+    snd
+  ))
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day3") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 161 174561379))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 48 106921067))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
