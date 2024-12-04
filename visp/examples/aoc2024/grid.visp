@@ -1,0 +1,33 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(include "./pos.visp")
+
+(typedef Grid char[,])
+
+(fn inline Grid_Height ([g: Grid])
+  (Array2D.length1 g))
+
+(fn inline Grid_Width ([g: Grid])
+  (Array2D.length2 g))
+
+(fn inline Grid_RowSlice ([g: Grid] [col: int])
+  (.[*, col] g))
+
+(fn inline Grid_ColSlice ([g: Grid] [row: int])
+  (.[row, *] g))
+
+(fn inline Grid_Contains? ([(x, y): Pos] [g: Grid])
+  (and
+    (and (>= x 0) (< x (Grid_Width g)))
+    (and (>= y 0) (< y (Grid_Height g)))))
+
+(fn inline Grid_Get ([(x, y): Pos] [g: Grid])
+  (cond_
+    [(Grid_Contains? (x, y) g) (Some (.[y, x] g))]
+    [_ None]
+  ))
