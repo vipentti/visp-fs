@@ -1,0 +1,43 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(typedef Pos int * int)
+
+(fn inline Pos_Add ([(x, y): Pos] [(ox, oy): Pos]) ((+ x ox), (+ y oy)))
+(fn inline Pos_LeftOf ([(x, y): Pos]) ((dec x), y))
+(fn inline Pos_RightOf ([(x, y): Pos]) ((inc x), y))
+(fn inline Pos_UpOf ([(x, y): Pos]) (x, (dec y)))
+(fn inline Pos_DownOf ([(x, y): Pos]) (x, (inc y)))
+(fn inline Pos_UpLeftOf ([(x, y): Pos]) ((dec x), (dec y)))
+(fn inline Pos_UpRightOf ([(x, y): Pos]) ((inc x), (dec y)))
+(fn inline Pos_DownLeftOf ([(x, y): Pos]) ((dec x), (inc y)))
+(fn inline Pos_DownRightOf ([(x, y): Pos]) ((inc x), (inc y)))
+
+(let POS_CARDINALS [|
+  (0, -1)
+  (-1, 0)
+  (1, 0)
+  (0, 1)
+|])
+
+(let POS_OFFSETS [|
+  (-1, -1)
+  (0, -1)
+  (1, -1)
+  (-1, 0)
+  (1, 0)
+  (-1, 1)
+  (0, 1)
+  (1, 1)
+|])
+
+(let POS_DIAGONALS [|
+  (-1, -1)
+  (1, -1)
+  (-1, 1)
+  (1, 1)
+|])

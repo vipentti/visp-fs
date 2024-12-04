@@ -1,0 +1,133 @@
+
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;;
+;; day4
+;;
+;; Include common utlities
+(include "./common.visp")
+(include "./grid.visp")
+
+;; Functions & types
+
+(fn ParseFile ([text: string])
+  (mut lines (EnumerateSpanSplitLines text))
+
+  (let res (new ResizeArray<_>))
+
+  (Macro_ReadWhileNotEmpty [line lines]
+    ;; Read contents here
+    (.Add res (->> (.ToArray line)))
+    ())
+  (array2D (.ToArray res)))
+
+(fn Part1 (parsedInput)
+  ;; (printfn "%A" parsedInput)
+  (let H (Grid_Height parsedInput))
+  (let W (Grid_Width parsedInput))
+
+  (mut xmas_count 0)
+
+  (for/to [y (0 to (dec H))]
+    (for/to [x (0 to (dec W))]
+      (match (Grid_Get (x . y) parsedInput)
+        [(Some #\X)
+          ;; (printfn "X at %A" (x . y))
+
+          (for/in [offset POS_OFFSETS]
+            ;; todo
+            (let next (Pos_Add (x . y) offset))
+            (match (Grid_Get next parsedInput)
+              [(Some #\M)
+                ;; (printfn "M at %A" next)
+
+                (let next_next (Pos_Add next offset))
+
+                (match (Grid_Get next_next parsedInput)
+                  [(Some #\A)
+                    ;; (printfn "A at %A" next_next)
+
+                    (let next_next_next (Pos_Add next_next offset))
+
+                    (match (Grid_Get next_next_next parsedInput)
+                      [(Some #\S)
+                        ;; (printfn "S at %A" next_next_next)
+                        (up! xmas_count inc)
+                      ]
+                      [_ ()]
+                    )
+                  ]
+                  [_ ()]
+                )
+              ]
+              [_ ()]
+            ))
+        ]
+        [_ ()])
+      ))
+
+  ;; Implement part1
+  xmas_count)
+
+(fn IsChar [v ch]
+  (match v
+    [(Some x) (= x ch)]
+    [_ false]))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  (let H (Grid_Height parsedInput))
+  (let W (Grid_Width parsedInput))
+
+  (mut xmas_count 0)
+
+  (for/to [y (0 to (dec H))]
+    (for/to [x (0 to (dec W))]
+      (match (Grid_Get (x . y) parsedInput)
+        [(Some #\A)
+          (mut m_count 0)
+          (mut s_count 0)
+
+          (let up_left (Grid_Get (Pos_UpLeftOf (x . y)) parsedInput))
+          (let up_right (Grid_Get (Pos_UpRightOf (x . y)) parsedInput))
+          (let down_right (Grid_Get (Pos_DownRightOf (x . y)) parsedInput))
+          (let down_left (Grid_Get (Pos_DownLeftOf (x . y)) parsedInput))
+
+          (when_ (and (IsChar up_left #\M) (IsChar down_right #\S))
+            (up! m_count inc))
+
+          (when_ (and (IsChar up_left #\S) (IsChar down_right #\M))
+            (up! m_count inc))
+
+          (when_ (and (IsChar up_right #\M) (IsChar down_left #\S))
+            (up! s_count inc))
+
+          (when_ (and (IsChar up_right #\S) (IsChar down_left #\M))
+            (up! s_count inc))
+
+          (when_ (and (= m_count 1) (= s_count 1))
+            (up! xmas_count inc))
+          ()
+        ]
+        [_ ()]
+      )))
+
+  xmas_count)
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day4") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 18 2370))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 9 1908))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
