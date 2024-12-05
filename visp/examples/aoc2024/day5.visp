@@ -1,0 +1,161 @@
+
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;;
+;; day5
+;;
+;; Include common utlities
+(include "./common.visp")
+
+;; Functions & types
+(record Rule
+  [before: int32]
+  [after: int32])
+
+(typedef PageUpdate list<int32>)
+(typedef Rules Map<int32, Set<int32>>)
+
+(record PageOrder
+  [rules : Rules]
+  [updates: list<PageUpdate>]
+)
+
+(fn ParseFile ([text: string])
+  (mut lines (EnumerateSpanSplitLinesWithoutEmpty text))
+
+  (mut reading_first_section true)
+
+  (let rules (new ResizeArray<_>))
+  (let updates (new ResizeArray<_>))
+
+  (mut new_rules Map.empty)
+
+  (Macro_ReadWhile [line lines]
+    (let index (.IndexOf line #\|))
+
+    (if (> index -1)
+      (begin
+        (mut parts (EnumerateSpanSplitCharsWithoutEmpty [|#\||] line))
+        (let f (span->int32 (Macro_ReadNext parts)))
+        (let s (span->int32 (Macro_ReadNext parts)))
+
+        (up! new_rules
+          (Map.change f #(
+            match %1
+            [(Some its) (Some (Set.add s its))]
+            [_ (Some (Set.singleton s))])
+          ))
+
+        ;; (printfn "%A %A" f s)
+        ;; (.Add rules {| [before f] [after s] |})
+      )
+      (begin
+        (mut parts (EnumerateSpanSplitCharsWithoutEmpty [|#\,|] line))
+        (let arr (new ResizeArray<_>))
+        (Macro_ReadWhile [part parts]
+          (.Add arr (span->int32 part)))
+
+        ;; (printfn "%A" arr)
+
+        (.Add updates (->> arr Seq.toList)))
+    )
+    ;; Read contents here
+    ())
+
+  {|
+    [rules new_rules]
+    [updates (->> updates Seq.toList)]
+  |}
+  )
+
+(fn rec Rules_IsBeforeAllOf [(before: int32) (rest: PageUpdate) (rules: Rules)]
+  (match (Map.tryFind before rules)
+    [(Some afters)
+      ;;
+      (->> rest
+        (List.forall #(begin
+          (or (Set.contains %1 afters)
+              (not (Rules_IsBeforeAllOf %1 (| before |) rules)))
+        )))
+    ]
+    [None
+      ;; (printfn "here? %A %A" before rest)
+      (->> rest
+        (List.forall #(
+          not (Rules_IsBeforeAllOf %1 (| before |) rules)
+        )))
+    ]))
+
+(fn UpdateInCorrectOrder [(upd: PageUpdate) (rules: Rules)]
+  (fn rec loop ([up: PageUpdate] [rules: Rules] (correct: bool))
+    (cond_
+      [(not correct) correct]
+      [_
+        (match up
+          [(cur :: rest) (loop rest rules (Rules_IsBeforeAllOf cur rest rules)) ]
+          [[] correct]
+        )]))
+  (loop upd rules true))
+
+(fn Update_PickMiddle [(upd: PageUpdate)]
+  (let len (/ (List.length upd) 2))
+  ;; (printfn "valid %A %A" upd len)
+  (List.item len upd))
+
+(fn Update_Fix [(rules: Rules) (upd: PageUpdate)]
+  ;; (printfn "valid %A %A" upd len)
+  (fn rec loop ([up: PageUpdate] [rules: Rules] [fixed: PageUpdate])
+    (match up
+      [[] (List.rev fixed)]
+      [(cur :: [])
+        (-> (cons cur fixed) (List.rev))
+      ]
+      [(cur :: next :: rest)
+        (cond_
+          [(Rules_IsBeforeAllOf cur (cons next rest) rules)
+            (loop (cons next rest) rules (cons cur fixed))
+          ]
+          [(Rules_IsBeforeAllOf next (cons cur rest) rules)
+            (loop (cons cur rest) rules (cons next fixed))
+          ]
+          [_ (loop (List.concat (| rest (| cur next |)|)) rules fixed)]
+        )
+      ]
+    )
+  )
+
+  (loop upd rules (||)))
+
+(fn Part1 (parsedInput)
+  ;; (printfn "%A" parsedInput)
+  ;; Implement part1
+  (->> (+updates parsedInput)
+    (List.filter #(UpdateInCorrectOrder %1 (+rules parsedInput)))
+    (List.map Update_PickMiddle)
+    (List.sum)))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  (->> (+updates parsedInput)
+    (List.filter #(not (UpdateInCorrectOrder %1 (+rules parsedInput))))
+    (List.map (Update_Fix (+rules parsedInput)))
+    (List.map Update_PickMiddle)
+    (List.sum)))
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day5") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 143 4637))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 123 6370))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
