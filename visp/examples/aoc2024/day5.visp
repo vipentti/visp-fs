@@ -74,7 +74,6 @@
   )
 
 (fn rec Rules_IsBeforeAllOf [(before: int32) (rest: PageUpdate) (rules: Rules)]
-
   (match (Map.tryFind before rules)
     [(Some afters)
       ;;
@@ -90,9 +89,7 @@
         (List.forall #(
           not (Rules_IsBeforeAllOf %1 (| before |) rules)
         )))
-    ]
-  )
-  )
+    ]))
 
 (fn UpdateInCorrectOrder [(upd: PageUpdate) (rules: Rules)]
   (fn rec loop ([up: PageUpdate] [rules: Rules] (correct: bool))
@@ -100,27 +97,39 @@
       [(not correct) correct]
       [_
         (match up
-          [(cur :: rest)
-            ;; todo
-            ;; (printfn "checking %A and %A" cur rest)
-
-            (loop rest rules (Rules_IsBeforeAllOf cur rest rules))
-          ]
+          [(cur :: rest) (loop rest rules (Rules_IsBeforeAllOf cur rest rules)) ]
           [[] correct]
-        ) ]))
-  ;; (->> upd
-  ;;   (List.pairwise)
-  ;;   (List.forall #(begin
-  ;;     (let (lhs, rhs) %1)
-
-  ;;     false
-  ;;   )))
+        )]))
   (loop upd rules true))
 
 (fn Update_PickMiddle [(upd: PageUpdate)]
   (let len (/ (List.length upd) 2))
   ;; (printfn "valid %A %A" upd len)
   (List.item len upd))
+
+(fn Update_Fix [(rules: Rules) (upd: PageUpdate)]
+  ;; (printfn "valid %A %A" upd len)
+  (fn rec loop ([up: PageUpdate] [rules: Rules] [fixed: PageUpdate])
+    (match up
+      [[] (List.rev fixed)]
+      [(cur :: [])
+        (-> (cons cur fixed) (List.rev))
+      ]
+      [(cur :: next :: rest)
+        (cond_
+          [(Rules_IsBeforeAllOf cur (cons next rest) rules)
+            (loop (cons next rest) rules (cons cur fixed))
+          ]
+          [(Rules_IsBeforeAllOf next (cons cur rest) rules)
+            (loop (cons cur rest) rules (cons next fixed))
+          ]
+          [_ (loop (List.concat (| rest (| cur next |)|)) rules fixed)]
+        )
+      ]
+    )
+  )
+
+  (loop upd rules (||)))
 
 (fn Part1 (parsedInput)
   ;; (printfn "%A" parsedInput)
@@ -132,7 +141,11 @@
 
 (fn Part2 (parsedInput)
   ;; Implement part2
-  0)
+  (->> (+updates parsedInput)
+    (List.filter #(not (UpdateInCorrectOrder %1 (+rules parsedInput))))
+    (List.map (Update_Fix (+rules parsedInput)))
+    (List.map Update_PickMiddle)
+    (List.sum)))
 
 ;; Implementation
 
@@ -140,7 +153,7 @@
 
 ;; Expected results
 (let PART1_EXPECTED_RESULT (if IS_EXAMPLE 143 4637))
-(let PART2_EXPECTED_RESULT (if IS_EXAMPLE -1 -1))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 123 6370))
 
 (WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
 (WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
