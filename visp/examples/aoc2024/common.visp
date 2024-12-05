@@ -21,8 +21,14 @@
 (fn EnumerateSpanSplitLines ([text: string])
   (.EnumerateSplitSubstrings text [| #\lf #\cr |]  commonSplitOptions))
 
-(fn EnumareteSpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
+(fn EnumerateSpanSplitLinesWithoutEmpty ([text: string])
+  (.EnumerateSplitSubstrings text [| #\lf #\cr |] (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries)))
+
+(fn EnumerateSpanSplitChars ([ch: array<char>] [text: ReadOnlySpan<char>])
   (.EnumerateSplitSubstrings text ch commonSplitOptions))
+
+(fn EnumerateSpanSplitCharsWithoutEmpty ([ch: array<char>] [text: ReadOnlySpan<char>])
+  (.EnumerateSplitSubstrings text ch (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries)))
 
 (fn EnumerateSpaceSeparated ([text: ReadOnlySpan<char>])
   (.EnumerateSplitSubstrings text [| #\space |] (bor StringSplitOptions.TrimEntries StringSplitOptions.RemoveEmptyEntries)))
@@ -31,6 +37,13 @@
   (let filepath (String.concat "" [| "./inputs/" day (if IS_EXAMPLE "_example" "") ".txt" |]))
   (printfn "file: %s" filepath)
   (System.IO.File.ReadAllText filepath))
+
+(syntax-macro Macro_ReadWhile
+  ([_ (id enu) body ...]
+    (while (.MoveNext enu)
+      (let id (+Current enu))
+      (begin body ...)
+      )))
 
 (syntax-macro Macro_ReadWhileNotEmpty
   ([_ (id enu) body ...]
