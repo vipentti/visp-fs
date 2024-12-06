@@ -102,7 +102,6 @@
           (unless (Add_Visited pos dir)
             (set! result true)
             (set! looping false))
-          ;; (up! visited (Set.add (pos . dir)))
         ]
         [_
           (match (Grid_Get next grid)
@@ -137,7 +136,7 @@
 (let PART1_EXPECTED_RESULT (if IS_EXAMPLE 41 5404))
 (let PART2_EXPECTED_RESULT (if IS_EXAMPLE 6 1984))
 
-(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
-(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+(WriteResult "part1" (Macro_TimeExecution "part1" (-> parsed Part1)) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (Macro_TimeExecution "part2" (-> parsed Part2)) PART2_EXPECTED_RESULT)
 
 ()
