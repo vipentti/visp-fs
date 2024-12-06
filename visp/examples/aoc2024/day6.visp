@@ -125,8 +125,9 @@
   (let start (FindStart parsedInput))
   (let tests (->> (FindVisited parsedInput) (Set.remove start)))
   (->> tests
-      (Seq.filter #(RunScenario start %1 parsedInput))
-      (Seq.length)))
+      (Array.ofSeq)
+      (Array.Parallel.filter #(RunScenario start %1 parsedInput))
+      (Array.length)))
 
 ;; Implementation
 
