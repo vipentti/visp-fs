@@ -1,0 +1,26 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+(union Direction
+  Up
+  Left
+  Down
+  Right)
+
+(fn inline Direction_TurnLeft ([d: Direction])
+  (match d
+    [Up Left]
+    [Left Down]
+    [Down Right]
+    [Right Up]))
+
+(fn inline Direction_TurnRight ([d: Direction])
+  (match d
+    [Up Right]
+    [Left Up]
+    [Down Left]
+    [Right Down]))

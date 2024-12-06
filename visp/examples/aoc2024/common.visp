@@ -58,3 +58,15 @@
     (begin
       (ignore (.MoveNext enu))
       (+Current enu))])
+
+(syntax-macro Macro_TimeExecution
+  [(_ op body ...)
+    (begin
+      (let sw (.StartNew System.Diagnostics.Stopwatch))
+
+      (let result (begin body ...))
+
+      (.Stop sw)
+      (printfn "%s took %fms" op (->> sw +Elapsed +TotalMilliseconds))
+
+      result)])
