@@ -1,0 +1,89 @@
+;; Copyright 2024 Ville Penttinen
+;; Distributed under the MIT License.
+;; https://github.com/vipentti/visp-fs/blob/main/LICENSE.md
+;;
+;; for basic syntax highlighting
+;; vim: set syntax=clojure:
+
+;;
+;; day6
+;;
+;; Include common utlities
+(include "./common.visp")
+(include "./grid.visp")
+(include "./direction.visp")
+
+(fn inline Direction_GetPosFun ([d: Direction])
+  (match d
+    [Up Pos_UpOf]
+    [Down Pos_DownOf]
+    [Left Pos_LeftOf]
+    [Right Pos_RightOf]
+  ))
+
+;; Functions & types
+
+(fn ParseFile ([text: string])
+  (mut lines (EnumerateSpanSplitLines text))
+
+  (let res (new ResizeArray<_>))
+
+  (Macro_ReadWhileNotEmpty [line lines]
+    ;; Read contents here
+    (.Add res (->> (.ToArray line)))
+    ())
+  (array2D (.ToArray res)))
+
+(fn Part1 (parsedInput)
+  ;; Implement part1
+  (let H (Grid_Height parsedInput))
+  (let W (Grid_Width parsedInput))
+
+  (mut start_pos (0 . 0))
+
+  (for/to [y (0 to (dec H))]
+    (for/to [x (0 to (dec W))]
+      (match (Grid_Get (x . y) parsedInput)
+        [(Some #\^) (set! start_pos (x . y)) ]
+        [_ ()])))
+
+  ;; (dbg! start_pos)
+
+  (mut visited (Set.singleton start_pos))
+  (mut start_dir Direction.Up)
+  (mut looping true)
+
+  (while looping
+    (let next ((Direction_GetPosFun start_dir) start_pos))
+
+    (match (Grid_Get next parsedInput)
+      [None (set! looping false)]
+      [(Some #\#)
+        ;; Found wall
+        (set! start_dir (Direction_TurnRight start_dir))
+      ]
+      [(Some _)
+        ;; (printfn "next %A" next)
+        (up! visited (Set.add next))
+        (set! start_pos next)
+      ]
+    ))
+
+  (Set.count visited))
+
+(fn Part2 (parsedInput)
+  ;; Implement part2
+  0)
+
+;; Implementation
+
+(let parsed (-> (ReadInput "day6") ParseFile))
+
+;; Expected results
+(let PART1_EXPECTED_RESULT (if IS_EXAMPLE 41 5404))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE -1 -1))
+
+(WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
+(WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
+
+()
