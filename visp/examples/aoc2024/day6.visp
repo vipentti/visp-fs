@@ -34,8 +34,7 @@
     ())
   (array2D (.ToArray res)))
 
-(fn Part1 (parsedInput)
-  ;; Implement part1
+(fn FindStart (parsedInput)
   (let H (Grid_Height parsedInput))
   (let W (Grid_Width parsedInput))
 
@@ -46,8 +45,11 @@
       (match (Grid_Get (x . y) parsedInput)
         [(Some #\^) (set! start_pos (x . y)) ]
         [_ ()])))
+  start_pos)
 
-  ;; (dbg! start_pos)
+(fn FindVisited (parsedInput)
+
+  (mut start_pos (FindStart parsedInput))
 
   (mut visited (Set.singleton start_pos))
   (mut start_dir Direction.Up)
@@ -68,12 +70,64 @@
         (set! start_pos next)
       ]
     ))
+  visited)
 
-  (Set.count visited))
+(fn Part1 (parsedInput)
+  ;; Implement part1
+  (->> parsedInput
+    FindVisited
+    Set.count))
 
 (fn Part2 (parsedInput)
   ;; Implement part2
-  0)
+  (fn RunScenario [start obstruction grid]
+    (mut looping true)
+
+    (mut pos start)
+    (mut dir Direction.Up)
+    (mut visited (Set.singleton (pos . dir)))
+    (mut looping true)
+    (mut result false)
+
+    (fn Add_Visited [pos dir]
+      (if (Set.contains (pos . dir) visited)
+        false
+        (begin (up! visited (Set.add (pos . dir))) true)))
+
+    (while looping
+      (let next ((Direction_GetPosFun dir) pos))
+      (cond_
+        [(= next obstruction)
+          (set! dir (Direction_TurnRight dir))
+          (unless (Add_Visited pos dir)
+            (set! result true)
+            (set! looping false))
+          ;; (up! visited (Set.add (pos . dir)))
+        ]
+        [_
+          (match (Grid_Get next grid)
+            [None (set! looping false)]
+            [(Some #\#)
+              (set! dir (Direction_TurnRight dir))
+              (unless (Add_Visited pos dir)
+                (set! result true)
+                (set! looping false))
+            ]
+            [(Some _)
+              (set! pos next)
+              (unless (Add_Visited pos dir)
+                (set! result true)
+                (set! looping false))
+            ])]
+      ))
+    result
+  )
+
+  (let start (FindStart parsedInput))
+  (let tests (->> (FindVisited parsedInput) (Set.remove start)))
+  (->> tests
+      (Seq.filter #(RunScenario start %1 parsedInput))
+      (Seq.length)))
 
 ;; Implementation
 
@@ -81,7 +135,7 @@
 
 ;; Expected results
 (let PART1_EXPECTED_RESULT (if IS_EXAMPLE 41 5404))
-(let PART2_EXPECTED_RESULT (if IS_EXAMPLE -1 -1))
+(let PART2_EXPECTED_RESULT (if IS_EXAMPLE 6 1984))
 
 (WriteResult "part1" (-> parsed Part1) PART1_EXPECTED_RESULT)
 (WriteResult "part2" (-> parsed Part2) PART2_EXPECTED_RESULT)
