@@ -11,6 +11,7 @@
 (open Flurl.Http)
 
 (fn GetFileTemplate (day)
+  (->>
   $$"""
 ;; Copyright 2024 Ville Penttinen
 ;; Distributed under the MIT License.
@@ -56,6 +57,8 @@
 
 ()
 """
+  #(.TrimStart %1)
+  )
 )
 
 (fn TryGetNamedArg (name)
